@@ -1,14 +1,18 @@
 import { manifest } from '../asset-manifest'
 import crypto from 'crypto'
 import path from 'path'
+import { MessageAttachment } from 'discord.js';
 
 function getAsset<
-  D extends typeof manifest,
+  D extends typeof manifest.data,
   A extends keyof D, 
   B extends keyof D[A]
-> (kind: A, entity: B, seed?: string): string {
+> (kind: A, entity: B, seed?: string): {
+  path: () => string
+  attachment: () => MessageAttachment
+} {
   // @ts-ignore: TS sucks and is losing context cause the object is deeply nested
-  const images = manifest[kind][entity]
+  const images = manifest.data[kind][entity]
 
   let index: number
   if (seed) {
@@ -19,7 +23,16 @@ function getAsset<
   }
   
   const image = images[index]
-  return path.join(String(kind), String(entity), image)
+
+  const assetPath = path.join(String(kind), String(entity), image)
+  const absolutePath = path.join(manifest.location, assetPath)
+
+  return {
+    path: () => absolutePath,
+    attachment: () => new MessageAttachment(absolutePath, `${entity}.jpg`)
+  }
+
+  // return path.join(manifest.location, String(kind), String(entity), image)
 }
 
 export { getAsset }

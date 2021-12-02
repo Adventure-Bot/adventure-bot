@@ -18,11 +18,10 @@ import { getCharacterUpdate } from "../../character/getCharacterUpdate";
 import { isHeavyCrownInPlay } from "../../store/selectors";
 import store from "../../store";
 
+import { getAsset } from "../../utils/getAsset";
+
 export const shop = async (interaction: CommandInteraction): Promise<void> => {
-  const shopImage = new MessageAttachment(
-    "./images/weapon-shop.jpg",
-    "shop.png"
-  );
+  const shopImageAttachment = getAsset('places', 'blacksmith').attachment();
   const character = getUserCharacter(interaction.user);
   const inventory = times(3, randomShopItem);
 
@@ -73,9 +72,9 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
           }),
         },
       ],
-    }).setImage(`attachment://${shopImage.name}`);
+    }).setImage(`attachment://${shopImageAttachment.name}`);
     return {
-      files: [shopImage],
+      files: [shopImageAttachment],
       embeds: [
         shopEmbed,
         ...inventory.map((item) => itemEmbed({ item, interaction })),
