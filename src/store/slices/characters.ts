@@ -39,6 +39,7 @@ const characterSlice = createSlice({
       looter.inventory = [...looter.inventory, ...itemsTaken];
 
       const target = state.charactersById[targetId];
+      target.gold -= goldTaken;
       const isTakenItem = (item: Item) =>
         itemsTaken.find((i) => i.id === item.id);
       target.inventory = target.inventory.filter((item) => !isTakenItem(item));
