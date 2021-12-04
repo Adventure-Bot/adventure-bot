@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Character } from "./Character";
-import { getCooldownRemaining } from "../getCooldownRemaining";
+import { getCooldownRemaining } from "./getCooldownRemaining";
 
 export const cooldownRemainingText = (
   characterId: string,
