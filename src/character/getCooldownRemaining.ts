@@ -1,12 +1,12 @@
-import { Character } from "./character/Character";
-import store from './store'
-import { getCooldownByType, getCharacterById } from "./store/selectors";
+import { Character } from "./Character";
+import store from "../store";
+import { getCooldownByType, getCharacterById } from "../store/selectors";
 
 export const getCooldownRemaining = (
   characterId: string,
   type: keyof Character["cooldowns"]
 ): number => {
-  const state = store.getState()
+  const state = store.getState();
   try {
     const cooldown = getCooldownByType(state, type) ?? 5 * 60000;
     const lastUsed = getCharacterById(state, characterId)?.cooldowns[type];
