@@ -1,7 +1,7 @@
-import { AttackResult } from "../attack/AttackResult";
-import { Character } from "../character/Character";
-import { hitChanceText } from "./hitChanceText";
+import { AttackResult } from "../../attack/AttackResult";
+import { Character } from "../../character/Character";
 import { accuracyBar } from "./accuracyBar";
+import { hitChanceText } from "./hitChanceText";
 
 export function accuracyText({
   attacker,

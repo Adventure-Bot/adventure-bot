@@ -9,7 +9,7 @@ import { getUserCharacter } from "../character/getUserCharacter";
 import { getRandomMonster } from "../monster/getRandomMonster";
 import { createEncounter } from "../encounter/createEncounter";
 import { Monster } from "../monster/Monster";
-import { encounterInProgressEmbed } from "./encounterInProgressEmbed";
+import { encounterInProgressEmbed } from "./utils/encounterInProgressEmbed";
 import { adjustHP } from "../character/adjustHP";
 import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
