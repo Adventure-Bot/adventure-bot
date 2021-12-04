@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { addItemToInventory } from "../store/slices/characters";
-import { heavyCrown } from "../equipment/items/heavyCrown";
-import { execute as inspect } from "./inspect/inspect";
-import store from "../store";
+import { getUserCharacter } from "../../character/getUserCharacter";
+import { addItemToInventory } from "../../store/slices/characters";
+import { heavyCrown } from "../../equipment/items/heavyCrown";
+import { execute as inspect } from "../inspect/inspect";
+import store from "../../store";
 
 export const command = new SlashCommandBuilder()
   .setName("crown")

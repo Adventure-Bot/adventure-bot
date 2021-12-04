@@ -1,13 +1,13 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { randomUUID } from "crypto";
 import { CommandInteraction } from "discord.js";
-import { getUserCharacters } from "../character/getUserCharacters";
-import { updateCharacter } from "../character/updateCharacter";
-import { armorShrine } from "../encounters/shrine/armor";
-import { attackShrine } from "../encounters/shrine/attack";
-import { randomShrine } from "../encounters/shrine/randomShrine";
-import { slayerShrine } from "../encounters/shrine/slayer";
-import { vigorShrine } from "../encounters/shrine/vigor";
+import { getUserCharacters } from "../../character/getUserCharacters";
+import { updateCharacter } from "../../character/updateCharacter";
+import { armorShrine } from "../../encounters/shrine/armor";
+import { attackShrine } from "../../encounters/shrine/attack";
+import { randomShrine } from "../../encounters/shrine/randomShrine";
+import { slayerShrine } from "../../encounters/shrine/slayer";
+import { vigorShrine } from "../../encounters/shrine/vigor";
 
 export const command = new SlashCommandBuilder()
   .setName("admin")

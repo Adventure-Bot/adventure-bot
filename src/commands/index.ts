@@ -2,9 +2,9 @@ import angels from "./angels";
 import adventure from "./adventure";
 import attack from "./attack";
 import cooldowns from "./cooldowns";
-import crown from "./crown";
+import crown from "./admin/crown";
 import dance from "./dance";
-import lootme from "./lootme";
+import lootme from "./admin/lootme";
 import db from "./db";
 import heal from "./heal";
 import hp from "./hp";
@@ -13,19 +13,19 @@ import inspect from "./inspect/inspect";
 import inventory from "./inventory";
 import list from "./list/list";
 import monster from "./monster";
-import quest from "./quest";
+import quest from "./admin/quest";
 import quests from "./quests";
 import renew from "./renew";
 import set from "./set";
 import shop from "./shop";
-import admin from "./admin";
+import admin from "./admin/admin";
 import chest from "./chest";
-import lootmonster from "./lootmonster";
+import lootmonster from "./admin/lootmonster";
 import barFight from "./barFight";
-import lootchest from "./lootchest";
+import lootchest from "./admin/lootchest";
 import { CommandHandler } from "../utils";
 import { RESTPostAPIApplicationCommandsJSONBody } from "discord-api-types";
-import cleanse from "./cleanse";
+import cleanse from "./admin/cleanse";
 
 const commands = new Map<
   string,

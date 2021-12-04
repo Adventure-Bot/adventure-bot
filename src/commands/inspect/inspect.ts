@@ -9,7 +9,7 @@ import {
 import { defaultProfile, defaultProfileAttachment } from "../../fixtures";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import { characterEmbed } from "../../character/characterEmbed";
-import { questEmbed } from "../questEmbed";
+import { questEmbed } from "../../quest/questEmbed";
 import { statusEffectEmbed } from "../../statusEffects/statusEffectEmbed";
 import { actionEmbed } from "./actionEmbed";
 import { values } from "remeda";

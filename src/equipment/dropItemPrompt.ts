@@ -5,7 +5,7 @@ import {
   MessageButton,
 } from "discord.js";
 import { getUserCharacter } from "../character/getUserCharacter";
-import { itemSelect } from "../commands/itemSelect";
+import { itemSelect } from "./itemSelect";
 import { dropItemConfirm } from "./dropItemConfirm";
 
 export async function dropItemPrompt(
