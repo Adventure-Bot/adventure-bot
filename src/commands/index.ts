@@ -11,11 +11,9 @@ import hpbartest from "../character/hpBar/hpbartest";
 import inspect from "./inspect/inspect";
 import inventory from "./inventory";
 import list from "./list/list";
-import quest from "./admin/quest";
 import quests from "./quests";
 import renew from "./renew";
 import set from "./set";
-import shop from "./shop";
 import admin from "./admin/admin";
 import lootmonster from "./admin/lootmonster";
 import lootchest from "./admin/lootchest";
@@ -55,8 +53,6 @@ if (process.env.DEV_COMMANDS === "true") {
   commands.set("lootchest", lootchest);
   commands.set("lootme", lootme);
   commands.set("lootmonster", lootmonster);
-  commands.set("quest", quest);
-  commands.set("shop", shop);
 }
 
 export default commands;

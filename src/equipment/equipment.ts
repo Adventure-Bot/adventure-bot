@@ -1,6 +1,9 @@
 import { Item } from "./Item";
 
-export type Equippable = Item & { equippable: true };
+export type Equippable = Item & {
+  equippable: true;
+  type: "weapon" | "armor" | "shield" | "hat" | "amulet";
+};
 export type Tradeable = Item & { tradeable: true };
 
 export type Weapon = Equippable & {
@@ -28,12 +31,15 @@ export type Armor = Equippable & {
 export type Shield = Equippable & {
   type: "shield";
 };
-
 export type Hat = Equippable & {
   type: "hat";
 };
+export type Amulet = Equippable & {
+  type: "amulet";
+};
 
 export const isHat = (item: Item): item is Hat => item.type === "hat";
+export const isAmulet = (item: Item): item is Amulet => item.type === "amulet";
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isShield = (item: Item): item is Shield => item.type === "shield";
 export const isWeapon = (item: Item): item is Weapon => item.type === "weapon";

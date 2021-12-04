@@ -21,20 +21,24 @@ export const command = new SlashCommandBuilder()
   .setName("encounter")
   .setDescription("Trigger a specific encounter");
 
-keys(encounters)
-  .map(camelToSnakeCase)
-  .forEach((encounterName) => {
-    command.addSubcommand((option) =>
-      option
-        .setName(encounterName)
-        .setDescription(`Trigger the ${encounterName} encounter`)
-    );
+command.addStringOption((option) => {
+  option
+    .setName("encounter")
+    .setDescription(`The encounter to trigger.`)
+    .setRequired(true);
+  keys(encounters).forEach((encounterName) => {
+    console.log("adding choice for", encounterName);
+    option.addChoice(camelToSnakeCase(encounterName), encounterName);
   });
+  return option;
+});
 
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const encounterName = snakeToCamelCase(interaction.options.getSubcommand());
+  const encounterName = snakeToCamelCase(
+    interaction.options.getString("encounter") ?? ""
+  );
   const encounterNames = keys(encounters);
   if (encounterNames.includes(encounterName)) {
     // @ts-ignore

@@ -12,6 +12,8 @@ import {
   plateArmor,
   towerShield,
 } from "./items";
+import { amuletOfAttack } from "./items/amuletOfAttack";
+import { amuletOfProtection } from "./items/amuletOfProtection";
 
 export const weights = new Map<() => Item, number>([
   [dagger, 1],
@@ -23,6 +25,8 @@ export const weights = new Map<() => Item, number>([
   [buckler, 1],
   [kiteShield, 1],
   [towerShield, 1],
+  [amuletOfAttack, 0.3],
+  [amuletOfProtection, 0.3],
 ]);
 
 export function randomShopItem(): Item {
