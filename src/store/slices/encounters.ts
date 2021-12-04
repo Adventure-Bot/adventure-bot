@@ -8,10 +8,24 @@ import { AttackResult } from "../../attack/AttackResult";
 
 const encountersById: Record<string, Encounter> = {};
 
+export const defaultEncounterWeights = {
+  divineBlessing: 0.1,
+  angels: 0.6,
+  fairyWell: 1,
+  shop: 1,
+  tavern: 1,
+  trap: 1,
+  travel: 1,
+  monster: 2,
+  chest: 2,
+  randomShrine: 2,
+};
+
 const encountersSlice = createSlice({
   name: "encounters",
   initialState: {
     encountersById,
+    encounterWeights: defaultEncounterWeights,
   },
   reducers: {
     createEncounter(
