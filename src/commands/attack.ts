@@ -256,7 +256,7 @@ function attackResultEmbed({
     },
   ]);
 
-  if (result.damage)
+  if (result.outcome === "hit")
     embed.addFields(damgeTakenField(interaction, result.damage)); // TODO: damageRollText
 
   return embed;
