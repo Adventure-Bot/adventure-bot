@@ -10,7 +10,7 @@ export const warAxe = (): Weapon => ({
   modifiers: {
     maxHP: 2,
   },
-  goldValue: 20,
+  goldValue: 30,
   accuracyDescriptors: {
     wideMiss: [
       "<@attacker>'s war axe slashes in the approximate direction of <@defender>",
