@@ -5,7 +5,7 @@ export const warAxe = (): Weapon => ({
   id: randomUUID(),
   type: "weapon",
   name: "war axe",
-  description: "a war axe",
+  description: "an axe made for war",
   damageMax: 6,
   modifiers: {
     maxHP: 2,
