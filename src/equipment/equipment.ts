@@ -2,7 +2,7 @@ import { Item } from "./Item";
 
 export type Equippable = Item & {
   equippable: true;
-  type: "weapon" | "armor" | "shield" | "hat" | "amulet";
+  type: "weapon" | "armor" | "shield" | "hat" | "amulet" | "ring";
 };
 export type Tradeable = Item & { tradeable: true };
 
@@ -36,6 +36,9 @@ export type Hat = Equippable & {
 };
 export type Amulet = Equippable & {
   type: "amulet";
+};
+export type Ring = Equippable & {
+  type: "ring";
 };
 
 export const isHat = (item: Item): item is Hat => item.type === "hat";

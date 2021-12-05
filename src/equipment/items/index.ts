@@ -9,21 +9,23 @@ import { leatherArmor } from "./leatherArmor";
 import { longsword } from "./longsword";
 import { mace } from "./mace";
 import { plateArmor } from "./plateArmor";
+import { ringOfAttack } from "./ringOfAttack";
 import { towerShield } from "./towerShield";
 import { warAxe } from "./warAxe";
 
 export {
+  amuletOfAttack,
+  amuletOfProtection,
   buckler,
-  dagger,
   chainArmor,
+  dagger,
   heavyCrown,
   kiteShield,
   leatherArmor,
   longsword,
   mace,
   plateArmor,
+  ringOfAttack,
   towerShield,
-  amuletOfAttack,
-  amuletOfProtection,
   warAxe,
 };

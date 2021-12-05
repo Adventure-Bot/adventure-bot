@@ -6,7 +6,7 @@ export const amuletOfProtection = (): Amulet => ({
   type: "amulet",
   description: "This amulet's onyx stone offers protection from harm.",
   goldValue: 200,
-  name: "amulet of protection",
+  name: "Amulet of Protection",
   modifiers: {
     ac: 2,
   },

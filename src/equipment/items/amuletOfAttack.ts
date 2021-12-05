@@ -6,7 +6,7 @@ export const amuletOfAttack = (): Amulet => ({
   type: "amulet",
   description: "This amulet's ruby gem lights up when its wearer attacks.",
   goldValue: 200,
-  name: "amulet of attack",
+  name: "Amulet of Attack",
   modifiers: {
     attackBonus: 2,
   },

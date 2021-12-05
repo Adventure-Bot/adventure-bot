@@ -10,6 +10,7 @@ import {
   longsword,
   mace,
   plateArmor,
+  ringOfAttack,
   towerShield,
   warAxe,
 } from "./items";
@@ -27,6 +28,7 @@ export const weights = new Map<() => Item, number>([
   [longsword, 1],
   [mace, 1],
   [plateArmor, 1],
+  [ringOfAttack, 0.3],
   [towerShield, 1],
   [warAxe, 0.5],
 ]);
