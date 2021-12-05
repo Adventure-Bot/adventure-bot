@@ -21,6 +21,7 @@ import { CommandHandler } from "../utils";
 import { RESTPostAPIApplicationCommandsJSONBody } from "discord-api-types";
 import cleanse from "./admin/cleanse";
 import encounter from "./admin/encounter";
+import item from "./admin/item";
 
 const commands = new Map<
   string,
@@ -47,6 +48,7 @@ if (process.env.DEV_COMMANDS === "true") {
   console.warn("⚠ DEV COMMANDS LOADED ⚠");
   commands.set("admin", admin);
   commands.set("encounter", encounter);
+  commands.set("item", item);
   commands.set("cleanse", cleanse);
   commands.set("crown", crown);
   commands.set("hpbartest", hpbartest);
