@@ -27,7 +27,6 @@ export const command = new SlashCommandBuilder()
 command.addStringOption((option) => {
   option.setName("item").setDescription(`Conjure an item.`).setRequired(true);
   keys(items).forEach((item) => {
-    console.log("adding choice for", item);
     option.addChoice(camelToSnakeCase(item), item);
   });
   return option;

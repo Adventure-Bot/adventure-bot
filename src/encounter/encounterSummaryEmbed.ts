@@ -48,7 +48,7 @@ export function encounterSummaryEmbed({
     case "player victory":
       summary.addField(
         "Triumphant!",
-        `${character.name} defeated the ${monster.name}! 🎉`
+        `${character.name} defeated ${monster.name}! 🎉`
       );
       summary.addFields([
         xpGainField(interaction),

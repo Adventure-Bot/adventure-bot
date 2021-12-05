@@ -1,9 +1,9 @@
 import { randomArrayElement } from "../randomArrayElement";
 import { namesByKind } from "./namesByKind";
 
-export type MonsterKind = "Goblin" | "Orc" | "Bandit";
+export const monsterKinds = ["goblin", "orc", "bandit", "slime"] as const;
 
-export const monsterKinds: MonsterKind[] = ["Goblin", "Orc", "Bandit"];
+export type MonsterKind = typeof monsterKinds[number];
 
-export const getRandomMonsterName = (kind: MonsterKind) =>
+export const getRandomMonsterName = (kind: MonsterKind): string =>
   randomArrayElement(namesByKind.get(kind) ?? [kind]);

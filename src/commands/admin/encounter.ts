@@ -27,7 +27,6 @@ command.addStringOption((option) => {
     .setDescription(`The encounter to trigger.`)
     .setRequired(true);
   keys(encounters).forEach((encounterName) => {
-    console.log("adding choice for", encounterName);
     option.addChoice(camelToSnakeCase(encounterName), encounterName);
   });
   return option;

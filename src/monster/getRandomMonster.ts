@@ -16,7 +16,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
   switch (true) {
     case rand > 0.9:
       return createMonster({
-        name: "Green Slime Man",
+        name: getRandomMonsterName("slime"),
         hp: 24,
         maxHP: 24,
         ac: 7,
@@ -29,7 +29,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
       });
     case rand > 0.6:
       return createMonster({
-        name: getRandomMonsterName("Orc"),
+        name: getRandomMonsterName("orc"),
         profile: "https://i.imgur.com/2cT3cLm.jpeg",
         gold: Math.floor(Math.random() * 6) + 2,
         isMonster: true,
@@ -38,7 +38,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
       return createMonster({
         hp: 8,
         maxHP: 8,
-        name: getRandomMonsterName("Bandit"),
+        name: getRandomMonsterName("bandit"),
         profile: "https://i.imgur.com/MV96z4T.png",
         xpValue: 4,
         gold: Math.floor(Math.random() * 5) + 1,
@@ -48,7 +48,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
       return createMonster({
         hp: 5,
         maxHP: 5,
-        name: getRandomMonsterName("Goblin"),
+        name: getRandomMonsterName("goblin"),
         profile: "https://i.imgur.com/gPH1JSl.png",
         xpValue: 3,
         gold: Math.floor(Math.random() * 3) + 1,
