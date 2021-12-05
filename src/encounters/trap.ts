@@ -6,6 +6,7 @@ import { updateUserQuestProgess } from "../quest/updateQuestProgess";
 import { awardXP } from "../character/awardXP";
 import { trapRollText } from "../trap/trapRollText";
 import { xpGainField } from "../character/xpGainField";
+import { hpBarField } from "../character/hpBar/hpBarField";
 
 export const trap = async (interaction: CommandInteraction): Promise<void> => {
   const message = await interaction.editReply({
@@ -19,6 +20,7 @@ export const trap = async (interaction: CommandInteraction): Promise<void> => {
   });
   if (!(message instanceof Message)) return;
   const result = trapAttack(interaction.user.id);
+
   if (!result) {
     await interaction.editReply("No result. This should not happen.");
     return;
@@ -33,9 +35,12 @@ export const trap = async (interaction: CommandInteraction): Promise<void> => {
       await interaction.followUp({
         embeds: [
           new MessageEmbed({
+            title: `The trap hit ${character.name} for ${result.damage}!`,
             color: "RED",
-            description: `You're hit! You take ${result.damage} damage!`,
-            fields: [xpGainField(interaction, 1)],
+            fields: [
+              xpGainField(interaction, 1),
+              hpBarField(character, -result.damage),
+            ],
           })
             .addField("Roll", trapRollText(result))
             .setImage("https://imgur.com/28oehQm.png"),
