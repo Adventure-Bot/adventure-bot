@@ -15,6 +15,11 @@ const enhancers = [];
 if (process.env.REDUX_DEVTOOLS_ENABLED === "true") {
   enhancers.push(
     remoteReduxEnhancer({
+      name:
+        "Adventure Bot" +
+        (process.env.NODE_ENV === "development"
+          ? " (development)"
+          : " (production)"),
       realtime: true,
       hostname: "localhost",
       port: 5010,
