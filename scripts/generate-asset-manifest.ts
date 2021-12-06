@@ -1,3 +1,4 @@
+require('dotenv').config()
 import fs from 'fs'
 import path from 'path'
 import { stringify } from "javascript-stringify"
@@ -11,32 +12,65 @@ const generateAssetManifest: (options: {
   imageAssetDir,
   outFileDir,
 }) => {
-  const kinds = fs.readdirSync(imageAssetDir).filter(isDirectory(imageAssetDir))
 
-  const manifest = kinds.reduce((acc, val) => {
-    const kindFolder = path.join(imageAssetDir, val)
-    const entities = fs.readdirSync(kindFolder).filter(isDirectory(kindFolder))
+  const doGen = (imageAssetDir: string) => {
+
+    const themes = fs.readdirSync(imageAssetDir).filter(isDirectory(imageAssetDir))
+  
+    const tsManifest: Record<string, Record<string, string>> = {}
+
+    const manifest = themes.reduce((themeAcc, theme) => {
+      const themeFolder = path.join(imageAssetDir, theme)
+      const kinds = fs.readdirSync(themeFolder).filter(isDirectory(themeFolder))
+      
+      tsManifest[theme] = tsManifest[theme] || {}
+
+      return {
+        ...themeAcc,
+        [theme]: kinds.reduce((kindsAcc, kind) => {
+
+          const kindFolder = path.join(themeFolder, kind)
+          const entities = fs.readdirSync(kindFolder).filter(isDirectory(kindFolder))
+          
+          tsManifest[theme][kind] = entities.join(' | ')
+
+          return {
+            ...kindsAcc,
+            [kind]: entities.reduce((kindAcc, entity) => ({
+              ...kindAcc,
+              [entity]: fs.readdirSync(path.join(kindFolder, entity))
+            }), {} as Record<string, string[]>),
+          }
+        }, {} as Record<string, Record<string, string[]>>)
+      }
+    }, {} as Record<string, Record<string, Record<string, string[]>>>)
+
     return {
-      ...acc,
-      [val]: entities.reduce((acc2, val2) => ({
-        ...acc2,
-        [val2]: fs.readdirSync(path.join(kindFolder, val2))
-      }), {} as Record<string, string[]>),
+      js: manifest,
+      ts: tsManifest,
     }
-  }, {} as Record<string, Record<string, string[]>>)
+  }
+
+  const {
+    js,
+    ts,
+  } = doGen(imageAssetDir)
 
   const manifestTS = `export const manifest = ${stringify({
     location: imageAssetDir,
-    data: manifest,
-  }, null, 2)} as const\n`
+    relativePath: imageAssetDir.replace(process.cwd(), ''),
+    data: js,
+  }, null, 2)} as const
+
+export type Manifest = ${stringify(ts, null, 2)?.replace(/ \| /g, `\' | \'`)}
+  `
 
   const writeTo = path.join(outFileDir, 'asset-manifest.ts')
   fs.writeFileSync(writeTo, manifestTS)
   console.info(`Wrote asset manifest to ${writeTo}`)
 }
 
-
 generateAssetManifest({
-  imageAssetDir: path.join(__dirname, '..', 'images', 'ai-gen'),
+  imageAssetDir: path.join(process.cwd(), String(process.env.AWS_S3_ASSETS_DIR)),
   outFileDir: path.join(__dirname, '..', 'src'),
 })

@@ -21,7 +21,6 @@ import store from "../../store";
 import { getAsset } from "../../utils/getAsset";
 
 export const shop = async (interaction: CommandInteraction): Promise<void> => {
-  const shopImageAttachment = getAsset('places', 'blacksmith').attachment();
   const character = getUserCharacter(interaction.user);
   const inventory = times(3, randomShopItem);
 
@@ -72,9 +71,9 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
           }),
         },
       ],
-    }).setImage(`attachment://${shopImageAttachment.name}`);
+    }).setImage(getAsset('fantasy', 'places', 'blacksmith').s3Url());
     return {
-      files: [shopImageAttachment],
+
       embeds: [
         shopEmbed,
         ...inventory.map((item) => itemEmbed({ item, interaction })),

@@ -1,18 +1,20 @@
-import { manifest } from '../asset-manifest'
+import { manifest, Manifest } from '../asset-manifest'
 import crypto from 'crypto'
 import path from 'path'
 import { MessageAttachment } from 'discord.js';
 
 function getAsset<
-  D extends typeof manifest.data,
-  A extends keyof D, 
-  B extends keyof D[A]
-> (kind: A, entity: B, seed?: string): {
+  Theme extends keyof Manifest, 
+  Kind extends keyof Manifest[Theme],
+  Entity extends Manifest[Theme][Kind]
+> (theme: Theme, kind: Kind, entity: Entity, seed?: string): {
   path: () => string
   attachment: () => MessageAttachment
+  attachmentString: () => string
+  s3Url: () => string
 } {
   // @ts-ignore: TS sucks and is losing context cause the object is deeply nested
-  const images = manifest.data[kind][entity]
+  const images = manifest.data[theme][kind][entity]
 
   let index: number
   if (seed) {
@@ -29,10 +31,10 @@ function getAsset<
 
   return {
     path: () => absolutePath,
-    attachment: () => new MessageAttachment(absolutePath, `${entity}.jpg`)
+    attachment: () => new MessageAttachment(absolutePath, `${entity}.jpg`),
+    attachmentString: () => `attachment://${entity}.jpg`,
+    s3Url: () => `${process.env.AWS_S3_HOST}/${theme}/${kind}/${String(entity).replace(/[\s]+/g, '+')}/${image}`
   }
-
-  // return path.join(manifest.location, String(kind), String(entity), image)
 }
 
 export { getAsset }

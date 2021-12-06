@@ -13,8 +13,6 @@ export const angels = async (
   );
   if (!character) return;
 
-  const angelAttachment = getAsset('characters', 'angel').attachment()
-
   interaction.followUp({
     embeds: [
       new MessageEmbed({
@@ -23,8 +21,7 @@ export const angels = async (
         description:
           "An angel implores you to mend what is broken.\nA taste of their power in return is thier token.",
       })
-      .setImage(`attachment://${angelAttachment.name}`),
+      .setImage(getAsset('fantasy', 'characters', 'angel').s3Url()),
     ].concat(questEmbed(character) ?? []),
-    files: [angelAttachment]
   });
 };
