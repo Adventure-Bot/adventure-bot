@@ -12,6 +12,7 @@ function getAsset<
   attachment: () => MessageAttachment
   attachmentString: () => string
   s3Url: () => string
+  values: () => [Theme, Kind, Entity]
 } {
   // @ts-ignore: TS sucks and is losing context cause the object is deeply nested
   const images = manifest.data[theme][kind][entity]
@@ -33,7 +34,8 @@ function getAsset<
     path: () => absolutePath,
     attachment: () => new MessageAttachment(absolutePath, `${entity}.jpg`),
     attachmentString: () => `attachment://${entity}.jpg`,
-    s3Url: () => `${process.env.AWS_S3_HOST}/${theme}/${kind}/${String(entity).replace(/[\s]+/g, '+')}/${image}`
+    s3Url: () => `${process.env.AWS_S3_HOST}/${theme}/${kind}/${String(entity).replace(/[\s]+/g, '+')}/${image}`,
+    values: () => [theme, kind, entity],
   }
 }
 
