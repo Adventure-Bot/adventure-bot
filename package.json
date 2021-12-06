@@ -7,6 +7,7 @@
     "generate-asset-manifest": "ts-node ./scripts/generate-asset-manifest.ts",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
+    "start:dev": "nodemon .build/index.js",
     "prestart:dev": "npm run build",
     "postinstall": "yarn generate-asset-manifest",
     "prebuild": "rimraf ./.build && yarn generate-asset-manifest",
