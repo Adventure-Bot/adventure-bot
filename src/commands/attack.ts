@@ -13,7 +13,6 @@ import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
 import { AttackResult } from "../attack/AttackResult";
 import { Emoji } from "../Emoji";
-import { damgeTakenField } from "../character/damgeTakenField";
 
 export const command = new SlashCommandBuilder()
   .setName("attack")
@@ -251,7 +250,7 @@ function attackResultEmbed({
   }
 
   embed.addFields([
-    hpBarField(result.defender, -result.damage),
+    hpBarField(result.defender, result.outcome === "hit" ? -result.damage : 0),
     {
       name: `Attack`,
       value: attackRollText({ result, interaction }),
