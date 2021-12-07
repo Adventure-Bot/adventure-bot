@@ -5,8 +5,8 @@ import { getUserCharacter } from "../character/getUserCharacter";
 import { cooldownRemainingText } from "../character/cooldownRemainingText";
 import { hpBarField } from "../character/hpBar/hpBarField";
 import { adjustHP } from "../character/adjustHP";
-import { Character } from "../character/Character";
 import { setCharacterCooldown } from "../character/setCharacterCooldown";
+import { isHealer } from "../heal/isHealer";
 
 export const command = new SlashCommandBuilder()
   .setName("renew")
@@ -14,10 +14,6 @@ export const command = new SlashCommandBuilder()
   .addUserOption((option) =>
     option.setName("target").setDescription("Whom to heal").setRequired(true)
   );
-
-const isHealer = (character: Character) =>
-  character.statusEffects?.filter((effect) => effect.name === "Healer")
-    .length ?? 0 > 0;
 
 export const execute = async (
   interaction: CommandInteraction

@@ -26,6 +26,17 @@ export const command = new SlashCommandBuilder()
           .setDescription("The amount of gold you have.")
           .setRequired(true)
       )
+  )
+  .addSubcommand((option) =>
+    option
+      .setName("set_health")
+      .setDescription("Sets your current health.")
+      .addIntegerOption((input) =>
+        input
+          .setName("hp")
+          .setDescription("Health points to set.")
+          .setRequired(true)
+      )
   );
 
 export const execute = async (
@@ -44,6 +55,10 @@ export const execute = async (
       setGold(interaction);
       interaction.editReply("Gold set.");
       return;
+    case "set_health":
+      setHealth(interaction);
+      interaction.editReply("Health set.");
+      return;
     default:
       interaction.editReply(
         `Invalid subcommand ${interaction.options.getSubcommand()}`
@@ -58,6 +73,16 @@ const setGold = async (interaction: CommandInteraction) => {
   updateCharacter({
     ...character,
     gold,
+  });
+};
+const setHealth = async (interaction: CommandInteraction) => {
+  const character = getUserCharacter(interaction.user);
+  const hp = interaction.options.getInteger("hp");
+  if (hp === null) return;
+  console.log(`Setting health to ${hp}`);
+  updateCharacter({
+    ...character,
+    hp,
   });
 };
 
