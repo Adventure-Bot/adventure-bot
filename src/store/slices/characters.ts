@@ -89,26 +89,15 @@ const characterSlice = createSlice({
     addCharacterQuestProgress(
       state,
       action: PayloadAction<{
-        character: Character;
+        characterId: string;
         questId: QuestId;
         amount: number;
       }>
     ) {
-      const { character, questId, amount } = action.payload;
-      const quest = character.quests[questId];
-
-      if (quest) {
-        state.charactersById[character.id] = {
-          ...character,
-          quests: {
-            ...character.quests,
-            [questId]: {
-              ...quest,
-              progress: quest.progress + amount,
-            },
-          },
-        };
-      }
+      const { questId, amount, characterId } = action.payload;
+      const quest = state.charactersById[characterId].quests[questId];
+      if (!quest) return;
+      quest.progress += amount;
     },
 
     questCompleted(
