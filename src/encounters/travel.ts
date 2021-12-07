@@ -9,7 +9,7 @@ export const travel = async (
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: "Travel",
+        title: `${interaction.user.username} travels`,
         color: "GREEN",
         fields: [xpGainField(interaction, 1)],
         description: `You travel the lands.`,
