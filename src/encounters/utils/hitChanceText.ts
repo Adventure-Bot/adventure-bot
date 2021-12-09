@@ -7,12 +7,12 @@ export function hitChanceText(
   defender: Character
 ): string {
   return (
-    (
+    Math.floor(
       100 *
-      chanceToHit({
-        bonus: getCharacterStatModified(attacker, "attackBonus"),
-        dc: getCharacterStatModified(defender, "ac"),
-      })
+        chanceToHit({
+          bonus: getCharacterStatModified(attacker, "attackBonus"),
+          dc: getCharacterStatModified(defender, "ac"),
+        })
     ).toString() + "%"
   );
 }
