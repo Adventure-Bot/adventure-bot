@@ -12,8 +12,6 @@ $ ai-art-gen -s fantasy -p "ghost" -n 5 -o ./images/s3/ai-gen/fantasy/characters
 
 Once you have generated your assets, you can sync them to S3.
 
-
-
 # 2. Syncing Assets to S3
 
 ## Create an S3 Bucket
