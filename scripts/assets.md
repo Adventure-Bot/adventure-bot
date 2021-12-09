@@ -12,7 +12,18 @@ $ ai-art-gen -s fantasy -p "ghost" -n 5 -o ./images/s3/ai-gen/fantasy/characters
 
 Once you have generated your assets, you can sync them to S3.
 
-# 2. Syncing Assets
+
+
+# 2. Syncing Assets to S3
+
+## Create an S3 Bucket
+
+Create your S3 bucket with ACLs and public access enabled.
+
+![Example of ACLs Enabled](./images/s3-bucket-ownership.png)
+
+![Public access enabled](./images/s3-public-access.png)
+
 Provide the following credentials in your `.env` file:
 - `AWS_S3_HOST`=
 - `AWS_S3_ASSETS_DIR`=./images/s3/ai-gen
@@ -20,7 +31,9 @@ Provide the following credentials in your `.env` file:
 - `AWS_ACCESS_KEY_ID`=
 - `AWS_SECRET_ACCESS_KEY`
 
-Once configuration is provided and you've created the bucket, you can sync assets via `yarn sync-s3-assets`
+[How do I get AWS_ACCESS_KEY_ID for Amazon?](https://stackoverflow.com/a/64325249/786729)
+
+Once configuration is provided and you've created the bucket, you can sync assets via `yarn sync-s3-assets`.
 
 # 3. Generating a Manifest
 Once assets have been synced, an `asset-manifest.ts` file will be generated for use during runtime as well as build-time for Typescript Types.
