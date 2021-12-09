@@ -1,18 +1,25 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { Character } from "../../character/Character";
-import { Monster,isMonster } from "../../monster/Monster";
+import { isMonster } from "../../monster/Monster";
 import { ReduxState } from "../../store";
 import { getAsset } from "../../utils/getAsset";
 
-const decorateCharacterWithAssetProfile = <T extends Character>(character: T) => {
+const decorateCharacterWithAssetProfile = <T extends Character>(
+  character: T
+) => {
   if (character && character.asset) {
     return {
       ...character,
-      // @ts-ignore
-      profile: getAsset(character.asset[0], character.asset[1], character.asset[2], character.id).s3Url()
-    }
-  } else return character
-}
+      profile: getAsset(
+        // @ts-ignore
+        character.asset[0],
+        character.asset[1],
+        character.asset[2],
+        character.id
+      ).s3Url(),
+    };
+  } else return character;
+};
 
 export const getCharacterById = createSelector(
   (state: ReduxState, id: string) => state.characters.charactersById[id],
@@ -22,9 +29,9 @@ export const getCharacterById = createSelector(
 export const getAllCharacters = createSelector(
   (state: ReduxState) => state.characters.charactersById,
   (charactersById) =>
-    Object.values(charactersById).filter(
-      (character) => character.isMonster !== true
-    ).map((c) => decorateCharacterWithAssetProfile<Character>(c))
+    Object.values(charactersById)
+      .filter((character) => character.isMonster !== true)
+      .map((c) => decorateCharacterWithAssetProfile<Character>(c))
 );
 
 export const getMonsterById = createSelector(
