@@ -1,15 +1,22 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import { monster } from "../encounters/monster";
+import { chest } from "../../encounters/chest";
 
 export const command = new SlashCommandBuilder()
-  .setName("monster")
-  .setDescription("Summon a monster");
+  .setName("lootchest")
+  .setDescription("Loot a random chest.");
 
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  monster(interaction);
+  await chest(interaction, {
+    hasLock: false,
+    hasTrap: false,
+    isLocked: false,
+    inspected: true,
+    isLooted: false,
+    isTrapped: false,
+  });
 };
 
 export default { command, execute };

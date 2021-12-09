@@ -1,7 +1,6 @@
 import { User } from "discord.js";
 import { Character } from "./Character";
 import { createCharacter } from "./createCharacter";
-import { defaultProfile } from "../fixtures";
 
 import { purgeExpiredStatuses } from "../statusEffects/purgeExpiredStatuses";
 
@@ -15,7 +14,7 @@ export const getUserCharacter = (user: User): Character => {
     return createCharacter({
       id: user.id,
       name: user.username,
-      profile: user.avatarURL() || defaultProfile,
+      profile: user.avatarURL() ?? undefined,
     });
   }
   return character;

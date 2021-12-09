@@ -9,8 +9,8 @@ const prompts = new Map<MonsterKind, string>(
     `This is a ${kind} name generator
 
 Monster kind: orc
-Seed names: ${(namesByKind.get("Orc")?.slice(0, -3) ?? []).join(", ")}
-Monster names: ${(namesByKind.get("Orc")?.slice(-3) ?? []).join(", ")}
+Seed names: ${(namesByKind.get("orc")?.slice(0, -3) ?? []).join(", ")}
+Monster names: ${(namesByKind.get("orc")?.slice(-3) ?? []).join(", ")}
 
 Monster kind: ${kind}
 Seed names: ${(namesByKind.get(kind) ?? []).join(", ")}

@@ -6,10 +6,9 @@ import {
   TextChannel,
   Webhook,
 } from "discord.js";
-import { defaultProfile, defaultProfileAttachment } from "../../fixtures";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import { characterEmbed } from "../../character/characterEmbed";
-import { questEmbed } from "../questEmbed";
+import { questEmbed } from "../../quest/questEmbed";
 import { statusEffectEmbed } from "../../statusEffects/statusEffectEmbed";
 import { actionEmbed } from "./actionEmbed";
 import { values } from "remeda";
@@ -35,8 +34,6 @@ export const execute = async (
   console.log(`inspect ${character.name}`, character);
 
   await interaction.followUp({
-    attachments:
-      character.profile === defaultProfile ? [defaultProfileAttachment] : [],
     embeds: [
       characterEmbed({ character, interaction }),
       statsEmbed({ character, interaction }),

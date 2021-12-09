@@ -1,18 +1,19 @@
-import { divineBlessing } from "./divineBlessing";
-import { fairyWell } from "./fairyWell";
-import { monster } from "./monster";
-import { tavern } from "./tavern/tavern";
-import { trap } from "./trap";
-import { travel } from "./travel";
-import { chest } from "./chest";
-import { angels } from "./angels";
-import { shop } from "./shop/shop";
-import { weightedTable } from "../utils/weightedTable";
+import {
+  angels,
+  fairyWell,
+  shop,
+  trap,
+  travel,
+  chest,
+  divineBlessing,
+  monster,
+  tavern,
+} from ".";
+import { CommandHandler, weightedTable } from "../utils";
 import { randomShrine } from "./shrine/randomShrine";
-import { CommandHandler } from "../utils";
 
-export const randomEncounter = (): CommandHandler =>
-  weightedTable([
+export const randomEncounter = (): CommandHandler => {
+  return weightedTable([
     [0.1, () => divineBlessing],
     [1, () => angels],
     [1, () => fairyWell],
@@ -24,3 +25,4 @@ export const randomEncounter = (): CommandHandler =>
     [2, () => chest],
     [2, randomShrine],
   ])();
+};

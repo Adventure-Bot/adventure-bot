@@ -11,7 +11,8 @@ type Emojis =
   | "hit"
   | "miss"
   | "run"
-  | "adventure";
+  | "adventure"
+  | "renew";
 
 const defaultEmojis: {
   [k in Emojis]: string;
@@ -31,6 +32,7 @@ const defaultEmojis: {
   miss: "🛡",
   run: "🏃‍♀️",
   adventure: "🚶‍♀️",
+  renew: "🤍",
 };
 
 /**

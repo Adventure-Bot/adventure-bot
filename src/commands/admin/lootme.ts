@@ -1,13 +1,13 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import { characterEmbed } from "../character/characterEmbed";
-import { getCharacterUpdate } from "../character/getCharacterUpdate";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { inventoryFields } from "../character/inventoryFields";
-import { loot } from "../character/loot/loot";
-import { lootResultEmbed } from "../character/loot/lootResultEmbed";
-import { getRandomMonster } from "../monster/getRandomMonster";
-import { monsterEmbed } from "../encounters/monsterEmbed";
+import { characterEmbed } from "../../character/characterEmbed";
+import { getCharacterUpdate } from "../../character/getCharacterUpdate";
+import { getUserCharacter } from "../../character/getUserCharacter";
+import { inventoryFields } from "../../character/inventoryFields";
+import { loot } from "../../character/loot/loot";
+import { lootResultEmbed } from "../../character/loot/lootResultEmbed";
+import { getRandomMonster } from "../../monster/getRandomMonster";
+import { monsterEmbed } from "../../encounters/utils/monsterEmbed";
 
 export const command = new SlashCommandBuilder()
   .setName("lootme")

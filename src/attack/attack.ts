@@ -3,8 +3,9 @@ import { d20 } from "../utils/dice";
 import { getCharacter } from "../character/getCharacter";
 import { AttackResult } from "./AttackResult";
 import { getCharacterStatModified } from "../character/getCharacterStatModified";
-import { updateCharacterQuestProgess } from "../quest/updateQuestProgess";
 import { adjustHP } from "../character/adjustHP";
+import store from "../store";
+import { addCharacterQuestProgress } from "../store/slices/characters";
 
 // TODO: decouple attack calculations from state side effects
 export const attack = (
@@ -33,7 +34,13 @@ export const attack = (
   ) {
     adjustHP(defender.id, -damage);
     if (defender.hp - damage > 0)
-      updateCharacterQuestProgess(defender, "survivor", damage);
+      store.dispatch(
+        addCharacterQuestProgress({
+          characterId: defenderId,
+          questId: "survivor",
+          amount: damage,
+        })
+      );
     return {
       outcome: "hit",
       attackRoll,

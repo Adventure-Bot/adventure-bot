@@ -4,6 +4,7 @@ import { goblinNames } from "./goblin";
 import { orcNames } from "./orc";
 import { zombieNames } from "./zombie";
 import { demonNames } from "./demon";
+import { slimeNames } from "./slimeNames";
 
 export const namesByKind = new Map<MonsterKind, string[]>([
   ["Goblin", goblinNames],
@@ -11,4 +12,6 @@ export const namesByKind = new Map<MonsterKind, string[]>([
   ["Bandit", banditNames],
   ["Zombie", zombieNames],
   ["Demon", demonNames],
+  ["Slime", slimeNames],
 ]);
+

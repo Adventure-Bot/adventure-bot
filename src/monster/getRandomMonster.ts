@@ -1,23 +1,23 @@
 import { createMonster } from "./createMonster";
-import { getRandomItem } from "./getRandomItem";
+import { getRandomArrayElement } from "../utils/getRandomArrayElement";
 import { getRandomMonsterName } from "./names/getRandomMonsterName";
 import { getRoamingMonsters } from "./getRoamingMonsters";
-import { Monster } from "./Monster";
 import { getAsset } from "../utils/getAsset";
+import { isMonster, Monster } from "./Monster";
 
 export const getRandomMonster = async (): Promise<Monster> => {
   const roamingMonsters = getRoamingMonsters();
   if (roamingMonsters.length && Math.random() <= roamingMonsters.length / 10) {
     console.log("returning existing monster");
-    const monster = getRandomItem(roamingMonsters);
-    if (monster) return monster;
+    const monster = getRandomArrayElement(roamingMonsters);
+    if (monster && isMonster(monster)) return monster;
   }
   const rand = Math.random();
   console.log("spawning new monster");
   switch (true) {
     case rand > 0.9:
       return createMonster({
-        name: "Green Slime",
+        name: getRandomMonsterName("Slime"),
         hp: 24,
         maxHP: 24,
         ac: 7,
@@ -40,6 +40,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
         maxHP: 8,
         name: getRandomMonsterName("Demon"),
         asset: getAsset('fantasy', 'monsters', 'demon').values(),
+        profile: "https://i.imgur.com/MV96z4T.png",
         xpValue: 4,
         gold: Math.floor(Math.random() * 5) + 1,
         isMonster: true,

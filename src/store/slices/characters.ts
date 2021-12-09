@@ -4,24 +4,49 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QuestId } from "../../quest/quests";
 import { getCharacterStatModified } from "../../character/getCharacterStatModified";
 import { Item } from "equipment/Item";
+import { equipmentFilter, LootResult } from "../../character/loot/loot";
+import { Monster } from "../../monster/Monster";
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
   Date.now() > new Date(effect.started).valueOf() + effect.duration;
 
 const charactersById: Record<string, Character> = {};
+const roamingMonsters: string[] = [];
 
 const characterSlice = createSlice({
   name: "characters",
   initialState: {
     charactersById,
+    roamingMonsters,
     isHeavyCrownInPlay: false,
   },
   reducers: {
     updateCharacter(state, action: PayloadAction<Character>) {
       const character = action.payload;
-      state.charactersById[character.id] = {
-        ...character,
-      };
+      state.charactersById[character.id] = character;
+    },
+
+    monsterCreated(state, action: PayloadAction<Monster>) {
+      const monster = action.payload;
+      state.charactersById[monster.id] = monster;
+      state.roamingMonsters.push(monster.id);
+    },
+
+    characterLooted(state, action: PayloadAction<LootResult>) {
+      const { targetId, looterId, itemsTaken, goldTaken } = action.payload;
+      const looter = state.charactersById[looterId];
+      looter.gold += goldTaken;
+      looter.inventory = [...looter.inventory, ...itemsTaken];
+
+      const target = state.charactersById[targetId];
+      target.gold -= goldTaken;
+      const isTakenItem = (item: Item) =>
+        itemsTaken.find((i) => i.id === item.id);
+      target.inventory = target.inventory.filter((item) => !isTakenItem(item));
+      target.equipment = equipmentFilter(
+        target.equipment,
+        (item) => !isTakenItem(item)
+      );
     },
 
     updateCharacterCooldowns(
@@ -64,26 +89,15 @@ const characterSlice = createSlice({
     addCharacterQuestProgress(
       state,
       action: PayloadAction<{
-        character: Character;
+        characterId: string;
         questId: QuestId;
         amount: number;
       }>
     ) {
-      const { character, questId, amount } = action.payload;
-      const quest = character.quests[questId];
-
-      if (quest) {
-        state.charactersById[character.id] = {
-          ...character,
-          quests: {
-            ...character.quests,
-            [questId]: {
-              ...quest,
-              progress: quest.progress + amount,
-            },
-          },
-        };
-      }
+      const { questId, amount, characterId } = action.payload;
+      const quest = state.charactersById[characterId].quests[questId];
+      if (!quest) return;
+      quest.progress += amount;
     },
 
     questCompleted(
@@ -97,18 +111,26 @@ const characterSlice = createSlice({
       delete state.charactersById[characterId].quests[questId];
     },
 
+    goldGained(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        amount: number;
+      }>
+    ) {
+      const { characterId, amount } = action.payload;
+      state.charactersById[characterId].gold += amount;
+    },
+
     updateGold(
       state,
       action: PayloadAction<{
-        character: Character;
+        characterId: string;
         gold: number;
       }>
     ) {
-      const { character, gold } = action.payload;
-      state.charactersById[character.id] = {
-        ...character,
-        gold,
-      };
+      const { characterId, gold } = action.payload;
+      state.charactersById[characterId].gold = gold;
     },
 
     grantDivineBlessing(state, action: PayloadAction<Character>) {
@@ -169,6 +191,9 @@ export const {
   adjustCharacterHP,
   addItemToInventory,
   questCompleted,
+  goldGained,
+  characterLooted,
+  monsterCreated,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;

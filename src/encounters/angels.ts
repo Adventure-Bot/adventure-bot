@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { updateCharacter } from "../character/updateCharacter";
-import { questEmbed } from "../commands/questEmbed";
+import { questEmbed } from "../quest/questEmbed";
 import { grantQuest } from "../quest/grantQuest";
 import { getAsset } from "../utils/getAsset";
 

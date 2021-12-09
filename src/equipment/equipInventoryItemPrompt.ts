@@ -7,7 +7,7 @@ import {
 import { getUserCharacter } from "../character/getUserCharacter";
 import { equipItem } from "../character/equipItem";
 import { updateCharacter } from "../character/updateCharacter";
-import { itemSelect } from "../commands/itemSelect";
+import { itemSelect } from "./itemSelect";
 import { equippableInventory } from "./equippableInventory";
 
 /**

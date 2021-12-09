@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { Character } from "../../character/Character";
-import { Monster } from "../../monster/Monster";
+import { Monster,isMonster } from "../../monster/Monster";
 import { ReduxState } from "../../store";
 import { getAsset } from "../../utils/getAsset";
 
@@ -28,15 +28,16 @@ export const getAllCharacters = createSelector(
 );
 
 export const getMonsterById = createSelector(
-  (state: ReduxState, id: string) => state.monsters.monstersById[id],
-  (monster) => decorateCharacterWithAssetProfile<Monster>(monster)
+  (state: ReduxState, id: string) => state.characters.charactersById[id],
+  (character) => (isMonster(character) ? character : undefined)
 );
 
 export const getRoamingMonsters = createSelector(
-  (state: ReduxState) => state.monsters.monstersById,
-  (monstersById) =>
-    Object.values(monstersById).filter((monster) => monster.hp > 0)
-    .map((m) => decorateCharacterWithAssetProfile<Monster>(m))
+  (state: ReduxState) =>
+    state.characters.roamingMonsters.map(
+      (id) => state.characters.charactersById[id]
+    ),
+  (monsters) => monsters.filter(isMonster).filter((monster) => monster.hp > 0)
 );
 
 export const getAllEncounters = createSelector(

@@ -1,13 +1,9 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { randomUUID } from "crypto";
 import { CommandInteraction } from "discord.js";
-import { getUserCharacters } from "../character/getUserCharacters";
-import { updateCharacter } from "../character/updateCharacter";
-import { armorShrine } from "../encounters/shrine/armor";
-import { attackShrine } from "../encounters/shrine/attack";
-import { randomShrine } from "../encounters/shrine/randomShrine";
-import { slayerShrine } from "../encounters/shrine/slayer";
-import { vigorShrine } from "../encounters/shrine/vigor";
+import { getUserCharacter } from "../../character/getUserCharacter";
+import { getUserCharacters } from "../../character/getUserCharacters";
+import { updateCharacter } from "../../character/updateCharacter";
 
 export const command = new SlashCommandBuilder()
   .setName("admin")
@@ -21,19 +17,26 @@ export const command = new SlashCommandBuilder()
     option.setName("unequip_all").setDescription("Globally unequip all items.")
   )
   .addSubcommand((option) =>
-    option.setName("random_shrine").setDescription("Summon a random shrine.")
+    option
+      .setName("set_gold")
+      .setDescription("Sets your current gold.")
+      .addIntegerOption((input) =>
+        input
+          .setName("gold")
+          .setDescription("The amount of gold you have.")
+          .setRequired(true)
+      )
   )
   .addSubcommand((option) =>
-    option.setName("armor_shrine").setDescription("Summon an armor shrine.")
-  )
-  .addSubcommand((option) =>
-    option.setName("vigor_shrine").setDescription("Summon a vigor shrine.")
-  )
-  .addSubcommand((option) =>
-    option.setName("attack_shrine").setDescription("Summon an attack shrine.")
-  )
-  .addSubcommand((option) =>
-    option.setName("slayer_shrine").setDescription("Summon a slayer shrine.")
+    option
+      .setName("set_health")
+      .setDescription("Sets your current health.")
+      .addIntegerOption((input) =>
+        input
+          .setName("hp")
+          .setDescription("Health points to set.")
+          .setRequired(true)
+      )
   );
 
 export const execute = async (
@@ -48,17 +51,39 @@ export const execute = async (
       unequipAll();
       interaction.editReply("All equipment removed.");
       return;
-    case "armor_shrine":
-      return armorShrine(interaction);
-    case "vigor_shrine":
-      return vigorShrine(interaction);
-    case "attack_shrine":
-      return attackShrine(interaction);
-    case "slayer_shrine":
-      return slayerShrine(interaction);
-    case "random_shrine":
-      return randomShrine()(interaction);
+    case "set_gold":
+      setGold(interaction);
+      interaction.editReply("Gold set.");
+      return;
+    case "set_health":
+      setHealth(interaction);
+      interaction.editReply("Health set.");
+      return;
+    default:
+      interaction.editReply(
+        `Invalid subcommand ${interaction.options.getSubcommand()}`
+      );
   }
+};
+
+const setGold = async (interaction: CommandInteraction) => {
+  const character = getUserCharacter(interaction.user);
+  const gold = interaction.options.getInteger("gold");
+  if (!gold) return;
+  updateCharacter({
+    ...character,
+    gold,
+  });
+};
+const setHealth = async (interaction: CommandInteraction) => {
+  const character = getUserCharacter(interaction.user);
+  const hp = interaction.options.getInteger("hp");
+  if (hp === null) return;
+  console.log(`Setting health to ${hp}`);
+  updateCharacter({
+    ...character,
+    hp,
+  });
 };
 
 const applyItemDefaults = async (): Promise<void> => {

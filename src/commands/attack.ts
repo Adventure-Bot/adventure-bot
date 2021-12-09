@@ -13,7 +13,6 @@ import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
 import { AttackResult } from "../attack/AttackResult";
 import { Emoji } from "../Emoji";
-import { damgeTakenField } from "../character/damgeTakenField";
 
 export const command = new SlashCommandBuilder()
   .setName("attack")
@@ -61,9 +60,10 @@ export const execute = async (
     return;
   }
   const embeds = [];
+  const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
   embeds.push(
     attackResultEmbed({ result, interaction }).setTitle(
-      `${attacker.name} attacks ${defender.name}!`
+      `${attacker.name} ${hitsOrMisses} ${defender.name}!`
     )
   );
   if (result.defender.hp === 0) {
@@ -84,9 +84,10 @@ export const execute = async (
       });
       return;
     }
+    const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
     retaliationEmbeds.push(
       attackResultEmbed({ result, interaction }).setTitle(
-        `${defender.name} retaliates against ${attacker.name}!`
+        `${defender.name}'s retaliation against ${attacker.name} ${hitsOrMisses}!`
       )
     );
     if (result.defender.hp === 0) {
@@ -249,15 +250,12 @@ function attackResultEmbed({
   }
 
   embed.addFields([
-    hpBarField(result.defender),
+    hpBarField(result.defender, result.outcome === "hit" ? -result.damage : 0),
     {
       name: `Attack`,
       value: attackRollText({ result, interaction }),
     },
   ]);
-
-  if (result.damage)
-    embed.addFields(damgeTakenField(interaction, result.damage)); // TODO: damageRollText
 
   return embed;
 }

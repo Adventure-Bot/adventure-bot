@@ -9,7 +9,7 @@
     "lint-and-fix": "eslint . --ext .ts --fix",
     "start:dev": "nodemon .build/index.js",
     "prestart:dev": "npm run build",
-    "postinstall": "yarn generate-asset-manifest",
+    "postinstall": "yarn generate-asset-manifest && yarn patch-package",
     "prebuild": "rimraf ./.build && yarn generate-asset-manifest",
     "build": "tsc",
     "prestart": "npm run build",
@@ -44,6 +44,7 @@
     "eslint": "^7.4.0",
     "nodemon": "^2.0.4",
     "s3": "^4.4.0",
+    "patch-package": "^6.4.7",
     "ts-node": "^8.10.2",
     "tscpaths": "^0.0.9"
   },

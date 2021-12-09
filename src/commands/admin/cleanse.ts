@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import { getUserCharacter } from "../character/getUserCharacter";
-import store from "../store";
-import { updateCharacter } from "../store/slices/characters";
+import { getUserCharacter } from "../../character/getUserCharacter";
+import store from "../../store";
+import { updateCharacter } from "../../store/slices/characters";
 
 export const command = new SlashCommandBuilder()
   .setName("cleanse")

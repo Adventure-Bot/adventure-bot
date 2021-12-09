@@ -1,15 +1,15 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import { angels } from "../encounters/angels";
+import { chattyTavernkeepers } from "../../encounters/tavern/chattyTavernkeepers";
 
 export const command = new SlashCommandBuilder()
-  .setName("angels")
-  .setDescription("Greet the divine agents.");
+  .setName("quest")
+  .setDescription("Test output of chatty tavernkeepers.");
 
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  await angels(interaction);
+  await chattyTavernkeepers(interaction, "reply");
 };
 
 export default { command, execute };
