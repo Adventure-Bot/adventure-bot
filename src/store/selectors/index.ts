@@ -23,7 +23,7 @@ const decorateCharacterWithAssetProfile = <T extends Character>(
 
 export const getCharacterById = createSelector(
   (state: ReduxState, id: string) => state.characters.charactersById[id],
-  (character) => decorateCharacterWithAssetProfile<Character>(character)
+  (character) => decorateCharacterWithAssetProfile(character)
 );
 
 export const getAllCharacters = createSelector(
@@ -36,7 +36,10 @@ export const getAllCharacters = createSelector(
 
 export const getMonsterById = createSelector(
   (state: ReduxState, id: string) => state.characters.charactersById[id],
-  (character) => (isMonster(character) ? character : undefined)
+  (character) =>
+    isMonster(character)
+      ? decorateCharacterWithAssetProfile(character)
+      : undefined
 );
 
 export const getRoamingMonsters = createSelector(
