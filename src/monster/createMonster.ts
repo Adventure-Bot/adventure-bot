@@ -16,6 +16,5 @@ export const createMonster = (
   };
   store.dispatch(monsterCreated(newMonster));
   console.log(`created monster ${newMonster.id}`);
-  // @ts-ignore
-  return getMonsterById(store.getState(), newMonster.id);
+  return getMonsterById(store.getState(), newMonster.id) ?? newMonster;
 };
