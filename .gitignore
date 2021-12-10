@@ -11,7 +11,6 @@ build/**/*
 
 package-lock.json
 .DS_Store
-db*.json
 db/*
 .DS_Store
 asset-manifest.ts
