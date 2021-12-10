@@ -25,21 +25,24 @@ export const getRandomMonster = async (): Promise<Monster> => {
         damageBonus: 2,
         damageMax: 4,
         gold: Math.floor(Math.random() * 8) + 3,
-        asset: getAsset('fantasy', 'monsters', 'green slime').values(),
+        asset: getAsset("fantasy", "monsters", "green slime").values(),
       });
     case rand > 0.6:
       return createMonster({
         name: getRandomMonsterName("Zombie"),
-        asset: getAsset('fantasy', 'monsters', 'zombie').values(),
+        asset: getAsset("fantasy", "monsters", "zombie").values(),
         gold: Math.floor(Math.random() * 6) + 2,
         isMonster: true,
       });
     case rand > 0.3:
       return createMonster({
-        hp: 8,
-        maxHP: 8,
+        hp: 12,
+        maxHP: 12,
         name: getRandomMonsterName("Demon"),
-        asset: getAsset('fantasy', 'monsters', 'demon').values(),
+        ac: 10,
+        attackBonus: 2,
+        damageMax: 6,
+        asset: getAsset("fantasy", "monsters", "demon").values(),
         profile: "https://i.imgur.com/MV96z4T.png",
         xpValue: 4,
         gold: Math.floor(Math.random() * 5) + 1,
@@ -50,7 +53,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
         hp: 5,
         maxHP: 5,
         name: getRandomMonsterName("Goblin"),
-        asset: getAsset('fantasy', 'monsters', 'goblin').values(),
+        asset: getAsset("fantasy", "monsters", "goblin").values(),
         xpValue: 3,
         gold: Math.floor(Math.random() * 3) + 1,
         isMonster: true,
