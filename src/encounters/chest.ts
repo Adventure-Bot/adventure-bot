@@ -203,7 +203,7 @@ export async function chest(
       });
       await equipItemPrompt(interaction, crown);
     }
-    if (Math.random() <= 0.1) {
+    if (Math.random() <= 0.2) {
       const item = randomChestItem();
       updateCharacter(
         grantCharacterItem(getUserCharacter(interaction.user), item)

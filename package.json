@@ -4,16 +4,19 @@
   "description": "Slay a monster! Stab your friends! Adventure bot!",
   "main": "index.js",
   "scripts": {
+    "generate-asset-manifest": "ts-node ./scripts/generate-asset-manifest.ts",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
-    "prestart:dev": "npm run build",
     "start:dev": "nodemon .build/index.js",
-    "prebuild": "rimraf ./.build",
+    "prestart:dev": "npm run build",
+    "postinstall": "yarn generate-asset-manifest && yarn patch-package",
+    "prebuild": "rimraf ./.build && yarn generate-asset-manifest",
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node .build/index.js",
-    "redux-devtools": "redux-devtools --hostname=localhost --port=5010",
-    "postinstall": "yarn patch-package"
+    "sync-s3-assets": "ts-node ./scripts/sync-s3-assets.ts",
+    "postsync-s3-assets": "yarn generate-asset-manifest",
+    "redux-devtools": "redux-devtools --hostname=localhost --port=5010"
   },
   "repository": {
     "type": "git",
@@ -37,8 +40,10 @@
     "@types/progress": "^2.0.5",
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
+    "aws-sdk": "^2.1043.0",
     "eslint": "^7.4.0",
     "nodemon": "^2.0.4",
+    "s3": "^4.4.0",
     "patch-package": "^6.4.7",
     "ts-node": "^8.10.2",
     "tscpaths": "^0.0.9"
@@ -53,6 +58,7 @@
     "discord.js": "^13.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "javascript-stringify": "^2.1.0",
     "lowdb": "^3.0.0",
     "mkdirp": "^1.0.4",
     "moment": "^2.29.1",

@@ -3,9 +3,11 @@ import { defaultCharacter } from "../character/defaultCharacter";
 import { Monster } from "./Monster";
 import store from "../store";
 import { monsterCreated } from "../store/slices/characters";
+import { getMonsterById } from "../store/selectors";
+import { MonsterKind } from "./names/getRandomMonsterName";
 
 export const createMonster = (
-  monster: Partial<Monster> & { name: string }
+  monster: Partial<Monster> & { name: string; kind: MonsterKind }
 ): Monster => {
   const newMonster: Monster = {
     ...defaultCharacter,
@@ -15,5 +17,5 @@ export const createMonster = (
   };
   store.dispatch(monsterCreated(newMonster));
   console.log(`created monster ${newMonster.id}`);
-  return newMonster;
+  return getMonsterById(store.getState(), newMonster.id) ?? newMonster;
 };

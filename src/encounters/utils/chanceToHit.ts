@@ -5,4 +5,6 @@ export const chanceToHit = ({
 }: {
   bonus: number;
   dc: number;
-}): number => (21 - dc - bonus) / 20; // https://rpg.stackexchange.com/a/70349
+}): number => {
+  return (21 - (dc - bonus)) / 20;
+}; // https://rpg.stackexchange.com/a/70349

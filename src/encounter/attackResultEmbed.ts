@@ -22,7 +22,11 @@ export function attackResultEmbed({
       result,
       interaction,
     })}
-    ${Emoji(interaction, "damage")} ${result.damageRoll} Damage
+    ${
+      result.outcome === "hit"
+        ? `${Emoji(interaction, "damage")} ${result.damageRoll} Damage`
+        : ""
+    }
     ${
       result.monsterDamageRoll
         ? `${Emoji(interaction, "monsterDamageMax")} ${

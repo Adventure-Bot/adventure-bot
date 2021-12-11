@@ -30,6 +30,15 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "redux-devtools"],
       "console": "integratedTerminal"
+    },
+    {
+      "name": "sync-s3-assets",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "sync-s3-assets"],
+      "console": "integratedTerminal"
     }
   ]
 }

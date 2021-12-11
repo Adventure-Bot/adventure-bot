@@ -1,11 +1,13 @@
 import { MessageEmbed } from "discord.js";
 import { getCharacter } from "../../character/getCharacter";
-import { Encounter } from "../../monster/Encounter";
 import { getMonster } from "../../monster/getMonster";
 import { decoratedName } from "../../character/decoratedName";
 import { accuracyText } from "./accuracyText";
+import { getEncounterById } from "../../store/selectors";
+import store from "../../store";
 
-export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
+export const encounterEmbed = (encounterId: string): MessageEmbed => {
+  const encounter = getEncounterById(store.getState(), encounterId);
   const character = getCharacter(encounter.characterId);
   const monster = getMonster(encounter.monsterId);
   if (!character)
@@ -23,7 +25,7 @@ export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
     fields: [
       {
         name: "Outcome",
-        value: encounter.outcome ?? "unknown",
+        value: encounter.outcome,
         inline: true,
       },
       {
