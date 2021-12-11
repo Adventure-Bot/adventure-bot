@@ -25,8 +25,9 @@ export const getRandomMonster = async (): Promise<Monster> => {
         attackBonus: 0,
         damageBonus: 2,
         damageMax: 4,
-        gold: Math.floor(Math.random() * 8) + 3,
+        gold: Math.floor(Math.random() * 8) + 6,
         asset: getAsset("fantasy", "monsters", "green slime").values(),
+        xpValue: 4,
       });
     case rand > 0.6:
       return createMonster({
@@ -34,7 +35,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
         name: getRandomMonsterName("Zombie"),
         asset: getAsset("fantasy", "monsters", "zombie").values(),
         gold: Math.floor(Math.random() * 6) + 2,
-        isMonster: true,
+        xpValue: 2,
       });
     case rand > 0.3:
       return createMonster({
@@ -44,7 +45,6 @@ export const getRandomMonster = async (): Promise<Monster> => {
         maxHP: 12,
         ac: 10,
         attackBonus: 2,
-        damageMax: 6,
         equipment: {
           weapon: {
             name: "Demon Claws",
@@ -70,7 +70,6 @@ export const getRandomMonster = async (): Promise<Monster> => {
         profile: "https://i.imgur.com/MV96z4T.png",
         xpValue: 10,
         gold: Math.floor(Math.random() * 10) + 6,
-        isMonster: true,
       });
     default:
       return createMonster({
@@ -79,9 +78,8 @@ export const getRandomMonster = async (): Promise<Monster> => {
         hp: 5,
         maxHP: 5,
         asset: getAsset("fantasy", "monsters", "goblin").values(),
-        xpValue: 3,
+        xpValue: 1,
         gold: Math.floor(Math.random() * 3) + 1,
-        isMonster: true,
       });
   }
 };
