@@ -17,6 +17,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
   switch (true) {
     case rand > 0.9:
       return createMonster({
+        kind: "Slime",
         name: getRandomMonsterName("Slime"),
         hp: 24,
         maxHP: 24,
@@ -29,6 +30,7 @@ export const getRandomMonster = async (): Promise<Monster> => {
       });
     case rand > 0.6:
       return createMonster({
+        kind: "Zombie",
         name: getRandomMonsterName("Zombie"),
         asset: getAsset("fantasy", "monsters", "zombie").values(),
         gold: Math.floor(Math.random() * 6) + 2,
@@ -36,23 +38,46 @@ export const getRandomMonster = async (): Promise<Monster> => {
       });
     case rand > 0.3:
       return createMonster({
+        kind: "Demon",
+        name: getRandomMonsterName("Demon"),
         hp: 12,
         maxHP: 12,
-        name: getRandomMonsterName("Demon"),
         ac: 10,
         attackBonus: 2,
         damageMax: 6,
+        equipment: {
+          weapon: {
+            name: "Demon Claws",
+            accuracyDescriptors: {
+              wideMiss: [
+                "<@attacker>'s claws slash in the approximate direction of <@defender>",
+              ],
+              nearMiss: ["<@attacker>'d claws nearly slash <@defender>"],
+              onTheNose: ["<@attacker>'s claws rake <@defender>"],
+              veryAccurate: ["<@attacker>'s claws rake <@defender> true"],
+            },
+            damageMax: 6,
+            description: "the claws of a demon",
+            equippable: true,
+            goldValue: 0,
+            id: "claws",
+            type: "weapon",
+            lootable: false,
+            sellable: false,
+          },
+        },
         asset: getAsset("fantasy", "monsters", "demon").values(),
         profile: "https://i.imgur.com/MV96z4T.png",
-        xpValue: 4,
-        gold: Math.floor(Math.random() * 5) + 1,
+        xpValue: 10,
+        gold: Math.floor(Math.random() * 10) + 6,
         isMonster: true,
       });
     default:
       return createMonster({
+        kind: "Goblin",
+        name: getRandomMonsterName("Goblin"),
         hp: 5,
         maxHP: 5,
-        name: getRandomMonsterName("Goblin"),
         asset: getAsset("fantasy", "monsters", "goblin").values(),
         xpValue: 3,
         gold: Math.floor(Math.random() * 3) + 1,
