@@ -6,7 +6,7 @@ export const slayerBuffQuestReward = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   const character = getUserCharacter(interaction.user);
-  const quest = character.quests.blessed;
+  const quest = character.quests.slayer;
   if (!quest) return;
   buffQuestReward(
     interaction,
