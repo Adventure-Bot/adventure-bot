@@ -30,7 +30,7 @@ export const monster = async (
   const encounter = createEncounter({ monster, player });
   let timeout = false;
   const message = await interaction.editReply({
-    embeds: [encounterEmbed(encounter)],
+    embeds: [encounterEmbed(encounter.id)],
   });
   if (!(message instanceof Message)) return;
 
@@ -115,7 +115,7 @@ export const monster = async (
     }
 
     message.edit({
-      embeds: [encounterEmbed(encounter)]
+      embeds: [encounterEmbed(encounter.id)]
         .concat(
           playerResult
             ? attackResultEmbed({ result: playerResult, interaction })
