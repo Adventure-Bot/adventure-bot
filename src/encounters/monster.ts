@@ -9,7 +9,6 @@ import { getUserCharacter } from "../character/getUserCharacter";
 import { getRandomMonster } from "../monster/getRandomMonster";
 import { createEncounter } from "../encounter/createEncounter";
 import { Monster } from "../monster/Monster";
-import { encounterInProgressEmbed } from "./utils/encounterInProgressEmbed";
 import { adjustHP } from "../character/adjustHP";
 import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
@@ -18,6 +17,7 @@ import { addMonsterAttack, addPlayerAttack } from "../store/slices/encounters";
 import { Emoji } from "../Emoji";
 import { attackResultEmbed } from "../encounter/attackResultEmbed";
 import { encounterSummaryEmbed } from "../encounter/encounterSummaryEmbed";
+import { encounterEmbed } from "./utils/encounterEmbed";
 
 export const monster = async (
   interaction: CommandInteraction
@@ -30,7 +30,7 @@ export const monster = async (
   const encounter = createEncounter({ monster, player });
   let timeout = false;
   const message = await interaction.editReply({
-    embeds: [encounterInProgressEmbed(encounter)],
+    embeds: [encounterEmbed(encounter)],
   });
   if (!(message instanceof Message)) return;
 
@@ -115,7 +115,7 @@ export const monster = async (
     }
 
     message.edit({
-      embeds: [encounterInProgressEmbed(encounter)]
+      embeds: [encounterEmbed(encounter)]
         .concat(
           playerResult
             ? attackResultEmbed({ result: playerResult, interaction })
