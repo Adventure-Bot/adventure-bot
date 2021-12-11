@@ -11,6 +11,7 @@ export const decoratedName = (character: Character): string => {
   )
     ? "👑"
     : false;
-  const kind = isMonster(character) ? `the ${character.kind}` : false;
+  const kind =
+    isMonster(character) && character.kind ? `the ${character.kind}` : false;
   return [crown, character.name, kind].filter(Boolean).join(" ");
 };
