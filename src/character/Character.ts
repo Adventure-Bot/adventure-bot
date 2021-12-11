@@ -9,7 +9,7 @@ export type Character = Stats & {
   id: string;
   name: string;
   profile: string;
-  asset?: [string, string, string],
+  asset?: [string, string, string];
   hp: number;
 
   inventory: Item[];
