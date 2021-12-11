@@ -1,101 +1,96 @@
-export const demonNames = [
-  "Abaddon",
-  "Adramalech",
-  "Ahpuch",
-  "Mayan",
-  "Ahriman",
-  "Mazdean",
-  "Amon",
-  "Apollyon",
-  "Asmodeus",
-  "Astaroth",
-  "Azazel",
-  "Baalberith",
-  "Canaanite",
-  "Balaam",
-  "Baphomet",
-  "Templars",
-  "Bast",
-  "Egyptian",
-  "Beelzebub",
-  "Behemoth",
-  "Syriac",
-  "Bilé",
-  "Chemosh",
-  "Moabites",
-  "Cimeries",
-  "Dagon",
-  "Philistine",
-  "Damballa",
-  "Voodoo",
-  "Demogorgon",
-  "Diabolus",
-  "Dracula",
-  "Emma-O",
-  "Euronymous",
-  "Fenriz",
-  "Loki",
-  "Gorgo",
-  "Haborym",
-  "Hecate",
-  "Ishtar",
-  "Kali",
-  "Lilith",
-  "Loki",
-  "Mammon",
-  "Mania",
-  "Etruscan",
-  "Mantus",
-  "Etruscan",
-  "Marduk",
-  "Mastema",
-  "Melek Taus",
-  "Yezidi",
-  "Mephistopheles",
-  "Faust",
-  "Metztli",
-  "Aztec",
-  "Mictian",
-  "Aztec",
-  "Midgard",
-  "Loki",
-  "Milcom",
-  "Ammonite",
-  "Moloch",
-  "Mormo",
-  "Ghouls",
-  "Hecate",
-  "Naamah",
-  "Nergal",
-  "Nihasa",
-  "Nija",
-  "O-Yama",
-  "Pan",
-  "Greek",
-  "Pluto",
-  "Proserpine",
-  "Pwcca",
-  "Rimmon",
-  "Syrian",
-  "Sabazios",
-  "Sammael",
-  "Samnu",
-  "Sedit",
-  "Sekhmet",
-  "Set",
-  "Shaitan",
-  "Shiva",
-  "Supay",
-  "Inca",
-  "T'an-mo",
-  "Tchort",
-  "Tezcatlipoca",
-  "Aztec",
-  "Thamuz",
-  "Sumerian",
-  "Thoth",
-  "Tunrida",
-  "Typhon",
-  "Yaotzin",
-  "Yen-lo-Wang",
-];
+export const demonNames = `
+Abaddon
+Adramalech
+Ahpuch
+Ahriman
+Ammonite
+Amon
+Apollyon
+Asmodeus
+Astaroth
+Azazel
+Aztec
+Baalberith
+Balaam
+Baphomet
+Bast
+Beelzebub
+Behemoth
+Bilé
+Canaanite
+Chemosh
+Cimeries
+Dagon
+Damballa
+Demogorgon
+Diabolus
+Dracula
+Egyptian
+Etruscan
+Etruscan
+Euronymous
+Faust
+Fenriz
+Ghouls
+Gorgo
+Greek
+Haborym
+Hecate
+Inca
+Ishtar
+Kali
+Lilith
+Loki
+Mammon
+Mania
+Mantus
+Marduk
+Mastema
+Mayan
+Mazdean
+Melek Taus
+Mephistopheles
+Metztli
+Mictian
+Midgard
+Milcom
+Moabites
+Moloch
+Mormo
+Naamah
+Nergal
+Nihasa
+Nija
+O-Yama
+Pan
+Philistine
+Pluto
+Proserpine
+Pwcca
+Rimmon
+Sabazios
+Sammael
+Samnu
+Sedit
+Sekhmet
+Set
+Shaitan
+Sumerian
+Supay
+Syriac
+Syrian
+T'an-mo
+Tchort
+Templars
+Tezcatlipoca
+Thamuz
+Thoth
+Tunrida
+Typhon
+Voodoo
+Yaotzin
+Yen-lo-Wang
+Yezidi
+`
+  .split("\n")
+  .filter(Boolean);
