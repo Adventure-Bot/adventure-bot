@@ -3,8 +3,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: ".env" });
 
 import { REST } from "@discordjs/rest";
-import express, { Request, Response } from "express";
-import Discord, { Intents, MessageEmbed } from "discord.js";
+import Discord, { Intents } from "discord.js";
 import { exit } from "process";
 import { Routes } from "discord-api-types/v9";
 import commands from "./commands";
@@ -48,14 +47,6 @@ async function main() {
     ],
   });
 
-  const PORT = process.env.PORT || 5000;
-
-  const app = express();
-
-  app.use("/", (request: Request, response: Response) => {
-    response.sendStatus(200);
-  });
-
   discordClient.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) return;
     console.log("interactionCreate");
@@ -81,7 +72,6 @@ async function main() {
   });
 
   discordClient.login(process.env.token);
-  app.listen(PORT, () => console.log(`Server started on port ${PORT}!`));
 }
 
 main();

@@ -14,6 +14,15 @@
       "console": "integratedTerminal"
     },
     {
+      "name": "start",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "console": "integratedTerminal"
+    },
+    {
       "name": "redux-devtools",
       "type": "node",
       "request": "launch",
