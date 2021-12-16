@@ -3,6 +3,7 @@ import { Character } from "../../character/Character";
 import { isMonster } from "../../monster/Monster";
 import { ReduxState } from "../../store";
 import { getAsset } from "../../utils/getAsset";
+import { isStatusEffectExpired } from "../slices/characters";
 
 const decorateCharacterWithAssetProfile = <T extends Character>(
   character: T
@@ -23,7 +24,12 @@ const decorateCharacterWithAssetProfile = <T extends Character>(
 
 export const selectCharacterById = createSelector(
   (state: ReduxState, id: string) => state.characters.charactersById[id],
-  (character) => decorateCharacterWithAssetProfile(character)
+  (character) => ({
+    ...decorateCharacterWithAssetProfile(character),
+    statusEffects: character?.statusEffects?.filter(
+      (effect) => !isStatusEffectExpired(effect)
+    ),
+  })
 );
 
 export const selectAllCharacters = createSelector(
