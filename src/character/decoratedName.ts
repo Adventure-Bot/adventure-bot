@@ -1,10 +1,10 @@
 import { Character } from "../character/Character";
-import { hasItemNameInInventory } from "../store/selectors";
+import { selectHasItemNameInInventory } from "../store/selectors";
 import store from "../store";
 import { isMonster } from "../monster/Monster";
 
 export const decoratedName = (character: Character): string => {
-  const crown = hasItemNameInInventory(
+  const crown = selectHasItemNameInInventory(
     store.getState(),
     character,
     "heavy crown"

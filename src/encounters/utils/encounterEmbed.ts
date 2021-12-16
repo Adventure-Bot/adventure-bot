@@ -3,11 +3,11 @@ import { getCharacter } from "../../character/getCharacter";
 import { getMonster } from "../../monster/getMonster";
 import { decoratedName } from "../../character/decoratedName";
 import { accuracyText } from "./accuracyText";
-import { getEncounterById } from "../../store/selectors";
+import { selectEncounterById } from "../../store/selectors";
 import store from "../../store";
 
 export const encounterEmbed = (encounterId: string): MessageEmbed => {
-  const encounter = getEncounterById(store.getState(), encounterId);
+  const encounter = selectEncounterById(store.getState(), encounterId);
   const character = getCharacter(encounter.characterId);
   const monster = getMonster(encounter.monsterId);
   if (!character)

@@ -5,11 +5,11 @@ import { createCharacter } from "./createCharacter";
 import { purgeExpiredStatuses } from "../statusEffects/purgeExpiredStatuses";
 
 import store from "../store";
-import { getCharacterById } from "../store/selectors";
+import { selectCharacterById } from "../store/selectors";
 
 export const getUserCharacter = (user: User): Character => {
   purgeExpiredStatuses(user.id);
-  const character = getCharacterById(store.getState(), user.id);
+  const character = selectCharacterById(store.getState(), user.id);
   if (!character) {
     return createCharacter({
       id: user.id,

@@ -3,7 +3,7 @@ import { defaultCharacter } from "../character/defaultCharacter";
 import { Monster } from "./Monster";
 import store from "../store";
 import { monsterCreated } from "../store/slices/characters";
-import { getMonsterById } from "../store/selectors";
+import { selectMonsterById } from "../store/selectors";
 import { MonsterKind } from "./names/getRandomMonsterName";
 
 export const createMonster = (
@@ -17,5 +17,5 @@ export const createMonster = (
   };
   store.dispatch(monsterCreated(newMonster));
   console.log(`created monster ${newMonster.id}`);
-  return getMonsterById(store.getState(), newMonster.id) ?? newMonster;
+  return selectMonsterById(store.getState(), newMonster.id) ?? newMonster;
 };

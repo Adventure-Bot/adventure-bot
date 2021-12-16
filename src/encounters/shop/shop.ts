@@ -15,7 +15,7 @@ import { buyItemPrompt } from "./buyItemPrompt";
 import { sellItemPrompt } from "./sellItemPrompt";
 import { goldValue } from "../../equipment/goldValue";
 import { getCharacterUpdate } from "../../character/getCharacterUpdate";
-import { isHeavyCrownInPlay } from "../../store/selectors";
+import { selectIsHeavyCrownInPlay } from "../../store/selectors";
 import store from "../../store";
 
 import { getAsset } from "../../utils/getAsset";
@@ -24,7 +24,7 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
   const character = getUserCharacter(interaction.user);
   const inventory = times(3, randomShopItem);
 
-  if (!isHeavyCrownInPlay(store.getState()) && Math.random() <= 0.1) {
+  if (!selectIsHeavyCrownInPlay(store.getState()) && Math.random() <= 0.1) {
     inventory.push(heavyCrown());
   }
 
@@ -71,9 +71,8 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
           }),
         },
       ],
-    }).setImage(getAsset('fantasy', 'places', 'blacksmith').s3Url());
+    }).setImage(getAsset("fantasy", "places", "blacksmith").s3Url());
     return {
-
       embeds: [
         shopEmbed,
         ...inventory.map((item) => itemEmbed({ item, interaction })),

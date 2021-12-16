@@ -1,6 +1,6 @@
 import store from "../store";
 import { Character } from "../character/Character";
-import { getCharacterById } from "../store/selectors";
+import { selectCharacterById } from "../store/selectors";
 import { addItemToInventory } from "../store/slices/characters";
 import { Item } from "./Item";
 
@@ -14,5 +14,5 @@ export const grantCharacterItem = (
       item,
     })
   );
-  return getCharacterById(store.getState(), character.id);
+  return selectCharacterById(store.getState(), character.id);
 };
