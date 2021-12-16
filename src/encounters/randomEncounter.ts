@@ -15,7 +15,7 @@ import { randomShrine } from "./shrine/randomShrine";
 export const randomEncounter = (): CommandHandler => {
   return weightedTable([
     [0.2, () => divineBlessing],
-    [1, () => angels],
+    [0.5, () => angels],
     [1, () => fairyWell],
     [1, () => shop],
     [1, () => tavern],
