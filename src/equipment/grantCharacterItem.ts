@@ -7,7 +7,7 @@ import { Item } from "./Item";
 export const grantCharacterItem = (
   character: Character,
   item: Item
-): Character => {
+): Character | void => {
   store.dispatch(
     addItemToInventory({
       character,

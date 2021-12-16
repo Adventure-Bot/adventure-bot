@@ -9,7 +9,6 @@ import { adjustHP } from "../character/adjustHP";
 import { awardXP } from "../character/awardXP";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { gpGainField } from "../character/gpGainField";
-import { updateCharacter } from "../character/updateCharacter";
 import { xpGainField } from "../character/xpGainField";
 import { Emoji } from "../Emoji";
 import { equipItemPrompt } from "../equipment/equipItemPrompt";
@@ -191,9 +190,8 @@ export async function chest(
     );
     if (Math.random() <= 0.005 && !selectIsHeavyCrownInPlay(store.getState())) {
       const crown = heavyCrown();
-      updateCharacter(
-        grantCharacterItem(getUserCharacter(interaction.user), crown)
-      );
+      const character = getUserCharacter(interaction.user);
+      grantCharacterItem(character, crown);
       embed.addField(
         "Heavy Crown",
         `You find a heavy crown. ${crown.description}`
@@ -205,9 +203,7 @@ export async function chest(
     }
     if (Math.random() <= 0.2) {
       const item = randomChestItem();
-      updateCharacter(
-        grantCharacterItem(getUserCharacter(interaction.user), item)
-      );
+      grantCharacterItem(getUserCharacter(interaction.user), item);
       if (isEquippable(item)) equipItemPrompt(interaction, item);
     }
   }
