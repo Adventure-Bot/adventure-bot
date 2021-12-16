@@ -2,6 +2,7 @@ import { Character } from "../character/Character";
 import { getCharacterStatModifier } from "../character/getCharacterStatModifier";
 import { Stat } from "../character/Stats";
 
+// todo: make this a selector
 export const getCharacterStatModified = (
   character: Character,
   stat: Stat
