@@ -3,7 +3,6 @@ import { getUserCharacter } from "../../character/getUserCharacter";
 import { questProgressField } from "../../quest/questProgressField";
 import { Shrine } from "../../shrines/Shrine";
 import { statusEffectEmbed } from "../../statusEffects/statusEffectEmbed";
-import { getAsset } from "../../utils/getAsset";
 
 export function shrineEmbeds({
   shrine,
