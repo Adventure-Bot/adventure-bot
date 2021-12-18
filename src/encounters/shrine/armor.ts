@@ -3,6 +3,7 @@ import { CommandInteraction } from "discord.js";
 import { Shrine } from "../../shrines/Shrine";
 import { shrineEmbeds } from "./shrineEmbeds";
 import { applyShrine } from "./applyShrine";
+import { getAsset } from "../../utils/getAsset";
 
 export const armorShrine = async (
   interaction: CommandInteraction
@@ -11,7 +12,11 @@ export const armorShrine = async (
     id: randomUUID(),
     color: "YELLOW",
     description: `This shrine will protect you during your journeys.`,
-    image: "https://i.imgur.com/mfDAYcQ.png",
+    image: getAsset(
+      "fantasy",
+      "items",
+      "a shield chiseled out of a stone"
+    ).s3Url(),
     effect: {
       name: "Shrine of Protection",
       modifiers: {

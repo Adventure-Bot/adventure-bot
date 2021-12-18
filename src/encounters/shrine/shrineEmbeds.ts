@@ -20,13 +20,7 @@ export function shrineEmbeds({
       description: shrine.description,
       fields: quest ? [questProgressField(quest)] : [],
       color: shrine.color,
-    }).setImage(
-      getAsset(
-        "fantasy",
-        "places",
-        "a beautiful glowing statue in a serene forest"
-      ).s3Url()
-    ),
+    }).setImage(shrine.image),
     statusEffectEmbed(shrine.effect, interaction),
   ];
 }

@@ -6,8 +6,10 @@ import { hpBarField } from "../character/hpBar/hpBarField";
 import { questProgressField } from "../character/hpBar/hpField";
 import { xpGainField } from "../character/xpGainField";
 import quests from "../commands/quests";
+import { Emoji } from "../Emoji";
 import { isUserQuestComplete } from "../quest/isQuestComplete";
 import { updateUserQuestProgess } from "../quest/updateQuestProgess";
+import { getAsset } from "../utils/getAsset";
 
 export const fairyWell = async (
   interaction: CommandInteraction
@@ -21,7 +23,12 @@ export const fairyWell = async (
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: "Fairy Well",
+        title: `${
+          interaction.user.username
+        } drinks from a fairy's well and gains ${Emoji(
+          interaction,
+          "heal"
+        )} +${healAmount}!`,
         color: "DARK_VIVID_PINK",
         description: `You drink from a fairy's well, it heals you for ${healAmount}!`,
         fields: [
@@ -32,7 +39,7 @@ export const fairyWell = async (
             ? questProgressField(character.quests.healer)
             : []
         ),
-      }).setImage("https://imgur.com/bgq63v9.png"),
+      }).setImage(getAsset("fantasy", "places", "a fairy's well").s3Url()),
     ],
   });
   if (isUserQuestComplete(interaction.user, "healer"))
