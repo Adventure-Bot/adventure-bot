@@ -3,6 +3,7 @@ import { CommandInteraction } from "discord.js";
 import { Shrine } from "../../shrines/Shrine";
 import { shrineEmbeds } from "./shrineEmbeds";
 import { applyShrine } from "./applyShrine";
+import { getAsset } from "../../utils/getAsset";
 
 export const slayerShrine = async (
   interaction: CommandInteraction
@@ -10,9 +11,8 @@ export const slayerShrine = async (
   const shrine: Shrine = {
     id: randomUUID(),
     name: "Slayer's Shrine",
-    description: `This shrine fills you with an instinct for blood!`,
-    image:
-      "https://i.pinimg.com/originals/6a/37/34/6a3734feeec0937b71b80eb646da00c7.png",
+    description: `This shrine fills you with an instincts of a hunter!`,
+    image: getAsset("fantasy", "characters", "hidden hunter").s3Url(),
     color: "GREY",
     effect: {
       name: "Slayer's Shrine",
