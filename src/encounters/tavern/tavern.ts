@@ -1,5 +1,6 @@
 import { CommandInteraction, Message, MessageEmbed } from "discord.js";
 import { CommandHandler, sleep } from "../../utils";
+import { getAsset } from "../../utils/getAsset";
 import { weightedRandom } from "../../utils/weightedRandom";
 import { barFight } from "./barFight";
 import { chattyTavernkeepers } from "./chattyTavernkeepers";
@@ -22,7 +23,7 @@ export const tavern = async (
         .setDescription(
           `You find a tavern and hope for a soft bed, warm meal, and strong drink...`
         )
-        .setImage("https://i.imgur.com/AbNnc7S.png"),
+        .setImage(getAsset("fantasy", "places", "tavern").s3Url()),
     ],
   });
   if (!(message instanceof Message)) return;
