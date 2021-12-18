@@ -3,6 +3,7 @@ import { CommandInteraction } from "discord.js";
 import { Shrine } from "../../shrines/Shrine";
 import { shrineEmbeds } from "./shrineEmbeds";
 import { applyShrine } from "./applyShrine";
+import { getAsset } from "../../utils/getAsset";
 
 export const vigorShrine = async (
   interaction: CommandInteraction
@@ -11,8 +12,11 @@ export const vigorShrine = async (
     id: randomUUID(),
     name: "Vigor Shrine",
     description: `The shrine fills you with renewed vigor.`,
-    image:
-      "https://i.pinimg.com/originals/c1/4e/f0/c14ef0766793f8c967f6d685f29d52d6.jpg",
+    image: getAsset(
+      "fantasy",
+      "places",
+      "a beautiful glowing statue in a serene forest"
+    ).s3Url(),
     color: "WHITE",
     effect: {
       name: "Shrine of Vigor",
