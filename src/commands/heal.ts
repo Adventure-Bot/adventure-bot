@@ -9,6 +9,7 @@ import { updateUserQuestProgess } from "../quest/updateQuestProgess";
 import { questProgressField } from "../quest/questProgressField";
 import { isUserQuestComplete } from "../quest/isQuestComplete";
 import quests from "./quests";
+import { getAsset } from "../utils/getAsset";
 
 export const command = new SlashCommandBuilder()
   .setName("heal")
@@ -46,16 +47,25 @@ export const execute = async (
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: "Heal",
-        description: `Healed ${target} for ${Emoji(interaction, "heal")} ${
-          result.amount
-        }!`,
+        title: `${healer.username} healed ${
+          healer.username === target.username ? "themself" : target.username
+        } for ${Emoji(interaction, "heal")} +${result.amount}`,
+        description: `${healer} healed ${target} for ${Emoji(
+          interaction,
+          "heal"
+        )} +${result.amount}!`,
         fields: [hpBarField(getUserCharacter(target), result.amount)].concat(
           character.quests.healer
             ? questProgressField(character.quests.healer)
             : []
         ),
-      }).setImage("https://i.imgur.com/S32LDbM.png"),
+      }).setImage(
+        getAsset(
+          "fantasy",
+          "magic",
+          "a glowing hand applying healing magic"
+        ).s3Url()
+      ),
     ].concat(),
   });
   if (isUserQuestComplete(healer, "healer")) await quests.execute(interaction);
