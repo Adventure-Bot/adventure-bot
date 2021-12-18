@@ -3,6 +3,7 @@ import { getUserCharacter } from "../../character/getUserCharacter";
 import { questProgressField } from "../../quest/questProgressField";
 import { Shrine } from "../../shrines/Shrine";
 import { statusEffectEmbed } from "../../statusEffects/statusEffectEmbed";
+import { getAsset } from "../../utils/getAsset";
 
 export function shrineEmbeds({
   shrine,
@@ -19,7 +20,13 @@ export function shrineEmbeds({
       description: shrine.description,
       fields: quest ? [questProgressField(quest)] : [],
       color: shrine.color,
-    }).setImage(shrine.image),
+    }).setImage(
+      getAsset(
+        "fantasy",
+        "places",
+        "a beautiful glowing statue in a serene forest"
+      ).s3Url()
+    ),
     statusEffectEmbed(shrine.effect, interaction),
   ];
 }
