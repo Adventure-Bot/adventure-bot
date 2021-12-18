@@ -13,6 +13,7 @@ export const heavyCrown = (): Hat => ({
     damageBonus: 3,
     ac: -2,
   },
+  lootable: true,
   equippable: true,
   sellable: true,
   tradeable: true,
