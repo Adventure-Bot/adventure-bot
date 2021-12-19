@@ -47,13 +47,11 @@ export const execute = async (
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: `${healer.username} healed ${
-          healer.username === target.username ? "themself" : target.username
-        } for ${Emoji(interaction, "heal")} +${result.amount}`,
-        description: `${healer} healed ${target} for ${Emoji(
-          interaction,
-          "heal"
-        )} +${result.amount}!`,
+        title: `${healer.username} ${
+          healer.username === target.username
+            ? "self healed"
+            : "healed " + target.username
+        } for +${result.amount} ${Emoji(interaction, "heal")}`,
         fields: [hpBarField(getUserCharacter(target), result.amount)].concat(
           character.quests.healer
             ? questProgressField(character.quests.healer)
