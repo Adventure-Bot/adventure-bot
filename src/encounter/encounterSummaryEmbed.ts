@@ -51,7 +51,7 @@ export function encounterSummaryEmbed({
         `${character.name} defeated ${monster.name}! 🎉`
       );
       summary.addFields([
-        xpGainField(interaction),
+        xpGainField(interaction, monster.xpValue),
         gpGainField(interaction, monster.gold),
       ]);
       if (character && character.quests.slayer)
