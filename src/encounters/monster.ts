@@ -1,4 +1,4 @@
-import { CommandInteraction, Message } from "discord.js";
+import { CommandInteraction, Message, TextChannel } from "discord.js";
 import { attack } from "../attack/attack";
 import { chest } from "./chest";
 import { isUserQuestComplete } from "../quest/isQuestComplete";
@@ -13,11 +13,16 @@ import { adjustHP } from "../character/adjustHP";
 import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
 import store from "../store";
-import { addMonsterAttack, addPlayerAttack } from "../store/slices/encounters";
+import {
+  addMonsterAttack,
+  addPlayerAttack,
+  updateEncounter,
+} from "../store/slices/encounters";
 import { Emoji } from "../Emoji";
 import { attackResultEmbed } from "../encounter/attackResultEmbed";
 import { encounterSummaryEmbed } from "../encounter/encounterSummaryEmbed";
 import { encounterEmbed } from "./utils/encounterEmbed";
+import { getHook } from "../commands/inspect/getHook";
 
 export const monster = async (
   interaction: CommandInteraction
@@ -33,6 +38,20 @@ export const monster = async (
     embeds: [encounterEmbed(encounter.id)],
   });
   if (!(message instanceof Message)) return;
+  const channel = interaction.channel;
+  if (!(channel instanceof TextChannel)) return;
+
+  const thread = await channel.threads.create({
+    name: `Monster for ${interaction.user.username}`,
+    startMessage: message,
+  });
+
+  const webhooks = await channel.fetchWebhooks();
+  const hook = await getHook({
+    name: "Combat",
+    webhooks,
+    interaction,
+  });
 
   while (encounter.outcome === "in progress") {
     encounter.rounds++;
@@ -113,19 +132,23 @@ export const monster = async (
         encounter.outcome = "double ko";
         break;
     }
+    store.dispatch(updateEncounter(encounter));
+    if (playerResult) {
+      hook?.send({
+        embeds: [attackResultEmbed({ result: playerResult, interaction })],
+        threadId: thread.id,
+      });
+    }
+
+    if (monsterResult) {
+      hook?.send({
+        embeds: [attackResultEmbed({ result: monsterResult, interaction })],
+        threadId: thread.id,
+      });
+    }
 
     message.edit({
-      embeds: [encounterEmbed(encounter.id)]
-        .concat(
-          playerResult
-            ? attackResultEmbed({ result: playerResult, interaction })
-            : []
-        )
-        .concat(
-          monsterResult
-            ? attackResultEmbed({ result: monsterResult, interaction })
-            : []
-        ),
+      embeds: [encounterEmbed(encounter.id)],
     });
   }
 

@@ -39,7 +39,7 @@ export const trap = async (interaction: CommandInteraction): Promise<void> => {
             color: "RED",
             fields: [
               xpGainField(interaction, 1),
-              hpBarField(character, -result.damage),
+              hpBarField({ character, adjustment: -result.damage }),
             ],
           })
             .addField("Roll", trapRollText(result))
