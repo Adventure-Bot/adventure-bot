@@ -250,7 +250,10 @@ function attackResultEmbed({
   }
 
   embed.addFields([
-    hpBarField(result.defender, result.outcome === "hit" ? -result.damage : 0),
+    hpBarField({
+      character: result.defender,
+      adjustment: result.outcome === "hit" ? -result.damage : 0,
+    }),
     {
       name: `Attack`,
       value: attackRollText({ result, interaction }),

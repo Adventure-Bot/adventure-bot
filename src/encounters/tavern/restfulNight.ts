@@ -49,7 +49,10 @@ export async function restfulNight(
         color: "DARK_NAVY",
         description: "You feel well rested. 💤",
         fields: [
-          hpBarField(getUserCharacter(interaction.user), actualHeal),
+          hpBarField({
+            character: getUserCharacter(interaction.user),
+            adjustment: actualHeal,
+          }),
           xpGainField(interaction, 1),
         ].concat(
           character.quests.healer

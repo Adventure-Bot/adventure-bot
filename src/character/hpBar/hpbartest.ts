@@ -30,19 +30,19 @@ export const execute = async (
     embeds: [
       new MessageEmbed({
         title: "Heal",
-        fields: [hpBarField(half, 3)],
+        fields: [hpBarField({ character: half, adjustment: 3 })],
       }),
       new MessageEmbed({
         title: "Overheal",
-        fields: [hpBarField(full, 300)],
+        fields: [hpBarField({ character: full, adjustment: 300 })],
       }),
       new MessageEmbed({
         title: "Damage",
-        fields: [hpBarField(half, -3)],
+        fields: [hpBarField({ character: half, adjustment: -3 })],
       }),
       new MessageEmbed({
         title: "Overkill",
-        fields: [hpBarField(ko, -100)],
+        fields: [hpBarField({ character: ko, adjustment: -100 })],
       }),
     ],
   });

@@ -11,14 +11,20 @@ const numberModifierText = (num?: number): string => {
   return "";
 };
 
-export const hpBarField = (
-  character: Character,
+export function hpBarField({
+  character,
   adjustment = 0,
-  showName = false
-): EmbedFieldData => ({
-  name: (showName ? character.name + "'s " : "") + "HP",
-  value: `${getCharacterUpdate(character).hp}/${getCharacterStatModified(
-    character,
-    "maxHP"
-  )}\n${hpBar(character, adjustment)} ${numberModifierText(adjustment)}`,
-});
+  showName = false,
+}: {
+  character: Character;
+  adjustment?: number;
+  showName?: boolean;
+}): EmbedFieldData {
+  return {
+    name: (showName ? character.name + "'s " : "") + "HP",
+    value: `${getCharacterUpdate(character).hp}/${getCharacterStatModified(
+      character,
+      "maxHP"
+    )}\n${hpBar(character, adjustment)} ${numberModifierText(adjustment)}`,
+  };
+}

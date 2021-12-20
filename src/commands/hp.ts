@@ -13,7 +13,7 @@ export const execute = async (
   interaction.editReply({
     embeds: [
       new MessageEmbed({
-        fields: [hpBarField(getUserCharacter(interaction.user))],
+        fields: [hpBarField({ character: getUserCharacter(interaction.user) })],
       }),
     ],
   });

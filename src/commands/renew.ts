@@ -54,7 +54,13 @@ export const execute = async (
   ];
   embeds.push(
     new MessageEmbed({
-      fields: [hpBarField(getUserCharacter(target), healAmount, true)],
+      fields: [
+        hpBarField({
+          character: getUserCharacter(target),
+          adjustment: healAmount,
+          showName: true,
+        }),
+      ],
       timestamp: new Date(),
     })
   );
@@ -67,7 +73,13 @@ export const execute = async (
     adjustHP(target.id, healAmount);
     embeds.push(
       new MessageEmbed({
-        fields: [hpBarField(getUserCharacter(target), healAmount, true)],
+        fields: [
+          hpBarField({
+            character: getUserCharacter(target),
+            adjustment: healAmount,
+            showName: true,
+          }),
+        ],
         timestamp: new Date(),
       })
     );

@@ -52,7 +52,12 @@ export const execute = async (
             ? "self healed"
             : "healed " + target.username
         } for +${result.amount} ${Emoji(interaction, "heal")}`,
-        fields: [hpBarField(getUserCharacter(target), result.amount)].concat(
+        fields: [
+          hpBarField({
+            character: getUserCharacter(target),
+            adjustment: result.amount,
+          }),
+        ].concat(
           character.quests.healer
             ? questProgressField(character.quests.healer)
             : []

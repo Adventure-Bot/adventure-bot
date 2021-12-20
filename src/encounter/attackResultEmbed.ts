@@ -35,11 +35,11 @@ export function attackResultEmbed({
         : ""
     }`,
     fields: [
-      hpBarField(
-        result.defender,
-        result.outcome === "hit" ? -result.damage : 0,
-        true
-      ),
+      hpBarField({
+        character: result.defender,
+        adjustment: result.outcome === "hit" ? -result.damage : 0,
+        showName: true,
+      }),
     ],
   }).setThumbnail(result.attacker.profile);
 }

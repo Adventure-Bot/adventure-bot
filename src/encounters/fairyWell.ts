@@ -33,7 +33,7 @@ export const fairyWell = async (
         description: `You drink from a fairy's well, it heals you for ${healAmount}!`,
         fields: [
           xpGainField(interaction, 1),
-          hpBarField(character, healAmount),
+          hpBarField({ character, adjustment: healAmount }),
         ].concat(
           character.quests.healer
             ? questProgressField(character.quests.healer)
