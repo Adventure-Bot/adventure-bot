@@ -178,16 +178,6 @@ export async function chest(
       xpGainField(interaction, xp),
       gpGainField(interaction, gp),
     ]);
-    embed.addField(
-      "Result",
-      `You loot ${Emoji(
-        interaction,
-        "gold"
-      )} ${gp} gold from the chest! You gain ${Emoji(
-        interaction,
-        "xp"
-      )} ${xp} xp.`
-    );
     if (Math.random() <= 0.005 && !selectIsHeavyCrownInPlay(store.getState())) {
       const crown = heavyCrown();
       const character = getUserCharacter(interaction.user);
