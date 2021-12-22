@@ -87,7 +87,7 @@ export const execute = async (
     const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
     retaliationEmbeds.push(
       attackResultEmbed({ result, interaction }).setTitle(
-        `${defender.name}'s retaliation against ${attacker.name} ${hitsOrMisses}!`
+        `${defender.name}'s ${hitsOrMisses} ${attacker.name} in retaliation!`
       )
     );
     if (result.defender.hp === 0) {
