@@ -237,17 +237,8 @@ function attackResultEmbed({
   const embed = new MessageEmbed().setDescription(attackFlavorText(result));
   if (!result || result.outcome === "cooldown") return embed;
 
-  switch (result.outcome) {
-    case "hit":
-      embed.setImage("https://i.imgur.com/rM6yWps.png");
-      break;
-    case "miss":
-    default:
-      embed.setImage(
-        "https://i.pinimg.com/564x/10/5e/9e/105e9ea5f0d2e86bde9e7a365289a9cc.jpg"
-      );
-      break;
-  }
+  embed.setImage(result.defender.profile);
+  embed.setThumbnail(result.attacker.profile);
 
   embed.addFields([
     hpBarField(result.defender, result.outcome === "hit" ? -result.damage : 0),
