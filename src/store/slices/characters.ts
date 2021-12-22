@@ -1,7 +1,7 @@
 import { Character } from "../../character/Character";
 import { StatusEffect } from "../../statusEffects/StatusEffect";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { QuestId } from "../../quest/quests";
+import { QuestId, quests } from "../../quest/quests";
 import { getCharacterStatModified } from "../../character/getCharacterStatModified";
 import { Item } from "equipment/Item";
 import { equipmentFilter, LootResult } from "../../character/loot/loot";
@@ -156,6 +156,19 @@ const characterSlice = createSlice({
       };
     },
 
+    grantQuest(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        questId: QuestId;
+      }>
+    ) {
+      const { characterId, questId } = action.payload;
+      const character = state.charactersById[characterId];
+      if (character.quests[questId]) return;
+      character.quests[questId] = { ...quests[questId] };
+    },
+
     addItemToInventory(
       state,
       action: PayloadAction<{
@@ -188,6 +201,7 @@ export const {
   goldGained,
   characterLooted,
   monsterCreated,
+  grantQuest,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;

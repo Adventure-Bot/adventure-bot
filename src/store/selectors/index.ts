@@ -1,6 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { Character } from "../../character/Character";
 import { isMonster } from "../../monster/Monster";
+import { Quest } from "../../quest/Quest";
+import { QuestId, quests } from "../../quest/quests";
 import { ReduxState } from "../../store";
 import { getAsset } from "../../utils/getAsset";
 import { isStatusEffectExpired } from "../slices/characters";
@@ -92,3 +94,29 @@ export const selectIsHeavyCrownInPlay = createSelector(
   (state: ReduxState) => state.characters.isHeavyCrownInPlay,
   (isHeavyCrownInPlay) => isHeavyCrownInPlay
 );
+
+export const selectIsCharacterOnQuest = ({
+  state,
+  characterId,
+  questId,
+}: {
+  state: ReduxState;
+  characterId: string;
+  questId: QuestId;
+}): boolean => {
+  const character = state.characters.charactersById[characterId];
+  return character?.quests[questId] ? true : false;
+};
+
+export function selectAvailableQuests(
+  state: ReduxState,
+  character: Character
+): Quest[] {
+  return [quests.blessed, quests.slayer, quests.survivor].filter((quest) => {
+    return !selectIsCharacterOnQuest({
+      state,
+      characterId: character.id,
+      questId: quest.id,
+    });
+  });
+}
