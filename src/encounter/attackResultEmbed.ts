@@ -11,7 +11,16 @@ export function attackResultEmbed({
   result: AttackResult;
   interaction: CommandInteraction;
 }): MessageEmbed {
+  const { attacker, defender, damage } = result;
+  const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
+  const forDamage =
+    result.outcome === "hit"
+      ? `for ${Emoji(interaction, "damage")} ${damage} damage`
+      : "";
   return new MessageEmbed({
+    title: `${Emoji(interaction, result.outcome)} ${
+      attacker.name
+    } ${hitsOrMisses} ${defender.name} ${forDamage}`,
     description: `${attackFlavorText(result)}
     ${attackRollText({
       result,
@@ -36,5 +45,7 @@ export function attackResultEmbed({
         showName: true,
       }),
     ],
-  }).setThumbnail(result.attacker.profile);
+  })
+    .setThumbnail(result.attacker.profile)
+    .setImage(result.defender.profile);
 }

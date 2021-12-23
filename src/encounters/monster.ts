@@ -27,6 +27,7 @@ import {
   selectEncounterById,
   selectMonsterById,
 } from "../store/selectors";
+import { decoratedName } from "../character/decoratedName";
 
 export const monster = async (
   interaction: CommandInteraction
@@ -47,7 +48,7 @@ export const monster = async (
   if (!(channel instanceof TextChannel)) return;
 
   const thread = await channel.threads.create({
-    name: `Monster for ${interaction.user.username}`,
+    name: `${decoratedName(player)} vs ${decoratedName(monster)}`,
     startMessage: message,
   });
 
@@ -59,8 +60,8 @@ export const monster = async (
   });
 
   while (
-    selectEncounterById(store.getState(), encounter.id)?.outcome ===
-    "in progress"
+    "in progress" ===
+    selectEncounterById(store.getState(), encounter.id)?.outcome
   ) {
     store.dispatch(advanceRound(encounter.id));
     encounter = selectEncounterById(store.getState(), encounter.id);

@@ -165,7 +165,9 @@ const accuracyDescriptor = (result: ReturnType<typeof playerAttack>) => {
 
 const damageDescriptor = (result: ReturnType<typeof playerAttack>) => {
   if (!result) return `No result`;
-  if (result.outcome === "cooldown") return "";
+
+  if (result.outcome === "cooldown" || result.outcome === "miss") return "";
+
   const damage = result.damage;
   switch (true) {
     case damage > 5:
@@ -215,7 +217,7 @@ export const attackRollText = ({
   const outcomeText =
     result.outcome === "hit"
       ? Emoji(interaction, "hit") + " Hit!"
-      : Emoji(interaction, "miss") + " Miss.";
+      : Emoji(interaction, "miss") + " Miss!";
 
   return `${outcomeText}\n${Emoji(
     interaction,
@@ -233,19 +235,6 @@ function attackResultEmbed({
   interaction: CommandInteraction;
 }): MessageEmbed {
   const embed = new MessageEmbed().setDescription(attackFlavorText(result));
-  if (!result) return embed;
-
-  switch (result.outcome) {
-    case "hit":
-      embed.setImage("https://i.imgur.com/rM6yWps.png");
-      break;
-    case "miss":
-    default:
-      embed.setImage(
-        "https://i.pinimg.com/564x/10/5e/9e/105e9ea5f0d2e86bde9e7a365289a9cc.jpg"
-      );
-      break;
-  }
 
   embed.addFields([
     hpBarField({

@@ -38,9 +38,7 @@ export function encounterSummaryEmbed({
       if (encounter.lootResult?.goldTaken) {
         summary.addField(
           "Looted!",
-          `Lost ${Emoji(interaction, "gold")} ${
-            encounter.lootResult.goldTaken
-          }!`
+          `${Emoji(interaction, "gold")} ${encounter.lootResult.goldTaken}!`
         );
       }
       break;

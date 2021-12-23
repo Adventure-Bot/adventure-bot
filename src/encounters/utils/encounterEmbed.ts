@@ -9,6 +9,11 @@ import { Encounter } from "../../monster/Encounter";
 export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
   const character = getCharacter(encounter.characterId);
   const monster = getMonster(encounter.monsterId);
+  const characterAdjustment =
+    encounter.playerAttacks[encounter.playerAttacks.length - 1]?.damage ?? 0;
+  const monsterAdjustment =
+    encounter.monsterAttacks[encounter.monsterAttacks.length - 1]?.damage ?? 0;
+
   if (!character)
     return new MessageEmbed({
       title: `Character ${encounter.characterId} not found`,
@@ -18,9 +23,7 @@ export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
       title: `Monster ${encounter.monsterId} not found`,
     });
   const embed = new MessageEmbed({
-    title: `Encounter: ${decoratedName(character)} vs ${decoratedName(
-      monster
-    )}`,
+    title: `${decoratedName(character)} vs ${decoratedName(monster)}`,
     fields: [
       {
         name: "Outcome",
@@ -56,8 +59,16 @@ export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
     .setThumbnail(character.profile);
   if (encounter.outcome === "in progress") {
     embed.addFields([
-      hpBarField({ character, showName: true }),
-      hpBarField({ character: monster, showName: true }),
+      hpBarField({
+        character,
+        showName: true,
+        adjustment: characterAdjustment,
+      }),
+      hpBarField({
+        character: monster,
+        showName: true,
+        adjustment: monsterAdjustment,
+      }),
     ]);
   }
   if (encounter.lootResult?.goldTaken)
