@@ -3,11 +3,10 @@ import { getCharacter } from "../../character/getCharacter";
 import { getMonster } from "../../monster/getMonster";
 import { decoratedName } from "../../character/decoratedName";
 import { accuracyText } from "./accuracyText";
-import { selectEncounterById } from "../../store/selectors";
-import store from "../../store";
+import { hpBarField } from "../../character/hpBar/hpBarField";
+import { Encounter } from "../../monster/Encounter";
 
-export const encounterEmbed = (encounterId: string): MessageEmbed => {
-  const encounter = selectEncounterById(store.getState(), encounterId);
+export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
   const character = getCharacter(encounter.characterId);
   const monster = getMonster(encounter.monsterId);
   if (!character)
@@ -55,7 +54,16 @@ export const encounterEmbed = (encounterId: string): MessageEmbed => {
     .setColor("RED")
     .setImage(monster.profile)
     .setThumbnail(character.profile);
-  if (encounter.goldLooted)
-    embed.addField("Gold Looted", "💰 " + encounter.goldLooted.toString());
+  if (encounter.outcome === "in progress") {
+    embed.addFields([
+      hpBarField({ character, showName: true }),
+      hpBarField({ character: monster, showName: true }),
+    ]);
+  }
+  if (encounter.lootResult?.goldTaken)
+    embed.addField(
+      "Gold Looted",
+      "💰 " + encounter.lootResult?.goldTaken.toString()
+    );
   return embed;
 };

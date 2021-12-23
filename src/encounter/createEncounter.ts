@@ -2,7 +2,8 @@ import { Monster } from "../monster/Monster";
 import { Encounter } from "../monster/Encounter";
 import { Character } from "../character/Character";
 import { randomUUID } from "crypto";
-import { setEncounter } from "./setEncounter";
+import store from "../store";
+import { encounterCreated } from "../store/slices/encounters";
 
 export function createEncounter({
   monster,
@@ -19,9 +20,8 @@ export function createEncounter({
     playerAttacks: [],
     monsterAttacks: [],
     rounds: 1,
-    goldLooted: 0,
     outcome: "in progress",
   };
-  setEncounter(encounter);
+  store.dispatch(encounterCreated(encounter));
   return encounter;
 }

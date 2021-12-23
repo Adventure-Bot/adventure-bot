@@ -1,10 +1,8 @@
+import { attack } from "./characters";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { randomUUID } from "crypto";
-
 import { Encounter } from "../../monster/Encounter";
-import { Monster } from "../../monster/Monster";
-import { Character } from "../../character/Character";
-import { AttackResult } from "../../attack/AttackResult";
+import { isMonster } from "../../monster/Monster";
+import { LootResult } from "../../character/loot/loot";
 
 const encountersById: Record<string, Encounter> = {};
 
@@ -28,63 +26,73 @@ const encountersSlice = createSlice({
     encounterWeights: defaultEncounterWeights,
   },
   reducers: {
-    createEncounter(
-      state,
-      action: PayloadAction<{
-        player: Character;
-        monster: Monster;
-      }>
-    ) {
-      const { monster, player } = action.payload;
-      const encounter: Encounter = {
-        id: randomUUID(),
-        characterId: player.id,
-        monsterId: monster.id,
-        date: new Date().toString(),
-        playerAttacks: [],
-        monsterAttacks: [],
-        rounds: 1,
-        goldLooted: 0,
-        outcome: "in progress",
-      };
-      state.encountersById[encounter.id] = {
-        ...encounter,
-      };
-    },
-    updateEncounter(state, action: PayloadAction<Encounter>) {
+    encounterCreated(state, action: PayloadAction<Encounter>) {
       const encounter = action.payload;
-      state.encountersById[encounter.id] = {
-        ...encounter,
-      };
+      state.encountersById[encounter.id] = encounter;
     },
-    addPlayerAttack(
+
+    advanceRound(state, action: PayloadAction<string>) {
+      const encounter = state.encountersById[action.payload];
+      encounter.rounds++;
+    },
+
+    playerVictory(
       state,
-      action: PayloadAction<{
-        encounter: Encounter;
-        result: AttackResult;
-      }>
+      action: PayloadAction<{ encounterId: string; lootResult?: LootResult }>
     ) {
-      const { encounter, result } = action.payload;
-      state.encountersById[encounter.id].playerAttacks.push(result);
+      const { encounterId, lootResult } = action.payload;
+      const encounter = state.encountersById[encounterId];
+      if (!encounter) return;
+      encounter.outcome = "player victory";
+      encounter.lootResult = lootResult;
     },
-    addMonsterAttack(
+
+    playerFled(state, action: PayloadAction<{ encounterId: string }>) {
+      const { encounterId } = action.payload;
+      const encounter = state.encountersById[encounterId];
+      if (encounter) {
+        encounter.outcome = "player fled";
+      }
+    },
+
+    playerDefeat(
       state,
-      action: PayloadAction<{
-        encounter: Encounter;
-        result: AttackResult;
-      }>
+      action: PayloadAction<{ encounterId: string; lootResult?: LootResult }>
     ) {
-      const { encounter, result } = action.payload;
-      state.encountersById[encounter.id].monsterAttacks.push(result);
+      const { encounterId, lootResult } = action.payload;
+      const encounter = state.encountersById[encounterId];
+      if (!encounter) return;
+      encounter.outcome = "player defeated";
+      encounter.lootResult = lootResult;
     },
+
+    doubleKO(state, action: PayloadAction<{ encounterId: string }>) {
+      const { encounterId } = action.payload;
+      const encounter = state.encountersById[encounterId];
+      if (!encounter) return;
+      encounter.outcome = "double ko";
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(attack, (state, action) => {
+      const { attackResult, encounter } = action.payload;
+      if (!encounter) return;
+      if (isMonster(attackResult.attacker)) {
+        state.encountersById[encounter.id].monsterAttacks.push(attackResult);
+      } else {
+        state.encountersById[encounter.id].playerAttacks.push(attackResult);
+      }
+    });
   },
 });
 
 export const {
-  createEncounter,
-  updateEncounter,
-  addPlayerAttack,
-  addMonsterAttack,
+  encounterCreated,
+  playerFled,
+  advanceRound,
+  playerVictory,
+  playerDefeat,
+  doubleKO,
 } = encountersSlice.actions;
 
 export default encountersSlice.reducer;

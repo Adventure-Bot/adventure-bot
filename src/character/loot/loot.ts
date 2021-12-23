@@ -1,11 +1,10 @@
 import { randomUUID } from "crypto";
 import { values } from "remeda";
-import { looted } from "../../store/slices/loots";
 import { Character } from "../Character";
 import { getCharacter } from "../getCharacter";
 import store from "../../store";
 import { Item } from "../../equipment/Item";
-import { characterLooted } from "../../store/slices/characters";
+import { characterLooted } from "../../store/slices/loots";
 
 export type LootResult = {
   id: string;
@@ -39,8 +38,6 @@ export function loot({
     targetId: target.id,
     timestamp: new Date().toString(),
   };
-
-  store.dispatch(looted(loot));
   store.dispatch(characterLooted(loot));
   return loot;
 }

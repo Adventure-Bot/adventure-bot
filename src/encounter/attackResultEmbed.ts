@@ -11,11 +11,6 @@ export function attackResultEmbed({
   result: AttackResult;
   interaction: CommandInteraction;
 }): MessageEmbed {
-  if (result.outcome === "cooldown") {
-    return new MessageEmbed({
-      description: `Cooldown.`,
-    });
-  }
   return new MessageEmbed({
     description: `${attackFlavorText(result)}
     ${attackRollText({

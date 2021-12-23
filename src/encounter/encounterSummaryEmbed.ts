@@ -35,10 +35,12 @@ export function encounterSummaryEmbed({
       break;
     case "player defeated":
       summary.addField("Unconscious", `${character.name} knocked out!`);
-      if (encounter.goldLooted) {
+      if (encounter.lootResult?.goldTaken) {
         summary.addField(
           "Looted!",
-          `Lost ${Emoji(interaction, "gold")} ${encounter.goldLooted}!`
+          `Lost ${Emoji(interaction, "gold")} ${
+            encounter.lootResult.goldTaken
+          }!`
         );
       }
       break;
@@ -51,7 +53,7 @@ export function encounterSummaryEmbed({
         `${character.name} defeated ${monster.name}! 🎉`
       );
       summary.addFields([
-        xpGainField(interaction),
+        xpGainField(interaction, monster.xpValue),
         gpGainField(interaction, monster.gold),
       ]);
       if (character && character.quests.slayer)

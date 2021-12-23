@@ -1,28 +1,32 @@
 import { CommandInteraction, Message, TextChannel } from "discord.js";
-import { attack } from "../attack/attack";
+import { makeAttack } from "../attack/makeAttack";
 import { chest } from "./chest";
 import { isUserQuestComplete } from "../quest/isQuestComplete";
 import quests from "../commands/quests";
 import { updateUserQuestProgess } from "../quest/updateQuestProgess";
-import { getCharacter } from "../character/getCharacter";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { getRandomMonster } from "../monster/getRandomMonster";
 import { createEncounter } from "../encounter/createEncounter";
-import { Monster } from "../monster/Monster";
-import { adjustHP } from "../character/adjustHP";
 import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
 import store from "../store";
 import {
-  addMonsterAttack,
-  addPlayerAttack,
-  updateEncounter,
+  advanceRound,
+  doubleKO,
+  playerDefeat,
+  playerFled,
+  playerVictory,
 } from "../store/slices/encounters";
 import { Emoji } from "../Emoji";
 import { attackResultEmbed } from "../encounter/attackResultEmbed";
 import { encounterSummaryEmbed } from "../encounter/encounterSummaryEmbed";
 import { encounterEmbed } from "./utils/encounterEmbed";
 import { getHook } from "../commands/inspect/getHook";
+import {
+  selectCharacterById,
+  selectEncounterById,
+  selectMonsterById,
+} from "../store/selectors";
 
 export const monster = async (
   interaction: CommandInteraction
@@ -32,10 +36,11 @@ export const monster = async (
   let player = getUserCharacter(interaction.user);
 
   console.log("monster encounter", monster, player);
-  const encounter = createEncounter({ monster, player });
+  let encounter = createEncounter({ monster, player });
+  console.log("selected encounter", encounter);
   let timeout = false;
   const message = await interaction.editReply({
-    embeds: [encounterEmbed(encounter.id)],
+    embeds: [encounterEmbed(encounter)],
   });
   if (!(message instanceof Message)) return;
   const channel = interaction.channel;
@@ -53,8 +58,12 @@ export const monster = async (
     interaction,
   });
 
-  while (encounter.outcome === "in progress") {
-    encounter.rounds++;
+  while (
+    selectEncounterById(store.getState(), encounter.id)?.outcome ===
+    "in progress"
+  ) {
+    store.dispatch(advanceRound(encounter.id));
+    encounter = selectEncounterById(store.getState(), encounter.id);
     const attackEmoji = Emoji(interaction, "attack");
     const runEmoji = Emoji(interaction, "run");
     await message.react(attackEmoji);
@@ -73,28 +82,25 @@ export const monster = async (
         timeout = true;
       });
     const reaction = collected?.first();
-    if (
+
+    const playerFlee =
       !collected ||
       timeout ||
       !reaction ||
-      [runEmoji, "run"].includes(reaction.emoji.name ?? "")
-    ) {
-      encounter.outcome = "player fled";
+      [runEmoji, "run"].includes(reaction.emoji.name ?? "");
+
+    if (playerFlee) {
+      store.dispatch(playerFled({ encounterId: encounter.id }));
     }
 
-    const playerResult =
-      encounter.outcome == "player fled"
-        ? undefined
-        : attack(player.id, monster.id);
-    const monsterResult = attack(monster.id, player.id);
-    playerResult &&
-      store.dispatch(addPlayerAttack({ encounter, result: playerResult }));
-    monsterResult &&
-      store.dispatch(addMonsterAttack({ encounter, result: monsterResult }));
-    const updatedMonster = getCharacter(monster.id);
-    const updatedPlayer = getCharacter(player.id);
+    const playerResult = playerFlee
+      ? undefined
+      : makeAttack(player.id, monster.id);
+    const monsterResult = makeAttack(monster.id, player.id);
+    const updatedMonster = selectMonsterById(store.getState(), monster.id);
+    const updatedPlayer = selectCharacterById(store.getState(), player.id);
     if (!updatedMonster || !updatedPlayer || !monsterResult) return;
-    monster = updatedMonster as Monster; // todo: fixme
+    monster = updatedMonster;
     player = updatedPlayer;
 
     const userReactions = message.reactions.cache.filter((reaction) =>
@@ -110,29 +116,37 @@ export const monster = async (
     }
     switch (true) {
       case player.hp > 0 && monster.hp === 0:
-        encounter.outcome = "player victory";
-        encounter.lootResult =
-          loot({
-            looterId: player.id,
-            targetId: monster.id,
-          }) ?? undefined;
-        encounter.goldLooted = monster.gold;
+        store.dispatch(
+          playerVictory({
+            encounterId: encounter.id,
+            lootResult:
+              loot({
+                looterId: player.id,
+                targetId: monster.id,
+              }) ?? undefined,
+          })
+        );
         if (player.quests.slayer) {
           updateUserQuestProgess(interaction.user, "slayer", 1);
         }
         break;
       case player.hp === 0 && monster.hp > 0:
-        encounter.outcome = "player defeated";
-        encounter.goldLooted = player.gold;
-        encounter.lootResult =
-          loot({ looterId: monster.id, targetId: player.id }) ?? undefined;
-        adjustHP(monster.id, monster.maxHP - monster.hp); // TODO: heal over time instead of immediately
+        store.dispatch(
+          playerDefeat({
+            encounterId: encounter.id,
+            lootResult:
+              loot({
+                looterId: monster.id,
+                targetId: player.id,
+              }) ?? undefined,
+          })
+        );
         break;
       case player.hp === 0 && monster.hp === 0:
-        encounter.outcome = "double ko";
+        store.dispatch(doubleKO({ encounterId: encounter.id }));
         break;
     }
-    store.dispatch(updateEncounter(encounter));
+    encounter = selectEncounterById(store.getState(), encounter.id);
     if (playerResult) {
       hook?.send({
         embeds: [attackResultEmbed({ result: playerResult, interaction })],
@@ -148,7 +162,7 @@ export const monster = async (
     }
 
     message.edit({
-      embeds: [encounterEmbed(encounter.id)],
+      embeds: [encounterEmbed(encounter)],
     });
   }
 

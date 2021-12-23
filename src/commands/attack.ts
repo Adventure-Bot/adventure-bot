@@ -7,7 +7,7 @@ import { playerAttack } from "../attack/playerAttack";
 import { sleep } from "../utils";
 import { cooldownRemainingText } from "../character/cooldownRemainingText";
 import { mentionCharacter } from "../character/mentionCharacter";
-import { attack } from "../attack/attack";
+import { makeAttack } from "../attack/makeAttack";
 import { hpBarField } from "../character/hpBar/hpBarField";
 import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
@@ -37,9 +37,9 @@ export const execute = async (
   if (attacker.hp === 0) {
     await interaction.editReply({
       embeds: [
-        new MessageEmbed()
-          .setDescription(`You're too weak to press on.`)
-          .setImage("https://imgur.com/uD06Okr.png"),
+        new MessageEmbed({
+          description: `You're too weak to press on.`,
+        }).setImage("https://imgur.com/uD06Okr.png"),
       ],
     });
     return;
@@ -76,9 +76,8 @@ export const execute = async (
   await sleep(2000);
   const retaliationEmbeds: MessageEmbed[] = [];
   if (result.defender.hp > 0) {
-    const result = attack(defender.id, attacker.id);
-    if (!result || result.outcome === "cooldown") {
-      // TODO: cooldown shouldn't be a possible outcome here
+    const result = makeAttack(defender.id, attacker.id);
+    if (!result) {
       await interaction.editReply({
         content: `No attack result or retaliation outcome is cooldown. This should not happen.`,
       });
@@ -203,7 +202,6 @@ export const attackRollText = ({
   interaction: CommandInteraction;
 }): string => {
   if (!result) return "No result. This should not happen.";
-  if (result.outcome === "cooldown") return "on cooldown";
   const ac = result.defender.ac;
   const acModifier = getCharacterStatModifier(result.defender, "ac");
   const roll = result.attackRoll;
@@ -235,7 +233,7 @@ function attackResultEmbed({
   interaction: CommandInteraction;
 }): MessageEmbed {
   const embed = new MessageEmbed().setDescription(attackFlavorText(result));
-  if (!result || result.outcome === "cooldown") return embed;
+  if (!result) return embed;
 
   switch (result.outcome) {
     case "hit":
