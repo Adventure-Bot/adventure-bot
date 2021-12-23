@@ -7,20 +7,38 @@ import {
   MessageSelectMenu,
 } from "discord.js";
 import { getUserCharacter } from "../../character/getUserCharacter";
-import { grantQuest } from "../../quest/grantQuest";
 import { isQuestId, quests } from "../../quest/quests";
 import questsCommand from "../../commands/quests";
 import { awardXP } from "../../character/awardXP";
-import { updateCharacter } from "../../character/updateCharacter";
 import { xpGainField } from "../../character/xpGainField";
+import { questEmbed } from "../../quest/questEmbed";
+import { selectAvailableQuests } from "../../store/selectors";
+import store from "../../store";
+import { grantQuest } from "../../store/slices/characters";
 
 // TODO: omit quests the user already has
 export const chattyTavernkeepers = async (
   interaction: CommandInteraction,
-  replyType: "reply" | "followUp" = "followUp"
+  followUp = false
 ): Promise<void> => {
   awardXP(interaction.user.id, 1);
-  const message = await interaction[replyType]({
+  const character = getUserCharacter(interaction.user);
+  const state = store.getState();
+  const availableQuests = selectAvailableQuests(state, character);
+
+  if (availableQuests.length === 0) {
+    interaction[followUp ? "followUp" : "editReply"]({
+      files: [new MessageAttachment("./images/Tavernkeepers.jpg")],
+      embeds: [
+        new MessageEmbed({
+          title: "Chatty Tavernkeepers!",
+          description: `You're all caught up on the latest, friend!`,
+        }).setImage("attachment://Tavernkeepers.jpg"),
+      ].concat(questEmbed(character) ?? []),
+    });
+    return;
+  }
+  const message = await interaction[followUp ? "followUp" : "editReply"]({
     fetchReply: true,
     files: [new MessageAttachment("./images/Tavernkeepers.jpg")],
     embeds: [
@@ -30,7 +48,7 @@ export const chattyTavernkeepers = async (
           "Turns out they know someone's got a thing needs doing.\n\nCompensation? Of course!",
         fields: [xpGainField(interaction, 1)],
       }).setImage("attachment://Tavernkeepers.jpg"),
-    ],
+    ].concat(questEmbed(character) ?? []),
     components: [
       new MessageActionRow({
         components: [
@@ -38,7 +56,7 @@ export const chattyTavernkeepers = async (
             customId: "quest",
             placeholder: "So... you in or what?",
           }).addOptions(
-            [quests.blessed, quests.slayer, quests.survivor].map((quest) => ({
+            availableQuests.map((quest) => ({
               label: quest.title,
               value: quest.id,
               description: `${quest.objective}: ${quest.reward}`,
@@ -71,7 +89,7 @@ export const chattyTavernkeepers = async (
     interaction.followUp(`${questId} is not a valid quest id`);
     return;
   }
-  updateCharacter(grantQuest(getUserCharacter(interaction.user), questId));
+  store.dispatch(grantQuest({ characterId: character.id, questId }));
   console.log(`quest accepted ${questId}`);
   await interaction.followUp(
     `You have been charged with the ${quests[questId].title} quest.`
