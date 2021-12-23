@@ -24,11 +24,14 @@ export async function listCharacters(
     webhooks,
     interaction,
   }).then((hook) => {
-    hook?.send({
-      embeds,
-      threadId: thread.id,
-    });
+    hook
+      ?.send({
+        embeds,
+        threadId: thread.id,
+      })
+      .then(() => {
+        thread.setArchived(true);
+      });
   });
-  thread.setArchived(true);
   interaction.editReply(`${character.name} sizes up the competition.`);
 }
