@@ -63,7 +63,9 @@ export const execute = async (
   const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
   embeds.push(
     attackResultEmbed({ result, interaction }).setTitle(
-      `${attacker.name} ${hitsOrMisses} ${defender.name}!`
+      `${Emoji(interaction, result.outcome)} ${attacker.name} ${hitsOrMisses} ${
+        defender.name
+      }!`
     )
   );
   if (result.defender.hp === 0) {
@@ -86,7 +88,9 @@ export const execute = async (
     const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
     retaliationEmbeds.push(
       attackResultEmbed({ result, interaction }).setTitle(
-        `${defender.name}'s ${hitsOrMisses} ${attacker.name} in retaliation!`
+        `${Emoji(interaction, result.outcome)} ${
+          defender.name
+        }'s ${hitsOrMisses} ${attacker.name} in retaliation!`
       )
     );
     if (result.defender.hp === 0) {
