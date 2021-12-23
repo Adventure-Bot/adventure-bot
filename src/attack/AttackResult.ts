@@ -8,4 +8,5 @@ export type AttackResult = {
   damage: number;
   monsterDamageRoll: number;
   damageRoll: number;
+  damageBonus: number;
 };

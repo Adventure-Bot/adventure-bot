@@ -10,9 +10,9 @@ export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
   const character = getCharacter(encounter.characterId);
   const monster = getMonster(encounter.monsterId);
   const characterAdjustment =
-    encounter.playerAttacks[encounter.playerAttacks.length - 1]?.damage ?? 0;
+    -encounter.playerAttacks[encounter.playerAttacks.length - 1]?.damage ?? 0;
   const monsterAdjustment =
-    encounter.monsterAttacks[encounter.monsterAttacks.length - 1]?.damage ?? 0;
+    -encounter.monsterAttacks[encounter.monsterAttacks.length - 1]?.damage ?? 0;
 
   if (!character)
     return new MessageEmbed({

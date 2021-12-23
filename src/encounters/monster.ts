@@ -96,8 +96,21 @@ export const monster = async (
 
     const playerResult = playerFlee
       ? undefined
-      : makeAttack(player.id, monster.id);
-    const monsterResult = makeAttack(monster.id, player.id);
+      : makeAttack(player.id, monster.id, encounter.id);
+    if (playerResult) {
+      hook?.send({
+        embeds: [attackResultEmbed({ result: playerResult, interaction })],
+        threadId: thread.id,
+      });
+    }
+    const monsterResult = makeAttack(monster.id, player.id, encounter.id);
+    if (monsterResult) {
+      hook?.send({
+        embeds: [attackResultEmbed({ result: monsterResult, interaction })],
+        threadId: thread.id,
+      });
+    }
+
     const updatedMonster = selectMonsterById(store.getState(), monster.id);
     const updatedPlayer = selectCharacterById(store.getState(), player.id);
     if (!updatedMonster || !updatedPlayer || !monsterResult) return;
@@ -147,21 +160,8 @@ export const monster = async (
         store.dispatch(doubleKO({ encounterId: encounter.id }));
         break;
     }
+
     encounter = selectEncounterById(store.getState(), encounter.id);
-    if (playerResult) {
-      hook?.send({
-        embeds: [attackResultEmbed({ result: playerResult, interaction })],
-        threadId: thread.id,
-      });
-    }
-
-    if (monsterResult) {
-      hook?.send({
-        embeds: [attackResultEmbed({ result: monsterResult, interaction })],
-        threadId: thread.id,
-      });
-    }
-
     message.edit({
       embeds: [encounterEmbed(encounter)],
     });
@@ -169,6 +169,7 @@ export const monster = async (
 
   message.reactions.removeAll();
 
+  encounter = selectEncounterById(store.getState(), encounter.id);
   await message.reply({
     embeds: [
       encounterSummaryEmbed({
@@ -179,6 +180,8 @@ export const monster = async (
       }),
     ].concat(encounter.lootResult ? lootResultEmbed(encounter.lootResult) : []),
   });
+
+  thread.setArchived(true);
 
   if (encounter.outcome === "player victory" && Math.random() <= 0.3)
     await chest(interaction);

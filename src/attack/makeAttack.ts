@@ -4,14 +4,19 @@ import { AttackResult } from "./AttackResult";
 import { getCharacterStatModified } from "../character/getCharacterStatModified";
 import store from "../store";
 import { attack, damage } from "../store/slices/characters";
+import { selectEncounterById } from "../store/selectors";
 
 export const makeAttack = (
   attackerId: string,
-  defenderId: string
+  defenderId: string,
+  encounterId?: string
 ): AttackResult | void => {
   const attacker = getCharacter(attackerId);
   const defender = getCharacter(defenderId);
   if (!attacker || !defender) return;
+  const encounter = encounterId
+    ? selectEncounterById(store.getState(), encounterId)
+    : undefined;
 
   const attackBonus = getCharacterStatModified(attacker, "attackBonus");
   const targetDefense = getCharacterStatModified(defender, "ac");
@@ -34,6 +39,7 @@ export const makeAttack = (
     outcome: hit ? "hit" : "miss",
     attackRoll,
     damage: totalDamage,
+    damageBonus,
     damageRoll,
     monsterDamageRoll,
     attacker,
@@ -42,6 +48,7 @@ export const makeAttack = (
   store.dispatch(
     attack({
       attackResult,
+      encounter,
     })
   );
 
