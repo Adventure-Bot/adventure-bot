@@ -18,7 +18,7 @@ import {
   playerVictory,
 } from "../store/slices/encounters";
 import { Emoji } from "../Emoji";
-import { attackResultEmbed } from "../encounter/attackResultEmbed";
+import { attackResultEmbed } from "../attack/attackResultEmbed";
 import { encounterSummaryEmbed } from "../encounter/encounterSummaryEmbed";
 import { encounterEmbed } from "./utils/encounterEmbed";
 import { getHook } from "../commands/inspect/getHook";
@@ -28,6 +28,7 @@ import {
   selectMonsterById,
 } from "../store/selectors";
 import { decoratedName } from "../character/decoratedName";
+import { questProgressField } from "../quest/questProgressField";
 
 export const monster = async (
   interaction: CommandInteraction
@@ -41,7 +42,7 @@ export const monster = async (
   console.log("selected encounter", encounter);
   let timeout = false;
   const message = await interaction.editReply({
-    embeds: [encounterEmbed(encounter)],
+    embeds: [encounterEmbed({ encounter, interaction })],
   });
   if (!(message instanceof Message)) return;
   const channel = interaction.channel;
@@ -163,25 +164,58 @@ export const monster = async (
 
     encounter = selectEncounterById(store.getState(), encounter.id);
     message.edit({
-      embeds: [encounterEmbed(encounter)],
+      embeds: [encounterEmbed({ encounter, interaction })]
+        .concat(
+          playerResult
+            ? [
+                attackResultEmbed({
+                  result: playerResult,
+                  interaction,
+                  variant: "compact",
+                }),
+              ]
+            : []
+        )
+        .concat(
+          monsterResult
+            ? attackResultEmbed({
+                result: monsterResult,
+                interaction,
+                variant: "compact",
+              })
+            : []
+        ),
     });
   }
 
   message.reactions.removeAll();
 
   encounter = selectEncounterById(store.getState(), encounter.id);
-  await message.reply({
-    embeds: [
-      encounterSummaryEmbed({
-        encounter,
-        monster,
-        character: player,
-        interaction,
-      }),
-    ].concat(encounter.lootResult ? lootResultEmbed(encounter.lootResult) : []),
+
+  const embed = encounterSummaryEmbed({
+    encounter,
+    interaction,
   });
 
-  thread.setArchived(true);
+  if (player.quests.slayer && encounter.outcome === "player victory")
+    embed.addFields([questProgressField(player.quests.slayer)]);
+
+  const embeds = [embed].concat(
+    encounter.lootResult ? lootResultEmbed(encounter.lootResult) : []
+  );
+
+  await message.reply({
+    embeds,
+  });
+
+  hook
+    ?.send({
+      embeds,
+      threadId: thread.id,
+    })
+    .then(() => {
+      thread.setArchived(true);
+    });
 
   if (encounter.outcome === "player victory" && Math.random() <= 0.3)
     await chest(interaction);

@@ -3,11 +3,11 @@ import { adjustHP } from "../character/adjustHP";
 import { awardXP } from "../character/awardXP";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { hpBarField } from "../character/hpBar/hpBarField";
-import { questProgressField } from "../character/hpBar/hpField";
 import { xpGainField } from "../character/xpGainField";
 import quests from "../commands/quests";
 import { Emoji } from "../Emoji";
 import { isUserQuestComplete } from "../quest/isQuestComplete";
+import { questProgressField } from "../quest/questProgressField";
 import { updateUserQuestProgess } from "../quest/updateQuestProgess";
 import { getAsset } from "../utils/getAsset";
 

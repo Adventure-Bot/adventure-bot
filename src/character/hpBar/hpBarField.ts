@@ -1,7 +1,5 @@
 import { EmbedFieldData } from "discord.js";
 import { Character } from "../../character/Character";
-import { getCharacterStatModified } from "../../character/getCharacterStatModified";
-import { getCharacterUpdate } from "../../character/getCharacterUpdate";
 import { hpBar } from "../../character/hpBar/hpBar";
 
 const numberModifierText = (num?: number): string => {
@@ -22,9 +20,6 @@ export function hpBarField({
 }): EmbedFieldData {
   return {
     name: (showName ? character.name + "'s " : "") + "HP",
-    value: `${getCharacterUpdate(character).hp}/${getCharacterStatModified(
-      character,
-      "maxHP"
-    )}\n${hpBar(character, adjustment)} ${numberModifierText(adjustment)}`,
+    value: `${hpBar(character, adjustment)} ${numberModifierText(adjustment)}`,
   };
 }

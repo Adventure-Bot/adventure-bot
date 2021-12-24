@@ -1,18 +1,18 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
+import { AttackResult } from "../attack/AttackResult";
+import { attackResultEmbed } from "../attack/attackResultEmbed";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { getCharacterStatModifier } from "../character/getCharacterStatModifier";
-import { getCharacterStatModified } from "../character/getCharacterStatModified";
-import { playerAttack } from "../attack/playerAttack";
-import { sleep } from "../utils";
 import { cooldownRemainingText } from "../character/cooldownRemainingText";
-import { mentionCharacter } from "../character/mentionCharacter";
-import { makeAttack } from "../attack/makeAttack";
-import { hpBarField } from "../character/hpBar/hpBarField";
+import { Emoji } from "../Emoji";
+import { getCharacterStatModified } from "../character/getCharacterStatModified";
+import { getCharacterStatModifier } from "../character/getCharacterStatModifier";
+import { getUserCharacter } from "../character/getUserCharacter";
 import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
-import { AttackResult } from "../attack/AttackResult";
-import { Emoji } from "../Emoji";
+import { makeAttack } from "../attack/makeAttack";
+import { mentionCharacter } from "../character/mentionCharacter";
+import { playerAttack } from "../attack/playerAttack";
+import { SlashCommandBuilder } from "@discordjs/builders";
+import { sleep } from "../utils";
 
 export const command = new SlashCommandBuilder()
   .setName("attack")
@@ -59,15 +59,7 @@ export const execute = async (
     );
     return;
   }
-  const embeds = [];
-  const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
-  embeds.push(
-    attackResultEmbed({ result, interaction }).setTitle(
-      `${Emoji(interaction, result.outcome)} ${attacker.name} ${hitsOrMisses} ${
-        defender.name
-      }!`
-    )
-  );
+  const embeds = [attackResultEmbed({ result, interaction })];
   if (result.defender.hp === 0) {
     lootResult = loot({ looterId: attacker.id, targetId: defender.id });
     if (lootResult) embeds.push(lootResultEmbed(lootResult));
@@ -85,13 +77,8 @@ export const execute = async (
       });
       return;
     }
-    const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
     retaliationEmbeds.push(
-      attackResultEmbed({ result, interaction }).setTitle(
-        `${Emoji(interaction, result.outcome)} ${
-          defender.name
-        }'s ${hitsOrMisses} ${attacker.name} in retaliation!`
-      )
+      attackResultEmbed({ result, interaction, variant: "retaliation" })
     );
     if (result.defender.hp === 0) {
       lootResult = loot({ looterId: defender.id, targetId: attacker.id });
@@ -218,42 +205,8 @@ export const attackRollText = ({
     acModifier > 0 ? `+${acModifier}` : acModifier < 0 ? `-${acModifier}` : ``;
 
   const comparison = result.outcome === "hit" ? "≥" : "<";
-  const outcomeText =
-    result.outcome === "hit"
-      ? Emoji(interaction, "hit") + " Hit!"
-      : Emoji(interaction, "miss") + " Miss!";
-
-  return `${outcomeText}\n${Emoji(
+  return `${Emoji(interaction, "attack")}${totalAttack} ${comparison} ${Emoji(
     interaction,
-    "attack"
-  )}${totalAttack} ${comparison} ${Emoji(interaction, "ac")}${
-    10 + acModifier
-  } (\`${roll}\`+${attackBonus} vs ${ac}${acModifierText})`;
+    "ac"
+  )}${10 + acModifier} (\`${roll}\`+${attackBonus} vs ${ac}${acModifierText})`;
 };
-
-function attackResultEmbed({
-  result,
-  interaction,
-}: {
-  result: AttackResult;
-  interaction: CommandInteraction;
-}): MessageEmbed {
-  const embed = new MessageEmbed().setDescription(attackFlavorText(result));
-  if (!result) return embed;
-
-  embed.setImage(result.defender.profile);
-  embed.setThumbnail(result.attacker.profile);
-
-  embed.addFields([
-    hpBarField({
-      character: result.defender,
-      adjustment: result.outcome === "hit" ? -result.damage : 0,
-    }),
-    {
-      name: `Attack`,
-      value: attackRollText({ result, interaction }),
-    },
-  ]);
-
-  return embed;
-}

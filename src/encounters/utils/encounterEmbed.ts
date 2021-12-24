@@ -1,18 +1,20 @@
-import { MessageEmbed } from "discord.js";
+import { CommandInteraction, MessageEmbed } from "discord.js";
 import { getCharacter } from "../../character/getCharacter";
 import { getMonster } from "../../monster/getMonster";
 import { decoratedName } from "../../character/decoratedName";
-import { accuracyText } from "./accuracyText";
 import { hpBarField } from "../../character/hpBar/hpBarField";
 import { Encounter } from "../../monster/Encounter";
+import { attackResultHeadline } from "../../attack/attackResultHeadline";
 
-export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
+export const encounterEmbed = ({
+  encounter,
+  interaction,
+}: {
+  encounter: Encounter;
+  interaction: CommandInteraction;
+}): MessageEmbed => {
   const character = getCharacter(encounter.characterId);
   const monster = getMonster(encounter.monsterId);
-  const characterAdjustment =
-    -encounter.playerAttacks[encounter.playerAttacks.length - 1]?.damage ?? 0;
-  const monsterAdjustment =
-    -encounter.monsterAttacks[encounter.monsterAttacks.length - 1]?.damage ?? 0;
 
   if (!character)
     return new MessageEmbed({
@@ -35,22 +37,6 @@ export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
         value: encounter.rounds.toString(),
         inline: true,
       },
-      {
-        name: "Monster accuracy",
-        value: accuracyText({
-          attacker: monster,
-          defender: character,
-          attacks: encounter.monsterAttacks,
-        }),
-      },
-      {
-        name: "Player accuracy",
-        value: accuracyText({
-          attacker: character,
-          defender: monster,
-          attacks: encounter.playerAttacks,
-        }),
-      },
     ],
     timestamp: encounter.date,
   })
@@ -58,23 +44,36 @@ export const encounterEmbed = (encounter: Encounter): MessageEmbed => {
     .setImage(monster.profile)
     .setThumbnail(character.profile);
   if (encounter.outcome === "in progress") {
+    const lastPlayerAttack =
+      encounter.playerAttacks[encounter.playerAttacks.length - 1];
     embed.addFields([
       hpBarField({
         character,
         showName: true,
-        adjustment: characterAdjustment,
+        adjustment: -(lastPlayerAttack?.damage ?? 0),
       }),
+    ]);
+    if (lastPlayerAttack) {
+      embed.addField(
+        `${character.name}'s attack`,
+        attackResultHeadline({ interaction, result: lastPlayerAttack })
+      );
+    }
+    const lastMonsterAttack =
+      encounter.monsterAttacks[encounter.monsterAttacks.length - 1];
+    embed.addFields([
       hpBarField({
         character: monster,
         showName: true,
-        adjustment: monsterAdjustment,
+        adjustment: -(lastMonsterAttack?.damage ?? 0),
       }),
     ]);
+    if (lastMonsterAttack) {
+      embed.addField(
+        `${monster.name}'s attack`,
+        attackResultHeadline({ interaction, result: lastMonsterAttack })
+      );
+    }
   }
-  if (encounter.lootResult?.goldTaken)
-    embed.addField(
-      "Gold Looted",
-      "💰 " + encounter.lootResult?.goldTaken.toString()
-    );
   return embed;
 };

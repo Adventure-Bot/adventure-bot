@@ -1,63 +1,81 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { questProgressField } from "../quest/questProgressField";
-import { Monster } from "../monster/Monster";
-import { Character } from "../character/Character";
 import { Encounter } from "../monster/Encounter";
 import { xpGainField } from "../character/xpGainField";
 import { Emoji } from "../Emoji";
 import { gpGainField } from "../character/gpGainField";
+import { selectCharacterById, selectMonsterById } from "../store/selectors";
+import store from "../store";
+import { decoratedName } from "../character/decoratedName";
 
 export function encounterSummaryEmbed({
   encounter,
-  monster,
-  character,
   interaction,
 }: {
   encounter: Encounter;
-  monster: Monster;
-  character: Character;
   interaction: CommandInteraction;
 }): MessageEmbed {
-  const summary = new MessageEmbed({ title: "Encounter Summary" });
+  const embed = new MessageEmbed({});
+  const state = store.getState();
+  const character = selectCharacterById(state, encounter.characterId);
+  if (!character) {
+    embed.setTitle(`Character ${encounter.characterId} not found`);
+    return embed;
+  }
+  const monster = selectMonsterById(state, encounter.monsterId);
+  if (!monster) {
+    embed.setTitle(`Monster ${encounter.monsterId} not found`);
+    return embed;
+  }
+  embed.setTitle(`${decoratedName(character)} vs ${decoratedName(monster)}`);
+
+  embed.addField("Outcome", encounter.outcome, true);
 
   switch (encounter.outcome) {
     case "double ko":
-      summary.addField("Double KO!", `You knocked eachother out!`);
+      embed.addField("Double KO!", `You knocked eachother out!`);
       break;
     case "in progress":
-      summary.addField("In Progress", "Encounter in progress.");
+      embed.addField("In Progress", "Encounter in progress.");
       break;
     case "monster fled":
-      summary.addField(
+      embed.addField(
         "Evaded!",
         Emoji(interaction, "run") + `${monster.name} escaped!`
       );
       break;
     case "player defeated":
-      summary.addField("Unconscious", `${character.name} knocked out!`);
-      if (encounter.lootResult?.goldTaken) {
-        summary.addField(
-          "Looted!",
-          `${Emoji(interaction, "gold")} ${encounter.lootResult.goldTaken}!`
-        );
-      }
+      embed.addField("Unconscious", `${character.name} knocked out!`);
       break;
     case "player fled":
-      summary.addField("Fled", `${character.name} escaped with their life!`);
+      embed.addField("Fled", `${character.name} escaped with their life!`);
       break;
     case "player victory":
-      summary.addField(
+      embed.addField(
         "Triumphant!",
         `${character.name} defeated ${monster.name}! 🎉`
       );
-      summary.addFields([
+      embed.addFields([
         xpGainField(interaction, monster.xpValue),
         gpGainField(interaction, monster.gold),
       ]);
-      if (character && character.quests.slayer)
-        summary.addFields([questProgressField(character.quests.slayer)]);
       break;
   }
 
-  return summary;
+  if (encounter.lootResult?.goldTaken) {
+    embed.addField(
+      "Gold Looted",
+      Emoji(interaction, "gold") +
+        " " +
+        encounter.lootResult?.goldTaken.toString()
+    );
+  }
+  const itemsTaken = encounter.lootResult?.itemsTaken;
+  if (itemsTaken && itemsTaken.length > 0) {
+    embed.addField(
+      "Items Looted",
+      itemsTaken.map((item) => item.name).join(", ")
+    );
+  }
+
+  return embed;
 }
