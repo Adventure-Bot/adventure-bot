@@ -2,13 +2,10 @@ import { CommandInteraction, MessageEmbed } from "discord.js";
 import { getCharacter } from "../../character/getCharacter";
 import { getMonster } from "../../monster/getMonster";
 import { decoratedName } from "../../character/decoratedName";
-import { hpBarField } from "../../character/hpBar/hpBarField";
 import { Encounter } from "../../monster/Encounter";
-import { attackResultHeadline } from "../../attack/attackResultHeadline";
 
 export const encounterEmbed = ({
   encounter,
-  interaction,
 }: {
   encounter: Encounter;
   interaction: CommandInteraction;
@@ -43,37 +40,5 @@ export const encounterEmbed = ({
     .setColor("RED")
     .setImage(monster.profile)
     .setThumbnail(character.profile);
-  if (encounter.outcome === "in progress") {
-    const lastPlayerAttack =
-      encounter.playerAttacks[encounter.playerAttacks.length - 1];
-    embed.addFields([
-      hpBarField({
-        character,
-        showName: true,
-        adjustment: -(lastPlayerAttack?.damage ?? 0),
-      }),
-    ]);
-    if (lastPlayerAttack) {
-      embed.addField(
-        `${character.name}'s attack`,
-        attackResultHeadline({ interaction, result: lastPlayerAttack })
-      );
-    }
-    const lastMonsterAttack =
-      encounter.monsterAttacks[encounter.monsterAttacks.length - 1];
-    embed.addFields([
-      hpBarField({
-        character: monster,
-        showName: true,
-        adjustment: -(lastMonsterAttack?.damage ?? 0),
-      }),
-    ]);
-    if (lastMonsterAttack) {
-      embed.addField(
-        `${monster.name}'s attack`,
-        attackResultHeadline({ interaction, result: lastMonsterAttack })
-      );
-    }
-  }
   return embed;
 };

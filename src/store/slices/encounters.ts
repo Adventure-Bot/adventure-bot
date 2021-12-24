@@ -31,7 +31,7 @@ const encountersSlice = createSlice({
       state.encountersById[encounter.id] = encounter;
     },
 
-    advanceRound(state, action: PayloadAction<string>) {
+    roundFinished(state, action: PayloadAction<string>) {
       const encounter = state.encountersById[action.payload];
       encounter.rounds++;
     },
@@ -72,6 +72,10 @@ const encountersSlice = createSlice({
       if (!encounter) return;
       encounter.outcome = "double ko";
     },
+
+    clearAllEncounters(state) {
+      state.encountersById = {};
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(attack, (state, action) => {
@@ -89,7 +93,7 @@ const encountersSlice = createSlice({
 export const {
   encounterCreated,
   playerFled,
-  advanceRound,
+  roundFinished,
   playerVictory,
   playerDefeat,
   doubleKO,

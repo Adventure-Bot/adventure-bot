@@ -28,14 +28,12 @@ export function encounterSummaryEmbed({
   }
   embed.setTitle(`${decoratedName(character)} vs ${decoratedName(monster)}`);
 
-  embed.addField("Outcome", encounter.outcome, true);
-
   switch (encounter.outcome) {
     case "double ko":
       embed.addField("Double KO!", `You knocked eachother out!`);
       break;
     case "in progress":
-      embed.addField("In Progress", "Encounter in progress.");
+      embed.addField("In Progress", "Encounter in progress!");
       break;
     case "monster fled":
       embed.addField(
@@ -54,20 +52,12 @@ export function encounterSummaryEmbed({
         "Triumphant!",
         `${character.name} defeated ${monster.name}! 🎉`
       );
-      embed.addFields([
-        xpGainField(interaction, monster.xpValue),
-        gpGainField(interaction, monster.gold),
-      ]);
+      embed.addFields([xpGainField(interaction, monster.xpValue)]);
       break;
   }
 
   if (encounter.lootResult?.goldTaken) {
-    embed.addField(
-      "Gold Looted",
-      Emoji(interaction, "gold") +
-        " " +
-        encounter.lootResult?.goldTaken.toString()
-    );
+    embed.addFields([gpGainField(interaction, monster.gold)]);
   }
   const itemsTaken = encounter.lootResult?.itemsTaken;
   if (itemsTaken && itemsTaken.length > 0) {

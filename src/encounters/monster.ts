@@ -11,7 +11,7 @@ import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
 import store from "../store";
 import {
-  advanceRound,
+  roundFinished as roundFinished,
   doubleKO,
   playerDefeat,
   playerFled,
@@ -49,7 +49,9 @@ export const monster = async (
   if (!(channel instanceof TextChannel)) return;
 
   const thread = await channel.threads.create({
-    name: `${decoratedName(player)} vs ${decoratedName(monster)}`,
+    name: `Combat log for ${decoratedName(player)} vs ${decoratedName(
+      monster
+    )}`,
     startMessage: message,
   });
 
@@ -64,7 +66,6 @@ export const monster = async (
     "in progress" ===
     selectEncounterById(store.getState(), encounter.id)?.outcome
   ) {
-    store.dispatch(advanceRound(encounter.id));
     encounter = selectEncounterById(store.getState(), encounter.id);
     const attackEmoji = Emoji(interaction, "attack");
     const runEmoji = Emoji(interaction, "run");
@@ -91,9 +92,7 @@ export const monster = async (
       !reaction ||
       [runEmoji, "run"].includes(reaction.emoji.name ?? "");
 
-    if (playerFlee) {
-      store.dispatch(playerFled({ encounterId: encounter.id }));
-    }
+    if (playerFlee) store.dispatch(playerFled({ encounterId: encounter.id }));
 
     const playerResult = playerFlee
       ? undefined
@@ -186,6 +185,7 @@ export const monster = async (
             : []
         ),
     });
+    store.dispatch(roundFinished(encounter.id));
   }
 
   message.reactions.removeAll();
