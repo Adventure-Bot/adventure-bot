@@ -23,7 +23,10 @@ export async function barFight(
     fields: [
       damgeTakenField(interaction, damage),
       xpGainField(interaction, 1),
-      hpBarField(getUserCharacter(interaction.user), -damage),
+      hpBarField({
+        character: getUserCharacter(interaction.user),
+        adjustment: -damage,
+      }),
     ],
   }).setImage("https://i.imgur.com/yo1JymD.png");
   const character = getUserCharacter(interaction.user);

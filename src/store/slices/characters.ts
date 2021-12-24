@@ -1,14 +1,25 @@
 import { Character } from "../../character/Character";
 import { StatusEffect } from "../../statusEffects/StatusEffect";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QuestId, quests } from "../../quest/quests";
 import { getCharacterStatModified } from "../../character/getCharacterStatModified";
 import { Item } from "equipment/Item";
-import { equipmentFilter, LootResult } from "../../character/loot/loot";
+import { equipmentFilter } from "../../character/loot/loot";
 import { Monster } from "../../monster/Monster";
+import { clamp } from "remeda";
+import { Encounter } from "../../monster/Encounter";
+import { AttackResult } from "../../attack/AttackResult";
+import { characterLooted } from "./loots";
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
   Date.now() > new Date(effect.started).valueOf() + effect.duration;
+
+export type AttackAction = {
+  encounter?: Encounter;
+  attackResult: AttackResult;
+};
+
+export const attack = createAction<AttackAction>("character/attack");
 
 const charactersById: Record<string, Character> = {};
 const roamingMonsters: string[] = [];
@@ -34,23 +45,6 @@ const characterSlice = createSlice({
       const monster = action.payload;
       state.charactersById[monster.id] = monster;
       state.roamingMonsters.push(monster.id);
-    },
-
-    characterLooted(state, action: PayloadAction<LootResult>) {
-      const { targetId, looterId, itemsTaken, goldTaken } = action.payload;
-      const looter = state.charactersById[looterId];
-      looter.gold += goldTaken;
-      looter.inventory = [...looter.inventory, ...itemsTaken];
-
-      const target = state.charactersById[targetId];
-      target.gold -= goldTaken;
-      const isTakenItem = (item: Item) =>
-        itemsTaken.find((i) => i.id === item.id);
-      target.inventory = target.inventory.filter((item) => !isTakenItem(item));
-      target.equipment = equipmentFilter(
-        target.equipment,
-        (item) => !isTakenItem(item)
-      );
     },
 
     updateCharacterCooldowns(
@@ -144,16 +138,34 @@ const characterSlice = createSlice({
         amount: number;
       }>
     ) {
-      const { character, amount } = action.payload;
-      const maxHP = getCharacterStatModified(character, "maxHP");
-      let newHp = character.hp + amount;
-      if (newHp < 0) newHp = 0;
-      if (newHp > maxHP) newHp = maxHP;
+      const { amount } = action.payload;
+      const character = state.charactersById[action.payload.character.id];
+      character.hp = clamp(character.hp + amount, {
+        min: 0,
+        max: getCharacterStatModified(character, "maxHP"),
+      });
+    },
 
-      state.charactersById[character.id] = {
-        ...character,
-        hp: newHp,
-      };
+    damage(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        amount: number;
+      }>
+    ) {
+      const { amount } = action.payload;
+      const character = state.charactersById[action.payload.characterId];
+      character.hp = clamp(character.hp - amount, {
+        min: 0,
+        max: getCharacterStatModified(character, "maxHP"),
+      });
+
+      if (character.hp > 0)
+        addCharacterQuestProgress({
+          characterId: character.id,
+          questId: "survivor",
+          amount,
+        });
     },
 
     grantQuest(
@@ -186,6 +198,25 @@ const characterSlice = createSlice({
       };
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(characterLooted, (state, action) => {
+      const { itemsTaken, goldTaken, looterId, targetId } = action.payload;
+      const looter = state.charactersById[looterId];
+      const target = state.charactersById[targetId];
+
+      looter.gold += goldTaken;
+      looter.inventory = [...looter.inventory, ...itemsTaken];
+
+      target.gold -= goldTaken;
+      const isTakenItem = (item: Item) =>
+        itemsTaken.find((i) => i.id === item.id);
+      target.inventory = target.inventory.filter((item) => !isTakenItem(item));
+      target.equipment = equipmentFilter(
+        target.equipment,
+        (item) => !isTakenItem(item)
+      );
+    });
+  },
 });
 
 export const {
@@ -199,8 +230,8 @@ export const {
   addItemToInventory,
   questCompleted,
   goldGained,
-  characterLooted,
   monsterCreated,
+  damage,
   grantQuest,
 } = characterSlice.actions;
 

@@ -1,23 +1,24 @@
 import { LootResult } from "../../character/loot/loot";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 
 const lootsById: Record<string, LootResult> = {};
+
+export const characterLooted = createAction<LootResult>(
+  "loots/characterLooted"
+);
 
 const lootsSlice = createSlice({
   name: "loots",
   initialState: {
     lootsById,
   },
-  reducers: {
-    looted(state, action: PayloadAction<LootResult>) {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(characterLooted, (state, action) => {
       const loot = action.payload;
-      state.lootsById[loot.id] = {
-        ...loot,
-      };
-    },
+      state.lootsById[loot.id] = loot;
+    });
   },
 });
-
-export const { looted } = lootsSlice.actions;
 
 export default lootsSlice.reducer;

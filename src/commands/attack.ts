@@ -1,18 +1,18 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
+import { AttackResult } from "../attack/AttackResult";
+import { attackResultEmbed } from "../attack/attackResultEmbed";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { getCharacterStatModifier } from "../character/getCharacterStatModifier";
-import { getCharacterStatModified } from "../character/getCharacterStatModified";
-import { playerAttack } from "../attack/playerAttack";
-import { sleep } from "../utils";
 import { cooldownRemainingText } from "../character/cooldownRemainingText";
-import { mentionCharacter } from "../character/mentionCharacter";
-import { attack } from "../attack/attack";
-import { hpBarField } from "../character/hpBar/hpBarField";
+import { Emoji } from "../Emoji";
+import { getCharacterStatModified } from "../character/getCharacterStatModified";
+import { getCharacterStatModifier } from "../character/getCharacterStatModifier";
+import { getUserCharacter } from "../character/getUserCharacter";
 import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
-import { AttackResult } from "../attack/AttackResult";
-import { Emoji } from "../Emoji";
+import { makeAttack } from "../attack/makeAttack";
+import { mentionCharacter } from "../character/mentionCharacter";
+import { playerAttack } from "../attack/playerAttack";
+import { SlashCommandBuilder } from "@discordjs/builders";
+import { sleep } from "../utils";
 
 export const command = new SlashCommandBuilder()
   .setName("attack")
@@ -37,9 +37,9 @@ export const execute = async (
   if (attacker.hp === 0) {
     await interaction.editReply({
       embeds: [
-        new MessageEmbed()
-          .setDescription(`You're too weak to press on.`)
-          .setImage("https://imgur.com/uD06Okr.png"),
+        new MessageEmbed({
+          description: `You're too weak to press on.`,
+        }).setImage("https://imgur.com/uD06Okr.png"),
       ],
     });
     return;
@@ -59,13 +59,7 @@ export const execute = async (
     );
     return;
   }
-  const embeds = [];
-  const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
-  embeds.push(
-    attackResultEmbed({ result, interaction }).setTitle(
-      `${attacker.name} ${hitsOrMisses} ${defender.name}!`
-    )
-  );
+  const embeds = [attackResultEmbed({ result, interaction })];
   if (result.defender.hp === 0) {
     lootResult = loot({ looterId: attacker.id, targetId: defender.id });
     if (lootResult) embeds.push(lootResultEmbed(lootResult));
@@ -76,19 +70,15 @@ export const execute = async (
   await sleep(2000);
   const retaliationEmbeds: MessageEmbed[] = [];
   if (result.defender.hp > 0) {
-    const result = attack(defender.id, attacker.id);
-    if (!result || result.outcome === "cooldown") {
-      // TODO: cooldown shouldn't be a possible outcome here
+    const result = makeAttack(defender.id, attacker.id);
+    if (!result) {
       await interaction.editReply({
         content: `No attack result or retaliation outcome is cooldown. This should not happen.`,
       });
       return;
     }
-    const hitsOrMisses = result.outcome === "hit" ? "hits" : "misses";
     retaliationEmbeds.push(
-      attackResultEmbed({ result, interaction }).setTitle(
-        `${defender.name}'s ${hitsOrMisses} ${attacker.name} in retaliation!`
-      )
+      attackResultEmbed({ result, interaction, variant: "retaliation" })
     );
     if (result.defender.hp === 0) {
       lootResult = loot({ looterId: defender.id, targetId: attacker.id });
@@ -166,7 +156,9 @@ const accuracyDescriptor = (result: ReturnType<typeof playerAttack>) => {
 
 const damageDescriptor = (result: ReturnType<typeof playerAttack>) => {
   if (!result) return `No result`;
-  if (result.outcome === "cooldown") return "";
+
+  if (result.outcome === "cooldown" || result.outcome === "miss") return "";
+
   const damage = result.damage;
   switch (true) {
     case damage > 5:
@@ -203,7 +195,6 @@ export const attackRollText = ({
   interaction: CommandInteraction;
 }): string => {
   if (!result) return "No result. This should not happen.";
-  if (result.outcome === "cooldown") return "on cooldown";
   const ac = result.defender.ac;
   const acModifier = getCharacterStatModifier(result.defender, "ac");
   const roll = result.attackRoll;
@@ -214,39 +205,8 @@ export const attackRollText = ({
     acModifier > 0 ? `+${acModifier}` : acModifier < 0 ? `-${acModifier}` : ``;
 
   const comparison = result.outcome === "hit" ? "≥" : "<";
-  const outcomeText =
-    result.outcome === "hit"
-      ? Emoji(interaction, "hit") + " Hit!"
-      : Emoji(interaction, "miss") + " Miss.";
-
-  return `${outcomeText}\n${Emoji(
+  return `${Emoji(interaction, "attack")}${totalAttack} ${comparison} ${Emoji(
     interaction,
-    "attack"
-  )}${totalAttack} ${comparison} ${Emoji(interaction, "ac")}${
-    10 + acModifier
-  } (\`${roll}\`+${attackBonus} vs ${ac}${acModifierText})`;
+    "ac"
+  )}${10 + acModifier} (\`${roll}\`+${attackBonus} vs ${ac}${acModifierText})`;
 };
-
-function attackResultEmbed({
-  result,
-  interaction,
-}: {
-  result: AttackResult;
-  interaction: CommandInteraction;
-}): MessageEmbed {
-  const embed = new MessageEmbed().setDescription(attackFlavorText(result));
-  if (!result || result.outcome === "cooldown") return embed;
-
-  embed.setImage(result.defender.profile);
-  embed.setThumbnail(result.attacker.profile);
-
-  embed.addFields([
-    hpBarField(result.defender, result.outcome === "hit" ? -result.damage : 0),
-    {
-      name: `Attack`,
-      value: attackRollText({ result, interaction }),
-    },
-  ]);
-
-  return embed;
-}

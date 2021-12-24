@@ -12,7 +12,9 @@ export function listMonsters(interaction: CommandInteraction): void {
         ? monsters
             .slice(0, 10)
             .map((monster) =>
-              monsterEmbed(monster).addFields([hpBarField(monster)])
+              monsterEmbed(monster).addFields([
+                hpBarField({ character: monster }),
+              ])
             )
         : [
             new MessageEmbed({

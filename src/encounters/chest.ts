@@ -89,6 +89,7 @@ export async function chest(
         timeout = true;
       });
     if (!collected || timeout) {
+      message.reactions.removeAll();
       await interaction.followUp(`Timed out`);
       return;
     }

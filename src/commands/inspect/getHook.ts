@@ -6,7 +6,12 @@ import {
   Webhook,
 } from "discord.js";
 
-export type HookName = "Equipment" | "Status Effects" | "Quests" | "Characters";
+export type HookName =
+  | "Equipment"
+  | "Status Effects"
+  | "Quests"
+  | "Characters"
+  | "Combat";
 
 export async function getHook({
   name,
