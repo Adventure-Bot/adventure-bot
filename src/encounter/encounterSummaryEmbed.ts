@@ -30,7 +30,7 @@ export function encounterSummaryEmbed({
 
   switch (encounter.outcome) {
     case "double ko":
-      embed.addField("Double KO!", `You knocked eachother out!`);
+      embed.addField("Double KO!", `They knocked eachother out!`);
       break;
     case "in progress":
       embed.addField("In Progress", "Encounter in progress!");
@@ -42,7 +42,7 @@ export function encounterSummaryEmbed({
       );
       break;
     case "player defeated":
-      embed.addField("Unconscious", `${character.name} knocked out!`);
+      embed.addField("Unconscious", `${character.name} was knocked out!`);
       break;
     case "player fled":
       embed.addField("Fled", `${character.name} escaped with their life!`);
@@ -66,6 +66,7 @@ export function encounterSummaryEmbed({
       itemsTaken.map((item) => item.name).join(", ")
     );
   }
+  embed.setImage(monster.profile).setThumbnail(character.profile);
 
   return embed;
 }
