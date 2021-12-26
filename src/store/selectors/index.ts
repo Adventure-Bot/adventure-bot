@@ -1,5 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { values } from "remeda";
 import { Character } from "../../character/Character";
+import { LootResult } from "../../character/loot/loot";
+import { Encounter } from "../../monster/Encounter";
 import { isMonster } from "../../monster/Monster";
 import { Quest } from "../../quest/Quest";
 import { QuestId, quests } from "../../quest/quests";
@@ -61,21 +64,16 @@ export const selectRoamingMonsters = createSelector(
   (monsters) => monsters.filter(isMonster).filter((monster) => monster.hp > 0)
 );
 
-export const selectAllEncounters = createSelector(
-  (state: ReduxState) => state.encounters.encountersById,
-  (encountersById) => Object.values(encountersById)
-);
+export const selectAllEncounters = (state: ReduxState): Encounter[] =>
+  values(state.encounters.encountersById);
 
-export const selectEncounterById = createSelector(
-  (state: ReduxState, id: string) => state.encounters.encountersById[id],
-  (encounter) => encounter
-);
+export const selectEncounterById = (state: ReduxState, id: string): Encounter =>
+  state.encounters.encountersById[id];
 
-export const selectCooldownByType = createSelector(
-  (state: ReduxState, cooldownType: keyof ReduxState["cooldowns"]) =>
-    state.cooldowns[cooldownType],
-  (cooldown) => cooldown
-);
+export const selectCooldownByType = (
+  state: ReduxState,
+  cooldownType: keyof ReduxState["cooldowns"]
+): number | undefined => state.cooldowns[cooldownType];
 
 export const selectHasItemNameInInventory = createSelector(
   (state: ReduxState, character: Character, itemName: string) =>
@@ -85,15 +83,11 @@ export const selectHasItemNameInInventory = createSelector(
   (hasItem) => hasItem
 );
 
-export const selectLoot = createSelector(
-  (state: ReduxState) => state.loots.lootsById,
-  (loots) => Object.values(loots)
-);
+export const selectLoot = (state: ReduxState): LootResult[] =>
+  values(state.loots.lootsById);
 
-export const selectIsHeavyCrownInPlay = createSelector(
-  (state: ReduxState) => state.characters.isHeavyCrownInPlay,
-  (isHeavyCrownInPlay) => isHeavyCrownInPlay
-);
+export const selectIsHeavyCrownInPlay = (state: ReduxState): boolean =>
+  state.characters.isHeavyCrownInPlay;
 
 export const selectIsCharacterOnQuest = ({
   state,
