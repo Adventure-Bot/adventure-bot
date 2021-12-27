@@ -77,7 +77,7 @@ const syncDir = ({
 };
 
 syncDir({
-  from: path.join(process.cwd(), String(process.env.AWS_S3_ASSETS_DIR)),
+  from: path.join(process.cwd(), String("./images/s3/ai-gen")),
   bucket: String(process.env.AWS_S3_BUCKET),
   accessKeyId: String(process.env.AWS_ACCESS_KEY_ID),
   secretAccessKey: String(process.env.AWS_SECRET_ACCESS_KEY),
