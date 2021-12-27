@@ -9,7 +9,6 @@ node_modules
 build
 build/**/*
 
-package-lock.json
 .DS_Store
 db/*
 .DS_Store
