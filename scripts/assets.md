@@ -24,7 +24,6 @@ Create your S3 bucket with ACLs and public access enabled.
 
 Provide the following credentials in your `.env` file:
 - `AWS_S3_HOST`=
-- `AWS_S3_ASSETS_DIR`=./images/s3/ai-gen
 - `AWS_S3_BUCKET`=
 - `AWS_ACCESS_KEY_ID`=
 - `AWS_SECRET_ACCESS_KEY`
