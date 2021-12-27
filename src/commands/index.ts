@@ -1,7 +1,6 @@
 import adventure from "./adventure";
 import attack from "./attack";
 import cooldowns from "./cooldowns";
-import crown from "./admin/crown";
 import dance from "./dance";
 import lootme from "./admin/lootme";
 import db from "./db";
@@ -50,7 +49,6 @@ if (process.env.DEV_COMMANDS === "true") {
   commands.set("encounter", encounter);
   commands.set("item", item);
   commands.set("cleanse", cleanse);
-  commands.set("crown", crown);
   commands.set("hpbartest", hpbartest);
   commands.set("lootchest", lootchest);
   commands.set("lootme", lootme);

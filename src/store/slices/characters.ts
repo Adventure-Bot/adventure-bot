@@ -32,6 +32,11 @@ const characterSlice = createSlice({
     isHeavyCrownInPlay: false,
   },
   reducers: {
+    /**
+     * @deprecated prefer more specific update actions
+     * @param state
+     * @param action
+     */
     updateCharacter(state, action: PayloadAction<Character>) {
       const character = action.payload;
       character.statusEffects =
@@ -132,7 +137,7 @@ const characterSlice = createSlice({
     adjustCharacterHP(
       state,
       action: PayloadAction<{
-        character: Character;
+        character: Character; // todo: characterId: string
         amount: number;
       }>
     ) {
@@ -142,6 +147,59 @@ const characterSlice = createSlice({
         min: 0,
         max: getCharacterStatModified(character, "maxHP"),
       });
+    },
+
+    itemGiven(
+      state,
+      action: PayloadAction<{
+        fromCharacterId: string;
+        toCharacterId: string;
+        item: Item;
+      }>
+    ) {
+      const {
+        fromCharacterId: fromId,
+        toCharacterId: toId,
+        item,
+      } = action.payload;
+      const fromCharacter = state.charactersById[fromId];
+      const toCharacter = state.charactersById[toId];
+      // remove from giver's inventory and equipment
+      const notIt = (i: Item) => i.id !== item.id;
+      fromCharacter.inventory = fromCharacter.inventory.filter(notIt);
+      fromCharacter.equipment = equipmentFilter(fromCharacter.equipment, notIt);
+      // give to recipient
+      toCharacter.inventory.push(item);
+    },
+
+    itemReceived(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        item: Item;
+      }>
+    ) {
+      const { characterId, item } = action.payload;
+      if (item.name === "heavy crown") {
+        state.isHeavyCrownInPlay = true;
+      }
+      const character = state.charactersById[characterId];
+      if (!character) return;
+      character.inventory.push(item);
+    },
+
+    itemRemoved(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        itemId: string;
+      }>
+    ) {
+      const { characterId, itemId } = action.payload;
+      const character = state.charactersById[characterId];
+      const notIt = (i: Item) => i.id !== itemId;
+      character.inventory = character.inventory.filter(notIt);
+      character.equipment = equipmentFilter(character.equipment, notIt);
     },
 
     damage(
@@ -178,23 +236,6 @@ const characterSlice = createSlice({
       if (character.quests[questId]) return;
       character.quests[questId] = { ...quests[questId] };
     },
-
-    addItemToInventory(
-      state,
-      action: PayloadAction<{
-        character: Character;
-        item: Item;
-      }>
-    ) {
-      const { character, item } = action.payload;
-      if (item.name === "heavy crown") {
-        state.isHeavyCrownInPlay = true;
-      }
-      state.charactersById[character.id] = {
-        ...character,
-        inventory: [...character.inventory, item],
-      };
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(characterLooted, (state, action) => {
@@ -225,12 +266,14 @@ export const {
   addCharacterQuestProgress,
   grantDivineBlessing,
   adjustCharacterHP,
-  addItemToInventory,
+  itemReceived,
   questCompleted,
   goldGained,
   monsterCreated,
   damage,
   grantQuest,
+  itemGiven,
+  itemRemoved,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;
