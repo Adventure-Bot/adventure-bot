@@ -13,6 +13,8 @@ import { mentionCharacter } from "../character/mentionCharacter";
 import { playerAttack } from "../attack/playerAttack";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { sleep } from "../utils";
+import { selectCharacterById } from "../store/selectors";
+import store from "../store";
 
 export const command = new SlashCommandBuilder()
   .setName("attack")
@@ -69,7 +71,7 @@ export const execute = async (
   });
   await sleep(2000);
   const retaliationEmbeds: MessageEmbed[] = [];
-  if (result.defender.hp > 0) {
+  if (0 < (selectCharacterById(store.getState(), defender.id)?.hp ?? 0)) {
     const result = makeAttack(defender.id, attacker.id);
     if (!result) {
       await interaction.editReply({
@@ -80,7 +82,7 @@ export const execute = async (
     retaliationEmbeds.push(
       attackResultEmbed({ result, interaction, variant: "retaliation" })
     );
-    if (result.defender.hp === 0) {
+    if (selectCharacterById(store.getState(), defender.id)?.hp === 0) {
       lootResult = loot({ looterId: defender.id, targetId: attacker.id });
       if (lootResult) retaliationEmbeds.push(lootResultEmbed(lootResult));
     }
