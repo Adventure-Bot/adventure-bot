@@ -62,9 +62,10 @@ export const execute = async (
     return;
   }
   const embeds = [attackResultEmbed({ result, interaction })];
-  if (result.defender.hp === 0) {
+  if (0 === selectCharacterById(store.getState(), defender.id)?.hp) {
     lootResult = loot({ looterId: attacker.id, targetId: defender.id });
-    if (lootResult) embeds.push(lootResultEmbed(lootResult));
+    if (lootResult)
+      embeds.push(lootResultEmbed({ result: lootResult, interaction }));
   }
   await interaction.editReply({
     embeds,
@@ -84,7 +85,10 @@ export const execute = async (
     );
     if (selectCharacterById(store.getState(), defender.id)?.hp === 0) {
       lootResult = loot({ looterId: defender.id, targetId: attacker.id });
-      if (lootResult) retaliationEmbeds.push(lootResultEmbed(lootResult));
+      if (lootResult)
+        retaliationEmbeds.push(
+          lootResultEmbed({ result: lootResult, interaction })
+        );
     }
 
     await interaction.followUp({

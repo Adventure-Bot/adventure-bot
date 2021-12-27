@@ -28,7 +28,7 @@ export const execute = async (
         character: getCharacterUpdate(character),
         interaction,
       }).addFields(...inventoryFields(character)),
-    ].concat(result ? lootResultEmbed(result) : []),
+    ].concat(result ? lootResultEmbed({ result, interaction }) : []),
   });
 };
 

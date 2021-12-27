@@ -14,7 +14,7 @@ export function listLootResults(interaction: CommandInteraction): void {
                 new Date(a.timestamp).valueOf() -
                 new Date(b.timestamp).valueOf()
             )
-            .map((lootResult) => lootResultEmbed(lootResult))
+            .map((result) => lootResultEmbed({ result, interaction }))
             .slice(0, 10)
         : [
             new MessageEmbed({
