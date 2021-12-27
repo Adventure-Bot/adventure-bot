@@ -4,6 +4,8 @@ import { selectCharacterById, selectMonsterById } from "../store/selectors";
 
 export const getCharacter = (characterId: string): Character | void => {
   const state = store.getState();
-  const character = selectCharacterById(state, characterId);
-  return character ?? selectMonsterById(state, characterId);
+  return (
+    selectCharacterById(state, characterId) ??
+    selectMonsterById(state, characterId)
+  );
 };
