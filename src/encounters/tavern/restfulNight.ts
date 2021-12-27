@@ -4,7 +4,6 @@ import { awardXP } from "../../character/awardXP";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import { hpBarField } from "../../character/hpBar/hpBarField";
 import { d6 } from "../../utils/dice";
-import { updateStatusEffect } from "../../statusEffects/grantStatusEffect";
 import { StatusEffect } from "../../statusEffects/StatusEffect";
 import { statusEffectEmbed } from "../../statusEffects/statusEffectEmbed";
 import { xpGainField } from "../../character/xpGainField";
@@ -14,6 +13,8 @@ import { getCharacterStatModified } from "../../character/getCharacterStatModifi
 import { questProgressField } from "../../quest/questProgressField";
 import { isUserQuestComplete } from "../../quest/isQuestComplete";
 import quests from "../../commands/quests";
+import store from "../../store";
+import { effectAdded } from "../../store/slices/characters";
 
 export async function restfulNight(
   interaction: CommandInteraction
@@ -27,7 +28,7 @@ export async function restfulNight(
   awardXP(interaction.user.id, 1);
   adjustHP(interaction.user.id, actualHeal);
   const character = getUserCharacter(interaction.user);
-  const buff: StatusEffect = {
+  const effect: StatusEffect = {
     name: "Restful Night",
     buff: true,
     debuff: false,
@@ -38,7 +39,7 @@ export async function restfulNight(
     },
   };
 
-  updateStatusEffect(character.id, buff);
+  store.dispatch(effectAdded({ characterId: interaction.user.id, effect }));
 
   updateUserQuestProgess(interaction.user, "healer", actualHeal);
 
@@ -60,7 +61,7 @@ export async function restfulNight(
             : []
         ),
       }).setImage("https://i.imgur.com/5FAD82X.png"),
-      statusEffectEmbed(buff, interaction),
+      statusEffectEmbed(effect, interaction),
     ],
   });
 

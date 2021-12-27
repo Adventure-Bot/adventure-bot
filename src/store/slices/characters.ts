@@ -61,18 +61,16 @@ const characterSlice = createSlice({
       };
     },
 
-    addCharacterStatusEffect(
+    effectAdded(
       state,
       action: PayloadAction<{
-        character: Character;
+        characterId: string;
         effect: StatusEffect;
       }>
     ) {
-      const { character, effect } = action.payload;
-      state.charactersById[character.id] = {
-        ...character,
-        statusEffects: [...(character.statusEffects || []), effect],
-      };
+      const { characterId, effect } = action.payload;
+      const character = state.charactersById[characterId];
+      character.statusEffects?.push(effect);
     },
 
     addCharacterQuestProgress(
@@ -223,7 +221,7 @@ export const {
   updateCharacter,
   updateCharacterCooldowns,
   updateGold,
-  addCharacterStatusEffect,
+  effectAdded,
   addCharacterQuestProgress,
   grantDivineBlessing,
   adjustCharacterHP,

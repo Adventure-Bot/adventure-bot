@@ -10,17 +10,16 @@ import { awardXP } from "../character/awardXP";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { gpGainField } from "../character/gpGainField";
 import { xpGainField } from "../character/xpGainField";
-import { Emoji } from "../Emoji";
 import { equipItemPrompt } from "../equipment/equipItemPrompt";
 import { itemEmbed } from "../equipment/itemEmbed";
 import { grantCharacterItem } from "../equipment/grantCharacterItem";
 import { randomChestItem } from "../equipment/randomChestItem";
 import { heavyCrown } from "../equipment/items/heavyCrown";
-import { updateStatusEffect } from "../statusEffects/grantStatusEffect";
 import { trapAttack } from "../trap/trapAttack";
 import { isEquippable } from "../equipment/equipment";
 import { selectIsHeavyCrownInPlay } from "../store/selectors";
 import store from "../store";
+import { effectAdded } from "../store/slices/characters";
 
 const chestImage = new MessageAttachment("./images/chest.jpg", "chest.jpg");
 
@@ -263,30 +262,43 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
     switch (true) {
       case roll <= 0.5:
         adjustHP(interaction.user.id, -attack.damage);
-        updateStatusEffect(interaction.user.id, {
-          name: "Poison Trap",
-          debuff: true,
-          buff: false,
-          modifiers: {
-            attackBonus: -2,
-          },
-          duration: 30 * 60000,
-          started: new Date().toString(),
-        });
+        store.dispatch(
+          effectAdded({
+            characterId: interaction.user.id,
+            effect: {
+              name: "Poison Trap",
+              debuff: true,
+              buff: false,
+              modifiers: {
+                attackBonus: -2,
+              },
+              duration: 30 * 60000,
+              started: new Date().toString(),
+            },
+          })
+        );
+
         chest.trapResult = `A needle pricks your finger. You take ${attack.damage} damage and feel ill!`;
         break;
-      case roll <= 1:
+      default:
         adjustHP(interaction.user.id, -attack.damage);
-        updateStatusEffect(interaction.user.id, {
-          name: "Slow Trap",
-          debuff: true,
-          buff: false,
-          modifiers: {
-            ac: -2,
-          },
-          duration: 30 * 60000,
-          started: new Date().toString(),
-        });
+
+        store.dispatch(
+          effectAdded({
+            characterId: interaction.user.id,
+            effect: {
+              name: "Slow Trap",
+              debuff: true,
+              buff: false,
+              modifiers: {
+                ac: -2,
+              },
+              duration: 30 * 60000,
+              started: new Date().toString(),
+            },
+          })
+        );
+
         chest.trapResult = `A strange dust explodes in your face. You take ${attack.damage} damage and feel sluggish!`;
         break;
     }

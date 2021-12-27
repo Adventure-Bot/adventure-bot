@@ -1,10 +1,8 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import inspect from "../../commands/inspect/inspect";
-import { getUserCharacter } from "../../character/getUserCharacter";
-import { updateStatusEffect } from "../../statusEffects/grantStatusEffect";
 import { StatusEffect } from "../../statusEffects/StatusEffect";
 import { Quest } from "../Quest";
-import { questCompleted } from "../../store/slices/characters";
+import { effectAdded, questCompleted } from "../../store/slices/characters";
 import store from "../../store";
 
 export async function buffQuestReward(
@@ -12,7 +10,6 @@ export async function buffQuestReward(
   effect: StatusEffect,
   quest: Quest
 ): Promise<void> {
-  const character = getUserCharacter(interaction.user);
   const embeds = [
     new MessageEmbed({
       title: `${quest.title} Complete!`,
@@ -20,7 +17,8 @@ export async function buffQuestReward(
     }),
   ];
 
-  updateStatusEffect(character.id, effect);
+  store.dispatch(effectAdded({ characterId: interaction.user.id, effect }));
+
   store.dispatch(
     questCompleted({ questId: quest.id, characterId: interaction.user.id })
   );
