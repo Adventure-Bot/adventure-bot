@@ -1,7 +1,6 @@
 import { CommandInteraction } from "discord.js";
 import { Character } from "../character/Character";
 import { adjustGold } from "../character/adjustGold";
-import { getUserCharacter } from "../character/getUserCharacter";
 import { itemReceived } from "../store/slices/characters";
 import store from "../store";
 import { equipItemPrompt } from "../equipment/equipItemPrompt";
@@ -21,7 +20,7 @@ export const buyItem = async (
   adjustGold(player.id, -item.goldValue);
   store.dispatch(
     itemReceived({
-      character: getUserCharacter(interaction.user),
+      characterId: player.id,
       item,
     })
   );
