@@ -8,9 +8,10 @@ import { getUserCharacter } from "../character/getUserCharacter";
 import { itemSelect } from "./itemSelect";
 import { isTradeable } from "./equipment";
 
-import { giveItem } from "./giveItem";
 import { itemEmbed } from "./itemEmbed";
 import { removeItemIdFromCharacter } from "./removeItemIdFromCharacter";
+import store from "../store";
+import { itemGiven, itemRemoved } from "../store/slices/characters";
 
 export const offerItemPrompt = async (
   interaction: CommandInteraction
@@ -93,7 +94,12 @@ export const offerItemPrompt = async (
       time: 60000,
     })
     .catch(() => {
-      removeItemIdFromCharacter({ character: sender, itemId: item.id });
+      store.dispatch(
+        itemRemoved({
+          characterId: sender.id,
+          itemId: item.id,
+        })
+      );
       offer.edit({
         content: `${item.name} is dust in the wind.`,
         components: [],
@@ -101,11 +107,13 @@ export const offerItemPrompt = async (
     });
   if (reply && reply.isButton()) {
     const recipient = getUserCharacter(reply.user);
-    giveItem({
-      sender,
-      item,
-      recipient,
-    });
+    store.dispatch(
+      itemGiven({
+        fromCharacterId: sender.id,
+        toCharacterId: recipient.id,
+        item,
+      })
+    );
     offer.edit({ components: [] });
     interaction.followUp(
       `${recipient.name} took ${sender.name}'s ${item.name}`
