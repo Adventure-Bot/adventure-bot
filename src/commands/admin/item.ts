@@ -3,8 +3,9 @@ import { CommandInteraction } from "discord.js";
 import * as items from "../../equipment/items";
 import { keys } from "remeda";
 import { itemEmbed } from "../../equipment/itemEmbed";
-import { grantCharacterItem } from "../../equipment/grantCharacterItem";
 import { getUserCharacter } from "../../character/getUserCharacter";
+import store from "../../store";
+import { itemReceived } from "../../store/slices/characters";
 
 const camelToSnakeCase = (str: string) =>
   str.replace(/[A-Z]/g, (letter: string) => `_${letter.toLowerCase()}`);
@@ -43,8 +44,12 @@ export const execute = async (
   if (itemNames.includes(itemName)) {
     // @ts-ignore
     const item = items[itemName]();
-    console.log(item);
-    grantCharacterItem(character, item);
+    store.dispatch(
+      itemReceived({
+        characterId: character.id,
+        item,
+      })
+    );
     interaction.editReply({
       content: `${item.name} conjured`,
       embeds: [itemEmbed({ item, interaction })],

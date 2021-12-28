@@ -12,14 +12,13 @@ import { gpGainField } from "../character/gpGainField";
 import { xpGainField } from "../character/xpGainField";
 import { equipItemPrompt } from "../equipment/equipItemPrompt";
 import { itemEmbed } from "../equipment/itemEmbed";
-import { grantCharacterItem } from "../equipment/grantCharacterItem";
 import { randomChestItem } from "../equipment/randomChestItem";
 import { heavyCrown } from "../equipment/items/heavyCrown";
 import { trapAttack } from "../trap/trapAttack";
 import { isEquippable } from "../equipment/equipment";
 import { selectIsHeavyCrownInPlay } from "../store/selectors";
 import store from "../store";
-import { effectAdded } from "../store/slices/characters";
+import { effectAdded, itemReceived } from "../store/slices/characters";
 
 const chestImage = new MessageAttachment("./images/chest.jpg", "chest.jpg");
 
@@ -181,10 +180,15 @@ export async function chest(
     if (Math.random() <= 0.005 && !selectIsHeavyCrownInPlay(store.getState())) {
       const crown = heavyCrown();
       const character = getUserCharacter(interaction.user);
-      grantCharacterItem(character, crown);
+      store.dispatch(
+        itemReceived({
+          characterId: character.id,
+          item: crown,
+        })
+      );
       embed.addField(
         "Heavy Crown",
-        `You find a heavy crown. ${crown.description}`
+        `You have found the heavy crown. ${crown.description}`
       );
       await interaction.followUp({
         embeds: [itemEmbed({ item: crown, interaction })],
@@ -193,7 +197,15 @@ export async function chest(
     }
     if (Math.random() <= 0.2) {
       const item = randomChestItem();
-      grantCharacterItem(getUserCharacter(interaction.user), item);
+      store.dispatch(
+        itemReceived({
+          characterId: interaction.user.id,
+          item,
+        })
+      );
+      await interaction.followUp({
+        embeds: [itemEmbed({ item, interaction })],
+      });
       if (isEquippable(item)) equipItemPrompt(interaction, item);
     }
   }
