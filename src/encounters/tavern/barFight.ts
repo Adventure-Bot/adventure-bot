@@ -5,7 +5,6 @@ import { questProgressField } from "../../quest/questProgressField";
 import { updateUserQuestProgess } from "../../quest/updateQuestProgess";
 import { hpBarField } from "../../character/hpBar/hpBarField";
 import { xpGainField } from "../../character/xpGainField";
-import { damgeTakenField } from "../../character/damgeTakenField";
 import store from "../../store";
 import { damaged, xpAwarded } from "../../store/slices/characters";
 
@@ -21,7 +20,6 @@ export async function barFight(
     color: "RED",
     description: "You get into a drunken brawl and are kicked out.",
     fields: [
-      damgeTakenField(interaction, damage),
       xpGainField(interaction, 1),
       hpBarField({
         character: getUserCharacter(interaction.user),
