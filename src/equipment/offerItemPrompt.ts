@@ -9,7 +9,6 @@ import { itemSelect } from "./itemSelect";
 import { isTradeable } from "./equipment";
 
 import { itemEmbed } from "./itemEmbed";
-import { removeItemIdFromCharacter } from "./removeItemIdFromCharacter";
 import store from "../store";
 import { itemGiven, itemRemoved } from "../store/slices/characters";
 
