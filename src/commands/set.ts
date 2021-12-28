@@ -1,6 +1,8 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import { setProfile } from "../character/setProfile";
+import { URL } from "url";
+import store from "../store";
+import { profileSet } from "../store/slices/characters";
 import { execute as inspect } from "./inspect/inspect";
 
 export const command = new SlashCommandBuilder()
@@ -16,9 +18,38 @@ export const command = new SlashCommandBuilder()
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const url = interaction.options.data[0].value?.toString();
-  if (!url) return;
-  setProfile(interaction.user.id, url);
+  const profile = interaction.options.data[0].value?.toString();
+  if (!profile) return;
+
+  try {
+    const url = new URL(profile);
+    if (!url.pathname.endsWith(".png")) {
+      interaction.editReply(
+        [
+          `\`${profile}\` must be a PNG file, please try again.`,
+          "Example:",
+          "`/set profile:https://www.example.com/profile.png`",
+        ].join("\n")
+      );
+      return;
+    }
+  } catch (e) {
+    interaction.editReply(
+      [
+        `\`${profile}\` must be a valid URL, please try again.`,
+        "Example:",
+        "`/set profile:https://www.example.com/profile.png`",
+      ].join("\n")
+    );
+    return;
+  }
+
+  store.dispatch(
+    profileSet({
+      characterId: interaction.user.id,
+      profile,
+    })
+  );
 
   await inspect(interaction);
 };

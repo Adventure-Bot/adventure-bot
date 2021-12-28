@@ -236,6 +236,15 @@ const characterSlice = createSlice({
       if (character.quests[questId]) return;
       character.quests[questId] = { ...quests[questId] };
     },
+
+    profileSet(
+      state,
+      action: PayloadAction<{ profile: string; characterId: string }>
+    ) {
+      const { profile, characterId } = action.payload;
+      const character = state.charactersById[characterId];
+      character.profile = profile;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(characterLooted, (state, action) => {
@@ -274,6 +283,7 @@ export const {
   grantQuest,
   itemGiven,
   itemRemoved,
+  profileSet,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;
