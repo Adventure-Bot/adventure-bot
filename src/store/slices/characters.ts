@@ -10,6 +10,14 @@ import { clamp } from "remeda";
 import { Encounter } from "../../monster/Encounter";
 import { AttackResult } from "../../attack/AttackResult";
 import { characterLooted } from "./loots";
+import {
+  isAmulet,
+  isArmor,
+  isEquippable,
+  isRing,
+  isWeapon,
+} from "../../equipment/equipment";
+import { getSaleRate } from "../../encounters/shop/getSaleRate";
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
   Date.now() > new Date(effect.started).valueOf() + effect.duration;
@@ -19,7 +27,7 @@ export type AttackAction = {
   attackResult: AttackResult;
 };
 
-export const attack = createAction<AttackAction>("character/attack");
+export const attacked = createAction<AttackAction>("character/attacked");
 
 const charactersById: Record<string, Character> = {};
 const roamingMonsters: string[] = [];
@@ -32,18 +40,13 @@ const characterSlice = createSlice({
     isHeavyCrownInPlay: false,
   },
   reducers: {
-    /**
-     * @deprecated prefer more specific update actions
-     * @param state
-     * @param action
-     */
-    updateCharacter(state, action: PayloadAction<Character>) {
-      const character = action.payload;
-      character.statusEffects =
-        character.statusEffects?.filter(
-          (effect) => !isStatusEffectExpired(effect)
-        ) ?? [];
-      state.charactersById[character.id] = character;
+    created(state, action: PayloadAction<Character>) {
+      state.charactersById[action.payload.id] = action.payload;
+    },
+
+    cleansed(state, action: PayloadAction<{ characterId: string }>) {
+      const character = state.charactersById[action.payload.characterId];
+      character.statusEffects = [];
     },
 
     monsterCreated(state, action: PayloadAction<Monster>) {
@@ -78,7 +81,7 @@ const characterSlice = createSlice({
       character.statusEffects?.push(effect);
     },
 
-    addCharacterQuestProgress(
+    questProgressed(
       state,
       action: PayloadAction<{
         characterId: string;
@@ -103,6 +106,15 @@ const characterSlice = createSlice({
       delete state.charactersById[characterId].quests[questId];
     },
 
+    goldSet(
+      state,
+      action: PayloadAction<{ characterId: string; gold: number }>
+    ) {
+      const { characterId, gold } = action.payload;
+      const character = state.charactersById[characterId];
+      character.gold = gold;
+    },
+
     goldGained(
       state,
       action: PayloadAction<{
@@ -112,17 +124,6 @@ const characterSlice = createSlice({
     ) {
       const { characterId, amount } = action.payload;
       state.charactersById[characterId].gold += amount;
-    },
-
-    updateGold(
-      state,
-      action: PayloadAction<{
-        characterId: string;
-        gold: number;
-      }>
-    ) {
-      const { characterId, gold } = action.payload;
-      state.charactersById[characterId].gold = gold;
     },
 
     grantDivineBlessing(state, action: PayloadAction<Character>) {
@@ -202,7 +203,46 @@ const characterSlice = createSlice({
       character.equipment = equipmentFilter(character.equipment, notIt);
     },
 
-    damage(
+    itemEquipped(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        itemId: string;
+      }>
+    ) {
+      const { characterId, itemId } = action.payload;
+      const character = state.charactersById[characterId];
+      if (!character) return;
+      const item = character.inventory.find((i) => i.id === itemId);
+      if (!item) return;
+      if (isWeapon(item)) character.equipment.weapon = item;
+      if (isAmulet(item)) character.equipment.amulet = item;
+      if (isArmor(item)) character.equipment.armor = item;
+      if (isRing(item)) character.equipment.ring = item;
+    },
+
+    itemSold(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        itemId: string;
+      }>
+    ) {
+      const { characterId, itemId } = action.payload;
+      const character = state.charactersById[characterId];
+      if (!character) return;
+      const item = character.inventory.find((i) => i.id === itemId);
+      if (!item) return;
+      if (!item.sellable) return;
+      character.inventory = character.inventory.filter((i) => i.id !== itemId);
+      character.gold += Math.round(item.goldValue * getSaleRate());
+      character.equipment = equipmentFilter(
+        character.equipment,
+        (i) => i.id !== itemId
+      );
+    },
+
+    damaged(
       state,
       action: PayloadAction<{
         characterId: string;
@@ -216,15 +256,28 @@ const characterSlice = createSlice({
         max: getCharacterStatModified(character, "maxHP"),
       });
 
-      if (character.hp > 0)
-        addCharacterQuestProgress({
-          characterId: character.id,
-          questId: "survivor",
-          amount,
-        });
+      if (character.hp > 0 && character.quests.survivor)
+        character.quests.survivor.progress += amount;
     },
 
-    grantQuest(
+    healed(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        amount: number;
+      }>
+    ) {
+      const { amount, characterId } = action.payload;
+      const character = state.charactersById[characterId];
+      if (!character) return;
+      if (character.hp > getCharacterStatModified(character, "maxHP")) return;
+      character.hp = clamp(character.hp + amount, {
+        min: 0,
+        max: getCharacterStatModified(character, "maxHP"),
+      });
+    },
+
+    questGranted(
       state,
       action: PayloadAction<{
         characterId: string;
@@ -244,6 +297,45 @@ const characterSlice = createSlice({
       const { profile, characterId } = action.payload;
       const character = state.charactersById[characterId];
       character.profile = profile;
+    },
+
+    healthSet(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        health: number;
+      }>
+    ) {
+      const { characterId, health } = action.payload;
+      const character = state.charactersById[characterId];
+      character.hp = health;
+    },
+
+    healthAdjusted(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        amount: number;
+      }>
+    ) {
+      const { characterId, amount } = action.payload;
+      const character = state.charactersById[characterId];
+      character.hp = clamp(character.hp + amount, {
+        min: 0,
+        max: getCharacterStatModified(character, "maxHP"),
+      });
+    },
+
+    xpAwarded(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        amount: number;
+      }>
+    ) {
+      const { characterId, amount } = action.payload;
+      const character = state.charactersById[characterId];
+      character.xp += amount;
     },
   },
   extraReducers: (builder) => {
@@ -268,22 +360,29 @@ const characterSlice = createSlice({
 });
 
 export const {
-  updateCharacter,
-  updateCharacterCooldowns,
-  updateGold,
-  effectAdded,
-  addCharacterQuestProgress,
-  grantDivineBlessing,
+  questProgressed,
   adjustCharacterHP,
-  itemReceived,
-  questCompleted,
+  cleansed,
+  created,
+  damaged,
+  effectAdded,
   goldGained,
-  monsterCreated,
-  damage,
-  grantQuest,
+  goldSet,
+  grantDivineBlessing,
+  questGranted,
+  healed,
+  healthSet,
+  healthAdjusted,
+  itemEquipped,
   itemGiven,
+  itemReceived,
   itemRemoved,
+  itemSold,
+  monsterCreated,
   profileSet,
+  questCompleted,
+  updateCharacterCooldowns,
+  xpAwarded,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;

@@ -3,13 +3,13 @@ import { getUserCharacter } from "../character/getUserCharacter";
 import { questEmbed } from "../quest/questEmbed";
 import { getAsset } from "../utils/getAsset";
 import store from "../store";
-import { grantQuest } from "../store/slices/characters";
+import { questGranted } from "../store/slices/characters";
 
 export const angels = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   store.dispatch(
-    grantQuest({
+    questGranted({
       characterId: interaction.user.id,
       questId: "healer",
     })

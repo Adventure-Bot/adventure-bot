@@ -1,4 +1,4 @@
-import { attack } from "./characters";
+import { attacked } from "./characters";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Encounter } from "../../monster/Encounter";
 import { isMonster } from "../../monster/Monster";
@@ -78,7 +78,7 @@ const encountersSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(attack, (state, action) => {
+    builder.addCase(attacked, (state, action) => {
       const { attackResult, encounter } = action.payload;
       if (!encounter) return;
       if (isMonster(attackResult.attacker)) {

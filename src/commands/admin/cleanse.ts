@@ -1,8 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import { getUserCharacter } from "../../character/getUserCharacter";
 import store from "../../store";
-import { updateCharacter } from "../../store/slices/characters";
+import { cleansed } from "../../store/slices/characters";
 
 export const command = new SlashCommandBuilder()
   .setName("cleanse")
@@ -11,14 +10,8 @@ export const command = new SlashCommandBuilder()
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const character = getUserCharacter(interaction.user);
-  store.dispatch(
-    updateCharacter({
-      ...character,
-      statusEffects: [],
-    })
-  );
-  interaction.followUp(`${character.name} cleanses themself`);
+  store.dispatch(cleansed({ characterId: interaction.user.id }));
+  interaction.followUp(`${interaction.user.username} cleansed themself`);
 };
 
 export default { command, execute };

@@ -6,10 +6,7 @@ import { hasStatusEffect } from "../../statusEffects/hasStatusEffect";
 import quests from "../../commands/quests";
 import { Shrine } from "../../shrines/Shrine";
 import store from "../../store";
-import {
-  addCharacterQuestProgress,
-  effectAdded,
-} from "../../store/slices/characters";
+import { questProgressed, effectAdded } from "../../store/slices/characters";
 
 export async function applyShrine({
   interaction,
@@ -25,14 +22,13 @@ export async function applyShrine({
   store.dispatch(effectAdded({ characterId: interaction.user.id, effect }));
 
   store.dispatch(
-    addCharacterQuestProgress({
+    questProgressed({
       characterId: interaction.user.id,
       questId: "blessed",
       amount: 1,
     })
   );
 
-  updateUserQuestProgess(interaction.user, "blessed", 1);
   if (isUserQuestComplete(interaction.user, "blessed"))
     await quests.execute(interaction);
 }

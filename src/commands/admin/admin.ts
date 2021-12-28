@@ -1,21 +1,11 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { randomUUID } from "crypto";
 import { CommandInteraction } from "discord.js";
-import { getUserCharacter } from "../../character/getUserCharacter";
-import { getUserCharacters } from "../../character/getUserCharacters";
-import { updateCharacter } from "../../character/updateCharacter";
+import store from "../../store";
+import { goldSet, healthSet } from "../../store/slices/characters";
 
 export const command = new SlashCommandBuilder()
   .setName("admin")
   .setDescription("Administrative functions.")
-  .addSubcommand((option) =>
-    option
-      .setName("apply_item_defaults")
-      .setDescription("Apply default properties to any items that lack them.")
-  )
-  .addSubcommand((option) =>
-    option.setName("unequip_all").setDescription("Globally unequip all items.")
-  )
   .addSubcommand((option) =>
     option
       .setName("set_gold")
@@ -43,14 +33,6 @@ export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   switch (interaction.options.getSubcommand()) {
-    case "apply_item_defaults":
-      applyItemDefaults();
-      interaction.editReply("Item defaults applied.");
-      return;
-    case "unequip_all":
-      unequipAll();
-      interaction.editReply("All equipment removed.");
-      return;
     case "set_gold":
       setGold(interaction);
       interaction.editReply("Gold set.");
@@ -67,44 +49,24 @@ export const execute = async (
 };
 
 const setGold = async (interaction: CommandInteraction) => {
-  const character = getUserCharacter(interaction.user);
   const gold = interaction.options.getInteger("gold");
   if (!gold) return;
-  updateCharacter({
-    ...character,
-    gold,
-  });
-};
-const setHealth = async (interaction: CommandInteraction) => {
-  const character = getUserCharacter(interaction.user);
-  const hp = interaction.options.getInteger("hp");
-  if (hp === null) return;
-  console.log(`Setting health to ${hp}`);
-  updateCharacter({
-    ...character,
-    hp,
-  });
-};
-
-const applyItemDefaults = async (): Promise<void> => {
-  getUserCharacters().forEach((character) =>
-    updateCharacter({
-      ...character,
-      inventory: character.inventory.map((item) => ({
-        ...item,
-        id: item.id ?? randomUUID(),
-        sellable: item.sellable ?? item.name !== "heavy crown",
-        tradeable: item.tradeable ?? item.name !== "heavy crown",
-      })),
+  store.dispatch(
+    goldSet({
+      characterId: interaction.user.id,
+      gold,
     })
   );
 };
 
-const unequipAll = async (): Promise<void> => {
-  getUserCharacters().forEach((character) =>
-    updateCharacter({
-      ...character,
-      equipment: {},
+const setHealth = async (interaction: CommandInteraction) => {
+  const hp = interaction.options.getInteger("hp");
+  if (hp === null) return;
+  console.log(`Setting health to ${hp}`);
+  store.dispatch(
+    healthSet({
+      characterId: interaction.user.id,
+      health: hp,
     })
   );
 };

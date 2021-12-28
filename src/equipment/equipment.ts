@@ -46,6 +46,7 @@ export const isAmulet = (item: Item): item is Amulet => item.type === "amulet";
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isShield = (item: Item): item is Shield => item.type === "shield";
 export const isWeapon = (item: Item): item is Weapon => item.type === "weapon";
+export const isRing = (item: Item): item is Ring => item.type === "ring";
 export const isEquippable = (item: Item): item is Equippable => item.equippable;
 export const isTradeable = (item: Item): item is Tradeable =>
   item.tradeable ?? false;

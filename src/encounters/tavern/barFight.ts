@@ -1,6 +1,4 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { adjustHP } from "../../character/adjustHP";
-import { awardXP } from "../../character/awardXP";
 import { d6 } from "../../utils/dice";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import { questProgressField } from "../../quest/questProgressField";
@@ -8,14 +6,16 @@ import { updateUserQuestProgess } from "../../quest/updateQuestProgess";
 import { hpBarField } from "../../character/hpBar/hpBarField";
 import { xpGainField } from "../../character/xpGainField";
 import { damgeTakenField } from "../../character/damgeTakenField";
+import store from "../../store";
+import { damaged, xpAwarded } from "../../store/slices/characters";
 
 export async function barFight(
   interaction: CommandInteraction,
   followUp = true
 ): Promise<void> {
   const damage = d6();
-  awardXP(interaction.user.id, 1);
-  adjustHP(interaction.user.id, -damage);
+  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }));
+  store.dispatch(damaged({ characterId: interaction.user.id, amount: damage }));
   const embed = new MessageEmbed({
     title: "Bar Fight!",
     color: "RED",

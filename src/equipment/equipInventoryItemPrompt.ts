@@ -5,10 +5,10 @@ import {
   MessageButton,
 } from "discord.js";
 import { getUserCharacter } from "../character/getUserCharacter";
-import { equipItem } from "../character/equipItem";
-import { updateCharacter } from "../character/updateCharacter";
 import { itemSelect } from "./itemSelect";
 import { equippableInventory } from "./equippableInventory";
+import store from "../store";
+import { itemEquipped } from "../store/slices/characters";
 
 /**
  * Prompt to equip from available inventory items.
@@ -72,7 +72,9 @@ export const equipInventoryItemPrompt = async (
     if (response.isSelectMenu()) {
       const item = inventory[parseInt(response.values[0])];
       const character = getUserCharacter(interaction.user);
-      updateCharacter(equipItem(character, item));
+      store.dispatch(
+        itemEquipped({ itemId: item.id, characterId: character.id })
+      );
       interaction.followUp(`${character.name} equipped their ${item.name}.`);
     }
   }

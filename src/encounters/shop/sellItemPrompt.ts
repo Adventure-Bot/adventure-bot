@@ -7,7 +7,6 @@ import {
   MessageEmbed,
 } from "discord.js";
 import { getUserCharacter } from "../../character/getUserCharacter";
-import { sellItem } from "./sellItem";
 import { itemEmbed } from "../../equipment/itemEmbed";
 import { gpGainField } from "../../character/gpGainField";
 import { sellList } from "./sellList";
@@ -15,6 +14,8 @@ import { getSaleRate } from "./getSaleRate";
 import { sellValue } from "./sellValue";
 import { goldValue } from "../../equipment/goldValue";
 import { getCharacterUpdate } from "../../character/getCharacterUpdate";
+import store from "../../store";
+import { itemSold } from "../../store/slices/characters";
 
 export async function sellItemPrompt({
   interaction,
@@ -76,7 +77,8 @@ export async function sellItemPrompt({
   if (!response.isSelectMenu()) return;
   const item = inventory[parseInt(response.values[0])];
   if (!item) return;
-  sellItem({ character, item });
+  store.dispatch(itemSold({ itemId: item.id, characterId: character.id }));
+
   interaction.followUp({
     embeds: [
       new MessageEmbed({

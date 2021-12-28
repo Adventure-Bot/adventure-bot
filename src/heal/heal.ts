@@ -1,11 +1,10 @@
 import { isCharacterOnCooldown } from "../character/isCharacterOnCooldown";
 import { getCharacter } from "../character/getCharacter";
-import { adjustHP } from "../character/adjustHP";
 import { setCharacterCooldown } from "../character/setCharacterCooldown";
 import { d6 } from "../utils/dice";
 import { HealResult } from "./HealResult";
-import { getCharacterStatModified } from "../character/getCharacterStatModified";
-import { clamp } from "remeda";
+import store from "../store";
+import { healed } from "../store/slices/characters";
 
 export const heal = (
   initiatorId: string,
@@ -14,17 +13,23 @@ export const heal = (
   if (isCharacterOnCooldown(initiatorId, "heal"))
     return { outcome: "cooldown" };
   const healer = getCharacter(initiatorId);
-  getCharacter(targetId);
   if (!healer) return;
-  setCharacterCooldown(healer.id, "heal");
-  const rawHeal = d6();
   const targetBeforeHeal = getCharacter(targetId);
   if (!targetBeforeHeal) return;
-  const missingHealth =
-    getCharacterStatModified(targetBeforeHeal, "maxHP") - targetBeforeHeal.hp;
-  const actualHeal = clamp(rawHeal, { max: missingHealth });
-  adjustHP(targetId, rawHeal);
+  setCharacterCooldown(healer.id, "heal");
+  const rawHeal = d6();
+  store.dispatch(
+    healed({
+      characterId: targetId,
+      amount: rawHeal,
+    })
+  );
   const target = getCharacter(targetId);
   if (!target) return;
-  return { outcome: "healed", amount: actualHeal, rawHeal, target };
+  return {
+    outcome: "healed",
+    amount: target.hp - targetBeforeHeal.hp,
+    rawHeal,
+    target,
+  };
 };

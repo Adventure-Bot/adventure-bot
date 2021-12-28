@@ -1,7 +1,8 @@
 import { randomUUID } from "crypto";
+import store from "../store";
+import { created } from "../store/slices/characters";
 import { Character } from "./Character";
 import { defaultCharacter } from "./defaultCharacter";
-import { updateCharacter } from "./updateCharacter";
 
 export const createCharacter = (
   character: Partial<Character> & { name: string }
@@ -11,7 +12,7 @@ export const createCharacter = (
     id: character?.id ?? randomUUID(),
     ...character,
   };
-  updateCharacter(newCharacter);
+  store.dispatch(created(newCharacter));
   console.log(`created ${newCharacter.id}`);
   return newCharacter;
 };

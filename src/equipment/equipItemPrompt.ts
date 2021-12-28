@@ -5,11 +5,10 @@ import {
   MessageButton,
 } from "discord.js";
 import inspect from "../commands/inspect/inspect";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { equipItem } from "../character/equipItem";
-import { updateCharacter } from "../character/updateCharacter";
 import { Item } from "./Item";
 import { itemEmbed } from "./itemEmbed";
+import store from "../store";
+import { itemEquipped } from "../store/slices/characters";
 
 /**
  * Prompt to equip a specific item
@@ -55,7 +54,9 @@ export const equipItemPrompt = async (
       });
     });
   if (!response) return;
-  updateCharacter(equipItem(getUserCharacter(interaction.user), item));
+  store.dispatch(
+    itemEquipped({ itemId: item.id, characterId: interaction.user.id })
+  );
   message.edit({
     content,
     components: [],

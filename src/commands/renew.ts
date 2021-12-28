@@ -4,9 +4,10 @@ import { isCharacterOnCooldown } from "../character/isCharacterOnCooldown";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { cooldownRemainingText } from "../character/cooldownRemainingText";
 import { hpBarField } from "../character/hpBar/hpBarField";
-import { adjustHP } from "../character/adjustHP";
 import { setCharacterCooldown } from "../character/setCharacterCooldown";
 import { isHealer } from "../heal/isHealer";
+import store from "../store";
+import { healed } from "../store/slices/characters";
 
 export const command = new SlashCommandBuilder()
   .setName("renew")
@@ -43,7 +44,7 @@ export const execute = async (
   const healAmount = 2;
   let totalTicks = 5;
   const tickRate = 5 * 60000;
-  adjustHP(target.id, healAmount);
+  store.dispatch(healed({ characterId: target.id, amount: healAmount }));
   totalTicks--;
   const embeds = [
     new MessageEmbed({
@@ -70,7 +71,7 @@ export const execute = async (
   if (!(message instanceof Message)) return;
   console.log("renew", { healAmount, hp: getUserCharacter(target).hp });
   const timer = setInterval(() => {
-    adjustHP(target.id, healAmount);
+    store.dispatch(healed({ characterId: target.id, amount: healAmount }));
     embeds.push(
       new MessageEmbed({
         fields: [

@@ -3,7 +3,7 @@ import { Character } from "../character/Character";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { QuestId } from "./quests";
 import store from "../store";
-import { addCharacterQuestProgress } from "../store/slices/characters";
+import { questProgressed } from "../store/slices/characters";
 
 export const updateUserQuestProgess = (
   user: User,
@@ -11,7 +11,7 @@ export const updateUserQuestProgess = (
   change: number
 ): Character => {
   store.dispatch(
-    addCharacterQuestProgress({
+    questProgressed({
       characterId: user.id,
       questId,
       amount: change,

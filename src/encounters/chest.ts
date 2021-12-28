@@ -5,7 +5,6 @@ import {
   MessageEmbed,
 } from "discord.js";
 import { adjustGold } from "../character/adjustGold";
-import { adjustHP } from "../character/adjustHP";
 import { awardXP } from "../character/awardXP";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { gpGainField } from "../character/gpGainField";
@@ -18,7 +17,7 @@ import { trapAttack } from "../trap/trapAttack";
 import { isEquippable } from "../equipment/equipment";
 import { selectIsHeavyCrownInPlay } from "../store/selectors";
 import store from "../store";
-import { effectAdded, itemReceived } from "../store/slices/characters";
+import { damaged, effectAdded, itemReceived } from "../store/slices/characters";
 
 const chestImage = new MessageAttachment("./images/chest.jpg", "chest.jpg");
 
@@ -271,9 +270,14 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
   if (attack.outcome === "hit") {
     const roll = Math.random();
 
+    store.dispatch(
+      damaged({
+        characterId: interaction.user.id,
+        amount: attack.damage,
+      })
+    );
     switch (true) {
       case roll <= 0.5:
-        adjustHP(interaction.user.id, -attack.damage);
         store.dispatch(
           effectAdded({
             characterId: interaction.user.id,
@@ -289,12 +293,9 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
             },
           })
         );
-
         chest.trapResult = `A needle pricks your finger. You take ${attack.damage} damage and feel ill!`;
         break;
       default:
-        adjustHP(interaction.user.id, -attack.damage);
-
         store.dispatch(
           effectAdded({
             characterId: interaction.user.id,
@@ -310,7 +311,6 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
             },
           })
         );
-
         chest.trapResult = `A strange dust explodes in your face. You take ${attack.damage} damage and feel sluggish!`;
         break;
     }

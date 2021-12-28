@@ -14,7 +14,7 @@ import { xpGainField } from "../../character/xpGainField";
 import { questEmbed } from "../../quest/questEmbed";
 import { selectAvailableQuests } from "../../store/selectors";
 import store from "../../store";
-import { grantQuest } from "../../store/slices/characters";
+import { questGranted } from "../../store/slices/characters";
 
 // TODO: omit quests the user already has
 export const chattyTavernkeepers = async (
@@ -89,7 +89,7 @@ export const chattyTavernkeepers = async (
     interaction.followUp(`${questId} is not a valid quest id`);
     return;
   }
-  store.dispatch(grantQuest({ characterId: character.id, questId }));
+  store.dispatch(questGranted({ characterId: character.id, questId }));
   console.log(`quest accepted ${questId}`);
   await interaction.followUp(
     `You have been charged with the ${quests[questId].title} quest.`

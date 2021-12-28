@@ -1,5 +1,4 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { adjustHP } from "../../character/adjustHP";
 import { awardXP } from "../../character/awardXP";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import { hpBarField } from "../../character/hpBar/hpBarField";
@@ -7,14 +6,18 @@ import { d6 } from "../../utils/dice";
 import { StatusEffect } from "../../statusEffects/StatusEffect";
 import { statusEffectEmbed } from "../../statusEffects/statusEffectEmbed";
 import { xpGainField } from "../../character/xpGainField";
-import { updateUserQuestProgess } from "../../quest/updateQuestProgess";
 import { clamp } from "remeda";
 import { getCharacterStatModified } from "../../character/getCharacterStatModified";
 import { questProgressField } from "../../quest/questProgressField";
 import { isUserQuestComplete } from "../../quest/isQuestComplete";
 import quests from "../../commands/quests";
 import store from "../../store";
-import { effectAdded } from "../../store/slices/characters";
+import {
+  effectAdded,
+  healed,
+  questProgressed,
+  xpAwarded,
+} from "../../store/slices/characters";
 
 export async function restfulNight(
   interaction: CommandInteraction
@@ -25,9 +28,10 @@ export async function restfulNight(
     max:
       getCharacterStatModified(preHealCharacter, "maxHP") - preHealCharacter.hp,
   });
-  awardXP(interaction.user.id, 1);
-  adjustHP(interaction.user.id, actualHeal);
-  const character = getUserCharacter(interaction.user);
+  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }));
+  store.dispatch(
+    healed({ characterId: interaction.user.id, amount: actualHeal })
+  );
   const effect: StatusEffect = {
     name: "Restful Night",
     buff: true,
@@ -40,9 +44,15 @@ export async function restfulNight(
   };
 
   store.dispatch(effectAdded({ characterId: interaction.user.id, effect }));
+  store.dispatch(
+    questProgressed({
+      characterId: interaction.user.id,
+      questId: "healer",
+      amount: actualHeal,
+    })
+  );
 
-  updateUserQuestProgess(interaction.user, "healer", actualHeal);
-
+  const character = getUserCharacter(interaction.user);
   await interaction.followUp({
     embeds: [
       new MessageEmbed({

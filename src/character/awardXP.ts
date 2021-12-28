@@ -1,16 +1,6 @@
-import { Character } from "./Character";
-import { getCharacter } from "./getCharacter";
-import { updateCharacter } from "./updateCharacter";
+import store from "../store";
+import { xpAwarded } from "../store/slices/characters";
 
-export const awardXP = (
-  characterId: string,
-  amount: number
-): Character | void => {
-  const character = getCharacter(characterId);
-  if (!character) return undefined;
-  updateCharacter({
-    ...character,
-    xp: character.xp + amount,
-  });
-  return getCharacter(characterId);
+export const awardXP = (characterId: string, amount: number): void => {
+  store.dispatch(xpAwarded({ characterId, amount }));
 };

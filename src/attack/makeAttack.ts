@@ -3,7 +3,7 @@ import { getCharacter } from "../character/getCharacter";
 import { AttackResult } from "./AttackResult";
 import { getCharacterStatModified } from "../character/getCharacterStatModified";
 import store from "../store";
-import { attack, damage } from "../store/slices/characters";
+import { attacked, damaged } from "../store/slices/characters";
 import { selectEncounterById } from "../store/selectors";
 
 export const makeAttack = (
@@ -46,7 +46,7 @@ export const makeAttack = (
     defender,
   };
   store.dispatch(
-    attack({
+    attacked({
       attackResult,
       encounter,
     })
@@ -54,7 +54,7 @@ export const makeAttack = (
 
   if (hit) {
     store.dispatch(
-      damage({
+      damaged({
         characterId: defenderId,
         amount: totalDamage,
       })
