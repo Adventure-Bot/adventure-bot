@@ -1,7 +1,6 @@
 import { d20 } from "../utils/dice";
 import { getCharacter } from "../character/getCharacter";
 import { AttackResult } from "./AttackResult";
-import { getCharacterStatModified } from "../character/getCharacterStatModified";
 import store from "../store";
 import { attacked, damaged } from "../store/slices/characters";
 import { selectEncounterById } from "../store/selectors";
@@ -18,18 +17,15 @@ export const makeAttack = (
     ? selectEncounterById(store.getState(), encounterId)
     : undefined;
 
-  const attackBonus = getCharacterStatModified(attacker, "attackBonus");
-  const targetDefense = getCharacterStatModified(defender, "ac");
-  const damageBonus = getCharacterStatModified(attacker, "damageBonus");
+  const { attackBonus, damageBonus, damageMax, monsterDamageMax } =
+    attacker.statsModified;
+
+  const targetDefense = defender.statsModified.ac;
 
   const attackRoll = d20();
-  const damageRoll = Math.ceil(
-    Math.random() * getCharacterStatModified(attacker, "damageMax")
-  );
+  const damageRoll = Math.ceil(Math.random() * damageMax);
   const monsterDamageRoll = defender.isMonster
-    ? Math.ceil(
-        Math.random() * getCharacterStatModified(attacker, "monsterDamageMax")
-      )
+    ? Math.ceil(Math.random() * monsterDamageMax)
     : 0;
 
   const totalDamage = damageRoll + monsterDamageRoll + damageBonus;

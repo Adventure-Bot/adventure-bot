@@ -10,13 +10,7 @@ import { clamp } from "remeda";
 import { Encounter } from "../../monster/Encounter";
 import { AttackResult } from "../../attack/AttackResult";
 import { characterLooted } from "./loots";
-import {
-  isAmulet,
-  isArmor,
-  isEquippable,
-  isRing,
-  isWeapon,
-} from "../../equipment/equipment";
+import { isAmulet, isArmor, isRing, isWeapon } from "../../equipment/equipment";
 import { getSaleRate } from "../../encounters/shop/getSaleRate";
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>

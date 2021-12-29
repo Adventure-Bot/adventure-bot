@@ -1,7 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { values } from "remeda";
 import { Character } from "../../character/Character";
+import { getCharacterStatModified } from "../../character/getCharacterStatModified";
+import { getCharacterStatModifier } from "../../character/getCharacterStatModifier";
 import { LootResult } from "../../character/loot/loot";
+import { Stats, stats } from "../../character/Stats";
 import { Encounter } from "../../monster/Encounter";
 import { isMonster } from "../../monster/Monster";
 import { Quest } from "../../quest/Quest";
@@ -27,18 +30,50 @@ const decorateCharacterWithAssetProfile = <T extends Character>(
   } else return character;
 };
 
-export const selectCharacterById = createSelector(
-  (state: ReduxState, id: string) => state.characters.charactersById[id],
-  (character) =>
-    character
-      ? {
-          ...decorateCharacterWithAssetProfile(character),
-          statusEffects: character?.statusEffects?.filter(
-            (effect) => !isStatusEffectExpired(effect)
-          ),
-        }
-      : undefined
-);
+export const selectStats = (
+  state: ReduxState,
+  characterId: string,
+  includeModifiers = true
+): Stats | void => {
+  const character = state.characters.charactersById[characterId];
+  if (!character) return;
+  if (!includeModifiers)
+    return stats.reduce(
+      (acc, stat) => ({
+        ...acc,
+        [stat]: getCharacterStatModified(character, stat),
+      }),
+      {} as Stats
+    );
+  return stats.reduce(
+    (acc, stat) => ({
+      ...acc,
+      [stat]: character[stat] + getCharacterStatModifier(character, stat),
+    }),
+    {} as Stats
+  );
+};
+
+export const selectCharacterById = (state: ReduxState, id: string) => {
+  const character = state.characters.charactersById[id];
+  const stats = selectStats(state, character.id);
+  const statsModified = selectStats(state, character.id, true);
+  if (!(character && stats && statsModified)) return;
+
+  return {
+    ...decorateCharacterWithAssetProfile(character),
+    statusEffects: character?.statusEffects?.filter(
+      (effect) => !isStatusEffectExpired(effect)
+    ),
+    stats,
+    statsModified,
+  };
+};
+
+export const selectMonsterById = (state: ReduxState, id: string) => {
+  const character = selectCharacterById(state, id);
+  if (character && isMonster(character)) return character;
+};
 
 export const selectAllCharacters = createSelector(
   (state: ReduxState) => state.characters.charactersById,
@@ -46,14 +81,6 @@ export const selectAllCharacters = createSelector(
     Object.values(charactersById)
       .filter((character) => character.isMonster !== true)
       .map((c) => decorateCharacterWithAssetProfile<Character>(c))
-);
-
-export const selectMonsterById = createSelector(
-  (state: ReduxState, id: string) => state.characters.charactersById[id],
-  (character) =>
-    isMonster(character)
-      ? decorateCharacterWithAssetProfile(character)
-      : undefined
 );
 
 export const selectRoamingMonsters = createSelector(
