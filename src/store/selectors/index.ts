@@ -56,6 +56,7 @@ export const selectStats = (
 
 export const selectCharacterById = (state: ReduxState, id: string) => {
   const character = state.characters.charactersById[id];
+  if(!character) return;
   const stats = selectStats(state, character.id);
   const statsModified = selectStats(state, character.id, true);
   if (!(character && stats && statsModified)) return;
