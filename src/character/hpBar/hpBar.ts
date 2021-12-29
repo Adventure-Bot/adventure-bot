@@ -1,14 +1,16 @@
 import { Character } from "../Character";
-import { getCharacterStatModified } from "../getCharacterStatModified";
 import { clamp, times } from "remeda";
-import { getCharacterUpdate } from "../getCharacterUpdate";
+import { selectCharacterById } from "../../store/selectors";
+import store from "../../store";
 
 export const hpBar = (c: Character, adjustment = 0): string => {
   const barLength = 10;
-  const character = getCharacterUpdate(c);
+  const character = selectCharacterById(store.getState(), c.id);
+  if (!character) return "";
 
-  const maxHP = getCharacterStatModified(character, "maxHP");
-  const fullPercent = character.hp / maxHP;
+  const { maxHP } = character.statsModified;
+  const { hp } = character;
+  const fullPercent = hp / maxHP;
   const adjustPercent = adjustment / maxHP;
   const healPercent = clamp(adjustPercent, { max: 1, min: 0 });
   const damagePercent = clamp(-adjustPercent, { max: 1, min: 0 });
