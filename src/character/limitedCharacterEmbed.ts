@@ -14,6 +14,10 @@ export function limitedCharacterEmbed({
 }): MessageEmbed {
   return new MessageEmbed({
     title: decoratedName(character),
-    fields: primaryStatFields({ character, adjustment, interaction }),
+    fields: primaryStatFields({
+      characterId: character.id,
+      adjustment,
+      interaction,
+    }),
   }).setThumbnail(character.profile);
 }

@@ -13,5 +13,7 @@ export function characterEmbed({
   return new MessageEmbed()
     .setTitle(decoratedName(character))
     .setImage(character.profile)
-    .addFields([...primaryStatFields({ character, interaction })]);
+    .addFields([
+      ...primaryStatFields({ characterId: character.id, interaction }),
+    ]);
 }

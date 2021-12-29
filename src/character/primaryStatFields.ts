@@ -1,25 +1,27 @@
 import { CommandInteraction, EmbedFieldData } from "discord.js";
 import { Emoji } from "../Emoji";
-import { Character } from "./Character";
-import { getCharacterStatModified } from "./getCharacterStatModified";
+import store from "../store";
+import { selectCharacterById } from "../store/selectors";
 import { hpBar } from "./hpBar/hpBar";
 
 export function primaryStatFields({
-  character,
+  characterId,
   adjustment = 0,
   interaction,
 }: {
-  character: Character;
+  characterId: string;
   adjustment?: number;
   interaction: CommandInteraction;
 }): EmbedFieldData[] {
+  const character = selectCharacterById(store.getState(), characterId);
+  if (!character) return [];
   return [
     {
       name: "Health",
-      value: `${character.hp}/${getCharacterStatModified(
+      value: `${character.hp}/${character.statsModified.maxHP}\n${hpBar(
         character,
-        "maxHP"
-      )}\n${hpBar(character, adjustment)}`,
+        adjustment
+      )}`,
     },
     {
       name: "Experience",
