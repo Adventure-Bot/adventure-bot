@@ -23,12 +23,18 @@ export const execute = async (
 
   try {
     const url = new URL(profile);
-    if (!url.pathname.endsWith(".png")) {
+    const validExtensions = ["png", "jpg", "jpeg", "gif", "webp"];
+    const isValidExtension = (path: string) =>
+      new RegExp(`${validExtensions.join("|")}$`).test(path);
+    if (!isValidExtension(url.pathname)) {
       interaction.editReply(
         [
-          `\`${profile}\` must be a PNG file, please try again.`,
+          `\`${profile}\` must be a one of these valid extensions: ${validExtensions.join(
+            ", "
+          )}`,
           "Example:",
           "`/set profile:https://www.example.com/profile.png`",
+          "Please try again.",
         ].join("\n")
       );
       return;
@@ -36,9 +42,10 @@ export const execute = async (
   } catch (e) {
     interaction.editReply(
       [
-        `\`${profile}\` must be a valid URL, please try again.`,
+        `\`${profile}\` must be a valid URL.`,
         "Example:",
         "`/set profile:https://www.example.com/profile.png`",
+        "Please try again.",
       ].join("\n")
     );
     return;
