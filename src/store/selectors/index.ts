@@ -41,7 +41,7 @@ export const selectStats = (
     return stats.reduce(
       (acc, stat) => ({
         ...acc,
-        [stat]: getCharacterStatModified(character, stat),
+        [stat]: character[stat],
       }),
       {} as Stats
     );
