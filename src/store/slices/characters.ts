@@ -12,6 +12,7 @@ import { AttackResult } from "../../attack/AttackResult";
 import { characterLooted } from "./loots";
 import { isAmulet, isArmor, isRing, isWeapon } from "../../equipment/equipment";
 import { getSaleRate } from "../../encounters/shop/getSaleRate";
+import { newGame } from "../actions/newGame";
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
   Date.now() > new Date(effect.started).valueOf() + effect.duration;
@@ -22,6 +23,7 @@ export type AttackAction = {
 };
 
 export const attacked = createAction<AttackAction>("character/attacked");
+export const created = createAction<Character>("character/created");
 
 const charactersById: Record<string, Character> = {};
 const roamingMonsters: string[] = [];
@@ -34,10 +36,6 @@ const characterSlice = createSlice({
     isHeavyCrownInPlay: false,
   },
   reducers: {
-    created(state, action: PayloadAction<Character>) {
-      state.charactersById[action.payload.id] = action.payload;
-    },
-
     cleansed(state, action: PayloadAction<{ characterId: string }>) {
       const character = state.charactersById[action.payload.characterId];
       character.statusEffects = [];
@@ -333,23 +331,34 @@ const characterSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(characterLooted, (state, action) => {
-      const { itemsTaken, goldTaken, looterId, targetId } = action.payload;
-      const looter = state.charactersById[looterId];
-      const target = state.charactersById[targetId];
+    builder
+      .addCase(newGame, (state, action) => {
+        state.charactersById = {};
+        state.roamingMonsters = [];
+        state.isHeavyCrownInPlay = false;
+      })
+      .addCase(created, (state, action: PayloadAction<Character>) => {
+        state.charactersById[action.payload.id] = action.payload;
+      })
+      .addCase(characterLooted, (state, action) => {
+        const { itemsTaken, goldTaken, looterId, targetId } = action.payload;
+        const looter = state.charactersById[looterId];
+        const target = state.charactersById[targetId];
 
-      looter.gold += goldTaken;
-      looter.inventory = [...looter.inventory, ...itemsTaken];
+        looter.gold += goldTaken;
+        looter.inventory = [...looter.inventory, ...itemsTaken];
 
-      target.gold -= goldTaken;
-      const isTakenItem = (item: Item) =>
-        itemsTaken.find((i) => i.id === item.id);
-      target.inventory = target.inventory.filter((item) => !isTakenItem(item));
-      target.equipment = equipmentFilter(
-        target.equipment,
-        (item) => !isTakenItem(item)
-      );
-    });
+        target.gold -= goldTaken;
+        const isTakenItem = (item: Item) =>
+          itemsTaken.find((i) => i.id === item.id);
+        target.inventory = target.inventory.filter(
+          (item) => !isTakenItem(item)
+        );
+        target.equipment = equipmentFilter(
+          target.equipment,
+          (item) => !isTakenItem(item)
+        );
+      });
   },
 });
 
@@ -357,7 +366,6 @@ export const {
   questProgressed,
   adjustCharacterHP,
   cleansed,
-  created,
   damaged,
   effectAdded,
   goldGained,

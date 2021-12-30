@@ -4,7 +4,6 @@ import { chest } from "./chest";
 import { isUserQuestComplete } from "../quest/isQuestComplete";
 import quests from "../commands/quests";
 import { updateUserQuestProgess } from "../quest/updateQuestProgess";
-import { getUserCharacter } from "../character/getUserCharacter";
 import { getRandomMonster } from "../monster/getRandomMonster";
 import { createEncounter } from "../encounter/createEncounter";
 import { loot } from "../character/loot/loot";
@@ -35,7 +34,8 @@ export const monster = async (
 ): Promise<void> => {
   // TODO: explore do/while refactor
   let monster = await getRandomMonster();
-  let player = getUserCharacter(interaction.user);
+  let player = selectCharacterById(store.getState(), interaction.user.id);
+  if (!player) return;
 
   console.log("monster encounter", monster, player);
   let encounter = createEncounter({ monster, player });
@@ -112,10 +112,9 @@ export const monster = async (
     }
 
     const updatedMonster = selectMonsterById(store.getState(), monster.id);
-    const updatedPlayer = selectCharacterById(store.getState(), player.id);
-    if (!updatedMonster || !updatedPlayer || !monsterResult) return;
+    player = selectCharacterById(store.getState(), player.id);
+    if (!player || !updatedMonster) return;
     monster = updatedMonster;
-    player = updatedPlayer;
 
     const userReactions = message.reactions.cache.filter((reaction) =>
       reaction.users.cache.has(interaction.user.id)
@@ -161,6 +160,7 @@ export const monster = async (
         break;
     }
 
+    store.dispatch(roundFinished(encounter.id));
     encounter = selectEncounterById(store.getState(), encounter.id);
     message.edit({
       embeds: [encounterEmbed({ encounter, interaction })]
@@ -185,18 +185,15 @@ export const monster = async (
             : []
         ),
     });
-    store.dispatch(roundFinished(encounter.id));
   }
 
   message.reactions.removeAll();
 
   encounter = selectEncounterById(store.getState(), encounter.id);
-
   const embed = encounterSummaryEmbed({
     encounter,
     interaction,
   });
-
   if (player.quests.slayer && encounter.outcome === "player victory")
     embed.addFields([questProgressField(player.quests.slayer)]);
 

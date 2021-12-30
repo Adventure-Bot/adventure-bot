@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import store from "../../store";
+import { newGame } from "../../store/actions/newGame";
 import { goldSet, healthSet } from "../../store/slices/characters";
 
 export const command = new SlashCommandBuilder()
@@ -18,6 +19,9 @@ export const command = new SlashCommandBuilder()
       )
   )
   .addSubcommand((option) =>
+    option.setName("new_game").setDescription("Starts a new game.")
+  )
+  .addSubcommand((option) =>
     option
       .setName("set_health")
       .setDescription("Sets your current health.")
@@ -33,6 +37,9 @@ export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   switch (interaction.options.getSubcommand()) {
+    case "new_game":
+      store.dispatch(newGame());
+      break;
     case "set_gold":
       setGold(interaction);
       interaction.editReply("Gold set.");

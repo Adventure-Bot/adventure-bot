@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Encounter } from "../../monster/Encounter";
 import { isMonster } from "../../monster/Monster";
 import { LootResult } from "../../character/loot/loot";
+import { newGame } from "../actions/newGame";
 
 const encountersById: Record<string, Encounter> = {};
 
@@ -78,15 +79,20 @@ const encountersSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(attacked, (state, action) => {
-      const { attackResult, encounter } = action.payload;
-      if (!encounter) return;
-      if (isMonster(attackResult.attacker)) {
-        state.encountersById[encounter.id].monsterAttacks.push(attackResult);
-      } else {
-        state.encountersById[encounter.id].playerAttacks.push(attackResult);
-      }
-    });
+    builder
+      .addCase(newGame, (state) => {
+        state.encountersById = {};
+        state.encounterWeights = defaultEncounterWeights;
+      })
+      .addCase(attacked, (state, action) => {
+        const { attackResult, encounter } = action.payload;
+        if (!encounter) return;
+        if (isMonster(attackResult.attacker)) {
+          state.encountersById[encounter.id].monsterAttacks.push(attackResult);
+        } else {
+          state.encountersById[encounter.id].playerAttacks.push(attackResult);
+        }
+      });
   },
 });
 

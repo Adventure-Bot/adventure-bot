@@ -1,5 +1,6 @@
 import { LootResult } from "../../character/loot/loot";
 import { createAction, createSlice } from "@reduxjs/toolkit";
+import { newGame } from "../actions/newGame";
 
 const lootsById: Record<string, LootResult> = {};
 
@@ -14,10 +15,14 @@ const lootsSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(characterLooted, (state, action) => {
-      const loot = action.payload;
-      state.lootsById[loot.id] = loot;
-    });
+    builder
+      .addCase(characterLooted, (state, action) => {
+        const loot = action.payload;
+        state.lootsById[loot.id] = loot;
+      })
+      .addCase(newGame, (state) => {
+        state.lootsById = {};
+      });
   },
 });
 
