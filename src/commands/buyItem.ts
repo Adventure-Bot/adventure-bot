@@ -5,6 +5,7 @@ import { itemReceived } from "../store/slices/characters";
 import store from "../store";
 import { equipItemPrompt } from "../equipment/equipItemPrompt";
 import { Item } from "../equipment/Item";
+import { itemCreated } from "../store/slices/items";
 
 export const buyItem = async (
   interaction: CommandInteraction,
@@ -18,6 +19,7 @@ export const buyItem = async (
     return;
   }
   adjustGold(player.id, -item.goldValue);
+  store.dispatch(itemCreated(item));
   store.dispatch(
     itemReceived({
       characterId: player.id,
