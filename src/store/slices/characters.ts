@@ -332,7 +332,7 @@ const characterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(newGame, (state, action) => {
+      .addCase(newGame, (state) => {
         state.charactersById = {};
         state.roamingMonsters = [];
         state.isHeavyCrownInPlay = false;
