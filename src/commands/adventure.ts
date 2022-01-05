@@ -38,7 +38,7 @@ export const execute = async (
     return;
   }
   setCharacterCooldown(player.id, "adventure");
-  const encounter = randomEncounter();
+  const encounter = randomEncounter(interaction);
   console.log(encounter);
   await encounter(interaction);
 };
