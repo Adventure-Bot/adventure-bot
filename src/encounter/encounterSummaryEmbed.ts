@@ -57,7 +57,9 @@ export function encounterSummaryEmbed({
   }
 
   if (encounter.lootResult?.goldTaken) {
-    embed.addFields([gpGainField(interaction, monster.gold)]);
+    embed.addFields([
+      gpGainField(interaction, encounter.lootResult?.goldTaken),
+    ]);
   }
   const itemsTaken = encounter.lootResult?.itemsTaken;
   if (itemsTaken && itemsTaken.length > 0) {

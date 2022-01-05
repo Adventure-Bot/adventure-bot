@@ -197,11 +197,7 @@ export const monster = async (
   if (player.quests.slayer && encounter.outcome === "player victory")
     embed.addFields([questProgressField(player.quests.slayer)]);
 
-  const embeds = [embed].concat(
-    encounter.lootResult
-      ? lootResultEmbed({ result: encounter.lootResult, interaction })
-      : []
-  );
+  const embeds = [embed];
 
   await message.reply({
     embeds,
