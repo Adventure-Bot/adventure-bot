@@ -3,6 +3,7 @@ import { CommandInteraction } from "discord.js";
 import { Shrine } from "../../shrines/Shrine";
 import { shrineEmbeds } from "./shrineEmbeds";
 import { applyShrine } from "./applyShrine";
+import { getAsset } from "../../utils/getAsset";
 
 export const attackShrine = async (
   interaction: CommandInteraction
@@ -11,7 +12,11 @@ export const attackShrine = async (
     id: randomUUID(),
     name: "Shrine of Agression",
     description: `This shrine fills you with a rage!`,
-    image: "https://i.imgur.com/7qVghXO.png",
+    image: getAsset(
+      "fantasy",
+      "places",
+      "magical obelisk with a fiery aura"
+    ).s3Url(),
     color: "RED",
     effect: {
       name: "Shrine of Agression",
