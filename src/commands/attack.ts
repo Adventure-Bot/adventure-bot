@@ -129,8 +129,6 @@ const accuracyDescriptor = (result: ReturnType<typeof playerAttack>) => {
       ? descriptors.nearMiss
       : descriptors.wideMiss;
 
-  console.log(descriptor, accuracy);
-
   return randomArrayElement(descriptor)
     .replace(/<@attacker>/g, attacker)
     .replace(/<@defender>/g, defender);

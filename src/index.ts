@@ -49,7 +49,7 @@ async function main() {
 
   discordClient.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) return;
-    console.log("interactionCreate");
+    console.log(`interactionCreate ${interaction.commandName}`);
     console.time(interaction.commandName);
     try {
       await interaction.deferReply();
