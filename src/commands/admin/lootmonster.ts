@@ -18,7 +18,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const monster = await getRandomMonster();
+  const monster = getRandomMonster();
   const character = getUserCharacter(interaction.user);
   const result = loot({ looterId: character.id, targetId: monster.id });
 

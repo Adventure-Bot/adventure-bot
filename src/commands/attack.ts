@@ -15,6 +15,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { sleep } from "../utils";
 import { selectCharacterById } from "../store/selectors";
 import store from "../store";
+import { randomArrayElement } from "../monster/randomArrayElement";
 
 export const command = new SlashCommandBuilder()
   .setName("attack")
@@ -99,6 +100,13 @@ export const execute = async (
 
 export default { command, execute };
 
+const defaultAccuracyDescriptors = {
+  wideMiss: [`<@attacker> misses <@defender> utterly`],
+  nearMiss: [`<@attacker> nearly misses <@defender>`],
+  onTheNose: [`<@attacker> finds purchase against <@defender>`],
+  veryAccurate: [`<@attacker> strikes <@defender> true`],
+};
+
 const accuracyDescriptor = (result: ReturnType<typeof playerAttack>) => {
   if (!result) return `No result`;
   if (result.outcome === "cooldown") return "On cooldown";
@@ -108,56 +116,24 @@ const accuracyDescriptor = (result: ReturnType<typeof playerAttack>) => {
     getCharacterStatModified(result.defender, "ac");
   const attacker = mentionCharacter(result.attacker);
   const defender = mentionCharacter(result.defender);
-  switch (true) {
-    case accuracy >= 5:
-      return (
-        result.attacker.equipment.weapon?.accuracyDescriptors.veryAccurate[0]
-          .replace(/<@attacker>/g, attacker)
-          .replace(/<@defender>/g, defender) ??
-        `${attacker} strikes ${defender} true`
-      );
-    case accuracy >= 2:
-      return (
-        result.attacker.equipment.weapon?.accuracyDescriptors.onTheNose[0]
-          .replace(/<@attacker>/g, attacker)
-          .replace(/<@defender>/g, defender) ??
-        `${attacker} finds purchase against ${defender}`
-      );
-    case accuracy >= 1:
-      return (
-        result.attacker.equipment.weapon?.accuracyDescriptors.onTheNose[0]
-          .replace(/<@attacker>/g, attacker)
-          .replace(/<@defender>/g, defender) ??
-        `${attacker} narrowly hits ${defender}`
-      );
-    case accuracy === 0:
-      return (
-        result.attacker.equipment.weapon?.accuracyDescriptors.onTheNose[0]
-          .replace(/<@attacker>/g, attacker)
-          .replace(/<@defender>/g, defender) ??
-        `${attacker} barely hits ${defender}`
-      );
-    case accuracy <= 1:
-      return (
-        result.attacker.equipment.weapon?.accuracyDescriptors.nearMiss[0]
-          .replace(/<@attacker>/g, attacker)
-          .replace(/<@defender>/g, defender) ??
-        `${attacker} narrowly misses ${defender}`
-      );
-    case accuracy <= 2:
-      return (
-        result.attacker.equipment.weapon?.accuracyDescriptors.nearMiss[0]
-          .replace(/<@attacker>/g, attacker)
-          .replace(/<@defender>/g, defender) ?? `${attacker} misses ${defender}`
-      );
-    case accuracy < 5:
-      return (
-        result.attacker.equipment.weapon?.accuracyDescriptors.wideMiss[0]
-          .replace(/<@attacker>/g, attacker)
-          .replace(/<@defender>/g, defender) ??
-        `${attacker} misses ${defender} utterly`
-      );
-  }
+  const descriptors =
+    result.attacker.equipment.weapon?.accuracyDescriptors ??
+    defaultAccuracyDescriptors;
+
+  const descriptor =
+    accuracy > 5
+      ? descriptors.veryAccurate
+      : accuracy > 0
+      ? descriptors.onTheNose
+      : accuracy > -2
+      ? descriptors.nearMiss
+      : descriptors.wideMiss;
+
+  console.log(descriptor, accuracy);
+
+  return randomArrayElement(descriptor)
+    .replace(/<@attacker>/g, attacker)
+    .replace(/<@defender>/g, defender);
 };
 
 const damageDescriptor = (result: ReturnType<typeof playerAttack>) => {

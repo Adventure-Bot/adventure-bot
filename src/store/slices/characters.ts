@@ -291,6 +291,10 @@ const characterSlice = createSlice({
       character.profile = profile;
     },
 
+    purgeRoamingMonsters(state) {
+      state.roamingMonsters = [];
+    },
+
     healthSet(
       state,
       action: PayloadAction<{
@@ -385,6 +389,7 @@ export const {
   questCompleted,
   updateCharacterCooldowns,
   xpAwarded,
+  purgeRoamingMonsters,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;
