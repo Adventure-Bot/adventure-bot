@@ -3,7 +3,7 @@ import { getRoamingMonsters } from "./getRoamingMonsters";
 import { isMonster, Monster } from "./Monster";
 import { createRandomMonster } from "./createRandomMonster";
 
-export const getRandomMonster = async (): Promise<Monster> => {
+export const getRandomMonster = (): Monster => {
   const roamingMonsters = getRoamingMonsters();
   if (roamingMonsters.length && Math.random() <= roamingMonsters.length / 10) {
     console.log("returning existing monster");

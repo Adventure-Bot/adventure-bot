@@ -33,7 +33,7 @@ export const monster = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   // TODO: explore do/while refactor
-  let monster = await getRandomMonster();
+  let monster = getRandomMonster();
   let player = selectCharacterById(store.getState(), interaction.user.id);
   if (!player) return;
 

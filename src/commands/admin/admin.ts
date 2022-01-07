@@ -2,7 +2,11 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import store from "../../store";
 import { newGame } from "../../store/actions/newGame";
-import { goldSet, healthSet } from "../../store/slices/characters";
+import {
+  goldSet,
+  healthSet,
+  purgeRoamingMonsters,
+} from "../../store/slices/characters";
 
 export const command = new SlashCommandBuilder()
   .setName("admin")
@@ -22,6 +26,9 @@ export const command = new SlashCommandBuilder()
     option.setName("new_game").setDescription("Starts a new game.")
   )
   .addSubcommand((option) =>
+    option.setName("purge_roaming").setDescription("Purge roaming monsters.")
+  )
+  .addSubcommand((option) =>
     option
       .setName("set_health")
       .setDescription("Sets your current health.")
@@ -39,6 +46,11 @@ export const execute = async (
   switch (interaction.options.getSubcommand()) {
     case "new_game":
       store.dispatch(newGame());
+      interaction.editReply("New game started");
+      break;
+    case "purge_roaming":
+      store.dispatch(purgeRoamingMonsters());
+      interaction.editReply("Roaming monsters purged");
       break;
     case "set_gold":
       setGold(interaction);
