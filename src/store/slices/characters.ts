@@ -10,7 +10,14 @@ import { clamp } from "remeda";
 import { Encounter } from "../../monster/Encounter";
 import { AttackResult } from "../../attack/AttackResult";
 import { characterLooted } from "./loots";
-import { isAmulet, isArmor, isRing, isWeapon } from "../../equipment/equipment";
+import {
+  isAmulet,
+  isArmor,
+  isHat,
+  isRing,
+  isShield,
+  isWeapon,
+} from "../../equipment/equipment";
 import { getSaleRate } from "../../encounters/shop/getSaleRate";
 import { newGame } from "../actions/newGame";
 
@@ -211,6 +218,8 @@ const characterSlice = createSlice({
       if (isAmulet(item)) character.equipment.amulet = item;
       if (isArmor(item)) character.equipment.armor = item;
       if (isRing(item)) character.equipment.ring = item;
+      if (isShield(item)) character.equipment.shield = item;
+      if (isHat(item)) character.equipment.hat = item;
     },
 
     itemSold(
