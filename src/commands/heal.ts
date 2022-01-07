@@ -15,13 +15,16 @@ export const command = new SlashCommandBuilder()
   .setName("heal")
   .setDescription("Heal someone")
   .addUserOption((option) =>
-    option.setName("target").setDescription("Whom to heal").setRequired(true)
+    option.setName("target").setDescription("Whom to heal")
   );
 
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const target = interaction.options.data[0].user;
+  const target =
+    (interaction.options.data[0] && interaction.options.data[0].user) ||
+    interaction.user;
+
   const healer = interaction.user;
   if (!target) {
     await interaction.editReply(`You must specify a target @player`);
