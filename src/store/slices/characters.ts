@@ -134,21 +134,6 @@ const characterSlice = createSlice({
       };
     },
 
-    adjustCharacterHP(
-      state,
-      action: PayloadAction<{
-        character: Character; // todo: characterId: string
-        amount: number;
-      }>
-    ) {
-      const { amount } = action.payload;
-      const character = state.charactersById[action.payload.character.id];
-      character.hp = clamp(character.hp + amount, {
-        min: 0,
-        max: getCharacterStatModified(character, "maxHP"),
-      });
-    },
-
     itemGiven(
       state,
       action: PayloadAction<{
@@ -377,7 +362,6 @@ const characterSlice = createSlice({
 
 export const {
   questProgressed,
-  adjustCharacterHP,
   cleansed,
   damaged,
   effectAdded,
