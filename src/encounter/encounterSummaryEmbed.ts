@@ -1,5 +1,5 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { Encounter } from "../monster/Encounter";
+import { Encounter } from "./Encounter";
 import { xpGainField } from "../character/xpGainField";
 import { Emoji } from "../Emoji";
 import { gpGainField } from "../character/gpGainField";

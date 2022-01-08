@@ -7,7 +7,7 @@ import { Item } from "equipment/Item";
 import { equipmentFilter } from "../../character/loot/loot";
 import { Monster } from "../../monster/Monster";
 import { clamp } from "remeda";
-import { Encounter } from "../../monster/Encounter";
+import { Encounter } from "../../encounter/Encounter";
 import { AttackResult } from "../../attack/AttackResult";
 import { characterLooted } from "./loots";
 import {

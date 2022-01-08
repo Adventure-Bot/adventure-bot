@@ -17,10 +17,10 @@ export const makeAttack = (
     ? selectEncounterById(store.getState(), encounterId)
     : undefined;
 
-  const { attackBonus, damageBonus, damageMax, monsterDamageMax } =
+  const { attackBonus, damageBonus, damageMax, monsterDamageMax, ac } =
     attacker.statsModified;
 
-  const targetDefense = defender.statsModified.ac;
+  const targetDefense = ac;
 
   const attackRoll = d20();
   const damageRoll = Math.ceil(Math.random() * damageMax);

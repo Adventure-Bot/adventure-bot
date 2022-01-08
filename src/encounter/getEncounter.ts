@@ -1,4 +1,4 @@
-import { Encounter } from "../monster/Encounter";
+import { Encounter } from "./Encounter";
 import { selectEncounterById } from "../store/selectors";
 import store from "../store";
 

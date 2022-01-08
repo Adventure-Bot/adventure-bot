@@ -1,5 +1,5 @@
 import { Monster } from "../monster/Monster";
-import { Encounter } from "../monster/Encounter";
+import { Encounter } from "./Encounter";
 import { Character } from "../character/Character";
 import { randomUUID } from "crypto";
 import store from "../store";

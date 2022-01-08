@@ -5,7 +5,7 @@ import { getCharacterStatModified } from "../../character/getCharacterStatModifi
 import { getCharacterStatModifier } from "../../character/getCharacterStatModifier";
 import { LootResult } from "../../character/loot/loot";
 import { Stats, stats } from "../../character/Stats";
-import { Encounter } from "../../monster/Encounter";
+import { Encounter } from "../../encounter/Encounter";
 import { isMonster } from "../../monster/Monster";
 import { Quest } from "../../quest/Quest";
 import { QuestId, quests } from "../../quest/quests";
@@ -56,7 +56,7 @@ export const selectStats = (
 
 export const selectCharacterById = (state: ReduxState, id: string) => {
   const character = state.characters.charactersById[id];
-  if(!character) return;
+  if (!character) return;
   const stats = selectStats(state, character.id);
   const statsModified = selectStats(state, character.id, true);
   if (!(character && stats && statsModified)) return;
