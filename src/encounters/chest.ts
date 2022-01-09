@@ -192,9 +192,9 @@ export async function chest(
       await interaction.followUp({
         embeds: [itemEmbed({ item: crown, interaction })],
       });
-      await equipItemPrompt(interaction, crown);
+      await equipItemPrompt({ interaction, item: crown });
     }
-    if (Math.random() <= 0.2) {
+    if (Math.random() <= 1) {
       const item = randomChestItem();
       store.dispatch(
         itemReceived({
@@ -205,7 +205,8 @@ export async function chest(
       await interaction.followUp({
         embeds: [itemEmbed({ item, interaction })],
       });
-      if (isEquippable(item)) equipItemPrompt(interaction, item);
+      if (isEquippable(item))
+        equipItemPrompt({ interaction, item, showItem: false });
     }
   }
   if (getUserCharacter(interaction.user).hp === 0) {
