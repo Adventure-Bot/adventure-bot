@@ -16,14 +16,19 @@ import { itemEquipped } from "../store/slices/characters";
  * @param item
  * @returns
  */
-export const equipItemPrompt = async (
-  interaction: CommandInteraction,
-  item: Item
-): Promise<void> => {
+export async function equipItemPrompt({
+  interaction,
+  item,
+  showItem = true,
+}: {
+  interaction: CommandInteraction;
+  item: Item;
+  showItem?: boolean;
+}): Promise<void> {
   const content = `Would you like to equip the ${item.name}?`;
   const message = await interaction.followUp({
     content,
-    embeds: [itemEmbed({ item, interaction })],
+    embeds: showItem ? [itemEmbed({ item, interaction })] : [],
     components: [
       new MessageActionRow({
         components: [
@@ -63,4 +68,4 @@ export const equipItemPrompt = async (
   });
   message.reply(`You equip the ${item.name}.`);
   await inspect.execute(interaction);
-};
+}
