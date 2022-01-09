@@ -194,7 +194,7 @@ export async function chest(
       });
       await equipItemPrompt({ interaction, item: crown });
     }
-    if (Math.random() <= 1) {
+    if (Math.random() <= 0.2) {
       const item = randomChestItem();
       store.dispatch(
         itemReceived({
