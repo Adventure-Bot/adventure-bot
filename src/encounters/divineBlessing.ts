@@ -7,11 +7,11 @@ export const divineBlessing = async (
   grantDivineBlessing(interaction.user.id);
   await interaction.editReply({
     embeds: [
-      new MessageEmbed()
-        .setTitle("Divine Blessing")
-        .setColor("GOLD")
-        .setDescription(`A Divine blesses you with +1 max hp!`)
-        .setImage("https://imgur.com/psnFPYG.png"),
+      new MessageEmbed({
+        title: "Divine Blessing",
+        description: `A Divine blesses you with +1 max hp!`,
+        color: "GOLD",
+      }).setImage("https://imgur.com/psnFPYG.png"),
     ],
   });
 };
