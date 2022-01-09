@@ -24,6 +24,5 @@ export const buyItem = async (
       item,
     })
   );
-  await equipItemPrompt(interaction, item);
-  equipItemPrompt(interaction, item);
+  await equipItemPrompt({ interaction, item });
 };
