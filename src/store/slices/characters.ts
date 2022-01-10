@@ -300,21 +300,6 @@ const characterSlice = createSlice({
       character.hp = health;
     },
 
-    healthAdjusted(
-      state,
-      action: PayloadAction<{
-        characterId: string;
-        amount: number;
-      }>
-    ) {
-      const { characterId, amount } = action.payload;
-      const character = state.charactersById[characterId];
-      character.hp = clamp(character.hp + amount, {
-        min: 0,
-        max: getCharacterStatModified(character, "maxHP"),
-      });
-    },
-
     xpAwarded(
       state,
       action: PayloadAction<{
@@ -371,7 +356,6 @@ export const {
   questGranted,
   healed,
   healthSet,
-  healthAdjusted,
   itemEquipped,
   itemGiven,
   itemReceived,
