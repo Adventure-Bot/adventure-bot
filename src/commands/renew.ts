@@ -4,7 +4,7 @@ import { isCharacterOnCooldown } from "../character/isCharacterOnCooldown";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { cooldownRemainingText } from "../character/cooldownRemainingText";
 import { hpBarField } from "../character/hpBar/hpBarField";
-import { setCharacterCooldown } from "../character/setCharacterCooldown";
+import { startCooldown } from "../character/startCooldown";
 import { isHealer } from "../heal/isHealer";
 import store from "../store";
 import { healed } from "../store/slices/characters";
@@ -40,7 +40,7 @@ export const execute = async (
     await interaction.editReply(`You must specify a target @player`);
     return;
   }
-  setCharacterCooldown(character.id, "renew");
+  startCooldown({ characterId: character.id, cooldown: "renew" });
   const healAmount = 2;
   let totalTicks = 5;
   const tickRate = 5 * 60000;

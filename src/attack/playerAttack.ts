@@ -1,7 +1,7 @@
 import { makeAttack } from "./makeAttack";
 import { isCharacterOnCooldown } from "../character/isCharacterOnCooldown";
 import { AttackResult } from "./AttackResult";
-import { setCharacterCooldown } from "../character/setCharacterCooldown";
+import { startCooldown } from "../character/startCooldown";
 
 export const playerAttack = (
   attackerId: string,
@@ -12,6 +12,6 @@ export const playerAttack = (
   }
   const result = makeAttack(attackerId, defenderId);
   if (!result) return;
-  setCharacterCooldown(attackerId, "attack");
+  startCooldown({ characterId: attackerId, cooldown: "attack" });
   return result;
 };

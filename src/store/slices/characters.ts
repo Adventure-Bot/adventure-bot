@@ -48,24 +48,23 @@ const characterSlice = createSlice({
       character.statusEffects = [];
     },
 
+    cooldownStarted(
+      state,
+      action: PayloadAction<{
+        characterId: string;
+        cooldown: keyof Character["cooldowns"];
+      }>
+    ) {
+      const { characterId, cooldown } = action.payload;
+      const character = state.charactersById[characterId];
+      if (!character) return;
+      character.cooldowns[cooldown] = new Date().toString();
+    },
+
     monsterCreated(state, action: PayloadAction<Monster>) {
       const monster = action.payload;
       state.charactersById[monster.id] = monster;
       state.roamingMonsters.push(monster.id);
-    },
-
-    updateCharacterCooldowns(
-      state,
-      action: PayloadAction<{
-        character: Character;
-        cooldowns: Character["cooldowns"];
-      }>
-    ) {
-      const { character, cooldowns } = action.payload;
-      state.charactersById[character.id] = {
-        ...character,
-        cooldowns,
-      };
     },
 
     effectAdded(
@@ -363,6 +362,7 @@ const characterSlice = createSlice({
 export const {
   questProgressed,
   cleansed,
+  cooldownStarted,
   damaged,
   effectAdded,
   goldGained,
@@ -380,7 +380,6 @@ export const {
   monsterCreated,
   profileSet,
   questCompleted,
-  updateCharacterCooldowns,
   xpAwarded,
   purgeRoamingMonsters,
 } = characterSlice.actions;

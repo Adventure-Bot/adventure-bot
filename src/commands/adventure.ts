@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { isCharacterOnCooldown } from "../character/isCharacterOnCooldown";
-import { setCharacterCooldown } from "../character/setCharacterCooldown";
+import { startCooldown } from "../character/startCooldown";
 import { cooldownRemainingText } from "../character/cooldownRemainingText";
 import { randomEncounter } from "../encounters/randomEncounter";
 
@@ -37,7 +37,7 @@ export const execute = async (
     });
     return;
   }
-  setCharacterCooldown(player.id, "adventure");
+  startCooldown({ characterId: player.id, cooldown: "adventure" });
   const encounter = randomEncounter(interaction);
   console.log(encounter);
   await encounter(interaction);

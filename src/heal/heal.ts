@@ -1,6 +1,6 @@
 import { isCharacterOnCooldown } from "../character/isCharacterOnCooldown";
 import { getCharacter } from "../character/getCharacter";
-import { setCharacterCooldown } from "../character/setCharacterCooldown";
+import { startCooldown } from "../character/startCooldown";
 import { d6 } from "../utils/dice";
 import { HealResult } from "./HealResult";
 import store from "../store";
@@ -16,7 +16,7 @@ export const heal = (
   if (!healer) return;
   const targetBeforeHeal = getCharacter(targetId);
   if (!targetBeforeHeal) return;
-  setCharacterCooldown(healer.id, "heal");
+  startCooldown({ characterId: healer.id, cooldown: "heal" });
   const rawHeal = d6();
   store.dispatch(
     healed({
