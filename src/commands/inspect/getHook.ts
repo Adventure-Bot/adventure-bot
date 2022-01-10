@@ -11,7 +11,8 @@ export type HookName =
   | "Status Effects"
   | "Quests"
   | "Characters"
-  | "Combat";
+  | "Combat"
+  | "Inventory";
 
 export async function getHook({
   name,
