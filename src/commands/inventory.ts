@@ -5,13 +5,16 @@ import {
   MessageActionRow,
   MessageButton,
   MessageOptions,
+  TextChannel,
 } from "discord.js";
+import { decoratedName } from "../character/decoratedName";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { equipInventoryItemPrompt } from "../equipment/equipInventoryItemPrompt";
 import { isTradeable } from "../equipment/equipment";
 import { equippableInventory } from "../equipment/equippableInventory";
 import { itemEmbed } from "../equipment/itemEmbed";
 import { offerItemPrompt as offerItemPrompt } from "../equipment/offerItemPrompt";
+import { getHook } from "./inspect/getHook";
 
 export const command = new SlashCommandBuilder()
   .setName("inventory")
@@ -21,7 +24,6 @@ export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   const character = getUserCharacter(interaction.user);
-  console.log(`${character.name}'s inventory`, character.inventory);
   if (!character.inventory.length) {
     await interaction.followUp("Your inventory is empty.");
     return;
@@ -31,6 +33,29 @@ export const execute = async (
     fetchReply: true,
   });
   if (!(message instanceof Message)) return;
+  const channel = interaction.channel;
+  if (!(channel instanceof TextChannel)) return;
+  const thread = await channel.threads.create({
+    name: `${character.name}'s inventory`,
+  });
+  const webhooks = await channel.fetchWebhooks();
+  const hook = await getHook({
+    name: "Inventory",
+    webhooks,
+    interaction,
+  });
+  if (!hook) {
+    await interaction.followUp(`Inventory hook not found.`);
+    return;
+  }
+
+  character.inventory.forEach((item) => {
+    hook.send({
+      embeds: [itemEmbed({ item, interaction })],
+      threadId: thread.id,
+    });
+  });
+
   let done = false;
   while (!done) {
     const reply = await message
@@ -51,9 +76,10 @@ export const execute = async (
     if (reply.customId === "equip") await equipInventoryItemPrompt(interaction);
     if (reply.customId === "offer") await offerItemPrompt(interaction);
     if (reply.customId === "done") done = true;
-    message.edit(inventoryMain(interaction));
+    await message.edit(inventoryMain(interaction));
   }
   message.edit({ components: [] });
+  thread.setArchived(true);
 };
 
 export default { command, execute };
@@ -90,9 +116,7 @@ function inventoryMain(interaction: CommandInteraction): MessageOptions {
   );
 
   return {
-    embeds: character.inventory.map((item) =>
-      itemEmbed({ item, interaction, showEquipStatus: true })
-    ),
+    content: `${decoratedName(character)} checks their bags.`,
     components: [
       new MessageActionRow({
         components,
