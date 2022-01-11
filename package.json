@@ -16,7 +16,8 @@
     "start": "node .build/index.js",
     "sync-s3-assets": "ts-node ./scripts/sync-s3-assets.ts",
     "postsync-s3-assets": "yarn generate-asset-manifest",
-    "redux-devtools": "redux-devtools --hostname=localhost --port=5010"
+    "redux-devtools": "redux-devtools --hostname=localhost --port=5010",
+    "find-deadcode": "ts-prune"
   },
   "repository": {
     "type": "git",
@@ -43,9 +44,10 @@
     "aws-sdk": "^2.1043.0",
     "eslint": "^7.4.0",
     "nodemon": "^2.0.4",
-    "s3": "^4.4.0",
     "patch-package": "^6.4.7",
+    "s3": "^4.4.0",
     "ts-node": "^8.10.2",
+    "ts-prune": "^0.10.3",
     "tscpaths": "^0.0.9"
   },
   "dependencies": {
