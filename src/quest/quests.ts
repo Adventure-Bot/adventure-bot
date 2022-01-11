@@ -84,15 +84,3 @@ export const quests: {
   //   objective: 'Evade '
   // },
 };
-
-export const getRandomQuests = (quests: Quest[], num = 3): Quest[] => {
-  const available = [...quests];
-  const results: Quest[] = [];
-  while (results.length < num) {
-    const i = Math.ceil(Math.random() * available.length);
-    const quest = available[i];
-    available.splice(i, 1);
-    results.push(quest);
-  }
-  return results;
-};

@@ -49,6 +49,7 @@ const store = configureStore({
     }),
 });
 
+// ts-prune-ignore-next
 export const persistor = persistStore(store);
 
 export default store;
