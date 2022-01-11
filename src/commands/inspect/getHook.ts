@@ -6,7 +6,7 @@ import {
   Webhook,
 } from "discord.js";
 
-export type HookName =
+type HookName =
   | "Equipment"
   | "Status Effects"
   | "Quests"
@@ -30,7 +30,7 @@ export async function getHook({
   return await channel.createWebhook(name, hookOptions(name));
 }
 
-export function hookOptions(name: HookName): ChannelWebhookCreateOptions {
+function hookOptions(name: HookName): ChannelWebhookCreateOptions {
   return {
     avatar:
       "https://www.wallpaperup.com/uploads/wallpapers/2013/02/22/43066/33ee1c3920aa37d0b18a0de6cd9796b9.jpg",
