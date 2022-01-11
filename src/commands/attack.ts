@@ -17,6 +17,7 @@ import { selectCharacterById } from "../store/selectors";
 import store from "../store";
 import { randomArrayElement } from "../monster/randomArrayElement";
 
+//test
 export const command = new SlashCommandBuilder()
   .setName("attack")
   .setDescription("Make an attack")
