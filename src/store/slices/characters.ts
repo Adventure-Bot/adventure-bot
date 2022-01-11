@@ -24,7 +24,7 @@ import { newGame } from "../actions/newGame";
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
   Date.now() > new Date(effect.started).valueOf() + effect.duration;
 
-export type AttackAction = {
+type AttackAction = {
   encounter?: Encounter;
   attackResult: AttackResult;
 };
