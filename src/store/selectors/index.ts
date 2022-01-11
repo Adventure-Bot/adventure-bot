@@ -30,7 +30,7 @@ const decorateCharacterWithAssetProfile = <T extends Character>(
   } else return character;
 };
 
-export const selectStats = (
+const selectStats = (
   state: ReduxState,
   characterId: string,
   includeModifiers = true
@@ -117,7 +117,7 @@ export const selectLoot = (state: ReduxState): LootResult[] =>
 export const selectIsHeavyCrownInPlay = (state: ReduxState): boolean =>
   state.characters.isHeavyCrownInPlay;
 
-export const selectIsCharacterOnQuest = ({
+const selectIsCharacterOnQuest = ({
   state,
   characterId,
   questId,
