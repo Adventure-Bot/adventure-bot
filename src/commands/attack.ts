@@ -157,16 +157,6 @@ export const attackFlavorText = (
     ? `${accuracyDescriptor(result)} ${damageDescriptor(result)}`
     : "No result";
 
-export const hpText = (result: ReturnType<typeof playerAttack>): string =>
-  result
-    ? result.outcome === "cooldown"
-      ? "on cooldown"
-      : `${result.defender.hp}/${getCharacterStatModified(
-          result.defender,
-          "maxHP"
-        )} ${result.defender.hp <= 0 ? "(unconscious)" : ""}`
-    : "No result";
-
 export const attackRollText = ({
   result,
   interaction,
