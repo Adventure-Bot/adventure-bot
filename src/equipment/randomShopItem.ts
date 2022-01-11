@@ -17,7 +17,7 @@ import {
 import { amuletOfAttack } from "./items/amuletOfAttack";
 import { amuletOfProtection } from "./items/amuletOfProtection";
 
-export const weights = new Map<() => Item, number>([
+const weights = new Map<() => Item, number>([
   [amuletOfAttack, 0.3],
   [amuletOfProtection, 0.3],
   [buckler, 1],
