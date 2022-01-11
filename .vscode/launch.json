@@ -18,8 +18,8 @@
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["nodemon", "--config", "nodemon-prune.json"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "prune:watch"],
       "console": "integratedTerminal"
     },
     {

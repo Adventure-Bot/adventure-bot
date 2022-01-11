@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { createCharacter } from "../createCharacter";
-import { hpBarField } from "./hpBarField";
+import { createCharacter } from "../character/createCharacter";
+import { hpBarField } from "../character/hpBar/hpBarField";
 
 export const command = new SlashCommandBuilder()
   .setName("hpbartest")

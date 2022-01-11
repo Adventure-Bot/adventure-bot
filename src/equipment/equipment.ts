@@ -4,7 +4,7 @@ export type Equippable = Item & {
   equippable: true;
   type: "weapon" | "armor" | "shield" | "hat" | "amulet" | "ring";
 };
-export type Tradeable = Item & { tradeable: true };
+type Tradeable = Item & { tradeable: true };
 
 export type Weapon = Equippable & {
   type: "weapon";
