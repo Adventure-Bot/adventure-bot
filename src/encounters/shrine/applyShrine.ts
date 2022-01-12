@@ -1,7 +1,6 @@
 import { CommandInteraction } from "discord.js";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import { isUserQuestComplete } from "../../quest/isQuestComplete";
-import { updateUserQuestProgess } from "../../quest/updateQuestProgess";
 import { hasStatusEffect } from "../../statusEffects/hasStatusEffect";
 import quests from "../../commands/quests";
 import { Shrine } from "../../shrines/Shrine";
