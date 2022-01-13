@@ -1,2 +1,3 @@
-export const d20 = (): number => Math.ceil(Math.random() * 20);
-export const d6 = (): number => Math.ceil(Math.random() * 6);
+export const d = (n: number): number => Math.ceil(Math.random() * n);
+export const d20 = (): number => d(20);
+export const d6 = (): number => d(6);

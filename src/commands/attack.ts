@@ -2,7 +2,7 @@ import { AttackResult } from "../attack/AttackResult";
 import { attackResultEmbed } from "../attack/attackResultEmbed";
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { cooldownRemainingText } from "../character/cooldownRemainingText";
-import { Emoji } from "../Emoji";
+import { d20Emoji, Emoji } from "../Emoji";
 import { getCharacterStatModified } from "../character/getCharacterStatModified";
 import { getCharacterStatModifier } from "../character/getCharacterStatModifier";
 import { getUserCharacter } from "../character/getUserCharacter";
@@ -165,18 +165,13 @@ export const attackRollText = ({
   interaction: CommandInteraction;
 }): string => {
   if (!result) return "No result. This should not happen.";
-  const ac = result.defender.ac;
-  const acModifier = getCharacterStatModifier(result.defender, "ac");
-  const roll = result.attackRoll;
+  const attackEmoji = Emoji(interaction, "attack");
   const attackBonus = getCharacterStatModified(result.attacker, "attackBonus");
-  const totalAttack = roll + attackBonus;
-
-  const acModifierText =
-    acModifier > 0 ? `+${acModifier}` : acModifier < 0 ? `-${acModifier}` : ``;
-
+  const diceEmoji = d20Emoji({ interaction, n: result.attackRoll });
+  const bonusText = (attackBonus > 0 ? "+" : "") + (attackBonus || "");
   const comparison = result.outcome === "hit" ? "≥" : "<";
-  return `${Emoji(interaction, "attack")}${totalAttack} ${comparison} ${Emoji(
-    interaction,
-    "ac"
-  )}${10 + acModifier} (\`${roll}\`+${attackBonus} vs ${ac}${acModifierText})`;
+  const acEmoji = Emoji(interaction, "ac");
+  const ac = result.defender.ac;
+
+  return `${attackEmoji}${diceEmoji}${bonusText} ${comparison} ${acEmoji} ${ac}`;
 };
