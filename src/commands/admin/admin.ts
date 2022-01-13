@@ -2,7 +2,6 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { cwd } from "process";
 import { range } from "remeda";
 import store from "../../store";
 import { newGame } from "../../store/actions/newGame";
