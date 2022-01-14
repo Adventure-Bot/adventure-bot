@@ -13,10 +13,10 @@ export function attackResultHeadline({
   const hitOrMissed = result.outcome === "hit" ? "hit" : "missed";
   const forDamage =
     result.outcome === "hit"
-      ? `for ${result.damage} ${Emoji(interaction, "damage")}`
+      ? ` for ${result.damage} ${Emoji(interaction, "damage")}`
       : "";
 
   return `${Emoji(interaction, result.outcome)} ${
     attacker.name
-  } ${hitOrMissed} ${defender.name} ${forDamage}`;
+  } ${hitOrMissed} ${defender.name}${forDamage}`;
 }
