@@ -1,5 +1,8 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
+import { readFileSync } from "fs";
+import { join } from "path";
+import { range } from "remeda";
 import store from "../../store";
 import { newGame } from "../../store/actions/newGame";
 import {
@@ -26,6 +29,9 @@ export const command = new SlashCommandBuilder()
     option.setName("new_game").setDescription("Starts a new game.")
   )
   .addSubcommand((option) =>
+    option.setName("add_emoji").setDescription("Adds emoji to your server.")
+  )
+  .addSubcommand((option) =>
     option.setName("purge_roaming").setDescription("Purge roaming monsters.")
   )
   .addSubcommand((option) =>
@@ -48,6 +54,9 @@ export const execute = async (
       store.dispatch(newGame());
       interaction.editReply("New game started");
       break;
+    case "add_emoji":
+      addEmoji(interaction);
+      break;
     case "purge_roaming":
       store.dispatch(purgeRoamingMonsters());
       interaction.editReply("Roaming monsters purged");
@@ -66,6 +75,30 @@ export const execute = async (
       );
   }
 };
+
+async function addEmoji(interaction: CommandInteraction) {
+  const guild = interaction.guild;
+  if (!guild) return;
+  range(1, 21).forEach(async (n) => {
+    const nn = n.toString().padStart(2, "0");
+    const path = join(__dirname, `../../../images/dice/00${nn}.png`);
+    const file = readFileSync(path);
+    try {
+      const emojiName = `d20_${nn}`;
+      const existing = guild.emojis.cache.find(
+        (emoji) => emoji.name === emojiName
+      );
+      if (existing) {
+        interaction.editReply(`Emoji already exists: ${existing}`);
+        return;
+      }
+      const emoji = await guild.emojis.create(file, emojiName);
+      interaction.editReply(`Emoji added: ${emoji}`);
+    } catch (e) {
+      interaction.editReply(`Error: ${e}`);
+    }
+  });
+}
 
 const setGold = async (interaction: CommandInteraction) => {
   const gold = interaction.options.getInteger("gold");

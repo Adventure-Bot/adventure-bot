@@ -7,7 +7,6 @@ import { updateUserQuestProgess } from "../quest/updateQuestProgess";
 import { getRandomMonster } from "../monster/getRandomMonster";
 import { createEncounter } from "../encounter/createEncounter";
 import { loot } from "../character/loot/loot";
-import { lootResultEmbed } from "../character/loot/lootResultEmbed";
 import store from "../store";
 import {
   roundFinished as roundFinished,

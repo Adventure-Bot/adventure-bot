@@ -13,3 +13,4 @@ build/**/*
 db/*
 .DS_Store
 asset-manifest.ts
+*.blend1

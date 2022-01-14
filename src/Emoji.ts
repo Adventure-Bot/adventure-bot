@@ -44,3 +44,17 @@ export function Emoji(interaction: Interaction, name: Emojis): string {
     defaultEmojis[name]
   }`;
 }
+
+export function d20Emoji({
+  interaction,
+  n,
+}: {
+  interaction: Interaction;
+  n: number;
+}): string {
+  const name = `d20_${n.toString().padStart(2, "0")}`;
+  const emoji = interaction.guild?.emojis.cache.find(
+    (emoji) => emoji.name === name
+  );
+  return `${emoji ?? `${n}`}`;
+}

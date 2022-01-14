@@ -21,6 +21,7 @@ import { RESTPostAPIApplicationCommandsJSONBody } from "discord-api-types";
 import cleanse from "./admin/cleanse";
 import encounter from "./admin/encounter";
 import item from "./admin/item";
+import d20 from "./d20";
 
 const commands = new Map<
   string,
@@ -34,6 +35,7 @@ commands.set("attack", attack);
 commands.set("cooldowns", cooldowns);
 commands.set("dance", dance);
 commands.set("heal", heal);
+commands.set("d20", d20);
 commands.set("hp", hp);
 commands.set("inspect", inspect);
 commands.set("inventory", inventory);
