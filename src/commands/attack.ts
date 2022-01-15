@@ -1,10 +1,9 @@
 import { AttackResult } from "../attack/AttackResult";
 import { attackResultEmbed } from "../attack/attackResultEmbed";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { cooldownRemainingText } from "../character/cooldownRemainingText";
+import { cooldownRemainingText } from "../character/cooldowns/cooldownRemainingText";
 import { d20Emoji, Emoji } from "../Emoji";
 import { getCharacterStatModified } from "../character/getCharacterStatModified";
-import { getCharacterStatModifier } from "../character/getCharacterStatModifier";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { loot } from "../character/loot/loot";
 import { lootResultEmbed } from "../character/loot/lootResultEmbed";
@@ -16,6 +15,7 @@ import { sleep } from "../utils";
 import { selectCharacterById } from "../store/selectors";
 import store from "../store";
 import { randomArrayElement } from "../monster/randomArrayElement";
+import cooldowns from "./cooldowns";
 
 export const command = new SlashCommandBuilder()
   .setName("attack")
@@ -54,12 +54,7 @@ export const execute = async (
   }
 
   if (result.outcome === "cooldown") {
-    await interaction.editReply(
-      `You can attack again ${cooldownRemainingText(
-        interaction.user.id,
-        "attack"
-      )}.`
-    );
+    await cooldowns.execute(interaction);
     return;
   }
   const embeds = [attackResultEmbed({ result, interaction })];

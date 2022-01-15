@@ -3,8 +3,8 @@ import { CommandInteraction, MessageEmbed } from "discord.js";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { isCharacterOnCooldown } from "../character/isCharacterOnCooldown";
 import { startCooldown } from "../character/startCooldown";
-import { cooldownRemainingText } from "../character/cooldownRemainingText";
 import { randomEncounter } from "../encounters/randomEncounter";
+import cooldowns from "./cooldowns";
 
 export const command = new SlashCommandBuilder()
   .setName("adventure")
@@ -25,16 +25,7 @@ export const execute = async (
     return;
   }
   if (isCharacterOnCooldown(player.id, "adventure")) {
-    await interaction.editReply({
-      embeds: [
-        new MessageEmbed().setDescription(
-          `You can adventure again ${cooldownRemainingText(
-            player.id,
-            "adventure"
-          )}`
-        ),
-      ],
-    });
+    await cooldowns.execute(interaction);
     return;
   }
   startCooldown({ characterId: player.id, cooldown: "adventure" });

@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Character } from "./Character";
+import { Character } from "../Character";
 import { getCooldownRemaining } from "./getCooldownRemaining";
 
 export const cooldownRemainingText = (
