@@ -76,7 +76,9 @@ const characterSlice = createSlice({
     ) {
       const { characterId, effect } = action.payload;
       const character = state.charactersById[characterId];
-      character.statusEffects?.push(effect);
+      character.statusEffects = character.statusEffects
+        .concat(effect)
+        .filter((effect) => !isStatusEffectExpired(effect));
     },
 
     questProgressed(

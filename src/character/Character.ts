@@ -35,7 +35,7 @@ export type Character = Stats & {
     heal?: string;
     renew?: string;
   };
-  statusEffects?: StatusEffect[];
+  statusEffects: StatusEffect[];
   quests: {
     [id in QuestId]?: Quest;
   };
