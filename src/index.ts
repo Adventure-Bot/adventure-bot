@@ -39,6 +39,7 @@ const installCommands = async () => {
 async function main() {
   await installCommands();
 
+  console.time("discord client ready");
   const discordClient = new Discord.Client({
     intents: [
       Intents.FLAGS.GUILDS,
@@ -70,6 +71,11 @@ async function main() {
   });
   discordClient.on("error", (e) => {
     console.error("Discord client error!", e);
+  });
+
+  discordClient.on("ready", async () => {
+    console.log("Adventures begin!");
+    console.timeEnd("discord client ready");
   });
 
   discordClient.login(process.env.token);

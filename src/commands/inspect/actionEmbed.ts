@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { Character } from "../../character/Character";
-import { cooldownRemainingText } from "../../character/cooldownRemainingText";
+import { cooldownRemainingText } from "../../character/cooldowns/cooldownRemainingText";
 import { Emoji } from "../../Emoji";
 import { isHealer } from "../../heal/isHealer";
 

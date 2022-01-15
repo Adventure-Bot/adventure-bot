@@ -1,5 +1,5 @@
 import { Character } from "./Character";
-import { getCooldownRemaining } from "./getCooldownRemaining";
+import { getCooldownRemaining } from "./cooldowns/getCooldownRemaining";
 
 export const isCharacterOnCooldown = (
   characterId: string,

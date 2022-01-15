@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { heal } from "../heal/heal";
 import { getUserCharacter } from "../character/getUserCharacter";
-import { cooldownRemainingText } from "../character/cooldownRemainingText";
+import { cooldownRemainingText } from "../character/cooldowns/cooldownRemainingText";
 import { hpBarField } from "../character/hpBar/hpBarField";
 import { Emoji } from "../Emoji";
 import { updateUserQuestProgess } from "../quest/updateQuestProgess";
@@ -10,6 +10,7 @@ import { questProgressField } from "../quest/questProgressField";
 import { isUserQuestComplete } from "../quest/isQuestComplete";
 import quests from "./quests";
 import { getAsset } from "../utils/getAsset";
+import cooldowns from "./cooldowns";
 
 export const command = new SlashCommandBuilder()
   .setName("heal")
@@ -39,10 +40,7 @@ export const execute = async (
     return;
   }
   if (result.outcome === "cooldown") {
-    await interaction.editReply(
-      `You can heal again in ${cooldownRemainingText(healer.id, "heal")}.`
-    );
-    // TODO: setTimeout to edit this when cooldown is available
+    await cooldowns.execute(interaction);
     return;
   }
   const character = updateUserQuestProgess(healer, "healer", result.amount);

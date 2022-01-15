@@ -1,6 +1,9 @@
-import { Character } from "./Character";
-import store from "../store";
-import { selectCooldownByType, selectCharacterById } from "../store/selectors";
+import { Character } from "../Character";
+import store from "../../store";
+import {
+  selectCooldownByType,
+  selectCharacterById,
+} from "../../store/selectors";
 
 export const getCooldownRemaining = (
   characterId: string,
