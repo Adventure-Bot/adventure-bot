@@ -32,7 +32,7 @@ function getAsset<
 
   const image = images[index];
 
-  const assetPath = path.join(String(kind), String(entity), image);
+  const assetPath = path.join(theme, String(kind), String(entity), image);
   const absolutePath = path.join(manifest.location, assetPath);
 
   return {
