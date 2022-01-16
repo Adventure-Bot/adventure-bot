@@ -46,7 +46,7 @@ export function createDragon(): Monster {
         sellable: false,
       },
     },
-    asset: getAsset("fantasy", "monsters", "dragon").values(),
+    asset: getAsset("fantasy", "monsters", "dragon").values,
     xpValue: 50,
     gold: Math.floor(Math.random() * 150) + 300,
   });

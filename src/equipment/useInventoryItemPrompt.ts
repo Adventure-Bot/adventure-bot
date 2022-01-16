@@ -138,7 +138,7 @@ function useInventoryItem({
                 "items",
                 "magic potion with glowing red liquid",
                 item.id
-              ).s3Url()
+              ).s3Url
             )
             .setThumbnail(character.profile),
         ],

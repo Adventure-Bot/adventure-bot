@@ -13,7 +13,7 @@ export function createGoblin(): Monster {
     equipment: {
       weapon: dagger(),
     },
-    asset: getAsset("fantasy", "monsters", "goblin").values(),
+    asset: getAsset("fantasy", "monsters", "goblin").values,
     xpValue: 2,
     gold: Math.floor(Math.random() * 8) + 6,
   });

@@ -63,11 +63,8 @@ export const execute = async (
             : []
         ),
       }).setImage(
-        getAsset(
-          "fantasy",
-          "magic",
-          "a glowing hand applying healing magic"
-        ).s3Url()
+        getAsset("fantasy", "magic", "a glowing hand applying healing magic")
+          .s3Url
       ),
     ].concat(),
   });

@@ -46,7 +46,7 @@ export const fairyWell = async (
             ? questProgressField(character.quests.healer)
             : []
         ),
-      }).setImage(getAsset("fantasy", "places", "a fairy's well").s3Url()),
+      }).setImage(getAsset("fantasy", "places", "a fairy's well").s3Url),
     ],
   });
   if (isUserQuestComplete(interaction.user, "healer"))

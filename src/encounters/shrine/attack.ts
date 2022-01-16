@@ -12,11 +12,8 @@ export const attackShrine = async (
     id: randomUUID(),
     name: "Shrine of Agression",
     description: `This shrine fills you with a rage!`,
-    image: getAsset(
-      "fantasy",
-      "places",
-      "magical obelisk with a fiery aura"
-    ).s3Url(),
+    image: getAsset("fantasy", "places", "magical obelisk with a fiery aura")
+      .s3Url,
     color: "RED",
     effect: {
       name: "Shrine of Agression",

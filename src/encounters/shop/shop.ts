@@ -71,7 +71,7 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
           }),
         },
       ],
-    }).setImage(getAsset("fantasy", "places", "blacksmith").s3Url());
+    }).setImage(getAsset("fantasy", "places", "blacksmith").s3Url);
     return {
       embeds: [
         shopEmbed,

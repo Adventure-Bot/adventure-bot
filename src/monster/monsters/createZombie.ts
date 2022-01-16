@@ -32,7 +32,7 @@ export function createZombie(): Monster {
       },
     },
     name: getRandomMonsterName("Zombie"),
-    asset: getAsset("fantasy", "monsters", "zombie").values(),
+    asset: getAsset("fantasy", "monsters", "zombie").values,
     gold: Math.floor(Math.random() * 4) + 1,
     xpValue: 1,
   });

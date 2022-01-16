@@ -14,7 +14,7 @@ export function createSlime(): Monster {
     damageBonus: 2,
     damageMax: 4,
     gold: Math.floor(Math.random() * 8) + 6,
-    asset: getAsset("fantasy", "monsters", "green slime").values(),
+    asset: getAsset("fantasy", "monsters", "green slime").values,
     xpValue: 4,
   });
 }

@@ -18,7 +18,7 @@ export const tavern = async (
         title: "Tavern",
         color: "#964B00",
         description: `You find a tavern and hope for a soft bed, warm meal, and strong drink...`,
-      }).setImage(getAsset("fantasy", "places", "tavern").s3Url()),
+      }).setImage(getAsset("fantasy", "places", "tavern").s3Url),
     ],
   });
   if (!(message instanceof Message)) return;

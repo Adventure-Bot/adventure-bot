@@ -32,7 +32,7 @@ export function createDemon(): Monster {
         sellable: false,
       },
     },
-    asset: getAsset("fantasy", "monsters", "demon").values(),
+    asset: getAsset("fantasy", "monsters", "demon").values,
     xpValue: 10,
     gold: Math.floor(Math.random() * 20) + 15,
   });

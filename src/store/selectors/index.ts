@@ -25,7 +25,7 @@ const decorateCharacterWithAssetProfile = <T extends Character>(
         character.asset[1],
         character.asset[2],
         character.id
-      ).s3Url(),
+      ).s3Url,
     };
   } else return character;
 };

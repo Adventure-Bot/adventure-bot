@@ -16,7 +16,7 @@ export const vigorShrine = async (
       "fantasy",
       "places",
       "a beautiful glowing statue in a serene forest"
-    ).s3Url(),
+    ).s3Url,
     color: "WHITE",
     effect: {
       name: "Shrine of Vigor",

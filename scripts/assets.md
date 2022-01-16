@@ -41,5 +41,5 @@ You may fetch assets in a variety of fashions, primarily through the use of `get
 ```js
 import { getAsset } from 'utils/getAsset'
 
-const url = getAsset('fantasy', 'characters', 'ghost').s3Url()
+const url = getAsset('fantasy', 'characters', 'ghost').s3Url
 ```

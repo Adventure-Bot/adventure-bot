@@ -12,7 +12,7 @@ export const slayerShrine = async (
     id: randomUUID(),
     name: "Slayer's Shrine",
     description: `This shrine fills you with an instincts of a hunter!`,
-    image: getAsset("fantasy", "characters", "hidden hunter").s3Url(),
+    image: getAsset("fantasy", "characters", "hidden hunter").s3Url,
     color: "GREY",
     effect: {
       name: "Slayer's Shrine",
