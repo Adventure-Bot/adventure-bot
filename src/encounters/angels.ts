@@ -15,14 +15,16 @@ export const angels = async (
     })
   );
   const character = getUserCharacter(interaction.user);
+  const angel = getAsset("fantasy", "characters", "angel");
   interaction.followUp({
+    files: [angel.attachment()],
     embeds: [
       new MessageEmbed({
         title: "Angels",
         color: "WHITE",
         description:
           "An angel implores you to mend what is broken.\nA taste of their power in return is thier token.",
-      }).setImage(getAsset("fantasy", "characters", "angel").s3Url()),
+      }).setImage(angel.attachmentString()),
     ].concat(questEmbed(character) ?? []),
   });
 };
