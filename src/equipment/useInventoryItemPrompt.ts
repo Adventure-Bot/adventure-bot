@@ -80,7 +80,6 @@ export const useInventoryItemPrompt = async (
     if (response.isSelectMenu()) {
       const item = inventory[parseInt(response.values[0])];
       const character = getUserCharacter(interaction.user);
-      interaction.followUp(`${character.name} uses their ${item.name}...`);
       useInventoryItem({
         itemId: item.id,
         characterId: character.id,
