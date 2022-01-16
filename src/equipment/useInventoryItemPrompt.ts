@@ -136,7 +136,8 @@ function useInventoryItem({
               getAsset(
                 "fantasy",
                 "items",
-                "magic potion with glowing red liquid"
+                "magic potion with glowing red liquid",
+                item.id
               ).s3Url()
             )
             .setThumbnail(character.profile),
