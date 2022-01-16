@@ -20,4 +20,5 @@ export type Item = {
   lootable?: boolean;
   sellable?: boolean;
   tradeable?: boolean;
+  usable?: boolean;
 };

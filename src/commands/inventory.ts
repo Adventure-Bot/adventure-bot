@@ -15,6 +15,8 @@ import { equippableInventory } from "../equipment/equippableInventory";
 import { itemEmbed } from "../equipment/itemEmbed";
 import { offerItemPrompt as offerItemPrompt } from "../equipment/offerItemPrompt";
 import { getHook } from "./inspect/getHook";
+import { usableInventory } from "../equipment/usableInventory";
+import { useInventoryItemPrompt } from "../equipment/useInventoryItemPrompt";
 
 export const command = new SlashCommandBuilder()
   .setName("inventory")
@@ -75,6 +77,7 @@ export const execute = async (
     if (!reply) return;
     if (reply.customId === "equip") await equipInventoryItemPrompt(interaction);
     if (reply.customId === "offer") await offerItemPrompt(interaction);
+    if (reply.customId === "use") await useInventoryItemPrompt(interaction);
     if (reply.customId === "done") done = true;
     await message.edit(inventoryMain(interaction));
   }
@@ -88,6 +91,7 @@ function inventoryMain(interaction: CommandInteraction): MessageOptions {
   const character = getUserCharacter(interaction.user);
   const hasItemsToOffer = character.inventory.filter(isTradeable).length > 0;
   const hasItemsToEquip = equippableInventory(character).length > 0;
+  const hasItemsToUse = usableInventory(character).length > 0;
 
   const components = [];
   if (hasItemsToEquip)
@@ -96,6 +100,14 @@ function inventoryMain(interaction: CommandInteraction): MessageOptions {
         customId: "equip",
         style: "SECONDARY",
         label: "Equip",
+      })
+    );
+  if (hasItemsToUse)
+    components.push(
+      new MessageButton({
+        customId: "use",
+        style: "SECONDARY",
+        label: "Use",
       })
     );
   if (hasItemsToOffer)

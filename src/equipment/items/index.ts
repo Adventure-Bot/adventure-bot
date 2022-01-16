@@ -9,6 +9,7 @@ import { leatherArmor } from "./leatherArmor";
 import { longsword } from "./longsword";
 import { mace } from "./mace";
 import { plateArmor } from "./plateArmor";
+import { potionOfHealing } from "./potionOfHealing";
 import { ringOfAttack } from "./ringOfAttack";
 import { towerShield } from "./towerShield";
 import { warAxe } from "./warAxe";
@@ -25,6 +26,7 @@ export {
   longsword,
   mace,
   plateArmor,
+  potionOfHealing,
   ringOfAttack,
   towerShield,
   warAxe,
