@@ -4,10 +4,10 @@ import { Potion } from "../equipment";
 export const potionOfHealing = (): Potion => ({
   id: randomUUID(),
   type: "potion",
-  description: "This milky vial has glowing globules bubbling inside.",
+  description: "magic potion with glowing red liquid",
   goldValue: 20,
   name: "Potion of Healing",
-  effects: {
+  useEffects: {
     maxHeal: 6,
   },
   usable: true,
