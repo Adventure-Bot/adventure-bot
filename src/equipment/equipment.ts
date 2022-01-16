@@ -47,7 +47,7 @@ export type Ring = Equippable & {
 export type Potion = Item &
   Usable & {
     type: "potion";
-    effects: {
+    useEffects: {
       maxHeal: number;
     };
   };
