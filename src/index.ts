@@ -7,12 +7,14 @@ import Discord, { Intents } from "discord.js";
 import { exit } from "process";
 import { Routes } from "discord-api-types/v9";
 import commands from "./commands";
+import { readFile, writeFile } from "fs/promises";
+import crypto from "crypto";
 
 if (!process.env.token) exit(1);
 
 const rest = new REST({ version: "9" }).setToken(process.env.token);
 
-const installCommands = async () => {
+const updateCommands = async () => {
   if (!process.env.token || !process.env.CLIENT_ID || !process.env.GUILD_ID)
     return;
 
@@ -20,6 +22,18 @@ const installCommands = async () => {
     const body = Array.from(commands.values()).map(({ command }) =>
       command.toJSON()
     );
+    const commandHash = crypto
+      .createHash("md5")
+      .update(JSON.stringify(body))
+      .digest("hex");
+    const priorHash = (
+      await readFile(".command-hash").catch(() => "")
+    ).toString();
+    if (commandHash === priorHash) {
+      console.log("✅ Commands are up-to-date");
+      return;
+    }
+
     console.time("updating commands");
     await rest.put(
       Routes.applicationGuildCommands(
@@ -30,6 +44,9 @@ const installCommands = async () => {
         body,
       }
     );
+
+    writeFile(".command-hash", commandHash);
+
     console.timeEnd("updating commands");
   } catch (error) {
     console.log(error);
@@ -37,7 +54,7 @@ const installCommands = async () => {
 };
 
 async function main() {
-  await installCommands();
+  await updateCommands();
 
   console.time("discord client ready");
   const discordClient = new Discord.Client({
@@ -74,7 +91,7 @@ async function main() {
   });
 
   discordClient.on("ready", async () => {
-    console.log("Adventures begin!");
+    console.log("🎉 Adventures begin!");
     console.timeEnd("discord client ready");
   });
 
