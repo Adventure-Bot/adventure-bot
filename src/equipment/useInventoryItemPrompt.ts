@@ -3,16 +3,20 @@ import {
   Message,
   MessageActionRow,
   MessageButton,
+  MessageEmbed,
 } from "discord.js";
 import { getUserCharacter } from "../character/getUserCharacter";
 import { itemSelect } from "./itemSelect";
 import store from "../store";
-import { healed } from "../store/slices/characters";
+import { healed, itemRemoved } from "../store/slices/characters";
 import { usableInventory } from "./usableInventory";
 import { isPotion } from "./equipment";
 import { d } from "../utils/dice";
 import { selectCharacterById } from "../store/selectors";
 import { clamp } from "remeda";
+import { Emoji } from "../Emoji";
+import { getAsset } from "../utils/getAsset";
+import { hpBarField } from "../character/hpBar/hpBarField";
 
 /**
  * Prompt to equip from available inventory items.
@@ -77,7 +81,11 @@ export const useInventoryItemPrompt = async (
       const item = inventory[parseInt(response.values[0])];
       const character = getUserCharacter(interaction.user);
       interaction.followUp(`${character.name} uses their ${item.name}...`);
-      useInventoryItem({ itemId: item.id, characterId: character.id });
+      useInventoryItem({
+        itemId: item.id,
+        characterId: character.id,
+        interaction,
+      });
     }
   }
 };
@@ -85,24 +93,56 @@ export const useInventoryItemPrompt = async (
 function useInventoryItem({
   itemId,
   characterId,
+  interaction,
 }: {
   itemId: string;
   characterId: string;
+  interaction: CommandInteraction;
 }) {
   const character = selectCharacterById(store.getState(), characterId);
   if (!character) return;
   const item = character.inventory.find((i) => i.id === itemId);
   if (!item) return;
   if (isPotion(item)) {
-    if (item.effects.maxHeal) {
+    if (item.useEffects.maxHeal) {
+      const rawHeal = d(item.useEffects.maxHeal);
+      const healAmount = clamp(rawHeal, {
+        max: character.statsModified.maxHP - character.hp,
+      });
+
       store.dispatch(
         healed({
-          amount: clamp(d(item.effects.maxHeal), {
-            max: character.statsModified.maxHP - character.hp,
-          }),
+          amount: healAmount,
           characterId: character.id,
         })
       );
+      store.dispatch(itemRemoved({ itemId, characterId }));
+      interaction.followUp({
+        embeds: [
+          new MessageEmbed({
+            title: `${
+              character.name
+            } drank a potion and healed +${healAmount} ${Emoji(
+              interaction,
+              "heal"
+            )}`,
+            fields: [
+              hpBarField({
+                character,
+                adjustment: healAmount,
+              }),
+            ],
+          })
+            .setImage(
+              getAsset(
+                "fantasy",
+                "items",
+                "magic potion with glowing red liquid"
+              ).s3Url()
+            )
+            .setThumbnail(character.profile),
+        ],
+      });
     }
   }
 }
