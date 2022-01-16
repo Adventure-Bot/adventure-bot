@@ -3,9 +3,11 @@ import { CommandInteraction } from "discord.js";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { range } from "remeda";
+import { healerStatus } from "../../quest/rewards/healerStatus";
 import store from "../../store";
 import { newGame } from "../../store/actions/newGame";
 import {
+  effectAdded,
   goldSet,
   healthSet,
   purgeRoamingMonsters,
@@ -33,6 +35,9 @@ export const command = new SlashCommandBuilder()
   )
   .addSubcommand((option) =>
     option.setName("purge_roaming").setDescription("Purge roaming monsters.")
+  )
+  .addSubcommand((option) =>
+    option.setName("become_healer").setDescription("Become a healer.")
   )
   .addSubcommand((option) =>
     option
@@ -68,6 +73,12 @@ export const execute = async (
     case "set_health":
       setHealth(interaction);
       interaction.editReply("Health set.");
+      return;
+    case "become_healer":
+      store.dispatch(
+        effectAdded({ characterId: interaction.user.id, effect: healerStatus })
+      );
+      interaction.editReply("You are now a healer.");
       return;
     default:
       interaction.editReply(

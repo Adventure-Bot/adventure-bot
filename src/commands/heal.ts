@@ -2,7 +2,6 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { heal } from "../heal/heal";
 import { getUserCharacter } from "../character/getUserCharacter";
-import { cooldownRemainingText } from "../character/cooldowns/cooldownRemainingText";
 import { hpBarField } from "../character/hpBar/hpBarField";
 import { Emoji } from "../Emoji";
 import { updateUserQuestProgess } from "../quest/updateQuestProgess";

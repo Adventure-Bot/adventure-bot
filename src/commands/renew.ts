@@ -13,7 +13,7 @@ export const command = new SlashCommandBuilder()
   .setName("renew")
   .setDescription("Heal someone over time.")
   .addUserOption((option) =>
-    option.setName("target").setDescription("Whom to heal").setRequired(true)
+    option.setName("target").setDescription("Whom to heal")
   );
 
 export const execute = async (
@@ -35,11 +35,10 @@ export const execute = async (
     );
     return;
   }
-  const target = interaction.options.data[0].user;
-  if (!target) {
-    await interaction.editReply(`You must specify a target @player`);
-    return;
-  }
+  const target =
+    (interaction.options.data[0] && interaction.options.data[0].user) ||
+    interaction.user;
+
   startCooldown({ characterId: character.id, cooldown: "renew" });
   const healAmount = 2;
   let totalTicks = 5;
