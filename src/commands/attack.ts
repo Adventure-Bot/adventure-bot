@@ -1,7 +1,6 @@
 import { AttackResult } from "../attack/AttackResult";
 import { attackResultEmbed } from "../attack/attackResultEmbed";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { cooldownRemainingText } from "../character/cooldowns/cooldownRemainingText";
 import { d20Emoji, Emoji } from "../Emoji";
 import { getCharacterStatModified } from "../character/getCharacterStatModified";
 import { getUserCharacter } from "../character/getUserCharacter";
