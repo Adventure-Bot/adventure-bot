@@ -5,6 +5,10 @@ import { getCharacter } from "../getCharacter";
 import store from "../../store";
 import { Item } from "../../equipment/Item";
 import { characterLooted } from "../../store/slices/loots";
+import { CommandInteraction, MessageEmbed } from "discord.js";
+import { getAsset } from "../../utils/getAsset";
+import moment from "moment";
+import { randomArrayElement } from "../../monster/randomArrayElement";
 
 export type LootResult = {
   id: string;
@@ -17,13 +21,53 @@ export type LootResult = {
 
 const isLootable = (item: Item): boolean => item.lootable ?? false;
 
-export function loot({
+const crownLootedAnnouncement = async ({
+  loot,
+  interaction,
+}: {
+  loot: LootResult;
+  interaction: CommandInteraction;
+}) => {
+  const looter = getCharacter(loot.looterId);
+  if (!looter) return;
+  const { s3Url } = randomArrayElement([
+    getAsset("fantasy", "items", "golden crown with jewels on a table"),
+    getAsset("fantasy", "items", "crown on display"),
+    getAsset("fantasy", "items", "golden crown with jewels"),
+    getAsset("fantasy", "items", "crown on a table"),
+  ]);
+  interaction.channel?.send({
+    embeds: [
+      new MessageEmbed({
+        title: `👑 ${looter.name} has the crown!`,
+        color: "YELLOW",
+        description: [
+          `Attention @here!`,
+          ``,
+          `${looter.name} has acquired the crown and their rule will become sovereign at:`,
+          ``,
+          moment()
+            .add(1, "days")
+            .format("h:mm a [on] dddd, [the] Do [day of] MMMM, YYYY"),
+          ``,
+          `If you do not wish to submit to their rule, rise up!`,
+        ].join("\n"),
+      })
+        .setImage(s3Url)
+        .setThumbnail(looter.profile),
+    ],
+  });
+};
+
+export async function loot({
   looterId,
   targetId,
+  interaction,
 }: {
   looterId: string;
   targetId: string;
-}): LootResult | void {
+  interaction: CommandInteraction;
+}): Promise<LootResult | void> {
   const looter = getCharacter(looterId);
   const target = getCharacter(targetId);
   if (!looter || !target) {
@@ -39,6 +83,10 @@ export function loot({
     timestamp: new Date().toString(),
   };
   store.dispatch(characterLooted(loot));
+  const crownTaken = loot.itemsTaken.some(
+    (item) => item.name === "heavy crown"
+  );
+  if (crownTaken) await crownLootedAnnouncement({ loot, interaction });
   return loot;
 }
 

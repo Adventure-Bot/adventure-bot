@@ -132,10 +132,11 @@ export const monster = async (
           playerVictory({
             encounterId: encounter.id,
             lootResult:
-              loot({
+              (await loot({
                 looterId: player.id,
                 targetId: monster.id,
-              }) ?? undefined,
+                interaction,
+              })) ?? undefined,
           })
         );
         if (player.quests.slayer) {
@@ -147,10 +148,11 @@ export const monster = async (
           playerDefeat({
             encounterId: encounter.id,
             lootResult:
-              loot({
+              (await loot({
                 looterId: monster.id,
                 targetId: player.id,
-              }) ?? undefined,
+                interaction,
+              })) ?? undefined,
           })
         );
         break;
