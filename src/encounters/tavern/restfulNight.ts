@@ -1,5 +1,4 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { awardXP } from "../../character/awardXP";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import { hpBarField } from "../../character/hpBar/hpBarField";
 import { d6 } from "../../utils/dice";
