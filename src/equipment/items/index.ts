@@ -12,6 +12,7 @@ import { plateArmor } from "./plateArmor";
 import { potionOfHealing } from "./potionOfHealing";
 import { ringOfAttack } from "./ringOfAttack";
 import { towerShield } from "./towerShield";
+import { unidentifiedPotion } from "./unidentifiedPotion";
 import { warAxe } from "./warAxe";
 
 export {
@@ -29,5 +30,6 @@ export {
   potionOfHealing,
   ringOfAttack,
   towerShield,
+  unidentifiedPotion,
   warAxe,
 };

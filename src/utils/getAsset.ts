@@ -37,8 +37,8 @@ function getAsset<
 
   return {
     path: absolutePath,
-    attachment: new MessageAttachment(absolutePath, `${entity}.jpg`),
-    attachmentString: `attachment://${entity}.jpg`,
+    attachment: new MessageAttachment(absolutePath, `${entity}-${index}.jpg`),
+    attachmentString: `attachment://${entity}-${index}.jpg`,
     s3Url: `${process.env.AWS_S3_HOST}/${theme}/${kind}/${String(
       entity
     ).replace(/[\s]+/g, "+")}/${image}`,
