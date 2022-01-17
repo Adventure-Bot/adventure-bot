@@ -2,7 +2,6 @@ import { CommandInteraction, MessageEmbed } from "discord.js";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import { hpBarField } from "../../character/hpBar/hpBarField";
 import { d6 } from "../../utils/dice";
-import { StatusEffect } from "../../statusEffects/StatusEffect";
 import { statusEffectEmbed } from "../../statusEffects/statusEffectEmbed";
 import { xpGainField } from "../../character/xpGainField";
 import { clamp } from "remeda";
@@ -17,6 +16,7 @@ import {
   questProgressed,
   xpAwarded,
 } from "../../store/slices/characters";
+import { createEffect } from "../../statusEffects";
 
 export async function restfulNight(
   interaction: CommandInteraction
@@ -31,18 +31,15 @@ export async function restfulNight(
   store.dispatch(
     healed({ characterId: interaction.user.id, amount: actualHeal })
   );
-  const effect: StatusEffect = {
-    name: "Restful Night",
-    buff: true,
-    debuff: false,
-    duration: 30 * 60000,
-    started: new Date().toString(),
-    modifiers: {
-      maxHP: 2,
-    },
-  };
 
-  store.dispatch(effectAdded({ characterId: interaction.user.id, effect }));
+  const effect = createEffect("invigorated");
+
+  store.dispatch(
+    effectAdded({
+      characterId: interaction.user.id,
+      effect,
+    })
+  );
   store.dispatch(
     questProgressed({
       characterId: interaction.user.id,

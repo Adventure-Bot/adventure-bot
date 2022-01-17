@@ -14,6 +14,7 @@ import {
   potionOfHealing,
   ringOfAttack,
   towerShield,
+  unidentifiedPotion,
   warAxe,
 } from "./items";
 
@@ -28,6 +29,7 @@ export function randomChestItem(): Item {
     [1, chainArmor],
     [1, kiteShield],
     [1, longsword],
+    [1, unidentifiedPotion],
     [1, potionOfHealing],
     [1, mace],
     [1.2, buckler],
