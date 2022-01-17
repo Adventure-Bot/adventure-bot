@@ -4,6 +4,7 @@ import { Shrine } from "../../shrines/Shrine";
 import { shrineEmbeds } from "./shrineEmbeds";
 import { applyShrine } from "./applyShrine";
 import { getAsset } from "../../utils/getAsset";
+import { createEffect } from "../../statusEffects";
 
 export const vigorShrine = async (
   interaction: CommandInteraction
@@ -18,16 +19,7 @@ export const vigorShrine = async (
       "a beautiful glowing statue in a serene forest"
     ).s3Url,
     color: "WHITE",
-    effect: {
-      name: "Shrine of Vigor",
-      buff: true,
-      debuff: false,
-      modifiers: {
-        maxHP: 3,
-      },
-      duration: 30 * 60000,
-      started: new Date().toString(),
-    },
+    effect: createEffect("invigorated"),
   };
 
   applyShrine({ shrine, interaction });

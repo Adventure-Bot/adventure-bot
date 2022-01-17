@@ -4,6 +4,7 @@ import { Shrine } from "../../shrines/Shrine";
 import { shrineEmbeds } from "./shrineEmbeds";
 import { applyShrine } from "./applyShrine";
 import { getAsset } from "../../utils/getAsset";
+import { createEffect } from "../../statusEffects/createEffect";
 
 export const attackShrine = async (
   interaction: CommandInteraction
@@ -15,16 +16,7 @@ export const attackShrine = async (
     image: getAsset("fantasy", "places", "magical obelisk with a fiery aura")
       .s3Url,
     color: "RED",
-    effect: {
-      name: "Shrine of Agression",
-      buff: true,
-      debuff: false,
-      modifiers: {
-        attackBonus: 2,
-      },
-      duration: 30 * 60000,
-      started: new Date().toString(),
-    },
+    effect: createEffect("aggression"),
   };
 
   applyShrine({ shrine, interaction });

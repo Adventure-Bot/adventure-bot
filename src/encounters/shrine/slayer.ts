@@ -4,6 +4,7 @@ import { Shrine } from "../../shrines/Shrine";
 import { shrineEmbeds } from "./shrineEmbeds";
 import { applyShrine } from "./applyShrine";
 import { getAsset } from "../../utils/getAsset";
+import { createEffect } from "../../statusEffects";
 
 export const slayerShrine = async (
   interaction: CommandInteraction
@@ -14,16 +15,7 @@ export const slayerShrine = async (
     description: `This shrine fills you with an instincts of a hunter!`,
     image: getAsset("fantasy", "characters", "hidden hunter").s3Url,
     color: "GREY",
-    effect: {
-      name: "Slayer's Shrine",
-      buff: true,
-      debuff: false,
-      modifiers: {
-        monsterDamageMax: 3,
-      },
-      duration: 30 * 60000,
-      started: new Date().toString(),
-    },
+    effect: createEffect("slayer"),
   };
 
   applyShrine({ shrine, interaction });

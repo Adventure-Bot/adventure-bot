@@ -1,3 +1,4 @@
+import { EffectTemplate } from "../statusEffects/templates";
 import { Item } from "./Item";
 
 export type Equippable = Item & {
@@ -48,7 +49,8 @@ export type Potion = Item &
   Usable & {
     type: "potion";
     useEffects: {
-      maxHeal: number;
+      maxHeal?: number;
+      randomEffect?: EffectTemplate[];
     };
   };
 

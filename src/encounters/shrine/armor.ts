@@ -4,6 +4,7 @@ import { Shrine } from "../../shrines/Shrine";
 import { shrineEmbeds } from "./shrineEmbeds";
 import { applyShrine } from "./applyShrine";
 import { getAsset } from "../../utils/getAsset";
+import { createEffect } from "../../statusEffects";
 
 export const armorShrine = async (
   interaction: CommandInteraction
@@ -14,16 +15,7 @@ export const armorShrine = async (
     description: `This shrine will protect you during your journeys.`,
     image: getAsset("fantasy", "items", "a shield chiseled out of a stone")
       .s3Url,
-    effect: {
-      name: "Shrine of Protection",
-      modifiers: {
-        ac: 2,
-      },
-      duration: 30 * 60000,
-      buff: true,
-      debuff: false,
-      started: new Date().toString(),
-    },
+    effect: createEffect("protectedEffect"),
     name: "Shrine of Protection",
   };
   applyShrine({ shrine, interaction });
