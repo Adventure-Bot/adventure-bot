@@ -18,6 +18,7 @@ import { isEquippable } from "../equipment/equipment";
 import { selectIsHeavyCrownInPlay } from "../store/selectors";
 import store from "../store";
 import { damaged, effectAdded, itemReceived } from "../store/slices/characters";
+import { itemCreated } from "../store/slices/items";
 
 const chestImage = new MessageAttachment("./images/chest.jpg", "chest.jpg");
 
@@ -178,10 +179,10 @@ export async function chest(
     ]);
     if (Math.random() <= 0.005 && !selectIsHeavyCrownInPlay(store.getState())) {
       const crown = heavyCrown();
-      const character = getUserCharacter(interaction.user);
+      store.dispatch(itemCreated(crown));
       store.dispatch(
         itemReceived({
-          characterId: character.id,
+          characterId: interaction.user.id,
           item: crown,
         })
       );
@@ -196,6 +197,7 @@ export async function chest(
     }
     if (Math.random() <= 0.2) {
       const item = randomChestItem();
+      store.dispatch(itemCreated(item));
       store.dispatch(
         itemReceived({
           characterId: interaction.user.id,

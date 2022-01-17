@@ -6,6 +6,7 @@ import { itemEmbed } from "../../equipment/itemEmbed";
 import { getUserCharacter } from "../../character/getUserCharacter";
 import store from "../../store";
 import { itemReceived } from "../../store/slices/characters";
+import { itemCreated } from "../../store/slices/items";
 
 const camelToSnakeCase = (str: string) =>
   str.replace(/[A-Z]/g, (letter: string) => `_${letter.toLowerCase()}`);
@@ -44,6 +45,7 @@ export const execute = async (
   if (itemNames.includes(itemName)) {
     // @ts-ignore
     const item = items[itemName]();
+    store.dispatch(itemCreated(item));
     store.dispatch(
       itemReceived({
         characterId: character.id,
