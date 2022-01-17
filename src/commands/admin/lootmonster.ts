@@ -20,7 +20,11 @@ export const execute = async (
 ): Promise<void> => {
   const monster = getRandomMonster();
   const character = getUserCharacter(interaction.user);
-  const result = loot({ looterId: character.id, targetId: monster.id });
+  const result = await loot({
+    looterId: character.id,
+    targetId: monster.id,
+    interaction,
+  });
 
   const updatedMonster = selectMonsterById(store.getState(), monster.id);
 

@@ -20,7 +20,11 @@ export const execute = async (
 ): Promise<void> => {
   const monster = getRandomMonster();
   const character = getUserCharacter(interaction.user);
-  const result = loot({ looterId: monster.id, targetId: interaction.user.id });
+  const result = await loot({
+    looterId: monster.id,
+    targetId: interaction.user.id,
+    interaction,
+  });
   interaction.editReply({
     embeds: [
       monsterEmbed(monster),

@@ -58,7 +58,11 @@ export const execute = async (
   }
   const embeds = [attackResultEmbed({ result, interaction })];
   if (0 === selectCharacterById(store.getState(), defender.id)?.hp) {
-    lootResult = loot({ looterId: attacker.id, targetId: defender.id });
+    lootResult = await loot({
+      looterId: attacker.id,
+      targetId: defender.id,
+      interaction,
+    });
     if (lootResult)
       embeds.push(lootResultEmbed({ result: lootResult, interaction }));
   }
@@ -79,7 +83,11 @@ export const execute = async (
       attackResultEmbed({ result, interaction, variant: "retaliation" })
     );
     if (selectCharacterById(store.getState(), defender.id)?.hp === 0) {
-      lootResult = loot({ looterId: defender.id, targetId: attacker.id });
+      lootResult = await loot({
+        looterId: defender.id,
+        targetId: attacker.id,
+        interaction,
+      });
       if (lootResult)
         retaliationEmbeds.push(
           lootResultEmbed({ result: lootResult, interaction })
