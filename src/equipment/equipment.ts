@@ -1,3 +1,4 @@
+import { Manifest } from "../asset-manifest";
 import { EffectTemplate } from "../statusEffects/templates";
 import { Item } from "./Item";
 
@@ -47,6 +48,7 @@ export type Ring = Equippable & {
 };
 export type Potion = Item &
   Usable & {
+    description: Manifest["fantasy"]["items"];
     type: "potion";
     useEffects: {
       maxHeal?: number;
