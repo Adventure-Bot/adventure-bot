@@ -10,6 +10,10 @@ import { longsword } from "./longsword";
 import { mace } from "./mace";
 import { plateArmor } from "./plateArmor";
 import { potionOfHealing } from "./potionOfHealing";
+import { potionOfMight } from "./potionOfMight";
+import { potionOfProtection } from "./potionOfProtection";
+import { potionOfSlaying } from "./potionOfSlaying";
+import { potionOfVigor } from "./potionOfVigor";
 import { ringOfAttack } from "./ringOfAttack";
 import { towerShield } from "./towerShield";
 import { unidentifiedPotion } from "./unidentifiedPotion";
@@ -28,6 +32,10 @@ export {
   mace,
   plateArmor,
   potionOfHealing,
+  potionOfProtection,
+  potionOfSlaying,
+  potionOfMight,
+  potionOfVigor,
   ringOfAttack,
   towerShield,
   unidentifiedPotion,

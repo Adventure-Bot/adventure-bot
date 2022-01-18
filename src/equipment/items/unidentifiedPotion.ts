@@ -2,7 +2,9 @@ import { randomUUID } from "crypto";
 import { randomArrayElement } from "../../monster/randomArrayElement";
 import { Potion } from "../equipment";
 
-export const unidentifiedPotion = (): Potion => ({
+export const unidentifiedPotion = (): Omit<Potion, "description"> & {
+  description: string;
+} => ({
   id: randomUUID(),
   type: "potion",
   description: randomArrayElement([
@@ -10,14 +12,21 @@ export const unidentifiedPotion = (): Potion => ({
     "It smells awful. But they usually do.",
     "You're pretty sure the toe is part of it.",
   ]),
-  goldValue: 20,
+  goldValue: 10,
   name: randomArrayElement([
     "unidentified potion",
     "potion of dubious origins",
     "Healing Potion?",
   ]),
   useEffects: {
-    randomEffect: ["aggression", "invigorated", "protectedEffect", "slayer"],
+    randomEffect: [
+      "aggression",
+      "invigorated",
+      "protectedEffect",
+      "slayer",
+      "frailty",
+      "might",
+    ],
   },
   usable: true,
   equippable: false,

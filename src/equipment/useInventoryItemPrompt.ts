@@ -20,6 +20,8 @@ import { hpBarField } from "../character/hpBar/hpBarField";
 import { randomArrayElement } from "../monster/randomArrayElement";
 import { statusEffectEmbed } from "../statusEffects/statusEffectEmbed";
 import { createEffect } from "../statusEffects";
+import { Manifest } from "../asset-manifest";
+import { EffectTemplate } from "../statusEffects/templates";
 
 /**
  * Prompt to equip from available inventory items.
@@ -92,6 +94,17 @@ export const useInventoryItemPrompt = async (
   }
 };
 
+export const potionArt: {
+  [key in EffectTemplate]: Manifest["fantasy"]["items"];
+} = {
+  aggression: "magic potion with glowing orange liquid",
+  frailty: "magic potion with glowing purple liquid",
+  invigorated: "magic potion with glowing white liquid",
+  might: "magic potion with glowing red liquid",
+  protectedEffect: "magic potion with glowing yellow liquid",
+  slayer: "magic potion with glowing green liquid",
+};
+
 function useInventoryItem({
   itemId,
   characterId,
@@ -108,15 +121,13 @@ function useInventoryItem({
   if (isPotion(item)) {
     const embeds = [];
     if (item.useEffects.randomEffect) {
-      const effect = createEffect(
-        randomArrayElement(item.useEffects.randomEffect)
-      );
+      const effectId = randomArrayElement(item.useEffects.randomEffect);
+      const effect = createEffect(effectId);
       store.dispatch(effectAdded({ characterId, effect }));
+      const { s3Url } = getAsset("fantasy", "items", potionArt[effectId]);
       embeds.push(
         statusEffectEmbed(effect, interaction)
-          .setImage(
-            getAsset("fantasy", "items", "potion bottle", item.id).s3Url
-          )
+          .setImage(s3Url)
           .setThumbnail(character.profile)
       );
     }
