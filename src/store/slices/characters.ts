@@ -19,7 +19,7 @@ import {
   isWeapon,
 } from "../../equipment/equipment";
 import { getSaleRate } from "../../encounters/shop/getSaleRate";
-import { newGame } from "../actions/newGame";
+import { newGame } from "../actions";
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
   Date.now() > new Date(effect.started).valueOf() + effect.duration;

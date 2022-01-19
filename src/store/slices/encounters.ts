@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Encounter } from "../../encounter/Encounter";
 import { isMonster } from "../../monster/Monster";
 import { LootResult } from "../../character/loot/loot";
-import { newGame } from "../actions/newGame";
+import { newGame } from "../actions";
 
 const encountersById: Record<string, Encounter> = {};
 
