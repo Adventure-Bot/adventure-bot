@@ -9,6 +9,8 @@ import { Routes } from "discord-api-types/v9";
 import commands from "./commands";
 import { readFile, writeFile } from "fs/promises";
 import crypto from "crypto";
+import store from "./store";
+import { tick } from "./store/actions";
 
 if (!process.env.token) exit(1);
 
@@ -54,7 +56,7 @@ const updateCommands = async () => {
 };
 
 async function main() {
-  await updateCommands();
+  updateCommands();
 
   console.time("discord client ready");
   const discordClient = new Discord.Client({
@@ -93,9 +95,20 @@ async function main() {
   discordClient.on("ready", async () => {
     console.log("🎉 Adventures begin!");
     console.timeEnd("discord client ready");
+    startClock();
   });
 
   discordClient.login(process.env.token);
+}
+
+function startClock() {
+  console.log("startClock");
+  const serverTick = () => {
+    console.log("tick");
+    store.dispatch(tick());
+  };
+  serverTick();
+  setInterval(serverTick, 6000);
 }
 
 main();

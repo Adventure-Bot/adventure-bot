@@ -1,6 +1,6 @@
 import { LootResult } from "../../character/loot/loot";
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { newGame } from "../actions/newGame";
+import { newGame } from "../actions";
 
 const lootsById: Record<string, LootResult> = {};
 
