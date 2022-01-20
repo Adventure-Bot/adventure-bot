@@ -17,7 +17,8 @@ import { trapAttack } from '../trap/trapAttack'
 import { isEquippable } from '../equipment/equipment'
 import { selectIsHeavyCrownInPlay } from '../store/selectors'
 import store from '../store'
-import { damaged, effectAdded, itemReceived } from '../store/slices/characters'
+import { damaged, effectAdded } from '../store/slices/characters'
+import { itemReceived } from '../store/actions'
 
 const chestImage = new MessageAttachment('./images/chest.jpg', 'chest.jpg')
 

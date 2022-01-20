@@ -2,15 +2,16 @@ console.time('ready')
 import dotenv from 'dotenv'
 dotenv.config({ path: '.env' })
 
-import { REST } from '@discordjs/rest'
-import Discord, { Intents } from 'discord.js'
-import { exit } from 'process'
-import { Routes } from 'discord-api-types/v9'
-import commands from './commands'
-import { readFile, writeFile } from 'fs/promises'
-import crypto from 'crypto'
-import store from './store'
-import { tick } from './store/actions'
+import { REST } from "@discordjs/rest";
+import Discord, { Intents } from "discord.js";
+import { exit } from "process";
+import { Routes } from "discord-api-types/v9";
+import commands from "./commands";
+import { readFile, writeFile } from "fs/promises";
+import crypto from "crypto";
+import store from "./store";
+import { channelInteraction, tick } from "./store/actions";
+import { selectCrownBearer, selectSovereign } from "./store/selectors";
 
 if (!process.env.token) exit(1)
 
@@ -68,10 +69,14 @@ async function main() {
     ],
   })
 
-  discordClient.on('interactionCreate', async (interaction) => {
-    if (!interaction.isCommand()) return
-    console.log(`interactionCreate ${interaction.commandName}`)
-    console.time(interaction.commandName)
+  discordClient.on("interactionCreate", async (interaction) => {
+    if (!interaction.isCommand()) return;
+    console.log(`interactionCreate ${interaction.commandName}`);
+    const channelId = interaction.channel?.id;
+    if (channelId) {
+      store.dispatch(channelInteraction(channelId));
+    }
+    console.time(interaction.commandName);
     try {
       await interaction.deferReply()
       const command = commands.get(interaction.commandName)
@@ -92,23 +97,29 @@ async function main() {
     console.error('Discord client error!', e)
   })
 
-  discordClient.on('ready', async () => {
-    console.log('🎉 Adventures begin!')
-    console.timeEnd('discord client ready')
-    startClock()
-  })
+  discordClient.on("ready", async () => {
+    console.log("🎉 Adventures begin!");
+    console.timeEnd("discord client ready");
+    startClock(discordClient);
+  });
 
   discordClient.login(process.env.token)
 }
 
-function startClock() {
-  console.log('startClock')
+function startClock(discordClient: Discord.Client) {
+  console.log("startClock");
   const serverTick = () => {
-    console.log('tick')
-    store.dispatch(tick())
-  }
-  serverTick()
-  setInterval(serverTick, 6000)
+    console.log("tick");
+
+    const sovereign = selectSovereign(store.getState());
+    console.log(`sovereign ${sovereign}`);
+    const crownBearer = selectCrownBearer(store.getState());
+    console.log(`crownBearer ${crownBearer?.name}`);
+
+    store.dispatch(tick());
+  };
+  serverTick();
+  setInterval(serverTick, 6000);
 }
 
 main()

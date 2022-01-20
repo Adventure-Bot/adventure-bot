@@ -5,7 +5,7 @@ import { keys } from 'remeda'
 import { itemEmbed } from '../../equipment/itemEmbed'
 import { getUserCharacter } from '../../character/getUserCharacter'
 import store from '../../store'
-import { itemReceived } from '../../store/slices/characters'
+import { itemReceived } from '../../store/actions'
 
 const camelToSnakeCase = (str: string) =>
   str.replace(/[A-Z]/g, (letter: string) => `_${letter.toLowerCase()}`)

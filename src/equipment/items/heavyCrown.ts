@@ -1,8 +1,9 @@
-import { randomUUID } from 'crypto'
 import { Hat } from '../equipment'
 
+export const heavyCrownId = 'heavy-crown'
+
 export const heavyCrown = (): Hat => ({
-  id: randomUUID(),
+  id: heavyCrownId,
   name: 'heavy crown',
   description: 'Beset with jewels, in the daylight it commands the eye.',
   goldValue: 300,
