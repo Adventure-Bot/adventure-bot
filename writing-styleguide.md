@@ -1,13 +1,15 @@
-For the sake of consistency, rules of style are defined as follow.
+# Writing Styleguide
 
-# Titles
+For the sake of consistency, rules of style are defined herein.
 
-## Past tense
+## Titles
+
+### Past tense
 
 - Good: Sally attacked Fred
 - Bad: Sally attacks Fred
 
-## Third person
+### Third person
 
 - Good: The Zombie attacked Sally!
 - Bad: The Zombie attacks you!
