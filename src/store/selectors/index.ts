@@ -53,7 +53,14 @@ const selectStats = (
   )
 }
 
-export const selectCharacterById = (state: ReduxState, id: string) => {
+type SelectedCharacter = Character & {
+  stats: Stats
+  statsModified: Stats
+}
+export const selectCharacterById = (
+  state: ReduxState,
+  id: string
+): SelectedCharacter | void => {
   const character = state.characters.charactersById[id]
   if (!character) return
   const stats = selectStats(state, character.id)
@@ -70,7 +77,10 @@ export const selectCharacterById = (state: ReduxState, id: string) => {
   }
 }
 
-export const selectMonsterById = (state: ReduxState, id: string) => {
+export const selectMonsterById = (
+  state: ReduxState,
+  id: string
+): SelectedCharacter | void => {
   const character = selectCharacterById(state, id)
   if (character && isMonster(character)) return character
 }
