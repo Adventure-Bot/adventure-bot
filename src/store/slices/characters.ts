@@ -17,9 +17,9 @@ import {
   isRing,
   isShield,
   isWeapon,
-} from "../../equipment/equipment";
-import { getSaleRate } from "../../encounters/shop/getSaleRate";
-import { itemReceived, newGame } from "../actions";
+} from '../../equipment/equipment'
+import { getSaleRate } from '../../encounters/shop/getSaleRate'
+import { itemReceived, newGame } from '../actions'
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
   Date.now() > new Date(effect.started).valueOf() + effect.duration
@@ -32,8 +32,8 @@ type AttackAction = {
 export const attacked = createAction<AttackAction>('character/attacked')
 export const created = createAction<Character>('character/created')
 
-const charactersById: Record<string, Character> = {};
-const roamingMonsters: string[] = [];
+const charactersById: Record<string, Character> = {}
+const roamingMonsters: string[] = []
 const characterSlice = createSlice({
   name: 'characters',
   initialState: {
@@ -299,8 +299,8 @@ const characterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(newGame, (state) => {
-        state.charactersById = {};
-        state.roamingMonsters = [];
+        state.charactersById = {}
+        state.roamingMonsters = []
       })
       .addCase(created, (state, action: PayloadAction<Character>) => {
         state.charactersById[action.payload.id] = action.payload
@@ -320,14 +320,14 @@ const characterSlice = createSlice({
         target.equipment = equipmentFilter(
           target.equipment,
           (item) => !isTakenItem(item)
-        );
+        )
       })
       .addCase(itemReceived, (state, action) => {
-        const { characterId, item } = action.payload;
-        const character = state.charactersById[characterId];
-        if (!character) return;
-        character.inventory.push(item);
-      });
+        const { characterId, item } = action.payload
+        const character = state.charactersById[characterId]
+        if (!character) return
+        character.inventory.push(item)
+      })
   },
 })
 

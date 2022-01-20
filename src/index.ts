@@ -103,13 +103,13 @@ async function main() {
   discordClient.on('ready', async () => {
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
-    startClock(discordClient)
+    startClock()
   })
 
   discordClient.login(process.env.token)
 }
 
-function startClock(discordClient: Discord.Client) {
+function startClock() {
   console.log('startClock')
   const serverTick = () => {
     console.log('tick')
