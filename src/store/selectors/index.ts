@@ -5,7 +5,7 @@ import { getCharacterStatModifier } from '../../character/getCharacterStatModifi
 import { LootResult } from '../../character/loot/loot'
 import { Stats, stats } from '../../character/Stats'
 import { Encounter } from '../../encounter/Encounter'
-import { isMonster } from '../../monster/Monster'
+import { isMonster, Monster } from '../../monster/Monster'
 import { Quest } from '../../quest/Quest'
 import { QuestId, quests } from '../../quest/quests'
 import { ReduxState } from '../../store'
@@ -77,10 +77,12 @@ export const selectCharacterById = (
   }
 }
 
+type SelectedMonster = SelectedCharacter & Monster
+
 export const selectMonsterById = (
   state: ReduxState,
   id: string
-): SelectedCharacter | void => {
+): SelectedMonster | void => {
   const character = selectCharacterById(state, id)
   if (character && isMonster(character)) return character
 }
