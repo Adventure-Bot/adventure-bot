@@ -5,7 +5,7 @@ import { join } from "path";
 import { range } from "remeda";
 import { healerStatus } from "../../quest/rewards/healerStatus";
 import store from "../../store";
-import { newGame } from "../../store/actions/newGame";
+import { newGame } from "../../store/actions";
 import {
   effectAdded,
   goldSet,
