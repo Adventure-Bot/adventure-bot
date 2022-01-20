@@ -19,8 +19,8 @@
     "redux-devtools": "redux-devtools --hostname=localhost --port=5010",
     "prune": "ts-prune",
     "prune:watch": "nodemon --config nodemon-prune.json",
-    "format:check": "prettier --check src",
-    "format:write": "prettier --write src"
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write ."
   },
   "repository": {
     "type": "git",
