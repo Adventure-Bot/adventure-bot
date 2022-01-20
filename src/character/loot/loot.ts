@@ -6,9 +6,8 @@ import store from '../../store'
 import { Item } from '../../equipment/Item'
 import { characterLooted } from '../../store/slices/loots'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { getAsset } from '../../utils/getAsset'
 import moment from 'moment'
-import { randomArrayElement } from '../../monster/randomArrayElement'
+import { getCrownArt } from './getCrownArt'
 
 export type LootResult = {
   id: string
@@ -27,15 +26,10 @@ const crownLootedAnnouncement = async ({
 }: {
   loot: LootResult
   interaction: CommandInteraction
-}) => {
+}): Promise<void> => {
   const looter = getCharacter(loot.looterId)
   if (!looter) return
-  const { s3Url } = randomArrayElement([
-    getAsset('fantasy', 'items', 'golden crown with jewels on a table'),
-    getAsset('fantasy', 'items', 'crown on display'),
-    getAsset('fantasy', 'items', 'golden crown with jewels'),
-    getAsset('fantasy', 'items', 'crown on a table'),
-  ])
+  const { s3Url } = getCrownArt()
   interaction.channel?.send({
     embeds: [
       new MessageEmbed({
