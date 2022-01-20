@@ -9,3 +9,5 @@ patches
 yarn.lock
 .github
 *.md
+.build
+db
