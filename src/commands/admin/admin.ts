@@ -3,15 +3,17 @@ import { CommandInteraction } from 'discord.js'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { range } from 'remeda'
+import { getUserCharacter } from '../../character/getUserCharacter'
 import { healerStatus } from '../../quest/rewards/healerStatus'
 import store from '../../store'
-import { newGame } from '../../store/actions'
+import { newGame, winnerDeclared } from '../../store/actions'
 import {
   effectAdded,
   goldSet,
   healthSet,
   purgeRoamingMonsters,
 } from '../../store/slices/characters'
+import { leaderboard } from '../leaderboard'
 
 export const command = new SlashCommandBuilder()
   .setName('admin')
@@ -38,6 +40,14 @@ export const command = new SlashCommandBuilder()
   )
   .addSubcommand((option) =>
     option.setName('become_healer').setDescription('Become a healer.')
+  )
+  .addSubcommand((option) =>
+    option
+      .setName('declare_winner')
+      .setDescription('Game over!')
+      .addUserOption((input) =>
+        input.setName('winner').setDescription('The winner').setRequired(true)
+      )
   )
   .addSubcommand((option) =>
     option
@@ -80,11 +90,22 @@ export const execute = async (
       )
       interaction.editReply('You are now a healer.')
       return
+    case 'declare_winner':
+      declareWinner(interaction)
+      leaderboard(interaction)
+      break
     default:
       interaction.editReply(
         `Invalid subcommand ${interaction.options.getSubcommand()}`
       )
   }
+}
+
+function declareWinner(interaction: CommandInteraction) {
+  const winnerUser = interaction.options.getUser('winner')
+  if (!winnerUser) return
+  const winner = getUserCharacter(winnerUser)
+  store.dispatch(winnerDeclared({ winner }))
 }
 
 async function addEmoji(interaction: CommandInteraction) {

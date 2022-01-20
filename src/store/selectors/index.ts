@@ -136,6 +136,10 @@ export const selectSovereign = (state: ReduxState): Character | undefined =>
 export const selectCrownBearer = (state: ReduxState): Character | undefined =>
   state.characters.charactersById[state.crown.bearerId]
 
+export const selectLeaderBoard = (
+  state: ReduxState
+): typeof state.leaderboard => state.leaderboard
+
 const selectIsCharacterOnQuest = ({
   state,
   characterId,

@@ -2,16 +2,16 @@ console.time('ready')
 import dotenv from 'dotenv'
 dotenv.config({ path: '.env' })
 
-import { REST } from "@discordjs/rest";
-import Discord, { Intents } from "discord.js";
-import { exit } from "process";
-import { Routes } from "discord-api-types/v9";
-import commands from "./commands";
-import { readFile, writeFile } from "fs/promises";
-import crypto from "crypto";
-import store from "./store";
-import { channelInteraction, tick } from "./store/actions";
-import { selectCrownBearer, selectSovereign } from "./store/selectors";
+import { REST } from '@discordjs/rest'
+import Discord, { Intents } from 'discord.js'
+import { exit } from 'process'
+import { Routes } from 'discord-api-types/v9'
+import commands from './commands'
+import { readFile, writeFile } from 'fs/promises'
+import crypto from 'crypto'
+import store from './store'
+import { commandInteraction, tick } from './store/actions'
+import { selectCrownBearer, selectSovereign } from './store/selectors'
 
 if (!process.env.token) exit(1)
 
@@ -69,14 +69,17 @@ async function main() {
     ],
   })
 
-  discordClient.on("interactionCreate", async (interaction) => {
-    if (!interaction.isCommand()) return;
-    console.log(`interactionCreate ${interaction.commandName}`);
-    const channelId = interaction.channel?.id;
-    if (channelId) {
-      store.dispatch(channelInteraction(channelId));
-    }
-    console.time(interaction.commandName);
+  // fixes `TypeError: Do not know how to serialize a BigInt` for store.dispatch(commandInteraction(interaction));
+  // https://github.com/GoogleChromeLabs/jsbi/issues/30#issuecomment-1006086291
+  ;(BigInt.prototype as any).toJSON = function () {
+    return this.toString()
+  }
+
+  discordClient.on('interactionCreate', async (interaction) => {
+    if (!interaction.isCommand()) return
+    store.dispatch(commandInteraction(interaction))
+    console.log(`command ${interaction.commandName}`)
+    console.time(interaction.commandName)
     try {
       await interaction.deferReply()
       const command = commands.get(interaction.commandName)
@@ -97,29 +100,29 @@ async function main() {
     console.error('Discord client error!', e)
   })
 
-  discordClient.on("ready", async () => {
-    console.log("🎉 Adventures begin!");
-    console.timeEnd("discord client ready");
-    startClock(discordClient);
-  });
+  discordClient.on('ready', async () => {
+    console.log('🎉 Adventures begin!')
+    console.timeEnd('discord client ready')
+    startClock(discordClient)
+  })
 
   discordClient.login(process.env.token)
 }
 
 function startClock(discordClient: Discord.Client) {
-  console.log("startClock");
+  console.log('startClock')
   const serverTick = () => {
-    console.log("tick");
+    console.log('tick')
 
-    const sovereign = selectSovereign(store.getState());
-    console.log(`sovereign ${sovereign}`);
-    const crownBearer = selectCrownBearer(store.getState());
-    console.log(`crownBearer ${crownBearer?.name}`);
+    const sovereign = selectSovereign(store.getState())
+    console.log(`sovereign ${sovereign}`)
+    const crownBearer = selectCrownBearer(store.getState())
+    console.log(`crownBearer ${crownBearer?.name}`)
 
-    store.dispatch(tick());
-  };
-  serverTick();
-  setInterval(serverTick, 6000);
+    store.dispatch(tick())
+  }
+  serverTick()
+  setInterval(serverTick, 6000)
 }
 
 main()

@@ -1,6 +1,8 @@
 import { RootReducerState } from '.'
 import { createMigrate } from 'redux-persist'
 import { defaultEncounterWeights } from './slices/encounters'
+import { defaultLeaderboard } from './slices/leaderboard'
+import { crownDefaultState } from './slices/crown'
 
 /*
  * This is the current version and should match the latest version
@@ -12,7 +14,10 @@ export const persistVersion = 4
  */
 type PersistedReduxStateV4 = RootReducerState
 
-type PersistedReduxStateV3 = PersistedReduxStateV4
+type PersistedReduxStateV3 = Omit<
+  PersistedReduxStateV4,
+  'crown' | 'leaderboard'
+>
 
 // state prior to stateful encounter weights
 type PersistedReduxStateV2 = Omit<PersistedReduxStateV3, 'encounterWeights'>
@@ -47,11 +52,8 @@ const persistMigrations = {
   }),
   4: (state: PersistedReduxStateV3): PersistedReduxStateV4 => ({
     ...state,
-    crown: {
-      bearerId: '',
-      claimedAt: 0,
-      sovereign: false,
-    },
+    leaderboard: defaultLeaderboard,
+    crown: crownDefaultState,
   }),
 }
 

@@ -3,6 +3,7 @@ import { Stat } from './character/Stats'
 
 type Emojis =
   | Stat
+  | 'crown'
   | 'xp'
   | 'gold'
   | 'damage'
@@ -17,6 +18,7 @@ type Emojis =
 const defaultEmojis: {
   [k in Emojis]: string
 } = {
+  crown: '👑',
   xp: '🧠',
   gold: '💰',
   damage: '💔',
