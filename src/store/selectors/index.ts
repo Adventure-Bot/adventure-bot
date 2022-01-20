@@ -126,7 +126,15 @@ export const selectLoot = (state: ReduxState): LootResult[] =>
   values(state.loots.lootsById)
 
 export const selectIsHeavyCrownInPlay = (state: ReduxState): boolean =>
-  state.characters.isHeavyCrownInPlay
+  state.crown.bearerId !== ''
+
+export const selectSovereign = (state: ReduxState): Character | undefined =>
+  state.crown.sovereign
+    ? state.characters.charactersById[state.crown.bearerId]
+    : undefined
+
+export const selectCrownBearer = (state: ReduxState): Character | undefined =>
+  state.characters.charactersById[state.crown.bearerId]
 
 const selectIsCharacterOnQuest = ({
   state,
