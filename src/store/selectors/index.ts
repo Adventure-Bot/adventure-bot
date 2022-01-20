@@ -1,7 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { values } from 'remeda'
 import { Character } from '../../character/Character'
-import { getCharacterStatModified } from '../../character/getCharacterStatModified'
 import { getCharacterStatModifier } from '../../character/getCharacterStatModifier'
 import { LootResult } from '../../character/loot/loot'
 import { Stats, stats } from '../../character/Stats'

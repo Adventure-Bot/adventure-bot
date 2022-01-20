@@ -2,7 +2,6 @@ import {
   CommandInteraction,
   Message,
   MessageActionRow,
-  MessageAttachment,
   MessageButton,
   MessageEmbed,
 } from 'discord.js'

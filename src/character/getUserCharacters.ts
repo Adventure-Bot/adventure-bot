@@ -1,4 +1,6 @@
 import store from '../store'
 import { selectAllCharacters } from '../store/selectors'
+import { Character } from './Character'
 
-export const getUserCharacters = () => selectAllCharacters(store.getState())
+export const getUserCharacters = (): Character[] =>
+  selectAllCharacters(store.getState())
