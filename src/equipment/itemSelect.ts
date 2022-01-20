@@ -1,15 +1,15 @@
-import { MessageSelectMenu } from "discord.js";
-import { Item } from "./Item";
+import { MessageSelectMenu } from 'discord.js'
+import { Item } from './Item'
 
 export const itemSelect = ({
   inventory,
-  placeholder = "Which item?",
+  placeholder = 'Which item?',
 }: {
-  inventory: Item[];
-  placeholder?: string;
+  inventory: Item[]
+  placeholder?: string
 }): MessageSelectMenu =>
   new MessageSelectMenu({
-    customId: "item",
+    customId: 'item',
     placeholder,
   }).addOptions(
     inventory.map((item, i) => ({
@@ -17,4 +17,4 @@ export const itemSelect = ({
       description: item.description,
       value: i.toString(),
     }))
-  );
+  )

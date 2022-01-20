@@ -1,4 +1,4 @@
-import { CommandInteraction } from "discord.js";
+import { CommandInteraction } from 'discord.js'
 import {
   angels,
   fairyWell,
@@ -9,16 +9,16 @@ import {
   divineBlessing,
   monster,
   tavern,
-} from ".";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { CommandHandler, weightedTable } from "../utils";
-import { randomShrine } from "./shrine/randomShrine";
+} from '.'
+import { getUserCharacter } from '../character/getUserCharacter'
+import { CommandHandler, weightedTable } from '../utils'
+import { randomShrine } from './shrine/randomShrine'
 
 export const randomEncounter = (
   interaction: CommandInteraction
 ): CommandHandler => {
-  const character = getUserCharacter(interaction.user);
-  const angelChance = character.quests.healer ? 0 : 0.5;
+  const character = getUserCharacter(interaction.user)
+  const angelChance = character.quests.healer ? 0 : 0.5
   return weightedTable([
     [0.2, () => divineBlessing],
     [angelChance, () => angels],
@@ -30,5 +30,5 @@ export const randomEncounter = (
     [2, () => monster],
     [2, () => chest],
     [2, randomShrine],
-  ])();
-};
+  ])()
+}

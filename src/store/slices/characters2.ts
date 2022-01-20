@@ -1,16 +1,16 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { created } from "./characters";
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { created } from './characters'
 
 const characterAdapater = createEntityAdapter<{
-  id: string;
-  name: string;
-  profile: string;
+  id: string
+  name: string
+  profile: string
 }>({
   selectId: (character) => character.id,
-});
+})
 
 const characters2Slice = createSlice({
-  name: "characters2",
+  name: 'characters2',
   initialState: characterAdapater.getInitialState(),
   reducers: {},
   extraReducers: (builder) => {
@@ -19,9 +19,9 @@ const characters2Slice = createSlice({
         id: action.payload.id,
         name: action.payload.name,
         profile: action.payload.profile,
-      });
-    });
+      })
+    })
   },
-});
+})
 
-export default characters2Slice.reducer;
+export default characters2Slice.reducer

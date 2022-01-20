@@ -1,32 +1,32 @@
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { hpBarField } from "../character/hpBar/hpBarField";
-import { xpGainField } from "../character/xpGainField";
-import quests from "../commands/quests";
-import { Emoji } from "../Emoji";
-import { isUserQuestComplete } from "../quest/isQuestComplete";
-import { questProgressField } from "../quest/questProgressField";
-import store from "../store";
-import { healed, questProgressed, xpAwarded } from "../store/slices/characters";
-import { getAsset } from "../utils/getAsset";
+import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { getUserCharacter } from '../character/getUserCharacter'
+import { hpBarField } from '../character/hpBar/hpBarField'
+import { xpGainField } from '../character/xpGainField'
+import quests from '../commands/quests'
+import { Emoji } from '../Emoji'
+import { isUserQuestComplete } from '../quest/isQuestComplete'
+import { questProgressField } from '../quest/questProgressField'
+import store from '../store'
+import { healed, questProgressed, xpAwarded } from '../store/slices/characters'
+import { getAsset } from '../utils/getAsset'
 
 export const fairyWell = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const healAmount = Math.ceil(Math.random() * 6);
+  const healAmount = Math.ceil(Math.random() * 6)
   store.dispatch(
     healed({ characterId: interaction.user.id, amount: healAmount })
-  );
-  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }));
+  )
+  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
   store.dispatch(
     questProgressed({
       characterId: interaction.user.id,
-      questId: "healer",
+      questId: 'healer',
       amount: healAmount,
     })
-  );
+  )
 
-  const character = getUserCharacter(interaction.user);
+  const character = getUserCharacter(interaction.user)
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
@@ -34,9 +34,9 @@ export const fairyWell = async (
           interaction.user.username
         } drinks from a fairy's well and gains ${Emoji(
           interaction,
-          "heal"
+          'heal'
         )} +${healAmount}!`,
-        color: "DARK_VIVID_PINK",
+        color: 'DARK_VIVID_PINK',
         description: `You drink from a fairy's well, it heals you for ${healAmount}!`,
         fields: [
           xpGainField(interaction, 1),
@@ -46,9 +46,9 @@ export const fairyWell = async (
             ? questProgressField(character.quests.healer)
             : []
         ),
-      }).setImage(getAsset("fantasy", "places", "a fairy's well").s3Url),
+      }).setImage(getAsset('fantasy', 'places', "a fairy's well").s3Url),
     ],
-  });
-  if (isUserQuestComplete(interaction.user, "healer"))
-    await quests.execute(interaction);
-};
+  })
+  if (isUserQuestComplete(interaction.user, 'healer'))
+    await quests.execute(interaction)
+}

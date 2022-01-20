@@ -1,10 +1,10 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { shop } from "../encounters/shop/shop";
+import { SlashCommandBuilder } from '@discordjs/builders'
+import { shop } from '../encounters/shop/shop'
 
 export const command = new SlashCommandBuilder()
-  .setName("shop")
-  .setDescription("If you have coin, game has wares.");
+  .setName('shop')
+  .setDescription('If you have coin, game has wares.')
 
-export const execute = shop;
+export const execute = shop
 
-export default { command, execute };
+export default { command, execute }

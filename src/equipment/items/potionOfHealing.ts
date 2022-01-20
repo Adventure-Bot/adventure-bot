@@ -1,12 +1,12 @@
-import { randomUUID } from "crypto";
-import { Potion } from "../equipment";
+import { randomUUID } from 'crypto'
+import { Potion } from '../equipment'
 
 export const potionOfHealing = (): Potion => ({
   id: randomUUID(),
-  type: "potion",
-  description: "magic potion with glowing red liquid",
+  type: 'potion',
+  description: 'magic potion with glowing red liquid',
   goldValue: 20,
-  name: "Potion of Healing",
+  name: 'Potion of Healing',
   useEffects: {
     maxHeal: 6,
   },
@@ -14,4 +14,4 @@ export const potionOfHealing = (): Potion => ({
   equippable: false,
   sellable: true,
   tradeable: true,
-});
+})

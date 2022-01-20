@@ -1,35 +1,35 @@
-import { randomUUID } from "crypto";
-import { randomArrayElement } from "../../monster/randomArrayElement";
-import { Potion } from "../equipment";
+import { randomUUID } from 'crypto'
+import { randomArrayElement } from '../../monster/randomArrayElement'
+import { Potion } from '../equipment'
 
-export const unidentifiedPotion = (): Omit<Potion, "description"> & {
-  description: string;
+export const unidentifiedPotion = (): Omit<Potion, 'description'> & {
+  description: string
 } => ({
   id: randomUUID(),
-  type: "potion",
+  type: 'potion',
   description: randomArrayElement([
     "You have no idea who made this, where it came from, or what's in it.",
-    "It smells awful. But they usually do.",
+    'It smells awful. But they usually do.',
     "You're pretty sure the toe is part of it.",
   ]),
   goldValue: 10,
   name: randomArrayElement([
-    "unidentified potion",
-    "potion of dubious origins",
-    "Healing Potion?",
+    'unidentified potion',
+    'potion of dubious origins',
+    'Healing Potion?',
   ]),
   useEffects: {
     randomEffect: [
-      "aggression",
-      "invigorated",
-      "protectedEffect",
-      "slayer",
-      "frailty",
-      "might",
+      'aggression',
+      'invigorated',
+      'protectedEffect',
+      'slayer',
+      'frailty',
+      'might',
     ],
   },
   usable: true,
   equippable: false,
   sellable: true,
   tradeable: true,
-});
+})

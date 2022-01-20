@@ -1,8 +1,8 @@
-import { APIEmbedField } from "discord-api-types";
-import { CommandInteraction } from "discord.js";
-import { Character } from "./Character";
-import { Stat, statTitles } from "./Stats";
-import { statText } from "../commands/statText";
+import { APIEmbedField } from 'discord-api-types'
+import { CommandInteraction } from 'discord.js'
+import { Character } from './Character'
+import { Stat, statTitles } from './Stats'
+import { statText } from '../commands/statText'
 
 export function statField(
   character: Character,
@@ -13,5 +13,5 @@ export function statField(
     name: statTitles[stat],
     value: statText({ character, stat, interaction }),
     inline: true,
-  };
+  }
 }

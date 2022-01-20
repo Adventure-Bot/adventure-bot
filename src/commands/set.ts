@@ -1,54 +1,54 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction } from "discord.js";
-import { URL } from "url";
-import store from "../store";
-import { profileSet } from "../store/slices/characters";
-import { execute as inspect } from "./inspect/inspect";
+import { SlashCommandBuilder } from '@discordjs/builders'
+import { CommandInteraction } from 'discord.js'
+import { URL } from 'url'
+import store from '../store'
+import { profileSet } from '../store/slices/characters'
+import { execute as inspect } from './inspect/inspect'
 
 export const command = new SlashCommandBuilder()
-  .setName("set")
-  .setDescription("Configure your character")
+  .setName('set')
+  .setDescription('Configure your character')
   .addStringOption((option) =>
     option
-      .setName("profile")
+      .setName('profile')
       .setDescription(`Set your character's profile picture.`)
       .setRequired(true)
-  );
+  )
 
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const profile = interaction.options.data[0].value?.toString();
-  if (!profile) return;
+  const profile = interaction.options.data[0].value?.toString()
+  if (!profile) return
 
   try {
-    const url = new URL(profile);
-    const validExtensions = ["png", "jpg", "jpeg", "gif", "webp"];
+    const url = new URL(profile)
+    const validExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp']
     const isValidExtension = (path: string) =>
-      new RegExp(`${validExtensions.join("|")}$`).test(path);
+      new RegExp(`${validExtensions.join('|')}$`).test(path)
     if (!isValidExtension(url.pathname)) {
       interaction.editReply(
         [
           `\`${profile}\` must be a one of these valid extensions: ${validExtensions.join(
-            ", "
+            ', '
           )}`,
-          "Example:",
-          "`/set profile:https://www.example.com/profile.png`",
-          "Please try again.",
-        ].join("\n")
-      );
-      return;
+          'Example:',
+          '`/set profile:https://www.example.com/profile.png`',
+          'Please try again.',
+        ].join('\n')
+      )
+      return
     }
   } catch (e) {
     interaction.editReply(
       [
         `\`${profile}\` must be a valid URL.`,
-        "Example:",
-        "`/set profile:https://www.example.com/profile.png`",
-        "Please try again.",
-      ].join("\n")
-    );
-    return;
+        'Example:',
+        '`/set profile:https://www.example.com/profile.png`',
+        'Please try again.',
+      ].join('\n')
+    )
+    return
   }
 
   store.dispatch(
@@ -56,9 +56,9 @@ export const execute = async (
       characterId: interaction.user.id,
       profile,
     })
-  );
+  )
 
-  await inspect(interaction);
-};
+  await inspect(interaction)
+}
 
-export default { command, execute };
+export default { command, execute }

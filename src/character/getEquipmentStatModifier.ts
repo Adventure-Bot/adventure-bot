@@ -1,6 +1,6 @@
-import { Character } from "./Character";
-import { Item } from "../equipment/Item";
-import { Stat } from "./Stats";
+import { Character } from './Character'
+import { Item } from '../equipment/Item'
+import { Stat } from './Stats'
 
 export const getEquipmentStatModifier = (
   character: Character,
@@ -9,4 +9,4 @@ export const getEquipmentStatModifier = (
   Object.values(character.equipment).reduce(
     (acc, item: Item) => acc + (item.modifiers?.[stat] ?? 0),
     0
-  );
+  )

@@ -1,5 +1,5 @@
-import { weightedTable } from "../utils/weightedTable";
-import { Item } from "./Item";
+import { weightedTable } from '../utils/weightedTable'
+import { Item } from './Item'
 import {
   amuletOfAttack,
   amuletOfProtection,
@@ -20,7 +20,7 @@ import {
   towerShield,
   unidentifiedPotion,
   warAxe,
-} from "./items";
+} from './items'
 
 export function randomChestItem(): Item {
   return weightedTable<() => Item>([
@@ -43,5 +43,5 @@ export function randomChestItem(): Item {
     [1.2, buckler],
     [1.2, leatherArmor],
     [1.3, dagger],
-  ])();
+  ])()
 }

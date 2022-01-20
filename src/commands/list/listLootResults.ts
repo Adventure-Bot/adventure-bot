@@ -1,10 +1,10 @@
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { lootResultEmbed } from "../../character/loot/lootResultEmbed";
-import { getLoots } from "../../encounter/getLoots";
+import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { lootResultEmbed } from '../../character/loot/lootResultEmbed'
+import { getLoots } from '../../encounter/getLoots'
 
 export function listLootResults(interaction: CommandInteraction): void {
-  const loots = getLoots();
-  console.log("listLootResults", loots);
+  const loots = getLoots()
+  console.log('listLootResults', loots)
   interaction.editReply({
     embeds:
       loots.length > 0
@@ -19,8 +19,8 @@ export function listLootResults(interaction: CommandInteraction): void {
         : [
             new MessageEmbed({
               description:
-                "No loot results yet. `/adventure` to loot some monsters! (or get looted)",
+                'No loot results yet. `/adventure` to loot some monsters! (or get looted)',
             }),
           ],
-  });
+  })
 }

@@ -1,5 +1,5 @@
-import store from "../store";
-import { goldGained } from "../store/slices/characters";
+import store from '../store'
+import { goldGained } from '../store/slices/characters'
 
 export const adjustGold = (characterId: string, amount: number): void => {
   store.dispatch(
@@ -7,5 +7,5 @@ export const adjustGold = (characterId: string, amount: number): void => {
       characterId,
       amount,
     })
-  );
-};
+  )
+}

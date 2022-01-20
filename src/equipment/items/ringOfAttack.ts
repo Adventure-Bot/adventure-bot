@@ -1,11 +1,11 @@
-import { randomUUID } from "crypto";
-import { Ring } from "../equipment";
+import { randomUUID } from 'crypto'
+import { Ring } from '../equipment'
 
 export const ringOfAttack = (): Ring => ({
   id: randomUUID(),
-  type: "ring",
-  name: "Ring of Attack",
-  description: "A ring that increases your accuracy.",
+  type: 'ring',
+  name: 'Ring of Attack',
+  description: 'A ring that increases your accuracy.',
   modifiers: {
     attackBonus: 2,
   },
@@ -13,4 +13,4 @@ export const ringOfAttack = (): Ring => ({
   equippable: true,
   sellable: true,
   tradeable: true,
-});
+})

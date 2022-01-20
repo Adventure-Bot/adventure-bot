@@ -1,8 +1,8 @@
-import { User } from "discord.js";
-import { Character } from "./Character";
-import { createCharacter } from "./createCharacter";
-import store from "../store";
-import { selectCharacterById } from "../store/selectors";
+import { User } from 'discord.js'
+import { Character } from './Character'
+import { createCharacter } from './createCharacter'
+import store from '../store'
+import { selectCharacterById } from '../store/selectors'
 
 export const getUserCharacter = (user: User): Character =>
   selectCharacterById(store.getState(), user.id) ??
@@ -10,4 +10,4 @@ export const getUserCharacter = (user: User): Character =>
     id: user.id,
     name: user.username,
     profile: user.avatarURL() ?? undefined,
-  });
+  })

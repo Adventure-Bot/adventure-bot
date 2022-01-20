@@ -1,6 +1,6 @@
-import store from "../store";
-import { selectAllEncounters } from "../store/selectors";
+import store from '../store'
+import { selectAllEncounters } from '../store/selectors'
 
 export function getEncounters() {
-  return selectAllEncounters(store.getState());
+  return selectAllEncounters(store.getState())
 }

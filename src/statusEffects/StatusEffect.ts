@@ -1,14 +1,14 @@
-import { Stats } from "../character/Stats";
+import { Stats } from '../character/Stats'
 
 export type StatusEffect = {
-  name: string;
+  name: string
   // image: string; // TODO
-  started: string;
+  started: string
   /**
    * Duration in milliseconds
    */
-  duration: number;
-  modifiers: Partial<Stats>;
-  buff: boolean;
-  debuff: boolean;
-};
+  duration: number
+  modifiers: Partial<Stats>
+  buff: boolean
+  debuff: boolean
+}

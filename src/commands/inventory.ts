@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
+import { SlashCommandBuilder } from '@discordjs/builders'
 import {
   CommandInteraction,
   Message,
@@ -6,126 +6,126 @@ import {
   MessageButton,
   MessageOptions,
   TextChannel,
-} from "discord.js";
-import { decoratedName } from "../character/decoratedName";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { equipInventoryItemPrompt } from "../equipment/equipInventoryItemPrompt";
-import { isTradeable } from "../equipment/equipment";
-import { equippableInventory } from "../equipment/equippableInventory";
-import { itemEmbed } from "../equipment/itemEmbed";
-import { offerItemPrompt as offerItemPrompt } from "../equipment/offerItemPrompt";
-import { getHook } from "./inspect/getHook";
-import { usableInventory } from "../equipment/usableInventory";
-import { useInventoryItemPrompt } from "../equipment/useInventoryItemPrompt";
+} from 'discord.js'
+import { decoratedName } from '../character/decoratedName'
+import { getUserCharacter } from '../character/getUserCharacter'
+import { equipInventoryItemPrompt } from '../equipment/equipInventoryItemPrompt'
+import { isTradeable } from '../equipment/equipment'
+import { equippableInventory } from '../equipment/equippableInventory'
+import { itemEmbed } from '../equipment/itemEmbed'
+import { offerItemPrompt as offerItemPrompt } from '../equipment/offerItemPrompt'
+import { getHook } from './inspect/getHook'
+import { usableInventory } from '../equipment/usableInventory'
+import { useInventoryItemPrompt } from '../equipment/useInventoryItemPrompt'
 
 export const command = new SlashCommandBuilder()
-  .setName("inventory")
-  .setDescription("View your inventory.");
+  .setName('inventory')
+  .setDescription('View your inventory.')
 
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const character = getUserCharacter(interaction.user);
+  const character = getUserCharacter(interaction.user)
   if (!character.inventory.length) {
-    await interaction.followUp("Your inventory is empty.");
-    return;
+    await interaction.followUp('Your inventory is empty.')
+    return
   }
   const message = await interaction.followUp({
     ...inventoryMain(interaction),
     fetchReply: true,
-  });
-  if (!(message instanceof Message)) return;
-  const channel = interaction.channel;
-  if (!(channel instanceof TextChannel)) return;
+  })
+  if (!(message instanceof Message)) return
+  const channel = interaction.channel
+  if (!(channel instanceof TextChannel)) return
   const thread = await channel.threads.create({
     name: `${character.name}'s inventory`,
-  });
-  const webhooks = await channel.fetchWebhooks();
+  })
+  const webhooks = await channel.fetchWebhooks()
   const hook = await getHook({
-    name: "Inventory",
+    name: 'Inventory',
     webhooks,
     interaction,
-  });
+  })
   if (!hook) {
-    await interaction.followUp(`Inventory hook not found.`);
-    return;
+    await interaction.followUp(`Inventory hook not found.`)
+    return
   }
 
   character.inventory.forEach((item) => {
     hook.send({
       embeds: [itemEmbed({ item, interaction })],
       threadId: thread.id,
-    });
-  });
+    })
+  })
 
-  let done = false;
+  let done = false
   while (!done) {
     const reply = await message
       .awaitMessageComponent({
         time: 30000,
         filter: (i) => {
-          i.deferUpdate();
-          return i.user.id === interaction.user.id;
+          i.deferUpdate()
+          return i.user.id === interaction.user.id
         },
-        componentType: "BUTTON",
+        componentType: 'BUTTON',
       })
       .catch(() => {
         message.edit({
           components: [],
-        });
-      });
-    if (!reply) return;
-    if (reply.customId === "equip") await equipInventoryItemPrompt(interaction);
-    if (reply.customId === "offer") await offerItemPrompt(interaction);
-    if (reply.customId === "use") await useInventoryItemPrompt(interaction);
-    if (reply.customId === "done") done = true;
-    await message.edit(inventoryMain(interaction));
+        })
+      })
+    if (!reply) return
+    if (reply.customId === 'equip') await equipInventoryItemPrompt(interaction)
+    if (reply.customId === 'offer') await offerItemPrompt(interaction)
+    if (reply.customId === 'use') await useInventoryItemPrompt(interaction)
+    if (reply.customId === 'done') done = true
+    await message.edit(inventoryMain(interaction))
   }
-  message.edit({ components: [] });
-  thread.setArchived(true);
-};
+  message.edit({ components: [] })
+  thread.setArchived(true)
+}
 
-export default { command, execute };
+export default { command, execute }
 
 function inventoryMain(interaction: CommandInteraction): MessageOptions {
-  const character = getUserCharacter(interaction.user);
-  const hasItemsToOffer = character.inventory.filter(isTradeable).length > 0;
-  const hasItemsToEquip = equippableInventory(character).length > 0;
-  const hasItemsToUse = usableInventory(character).length > 0;
+  const character = getUserCharacter(interaction.user)
+  const hasItemsToOffer = character.inventory.filter(isTradeable).length > 0
+  const hasItemsToEquip = equippableInventory(character).length > 0
+  const hasItemsToUse = usableInventory(character).length > 0
 
-  const components = [];
+  const components = []
   if (hasItemsToEquip)
     components.push(
       new MessageButton({
-        customId: "equip",
-        style: "SECONDARY",
-        label: "Equip",
+        customId: 'equip',
+        style: 'SECONDARY',
+        label: 'Equip',
       })
-    );
+    )
   if (hasItemsToUse)
     components.push(
       new MessageButton({
-        customId: "use",
-        style: "SECONDARY",
-        label: "Use",
+        customId: 'use',
+        style: 'SECONDARY',
+        label: 'Use',
       })
-    );
+    )
   if (hasItemsToOffer)
     components.push(
       new MessageButton({
-        customId: "offer",
-        style: "SECONDARY",
-        label: "Offer",
+        customId: 'offer',
+        style: 'SECONDARY',
+        label: 'Offer',
       })
-    );
+    )
 
   components.push(
     new MessageButton({
-      customId: "done",
-      style: "SECONDARY",
-      label: "Done",
+      customId: 'done',
+      style: 'SECONDARY',
+      label: 'Done',
     })
-  );
+  )
 
   return {
     content: `${decoratedName(character)} checks their bags.`,
@@ -134,5 +134,5 @@ function inventoryMain(interaction: CommandInteraction): MessageOptions {
         components,
       }),
     ],
-  };
+  }
 }

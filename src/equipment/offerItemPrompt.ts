@@ -3,72 +3,72 @@ import {
   Message,
   MessageActionRow,
   MessageButton,
-} from "discord.js";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { itemSelect } from "./itemSelect";
-import { isTradeable } from "./equipment";
+} from 'discord.js'
+import { getUserCharacter } from '../character/getUserCharacter'
+import { itemSelect } from './itemSelect'
+import { isTradeable } from './equipment'
 
-import { itemEmbed } from "./itemEmbed";
-import store from "../store";
-import { itemGiven, itemRemoved } from "../store/slices/characters";
+import { itemEmbed } from './itemEmbed'
+import store from '../store'
+import { itemGiven, itemRemoved } from '../store/slices/characters'
 
 export const offerItemPrompt = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const sender = getUserCharacter(interaction.user);
-  const inventory = sender.inventory.filter(isTradeable);
+  const sender = getUserCharacter(interaction.user)
+  const inventory = sender.inventory.filter(isTradeable)
   if (inventory.length === 0) {
-    interaction.followUp(`No items to offer.`);
-    return;
+    interaction.followUp(`No items to offer.`)
+    return
   }
   const message = await interaction.followUp({
     content:
-      "Offer an item for grabs. First to click gets it. If time expires, it will become dust in the wind.",
+      'Offer an item for grabs. First to click gets it. If time expires, it will become dust in the wind.',
     components: [
       new MessageActionRow({
         components: [
           itemSelect({
             inventory,
-            placeholder: "Which item to be rid of?",
+            placeholder: 'Which item to be rid of?',
           }),
         ],
       }),
       new MessageActionRow({
         components: [
           new MessageButton({
-            customId: "cancel",
-            label: "Nevermind",
-            style: "SECONDARY",
+            customId: 'cancel',
+            label: 'Nevermind',
+            style: 'SECONDARY',
           }),
         ],
       }),
     ],
-  });
-  if (!(message instanceof Message)) return;
-  let timeout = false;
+  })
+  if (!(message instanceof Message)) return
+  let timeout = false
   const response = await message
     .awaitMessageComponent({
       time: 60000,
     })
     .catch(() => {
-      timeout = true;
+      timeout = true
       message.edit({
         content: `${sender.name} decided not to offer any items.`,
         components: [],
-      });
-    });
-  message.edit({ components: [] });
-  if (!response) return;
+      })
+    })
+  message.edit({ components: [] })
+  if (!response) return
   if (response.isButton()) {
     message.edit({
       content: `${sender.name} decided not to offer any items.`,
       components: [],
-    });
+    })
   }
-  if (!response.isSelectMenu()) return;
-  const item = inventory[parseInt(response.values[0])];
-  if (timeout || !item) return;
-  if (!item) return;
+  if (!response.isSelectMenu()) return
+  const item = inventory[parseInt(response.values[0])]
+  if (timeout || !item) return
+  if (!item) return
   const offer = await interaction.followUp({
     fetchReply: true,
     content: `${sender.name} offers their ${item.name}.`,
@@ -77,19 +77,19 @@ export const offerItemPrompt = async (
       new MessageActionRow({
         components: [
           new MessageButton({
-            customId: "take",
+            customId: 'take',
             label: `Take the ${item.name}.`,
-            style: "PRIMARY",
+            style: 'PRIMARY',
           }),
         ],
       }),
     ],
-  });
+  })
 
-  if (!(offer instanceof Message)) return;
+  if (!(offer instanceof Message)) return
   const reply = await offer
     .awaitMessageComponent({
-      componentType: "BUTTON",
+      componentType: 'BUTTON',
       time: 60000,
     })
     .catch(() => {
@@ -98,24 +98,22 @@ export const offerItemPrompt = async (
           characterId: sender.id,
           itemId: item.id,
         })
-      );
+      )
       offer.edit({
         content: `${item.name} is dust in the wind.`,
         components: [],
-      });
-    });
+      })
+    })
   if (reply && reply.isButton()) {
-    const recipient = getUserCharacter(reply.user);
+    const recipient = getUserCharacter(reply.user)
     store.dispatch(
       itemGiven({
         fromCharacterId: sender.id,
         toCharacterId: recipient.id,
         item,
       })
-    );
-    offer.edit({ components: [] });
-    interaction.followUp(
-      `${recipient.name} took ${sender.name}'s ${item.name}`
-    );
+    )
+    offer.edit({ components: [] })
+    interaction.followUp(`${recipient.name} took ${sender.name}'s ${item.name}`)
   }
-};
+}

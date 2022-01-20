@@ -3,12 +3,12 @@ import {
   Message,
   MessageActionRow,
   MessageButton,
-} from "discord.js";
-import inspect from "../commands/inspect/inspect";
-import { Item } from "./Item";
-import { itemEmbed } from "./itemEmbed";
-import store from "../store";
-import { itemEquipped } from "../store/slices/characters";
+} from 'discord.js'
+import inspect from '../commands/inspect/inspect'
+import { Item } from './Item'
+import { itemEmbed } from './itemEmbed'
+import store from '../store'
+import { itemEquipped } from '../store/slices/characters'
 
 /**
  * Prompt to equip a specific item
@@ -21,11 +21,11 @@ export async function equipItemPrompt({
   item,
   showItem = true,
 }: {
-  interaction: CommandInteraction;
-  item: Item;
-  showItem?: boolean;
+  interaction: CommandInteraction
+  item: Item
+  showItem?: boolean
 }): Promise<void> {
-  const content = `Would you like to equip the ${item.name}?`;
+  const content = `Would you like to equip the ${item.name}?`
   const message = await interaction.followUp({
     content,
     embeds: showItem ? [itemEmbed({ item, interaction })] : [],
@@ -33,39 +33,39 @@ export async function equipItemPrompt({
       new MessageActionRow({
         components: [
           new MessageButton({
-            customId: "equip",
+            customId: 'equip',
             label: `Equip the ${item.name}`,
-            style: "SECONDARY",
+            style: 'SECONDARY',
           }),
         ],
       }),
     ],
-  });
+  })
 
-  if (!(message instanceof Message)) return;
+  if (!(message instanceof Message)) return
   const response = await message
     .awaitMessageComponent({
       filter: (interaction) => {
-        interaction.deferUpdate();
-        return interaction.user.id === interaction.user.id;
+        interaction.deferUpdate()
+        return interaction.user.id === interaction.user.id
       },
-      componentType: "BUTTON",
+      componentType: 'BUTTON',
       time: 60000,
     })
     .catch(() => {
       message.edit({
         content,
         components: [],
-      });
-    });
-  if (!response) return;
+      })
+    })
+  if (!response) return
   store.dispatch(
     itemEquipped({ itemId: item.id, characterId: interaction.user.id })
-  );
+  )
   message.edit({
     content,
     components: [],
-  });
-  message.reply(`You equip the ${item.name}.`);
-  await inspect.execute(interaction);
+  })
+  message.reply(`You equip the ${item.name}.`)
+  await inspect.execute(interaction)
 }

@@ -1,16 +1,16 @@
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { Character } from "./Character";
-import { primaryStatFields } from "./primaryStatFields";
-import { decoratedName } from "./decoratedName";
+import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { Character } from './Character'
+import { primaryStatFields } from './primaryStatFields'
+import { decoratedName } from './decoratedName'
 
 export function limitedCharacterEmbed({
   character,
   interaction,
   adjustment = 0,
 }: {
-  character: Character;
-  interaction: CommandInteraction;
-  adjustment?: number;
+  character: Character
+  interaction: CommandInteraction
+  adjustment?: number
 }): MessageEmbed {
   return new MessageEmbed({
     title: decoratedName(character),
@@ -19,5 +19,5 @@ export function limitedCharacterEmbed({
       adjustment,
       interaction,
     }),
-  }).setThumbnail(character.profile);
+  }).setThumbnail(character.profile)
 }

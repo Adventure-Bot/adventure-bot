@@ -1,11 +1,11 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { hpBarField } from "../character/hpBar/hpBarField";
+import { SlashCommandBuilder } from '@discordjs/builders'
+import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { getUserCharacter } from '../character/getUserCharacter'
+import { hpBarField } from '../character/hpBar/hpBarField'
 
 export const command = new SlashCommandBuilder()
-  .setName("hp")
-  .setDescription("Show your hp");
+  .setName('hp')
+  .setDescription('Show your hp')
 
 export const execute = async (
   interaction: CommandInteraction
@@ -16,7 +16,7 @@ export const execute = async (
         fields: [hpBarField({ character: getUserCharacter(interaction.user) })],
       }),
     ],
-  });
-};
+  })
+}
 
-export default { command, execute };
+export default { command, execute }
