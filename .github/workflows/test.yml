@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, chore/github-actions]
   pull_request:
-    branches: [main, chore/github-actions]
+    branches: [main]
 
 jobs:
   format:
