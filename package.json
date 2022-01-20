@@ -18,7 +18,9 @@
     "postsync-s3-assets": "yarn generate-asset-manifest",
     "redux-devtools": "redux-devtools --hostname=localhost --port=5010",
     "prune": "ts-prune",
-    "prune:watch": "nodemon --config nodemon-prune.json"
+    "prune:watch": "nodemon --config nodemon-prune.json",
+    "format:check": "prettier --check src",
+    "format:write": "prettier --write src"
   },
   "repository": {
     "type": "git",
@@ -44,8 +46,10 @@
     "@typescript-eslint/parser": "^3.6.0",
     "aws-sdk": "^2.1043.0",
     "eslint": "^7.4.0",
+    "eslint-config-prettier": "^8.3.0",
     "nodemon": "^2.0.4",
     "patch-package": "^6.4.7",
+    "prettier": "2.5.1",
     "s3": "^4.4.0",
     "ts-node": "^8.10.2",
     "ts-prune": "^0.10.3",
