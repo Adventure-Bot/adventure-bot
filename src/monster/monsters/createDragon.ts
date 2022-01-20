@@ -1,29 +1,29 @@
-import { createMonster } from "../createMonster";
-import { getRandomMonsterName } from "../names/getRandomMonsterName";
-import { getAsset } from "../../utils/getAsset";
-import { Monster } from "../Monster";
+import { createMonster } from '../createMonster'
+import { getRandomMonsterName } from '../names/getRandomMonsterName'
+import { getAsset } from '../../utils/getAsset'
+import { Monster } from '../Monster'
 
 export function createDragon(): Monster {
   return createMonster({
-    kind: "Dragon",
-    name: getRandomMonsterName("Dragon"),
+    kind: 'Dragon',
+    name: getRandomMonsterName('Dragon'),
     hp: 100,
     maxHP: 100,
     ac: 18,
     attackBonus: 5,
     equipment: {
       weapon: {
-        name: "Dragon Attack",
+        name: 'Dragon Attack',
         accuracyDescriptors: {
           wideMiss: [
-            "<@attacker> claws in the approximate direction of <@defender>",
-            "<@attacker> breathes fire in the approximate direction of <@defender>",
-            "<@attacker> bites in the approximate direction of <@defender>",
+            '<@attacker> claws in the approximate direction of <@defender>',
+            '<@attacker> breathes fire in the approximate direction of <@defender>',
+            '<@attacker> bites in the approximate direction of <@defender>',
           ],
           nearMiss: [
-            "<@attacker> nearly claws <@defender>",
+            '<@attacker> nearly claws <@defender>',
             "<@attacker>'s fire breath nearly burns <@defender>",
-            "<@attacker> nearly bites <@defender>",
+            '<@attacker> nearly bites <@defender>',
           ],
           onTheNose: [
             "<@attacker>'s claws rake <@defender>",
@@ -37,17 +37,17 @@ export function createDragon(): Monster {
           ],
         },
         damageMax: 6,
-        description: "the fury of a dragon",
+        description: 'the fury of a dragon',
         equippable: true,
         goldValue: 0,
-        id: "dragon-attack",
-        type: "weapon",
+        id: 'dragon-attack',
+        type: 'weapon',
         lootable: false,
         sellable: false,
       },
     },
-    asset: getAsset("fantasy", "monsters", "dragon").values,
+    asset: getAsset('fantasy', 'monsters', 'dragon').values,
     xpValue: 50,
     gold: Math.floor(Math.random() * 150) + 300,
-  });
+  })
 }

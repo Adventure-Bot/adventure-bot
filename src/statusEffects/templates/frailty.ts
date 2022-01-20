@@ -1,7 +1,7 @@
-import { TemplateEffect } from "./TemplateEffect";
+import { TemplateEffect } from './TemplateEffect'
 
 export const frailty: TemplateEffect = {
-  name: "Frailty",
+  name: 'Frailty',
   buff: false,
   debuff: true,
   duration: 60 * 60000,
@@ -9,4 +9,4 @@ export const frailty: TemplateEffect = {
     ac: -3,
     maxHP: -3,
   },
-};
+}

@@ -1,11 +1,11 @@
-import { randomUUID } from "crypto";
-import { Weapon } from "../equipment";
+import { randomUUID } from 'crypto'
+import { Weapon } from '../equipment'
 
 export const longsword = (): Weapon => ({
   id: randomUUID(),
-  type: "weapon",
-  name: "longsword",
-  description: "A classic for a reason. Purpose built and effective.",
+  type: 'weapon',
+  name: 'longsword',
+  description: 'A classic for a reason. Purpose built and effective.',
   damageMax: 8,
   goldValue: 40,
   accuracyDescriptors: {
@@ -17,4 +17,4 @@ export const longsword = (): Weapon => ({
   equippable: true,
   sellable: true,
   tradeable: true,
-});
+})

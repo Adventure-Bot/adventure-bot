@@ -1,7 +1,7 @@
-import { Character } from "./Character";
+import { Character } from './Character'
 
-export const defaultCharacter: Omit<Character, "id" | "name"> = {
-  profile: "",
+export const defaultCharacter: Omit<Character, 'id' | 'name'> = {
+  profile: '',
   inventory: [],
   gold: 0,
   hp: 10,
@@ -17,4 +17,4 @@ export const defaultCharacter: Omit<Character, "id" | "name"> = {
   xp: 0,
   xpValue: 10,
   damageMax: 4,
-};
+}

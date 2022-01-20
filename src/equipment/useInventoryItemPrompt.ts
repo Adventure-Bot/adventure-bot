@@ -4,24 +4,24 @@ import {
   MessageActionRow,
   MessageButton,
   MessageEmbed,
-} from "discord.js";
-import { getUserCharacter } from "../character/getUserCharacter";
-import { itemSelect } from "./itemSelect";
-import store from "../store";
-import { effectAdded, healed, itemRemoved } from "../store/slices/characters";
-import { usableInventory } from "./usableInventory";
-import { isPotion } from "./equipment";
-import { d } from "../utils/dice";
-import { selectCharacterById } from "../store/selectors";
-import { clamp } from "remeda";
-import { Emoji } from "../Emoji";
-import { getAsset } from "../utils/getAsset";
-import { hpBarField } from "../character/hpBar/hpBarField";
-import { randomArrayElement } from "../monster/randomArrayElement";
-import { statusEffectEmbed } from "../statusEffects/statusEffectEmbed";
-import { createEffect } from "../statusEffects";
-import { Manifest } from "../asset-manifest";
-import { EffectTemplate } from "../statusEffects/templates";
+} from 'discord.js'
+import { getUserCharacter } from '../character/getUserCharacter'
+import { itemSelect } from './itemSelect'
+import store from '../store'
+import { effectAdded, healed, itemRemoved } from '../store/slices/characters'
+import { usableInventory } from './usableInventory'
+import { isPotion } from './equipment'
+import { d } from '../utils/dice'
+import { selectCharacterById } from '../store/selectors'
+import { clamp } from 'remeda'
+import { Emoji } from '../Emoji'
+import { getAsset } from '../utils/getAsset'
+import { hpBarField } from '../character/hpBar/hpBarField'
+import { randomArrayElement } from '../monster/randomArrayElement'
+import { statusEffectEmbed } from '../statusEffects/statusEffectEmbed'
+import { createEffect } from '../statusEffects'
+import { Manifest } from '../asset-manifest'
+import { EffectTemplate } from '../statusEffects/templates'
 
 /**
  * Prompt to equip from available inventory items.
@@ -31,122 +31,122 @@ import { EffectTemplate } from "../statusEffects/templates";
 export const useInventoryItemPrompt = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const character = getUserCharacter(interaction.user);
-  const inventory = usableInventory(character);
+  const character = getUserCharacter(interaction.user)
+  const inventory = usableInventory(character)
   if (inventory.length === 0) {
     interaction.editReply({
-      content: "No inventory items available to use",
-    });
-    return;
+      content: 'No inventory items available to use',
+    })
+    return
   }
   const message = await interaction.followUp({
-    content: "What would you like to use?",
+    content: 'What would you like to use?',
     components: [
       new MessageActionRow({
         components: [
           itemSelect({
             inventory: inventory,
-            placeholder: "Choose an item to use.",
+            placeholder: 'Choose an item to use.',
           }),
         ],
       }),
       new MessageActionRow({
         components: [
           new MessageButton({
-            customId: "done",
-            style: "PRIMARY",
-            label: "Done",
+            customId: 'done',
+            style: 'PRIMARY',
+            label: 'Done',
           }),
         ],
       }),
     ],
-  });
-  if (!(message instanceof Message)) return;
+  })
+  if (!(message instanceof Message)) return
 
-  let done = false;
+  let done = false
 
   while (!done) {
     const response = await message
       .awaitMessageComponent({
         filter: (interaction) => {
-          interaction.deferUpdate();
-          return interaction.user.id === interaction.user.id;
+          interaction.deferUpdate()
+          return interaction.user.id === interaction.user.id
         },
         time: 60000,
       })
       .catch(() => {
-        message.edit({ components: [] });
-      });
-    if (!response) return;
-    if (response.isButton() && response.customId === "done") {
-      message.delete();
-      done = true;
+        message.edit({ components: [] })
+      })
+    if (!response) return
+    if (response.isButton() && response.customId === 'done') {
+      message.delete()
+      done = true
     }
     if (response.isSelectMenu()) {
-      const item = inventory[parseInt(response.values[0])];
-      const character = getUserCharacter(interaction.user);
+      const item = inventory[parseInt(response.values[0])]
+      const character = getUserCharacter(interaction.user)
       useInventoryItem({
         itemId: item.id,
         characterId: character.id,
         interaction,
-      });
+      })
     }
   }
-};
+}
 
 export const potionArt: {
-  [key in EffectTemplate]: Manifest["fantasy"]["items"];
+  [key in EffectTemplate]: Manifest['fantasy']['items']
 } = {
-  aggression: "magic potion with glowing orange liquid",
-  frailty: "magic potion with glowing purple liquid",
-  invigorated: "magic potion with glowing white liquid",
-  might: "magic potion with glowing red liquid",
-  protectedEffect: "magic potion with glowing yellow liquid",
-  slayer: "magic potion with glowing green liquid",
-};
+  aggression: 'magic potion with glowing orange liquid',
+  frailty: 'magic potion with glowing purple liquid',
+  invigorated: 'magic potion with glowing white liquid',
+  might: 'magic potion with glowing red liquid',
+  protectedEffect: 'magic potion with glowing yellow liquid',
+  slayer: 'magic potion with glowing green liquid',
+}
 
 function useInventoryItem({
   itemId,
   characterId,
   interaction,
 }: {
-  itemId: string;
-  characterId: string;
-  interaction: CommandInteraction;
+  itemId: string
+  characterId: string
+  interaction: CommandInteraction
 }) {
-  const character = selectCharacterById(store.getState(), characterId);
-  if (!character) return;
-  const item = character.inventory.find((i) => i.id === itemId);
-  if (!item) return;
+  const character = selectCharacterById(store.getState(), characterId)
+  if (!character) return
+  const item = character.inventory.find((i) => i.id === itemId)
+  if (!item) return
   if (isPotion(item)) {
-    const embeds = [];
+    const embeds = []
     if (item.useEffects.randomEffect) {
-      const effectId = randomArrayElement(item.useEffects.randomEffect);
-      const effect = createEffect(effectId);
-      store.dispatch(effectAdded({ characterId, effect }));
-      const { s3Url } = getAsset("fantasy", "items", potionArt[effectId]);
+      const effectId = randomArrayElement(item.useEffects.randomEffect)
+      const effect = createEffect(effectId)
+      store.dispatch(effectAdded({ characterId, effect }))
+      const { s3Url } = getAsset('fantasy', 'items', potionArt[effectId])
       embeds.push(
         statusEffectEmbed(effect, interaction)
           .setImage(s3Url)
           .setThumbnail(character.profile)
-      );
+      )
     }
     if (item.useEffects.maxHeal) {
-      const rawHeal = d(item.useEffects.maxHeal);
+      const rawHeal = d(item.useEffects.maxHeal)
       const healAmount = clamp(rawHeal, {
         max: character.statsModified.maxHP - character.hp,
-      });
+      })
       store.dispatch(
         healed({
           amount: healAmount,
           characterId: character.id,
         })
-      );
+      )
       embeds.push(
         new MessageEmbed({
           title: `${character.name} healed +${healAmount} ${Emoji(
             interaction,
-            "heal"
+            'heal'
           )}`,
           fields: [
             hpBarField({
@@ -157,19 +157,19 @@ function useInventoryItem({
         })
           .setImage(
             getAsset(
-              "fantasy",
-              "items",
-              "magic potion with glowing red liquid",
+              'fantasy',
+              'items',
+              'magic potion with glowing red liquid',
               item.id
             ).s3Url
           )
           .setThumbnail(character.profile)
-      );
+      )
     }
-    store.dispatch(itemRemoved({ itemId, characterId }));
+    store.dispatch(itemRemoved({ itemId, characterId }))
     interaction.followUp({
       content: `${character.name} drank a ${item.name}`,
       embeds,
-    });
+    })
   }
 }

@@ -1,22 +1,22 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, TextChannel } from "discord.js";
-import { getUserCharacter } from "../../character/getUserCharacter";
-import { characterEmbed } from "../../character/characterEmbed";
-import { questEmbed } from "../../quest/questEmbed";
-import { statusEffectEmbed } from "../../statusEffects/statusEffectEmbed";
-import { actionEmbed } from "./actionEmbed";
-import { values } from "remeda";
-import { statsEmbed } from "../../character/statsEmbed";
-import { itemEmbed } from "../../equipment/itemEmbed";
-import { Character } from "../../character/Character";
-import { getHook } from "./getHook";
+import { SlashCommandBuilder } from '@discordjs/builders'
+import { CommandInteraction, TextChannel } from 'discord.js'
+import { getUserCharacter } from '../../character/getUserCharacter'
+import { characterEmbed } from '../../character/characterEmbed'
+import { questEmbed } from '../../quest/questEmbed'
+import { statusEffectEmbed } from '../../statusEffects/statusEffectEmbed'
+import { actionEmbed } from './actionEmbed'
+import { values } from 'remeda'
+import { statsEmbed } from '../../character/statsEmbed'
+import { itemEmbed } from '../../equipment/itemEmbed'
+import { Character } from '../../character/Character'
+import { getHook } from './getHook'
 
 export const command = new SlashCommandBuilder()
-  .setName("inspect")
-  .setDescription("Inspect someone.")
+  .setName('inspect')
+  .setDescription('Inspect someone.')
   .addUserOption((option) =>
-    option.setName("target").setDescription("Whom to inspect")
-  );
+    option.setName('target').setDescription('Whom to inspect')
+  )
 
 // TODO: inspect hp|stats|inventory|cooldowns
 export const execute = async (
@@ -24,9 +24,9 @@ export const execute = async (
 ): Promise<void> => {
   const user =
     (interaction.options.data[0] && interaction.options.data[0].user) ||
-    interaction.user;
-  const character = getUserCharacter(user);
-  console.log(`inspect ${character.name}`, character);
+    interaction.user
+  const character = getUserCharacter(user)
+  console.log(`inspect ${character.name}`, character)
 
   await interaction.followUp({
     embeds: [
@@ -34,47 +34,47 @@ export const execute = async (
       statsEmbed({ character, interaction }),
       actionEmbed({ character, interaction }),
     ],
-  });
+  })
 
   if (
     values(character.equipment).length ||
     (character.statusEffects?.length ?? 0) ||
     values(character.quests).length
   )
-    inspectThread({ interaction, character });
-};
+    inspectThread({ interaction, character })
+}
 
 async function inspectThread({
   interaction,
   character,
 }: {
-  interaction: CommandInteraction;
-  character: Character;
+  interaction: CommandInteraction
+  character: Character
 }): Promise<void> {
-  const channel = interaction.channel;
-  if (!(channel instanceof TextChannel)) return;
+  const channel = interaction.channel
+  if (!(channel instanceof TextChannel)) return
   const thread = await channel.threads.create({
     name: `Inspect ${character.name}`,
-  });
-  const webhooks = await channel.fetchWebhooks();
+  })
+  const webhooks = await channel.fetchWebhooks()
   const equipmentEmbeds = values(character.equipment)
     .map((item) => itemEmbed({ item, interaction }))
-    .slice(0, 9);
+    .slice(0, 9)
   if (equipmentEmbeds.length)
     await getHook({
-      name: "Equipment",
+      name: 'Equipment',
       webhooks,
       interaction,
     }).then((hook) => {
       hook?.send({
         embeds: equipmentEmbeds,
         threadId: thread.id,
-      });
-    });
+      })
+    })
 
   if ((character.statusEffects?.length ?? 0) > 0) {
     await getHook({
-      name: "Status Effects",
+      name: 'Status Effects',
       webhooks,
       interaction,
     }).then((hook) =>
@@ -84,12 +84,12 @@ async function inspectThread({
         ),
         threadId: thread.id,
       })
-    );
+    )
   }
-  const embed = questEmbed(character);
+  const embed = questEmbed(character)
   if (embed) {
     await getHook({
-      name: "Quests",
+      name: 'Quests',
       webhooks,
       interaction,
     }).then((hook) =>
@@ -97,9 +97,9 @@ async function inspectThread({
         embeds: [embed],
         threadId: thread.id,
       })
-    );
+    )
   }
-  thread.setArchived(true);
+  thread.setArchived(true)
 }
 
-export default { command, execute };
+export default { command, execute }

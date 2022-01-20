@@ -1,10 +1,10 @@
-import { Character } from "./Character";
-import { getCooldownRemaining } from "./cooldowns/getCooldownRemaining";
+import { Character } from './Character'
+import { getCooldownRemaining } from './cooldowns/getCooldownRemaining'
 
 export const isCharacterOnCooldown = (
   characterId: string,
-  type: keyof Character["cooldowns"]
+  type: keyof Character['cooldowns']
 ): boolean =>
-  process.env.COOLDOWNS_DISABLED === "true"
+  process.env.COOLDOWNS_DISABLED === 'true'
     ? false
-    : (getCooldownRemaining(characterId, type) ?? 0) > 0;
+    : (getCooldownRemaining(characterId, type) ?? 0) > 0

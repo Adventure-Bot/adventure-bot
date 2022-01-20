@@ -1,42 +1,42 @@
-import { Quest } from "./Quest";
+import { Quest } from './Quest'
 
 const questIds = [
-  "slayer",
-  "survivor",
-  "blessed",
+  'slayer',
+  'survivor',
+  'blessed',
   // "afflicted",
   // "traveler",
-  "healer",
+  'healer',
   // "rogue",
-] as const;
+] as const
 
-export type QuestId = typeof questIds[number];
+export type QuestId = typeof questIds[number]
 export const isQuestId = (id: string): id is QuestId =>
-  questIds.includes(id as QuestId);
+  questIds.includes(id as QuestId)
 
 // TODO: refactor to map.
 export const quests: {
-  [id in QuestId]: Quest;
+  [id in QuestId]: Quest
 } = {
   slayer: {
-    id: "slayer",
-    title: "Slayer",
+    id: 'slayer',
+    title: 'Slayer',
     progress: 0,
     totalRequired: 5,
-    objective: "Defeat 5 monsters",
-    reward: "Deal more damage to monsters.",
+    objective: 'Defeat 5 monsters',
+    reward: 'Deal more damage to monsters.',
     repeatable: true,
-    victoryText: "Your are a slayer!",
+    victoryText: 'Your are a slayer!',
   },
   survivor: {
-    id: "survivor",
-    title: "Survivor",
+    id: 'survivor',
+    title: 'Survivor',
     progress: 0,
     totalRequired: 50,
-    objective: "Survive 50 damage",
-    reward: "Gain temporary health.",
+    objective: 'Survive 50 damage',
+    reward: 'Gain temporary health.',
     repeatable: true,
-    victoryText: "You have survived hardship and it only makes you harder.",
+    victoryText: 'You have survived hardship and it only makes you harder.',
   },
   // afflicted: {
   //   id: "afflicted",
@@ -57,24 +57,24 @@ export const quests: {
   //   repeatable: false,
   // },
   blessed: {
-    id: "blessed",
-    title: "Blessed",
+    id: 'blessed',
+    title: 'Blessed',
     progress: 0,
     totalRequired: 5,
-    objective: "Find 5 shrines.",
-    reward: "Shrines last twice as long.",
+    objective: 'Find 5 shrines.',
+    reward: 'Shrines last twice as long.',
     repeatable: false,
-    victoryText: "#blessed is the shrine seeker.",
+    victoryText: '#blessed is the shrine seeker.',
   },
   healer: {
-    id: "healer",
-    title: "Healer",
+    id: 'healer',
+    title: 'Healer',
     progress: 0,
     totalRequired: 25,
-    objective: "Heal 25 hp",
-    reward: "Gain ability `/renew`, which heals over time.",
+    objective: 'Heal 25 hp',
+    reward: 'Gain ability `/renew`, which heals over time.',
     repeatable: false,
-    victoryText: "Flesh rended and renewed. The cycle of life.",
+    victoryText: 'Flesh rended and renewed. The cycle of life.',
   },
   // rogue: {
   //   id: "rogue",
@@ -83,4 +83,4 @@ export const quests: {
   //   totalRequired: 15,
   //   objective: 'Evade '
   // },
-};
+}

@@ -1,13 +1,13 @@
-import { MessageEmbed } from "discord.js";
-import { Character } from "../character/Character";
-import { questProgressField } from "./questProgressField";
+import { MessageEmbed } from 'discord.js'
+import { Character } from '../character/Character'
+import { questProgressField } from './questProgressField'
 
 export const questEmbed = (character: Character): MessageEmbed | void => {
-  if (Object.keys(character.quests).length === 0) return;
-  const embed = new MessageEmbed();
-  embed.setTitle("Quests");
+  if (Object.keys(character.quests).length === 0) return
+  const embed = new MessageEmbed()
+  embed.setTitle('Quests')
   Object.values(character.quests).forEach((quest) => {
-    embed.addFields([questProgressField(quest)]);
-  });
-  return embed;
-};
+    embed.addFields([questProgressField(quest)])
+  })
+  return embed
+}

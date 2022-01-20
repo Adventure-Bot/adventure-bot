@@ -1,41 +1,36 @@
-import { configureStore } from "@reduxjs/toolkit";
-import {
-  persistStore,
-  persistReducer,
-  PERSIST,
-  REHYDRATE,
-} from "redux-persist";
-import remoteReduxEnhancer from "@redux-devtools/remote";
-import rootReducer from "./reducers";
-import { disk } from "./storage";
-import { persistVersion, persistMigrate } from "./migrations";
+import { configureStore } from '@reduxjs/toolkit'
+import { persistStore, persistReducer, PERSIST, REHYDRATE } from 'redux-persist'
+import remoteReduxEnhancer from '@redux-devtools/remote'
+import rootReducer from './reducers'
+import { disk } from './storage'
+import { persistVersion, persistMigrate } from './migrations'
 
-const enhancers = [];
+const enhancers = []
 
-if (process.env.REDUX_DEVTOOLS_ENABLED === "true") {
+if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
   enhancers.push(
     remoteReduxEnhancer({
       name:
-        "Adventure Bot" +
-        (process.env.NODE_ENV === "development"
-          ? " (development)"
-          : " (production)"),
+        'Adventure Bot' +
+        (process.env.NODE_ENV === 'development'
+          ? ' (development)'
+          : ' (production)'),
       realtime: true,
-      hostname: "localhost",
+      hostname: 'localhost',
       port: 5010,
     })
-  );
+  )
 }
 
 const persistedReducer = persistReducer(
   {
-    key: "root",
+    key: 'root',
     storage: disk,
     version: persistVersion,
     migrate: persistMigrate,
   },
   rootReducer
-);
+)
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -47,12 +42,12 @@ const store = configureStore({
         ignoredActions: [PERSIST, REHYDRATE],
       },
     }),
-});
+})
 
 // ts-prune-ignore-next
-export const persistor = persistStore(store);
+export const persistor = persistStore(store)
 
-export default store;
+export default store
 
-export type ReduxState = ReturnType<typeof store.getState>;
-export type RootReducerState = ReturnType<typeof rootReducer>;
+export type ReduxState = ReturnType<typeof store.getState>
+export type RootReducerState = ReturnType<typeof rootReducer>

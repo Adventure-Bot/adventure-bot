@@ -122,5 +122,5 @@ Zhao
 Ziselaer
 Zysyss
 `
-  .split("\n")
-  .filter(Boolean);
+  .split('\n')
+  .filter(Boolean)

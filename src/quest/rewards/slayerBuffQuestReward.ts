@@ -1,17 +1,17 @@
-import { CommandInteraction } from "discord.js";
-import { getUserCharacter } from "../../character/getUserCharacter";
-import { buffQuestReward } from "./buffQuestReward";
+import { CommandInteraction } from 'discord.js'
+import { getUserCharacter } from '../../character/getUserCharacter'
+import { buffQuestReward } from './buffQuestReward'
 
 export const slayerBuffQuestReward = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const character = getUserCharacter(interaction.user);
-  const quest = character.quests.slayer;
-  if (!quest) return;
+  const character = getUserCharacter(interaction.user)
+  const quest = character.quests.slayer
+  if (!quest) return
   buffQuestReward(
     interaction,
     {
-      name: "Slayer",
+      name: 'Slayer',
       buff: true,
       debuff: false,
       duration: 4 * 60 * 60000,
@@ -21,5 +21,5 @@ export const slayerBuffQuestReward = async (
       started: new Date().toString(),
     },
     quest
-  );
-};
+  )
+}

@@ -1,36 +1,36 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction } from "discord.js";
-import { characterEmbed } from "../../character/characterEmbed";
-import { getCharacterUpdate } from "../../character/getCharacterUpdate";
-import { getUserCharacter } from "../../character/getUserCharacter";
-import { inventoryFields } from "../../character/inventoryFields";
-import { loot } from "../../character/loot/loot";
-import { lootResultEmbed } from "../../character/loot/lootResultEmbed";
-import { getRandomMonster } from "../../monster/getRandomMonster";
-import { monsterEmbed } from "../../encounters/utils/monsterEmbed";
-import { selectMonsterById } from "../../store/selectors";
-import store from "../../store";
+import { SlashCommandBuilder } from '@discordjs/builders'
+import { CommandInteraction } from 'discord.js'
+import { characterEmbed } from '../../character/characterEmbed'
+import { getCharacterUpdate } from '../../character/getCharacterUpdate'
+import { getUserCharacter } from '../../character/getUserCharacter'
+import { inventoryFields } from '../../character/inventoryFields'
+import { loot } from '../../character/loot/loot'
+import { lootResultEmbed } from '../../character/loot/lootResultEmbed'
+import { getRandomMonster } from '../../monster/getRandomMonster'
+import { monsterEmbed } from '../../encounters/utils/monsterEmbed'
+import { selectMonsterById } from '../../store/selectors'
+import store from '../../store'
 
 export const command = new SlashCommandBuilder()
-  .setName("lootmonster")
-  .setDescription("Loot a random monster.");
+  .setName('lootmonster')
+  .setDescription('Loot a random monster.')
 
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const monster = getRandomMonster();
-  const character = getUserCharacter(interaction.user);
+  const monster = getRandomMonster()
+  const character = getUserCharacter(interaction.user)
   const result = await loot({
     looterId: character.id,
     targetId: monster.id,
     interaction,
-  });
+  })
 
-  const updatedMonster = selectMonsterById(store.getState(), monster.id);
+  const updatedMonster = selectMonsterById(store.getState(), monster.id)
 
   if (!updatedMonster) {
-    interaction.editReply(`Monster not found ${monster.id}`);
-    return;
+    interaction.editReply(`Monster not found ${monster.id}`)
+    return
   }
   interaction.editReply({
     embeds: [
@@ -40,7 +40,7 @@ export const execute = async (
         interaction,
       }).addFields(...inventoryFields(character)),
     ].concat(result ? lootResultEmbed({ result, interaction }) : []),
-  });
-};
+  })
+}
 
-export default { command, execute };
+export default { command, execute }

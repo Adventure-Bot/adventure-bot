@@ -1,4 +1,4 @@
-import store from "../store";
-import { selectAllCharacters } from "../store/selectors";
+import store from '../store'
+import { selectAllCharacters } from '../store/selectors'
 
-export const getUserCharacters = () => selectAllCharacters(store.getState());
+export const getUserCharacters = () => selectAllCharacters(store.getState())

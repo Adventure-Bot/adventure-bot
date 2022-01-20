@@ -92,5 +92,5 @@ Yaotzin
 Yen-lo-Wang
 Yezidi
 `
-  .split("\n")
-  .filter(Boolean);
+  .split('\n')
+  .filter(Boolean)

@@ -1,12 +1,12 @@
-import { Monster } from "./Monster";
-import { weightedTable } from "../utils";
+import { Monster } from './Monster'
+import { weightedTable } from '../utils'
 import {
   createDemon,
   createGoblin,
   createSlime,
   createZombie,
   createDragon,
-} from "./monsters";
+} from './monsters'
 
 export function createRandomMonster(): Monster {
   return weightedTable([
@@ -15,5 +15,5 @@ export function createRandomMonster(): Monster {
     [10, createSlime],
     [10, createZombie],
     [0.5, createDragon],
-  ])();
+  ])()
 }

@@ -1,3 +1,3 @@
-import { StatusEffect } from "../StatusEffect";
+import { StatusEffect } from '../StatusEffect'
 
-export type TemplateEffect = Omit<StatusEffect, "started">;
+export type TemplateEffect = Omit<StatusEffect, 'started'>

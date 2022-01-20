@@ -1,3 +1,3 @@
-import { createEffect } from "./createEffect";
+import { createEffect } from './createEffect'
 
-export { createEffect };
+export { createEffect }

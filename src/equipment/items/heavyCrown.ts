@@ -1,12 +1,12 @@
-import { randomUUID } from "crypto";
-import { Hat } from "../equipment";
+import { randomUUID } from 'crypto'
+import { Hat } from '../equipment'
 
 export const heavyCrown = (): Hat => ({
   id: randomUUID(),
-  name: "heavy crown",
-  description: "Beset with jewels, in the daylight it commands the eye.",
+  name: 'heavy crown',
+  description: 'Beset with jewels, in the daylight it commands the eye.',
   goldValue: 300,
-  type: "hat",
+  type: 'hat',
   modifiers: {
     maxHP: 5,
     attackBonus: +2,
@@ -17,4 +17,4 @@ export const heavyCrown = (): Hat => ({
   equippable: true,
   sellable: true,
   tradeable: true,
-});
+})

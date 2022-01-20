@@ -1,5 +1,5 @@
-import { weightedRandom } from "../utils/weightedRandom";
-import { Item } from "./Item";
+import { weightedRandom } from '../utils/weightedRandom'
+import { Item } from './Item'
 import {
   buckler,
   chainArmor,
@@ -16,10 +16,10 @@ import {
   ringOfAttack,
   towerShield,
   warAxe,
-} from "./items";
-import { amuletOfAttack } from "./items/amuletOfAttack";
-import { amuletOfProtection } from "./items/amuletOfProtection";
-import { potionOfMight } from "./items/potionOfMight";
+} from './items'
+import { amuletOfAttack } from './items/amuletOfAttack'
+import { amuletOfProtection } from './items/amuletOfProtection'
+import { potionOfMight } from './items/potionOfMight'
 
 const weights = new Map<() => Item, number>([
   [amuletOfAttack, 0.3],
@@ -40,10 +40,10 @@ const weights = new Map<() => Item, number>([
   [ringOfAttack, 0.3],
   [towerShield, 1],
   [warAxe, 0.5],
-]);
+])
 
 export function randomShopItem(): Item {
   return Array.from(weights.keys())[
     weightedRandom(Array.from(weights.values()))
-  ]();
+  ]()
 }

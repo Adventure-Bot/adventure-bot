@@ -4,5 +4,5 @@
  */
 
 export function getSaleRate(): number {
-  return 0.8;
+  return 0.8
 }

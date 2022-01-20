@@ -100,5 +100,5 @@ Keshawn Knight
 Peter Beasley
 Essence Duffy
 `
-  .split("\n")
-  .filter(Boolean);
+  .split('\n')
+  .filter(Boolean)

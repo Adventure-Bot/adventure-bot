@@ -1,13 +1,13 @@
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { hpBarField } from "../../character/hpBar/hpBarField";
-import { getRoamingMonsters } from "../../monster/getRoamingMonsters";
-import { monsterEmbed } from "../../encounters/utils/monsterEmbed";
+import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { hpBarField } from '../../character/hpBar/hpBarField'
+import { getRoamingMonsters } from '../../monster/getRoamingMonsters'
+import { monsterEmbed } from '../../encounters/utils/monsterEmbed'
 
 export function listMonsters(interaction: CommandInteraction): void {
-  const monsters = getRoamingMonsters();
+  const monsters = getRoamingMonsters()
   interaction.editReply({
     embeds: [
-      new MessageEmbed({ title: "Monsters at large" }),
+      new MessageEmbed({ title: 'Monsters at large' }),
       ...(monsters.length > 0
         ? monsters
             .slice(0, 10)
@@ -19,9 +19,9 @@ export function listMonsters(interaction: CommandInteraction): void {
         : [
             new MessageEmbed({
               description:
-                "No monsters encountered yet. `/adventure` to find some!",
+                'No monsters encountered yet. `/adventure` to find some!',
             }),
           ]),
     ],
-  });
+  })
 }

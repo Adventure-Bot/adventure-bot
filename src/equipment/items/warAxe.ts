@@ -1,11 +1,11 @@
-import { randomUUID } from "crypto";
-import { Weapon } from "../equipment";
+import { randomUUID } from 'crypto'
+import { Weapon } from '../equipment'
 
 export const warAxe = (): Weapon => ({
   id: randomUUID(),
-  type: "weapon",
-  name: "war axe",
-  description: "an axe made for war",
+  type: 'weapon',
+  name: 'war axe',
+  description: 'an axe made for war',
   damageMax: 6,
   modifiers: {
     maxHP: 2,
@@ -22,4 +22,4 @@ export const warAxe = (): Weapon => ({
   equippable: true,
   sellable: true,
   tradeable: true,
-});
+})
