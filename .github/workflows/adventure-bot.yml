@@ -72,4 +72,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: yarn prune
+      - run: yarn ts-prune -e
