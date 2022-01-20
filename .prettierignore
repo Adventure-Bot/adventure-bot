@@ -1,1 +1,11 @@
 asset-manifest.ts
+node_modules
+blends
+chapters
+emoji
+fonts
+images
+patches
+yarn.lock
+.github
+*.md
