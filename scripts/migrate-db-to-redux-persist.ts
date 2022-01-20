@@ -1,18 +1,18 @@
-import fs from "fs";
-import path from "path";
-import mkdirp from "mkdirp";
+import fs from 'fs'
+import path from 'path'
+import mkdirp from 'mkdirp'
 
 const migrate = async () => {
-  const reduxDBPath = path.join(__dirname, "..", "db.json");
-  const dbDir = path.join(__dirname, "..", "db");
-  const persistedReduxDBPath = path.join(dbDir, "db.json");
+  const reduxDBPath = path.join(__dirname, '..', 'db.json')
+  const dbDir = path.join(__dirname, '..', 'db')
+  const persistedReduxDBPath = path.join(dbDir, 'db.json')
 
-  await mkdirp(dbDir);
+  await mkdirp(dbDir)
 
   if (fs.existsSync(reduxDBPath)) {
     const reduxDBData = JSON.parse(
-      fs.readFileSync(reduxDBPath).toString("utf-8")
-    );
+      fs.readFileSync(reduxDBPath).toString('utf-8')
+    )
 
     const persistedReduxDB = {
       ...Object.keys(reduxDBData).reduce(
@@ -23,13 +23,13 @@ const migrate = async () => {
         {} as Record<string, string>
       ),
       _persist: `{"version":0,"rehydrated":true}`,
-    };
+    }
 
     fs.writeFileSync(
       persistedReduxDBPath,
       JSON.stringify(persistedReduxDB, null, 2)
-    );
+    )
   }
-};
+}
 
-migrate();
+migrate()
