@@ -1,14 +1,10 @@
 {
-  "include": [
-    "./src/**/*.ts"
-  ],
+  "include": ["./src/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
-    "lib": [
-      "es6"
-    ],
+    "lib": ["es6"],
     "allowJs": true,
     "outDir": ".build",
     "rootDir": "src",
@@ -19,6 +15,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": false,
+    "noImplicitReturns": false
   }
 }
