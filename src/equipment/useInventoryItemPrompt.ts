@@ -94,7 +94,7 @@ export const useInventoryItemPrompt = async (
   }
 }
 
-export const potionArt: {
+const potionArt: {
   [key in EffectTemplate]: Manifest['fantasy']['items']
 } = {
   aggression: 'magic potion with glowing orange liquid',
