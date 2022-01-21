@@ -1,8 +1,8 @@
 # Adventure Bot
 
-![Build](https://github.com/Adventure-Bot/adventure-bot/actions/workflows/build.yml/badge.svg)
+![Build](https://github.com/Adventure-Bot/adventure-bot/actions/workflows/adventure-bot.yml/badge.svg)
 
-Slay monsters, earn gold, evade traps, travel, gear up, complete quests, and stab your friends when they're at their weakest so you can steal all _their_ gold. 
+Slay monsters, earn gold, evade traps, travel, gear up, complete quests, and stab your friends when they're at their weakest so you can steal all _their_ gold.
 
 As you do.
 
@@ -16,7 +16,7 @@ Adventure Bot is the DM in your friend's Discord roleplaying game!
 
 ![example heal](./images/heal.png)
 
-# Developers
+## Developers
 
 Adventure Bot is developer friendly. Fork, hack, contribute!
 
