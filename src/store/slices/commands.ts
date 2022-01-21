@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { commandUsed } from '../actions'
 
-export const defaultCommands = {
+export const defaultCommandsState = {
   lastChannelId: '',
 }
 
 const commandsSlice = createSlice({
   name: 'commands',
   initialState: {
-    ...defaultCommands,
+    ...defaultCommandsState,
   },
   reducers: {},
   extraReducers: (builder) => {

@@ -1,8 +1,9 @@
 import { RootReducerState } from '.'
 import { createMigrate } from 'redux-persist'
 import { defaultEncounterWeights } from './slices/encounters'
-import { defaultLeaderboard } from './slices/leaderboard'
+import { defaultLeaderboardState } from './slices/leaderboard'
 import { crownDefaultState } from './slices/crown'
+import { defaultCommandsState } from './slices/commands'
 
 /*
  * This is the current version and should match the latest version
@@ -52,8 +53,9 @@ const persistMigrations = {
   }),
   4: (state: PersistedReduxStateV3): PersistedReduxStateV4 => ({
     ...state,
-    leaderboard: defaultLeaderboard,
+    leaderboard: defaultLeaderboardState,
     crown: crownDefaultState,
+    commands: defaultCommandsState,
   }),
 }
 
