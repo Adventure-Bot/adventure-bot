@@ -4,7 +4,7 @@ import { commandUsed, winnerDeclared } from '../actions'
 
 type Score = { name: string; gold: number; wins: number; profile: string }
 
-export const defaultLeaderboard: {
+export const defaultLeaderboardState: {
   winners: Character[]
   scoresByCharacter: { [id: string]: Score }
   leaderboard: Score[]
@@ -19,7 +19,7 @@ export const defaultLeaderboard: {
 const leaderboardSlice = createSlice({
   name: 'leaderboard',
   initialState: {
-    ...defaultLeaderboard,
+    ...defaultLeaderboardState,
   },
   reducers: {},
   extraReducers: (builder) => {

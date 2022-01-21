@@ -133,12 +133,6 @@ export const selectSovereign = (state: ReduxState): Character | undefined =>
     ? state.characters.charactersById[state.crown.bearerId]
     : undefined
 
-export const selectCrownBearer = (state: ReduxState): Character | undefined =>
-  state.characters.charactersById[state.crown.bearerId]
-
-export const selectCrownTimeRemaining = (state: ReduxState): number =>
-  state.crown.timeRemaining
-
 export const selectWinnerAnnounced = (state: ReduxState): boolean =>
   state.crown.announced
 
