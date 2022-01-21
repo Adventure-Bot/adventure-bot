@@ -10,9 +10,7 @@
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
-      "@adventure-bot/*": [
-        "./*"
-      ],
+      "@adventure-bot/*": ["./*"]
     },
     "strict": true,
     "noImplicitAny": true,
