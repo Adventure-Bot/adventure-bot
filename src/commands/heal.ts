@@ -7,9 +7,9 @@ import { Emoji } from '@adventure-bot/Emoji'
 import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
 import { questProgressField } from '@adventure-bot/quest/questProgressField'
 import { isUserQuestComplete } from '@adventure-bot/quest/isQuestComplete'
-import quests from './quests'
+import quests from '@adventure-bot/commands/quests'
 import { getAsset } from '@adventure-bot/utils/getAsset'
-import cooldowns from './cooldowns'
+import cooldowns from '@adventure-bot/commands/cooldowns'
 
 export const command = new SlashCommandBuilder()
   .setName('heal')

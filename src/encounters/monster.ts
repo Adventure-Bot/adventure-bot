@@ -1,6 +1,6 @@
 import { CommandInteraction, Message, TextChannel } from 'discord.js'
 import { makeAttack } from '@adventure-bot/attack/makeAttack'
-import { chest } from './chest'
+import { chest } from '@adventure-bot/encounters/chest'
 import { isUserQuestComplete } from '@adventure-bot/quest/isQuestComplete'
 import quests from '@adventure-bot/commands/quests'
 import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
@@ -18,7 +18,7 @@ import {
 import { Emoji } from '@adventure-bot/Emoji'
 import { attackResultEmbed } from '@adventure-bot/attack/attackResultEmbed'
 import { encounterSummaryEmbed } from '@adventure-bot/encounter/encounterSummaryEmbed'
-import { encounterEmbed } from './utils/encounterEmbed'
+import { encounterEmbed } from '@adventure-bot/encounters/utils/encounterEmbed'
 import { getHook } from '@adventure-bot/commands/inspect/getHook'
 import {
   selectCharacterById,

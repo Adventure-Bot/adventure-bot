@@ -12,6 +12,9 @@
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-unused-vars": 2,
-    "@typescript-eslint/explicit-module-boundary-types": 2
+    "@typescript-eslint/explicit-module-boundary-types": 2,
+    "no-restricted-imports": ["error", {
+      "patterns": [".*"]
+    }]
   }
 }

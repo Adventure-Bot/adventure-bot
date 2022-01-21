@@ -16,9 +16,9 @@ import {
   isRing,
   isShield,
   isWeapon,
-} from '../../equipment/equipment'
-import { getSaleRate } from '../../encounters/shop/getSaleRate'
-import { itemReceived, newGame } from '../actions'
+} from '@adventure-bot/equipment/equipment'
+import { getSaleRate } from '@adventure-bot/encounters/shop/getSaleRate'
+import { itemReceived, newGame } from '@adventure-bot/store/actions'
 import { AttackResult } from '@adventure-bot/attack/AttackResult'
 import { characterLooted } from '@adventure-bot/store/slices/loots'
 
