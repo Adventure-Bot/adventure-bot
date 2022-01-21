@@ -1,13 +1,14 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
+
 import { characterEmbed } from '@adventure-bot/character/characterEmbed'
 import { getCharacterUpdate } from '@adventure-bot/character/getCharacterUpdate'
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { inventoryFields } from '@adventure-bot/character/inventoryFields'
 import { loot } from '@adventure-bot/character/loot/loot'
 import { lootResultEmbed } from '@adventure-bot/character/loot/lootResultEmbed'
-import { getRandomMonster } from '@adventure-bot/monster/getRandomMonster'
 import { monsterEmbed } from '@adventure-bot/encounters/utils/monsterEmbed'
+import { getRandomMonster } from '@adventure-bot/monster/getRandomMonster'
 
 export const command = new SlashCommandBuilder()
   .setName('lootme')

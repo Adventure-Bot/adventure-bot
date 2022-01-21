@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
+
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { actionEmbed } from '@adventure-bot/commands/inspect/actionEmbed'
 

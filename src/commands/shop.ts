@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
+
 import { shop } from '@adventure-bot/encounters/shop/shop'
 
 export const command = new SlashCommandBuilder()

@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageAttachment, Permissions } from 'discord.js'
+
 import { DB_FILE } from '@adventure-bot/fixtures'
 import { CommandHandler } from '@adventure-bot/utils'
 

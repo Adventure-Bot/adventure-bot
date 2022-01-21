@@ -1,6 +1,6 @@
+import { AttackResult } from '@adventure-bot/attack/AttackResult'
 import { makeAttack } from '@adventure-bot/attack/makeAttack'
 import { isCharacterOnCooldown } from '@adventure-bot/character/isCharacterOnCooldown'
-import { AttackResult } from '@adventure-bot/attack/AttackResult'
 import { startCooldown } from '@adventure-bot/character/startCooldown'
 
 export const playerAttack = (

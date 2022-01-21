@@ -1,4 +1,5 @@
 import { User } from 'discord.js'
+
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { Quest } from '@adventure-bot/quest/Quest'
 import { QuestId } from '@adventure-bot/quest/quests'

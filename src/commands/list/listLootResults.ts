@@ -1,4 +1,5 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
+
 import { lootResultEmbed } from '@adventure-bot/character/loot/lootResultEmbed'
 import { getLoots } from '@adventure-bot/encounter/getLoots'
 

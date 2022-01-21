@@ -1,7 +1,8 @@
-import { Character } from '@adventure-bot/character/Character'
 import { clamp, times } from 'remeda'
-import { selectCharacterById } from '@adventure-bot/store/selectors'
+
+import { Character } from '@adventure-bot/character/Character'
 import store from '@adventure-bot/store'
+import { selectCharacterById } from '@adventure-bot/store/selectors'
 
 export const hpBar = (c: Character, adjustment = 0): string => {
   const barLength = 10

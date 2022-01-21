@@ -1,8 +1,8 @@
 import { Character } from '@adventure-bot/character/Character'
 import store from '@adventure-bot/store'
 import {
-  selectCooldownByType,
   selectCharacterById,
+  selectCooldownByType,
 } from '@adventure-bot/store/selectors'
 
 export const getCooldownRemaining = (

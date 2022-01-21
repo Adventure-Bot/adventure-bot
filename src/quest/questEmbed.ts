@@ -1,4 +1,5 @@
 import { MessageEmbed } from 'discord.js'
+
 import { Character } from '@adventure-bot/character/Character'
 import { questProgressField } from '@adventure-bot/quest/questProgressField'
 

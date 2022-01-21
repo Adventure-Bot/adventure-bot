@@ -1,12 +1,13 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { d6 } from '@adventure-bot/utils/dice'
+
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
-import { questProgressField } from '@adventure-bot/quest/questProgressField'
-import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
 import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
 import { xpGainField } from '@adventure-bot/character/xpGainField'
+import { questProgressField } from '@adventure-bot/quest/questProgressField'
+import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
 import store from '@adventure-bot/store'
 import { damaged, xpAwarded } from '@adventure-bot/store/slices/characters'
+import { d6 } from '@adventure-bot/utils/dice'
 
 export async function barFight(
   interaction: CommandInteraction,

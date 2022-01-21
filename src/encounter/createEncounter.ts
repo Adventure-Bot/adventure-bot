@@ -1,7 +1,8 @@
-import { Monster } from '@adventure-bot/monster/Monster'
-import { Encounter } from '@adventure-bot/encounter/Encounter'
-import { Character } from '@adventure-bot/character/Character'
 import { randomUUID } from 'crypto'
+
+import { Character } from '@adventure-bot/character/Character'
+import { Encounter } from '@adventure-bot/encounter/Encounter'
+import { Monster } from '@adventure-bot/monster/Monster'
 import store from '@adventure-bot/store'
 import { encounterCreated } from '@adventure-bot/store/slices/encounters'
 

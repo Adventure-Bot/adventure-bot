@@ -6,15 +6,16 @@ import {
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
+
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
-import { progressBar } from '@adventure-bot/utils/progress-bar'
-import { getCompletedQuests } from '@adventure-bot/quest/getCompletedQuests'
 import { Quest } from '@adventure-bot/quest/Quest'
-import { isQuestId, QuestId } from '@adventure-bot/quest/quests'
-import { slayerBuffQuestReward } from '@adventure-bot/quest/rewards/slayerBuffQuestReward'
-import { survivorBuffQuestReward } from '@adventure-bot/quest/rewards/survivorBuffQuest'
+import { getCompletedQuests } from '@adventure-bot/quest/getCompletedQuests'
+import { QuestId, isQuestId } from '@adventure-bot/quest/quests'
 import { blessedBuffQuestReward } from '@adventure-bot/quest/rewards/blessedBuffQuest'
 import { healerQuestReward } from '@adventure-bot/quest/rewards/healerQuestReward'
+import { slayerBuffQuestReward } from '@adventure-bot/quest/rewards/slayerBuffQuestReward'
+import { survivorBuffQuestReward } from '@adventure-bot/quest/rewards/survivorBuffQuest'
+import { progressBar } from '@adventure-bot/utils/progress-bar'
 
 export const command = new SlashCommandBuilder()
   .setName('quests')

@@ -6,14 +6,15 @@ import {
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
+
+import { getCharacterUpdate } from '@adventure-bot/character/getCharacterUpdate'
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
-import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
 import { gpGainField } from '@adventure-bot/character/gpGainField'
-import { sellList } from '@adventure-bot/encounters/shop/sellList'
 import { getSaleRate } from '@adventure-bot/encounters/shop/getSaleRate'
+import { sellList } from '@adventure-bot/encounters/shop/sellList'
 import { sellValue } from '@adventure-bot/encounters/shop/sellValue'
 import { goldValue } from '@adventure-bot/equipment/goldValue'
-import { getCharacterUpdate } from '@adventure-bot/character/getCharacterUpdate'
+import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
 import store from '@adventure-bot/store'
 import { itemSold } from '@adventure-bot/store/slices/characters'
 

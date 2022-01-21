@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { persistStore, persistReducer, PERSIST, REHYDRATE } from 'redux-persist'
 import remoteReduxEnhancer from '@redux-devtools/remote'
+import { configureStore } from '@reduxjs/toolkit'
+import { PERSIST, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
+
+import * as actionCreators from '@adventure-bot/store/actions'
+import { persistMigrate, persistVersion } from '@adventure-bot/store/migrations'
 import rootReducer from '@adventure-bot/store/reducers'
 import { disk } from '@adventure-bot/store/storage'
-import { persistVersion, persistMigrate } from '@adventure-bot/store/migrations'
-import * as actionCreators from '@adventure-bot/store/actions'
+
 const enhancers = []
 
 if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {

@@ -1,7 +1,8 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
-import * as encounters from '@adventure-bot/encounters'
 import { keys } from 'remeda'
+
+import * as encounters from '@adventure-bot/encounters'
 
 const camelToSnakeCase = (str: string) =>
   str.replace(/[A-Z]/g, (letter: string) => `_${letter.toLowerCase()}`)

@@ -6,14 +6,15 @@ import {
   MessageEmbed,
   MessageSelectMenu,
 } from 'discord.js'
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
-import { isQuestId, quests } from '@adventure-bot/quest/quests'
-import questsCommand from '@adventure-bot/commands/quests'
+
 import { awardXP } from '@adventure-bot/character/awardXP'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { xpGainField } from '@adventure-bot/character/xpGainField'
+import questsCommand from '@adventure-bot/commands/quests'
 import { questEmbed } from '@adventure-bot/quest/questEmbed'
-import { selectAvailableQuests } from '@adventure-bot/store/selectors'
+import { isQuestId, quests } from '@adventure-bot/quest/quests'
 import store from '@adventure-bot/store'
+import { selectAvailableQuests } from '@adventure-bot/store/selectors'
 import { questGranted } from '@adventure-bot/store/slices/characters'
 
 // TODO: omit quests the user already has
