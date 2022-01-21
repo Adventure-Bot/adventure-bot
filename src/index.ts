@@ -16,6 +16,7 @@ import {
   selectSovereign,
   selectWinnerAnnounced,
 } from './store/selectors'
+import { leaderboard } from './commands/leaderboard'
 
 if (!process.env.token) exit(1)
 
@@ -116,16 +117,16 @@ async function main() {
 function startClock(client: Discord.Client) {
   const serverTick = () => {
     const sovereign = selectSovereign(store.getState())
-    // const crownBearer = selectCrownBearer(store.getState())
-    // const timeRemaining = selectCrownTimeRemaining(store.getState())
     const announced = selectWinnerAnnounced(store.getState())
     if (sovereign && !announced) {
       const lastChannelId = selectLastChannelUsed(store.getState())
       const channel = client.channels.cache.get(lastChannelId)
       if (!channel?.isText()) return
-      channel.send(`${sovereign} has won the crown! Congratulations!`)
+      channel.send({
+        content: `👑 ${sovereign.name} has claimed the crown! Game over!`,
+        embeds: leaderboard(),
+      })
       store.dispatch(winnerDeclared({ winner: sovereign }))
-      debugger
     }
     store.dispatch(tick())
   }
