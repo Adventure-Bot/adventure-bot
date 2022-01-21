@@ -1,5 +1,5 @@
-import store from '../store'
-import { selectAllEncounters } from '../store/selectors'
+import store from '@adventure-bot/store'
+import { selectAllEncounters } from '@adventure-bot/store/selectors'
 import { Encounter } from './Encounter'
 
 export function getEncounters(): Encounter[] {

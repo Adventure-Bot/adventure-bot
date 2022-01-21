@@ -6,8 +6,12 @@ import quests from '../commands/quests'
 import { Emoji } from '../Emoji'
 import { isUserQuestComplete } from '../quest/isQuestComplete'
 import { questProgressField } from '../quest/questProgressField'
-import store from '../store'
-import { healed, questProgressed, xpAwarded } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import {
+  healed,
+  questProgressed,
+  xpAwarded,
+} from '@adventure-bot/store/slices/characters'
 import { getAsset } from '../utils/getAsset'
 
 export const fairyWell = async (

@@ -9,8 +9,8 @@ import { itemSelect } from './itemSelect'
 import { isTradeable } from './equipment'
 
 import { itemEmbed } from './itemEmbed'
-import store from '../store'
-import { itemGiven, itemRemoved } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import { itemGiven, itemRemoved } from '@adventure-bot/store/slices/characters'
 
 export const offerItemPrompt = async (
   interaction: CommandInteraction

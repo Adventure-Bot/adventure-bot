@@ -3,8 +3,11 @@ import { Encounter } from './Encounter'
 import { xpGainField } from '../character/xpGainField'
 import { Emoji } from '../Emoji'
 import { gpGainField } from '../character/gpGainField'
-import { selectCharacterById, selectMonsterById } from '../store/selectors'
-import store from '../store'
+import {
+  selectCharacterById,
+  selectMonsterById,
+} from '@adventure-bot/store/selectors'
+import store from '@adventure-bot/store'
 import { decoratedName } from '../character/decoratedName'
 
 export function encounterSummaryEmbed({

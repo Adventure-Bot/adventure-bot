@@ -2,8 +2,8 @@ import { getCharacterStatModified } from '../character/getCharacterStatModified'
 import { d20, d6 } from '../utils/dice'
 import { TrapResult } from './TrapResult'
 import { getCharacter } from '../character/getCharacter'
-import store from '../store'
-import { damaged } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import { damaged } from '@adventure-bot/store/slices/characters'
 
 export const trapAttack = (
   characterId: string,

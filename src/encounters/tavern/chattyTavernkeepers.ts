@@ -12,9 +12,9 @@ import questsCommand from '../../commands/quests'
 import { awardXP } from '../../character/awardXP'
 import { xpGainField } from '../../character/xpGainField'
 import { questEmbed } from '../../quest/questEmbed'
-import { selectAvailableQuests } from '../../store/selectors'
-import store from '../../store'
-import { questGranted } from '../../store/slices/characters'
+import { selectAvailableQuests } from '@adventure-bot/store/selectors'
+import store from '@adventure-bot/store'
+import { questGranted } from '@adventure-bot/store/slices/characters'
 
 // TODO: omit quests the user already has
 export const chattyTavernkeepers = async (

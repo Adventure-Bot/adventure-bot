@@ -7,8 +7,8 @@ import {
 import inspect from '../commands/inspect/inspect'
 import { Item } from './Item'
 import { itemEmbed } from './itemEmbed'
-import store from '../store'
-import { itemEquipped } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import { itemEquipped } from '@adventure-bot/store/slices/characters'
 
 /**
  * Prompt to equip a specific item

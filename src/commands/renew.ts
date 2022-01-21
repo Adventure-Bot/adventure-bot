@@ -6,8 +6,8 @@ import { cooldownRemainingText } from '../character/cooldowns/cooldownRemainingT
 import { hpBarField } from '../character/hpBar/hpBarField'
 import { startCooldown } from '../character/startCooldown'
 import { isHealer } from '../heal/isHealer'
-import store from '../store'
-import { healed } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import { healed } from '@adventure-bot/store/slices/characters'
 
 export const command = new SlashCommandBuilder()
   .setName('renew')

@@ -14,8 +14,8 @@ import { buyItemPrompt } from './buyItemPrompt'
 import { sellItemPrompt } from './sellItemPrompt'
 import { goldValue } from '../../equipment/goldValue'
 import { getCharacterUpdate } from '../../character/getCharacterUpdate'
-import { selectIsHeavyCrownInPlay } from '../../store/selectors'
-import store from '../../store'
+import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
+import store from '@adventure-bot/store'
 
 import { getAsset } from '../../utils/getAsset'
 

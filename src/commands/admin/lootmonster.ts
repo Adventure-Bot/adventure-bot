@@ -8,8 +8,8 @@ import { loot } from '../../character/loot/loot'
 import { lootResultEmbed } from '../../character/loot/lootResultEmbed'
 import { getRandomMonster } from '../../monster/getRandomMonster'
 import { monsterEmbed } from '../../encounters/utils/monsterEmbed'
-import { selectMonsterById } from '../../store/selectors'
-import store from '../../store'
+import { selectMonsterById } from '@adventure-bot/store/selectors'
+import store from '@adventure-bot/store'
 
 export const command = new SlashCommandBuilder()
   .setName('lootmonster')

@@ -14,8 +14,8 @@ import { getSaleRate } from './getSaleRate'
 import { sellValue } from './sellValue'
 import { goldValue } from '../../equipment/goldValue'
 import { getCharacterUpdate } from '../../character/getCharacterUpdate'
-import store from '../../store'
-import { itemSold } from '../../store/slices/characters'
+import store from '@adventure-bot/store'
+import { itemSold } from '@adventure-bot/store/slices/characters'
 
 export async function sellItemPrompt({
   interaction,

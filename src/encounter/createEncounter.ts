@@ -2,8 +2,8 @@ import { Monster } from '../monster/Monster'
 import { Encounter } from './Encounter'
 import { Character } from '../character/Character'
 import { randomUUID } from 'crypto'
-import store from '../store'
-import { encounterCreated } from '../store/slices/encounters'
+import store from '@adventure-bot/store'
+import { encounterCreated } from '@adventure-bot/store/slices/encounters'
 
 export function createEncounter({
   monster,

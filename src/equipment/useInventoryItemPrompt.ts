@@ -7,12 +7,16 @@ import {
 } from 'discord.js'
 import { getUserCharacter } from '../character/getUserCharacter'
 import { itemSelect } from './itemSelect'
-import store from '../store'
-import { effectAdded, healed, itemRemoved } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import {
+  effectAdded,
+  healed,
+  itemRemoved,
+} from '@adventure-bot/store/slices/characters'
 import { usableInventory } from './usableInventory'
 import { isPotion } from './equipment'
 import { d } from '../utils/dice'
-import { selectCharacterById } from '../store/selectors'
+import { selectCharacterById } from '@adventure-bot/store/selectors'
 import { clamp } from 'remeda'
 import { Emoji } from '../Emoji'
 import { getAsset } from '../utils/getAsset'

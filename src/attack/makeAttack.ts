@@ -1,9 +1,9 @@
 import { d20 } from '../utils/dice'
 import { getCharacter } from '../character/getCharacter'
 import { AttackResult } from './AttackResult'
-import store from '../store'
-import { attacked, damaged } from '../store/slices/characters'
-import { selectEncounterById } from '../store/selectors'
+import store from '@adventure-bot/store'
+import { attacked, damaged } from '@adventure-bot/store/slices/characters'
+import { selectEncounterById } from '@adventure-bot/store/selectors'
 
 export const makeAttack = (
   attackerId: string,

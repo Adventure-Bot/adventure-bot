@@ -1,8 +1,8 @@
 import { User } from 'discord.js'
 import { Character } from './Character'
 import { createCharacter } from './createCharacter'
-import store from '../store'
-import { selectCharacterById } from '../store/selectors'
+import store from '@adventure-bot/store'
+import { selectCharacterById } from '@adventure-bot/store/selectors'
 
 export const getUserCharacter = (user: User): Character =>
   selectCharacterById(store.getState(), user.id) ??

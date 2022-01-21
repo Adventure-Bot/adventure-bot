@@ -5,14 +5,14 @@ import { join } from 'path'
 import { range } from 'remeda'
 import { getUserCharacter } from '../../character/getUserCharacter'
 import { healerStatus } from '../../quest/rewards/healerStatus'
-import store from '../../store'
-import { newGame, winnerDeclared } from '../../store/actions'
+import store from '@adventure-bot/store'
+import { newGame, winnerDeclared } from '@adventure-bot/store/actions'
 import {
   effectAdded,
   goldSet,
   healthSet,
   purgeRoamingMonsters,
-} from '../../store/slices/characters'
+} from '@adventure-bot/store/slices/characters'
 import { leaderboard } from '../leaderboard'
 
 export const command = new SlashCommandBuilder()

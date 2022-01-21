@@ -3,8 +3,8 @@ import { getCharacter } from '../character/getCharacter'
 import { startCooldown } from '../character/startCooldown'
 import { d6 } from '../utils/dice'
 import { HealResult } from './HealResult'
-import store from '../store'
-import { healed } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import { healed } from '@adventure-bot/store/slices/characters'
 
 export const heal = (
   initiatorId: string,

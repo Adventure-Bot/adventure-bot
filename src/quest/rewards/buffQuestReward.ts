@@ -2,8 +2,11 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import inspect from '../../commands/inspect/inspect'
 import { StatusEffect } from '../../statusEffects/StatusEffect'
 import { Quest } from '../Quest'
-import { effectAdded, questCompleted } from '../../store/slices/characters'
-import store from '../../store'
+import {
+  effectAdded,
+  questCompleted,
+} from '@adventure-bot/store/slices/characters'
+import store from '@adventure-bot/store'
 
 export async function buffQuestReward(
   interaction: CommandInteraction,
