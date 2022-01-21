@@ -1,4 +1,4 @@
-import { Character } from './Character'
+import { Character } from '@adventure-bot/character/Character'
 import store from '@adventure-bot/store'
 import { cooldownStarted } from '@adventure-bot/store/slices/characters'
 

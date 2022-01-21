@@ -1,12 +1,12 @@
 import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
-import { getUserCharacter } from '../character/getUserCharacter'
-import { trapAttack as trapAttack } from '../trap/trapAttack'
-import { sleep } from '../utils'
-import { updateUserQuestProgess } from '../quest/updateQuestProgess'
-import { awardXP } from '../character/awardXP'
-import { trapRollText } from '../trap/trapRollText'
-import { xpGainField } from '../character/xpGainField'
-import { hpBarField } from '../character/hpBar/hpBarField'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { trapAttack as trapAttack } from '@adventure-bot/trap/trapAttack'
+import { sleep } from '@adventure-bot/utils'
+import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
+import { awardXP } from '@adventure-bot/character/awardXP'
+import { trapRollText } from '@adventure-bot/trap/trapRollText'
+import { xpGainField } from '@adventure-bot/character/xpGainField'
+import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
 
 export const trap = async (interaction: CommandInteraction): Promise<void> => {
   const message = await interaction.editReply({

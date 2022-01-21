@@ -1,4 +1,4 @@
-import { weightedRandom } from './weightedRandom'
+import { weightedRandom } from '@adventure-bot/utils/weightedRandom'
 
 type WeightedTable<T> = [number, T][]
 

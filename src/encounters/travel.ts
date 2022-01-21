@@ -1,8 +1,8 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { awardXP } from '../character/awardXP'
-import { xpGainField } from '../character/xpGainField'
-import { randomArrayElement } from '../monster/randomArrayElement'
-import { getAsset } from '../utils/getAsset'
+import { awardXP } from '@adventure-bot/character/awardXP'
+import { xpGainField } from '@adventure-bot/character/xpGainField'
+import { randomArrayElement } from '@adventure-bot/monster/randomArrayElement'
+import { getAsset } from '@adventure-bot/utils/getAsset'
 
 export const travel = async (
   interaction: CommandInteraction

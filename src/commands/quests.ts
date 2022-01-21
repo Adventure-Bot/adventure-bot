@@ -6,15 +6,15 @@ import {
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
-import { getUserCharacter } from '../character/getUserCharacter'
-import { progressBar } from '../utils/progress-bar'
-import { getCompletedQuests } from '../quest/getCompletedQuests'
-import { Quest } from '../quest/Quest'
-import { isQuestId, QuestId } from '../quest/quests'
-import { slayerBuffQuestReward } from '../quest/rewards/slayerBuffQuestReward'
-import { survivorBuffQuestReward } from '../quest/rewards/survivorBuffQuest'
-import { blessedBuffQuestReward } from '../quest/rewards/blessedBuffQuest'
-import { healerQuestReward } from '../quest/rewards/healerQuestReward'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { progressBar } from '@adventure-bot/utils/progress-bar'
+import { getCompletedQuests } from '@adventure-bot/quest/getCompletedQuests'
+import { Quest } from '@adventure-bot/quest/Quest'
+import { isQuestId, QuestId } from '@adventure-bot/quest/quests'
+import { slayerBuffQuestReward } from '@adventure-bot/quest/rewards/slayerBuffQuestReward'
+import { survivorBuffQuestReward } from '@adventure-bot/quest/rewards/survivorBuffQuest'
+import { blessedBuffQuestReward } from '@adventure-bot/quest/rewards/blessedBuffQuest'
+import { healerQuestReward } from '@adventure-bot/quest/rewards/healerQuestReward'
 
 export const command = new SlashCommandBuilder()
   .setName('quests')

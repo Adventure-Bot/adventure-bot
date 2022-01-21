@@ -1,6 +1,6 @@
-import { Equippable, isEquippable } from './equipment'
-import { isEquipped } from './isEquipped'
-import { Character } from '../character/Character'
+import { Equippable, isEquippable } from '@adventure-bot/equipment/equipment'
+import { isEquipped } from '@adventure-bot/equipment/isEquipped'
+import { Character } from '@adventure-bot/character/Character'
 
 export function equippableInventory(character: Character): Equippable[] {
   return character.inventory

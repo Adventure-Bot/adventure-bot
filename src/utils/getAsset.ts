@@ -1,4 +1,4 @@
-import { manifest, Manifest } from '../asset-manifest'
+import { manifest, Manifest } from '@adventure-bot/asset-manifest'
 import crypto from 'crypto'
 import path from 'path'
 import { MessageAttachment } from 'discord.js'

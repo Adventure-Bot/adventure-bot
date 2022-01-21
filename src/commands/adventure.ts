@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { getUserCharacter } from '../character/getUserCharacter'
-import { isCharacterOnCooldown } from '../character/isCharacterOnCooldown'
-import { startCooldown } from '../character/startCooldown'
-import { randomEncounter } from '../encounters/randomEncounter'
-import cooldowns from './cooldowns'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { isCharacterOnCooldown } from '@adventure-bot/character/isCharacterOnCooldown'
+import { startCooldown } from '@adventure-bot/character/startCooldown'
+import { randomEncounter } from '@adventure-bot/encounters/randomEncounter'
+import cooldowns from '@adventure-bot/commands/cooldowns'
 
 export const command = new SlashCommandBuilder()
   .setName('adventure')

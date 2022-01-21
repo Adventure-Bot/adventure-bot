@@ -1,6 +1,6 @@
-import { Character } from '../character/Character'
-import { Quest } from './Quest'
-import { isQuestComplete } from './isQuestComplete'
+import { Character } from '@adventure-bot/character/Character'
+import { Quest } from '@adventure-bot/quest/Quest'
+import { isQuestComplete } from '@adventure-bot/quest/isQuestComplete'
 
 export const getCompletedQuests = (character: Character): Map<string, Quest> =>
   new Map(

@@ -6,12 +6,12 @@ import {
   MessageEmbed,
   MessageSelectMenu,
 } from 'discord.js'
-import { getUserCharacter } from '../../character/getUserCharacter'
-import { isQuestId, quests } from '../../quest/quests'
-import questsCommand from '../../commands/quests'
-import { awardXP } from '../../character/awardXP'
-import { xpGainField } from '../../character/xpGainField'
-import { questEmbed } from '../../quest/questEmbed'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { isQuestId, quests } from '@adventure-bot/quest/quests'
+import questsCommand from '@adventure-bot/commands/quests'
+import { awardXP } from '@adventure-bot/character/awardXP'
+import { xpGainField } from '@adventure-bot/character/xpGainField'
+import { questEmbed } from '@adventure-bot/quest/questEmbed'
 import { selectAvailableQuests } from '@adventure-bot/store/selectors'
 import store from '@adventure-bot/store'
 import { questGranted } from '@adventure-bot/store/slices/characters'

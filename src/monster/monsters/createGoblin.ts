@@ -1,8 +1,8 @@
-import { createMonster } from '../createMonster'
-import { getRandomMonsterName } from '../names/getRandomMonsterName'
-import { getAsset } from '../../utils/getAsset'
-import { Monster } from '../Monster'
-import { dagger } from '../../equipment/items'
+import { createMonster } from '@adventure-bot/monster/createMonster'
+import { getRandomMonsterName } from '@adventure-bot/monster/names/getRandomMonsterName'
+import { getAsset } from '@adventure-bot/utils/getAsset'
+import { Monster } from '@adventure-bot/monster/Monster'
+import { dagger } from '@adventure-bot/equipment/items'
 
 export function createGoblin(): Monster {
   return createMonster({

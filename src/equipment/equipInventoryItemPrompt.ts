@@ -4,9 +4,9 @@ import {
   MessageActionRow,
   MessageButton,
 } from 'discord.js'
-import { getUserCharacter } from '../character/getUserCharacter'
-import { itemSelect } from './itemSelect'
-import { equippableInventory } from './equippableInventory'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { itemSelect } from '@adventure-bot/equipment/itemSelect'
+import { equippableInventory } from '@adventure-bot/equipment/equippableInventory'
 import store from '@adventure-bot/store'
 import { itemEquipped } from '@adventure-bot/store/slices/characters'
 

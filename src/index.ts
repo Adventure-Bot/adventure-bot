@@ -16,7 +16,7 @@ import {
   selectSovereign,
   selectWinnerAnnounced,
 } from '@adventure-bot/store/selectors'
-import { leaderboard } from './commands/leaderboard'
+import { leaderboard } from '@adventure-bot/commands/leaderboard'
 
 if (!process.env.token) exit(1)
 

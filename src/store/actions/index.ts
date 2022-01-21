@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
 import { CommandInteraction } from 'discord.js'
-import { Character } from '../../character/Character'
-import { Item } from '../../equipment/Item'
+import { Character } from '@adventure-bot/character/Character'
+import { Item } from '@adventure-bot/equipment/Item'
 
 export const newGame = createAction('newGame')
 export const tick = createAction('tick')

@@ -7,16 +7,16 @@ import {
   MessageOptions,
   TextChannel,
 } from 'discord.js'
-import { decoratedName } from '../character/decoratedName'
-import { getUserCharacter } from '../character/getUserCharacter'
-import { equipInventoryItemPrompt } from '../equipment/equipInventoryItemPrompt'
-import { isTradeable } from '../equipment/equipment'
-import { equippableInventory } from '../equipment/equippableInventory'
-import { itemEmbed } from '../equipment/itemEmbed'
-import { offerItemPrompt as offerItemPrompt } from '../equipment/offerItemPrompt'
+import { decoratedName } from '@adventure-bot/character/decoratedName'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { equipInventoryItemPrompt } from '@adventure-bot/equipment/equipInventoryItemPrompt'
+import { isTradeable } from '@adventure-bot/equipment/equipment'
+import { equippableInventory } from '@adventure-bot/equipment/equippableInventory'
+import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
+import { offerItemPrompt as offerItemPrompt } from '@adventure-bot/equipment/offerItemPrompt'
 import { getHook } from './inspect/getHook'
-import { usableInventory } from '../equipment/usableInventory'
-import { useInventoryItemPrompt } from '../equipment/useInventoryItemPrompt'
+import { usableInventory } from '@adventure-bot/equipment/usableInventory'
+import { useInventoryItemPrompt } from '@adventure-bot/equipment/useInventoryItemPrompt'
 
 export const command = new SlashCommandBuilder()
   .setName('inventory')

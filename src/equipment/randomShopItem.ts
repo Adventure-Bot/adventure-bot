@@ -1,5 +1,5 @@
-import { weightedRandom } from '../utils/weightedRandom'
-import { Item } from './Item'
+import { weightedRandom } from '@adventure-bot/utils/weightedRandom'
+import { Item } from '@adventure-bot/equipment/Item'
 import {
   buckler,
   chainArmor,

@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
-import { d20Emoji } from '../Emoji'
-import { d } from '../utils/dice'
+import { d20Emoji } from '@adventure-bot/Emoji'
+import { d } from '@adventure-bot/utils/dice'
 
 export const command = new SlashCommandBuilder()
   .setName('d20')

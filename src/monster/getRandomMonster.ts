@@ -1,7 +1,7 @@
-import { getRandomArrayElement } from '../utils/getRandomArrayElement'
-import { getRoamingMonsters } from './getRoamingMonsters'
-import { isMonster, Monster } from './Monster'
-import { createRandomMonster } from './createRandomMonster'
+import { getRandomArrayElement } from '@adventure-bot/utils/getRandomArrayElement'
+import { getRoamingMonsters } from '@adventure-bot/monster/getRoamingMonsters'
+import { isMonster, Monster } from '@adventure-bot/monster/Monster'
+import { createRandomMonster } from '@adventure-bot/monster/createRandomMonster'
 
 export const getRandomMonster = (): Monster => {
   const roamingMonsters = getRoamingMonsters()

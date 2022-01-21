@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js'
-import { Emoji } from '../Emoji'
+import { Emoji } from '@adventure-bot/Emoji'
 
 export function goldValue({
   interaction,

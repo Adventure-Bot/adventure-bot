@@ -1,5 +1,5 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { grantDivineBlessing } from '../grantDivineBlessing'
+import { grantDivineBlessing } from '@adventure-bot/grantDivineBlessing'
 
 export const divineBlessing = async (
   interaction: CommandInteraction

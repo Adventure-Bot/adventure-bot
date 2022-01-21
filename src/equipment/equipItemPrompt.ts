@@ -4,9 +4,9 @@ import {
   MessageActionRow,
   MessageButton,
 } from 'discord.js'
-import inspect from '../commands/inspect/inspect'
-import { Item } from './Item'
-import { itemEmbed } from './itemEmbed'
+import inspect from '@adventure-bot/commands/inspect/inspect'
+import { Item } from '@adventure-bot/equipment/Item'
+import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
 import store from '@adventure-bot/store'
 import { itemEquipped } from '@adventure-bot/store/slices/characters'
 

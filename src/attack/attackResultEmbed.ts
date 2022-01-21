@@ -1,9 +1,12 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { AttackResult } from './AttackResult'
-import { hpBarField } from '../character/hpBar/hpBarField'
-import { Emoji } from '../Emoji'
-import { attackFlavorText, attackRollText } from '../commands/attack'
-import { attackResultHeadline } from './attackResultHeadline'
+import { AttackResult } from '@adventure-bot/attack/AttackResult'
+import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
+import { Emoji } from '@adventure-bot/Emoji'
+import {
+  attackFlavorText,
+  attackRollText,
+} from '@adventure-bot/commands/attack'
+import { attackResultHeadline } from '@adventure-bot/attack/attackResultHeadline'
 
 export function attackResultEmbed({
   result,

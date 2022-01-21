@@ -1,8 +1,8 @@
 import { CommandInteraction, TextChannel } from 'discord.js'
-import { getUserCharacter } from '../../character/getUserCharacter'
-import { getUserCharacters } from '../../character/getUserCharacters'
-import { limitedCharacterEmbed } from '../../character/limitedCharacterEmbed'
-import { getHook } from '../inspect/getHook'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getUserCharacters } from '@adventure-bot/character/getUserCharacters'
+import { limitedCharacterEmbed } from '@adventure-bot/character/limitedCharacterEmbed'
+import { getHook } from '@adventure-bot/commands/inspect/getHook'
 
 export async function listCharacters(
   interaction: CommandInteraction

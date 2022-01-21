@@ -1,5 +1,5 @@
-import { Character } from '../character/Character'
-import { MonsterKind } from './names/getRandomMonsterName'
+import { Character } from '@adventure-bot/character/Character'
+import { MonsterKind } from '@adventure-bot/monster/names/getRandomMonsterName'
 
 export type Monster = Character & {
   kind: MonsterKind

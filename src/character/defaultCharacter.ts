@@ -1,4 +1,4 @@
-import { Character } from './Character'
+import { Character } from '@adventure-bot/character/Character'
 
 export const defaultCharacter: Omit<Character, 'id' | 'name'> = {
   profile: '',

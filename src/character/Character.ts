@@ -5,12 +5,12 @@ import {
   Ring,
   Shield,
   Weapon,
-} from '../equipment/equipment'
-import { Item } from '../equipment/Item'
-import { Quest } from '../quest/Quest'
-import { QuestId } from '../quest/quests'
-import { StatusEffect } from '../statusEffects/StatusEffect'
-import { Stats } from './Stats'
+} from '@adventure-bot/equipment/equipment'
+import { Item } from '@adventure-bot/equipment/Item'
+import { Quest } from '@adventure-bot/quest/Quest'
+import { QuestId } from '@adventure-bot/quest/quests'
+import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
+import { Stats } from '@adventure-bot/character/Stats'
 
 export type Character = Stats & {
   id: string

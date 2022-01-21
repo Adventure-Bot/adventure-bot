@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageSelectMenu } from 'discord.js'
-import { Item } from '../../equipment/Item'
-import { sellValue } from './sellValue'
+import { Item } from '@adventure-bot/equipment/Item'
+import { sellValue } from '@adventure-bot/encounters/shop/sellValue'
 
 export function sellList({
   inventory,

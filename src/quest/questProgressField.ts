@@ -1,6 +1,6 @@
 import { EmbedField } from 'discord.js'
-import { Quest } from './Quest'
-import { questProgressBar } from './questProgressBar'
+import { Quest } from '@adventure-bot/quest/Quest'
+import { questProgressBar } from '@adventure-bot/quest/questProgressBar'
 
 export const questProgressField = (quest: Quest): EmbedField => ({
   name: quest.title,

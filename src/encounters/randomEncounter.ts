@@ -9,10 +9,10 @@ import {
   divineBlessing,
   monster,
   tavern,
-} from '.'
-import { getUserCharacter } from '../character/getUserCharacter'
-import { CommandHandler, weightedTable } from '../utils'
-import { randomShrine } from './shrine/randomShrine'
+} from '@adventure-bot/encounters'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { CommandHandler, weightedTable } from '@adventure-bot/utils'
+import { randomShrine } from '@adventure-bot/encounters/shrine/randomShrine'
 
 export const randomEncounter = (
   interaction: CommandInteraction

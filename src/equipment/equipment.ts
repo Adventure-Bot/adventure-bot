@@ -1,6 +1,6 @@
-import { Manifest } from '../asset-manifest'
-import { EffectTemplate } from '../statusEffects/templates'
-import { Item } from './Item'
+import { Manifest } from '@adventure-bot/asset-manifest'
+import { EffectTemplate } from '@adventure-bot/statusEffects/templates'
+import { Item } from '@adventure-bot/equipment/Item'
 
 export type Equippable = Item & {
   equippable: true
