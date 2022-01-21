@@ -1,14 +1,14 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { getUserCharacter } from '../../character/getUserCharacter'
-import { hpBarField } from '../../character/hpBar/hpBarField'
-import { d6 } from '../../utils/dice'
-import { statusEffectEmbed } from '../../statusEffects/statusEffectEmbed'
-import { xpGainField } from '../../character/xpGainField'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
+import { d6 } from '@adventure-bot/utils/dice'
+import { statusEffectEmbed } from '@adventure-bot/statusEffects/statusEffectEmbed'
+import { xpGainField } from '@adventure-bot/character/xpGainField'
 import { clamp } from 'remeda'
-import { getCharacterStatModified } from '../../character/getCharacterStatModified'
-import { questProgressField } from '../../quest/questProgressField'
-import { isUserQuestComplete } from '../../quest/isQuestComplete'
-import quests from '../../commands/quests'
+import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
+import { questProgressField } from '@adventure-bot/quest/questProgressField'
+import { isUserQuestComplete } from '@adventure-bot/quest/isQuestComplete'
+import quests from '@adventure-bot/commands/quests'
 import store from '@adventure-bot/store'
 import {
   effectAdded,
@@ -16,7 +16,7 @@ import {
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/store/slices/characters'
-import { createEffect } from '../../statusEffects'
+import { createEffect } from '@adventure-bot/statusEffects'
 
 export async function restfulNight(
   interaction: CommandInteraction

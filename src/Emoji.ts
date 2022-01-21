@@ -1,5 +1,5 @@
 import { Interaction } from 'discord.js'
-import { Stat } from './character/Stats'
+import { Stat } from '@adventure-bot/character/Stats'
 
 type Emojis =
   | Stat

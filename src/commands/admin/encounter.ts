@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
-import * as encounters from '../../encounters'
+import * as encounters from '@adventure-bot/encounters'
 import { keys } from 'remeda'
 
 const camelToSnakeCase = (str: string) =>

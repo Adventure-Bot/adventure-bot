@@ -3,7 +3,7 @@ import { CommandInteraction } from 'discord.js'
 import { URL } from 'url'
 import store from '@adventure-bot/store'
 import { profileSet } from '@adventure-bot/store/slices/characters'
-import { execute as inspect } from './inspect/inspect'
+import { execute as inspect } from '@adventure-bot/commands/inspect/inspect'
 
 export const command = new SlashCommandBuilder()
   .setName('set')

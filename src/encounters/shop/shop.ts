@@ -5,19 +5,19 @@ import {
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
-import { getUserCharacter } from '../../character/getUserCharacter'
-import { itemEmbed } from '../../equipment/itemEmbed'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
 import { times } from 'remeda'
-import { heavyCrown } from '../../equipment/items/heavyCrown'
-import { randomShopItem } from '../../equipment/randomShopItem'
-import { buyItemPrompt } from './buyItemPrompt'
-import { sellItemPrompt } from './sellItemPrompt'
-import { goldValue } from '../../equipment/goldValue'
-import { getCharacterUpdate } from '../../character/getCharacterUpdate'
+import { heavyCrown } from '@adventure-bot/equipment/items/heavyCrown'
+import { randomShopItem } from '@adventure-bot/equipment/randomShopItem'
+import { buyItemPrompt } from '@adventure-bot/encounters/shop/buyItemPrompt'
+import { sellItemPrompt } from '@adventure-bot/encounters/shop/sellItemPrompt'
+import { goldValue } from '@adventure-bot/equipment/goldValue'
+import { getCharacterUpdate } from '@adventure-bot/character/getCharacterUpdate'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
 import store from '@adventure-bot/store'
 
-import { getAsset } from '../../utils/getAsset'
+import { getAsset } from '@adventure-bot/utils/getAsset'
 
 export const shop = async (interaction: CommandInteraction): Promise<void> => {
   const character = getUserCharacter(interaction.user)

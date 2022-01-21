@@ -1,9 +1,9 @@
-import { CommandHandler } from '../../utils'
-import { weightedTable } from '../../utils/weightedTable'
-import { armorShrine } from './armor'
-import { attackShrine } from './attack'
-import { slayerShrine } from './slayer'
-import { vigorShrine } from './vigor'
+import { CommandHandler } from '@adventure-bot/utils'
+import { weightedTable } from '@adventure-bot/utils/weightedTable'
+import { armorShrine } from '@adventure-bot/encounters/shrine/armor'
+import { attackShrine } from '@adventure-bot/encounters/shrine/attack'
+import { slayerShrine } from '@adventure-bot/encounters/shrine/slayer'
+import { vigorShrine } from '@adventure-bot/encounters/shrine/vigor'
 
 export const randomShrine = (): CommandHandler =>
   weightedTable([

@@ -1,11 +1,11 @@
 import { CommandInteraction, EmbedFieldData, MessageEmbed } from 'discord.js'
-import { Item } from './Item'
-import { goldValue } from './goldValue'
-import { stats, statTitles } from '../character/Stats'
-import { Emoji } from '../Emoji'
-import { getUserCharacter } from '../character/getUserCharacter'
-import { isEquipped } from './isEquipped'
-import { sellValue } from '../encounters/shop/sellValue'
+import { Item } from '@adventure-bot/equipment/Item'
+import { goldValue } from '@adventure-bot/equipment/goldValue'
+import { stats, statTitles } from '@adventure-bot/character/Stats'
+import { Emoji } from '@adventure-bot/Emoji'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { isEquipped } from '@adventure-bot/equipment/isEquipped'
+import { sellValue } from '@adventure-bot/encounters/shop/sellValue'
 
 export function itemEmbed({
   item,

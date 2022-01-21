@@ -1,7 +1,7 @@
 import { User } from 'discord.js'
-import { getUserCharacter } from '../character/getUserCharacter'
-import { Quest } from './Quest'
-import { QuestId } from './quests'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { Quest } from '@adventure-bot/quest/Quest'
+import { QuestId } from '@adventure-bot/quest/quests'
 
 export const isQuestComplete = (quest: Quest): boolean =>
   quest.progress >= quest.totalRequired

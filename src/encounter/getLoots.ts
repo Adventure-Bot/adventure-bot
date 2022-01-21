@@ -1,4 +1,4 @@
-import { LootResult } from '../character/loot/loot'
+import { LootResult } from '@adventure-bot/character/loot/loot'
 import store from '@adventure-bot/store'
 import { selectLoot } from '@adventure-bot/store/selectors'
 

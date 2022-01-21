@@ -1,8 +1,8 @@
 import { CommandInteraction, EmbedFieldData } from 'discord.js'
-import { Emoji } from '../Emoji'
+import { Emoji } from '@adventure-bot/Emoji'
 import store from '@adventure-bot/store'
 import { selectCharacterById } from '@adventure-bot/store/selectors'
-import { hpBar } from './hpBar/hpBar'
+import { hpBar } from '@adventure-bot/character/hpBar/hpBar'
 
 export function primaryStatFields({
   characterId,

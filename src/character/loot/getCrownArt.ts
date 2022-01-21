@@ -1,5 +1,5 @@
-import { getAsset } from '../../utils/getAsset'
-import { randomArrayElement } from '../../monster/randomArrayElement'
+import { getAsset } from '@adventure-bot/utils/getAsset'
+import { randomArrayElement } from '@adventure-bot/monster/randomArrayElement'
 
 export function getCrownArt(): ReturnType<typeof getAsset> {
   return randomArrayElement([

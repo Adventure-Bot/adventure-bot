@@ -1,4 +1,4 @@
-import { TemplateEffect } from './TemplateEffect'
+import { TemplateEffect } from '@adventure-bot/statusEffects/templates/TemplateEffect'
 
 export const invigorated: TemplateEffect = {
   name: 'Invigorated',

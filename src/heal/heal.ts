@@ -1,8 +1,8 @@
-import { isCharacterOnCooldown } from '../character/isCharacterOnCooldown'
-import { getCharacter } from '../character/getCharacter'
-import { startCooldown } from '../character/startCooldown'
-import { d6 } from '../utils/dice'
-import { HealResult } from './HealResult'
+import { isCharacterOnCooldown } from '@adventure-bot/character/isCharacterOnCooldown'
+import { getCharacter } from '@adventure-bot/character/getCharacter'
+import { startCooldown } from '@adventure-bot/character/startCooldown'
+import { d6 } from '@adventure-bot/utils/dice'
+import { HealResult } from '@adventure-bot/heal/HealResult'
 import store from '@adventure-bot/store'
 import { healed } from '@adventure-bot/store/slices/characters'
 

@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js'
-import { getUserCharacter } from '../../character/getUserCharacter'
-import { buffQuestReward } from './buffQuestReward'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { buffQuestReward } from '@adventure-bot/quest/rewards/buffQuestReward'
 
 export const slayerBuffQuestReward = async (
   interaction: CommandInteraction

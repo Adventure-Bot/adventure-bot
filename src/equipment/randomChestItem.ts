@@ -1,5 +1,5 @@
-import { weightedTable } from '../utils/weightedTable'
-import { Item } from './Item'
+import { weightedTable } from '@adventure-bot/utils/weightedTable'
+import { Item } from '@adventure-bot/equipment/Item'
 import {
   amuletOfAttack,
   amuletOfProtection,

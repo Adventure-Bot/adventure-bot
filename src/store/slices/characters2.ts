@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { created } from './characters'
+import { created } from '@adventure-bot/store/slices/characters'
 
 const characterAdapater = createEntityAdapter<{
   id: string

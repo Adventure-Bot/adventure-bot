@@ -1,15 +1,14 @@
-import { Character } from '../../character/Character'
-import { StatusEffect } from '../../statusEffects/StatusEffect'
+import { Character } from '@adventure-bot/character/Character'
+import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { QuestId, quests } from '../../quest/quests'
-import { getCharacterStatModified } from '../../character/getCharacterStatModified'
-import { Item } from '../../equipment/Item'
-import { equipmentFilter } from '../../character/loot/loot'
-import { Monster } from '../../monster/Monster'
+import { QuestId, quests } from '@adventure-bot/quest/quests'
+import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
+import { Item } from '@adventure-bot/equipment/Item'
+import { equipmentFilter } from '@adventure-bot/character/loot/loot'
+import { Monster } from '@adventure-bot/monster/Monster'
 import { clamp } from 'remeda'
-import { Encounter } from '../../encounter/Encounter'
-import { AttackResult } from '../../attack/AttackResult'
-import { characterLooted } from './loots'
+import { Encounter } from '@adventure-bot/encounter/Encounter'
+
 import {
   isAmulet,
   isArmor,
@@ -20,6 +19,8 @@ import {
 } from '../../equipment/equipment'
 import { getSaleRate } from '../../encounters/shop/getSaleRate'
 import { itemReceived, newGame } from '../actions'
+import { AttackResult } from '@adventure-bot/attack/AttackResult'
+import { characterLooted } from '@adventure-bot/store/slices/loots'
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
   Date.now() > new Date(effect.started).valueOf() + effect.duration

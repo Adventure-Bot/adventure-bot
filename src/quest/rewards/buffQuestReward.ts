@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import inspect from '../../commands/inspect/inspect'
-import { StatusEffect } from '../../statusEffects/StatusEffect'
-import { Quest } from '../Quest'
+import inspect from '@adventure-bot/commands/inspect/inspect'
+import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
+import { Quest } from '@adventure-bot/quest/Quest'
 import {
   effectAdded,
   questCompleted,

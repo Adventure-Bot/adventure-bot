@@ -1,3 +1,3 @@
-import { createEffect } from './createEffect'
+import { createEffect } from '@adventure-bot/statusEffects/createEffect'
 
 export { createEffect }

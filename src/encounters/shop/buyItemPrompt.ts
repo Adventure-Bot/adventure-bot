@@ -4,10 +4,10 @@ import {
   MessageActionRow,
   MessageButton,
 } from 'discord.js'
-import { getUserCharacter } from '../../character/getUserCharacter'
-import { buyItem } from '../../commands/buyItem'
-import { buyList } from './buyList'
-import { Item } from '../../equipment/Item'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { buyItem } from '@adventure-bot/commands/buyItem'
+import { buyList } from '@adventure-bot/encounters/shop/buyList'
+import { Item } from '@adventure-bot/equipment/Item'
 
 export async function buyItemPrompt({
   interaction,

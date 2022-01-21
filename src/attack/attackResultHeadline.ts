@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js'
-import { AttackResult } from './AttackResult'
-import { Emoji } from '../Emoji'
+import { AttackResult } from '@adventure-bot/attack/AttackResult'
+import { Emoji } from '@adventure-bot/Emoji'
 
 export function attackResultHeadline({
   interaction,

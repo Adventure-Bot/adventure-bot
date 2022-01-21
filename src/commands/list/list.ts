@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
-import { listCharacters } from './listCharacters'
-import { listEncounters } from './listEncounters'
-import { listLootResults } from './listLootResults'
-import { listMonsters } from './listMonsters'
+import { listCharacters } from '@adventure-bot/commands/list/listCharacters'
+import { listEncounters } from '@adventure-bot/commands/list/listEncounters'
+import { listLootResults } from '@adventure-bot/commands/list/listLootResults'
+import { listMonsters } from '@adventure-bot/commands/list/listMonsters'
 
 export const command = new SlashCommandBuilder()
   .setName('list')

@@ -1,5 +1,5 @@
 import { d20 } from '../utils/dice'
-import { getCharacter } from '../character/getCharacter'
+import { getCharacter } from '@adventure-bot/character/getCharacter'
 import { AttackResult } from './AttackResult'
 import store from '@adventure-bot/store'
 import { attacked, damaged } from '@adventure-bot/store/slices/characters'

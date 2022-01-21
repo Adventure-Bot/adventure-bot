@@ -1,5 +1,5 @@
 import { MessageEmbed } from 'discord.js'
-import { getCrownArt } from '../character/loot/getCrownArt'
+import { getCrownArt } from '@adventure-bot/character/loot/getCrownArt'
 import store from '@adventure-bot/store'
 import { selectLeaderBoard } from '@adventure-bot/store/selectors'
 

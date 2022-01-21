@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
-import * as items from '../../equipment/items'
+import * as items from '@adventure-bot/equipment/equipment'
 import { keys } from 'remeda'
-import { itemEmbed } from '../../equipment/itemEmbed'
-import { getUserCharacter } from '../../character/getUserCharacter'
+import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import store from '@adventure-bot/store'
 import { itemReceived } from '@adventure-bot/store/actions'
 

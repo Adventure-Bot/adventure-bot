@@ -1,5 +1,5 @@
-import { StatusEffect } from './StatusEffect'
-import { EffectTemplate, effects } from './templates'
+import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
+import { EffectTemplate, effects } from '@adventure-bot/statusEffects/templates'
 
 export const createEffect = (effect: EffectTemplate): StatusEffect => ({
   ...effects[effect],

@@ -1,12 +1,12 @@
 import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
-import { getUserCharacter } from '../../character/getUserCharacter'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import store from '@adventure-bot/store'
 import { selectAvailableQuests } from '@adventure-bot/store/selectors'
-import { sleep, weightedTable } from '../../utils'
-import { getAsset } from '../../utils/getAsset'
-import { barFight } from './barFight'
-import { chattyTavernkeepers } from './chattyTavernkeepers'
-import { restfulNight } from './restfulNight'
+import { sleep, weightedTable } from '@adventure-bot/utils'
+import { getAsset } from '@adventure-bot/utils/getAsset'
+import { barFight } from '@adventure-bot/encounters/tavern/barFight'
+import { chattyTavernkeepers } from '@adventure-bot/encounters/tavern/chattyTavernkeepers'
+import { restfulNight } from '@adventure-bot/encounters/tavern/restfulNight'
 
 export const tavern = async (
   interaction: CommandInteraction

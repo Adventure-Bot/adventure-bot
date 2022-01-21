@@ -1,12 +1,12 @@
 import { CommandInteraction, Message, TextChannel } from 'discord.js'
-import { makeAttack } from '../attack/makeAttack'
+import { makeAttack } from '@adventure-bot/attack/makeAttack'
 import { chest } from './chest'
-import { isUserQuestComplete } from '../quest/isQuestComplete'
-import quests from '../commands/quests'
-import { updateUserQuestProgess } from '../quest/updateQuestProgess'
-import { getRandomMonster } from '../monster/getRandomMonster'
-import { createEncounter } from '../encounter/createEncounter'
-import { loot } from '../character/loot/loot'
+import { isUserQuestComplete } from '@adventure-bot/quest/isQuestComplete'
+import quests from '@adventure-bot/commands/quests'
+import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
+import { getRandomMonster } from '@adventure-bot/monster/getRandomMonster'
+import { createEncounter } from '@adventure-bot/encounter/createEncounter'
+import { loot } from '@adventure-bot/character/loot/loot'
 import store from '@adventure-bot/store'
 import {
   roundFinished as roundFinished,
@@ -15,18 +15,18 @@ import {
   playerFled,
   playerVictory,
 } from '@adventure-bot/store/slices/encounters'
-import { Emoji } from '../Emoji'
-import { attackResultEmbed } from '../attack/attackResultEmbed'
-import { encounterSummaryEmbed } from '../encounter/encounterSummaryEmbed'
+import { Emoji } from '@adventure-bot/Emoji'
+import { attackResultEmbed } from '@adventure-bot/attack/attackResultEmbed'
+import { encounterSummaryEmbed } from '@adventure-bot/encounter/encounterSummaryEmbed'
 import { encounterEmbed } from './utils/encounterEmbed'
-import { getHook } from '../commands/inspect/getHook'
+import { getHook } from '@adventure-bot/commands/inspect/getHook'
 import {
   selectCharacterById,
   selectEncounterById,
   selectMonsterById,
 } from '@adventure-bot/store/selectors'
-import { decoratedName } from '../character/decoratedName'
-import { questProgressField } from '../quest/questProgressField'
+import { decoratedName } from '@adventure-bot/character/decoratedName'
+import { questProgressField } from '@adventure-bot/quest/questProgressField'
 
 export const monster = async (
   interaction: CommandInteraction

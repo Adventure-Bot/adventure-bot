@@ -1,7 +1,7 @@
-import { getCharacterStatModified } from '../character/getCharacterStatModified'
-import { d20, d6 } from '../utils/dice'
-import { TrapResult } from './TrapResult'
-import { getCharacter } from '../character/getCharacter'
+import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
+import { d20, d6 } from '@adventure-bot/utils/dice'
+import { TrapResult } from '@adventure-bot/trap/TrapResult'
+import { getCharacter } from '@adventure-bot/character/getCharacter'
 import store from '@adventure-bot/store'
 import { damaged } from '@adventure-bot/store/slices/characters'
 

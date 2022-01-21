@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Character } from '../../character/Character'
-import { commandUsed, winnerDeclared } from '../actions'
+import { Character } from '@adventure-bot/character/Character'
+import { commandUsed, winnerDeclared } from '@adventure-bot/store/actions'
 
 type Score = { name: string; gold: number; wins: number; profile: string }
 

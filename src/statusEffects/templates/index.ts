@@ -1,9 +1,9 @@
-import { aggression } from './aggression'
-import { frailty } from './frailty'
-import { invigorated } from './invigorated'
-import { might } from './might'
-import { protectedEffect } from './protectedEffect'
-import { slayer } from './slayer'
+import { aggression } from '@adventure-bot/statusEffects/templates/aggression'
+import { frailty } from '@adventure-bot/statusEffects/templates/frailty'
+import { invigorated } from '@adventure-bot/statusEffects/templates/invigorated'
+import { might } from '@adventure-bot/statusEffects/templates/might'
+import { protectedEffect } from '@adventure-bot/statusEffects/templates/protectedEffect'
+import { slayer } from '@adventure-bot/statusEffects/templates/slayer'
 
 export const effects = {
   invigorated,

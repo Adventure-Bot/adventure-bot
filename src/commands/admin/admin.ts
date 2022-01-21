@@ -3,8 +3,8 @@ import { CommandInteraction } from 'discord.js'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { range } from 'remeda'
-import { getUserCharacter } from '../../character/getUserCharacter'
-import { healerStatus } from '../../quest/rewards/healerStatus'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { healerStatus } from '@adventure-bot/quest/rewards/healerStatus'
 import store from '@adventure-bot/store'
 import { newGame, winnerDeclared } from '@adventure-bot/store/actions'
 import {
@@ -13,7 +13,7 @@ import {
   healthSet,
   purgeRoamingMonsters,
 } from '@adventure-bot/store/slices/characters'
-import { leaderboard } from '../leaderboard'
+import { leaderboard } from '@adventure-bot/commands/leaderboard'
 
 export const command = new SlashCommandBuilder()
   .setName('admin')

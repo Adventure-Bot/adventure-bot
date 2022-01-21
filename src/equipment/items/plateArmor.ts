@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import { Armor } from '../equipment'
+import { Armor } from '@adventure-bot/equipment/equipment'
 
 export const plateArmor = (): Armor => ({
   id: randomUUID(),

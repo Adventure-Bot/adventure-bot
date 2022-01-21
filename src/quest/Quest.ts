@@ -1,4 +1,4 @@
-import { QuestId } from './quests'
+import { QuestId } from '@adventure-bot/quest/quests'
 
 export type Quest = {
   id: QuestId

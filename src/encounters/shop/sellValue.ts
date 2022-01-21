@@ -1,4 +1,4 @@
-import { Item } from '../../equipment/Item'
+import { Item } from '@adventure-bot/equipment/Item'
 import { getSaleRate } from './getSaleRate'
 
 export function sellValue(item: Item): number {
