@@ -1,15 +1,16 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, TextChannel } from 'discord.js'
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { values } from 'remeda'
+
+import { Character } from '@adventure-bot/character/Character'
 import { characterEmbed } from '@adventure-bot/character/characterEmbed'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { statsEmbed } from '@adventure-bot/character/statsEmbed'
+import { actionEmbed } from '@adventure-bot/commands/inspect/actionEmbed'
+import { getHook } from '@adventure-bot/commands/inspect/getHook'
+import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
 import { questEmbed } from '@adventure-bot/quest/questEmbed'
 import { statusEffectEmbed } from '@adventure-bot/statusEffects/statusEffectEmbed'
-import { actionEmbed } from '@adventure-bot/commands/inspect/actionEmbed'
-import { values } from 'remeda'
-import { statsEmbed } from '@adventure-bot/character/statsEmbed'
-import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
-import { Character } from '@adventure-bot/character/Character'
-import { getHook } from '@adventure-bot/commands/inspect/getHook'
 
 export const command = new SlashCommandBuilder()
   .setName('inspect')

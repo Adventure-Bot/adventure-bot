@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
+
 import { chest } from '@adventure-bot/encounters/chest'
 
 export const command = new SlashCommandBuilder()

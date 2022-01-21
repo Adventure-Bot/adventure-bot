@@ -1,6 +1,6 @@
-import { isStatusEffectExpired } from '@adventure-bot/store/slices/characters'
 import { Character } from '@adventure-bot/character/Character'
 import { Stat } from '@adventure-bot/character/Stats'
+import { isStatusEffectExpired } from '@adventure-bot/store/slices/characters'
 
 export const getStatusEffectStatModifier = (
   character: Character,

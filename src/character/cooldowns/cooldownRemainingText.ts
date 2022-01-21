@@ -1,4 +1,5 @@
 import moment from 'moment'
+
 import { Character } from '@adventure-bot/character/Character'
 import { getCooldownRemaining } from '@adventure-bot/character/cooldowns/getCooldownRemaining'
 

@@ -5,18 +5,18 @@ import {
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
-import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
 import { times } from 'remeda'
-import { heavyCrown } from '@adventure-bot/equipment/items'
-import { randomShopItem } from '@adventure-bot/equipment/randomShopItem'
+
+import { getCharacterUpdate } from '@adventure-bot/character/getCharacterUpdate'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { buyItemPrompt } from '@adventure-bot/encounters/shop/buyItemPrompt'
 import { sellItemPrompt } from '@adventure-bot/encounters/shop/sellItemPrompt'
 import { goldValue } from '@adventure-bot/equipment/goldValue'
-import { getCharacterUpdate } from '@adventure-bot/character/getCharacterUpdate'
-import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
+import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
+import { heavyCrown } from '@adventure-bot/equipment/items'
+import { randomShopItem } from '@adventure-bot/equipment/randomShopItem'
 import store from '@adventure-bot/store'
-
+import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
 import { getAsset } from '@adventure-bot/utils/getAsset'
 
 export const shop = async (interaction: CommandInteraction): Promise<void> => {

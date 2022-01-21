@@ -1,7 +1,8 @@
-require('dotenv').config()
 import fs from 'fs'
-import path from 'path'
 import { stringify } from 'javascript-stringify'
+import path from 'path'
+
+require('dotenv').config()
 
 const isDirectory = (base: string) => (name: string) =>
   fs.statSync(path.join(base, name)).isDirectory()

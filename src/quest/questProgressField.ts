@@ -1,4 +1,5 @@
 import { EmbedField } from 'discord.js'
+
 import { Quest } from '@adventure-bot/quest/Quest'
 import { questProgressBar } from '@adventure-bot/quest/questProgressBar'
 

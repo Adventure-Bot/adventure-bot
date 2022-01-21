@@ -1,9 +1,10 @@
-import { RootReducerState } from '@adventure-bot/store'
 import { createMigrate } from 'redux-persist'
+
+import { RootReducerState } from '@adventure-bot/store'
+import { defaultCommandsState } from '@adventure-bot/store/slices/commands'
+import { crownDefaultState } from '@adventure-bot/store/slices/crown'
 import { defaultEncounterWeights } from '@adventure-bot/store/slices/encounters'
 import { defaultLeaderboardState } from '@adventure-bot/store/slices/leaderboard'
-import { crownDefaultState } from '@adventure-bot/store/slices/crown'
-import { defaultCommandsState } from '@adventure-bot/store/slices/commands'
 
 /*
  * This is the current version and should match the latest version

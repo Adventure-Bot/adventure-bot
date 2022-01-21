@@ -4,21 +4,22 @@ import {
   MessageAttachment,
   MessageEmbed,
 } from 'discord.js'
+
 import { adjustGold } from '@adventure-bot/character/adjustGold'
 import { awardXP } from '@adventure-bot/character/awardXP'
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { gpGainField } from '@adventure-bot/character/gpGainField'
 import { xpGainField } from '@adventure-bot/character/xpGainField'
 import { equipItemPrompt } from '@adventure-bot/equipment/equipItemPrompt'
-import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
-import { randomChestItem } from '@adventure-bot/equipment/randomChestItem'
-import { heavyCrown } from '@adventure-bot/equipment/items'
-import { trapAttack } from '@adventure-bot/trap/trapAttack'
 import { isEquippable } from '@adventure-bot/equipment/equipment'
-import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
+import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
+import { heavyCrown } from '@adventure-bot/equipment/items'
+import { randomChestItem } from '@adventure-bot/equipment/randomChestItem'
 import store from '@adventure-bot/store'
-import { damaged, effectAdded } from '@adventure-bot/store/slices/characters'
 import { itemReceived } from '@adventure-bot/store/actions'
+import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
+import { damaged, effectAdded } from '@adventure-bot/store/slices/characters'
+import { trapAttack } from '@adventure-bot/trap/trapAttack'
 
 const chestImage = new MessageAttachment('./images/chest.jpg', 'chest.jpg')
 

@@ -1,5 +1,5 @@
 import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
-import { trapAttack as trapAttack } from '@adventure-bot/trap/trapAttack'
+import { trapAttack } from '@adventure-bot/trap/trapAttack'
 
 export const trapRollText = (result: ReturnType<typeof trapAttack>): string =>
   result

@@ -1,14 +1,15 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { Encounter } from '@adventure-bot/encounter/Encounter'
-import { xpGainField } from '@adventure-bot/character/xpGainField'
+
 import { Emoji } from '@adventure-bot/Emoji'
+import { decoratedName } from '@adventure-bot/character/decoratedName'
 import { gpGainField } from '@adventure-bot/character/gpGainField'
+import { xpGainField } from '@adventure-bot/character/xpGainField'
+import { Encounter } from '@adventure-bot/encounter/Encounter'
+import store from '@adventure-bot/store'
 import {
   selectCharacterById,
   selectMonsterById,
 } from '@adventure-bot/store/selectors'
-import store from '@adventure-bot/store'
-import { decoratedName } from '@adventure-bot/character/decoratedName'
 
 export function encounterSummaryEmbed({
   encounter,

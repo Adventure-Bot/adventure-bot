@@ -1,4 +1,5 @@
 import { EmbedFieldData } from 'discord.js'
+
 import { Character } from '@adventure-bot/character/Character'
 
 export const inventoryFields = (character: Character): EmbedFieldData[] =>

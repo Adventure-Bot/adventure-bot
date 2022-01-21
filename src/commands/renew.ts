@@ -1,9 +1,10 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
-import { isCharacterOnCooldown } from '@adventure-bot/character/isCharacterOnCooldown'
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+
 import { cooldownRemainingText } from '@adventure-bot/character/cooldowns/cooldownRemainingText'
+import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
+import { isCharacterOnCooldown } from '@adventure-bot/character/isCharacterOnCooldown'
 import { startCooldown } from '@adventure-bot/character/startCooldown'
 import { isHealer } from '@adventure-bot/heal/isHealer'
 import store from '@adventure-bot/store'

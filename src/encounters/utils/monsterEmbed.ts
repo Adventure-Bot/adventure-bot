@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js'
-import { Monster } from '@adventure-bot/monster/Monster'
+
 import { decoratedName } from '@adventure-bot/character/decoratedName'
+import { Monster } from '@adventure-bot/monster/Monster'
 
 export const monsterEmbed = (monster: Monster): MessageEmbed =>
   new MessageEmbed({

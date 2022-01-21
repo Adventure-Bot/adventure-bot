@@ -4,6 +4,7 @@ import {
   MessageActionRow,
   MessageButton,
 } from 'discord.js'
+
 import inspect from '@adventure-bot/commands/inspect/inspect'
 import { Item } from '@adventure-bot/equipment/Item'
 import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'

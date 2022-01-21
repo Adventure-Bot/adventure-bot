@@ -1,9 +1,9 @@
-import { d20 } from '@adventure-bot/utils/dice'
-import { getCharacter } from '@adventure-bot/character/getCharacter'
 import { AttackResult } from '@adventure-bot/attack/AttackResult'
+import { getCharacter } from '@adventure-bot/character/getCharacter'
 import store from '@adventure-bot/store'
-import { attacked, damaged } from '@adventure-bot/store/slices/characters'
 import { selectEncounterById } from '@adventure-bot/store/selectors'
+import { attacked, damaged } from '@adventure-bot/store/slices/characters'
+import { d20 } from '@adventure-bot/utils/dice'
 
 export const makeAttack = (
   attackerId: string,

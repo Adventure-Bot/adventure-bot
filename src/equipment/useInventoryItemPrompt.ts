@@ -5,27 +5,28 @@ import {
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
+import { clamp } from 'remeda'
+
+import { Emoji } from '@adventure-bot/Emoji'
+import { Manifest } from '@adventure-bot/asset-manifest'
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
+import { isPotion } from '@adventure-bot/equipment/equipment'
 import { itemSelect } from '@adventure-bot/equipment/itemSelect'
+import { usableInventory } from '@adventure-bot/equipment/usableInventory'
+import { randomArrayElement } from '@adventure-bot/monster/randomArrayElement'
+import { createEffect } from '@adventure-bot/statusEffects'
+import { statusEffectEmbed } from '@adventure-bot/statusEffects/statusEffectEmbed'
+import { EffectTemplate } from '@adventure-bot/statusEffects/templates'
 import store from '@adventure-bot/store'
+import { selectCharacterById } from '@adventure-bot/store/selectors'
 import {
   effectAdded,
   healed,
   itemRemoved,
 } from '@adventure-bot/store/slices/characters'
-import { usableInventory } from '@adventure-bot/equipment/usableInventory'
-import { isPotion } from '@adventure-bot/equipment/equipment'
 import { d } from '@adventure-bot/utils/dice'
-import { selectCharacterById } from '@adventure-bot/store/selectors'
-import { clamp } from 'remeda'
-import { Emoji } from '@adventure-bot/Emoji'
 import { getAsset } from '@adventure-bot/utils/getAsset'
-import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
-import { randomArrayElement } from '@adventure-bot/monster/randomArrayElement'
-import { statusEffectEmbed } from '@adventure-bot/statusEffects/statusEffectEmbed'
-import { createEffect } from '@adventure-bot/statusEffects'
-import { Manifest } from '@adventure-bot/asset-manifest'
-import { EffectTemplate } from '@adventure-bot/statusEffects/templates'
 
 /**
  * Prompt to equip from available inventory items.

@@ -1,7 +1,8 @@
-require('dotenv').config()
-import fs, { Stats } from 'fs'
 import AWS from 'aws-sdk'
+import fs, { Stats } from 'fs'
 import path from 'path'
+
+require('dotenv').config()
 
 const walk = (
   currentDirPath: string,

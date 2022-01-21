@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+
 import { Character } from '@adventure-bot/character/Character'
 import { commandUsed, winnerDeclared } from '@adventure-bot/store/actions'
 

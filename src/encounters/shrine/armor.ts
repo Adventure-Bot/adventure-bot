@@ -1,10 +1,11 @@
 import { randomUUID } from 'crypto'
 import { CommandInteraction } from 'discord.js'
-import { Shrine } from '@adventure-bot/shrines/Shrine'
-import { shrineEmbeds } from '@adventure-bot/encounters/shrine/shrineEmbeds'
+
 import { applyShrine } from '@adventure-bot/encounters/shrine/applyShrine'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { shrineEmbeds } from '@adventure-bot/encounters/shrine/shrineEmbeds'
+import { Shrine } from '@adventure-bot/shrines/Shrine'
 import { createEffect } from '@adventure-bot/statusEffects'
+import { getAsset } from '@adventure-bot/utils/getAsset'
 
 export const armorShrine = async (
   interaction: CommandInteraction

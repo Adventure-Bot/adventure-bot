@@ -1,14 +1,13 @@
-console.time('ready')
-import dotenv from 'dotenv'
-dotenv.config({ path: '.env' })
-
 import { REST } from '@discordjs/rest'
-import Discord, { Intents } from 'discord.js'
-import { exit } from 'process'
-import { Routes } from 'discord-api-types/v9'
-import commands from '@adventure-bot/commands'
-import { readFile, writeFile } from 'fs/promises'
 import crypto from 'crypto'
+import { Routes } from 'discord-api-types/v9'
+import Discord, { Intents } from 'discord.js'
+import dotenv from 'dotenv'
+import { readFile, writeFile } from 'fs/promises'
+import { exit } from 'process'
+
+import commands from '@adventure-bot/commands'
+import { leaderboard } from '@adventure-bot/commands/leaderboard'
 import store from '@adventure-bot/store'
 import { commandUsed, tick, winnerDeclared } from '@adventure-bot/store/actions'
 import {
@@ -16,7 +15,10 @@ import {
   selectSovereign,
   selectWinnerAnnounced,
 } from '@adventure-bot/store/selectors'
-import { leaderboard } from '@adventure-bot/commands/leaderboard'
+
+console.time('ready')
+
+dotenv.config({ path: '.env' })
 
 if (!process.env.token) exit(1)
 

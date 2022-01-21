@@ -1,8 +1,8 @@
-import fs from 'fs/promises'
 import fsSync from 'fs'
 import { constants } from 'fs'
-import path from 'path'
+import fs from 'fs/promises'
 import mkdirp from 'mkdirp'
+import path from 'path'
 
 const dbFolder = path.join(__dirname, '..', '..', 'db')
 const dbFile = path.join(dbFolder, `db.json`)

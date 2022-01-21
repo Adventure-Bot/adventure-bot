@@ -1,7 +1,8 @@
 import { CommandInteraction, EmbedFieldData, MessageEmbed } from 'discord.js'
 import moment from 'moment'
-import { stats, statTitles } from '@adventure-bot/character/Stats'
+
 import { Emoji } from '@adventure-bot/Emoji'
+import { statTitles, stats } from '@adventure-bot/character/Stats'
 import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
 
 export function statusEffectEmbed(

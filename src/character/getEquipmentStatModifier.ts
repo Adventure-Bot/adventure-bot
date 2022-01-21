@@ -1,6 +1,6 @@
 import { Character } from '@adventure-bot/character/Character'
-import { Item } from '@adventure-bot/equipment/Item'
 import { Stat } from '@adventure-bot/character/Stats'
+import { Item } from '@adventure-bot/equipment/Item'
 
 export const getEquipmentStatModifier = (
   character: Character,

@@ -1,6 +1,6 @@
 import fs from 'fs'
-import path from 'path'
 import mkdirp from 'mkdirp'
+import path from 'path'
 
 const migrate = async () => {
   const reduxDBPath = path.join(__dirname, '..', 'db.json')

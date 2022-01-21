@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+
 import { Amulet } from '@adventure-bot/equipment/equipment'
 
 export const amuletOfAttack = (): Amulet => ({

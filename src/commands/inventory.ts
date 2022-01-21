@@ -7,14 +7,15 @@ import {
   MessageOptions,
   TextChannel,
 } from 'discord.js'
+
 import { decoratedName } from '@adventure-bot/character/decoratedName'
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getHook } from '@adventure-bot/commands/inspect/getHook'
 import { equipInventoryItemPrompt } from '@adventure-bot/equipment/equipInventoryItemPrompt'
 import { isTradeable } from '@adventure-bot/equipment/equipment'
 import { equippableInventory } from '@adventure-bot/equipment/equippableInventory'
 import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
-import { offerItemPrompt as offerItemPrompt } from '@adventure-bot/equipment/offerItemPrompt'
-import { getHook } from '@adventure-bot/commands/inspect/getHook'
+import { offerItemPrompt } from '@adventure-bot/equipment/offerItemPrompt'
 import { usableInventory } from '@adventure-bot/equipment/usableInventory'
 import { useInventoryItemPrompt } from '@adventure-bot/equipment/useInventoryItemPrompt'
 
