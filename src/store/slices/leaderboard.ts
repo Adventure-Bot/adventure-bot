@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Character } from '../../character/Character'
-import { commandInteraction, winnerDeclared } from '../actions'
+import { commandUsed, winnerDeclared } from '../actions'
 
 type Score = { name: string; gold: number; wins: number; profile: string }
 
@@ -24,7 +24,7 @@ const leaderboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(commandInteraction, (state, action) => {
+      .addCase(commandUsed, (state, action) => {
         state.channelId = action.payload.channelId
       })
       .addCase(winnerDeclared, (state, action) => {

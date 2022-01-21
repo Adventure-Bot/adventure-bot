@@ -3,10 +3,9 @@ import { CommandInteraction } from 'discord.js'
 import { Character } from '../../character/Character'
 import { Item } from '../../equipment/Item'
 
-export const newGame = createAction('new_game')
+export const newGame = createAction('newGame')
 export const tick = createAction('tick')
-export const commandInteraction =
-  createAction<CommandInteraction>('commandInteraction')
+export const commandUsed = createAction<CommandInteraction>('commandUsed')
 export const winnerDeclared =
   createAction<{ winner: Character }>('winnerDeclared')
 export const itemReceived = createAction<{
