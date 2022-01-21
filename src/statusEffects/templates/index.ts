@@ -15,5 +15,3 @@ export const effects = {
 } as const
 
 export type EffectTemplate = keyof typeof effects
-
-export default { ...effects }
