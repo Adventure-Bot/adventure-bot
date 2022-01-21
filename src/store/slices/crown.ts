@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { heavyCrownId } from '../../equipment/items/heavyCrown'
-import { itemReceived, newGame, tick } from '../actions'
+import { itemReceived, newGame, tick, winnerDeclared } from '../actions'
 
 export const crownDefaultState = {
   bearerId: '',
   claimedAt: 0,
   timeRemaining: 0,
   sovereign: false,
+  announced: false,
 }
 
 const crownSlice = createSlice({
@@ -21,12 +22,15 @@ const crownSlice = createSlice({
           state.claimedAt = Date.now()
         }
       })
+      .addCase(winnerDeclared, (state) => {
+        state.announced = true
+      })
       .addCase(tick, (state) => {
         const twentyFourHours = 1000 * 60 * 60 * 24
         state.timeRemaining = state.claimedAt
           ? state.claimedAt + twentyFourHours - Date.now()
           : 0
-        if (state.timeRemaining <= 0) {
+        if (state.claimedAt && state.timeRemaining <= 0) {
           state.sovereign = true
         }
       })
