@@ -5,12 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "start:dev",
+      "name": "dev",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start:dev"],
+      "runtimeVersion": "16",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["dev"],
       "console": "integratedTerminal"
     },
     {
@@ -18,8 +19,9 @@
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "prune:watch"],
+      "runtimeVersion": "16",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["prune:watch"],
       "console": "integratedTerminal"
     },
     {
@@ -27,8 +29,8 @@
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start"],
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["start"],
       "console": "integratedTerminal"
     },
     {
@@ -36,8 +38,8 @@
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "redux-devtools"],
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["redux-devtools"],
       "console": "integratedTerminal"
     },
     {
@@ -45,8 +47,8 @@
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "sync-s3-assets"],
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["sync-s3-assets"],
       "console": "integratedTerminal"
     }
   ]
