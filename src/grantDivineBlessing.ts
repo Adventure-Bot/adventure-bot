@@ -1,6 +1,6 @@
 import { getCharacter } from './character/getCharacter'
-import store from './store'
-import { grantDivineBlessing as doGrantDivineBlessing } from './store/slices/characters'
+import store from '@adventure-bot/store'
+import { grantDivineBlessing as doGrantDivineBlessing } from '@adventure-bot/store/slices/characters'
 
 export const grantDivineBlessing = (characterId: string): void => {
   const character = getCharacter(characterId)

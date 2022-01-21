@@ -1,9 +1,9 @@
 import { randomUUID } from 'crypto'
 import { defaultCharacter } from '../character/defaultCharacter'
 import { Monster } from './Monster'
-import store from '../store'
-import { monsterCreated } from '../store/slices/characters'
-import { selectMonsterById } from '../store/selectors'
+import store from '@adventure-bot/store'
+import { monsterCreated } from '@adventure-bot/store/slices/characters'
+import { selectMonsterById } from '@adventure-bot/store/selectors'
 import { MonsterKind } from './names/getRandomMonsterName'
 
 export const createMonster = (

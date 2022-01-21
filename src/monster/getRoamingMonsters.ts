@@ -1,5 +1,5 @@
-import store from '../store'
-import { selectRoamingMonsters as doGetRoamingMonsters } from '../store/selectors'
+import store from '@adventure-bot/store'
+import { selectRoamingMonsters as doGetRoamingMonsters } from '@adventure-bot/store/selectors'
 import { Monster } from './Monster'
 
 export function getRoamingMonsters(): Monster[] {

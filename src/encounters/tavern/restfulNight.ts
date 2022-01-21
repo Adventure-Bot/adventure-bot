@@ -9,13 +9,13 @@ import { getCharacterStatModified } from '../../character/getCharacterStatModifi
 import { questProgressField } from '../../quest/questProgressField'
 import { isUserQuestComplete } from '../../quest/isQuestComplete'
 import quests from '../../commands/quests'
-import store from '../../store'
+import store from '@adventure-bot/store'
 import {
   effectAdded,
   healed,
   questProgressed,
   xpAwarded,
-} from '../../store/slices/characters'
+} from '@adventure-bot/store/slices/characters'
 import { createEffect } from '../../statusEffects'
 
 export async function restfulNight(

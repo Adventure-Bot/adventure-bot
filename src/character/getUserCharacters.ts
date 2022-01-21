@@ -1,5 +1,5 @@
-import store from '../store'
-import { selectAllCharacters } from '../store/selectors'
+import store from '@adventure-bot/store'
+import { selectAllCharacters } from '@adventure-bot/store/selectors'
 import { Character } from './Character'
 
 export const getUserCharacters = (): Character[] =>

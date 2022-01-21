@@ -15,10 +15,10 @@ import { randomChestItem } from '../equipment/randomChestItem'
 import { heavyCrown } from '../equipment/items/heavyCrown'
 import { trapAttack } from '../trap/trapAttack'
 import { isEquippable } from '../equipment/equipment'
-import { selectIsHeavyCrownInPlay } from '../store/selectors'
-import store from '../store'
-import { damaged, effectAdded } from '../store/slices/characters'
-import { itemReceived } from '../store/actions'
+import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
+import store from '@adventure-bot/store'
+import { damaged, effectAdded } from '@adventure-bot/store/slices/characters'
+import { itemReceived } from '@adventure-bot/store/actions'
 
 const chestImage = new MessageAttachment('./images/chest.jpg', 'chest.jpg')
 

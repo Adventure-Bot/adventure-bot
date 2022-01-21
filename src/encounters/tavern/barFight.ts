@@ -5,8 +5,8 @@ import { questProgressField } from '../../quest/questProgressField'
 import { updateUserQuestProgess } from '../../quest/updateQuestProgess'
 import { hpBarField } from '../../character/hpBar/hpBarField'
 import { xpGainField } from '../../character/xpGainField'
-import store from '../../store'
-import { damaged, xpAwarded } from '../../store/slices/characters'
+import store from '@adventure-bot/store'
+import { damaged, xpAwarded } from '@adventure-bot/store/slices/characters'
 
 export async function barFight(
   interaction: CommandInteraction,

@@ -1,13 +1,13 @@
 import { randomUUID } from 'crypto'
 import { values } from 'remeda'
-import { Character } from '../Character'
-import { getCharacter } from '../getCharacter'
-import store from '../../store'
-import { Item } from '../../equipment/Item'
-import { characterLooted } from '../../store/slices/loots'
+import { Character } from '@adventure-bot/character/Character'
+import { getCharacter } from '@adventure-bot/character/getCharacter'
+import store from '@adventure-bot/store'
+import { Item } from '@adventure-bot/equipment/Item'
+import { characterLooted } from '@adventure-bot/store/slices/loots'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 import moment from 'moment'
-import { getCrownArt } from './getCrownArt'
+import { getCrownArt } from '@adventure-bot/character/loot/getCrownArt'
 
 export type LootResult = {
   id: string

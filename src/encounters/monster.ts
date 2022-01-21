@@ -7,14 +7,14 @@ import { updateUserQuestProgess } from '../quest/updateQuestProgess'
 import { getRandomMonster } from '../monster/getRandomMonster'
 import { createEncounter } from '../encounter/createEncounter'
 import { loot } from '../character/loot/loot'
-import store from '../store'
+import store from '@adventure-bot/store'
 import {
   roundFinished as roundFinished,
   doubleKO,
   playerDefeat,
   playerFled,
   playerVictory,
-} from '../store/slices/encounters'
+} from '@adventure-bot/store/slices/encounters'
 import { Emoji } from '../Emoji'
 import { attackResultEmbed } from '../attack/attackResultEmbed'
 import { encounterSummaryEmbed } from '../encounter/encounterSummaryEmbed'
@@ -24,7 +24,7 @@ import {
   selectCharacterById,
   selectEncounterById,
   selectMonsterById,
-} from '../store/selectors'
+} from '@adventure-bot/store/selectors'
 import { decoratedName } from '../character/decoratedName'
 import { questProgressField } from '../quest/questProgressField'
 

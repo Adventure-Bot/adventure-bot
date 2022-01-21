@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto'
-import store from '../store'
-import { created } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import { created } from '@adventure-bot/store/slices/characters'
 import { Character } from './Character'
 import { defaultCharacter } from './defaultCharacter'
 

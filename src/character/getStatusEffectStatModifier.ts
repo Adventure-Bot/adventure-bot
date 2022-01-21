@@ -1,4 +1,4 @@
-import { isStatusEffectExpired } from '../store/slices/characters'
+import { isStatusEffectExpired } from '@adventure-bot/store/slices/characters'
 import { Character } from './Character'
 import { Stat } from './Stats'
 

@@ -4,8 +4,11 @@ import { isUserQuestComplete } from '../../quest/isQuestComplete'
 import { hasStatusEffect } from '../../statusEffects/hasStatusEffect'
 import quests from '../../commands/quests'
 import { Shrine } from '../../shrines/Shrine'
-import store from '../../store'
-import { questProgressed, effectAdded } from '../../store/slices/characters'
+import store from '@adventure-bot/store'
+import {
+  questProgressed,
+  effectAdded,
+} from '@adventure-bot/store/slices/characters'
 
 export async function applyShrine({
   interaction,

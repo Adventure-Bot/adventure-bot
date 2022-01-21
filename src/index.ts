@@ -9,13 +9,13 @@ import { Routes } from 'discord-api-types/v9'
 import commands from '@adventure-bot/commands'
 import { readFile, writeFile } from 'fs/promises'
 import crypto from 'crypto'
-import store from './store'
-import { commandUsed, tick, winnerDeclared } from './store/actions'
+import store from '@adventure-bot/store'
+import { commandUsed, tick, winnerDeclared } from '@adventure-bot/store/actions'
 import {
   selectLastChannelUsed,
   selectSovereign,
   selectWinnerAnnounced,
-} from './store/selectors'
+} from '@adventure-bot/store/selectors'
 import { leaderboard } from './commands/leaderboard'
 
 if (!process.env.token) exit(1)

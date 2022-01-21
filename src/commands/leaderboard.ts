@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 import { getCrownArt } from '../character/loot/getCrownArt'
-import store from '../store'
-import { selectLeaderBoard } from '../store/selectors'
+import store from '@adventure-bot/store'
+import { selectLeaderBoard } from '@adventure-bot/store/selectors'
 
 export function leaderboard(): MessageEmbed[] {
   const { leaderboard } = selectLeaderBoard(store.getState())

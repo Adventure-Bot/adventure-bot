@@ -1,5 +1,5 @@
-import store from '../store'
-import { goldGained } from '../store/slices/characters'
+import store from '@adventure-bot/store'
+import { goldGained } from '@adventure-bot/store/slices/characters'
 
 export const adjustGold = (characterId: string, amount: number): void => {
   store.dispatch(
