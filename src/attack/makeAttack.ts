@@ -1,6 +1,6 @@
-import { d20 } from '../utils/dice'
+import { d20 } from '@adventure-bot/utils/dice'
 import { getCharacter } from '@adventure-bot/character/getCharacter'
-import { AttackResult } from './AttackResult'
+import { AttackResult } from '@adventure-bot/attack/AttackResult'
 import store from '@adventure-bot/store'
 import { attacked, damaged } from '@adventure-bot/store/slices/characters'
 import { selectEncounterById } from '@adventure-bot/store/selectors'

@@ -20,7 +20,7 @@ import {
   towerShield,
   unidentifiedPotion,
   warAxe,
-} from './items'
+} from '@adventure-bot/equipment/items'
 
 export function randomChestItem(): Item {
   return weightedTable<() => Item>([

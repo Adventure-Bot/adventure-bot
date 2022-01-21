@@ -16,10 +16,10 @@ import {
   ringOfAttack,
   towerShield,
   warAxe,
-} from './items'
-import { amuletOfAttack } from './items/amuletOfAttack'
-import { amuletOfProtection } from './items/amuletOfProtection'
-import { potionOfMight } from './items/potionOfMight'
+} from '@adventure-bot/equipment/items'
+import { amuletOfAttack } from '@adventure-bot/equipment/items/amuletOfAttack'
+import { amuletOfProtection } from '@adventure-bot/equipment/items/amuletOfProtection'
+import { potionOfMight } from '@adventure-bot/equipment/items/potionOfMight'
 
 const weights = new Map<() => Item, number>([
   [amuletOfAttack, 0.3],

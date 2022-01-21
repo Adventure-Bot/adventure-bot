@@ -14,7 +14,7 @@ import { isTradeable } from '@adventure-bot/equipment/equipment'
 import { equippableInventory } from '@adventure-bot/equipment/equippableInventory'
 import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
 import { offerItemPrompt as offerItemPrompt } from '@adventure-bot/equipment/offerItemPrompt'
-import { getHook } from './inspect/getHook'
+import { getHook } from '@adventure-bot/commands/inspect/getHook'
 import { usableInventory } from '@adventure-bot/equipment/usableInventory'
 import { useInventoryItemPrompt } from '@adventure-bot/equipment/useInventoryItemPrompt'
 
