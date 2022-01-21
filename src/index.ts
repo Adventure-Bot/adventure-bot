@@ -10,8 +10,12 @@ import commands from './commands'
 import { readFile, writeFile } from 'fs/promises'
 import crypto from 'crypto'
 import store from './store'
-import { commandInteraction, tick } from './store/actions'
-import { selectCrownBearer, selectSovereign } from './store/selectors'
+import { commandUsed, tick, winnerDeclared } from './store/actions'
+import {
+  selectLastChannelUsed,
+  selectSovereign,
+  selectWinnerAnnounced,
+} from './store/selectors'
 
 if (!process.env.token) exit(1)
 
@@ -60,7 +64,7 @@ async function main() {
   updateCommands()
 
   console.time('discord client ready')
-  const discordClient = new Discord.Client({
+  const client = new Discord.Client({
     intents: [
       Intents.FLAGS.GUILDS,
       Intents.FLAGS.GUILD_MESSAGES,
@@ -75,9 +79,9 @@ async function main() {
     return this.toString()
   }
 
-  discordClient.on('interactionCreate', async (interaction) => {
+  client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return
-    store.dispatch(commandInteraction(interaction))
+    store.dispatch(commandUsed(interaction))
     console.log(`command ${interaction.commandName}`)
     console.time(interaction.commandName)
     try {
@@ -96,29 +100,33 @@ async function main() {
     }
     console.timeEnd(interaction.commandName)
   })
-  discordClient.on('error', (e) => {
+  client.on('error', (e) => {
     console.error('Discord client error!', e)
   })
 
-  discordClient.on('ready', async () => {
+  client.on('ready', async () => {
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
-    startClock()
+    startClock(client)
   })
 
-  discordClient.login(process.env.token)
+  client.login(process.env.token)
 }
 
-function startClock() {
-  console.log('startClock')
+function startClock(client: Discord.Client) {
   const serverTick = () => {
-    console.log('tick')
-
     const sovereign = selectSovereign(store.getState())
-    console.log(`sovereign ${sovereign}`)
-    const crownBearer = selectCrownBearer(store.getState())
-    console.log(`crownBearer ${crownBearer?.name}`)
-
+    // const crownBearer = selectCrownBearer(store.getState())
+    // const timeRemaining = selectCrownTimeRemaining(store.getState())
+    const announced = selectWinnerAnnounced(store.getState())
+    if (sovereign && !announced) {
+      const lastChannelId = selectLastChannelUsed(store.getState())
+      const channel = client.channels.cache.get(lastChannelId)
+      if (!channel?.isText()) return
+      channel.send(`${sovereign} has won the crown! Congratulations!`)
+      store.dispatch(winnerDeclared({ winner: sovereign }))
+      debugger
+    }
     store.dispatch(tick())
   }
   serverTick()
