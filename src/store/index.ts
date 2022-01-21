@@ -4,7 +4,7 @@ import remoteReduxEnhancer from '@redux-devtools/remote'
 import rootReducer from './reducers'
 import { disk } from './storage'
 import { persistVersion, persistMigrate } from './migrations'
-
+import * as actionCreators from './actions'
 const enhancers = []
 
 if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
@@ -18,6 +18,7 @@ if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
       realtime: true,
       hostname: 'localhost',
       port: 5010,
+      actionCreators,
     })
   )
 }
