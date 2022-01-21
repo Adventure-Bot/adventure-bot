@@ -92,7 +92,9 @@ export const execute = async (
       return
     case 'declare_winner':
       declareWinner(interaction)
-      leaderboard(interaction)
+      interaction.editReply({
+        embeds: leaderboard(),
+      })
       break
     default:
       interaction.editReply(
