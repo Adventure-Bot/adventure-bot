@@ -1,4 +1,3 @@
-import quests from '@adventure-bot/commands/quests'
 import { Quest } from '@adventure-bot/quest/Quest'
 import { getCompletedQuests } from '@adventure-bot/quest/getCompletedQuests'
 import {
@@ -8,7 +7,7 @@ import {
 import { questEmbed } from '@adventure-bot/quest/questEmbed'
 import { questProgressBar } from '@adventure-bot/quest/questProgressBar'
 import { questProgressField } from '@adventure-bot/quest/questProgressField'
-import { QuestId, isQuestId } from '@adventure-bot/quest/quests'
+import { QuestId, isQuestId, quests } from '@adventure-bot/quest/quests'
 import {
   blessedBuffQuestReward,
   buffQuestReward,
