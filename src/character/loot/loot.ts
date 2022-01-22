@@ -4,7 +4,7 @@ import moment from 'moment'
 import { values } from 'remeda'
 
 import { Character, getCharacter, getCrownArt } from '@adventure-bot/character'
-import { Item } from '@adventure-bot/equipment/Item'
+import { Item } from '@adventure-bot/equipment'
 import store from '@adventure-bot/store'
 import { characterLooted } from '@adventure-bot/store/slices/loots'
 

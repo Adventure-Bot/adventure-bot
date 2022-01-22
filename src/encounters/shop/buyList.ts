@@ -1,12 +1,11 @@
-import { CommandInteraction, MessageSelectMenu } from 'discord.js'
+import { MessageSelectMenu } from 'discord.js'
 
-import { Item } from '@adventure-bot/equipment/Item'
+import { Item } from '@adventure-bot/equipment'
 
 export function buyList({
   inventory,
 }: {
   inventory: Item[]
-  interaction: CommandInteraction
 }): MessageSelectMenu {
   return new MessageSelectMenu({
     customId: 'item',

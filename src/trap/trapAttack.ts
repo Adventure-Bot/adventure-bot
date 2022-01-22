@@ -3,7 +3,7 @@ import { getCharacterStatModified } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { damaged } from '@adventure-bot/store/slices/characters'
 import { TrapResult } from '@adventure-bot/trap/TrapResult'
-import { d6, d20 } from '@adventure-bot/utils/dice'
+import { d6, d20 } from '@adventure-bot/utils'
 
 export const trapAttack = (
   characterId: string,

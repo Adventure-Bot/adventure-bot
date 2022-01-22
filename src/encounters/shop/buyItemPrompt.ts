@@ -8,7 +8,7 @@ import {
 import { getUserCharacter } from '@adventure-bot/character'
 import { buyItem } from '@adventure-bot/commands/buyItem'
 import { buyList } from '@adventure-bot/encounters/shop/buyList'
-import { Item } from '@adventure-bot/equipment/Item'
+import { Item } from '@adventure-bot/equipment'
 
 export async function buyItemPrompt({
   interaction,
@@ -20,7 +20,7 @@ export async function buyItemPrompt({
   const message = await interaction.editReply({
     components: [
       new MessageActionRow({
-        components: [buyList({ inventory, interaction })],
+        components: [buyList({ inventory })],
       }),
       new MessageActionRow({
         components: [

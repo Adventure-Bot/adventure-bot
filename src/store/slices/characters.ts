@@ -9,7 +9,7 @@ import {
 } from '@adventure-bot/character'
 import { Encounter } from '@adventure-bot/encounter'
 import { getSaleRate } from '@adventure-bot/encounters/shop/getSaleRate'
-import { Item } from '@adventure-bot/equipment/Item'
+import { Item } from '@adventure-bot/equipment'
 import {
   isAmulet,
   isArmor,
