@@ -11,7 +11,7 @@
     "preci:build": "rimraf .build && yarn generate-asset-manifest",
     "ci:build": "tsc",
     "prestart": "yarn generate-asset-manifest",
-    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "start": "ts-node -r tsconfig-paths/register -r dotenv/config src/index.ts",
     "dev": "nodemon",
     "sync-s3-assets": "ts-node ./scripts/sync-s3-assets.ts",
     "postsync-s3-assets": "yarn generate-asset-manifest",
