@@ -1,5 +1,4 @@
-import { AttackResult } from '@adventure-bot/attack'
-import { makeAttack } from '@adventure-bot/attack/makeAttack'
+import { AttackResult, makeAttack } from '@adventure-bot/attack'
 import { isCharacterOnCooldown } from '@adventure-bot/character/isCharacterOnCooldown'
 import { startCooldown } from '@adventure-bot/character/startCooldown'
 

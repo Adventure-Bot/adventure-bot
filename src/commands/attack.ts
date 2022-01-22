@@ -2,10 +2,12 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { Emoji, d20Emoji } from '@adventure-bot/Emoji'
-import { AttackResult } from '@adventure-bot/attack'
-import { attackResultEmbed } from '@adventure-bot/attack/attackResultEmbed'
-import { makeAttack } from '@adventure-bot/attack/makeAttack'
-import { playerAttack } from '@adventure-bot/attack/playerAttack'
+import {
+  AttackResult,
+  attackResultEmbed,
+  makeAttack,
+  playerAttack,
+} from '@adventure-bot/attack'
 import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { loot } from '@adventure-bot/character/loot/loot'

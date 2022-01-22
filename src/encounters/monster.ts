@@ -1,8 +1,7 @@
 import { CommandInteraction, Message, TextChannel } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/Emoji'
-import { attackResultEmbed } from '@adventure-bot/attack/attackResultEmbed'
-import { makeAttack } from '@adventure-bot/attack/makeAttack'
+import { attackResultEmbed, makeAttack } from '@adventure-bot/attack'
 import { decoratedName } from '@adventure-bot/character/decoratedName'
 import { loot } from '@adventure-bot/character/loot/loot'
 import { getHook } from '@adventure-bot/commands/inspect/getHook'
