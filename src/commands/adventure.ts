@@ -7,7 +7,7 @@ import {
   startCooldown,
 } from '@adventure-bot/character'
 import cooldowns from '@adventure-bot/commands/cooldowns'
-import { randomEncounter } from '@adventure-bot/encounters/randomEncounter'
+import { randomEncounter } from '@adventure-bot/encounters'
 
 export const command = new SlashCommandBuilder()
   .setName('adventure')

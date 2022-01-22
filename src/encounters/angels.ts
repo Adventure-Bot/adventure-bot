@@ -4,7 +4,7 @@ import { getUserCharacter } from '@adventure-bot/character'
 import { questEmbed } from '@adventure-bot/quest'
 import store from '@adventure-bot/store'
 import { questGranted } from '@adventure-bot/store/slices/characters'
-import { getAsset } from '@adventure-bot/utils'
+import { asset } from '@adventure-bot/utils'
 
 export const angels = async (
   interaction: CommandInteraction
@@ -16,7 +16,7 @@ export const angels = async (
     })
   )
   const character = getUserCharacter(interaction.user)
-  const angel = getAsset('fantasy', 'characters', 'angel')
+  const angel = asset('fantasy', 'characters', 'angel')
 
   interaction.followUp({
     files: [angel.attachment],

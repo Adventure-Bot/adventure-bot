@@ -26,7 +26,7 @@ import {
   itemRemoved,
 } from '@adventure-bot/store/slices/characters'
 import { d } from '@adventure-bot/utils'
-import { getAsset } from '@adventure-bot/utils'
+import { asset } from '@adventure-bot/utils'
 
 /**
  * Prompt to equip from available inventory items.
@@ -129,7 +129,7 @@ function useInventoryItem({
       const effectId = randomArrayElement(item.useEffects.randomEffect)
       const effect = createEffect(effectId)
       store.dispatch(effectAdded({ characterId, effect }))
-      const { s3Url } = getAsset('fantasy', 'items', potionArt[effectId])
+      const { s3Url } = asset('fantasy', 'items', potionArt[effectId])
       embeds.push(
         statusEffectEmbed(effect, interaction)
           .setImage(s3Url)
@@ -161,7 +161,7 @@ function useInventoryItem({
           ],
         })
           .setImage(
-            getAsset(
+            asset(
               'fantasy',
               'items',
               'magic potion with glowing red liquid',

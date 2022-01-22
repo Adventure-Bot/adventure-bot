@@ -11,7 +11,7 @@ import {
   questProgressField,
   updateUserQuestProgess,
 } from '@adventure-bot/quest'
-import { getAsset } from '@adventure-bot/utils'
+import { asset } from '@adventure-bot/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('heal')
@@ -65,8 +65,7 @@ export const execute = async (
             : []
         ),
       }).setImage(
-        getAsset('fantasy', 'magic', 'a glowing hand applying healing magic')
-          .s3Url
+        asset('fantasy', 'magic', 'a glowing hand applying healing magic').s3Url
       ),
     ].concat(),
   })

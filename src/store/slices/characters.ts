@@ -7,7 +7,7 @@ import {
   equipmentFilter,
   getCharacterStatModified,
 } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounter'
+import { Encounter } from '@adventure-bot/encounters'
 import { getSaleRate } from '@adventure-bot/encounters/shop/getSaleRate'
 import { Item } from '@adventure-bot/equipment/Item'
 import {
