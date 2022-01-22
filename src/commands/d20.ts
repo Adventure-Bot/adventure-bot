@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
 
 import { d20Emoji } from '@adventure-bot/Emoji'
-import { d } from '@adventure-bot/utils/dice'
+import { d20 } from '@adventure-bot/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('d20')
@@ -14,7 +14,7 @@ export const execute = async (
   interaction.editReply({
     content: d20Emoji({
       interaction,
-      n: d(20),
+      n: d20(),
     }),
   })
 }

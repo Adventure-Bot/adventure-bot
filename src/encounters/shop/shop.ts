@@ -17,7 +17,7 @@ import { heavyCrown } from '@adventure-bot/equipment/items'
 import { randomShopItem } from '@adventure-bot/equipment/randomShopItem'
 import store from '@adventure-bot/store'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { getAsset } from '@adventure-bot/utils'
 
 export const shop = async (interaction: CommandInteraction): Promise<void> => {
   const character = getUserCharacter(interaction.user)

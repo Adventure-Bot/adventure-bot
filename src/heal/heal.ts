@@ -4,7 +4,7 @@ import { startCooldown } from '@adventure-bot/character'
 import { HealResult } from '@adventure-bot/heal/HealResult'
 import store from '@adventure-bot/store'
 import { healed } from '@adventure-bot/store/slices/characters'
-import { d6 } from '@adventure-bot/utils/dice'
+import { d6 } from '@adventure-bot/utils'
 
 export const heal = (
   initiatorId: string,

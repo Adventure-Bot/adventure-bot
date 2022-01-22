@@ -16,7 +16,7 @@ import {
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/store/slices/characters'
-import { d6 } from '@adventure-bot/utils/dice'
+import { d6 } from '@adventure-bot/utils'
 
 export async function restfulNight(
   interaction: CommandInteraction

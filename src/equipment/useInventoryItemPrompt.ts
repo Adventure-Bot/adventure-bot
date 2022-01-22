@@ -25,8 +25,8 @@ import {
   healed,
   itemRemoved,
 } from '@adventure-bot/store/slices/characters'
-import { d } from '@adventure-bot/utils/dice'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { d } from '@adventure-bot/utils'
+import { getAsset } from '@adventure-bot/utils'
 
 /**
  * Prompt to equip from available inventory items.
