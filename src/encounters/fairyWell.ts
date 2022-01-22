@@ -1,12 +1,13 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/Emoji'
-import { getUserCharacter } from '@adventure-bot/character'
-import { hpBarField } from '@adventure-bot/character'
-import { xpGainField } from '@adventure-bot/character'
+import {
+  getUserCharacter,
+  hpBarField,
+  xpGainField,
+} from '@adventure-bot/character'
 import quests from '@adventure-bot/commands/quests'
-import { isUserQuestComplete } from '@adventure-bot/quest/isQuestComplete'
-import { questProgressField } from '@adventure-bot/quest/questProgressField'
+import { isUserQuestComplete, questProgressField } from '@adventure-bot/quest'
 import store from '@adventure-bot/store'
 import {
   healed,

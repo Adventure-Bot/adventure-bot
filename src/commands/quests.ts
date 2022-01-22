@@ -8,13 +8,16 @@ import {
 } from 'discord.js'
 
 import { getUserCharacter } from '@adventure-bot/character'
-import { Quest } from '@adventure-bot/quest/Quest'
-import { getCompletedQuests } from '@adventure-bot/quest/getCompletedQuests'
-import { QuestId, isQuestId } from '@adventure-bot/quest/quests'
-import { blessedBuffQuestReward } from '@adventure-bot/quest/rewards'
-import { healerQuestReward } from '@adventure-bot/quest/rewards'
-import { slayerBuffQuestReward } from '@adventure-bot/quest/rewards'
-import { survivorBuffQuestReward } from '@adventure-bot/quest/rewards'
+import {
+  Quest,
+  QuestId,
+  blessedBuffQuestReward,
+  getCompletedQuests,
+  healerQuestReward,
+  isQuestId,
+  slayerBuffQuestReward,
+  survivorBuffQuestReward,
+} from '@adventure-bot/quest'
 import { progressBar } from '@adventure-bot/utils/progress-bar'
 
 export const command = new SlashCommandBuilder()

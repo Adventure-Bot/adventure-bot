@@ -6,7 +6,7 @@ import { range } from 'remeda'
 
 import { getUserCharacter } from '@adventure-bot/character'
 import { leaderboard } from '@adventure-bot/commands/leaderboard'
-import { healerStatus } from '@adventure-bot/quest/rewards'
+import { healerStatus } from '@adventure-bot/quest'
 import store from '@adventure-bot/store'
 import { newGame, winnerDeclared } from '@adventure-bot/store/actions'
 import {

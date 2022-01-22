@@ -1,10 +1,14 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import { hpBarField } from '@adventure-bot/character'
-import { xpGainField } from '@adventure-bot/character'
-import { questProgressField } from '@adventure-bot/quest/questProgressField'
-import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
+import {
+  getUserCharacter,
+  hpBarField,
+  xpGainField,
+} from '@adventure-bot/character'
+import {
+  questProgressField,
+  updateUserQuestProgess,
+} from '@adventure-bot/quest'
 import store from '@adventure-bot/store'
 import { damaged, xpAwarded } from '@adventure-bot/store/slices/characters'
 import { d6 } from '@adventure-bot/utils/dice'

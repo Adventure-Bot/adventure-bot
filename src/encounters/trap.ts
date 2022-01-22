@@ -6,7 +6,7 @@ import {
   hpBarField,
   xpGainField,
 } from '@adventure-bot/character'
-import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
+import { updateUserQuestProgess } from '@adventure-bot/quest'
 import { trapAttack } from '@adventure-bot/trap/trapAttack'
 import { trapRollText } from '@adventure-bot/trap/trapRollText'
 import { sleep } from '@adventure-bot/utils'

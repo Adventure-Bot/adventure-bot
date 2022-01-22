@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { getUserCharacter } from '@adventure-bot/character'
-import { questEmbed } from '@adventure-bot/quest/questEmbed'
+import { questEmbed } from '@adventure-bot/quest'
 import store from '@adventure-bot/store'
 import { questGranted } from '@adventure-bot/store/slices/characters'
 import { getAsset } from '@adventure-bot/utils/getAsset'
