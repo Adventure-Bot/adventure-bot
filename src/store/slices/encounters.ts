@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { LootResult } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounter/Encounter'
+import { Encounter } from '@adventure-bot/encounter'
 import { isMonster } from '@adventure-bot/monster/Monster'
 import { newGame } from '@adventure-bot/store/actions'
 import { attacked } from '@adventure-bot/store/slices/characters'

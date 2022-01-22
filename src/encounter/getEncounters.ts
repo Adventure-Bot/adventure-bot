@@ -1,4 +1,4 @@
-import { Encounter } from '@adventure-bot/encounter/Encounter'
+import { Encounter } from '@adventure-bot/encounter'
 import store from '@adventure-bot/store'
 import { selectAllEncounters } from '@adventure-bot/store/selectors'
 

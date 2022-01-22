@@ -1,10 +1,12 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/Emoji'
-import { decoratedName } from '@adventure-bot/character'
-import { gpGainField } from '@adventure-bot/character'
-import { xpGainField } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounter/Encounter'
+import {
+  decoratedName,
+  gpGainField,
+  xpGainField,
+} from '@adventure-bot/character'
+import { Encounter } from '@adventure-bot/encounter'
 import store from '@adventure-bot/store'
 import {
   selectCharacterById,
