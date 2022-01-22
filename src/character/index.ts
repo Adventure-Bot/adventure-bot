@@ -23,7 +23,6 @@ import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
 import { inventoryFields } from '@adventure-bot/character/inventoryFields'
 import { isCharacterOnCooldown } from '@adventure-bot/character/isCharacterOnCooldown'
 import { limitedCharacterEmbed } from '@adventure-bot/character/limitedCharacterEmbed'
-import { getCrownArt } from '@adventure-bot/character/loot/getCrownArt'
 import {
   LootResult,
   equipmentFilter,
@@ -69,7 +68,6 @@ export {
   statTitles,
   statText,
   stats,
-  getCrownArt,
   LootResult,
   gpGainField,
   getUserCharacter,

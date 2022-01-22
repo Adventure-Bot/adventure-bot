@@ -1,12 +1,12 @@
 import { MessageEmbed } from 'discord.js'
 
-import { getCrownArt } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { selectLeaderBoard } from '@adventure-bot/store/selectors'
+import { crownArt } from '@adventure-bot/utils'
 
 export function leaderboard(): MessageEmbed[] {
   const { leaderboard } = selectLeaderBoard(store.getState())
-  const crown = getCrownArt()
+  const crown = crownArt()
 
   const embeds = [
     new MessageEmbed({
