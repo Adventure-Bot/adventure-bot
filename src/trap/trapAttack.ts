@@ -1,5 +1,5 @@
-import { getCharacter } from '@adventure-bot/character/getCharacter'
-import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
+import { getCharacter } from '@adventure-bot/character'
+import { getCharacterStatModified } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { damaged } from '@adventure-bot/store/slices/characters'
 import { TrapResult } from '@adventure-bot/trap/TrapResult'

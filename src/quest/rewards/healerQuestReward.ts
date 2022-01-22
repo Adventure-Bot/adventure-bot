@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getUserCharacter } from '@adventure-bot/character'
 import { buffQuestReward } from '@adventure-bot/quest/rewards/buffQuestReward'
 import { healerStatus } from '@adventure-bot/quest/rewards/healerStatus'
 

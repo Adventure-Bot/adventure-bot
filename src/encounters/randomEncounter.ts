@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getUserCharacter } from '@adventure-bot/character'
 import {
   angels,
   chest,

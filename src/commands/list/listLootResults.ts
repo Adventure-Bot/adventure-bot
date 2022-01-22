@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { lootResultEmbed } from '@adventure-bot/character/loot/lootResultEmbed'
+import { lootResultEmbed } from '@adventure-bot/character'
 import { getLoots } from '@adventure-bot/encounter/getLoots'
 
 export function listLootResults(interaction: CommandInteraction): void {

@@ -2,7 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/Emoji'
 import { Character } from '@adventure-bot/character'
-import { cooldownRemainingText } from '@adventure-bot/character/cooldowns/cooldownRemainingText'
+import { cooldownRemainingText } from '@adventure-bot/character'
 import { isHealer } from '@adventure-bot/heal/isHealer'
 
 export function actionEmbed({

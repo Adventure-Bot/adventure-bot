@@ -2,9 +2,9 @@ import { CommandInteraction } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/Emoji'
 import { Character } from '@adventure-bot/character'
-import { Stat } from '@adventure-bot/character/Stats'
-import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
-import { getCharacterStatModifier } from '@adventure-bot/character/getCharacterStatModifier'
+import { Stat } from '@adventure-bot/character'
+import { getCharacterStatModified } from '@adventure-bot/character'
+import { getCharacterStatModifier } from '@adventure-bot/character'
 
 export function statText({
   character,

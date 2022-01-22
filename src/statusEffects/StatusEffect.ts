@@ -1,4 +1,4 @@
-import { Stats } from '@adventure-bot/character/Stats'
+import { Stats } from '@adventure-bot/character'
 
 export type StatusEffect = {
   name: string
