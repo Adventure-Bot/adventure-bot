@@ -1,5 +1,5 @@
-import { Item } from '@adventure-bot/equipment/Item'
 import {
+  Item,
   amuletOfAttack,
   amuletOfProtection,
   buckler,
@@ -18,7 +18,7 @@ import {
   ringOfAttack,
   towerShield,
   warAxe,
-} from '@adventure-bot/equipment/items'
+} from '@adventure-bot/equipment'
 import { weightedRandom } from '@adventure-bot/utils'
 
 const weights = new Map<() => Item, number>([

@@ -1,5 +1,5 @@
 import { Stats } from '@adventure-bot/character'
-import { Item } from '@adventure-bot/equipment/Item'
+import { Item } from '@adventure-bot/equipment'
 import {
   Amulet,
   Armor,
@@ -7,7 +7,7 @@ import {
   Ring,
   Shield,
   Weapon,
-} from '@adventure-bot/equipment/equipment'
+} from '@adventure-bot/equipment'
 import { Quest, QuestId } from '@adventure-bot/quest'
 import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
 

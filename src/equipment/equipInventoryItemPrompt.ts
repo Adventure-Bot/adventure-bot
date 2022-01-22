@@ -6,8 +6,8 @@ import {
 } from 'discord.js'
 
 import { getUserCharacter } from '@adventure-bot/character'
-import { equippableInventory } from '@adventure-bot/equipment/equippableInventory'
-import { itemSelect } from '@adventure-bot/equipment/itemSelect'
+import { equippableInventory } from '@adventure-bot/equipment'
+import { itemSelect } from '@adventure-bot/equipment'
 import store from '@adventure-bot/store'
 import { itemEquipped } from '@adventure-bot/store/slices/characters'
 

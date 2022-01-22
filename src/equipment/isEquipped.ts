@@ -1,7 +1,7 @@
 import { values } from 'remeda'
 
 import { Character, equipmentFilter } from '@adventure-bot/character'
-import { Item } from '@adventure-bot/equipment/Item'
+import { Item } from '@adventure-bot/equipment'
 
 export function isEquipped({
   character,

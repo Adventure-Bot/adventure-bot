@@ -9,7 +9,7 @@ import {
 } from '@adventure-bot/character'
 import { Encounter } from '@adventure-bot/encounters'
 import { getSaleRate } from '@adventure-bot/encounters/shop/getSaleRate'
-import { Item } from '@adventure-bot/equipment/Item'
+import { Item } from '@adventure-bot/equipment'
 import {
   isAmulet,
   isArmor,
@@ -17,7 +17,7 @@ import {
   isRing,
   isShield,
   isWeapon,
-} from '@adventure-bot/equipment/equipment'
+} from '@adventure-bot/equipment'
 import { Monster } from '@adventure-bot/monster'
 import { QuestId, quests } from '@adventure-bot/quest'
 import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
