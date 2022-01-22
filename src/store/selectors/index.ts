@@ -1,11 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { values } from 'remeda'
 
-import { Character } from '@adventure-bot/character'
-import { Stats, stats } from '@adventure-bot/character'
-import { getCharacterStatModifier } from '@adventure-bot/character'
-import { LootResult } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounter/Encounter'
+import {
+  Character,
+  LootResult,
+  Stats,
+  getCharacterStatModifier,
+  stats,
+} from '@adventure-bot/character'
+import { Encounter } from '@adventure-bot/encounter'
 import { Monster, isMonster } from '@adventure-bot/monster/Monster'
 import { Quest } from '@adventure-bot/quest/Quest'
 import { QuestId, quests } from '@adventure-bot/quest/quests'
