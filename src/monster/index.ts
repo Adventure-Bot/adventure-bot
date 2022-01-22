@@ -1,6 +1,7 @@
 import { Monster, isMonster } from '@adventure-bot/monster/Monster'
 import { createMonster } from '@adventure-bot/monster/createMonster'
 import { createRandomMonster } from '@adventure-bot/monster/createRandomMonster'
+import { getMonster } from '@adventure-bot/monster/getMonster'
 import { getRandomMonster } from '@adventure-bot/monster/getRandomMonster'
 import { getRoamingMonsters } from '@adventure-bot/monster/getRoamingMonsters'
 import {
@@ -31,4 +32,5 @@ export {
   createMonster,
   getRandomMonsterName,
   getRandomMonster,
+  getMonster,
 }
