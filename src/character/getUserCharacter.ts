@@ -1,7 +1,6 @@
 import { User } from 'discord.js'
 
-import { Character } from '@adventure-bot/character'
-import { createCharacter } from '@adventure-bot/character/createCharacter'
+import { Character, createCharacter } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { selectCharacterById } from '@adventure-bot/store/selectors'
 

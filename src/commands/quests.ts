@@ -7,7 +7,7 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getUserCharacter } from '@adventure-bot/character'
 import { Quest } from '@adventure-bot/quest/Quest'
 import { getCompletedQuests } from '@adventure-bot/quest/getCompletedQuests'
 import { QuestId, isQuestId } from '@adventure-bot/quest/quests'

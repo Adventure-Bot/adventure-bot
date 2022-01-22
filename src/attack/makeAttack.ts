@@ -1,5 +1,5 @@
 import { AttackResult } from '@adventure-bot/attack'
-import { getCharacter } from '@adventure-bot/character/getCharacter'
+import { getCharacter } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { selectEncounterById } from '@adventure-bot/store/selectors'
 import { attacked, damaged } from '@adventure-bot/store/slices/characters'
