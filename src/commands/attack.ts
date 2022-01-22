@@ -16,10 +16,9 @@ import {
   mentionCharacter,
 } from '@adventure-bot/character'
 import cooldowns from '@adventure-bot/commands/cooldowns'
-import { randomArrayElement } from '@adventure-bot/monster/randomArrayElement'
 import store from '@adventure-bot/store'
 import { selectCharacterById } from '@adventure-bot/store/selectors'
-import { sleep } from '@adventure-bot/utils'
+import { randomArrayElement, sleep } from '@adventure-bot/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('attack')

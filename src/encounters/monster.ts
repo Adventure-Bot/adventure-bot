@@ -10,7 +10,7 @@ import { createEncounter } from '@adventure-bot/encounters'
 import { encounterSummaryEmbed } from '@adventure-bot/encounters'
 import { chest } from '@adventure-bot/encounters/chest'
 import { encounterEmbed } from '@adventure-bot/encounters/utils/encounterEmbed'
-import { getRandomMonster } from '@adventure-bot/monster/getRandomMonster'
+import { getRandomMonster } from '@adventure-bot/monster'
 import {
   isUserQuestComplete,
   questProgressField,

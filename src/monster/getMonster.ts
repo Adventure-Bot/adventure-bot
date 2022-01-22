@@ -1,4 +1,4 @@
-import { Monster } from '@adventure-bot/monster/Monster'
+import { Monster } from '@adventure-bot/monster'
 import store from '@adventure-bot/store'
 import { selectMonsterById } from '@adventure-bot/store/selectors'
 

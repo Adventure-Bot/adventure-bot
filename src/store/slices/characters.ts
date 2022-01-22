@@ -18,7 +18,7 @@ import {
   isShield,
   isWeapon,
 } from '@adventure-bot/equipment/equipment'
-import { Monster } from '@adventure-bot/monster/Monster'
+import { Monster } from '@adventure-bot/monster'
 import { QuestId, quests } from '@adventure-bot/quest'
 import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
 import { itemReceived, newGame } from '@adventure-bot/store/actions'

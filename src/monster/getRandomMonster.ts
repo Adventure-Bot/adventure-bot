@@ -1,13 +1,16 @@
-import { Monster, isMonster } from '@adventure-bot/monster/Monster'
-import { createRandomMonster } from '@adventure-bot/monster/createRandomMonster'
-import { getRoamingMonsters } from '@adventure-bot/monster/getRoamingMonsters'
-import { getRandomArrayElement } from '@adventure-bot/utils'
+import {
+  Monster,
+  createRandomMonster,
+  getRoamingMonsters,
+  isMonster,
+} from '@adventure-bot/monster'
+import { randomArrayElement } from '@adventure-bot/utils'
 
 export const getRandomMonster = (): Monster => {
   const roamingMonsters = getRoamingMonsters()
   if (roamingMonsters.length && Math.random() <= roamingMonsters.length / 10) {
     console.log('returning existing monster')
-    const monster = getRandomArrayElement(roamingMonsters)
+    const monster = randomArrayElement(roamingMonsters)
     if (monster && isMonster(monster)) return monster
   }
   console.log('spawning new monster')

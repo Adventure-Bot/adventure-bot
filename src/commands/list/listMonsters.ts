@@ -2,7 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { hpBarField } from '@adventure-bot/character'
 import { monsterEmbed } from '@adventure-bot/encounters/utils/monsterEmbed'
-import { getRoamingMonsters } from '@adventure-bot/monster/getRoamingMonsters'
+import { getRoamingMonsters } from '@adventure-bot/monster'
 
 export function listMonsters(interaction: CommandInteraction): void {
   const monsters = getRoamingMonsters()

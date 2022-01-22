@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto'
 
 import { Potion } from '@adventure-bot/equipment/equipment'
-import { randomArrayElement } from '@adventure-bot/monster/randomArrayElement'
+import { randomArrayElement } from '@adventure-bot/monster'
 
 export const unidentifiedPotion = (): Omit<Potion, 'description'> & {
   description: string
