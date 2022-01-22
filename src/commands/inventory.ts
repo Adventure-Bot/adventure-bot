@@ -8,8 +8,7 @@ import {
   TextChannel,
 } from 'discord.js'
 
-import { decoratedName } from '@adventure-bot/character'
-import { getUserCharacter } from '@adventure-bot/character'
+import { decoratedName, getUserCharacter } from '@adventure-bot/character'
 import { getHook } from '@adventure-bot/commands/inspect/getHook'
 import { equipInventoryItemPrompt } from '@adventure-bot/equipment/equipInventoryItemPrompt'
 import { isTradeable } from '@adventure-bot/equipment/equipment'

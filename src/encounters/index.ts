@@ -3,6 +3,7 @@ import { angels } from '@adventure-bot/encounters/angels'
 import { chest } from '@adventure-bot/encounters/chest'
 import { createEncounter } from '@adventure-bot/encounters/createEncounter'
 import { divineBlessing } from '@adventure-bot/encounters/divineBlessing'
+import { encounterEmbed } from '@adventure-bot/encounters/encounterEmbed'
 import { encounterSummaryEmbed } from '@adventure-bot/encounters/encounterSummaryEmbed'
 import { fairyWell } from '@adventure-bot/encounters/fairyWell'
 import { getEncounters } from '@adventure-bot/encounters/getEncounters'
@@ -42,4 +43,5 @@ export {
   Encounter,
   createEncounter,
   randomEncounter,
+  encounterEmbed,
 }

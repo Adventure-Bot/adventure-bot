@@ -2,10 +2,12 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, TextChannel } from 'discord.js'
 import { values } from 'remeda'
 
-import { Character } from '@adventure-bot/character'
-import { characterEmbed } from '@adventure-bot/character'
-import { getUserCharacter } from '@adventure-bot/character'
-import { statsEmbed } from '@adventure-bot/character'
+import {
+  Character,
+  characterEmbed,
+  getUserCharacter,
+  statsEmbed,
+} from '@adventure-bot/character'
 import { actionEmbed } from '@adventure-bot/commands/inspect/actionEmbed'
 import { getHook } from '@adventure-bot/commands/inspect/getHook'
 import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'

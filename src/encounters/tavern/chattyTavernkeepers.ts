@@ -7,9 +7,11 @@ import {
   MessageSelectMenu,
 } from 'discord.js'
 
-import { awardXP } from '@adventure-bot/character'
-import { getUserCharacter } from '@adventure-bot/character'
-import { xpGainField } from '@adventure-bot/character'
+import {
+  awardXP,
+  getUserCharacter,
+  xpGainField,
+} from '@adventure-bot/character'
 import questsCommand from '@adventure-bot/commands/quests'
 import { isQuestId, questEmbed, quests } from '@adventure-bot/quest'
 import store from '@adventure-bot/store'

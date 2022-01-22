@@ -5,11 +5,13 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
-import { adjustGold } from '@adventure-bot/character'
-import { awardXP } from '@adventure-bot/character'
-import { getUserCharacter } from '@adventure-bot/character'
-import { gpGainField } from '@adventure-bot/character'
-import { xpGainField } from '@adventure-bot/character'
+import {
+  adjustGold,
+  awardXP,
+  getUserCharacter,
+  gpGainField,
+  xpGainField,
+} from '@adventure-bot/character'
 import { equipItemPrompt } from '@adventure-bot/equipment/equipItemPrompt'
 import { isEquippable } from '@adventure-bot/equipment/equipment'
 import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
