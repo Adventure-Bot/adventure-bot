@@ -6,9 +6,9 @@ import {
 } from 'discord.js'
 
 import { getUserCharacter } from '@adventure-bot/character'
-import { isTradeable } from '@adventure-bot/equipment/equipment'
-import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
-import { itemSelect } from '@adventure-bot/equipment/itemSelect'
+import { isTradeable } from '@adventure-bot/equipment'
+import { itemEmbed } from '@adventure-bot/equipment'
+import { itemSelect } from '@adventure-bot/equipment'
 import store from '@adventure-bot/store'
 import { itemGiven, itemRemoved } from '@adventure-bot/store/slices/characters'
 

@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto'
 
-import { Shield } from '@adventure-bot/equipment/equipment'
+import { Shield } from '@adventure-bot/equipment'
 
 export const kiteShield = (): Shield => ({
   id: randomUUID(),

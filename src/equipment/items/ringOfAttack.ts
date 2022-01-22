@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto'
 
-import { Ring } from '@adventure-bot/equipment/equipment'
+import { Ring } from '@adventure-bot/equipment'
 
 export const ringOfAttack = (): Ring => ({
   id: randomUUID(),

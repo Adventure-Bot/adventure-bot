@@ -3,9 +3,9 @@ import { CommandInteraction, EmbedFieldData, MessageEmbed } from 'discord.js'
 import { Emoji } from '@adventure-bot/Emoji'
 import { getUserCharacter, statTitles, stats } from '@adventure-bot/character'
 import { sellValue } from '@adventure-bot/encounters/shop/sellValue'
-import { Item } from '@adventure-bot/equipment/Item'
-import { goldValue } from '@adventure-bot/equipment/goldValue'
-import { isEquipped } from '@adventure-bot/equipment/isEquipped'
+import { Item } from '@adventure-bot/equipment'
+import { goldValue } from '@adventure-bot/equipment'
+import { isEquipped } from '@adventure-bot/equipment'
 
 export function itemEmbed({
   item,

@@ -1,4 +1,4 @@
-import { Item } from '@adventure-bot/equipment/Item'
+import { Item } from '@adventure-bot/equipment'
 import {
   amuletOfAttack,
   amuletOfProtection,
@@ -19,7 +19,7 @@ import {
   towerShield,
   unidentifiedPotion,
   warAxe,
-} from '@adventure-bot/equipment/items'
+} from '@adventure-bot/equipment'
 import { weightedTable } from '@adventure-bot/utils'
 
 export function randomChestItem(): Item {

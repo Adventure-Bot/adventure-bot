@@ -1,8 +1,8 @@
 import { CommandInteraction } from 'discord.js'
 
 import { Character, adjustGold } from '@adventure-bot/character'
-import { Item } from '@adventure-bot/equipment/Item'
-import { equipItemPrompt } from '@adventure-bot/equipment/equipItemPrompt'
+import { Item } from '@adventure-bot/equipment'
+import { equipItemPrompt } from '@adventure-bot/equipment'
 import store from '@adventure-bot/store'
 import { itemReceived } from '@adventure-bot/store/actions'
 
