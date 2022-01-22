@@ -18,7 +18,7 @@ import {
   slayerBuffQuestReward,
   survivorBuffQuestReward,
 } from '@adventure-bot/quest'
-import { progressBar } from '@adventure-bot/utils/progress-bar'
+import { progressBar } from '@adventure-bot/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('quests')

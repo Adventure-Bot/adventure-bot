@@ -3,10 +3,11 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import moment from 'moment'
 import { values } from 'remeda'
 
-import { Character, getCharacter, getCrownArt } from '@adventure-bot/character'
+import { Character, getCharacter } from '@adventure-bot/character'
 import { Item } from '@adventure-bot/equipment/Item'
 import store from '@adventure-bot/store'
 import { characterLooted } from '@adventure-bot/store/slices/loots'
+import { crownArt } from '@adventure-bot/utils'
 
 export type LootResult = {
   id: string
@@ -28,7 +29,7 @@ const crownLootedAnnouncement = async ({
 }): Promise<void> => {
   const looter = getCharacter(loot.looterId)
   if (!looter) return
-  const { s3Url } = getCrownArt()
+  const { s3Url } = crownArt()
   interaction.channel?.send({
     embeds: [
       new MessageEmbed({
