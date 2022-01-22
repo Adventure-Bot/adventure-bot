@@ -1,5 +1,7 @@
 import { Item } from '@adventure-bot/equipment/Item'
 import {
+  amuletOfAttack,
+  amuletOfProtection,
   buckler,
   chainArmor,
   dagger,
@@ -9,6 +11,7 @@ import {
   mace,
   plateArmor,
   potionOfHealing,
+  potionOfMight,
   potionOfProtection,
   potionOfSlaying,
   potionOfVigor,
@@ -16,9 +19,6 @@ import {
   towerShield,
   warAxe,
 } from '@adventure-bot/equipment/items'
-import { amuletOfAttack } from '@adventure-bot/equipment/items/amuletOfAttack'
-import { amuletOfProtection } from '@adventure-bot/equipment/items/amuletOfProtection'
-import { potionOfMight } from '@adventure-bot/equipment/items/potionOfMight'
 import { weightedRandom } from '@adventure-bot/utils/weightedRandom'
 
 const weights = new Map<() => Item, number>([
