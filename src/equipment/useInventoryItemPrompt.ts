@@ -14,7 +14,6 @@ import { hpBarField } from '@adventure-bot/character'
 import { isPotion } from '@adventure-bot/equipment/equipment'
 import { itemSelect } from '@adventure-bot/equipment/itemSelect'
 import { usableInventory } from '@adventure-bot/equipment/usableInventory'
-import { randomArrayElement } from '@adventure-bot/monster'
 import { createEffect } from '@adventure-bot/statusEffects'
 import { statusEffectEmbed } from '@adventure-bot/statusEffects/statusEffectEmbed'
 import { EffectTemplate } from '@adventure-bot/statusEffects/templates'
@@ -25,8 +24,7 @@ import {
   healed,
   itemRemoved,
 } from '@adventure-bot/store/slices/characters'
-import { d } from '@adventure-bot/utils'
-import { asset } from '@adventure-bot/utils'
+import { asset, d, randomArrayElement } from '@adventure-bot/utils'
 
 /**
  * Prompt to equip from available inventory items.
