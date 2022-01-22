@@ -1,4 +1,4 @@
-import { AttackResult } from '@adventure-bot/attack/AttackResult'
+import { AttackResult } from '@adventure-bot/attack'
 import { LootResult } from '@adventure-bot/character/loot/loot'
 
 export type Encounter = {

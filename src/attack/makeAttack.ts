@@ -1,4 +1,4 @@
-import { AttackResult } from '@adventure-bot/attack/AttackResult'
+import { AttackResult } from '@adventure-bot/attack'
 import { getCharacter } from '@adventure-bot/character/getCharacter'
 import store from '@adventure-bot/store'
 import { selectEncounterById } from '@adventure-bot/store/selectors'
