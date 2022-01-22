@@ -1,6 +1,8 @@
-import { getCharacter } from '@adventure-bot/character'
-import { isCharacterOnCooldown } from '@adventure-bot/character'
-import { startCooldown } from '@adventure-bot/character'
+import {
+  getCharacter,
+  isCharacterOnCooldown,
+  startCooldown,
+} from '@adventure-bot/character'
 import { HealResult } from '@adventure-bot/heal/HealResult'
 import store from '@adventure-bot/store'
 import { healed } from '@adventure-bot/store/slices/characters'

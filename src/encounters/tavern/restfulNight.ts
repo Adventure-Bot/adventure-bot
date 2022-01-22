@@ -1,10 +1,12 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { clamp } from 'remeda'
 
-import { getCharacterStatModified } from '@adventure-bot/character'
-import { getUserCharacter } from '@adventure-bot/character'
-import { hpBarField } from '@adventure-bot/character'
-import { xpGainField } from '@adventure-bot/character'
+import {
+  getCharacterStatModified,
+  getUserCharacter,
+  hpBarField,
+  xpGainField,
+} from '@adventure-bot/character'
 import quests from '@adventure-bot/commands/quests'
 import { isUserQuestComplete, questProgressField } from '@adventure-bot/quest'
 import { createEffect } from '@adventure-bot/statusEffects'

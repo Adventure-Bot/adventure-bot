@@ -1,5 +1,4 @@
-import { Character } from '@adventure-bot/character'
-import { getCooldownRemaining } from '@adventure-bot/character'
+import { Character, getCooldownRemaining } from '@adventure-bot/character'
 
 export const isCharacterOnCooldown = (
   characterId: string,

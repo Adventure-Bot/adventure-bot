@@ -1,13 +1,14 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
 
-// todo: #92 consolidate @adventure-bot/character imports
-import { characterEmbed } from '@adventure-bot/character'
-import { getCharacterUpdate } from '@adventure-bot/character'
-import { getUserCharacter } from '@adventure-bot/character'
-import { inventoryFields } from '@adventure-bot/character'
-import { loot } from '@adventure-bot/character'
-import { lootResultEmbed } from '@adventure-bot/character'
+import {
+  characterEmbed,
+  getCharacterUpdate,
+  getUserCharacter,
+  inventoryFields,
+  loot,
+  lootResultEmbed,
+} from '@adventure-bot/character'
 import { monsterEmbed } from '@adventure-bot/encounters/utils/monsterEmbed'
 import { getRandomMonster } from '@adventure-bot/monster'
 

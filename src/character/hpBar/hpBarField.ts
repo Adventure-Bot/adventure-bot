@@ -1,7 +1,6 @@
 import { EmbedFieldData } from 'discord.js'
 
-import { Character } from '@adventure-bot/character'
-import { hpBar } from '@adventure-bot/character'
+import { Character, hpBar } from '@adventure-bot/character'
 
 const numberModifierText = (num?: number): string => {
   if (!num) return ''

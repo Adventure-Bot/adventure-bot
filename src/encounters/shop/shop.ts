@@ -7,8 +7,7 @@ import {
 } from 'discord.js'
 import { times } from 'remeda'
 
-import { getCharacterUpdate } from '@adventure-bot/character'
-import { getUserCharacter } from '@adventure-bot/character'
+import { getCharacterUpdate, getUserCharacter } from '@adventure-bot/character'
 import { buyItemPrompt } from '@adventure-bot/encounters/shop/buyItemPrompt'
 import { sellItemPrompt } from '@adventure-bot/encounters/shop/sellItemPrompt'
 import { goldValue } from '@adventure-bot/equipment/goldValue'
