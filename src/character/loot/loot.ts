@@ -3,7 +3,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import moment from 'moment'
 import { values } from 'remeda'
 
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { getCharacter } from '@adventure-bot/character/getCharacter'
 import { getCrownArt } from '@adventure-bot/character/loot/getCrownArt'
 import { Item } from '@adventure-bot/equipment/Item'

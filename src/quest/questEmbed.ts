@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js'
 
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { questProgressField } from '@adventure-bot/quest/questProgressField'
 
 export const questEmbed = (character: Character): MessageEmbed | void => {

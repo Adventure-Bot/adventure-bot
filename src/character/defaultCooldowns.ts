@@ -1,4 +1,4 @@
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 
 export const defaultCooldowns: {
   [key in keyof Character['cooldowns']]: number

@@ -1,6 +1,6 @@
 import { values } from 'remeda'
 
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { equipmentFilter } from '@adventure-bot/character/loot/loot'
 import { Item } from '@adventure-bot/equipment/Item'
 

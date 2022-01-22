@@ -1,6 +1,6 @@
 import { clamp, times } from 'remeda'
 
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { selectCharacterById } from '@adventure-bot/store/selectors'
 
