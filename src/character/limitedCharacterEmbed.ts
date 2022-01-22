@@ -1,8 +1,10 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Character } from '@adventure-bot/character'
-import { decoratedName } from '@adventure-bot/character/decoratedName'
-import { primaryStatFields } from '@adventure-bot/character/primaryStatFields'
+import {
+  Character,
+  decoratedName,
+  primaryStatFields,
+} from '@adventure-bot/character'
 
 export function limitedCharacterEmbed({
   character,

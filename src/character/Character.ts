@@ -1,4 +1,4 @@
-import { Stats } from '@adventure-bot/character/Stats'
+import { Stats } from '@adventure-bot/character'
 import { Item } from '@adventure-bot/equipment/Item'
 import {
   Amulet,

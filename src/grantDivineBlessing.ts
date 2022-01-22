@@ -1,4 +1,4 @@
-import { getCharacter } from '@adventure-bot/character/getCharacter'
+import { getCharacter } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { grantDivineBlessing as doGrantDivineBlessing } from '@adventure-bot/store/slices/characters'
 

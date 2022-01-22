@@ -1,7 +1,7 @@
 import { CommandInteraction, EmbedFieldData } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/Emoji'
-import { hpBar } from '@adventure-bot/character/hpBar/hpBar'
+import { hpBar } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { selectCharacterById } from '@adventure-bot/store/selectors'
 
