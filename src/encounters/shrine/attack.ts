@@ -5,7 +5,7 @@ import { applyShrine } from '@adventure-bot/encounters/shrine/applyShrine'
 import { shrineEmbeds } from '@adventure-bot/encounters/shrine/shrineEmbeds'
 import { Shrine } from '@adventure-bot/shrines/Shrine'
 import { createEffect } from '@adventure-bot/statusEffects/createEffect'
-import { getAsset } from '@adventure-bot/utils'
+import { asset } from '@adventure-bot/utils'
 
 export const attackShrine = async (
   interaction: CommandInteraction
@@ -14,7 +14,7 @@ export const attackShrine = async (
     id: randomUUID(),
     name: 'Shrine of Agression',
     description: `This shrine fills you with a rage!`,
-    image: getAsset('fantasy', 'places', 'magical obelisk with a fiery aura')
+    image: asset('fantasy', 'places', 'magical obelisk with a fiery aura')
       .s3Url,
     color: 'RED',
     effect: createEffect('aggression'),

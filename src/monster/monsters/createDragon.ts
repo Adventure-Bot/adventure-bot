@@ -1,7 +1,7 @@
 import { Monster } from '@adventure-bot/monster/Monster'
 import { createMonster } from '@adventure-bot/monster/createMonster'
 import { getRandomMonsterName } from '@adventure-bot/monster/names/getRandomMonsterName'
-import { getAsset } from '@adventure-bot/utils'
+import { asset } from '@adventure-bot/utils'
 
 export function createDragon(): Monster {
   return createMonster({
@@ -46,7 +46,7 @@ export function createDragon(): Monster {
         sellable: false,
       },
     },
-    asset: getAsset('fantasy', 'monsters', 'dragon').values,
+    asset: asset('fantasy', 'monsters', 'dragon').values,
     xpValue: 50,
     gold: Math.floor(Math.random() * 150) + 300,
   })

@@ -4,7 +4,7 @@ import path from 'path'
 
 import { Manifest, manifest } from '@adventure-bot/asset-manifest'
 
-function getAsset<
+function asset<
   Theme extends keyof Manifest,
   Kind extends keyof Manifest[Theme],
   Entity extends Manifest[Theme][Kind]
@@ -47,4 +47,4 @@ function getAsset<
   }
 }
 
-export { getAsset }
+export { asset }

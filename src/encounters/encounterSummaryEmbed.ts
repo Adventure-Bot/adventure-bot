@@ -6,7 +6,7 @@ import {
   gpGainField,
   xpGainField,
 } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounter'
+import { Encounter } from '@adventure-bot/encounters'
 import store from '@adventure-bot/store'
 import {
   selectCharacterById,

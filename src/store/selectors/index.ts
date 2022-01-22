@@ -8,13 +8,13 @@ import {
   getCharacterStatModifier,
   stats,
 } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounter'
+import { Encounter } from '@adventure-bot/encounters'
 import { Monster, isMonster } from '@adventure-bot/monster/Monster'
 import { Quest } from '@adventure-bot/quest/Quest'
 import { QuestId, quests } from '@adventure-bot/quest/quests'
 import { ReduxState } from '@adventure-bot/store'
 import { isStatusEffectExpired } from '@adventure-bot/store/slices/characters'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { asset } from '@adventure-bot/utils/asset'
 
 const decorateCharacterWithAssetProfile = <T extends Character>(
   character: T
@@ -22,7 +22,7 @@ const decorateCharacterWithAssetProfile = <T extends Character>(
   if (character && character.asset) {
     return {
       ...character,
-      profile: getAsset(
+      profile: asset(
         // @ts-ignore
         character.asset[0],
         character.asset[1],

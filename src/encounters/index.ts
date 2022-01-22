@@ -1,8 +1,14 @@
+import { Encounter } from '@adventure-bot/encounters/Encounter'
 import { angels } from '@adventure-bot/encounters/angels'
 import { chest } from '@adventure-bot/encounters/chest'
+import { createEncounter } from '@adventure-bot/encounters/createEncounter'
 import { divineBlessing } from '@adventure-bot/encounters/divineBlessing'
+import { encounterSummaryEmbed } from '@adventure-bot/encounters/encounterSummaryEmbed'
 import { fairyWell } from '@adventure-bot/encounters/fairyWell'
+import { getEncounters } from '@adventure-bot/encounters/getEncounters'
+import { getLoots } from '@adventure-bot/encounters/getLoots'
 import { monster } from '@adventure-bot/encounters/monster'
+import { randomEncounter } from '@adventure-bot/encounters/randomEncounter'
 import { shop } from '@adventure-bot/encounters/shop/shop'
 import { armorShrine } from '@adventure-bot/encounters/shrine/armor'
 import { attackShrine } from '@adventure-bot/encounters/shrine/attack'
@@ -30,4 +36,10 @@ export {
   attackShrine,
   slayerShrine,
   vigorShrine,
+  encounterSummaryEmbed,
+  getEncounters,
+  getLoots,
+  Encounter,
+  createEncounter,
+  randomEncounter,
 }

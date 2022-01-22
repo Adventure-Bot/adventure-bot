@@ -14,7 +14,7 @@ import {
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/store/slices/characters'
-import { getAsset } from '@adventure-bot/utils'
+import { asset } from '@adventure-bot/utils'
 
 export const fairyWell = async (
   interaction: CommandInteraction
@@ -52,7 +52,7 @@ export const fairyWell = async (
             ? questProgressField(character.quests.healer)
             : []
         ),
-      }).setImage(getAsset('fantasy', 'places', "a fairy's well").s3Url),
+      }).setImage(asset('fantasy', 'places', "a fairy's well").s3Url),
     ],
   })
   if (isUserQuestComplete(interaction.user, 'healer'))
