@@ -6,8 +6,7 @@ import {
 } from 'discord.js'
 
 import inspect from '@adventure-bot/commands/inspect/inspect'
-import { Item } from '@adventure-bot/equipment'
-import { itemEmbed } from '@adventure-bot/equipment'
+import { Item, itemEmbed } from '@adventure-bot/equipment'
 import store from '@adventure-bot/store'
 import { itemEquipped } from '@adventure-bot/store/slices/characters'
 

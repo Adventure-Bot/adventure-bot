@@ -3,8 +3,8 @@ import { CommandInteraction } from 'discord.js'
 import { keys } from 'remeda'
 
 import { getUserCharacter } from '@adventure-bot/character'
-import * as items from '@adventure-bot/equipment'
 import { itemEmbed } from '@adventure-bot/equipment'
+import * as items from '@adventure-bot/equipment/items'
 import store from '@adventure-bot/store'
 import { itemReceived } from '@adventure-bot/store/actions'
 
