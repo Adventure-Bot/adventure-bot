@@ -1,9 +1,9 @@
 import { Stats } from '@adventure-bot/character'
-import { Item } from '@adventure-bot/equipment'
 import {
   Amulet,
   Armor,
   Hat,
+  Item,
   Ring,
   Shield,
   Weapon,

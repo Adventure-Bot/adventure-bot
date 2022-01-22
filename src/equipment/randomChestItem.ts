@@ -1,5 +1,5 @@
-import { Item } from '@adventure-bot/equipment'
 import {
+  Item,
   amuletOfAttack,
   amuletOfProtection,
   buckler,

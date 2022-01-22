@@ -10,13 +10,15 @@ import {
 
 import { decoratedName, getUserCharacter } from '@adventure-bot/character'
 import { getHook } from '@adventure-bot/commands/inspect/getHook'
-import { equipInventoryItemPrompt } from '@adventure-bot/equipment'
-import { isTradeable } from '@adventure-bot/equipment'
-import { equippableInventory } from '@adventure-bot/equipment'
-import { itemEmbed } from '@adventure-bot/equipment'
-import { offerItemPrompt } from '@adventure-bot/equipment'
-import { usableInventory } from '@adventure-bot/equipment'
-import { useInventoryItemPrompt } from '@adventure-bot/equipment'
+import {
+  equipInventoryItemPrompt,
+  equippableInventory,
+  isTradeable,
+  itemEmbed,
+  offerItemPrompt,
+  usableInventory,
+  useInventoryItemPrompt,
+} from '@adventure-bot/equipment'
 
 export const command = new SlashCommandBuilder()
   .setName('inventory')

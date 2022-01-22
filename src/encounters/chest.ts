@@ -12,11 +12,13 @@ import {
   gpGainField,
   xpGainField,
 } from '@adventure-bot/character'
-import { equipItemPrompt } from '@adventure-bot/equipment'
-import { isEquippable } from '@adventure-bot/equipment'
-import { itemEmbed } from '@adventure-bot/equipment'
-import { heavyCrown } from '@adventure-bot/equipment'
-import { randomChestItem } from '@adventure-bot/equipment'
+import {
+  equipItemPrompt,
+  heavyCrown,
+  isEquippable,
+  itemEmbed,
+  randomChestItem,
+} from '@adventure-bot/equipment'
 import store from '@adventure-bot/store'
 import { itemReceived } from '@adventure-bot/store/actions'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
