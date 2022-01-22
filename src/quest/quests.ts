@@ -1,4 +1,4 @@
-import { Quest } from '@adventure-bot/quest/Quest'
+import { Quest } from '@adventure-bot/quest'
 
 const questIds = [
   'slayer',

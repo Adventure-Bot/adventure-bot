@@ -9,7 +9,7 @@ import { statsEmbed } from '@adventure-bot/character'
 import { actionEmbed } from '@adventure-bot/commands/inspect/actionEmbed'
 import { getHook } from '@adventure-bot/commands/inspect/getHook'
 import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
-import { questEmbed } from '@adventure-bot/quest/questEmbed'
+import { questEmbed } from '@adventure-bot/quest'
 import { statusEffectEmbed } from '@adventure-bot/statusEffects/statusEffectEmbed'
 
 export const command = new SlashCommandBuilder()
