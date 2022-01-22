@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
 
+// todo: #92 consolidate @adventure-bot/character imports
 import { characterEmbed } from '@adventure-bot/character'
 import { getCharacterUpdate } from '@adventure-bot/character'
 import { getUserCharacter } from '@adventure-bot/character'
