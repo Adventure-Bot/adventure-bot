@@ -1,7 +1,7 @@
 import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit'
 import { clamp } from 'remeda'
 
-import { AttackResult } from '@adventure-bot/attack/AttackResult'
+import { AttackResult } from '@adventure-bot/attack'
 import { Character } from '@adventure-bot/character'
 import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
 import { equipmentFilter } from '@adventure-bot/character/loot/loot'
