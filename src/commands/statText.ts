@@ -1,7 +1,7 @@
 import { CommandInteraction } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/Emoji'
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { Stat } from '@adventure-bot/character/Stats'
 import { getCharacterStatModified } from '@adventure-bot/character/getCharacterStatModified'
 import { getCharacterStatModifier } from '@adventure-bot/character/getCharacterStatModifier'

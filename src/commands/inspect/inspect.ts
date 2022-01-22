@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, TextChannel } from 'discord.js'
 import { values } from 'remeda'
 
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { characterEmbed } from '@adventure-bot/character/characterEmbed'
 import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
 import { statsEmbed } from '@adventure-bot/character/statsEmbed'

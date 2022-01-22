@@ -1,4 +1,4 @@
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { Usable, isUsable } from '@adventure-bot/equipment/equipment'
 
 export function usableInventory(character: Character): Usable[] {

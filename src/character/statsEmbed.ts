@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { stats } from '@adventure-bot/character/Stats'
 import { statField } from '@adventure-bot/character/statField'
 

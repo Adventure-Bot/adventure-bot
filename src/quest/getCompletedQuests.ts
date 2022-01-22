@@ -1,4 +1,4 @@
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { Quest } from '@adventure-bot/quest/Quest'
 import { isQuestComplete } from '@adventure-bot/quest/isQuestComplete'
 

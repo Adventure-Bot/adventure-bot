@@ -1,4 +1,4 @@
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { Equippable, isEquippable } from '@adventure-bot/equipment/equipment'
 import { isEquipped } from '@adventure-bot/equipment/isEquipped'
 

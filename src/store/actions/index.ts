@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
 import { CommandInteraction } from 'discord.js'
 
-import { Character } from '@adventure-bot/character/Character'
+import { Character } from '@adventure-bot/character'
 import { Item } from '@adventure-bot/equipment/Item'
 
 export const newGame = createAction('newGame')
