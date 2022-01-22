@@ -1,9 +1,11 @@
 import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
 
-import { awardXP } from '@adventure-bot/character/awardXP'
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
-import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
-import { xpGainField } from '@adventure-bot/character/xpGainField'
+import {
+  awardXP,
+  getUserCharacter,
+  hpBarField,
+  xpGainField,
+} from '@adventure-bot/character'
 import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
 import { trapAttack } from '@adventure-bot/trap/trapAttack'
 import { trapRollText } from '@adventure-bot/trap/trapRollText'

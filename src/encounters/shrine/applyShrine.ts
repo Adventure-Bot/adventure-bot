@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getUserCharacter } from '@adventure-bot/character'
 import quests from '@adventure-bot/commands/quests'
 import { isUserQuestComplete } from '@adventure-bot/quest/isQuestComplete'
 import { Shrine } from '@adventure-bot/shrines/Shrine'

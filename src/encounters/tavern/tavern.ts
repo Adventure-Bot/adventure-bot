@@ -1,6 +1,6 @@
 import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getUserCharacter } from '@adventure-bot/character'
 import { barFight } from '@adventure-bot/encounters/tavern/barFight'
 import { chattyTavernkeepers } from '@adventure-bot/encounters/tavern/chattyTavernkeepers'
 import { restfulNight } from '@adventure-bot/encounters/tavern/restfulNight'

@@ -5,7 +5,7 @@ import {
   MessageButton,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getUserCharacter } from '@adventure-bot/character'
 import { equippableInventory } from '@adventure-bot/equipment/equippableInventory'
 import { itemSelect } from '@adventure-bot/equipment/itemSelect'
 import store from '@adventure-bot/store'

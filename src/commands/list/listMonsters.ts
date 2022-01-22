@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
+import { hpBarField } from '@adventure-bot/character'
 import { monsterEmbed } from '@adventure-bot/encounters/utils/monsterEmbed'
 import { getRoamingMonsters } from '@adventure-bot/monster/getRoamingMonsters'
 

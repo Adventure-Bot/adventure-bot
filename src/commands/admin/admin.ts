@@ -4,7 +4,7 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import { range } from 'remeda'
 
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
+import { getUserCharacter } from '@adventure-bot/character'
 import { leaderboard } from '@adventure-bot/commands/leaderboard'
 import { healerStatus } from '@adventure-bot/quest/rewards/healerStatus'
 import store from '@adventure-bot/store'

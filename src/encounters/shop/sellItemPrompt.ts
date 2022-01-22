@@ -7,9 +7,9 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
-import { getCharacterUpdate } from '@adventure-bot/character/getCharacterUpdate'
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
-import { gpGainField } from '@adventure-bot/character/gpGainField'
+import { getCharacterUpdate } from '@adventure-bot/character'
+import { getUserCharacter } from '@adventure-bot/character'
+import { gpGainField } from '@adventure-bot/character'
 import { getSaleRate } from '@adventure-bot/encounters/shop/getSaleRate'
 import { sellList } from '@adventure-bot/encounters/shop/sellList'
 import { sellValue } from '@adventure-bot/encounters/shop/sellValue'

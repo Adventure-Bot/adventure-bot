@@ -1,8 +1,8 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character/getUserCharacter'
-import { hpBarField } from '@adventure-bot/character/hpBar/hpBarField'
-import { xpGainField } from '@adventure-bot/character/xpGainField'
+import { getUserCharacter } from '@adventure-bot/character'
+import { hpBarField } from '@adventure-bot/character'
+import { xpGainField } from '@adventure-bot/character'
 import { questProgressField } from '@adventure-bot/quest/questProgressField'
 import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
 import store from '@adventure-bot/store'

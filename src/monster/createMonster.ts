@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto'
 
-import { defaultCharacter } from '@adventure-bot/character/defaultCharacter'
+import { defaultCharacter } from '@adventure-bot/character'
 import { Monster } from '@adventure-bot/monster/Monster'
 import { MonsterKind } from '@adventure-bot/monster/names/getRandomMonsterName'
 import store from '@adventure-bot/store'
