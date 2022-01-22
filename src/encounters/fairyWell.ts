@@ -14,7 +14,7 @@ import {
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/store/slices/characters'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { getAsset } from '@adventure-bot/utils'
 
 export const fairyWell = async (
   interaction: CommandInteraction

@@ -1,7 +1,7 @@
 import { CommandInteraction } from 'discord.js'
 
 import { crownArt } from '@adventure-bot/utils/crownArt'
-import { d6, d20 } from '@adventure-bot/utils/dice'
+import { d, d6, d20 } from '@adventure-bot/utils/dice'
 import { getAsset } from '@adventure-bot/utils/getAsset'
 import { getRandomArrayElement } from '@adventure-bot/utils/getRandomArrayElement'
 import { progressBar } from '@adventure-bot/utils/progressBar'
@@ -17,6 +17,7 @@ export {
   weightedTable,
   d6,
   d20,
+  d,
 }
 
 export const sleep = (milliseconds: number): Promise<void> =>

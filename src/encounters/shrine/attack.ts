@@ -5,7 +5,7 @@ import { applyShrine } from '@adventure-bot/encounters/shrine/applyShrine'
 import { shrineEmbeds } from '@adventure-bot/encounters/shrine/shrineEmbeds'
 import { Shrine } from '@adventure-bot/shrines/Shrine'
 import { createEffect } from '@adventure-bot/statusEffects/createEffect'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { getAsset } from '@adventure-bot/utils'
 
 export const attackShrine = async (
   interaction: CommandInteraction

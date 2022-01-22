@@ -4,7 +4,7 @@ import { getUserCharacter } from '@adventure-bot/character'
 import { questEmbed } from '@adventure-bot/quest'
 import store from '@adventure-bot/store'
 import { questGranted } from '@adventure-bot/store/slices/characters'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { getAsset } from '@adventure-bot/utils'
 
 export const angels = async (
   interaction: CommandInteraction

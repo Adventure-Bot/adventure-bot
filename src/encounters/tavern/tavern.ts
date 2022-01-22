@@ -7,7 +7,7 @@ import { restfulNight } from '@adventure-bot/encounters/tavern/restfulNight'
 import store from '@adventure-bot/store'
 import { selectAvailableQuests } from '@adventure-bot/store/selectors'
 import { sleep, weightedTable } from '@adventure-bot/utils'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { getAsset } from '@adventure-bot/utils'
 
 export const tavern = async (
   interaction: CommandInteraction

@@ -11,7 +11,7 @@ import {
   questProgressField,
   updateUserQuestProgess,
 } from '@adventure-bot/quest'
-import { getAsset } from '@adventure-bot/utils/getAsset'
+import { getAsset } from '@adventure-bot/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('heal')
