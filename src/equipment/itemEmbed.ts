@@ -1,4 +1,5 @@
 import { CommandInteraction, EmbedFieldData, MessageEmbed } from 'discord.js'
+import dotenv from 'dotenv'
 
 import { Emoji } from '@adventure-bot/Emoji'
 import { statTitles, stats } from '@adventure-bot/character'
@@ -7,6 +8,8 @@ import { sellValue } from '@adventure-bot/encounters/shop/sellValue'
 import { Item } from '@adventure-bot/equipment/Item'
 import { goldValue } from '@adventure-bot/equipment/goldValue'
 import { isEquipped } from '@adventure-bot/equipment/isEquipped'
+
+dotenv.config({ path: '.env' })
 
 export function itemEmbed({
   item,

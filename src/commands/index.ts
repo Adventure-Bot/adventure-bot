@@ -1,4 +1,5 @@
 import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types'
+import dotenv from 'dotenv'
 
 import admin from '@adventure-bot/commands/admin/admin'
 import cleanse from '@adventure-bot/commands/admin/cleanse'
@@ -23,6 +24,8 @@ import quests from '@adventure-bot/commands/quests'
 import renew from '@adventure-bot/commands/renew'
 import set from '@adventure-bot/commands/set'
 import { CommandHandler } from '@adventure-bot/utils'
+
+dotenv.config({ path: '.env' })
 
 const commands = new Map<
   string,
@@ -56,6 +59,8 @@ if (process.env.DEV_COMMANDS === 'true') {
   commands.set('lootchest', lootchest)
   commands.set('lootme', lootme)
   commands.set('lootmonster', lootmonster)
+} else {
+  console.warn('⚠ DEV COMMANDS DISABLED ⚠')
 }
 
 export default commands
