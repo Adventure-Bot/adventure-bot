@@ -1,5 +1,5 @@
 import { Character } from '@adventure-bot/character'
-import { isMonster } from '@adventure-bot/monster/Monster'
+import { isMonster } from '@adventure-bot/monster'
 import store from '@adventure-bot/store'
 import { selectHasItemNameInInventory } from '@adventure-bot/store/selectors'
 
