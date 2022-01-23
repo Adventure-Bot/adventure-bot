@@ -1,18 +1,30 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { grantDivineBlessing } from '@adventure-bot/grantDivineBlessing'
+import { EmojiModifier } from '@adventure-bot/Emoji'
+import { getUserCharacter, statField } from '@adventure-bot/character'
+import store from '@adventure-bot/store'
+import { grantDivineBlessing } from '@adventure-bot/store/slices/characters'
+import { asset } from '@adventure-bot/utils'
 
 export const divineBlessing = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  grantDivineBlessing(interaction.user.id)
+  store.dispatch(grantDivineBlessing(interaction.user.id))
+  const art = asset('fantasy', 'magic', 'a divine blessing')
+  const character = getUserCharacter(interaction.user)
+
   await interaction.editReply({
+    files: [art.attachment],
     embeds: [
       new MessageEmbed({
-        title: 'Divine Blessing',
-        description: `A Divine blesses you with +1 max hp!`,
+        title: `${interaction.user.username} is blessed by the Divine!`,
+        description: `You gain a permanent ${EmojiModifier(
+          'maxHP',
+          1
+        )} Max Health!`,
         color: 'GOLD',
-      }).setImage('https://imgur.com/psnFPYG.png'),
+        fields: [statField(character, interaction, 'maxHP')],
+      }).setImage(art.attachmentString),
     ],
   })
 }

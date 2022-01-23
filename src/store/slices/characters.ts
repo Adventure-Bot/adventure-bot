@@ -127,13 +127,11 @@ const characterSlice = createSlice({
       state.charactersById[characterId].gold += amount
     },
 
-    grantDivineBlessing(state, action: PayloadAction<Character>) {
-      const character = action.payload
-      state.charactersById[character.id] = {
-        ...character,
-        maxHP: character.maxHP + 1,
-        hp: character.hp + 1,
-      }
+    grantDivineBlessing(state, action: PayloadAction<string>) {
+      const character = state.charactersById[action.payload]
+      if (!character) return
+      character.maxHP += 1
+      character.hp += 1
     },
 
     itemGiven(

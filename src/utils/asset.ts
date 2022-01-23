@@ -36,10 +36,14 @@ function asset<
   const assetPath = path.join(theme, String(kind), String(entity), image)
   const absolutePath = path.join(manifest.location, assetPath)
 
+  const file = [theme, String(kind), String(entity), image]
+    .join('--')
+    .replace(/ /g, '-')
+
   return {
     path: absolutePath,
-    attachment: new MessageAttachment(absolutePath, `${entity}-${index}.jpg`),
-    attachmentString: `attachment://${entity}-${index}.jpg`,
+    attachment: new MessageAttachment(absolutePath, file),
+    attachmentString: `attachment://${file}`,
     s3Url: `${process.env.AWS_S3_HOST}/${theme}/${kind}/${String(
       entity
     ).replace(/[\s]+/g, '+')}/${image}`,
