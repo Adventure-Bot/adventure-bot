@@ -3,7 +3,7 @@ import moment from 'moment'
 
 import { Emoji } from '@adventure-bot/Emoji'
 import { statTitles, stats } from '@adventure-bot/character'
-import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
+import { StatusEffect } from '@adventure-bot/statusEffects'
 
 export function statusEffectEmbed(
   effect: StatusEffect,

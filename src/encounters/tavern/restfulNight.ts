@@ -10,7 +10,7 @@ import {
 import quests from '@adventure-bot/commands/quests'
 import { isUserQuestComplete, questProgressField } from '@adventure-bot/quest'
 import { createEffect } from '@adventure-bot/statusEffects'
-import { statusEffectEmbed } from '@adventure-bot/statusEffects/statusEffectEmbed'
+import { statusEffectEmbed } from '@adventure-bot/statusEffects'
 import store from '@adventure-bot/store'
 import {
   effectAdded,

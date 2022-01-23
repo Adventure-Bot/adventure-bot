@@ -20,7 +20,7 @@ import {
 } from '@adventure-bot/equipment'
 import { Monster } from '@adventure-bot/monster'
 import { QuestId, quests } from '@adventure-bot/quest'
-import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
+import { StatusEffect } from '@adventure-bot/statusEffects'
 import { itemReceived, newGame } from '@adventure-bot/store/actions'
 import { characterLooted } from '@adventure-bot/store/slices/loots'
 

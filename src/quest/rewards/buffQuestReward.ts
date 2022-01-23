@@ -2,7 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import inspect from '@adventure-bot/commands/inspect/inspect'
 import { Quest } from '@adventure-bot/quest'
-import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
+import { StatusEffect } from '@adventure-bot/statusEffects'
 import store from '@adventure-bot/store'
 import {
   effectAdded,
