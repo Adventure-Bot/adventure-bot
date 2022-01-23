@@ -16,6 +16,9 @@ Adventure Bot is the DM in your friend's Discord roleplaying game!
 
 ![example heal](./images/heal.png)
 
+![example divine blessing](./images/divine-blessing.png)
+
+
 ## Developers
 
 Adventure Bot is developer friendly. Fork, hack, contribute!
