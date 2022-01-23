@@ -110,28 +110,29 @@ async function main() {
   client.on('ready', async () => {
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
-    startClock(client)
+    startClock()
   })
 
   client.login(process.env.token)
 }
 
-function startClock(client: Discord.Client) {
-  const serverTick = () => {
-    const sovereign = selectSovereign(store.getState())
-    const announced = selectWinnerAnnounced(store.getState())
-    if (sovereign && !announced) {
-      const lastChannelId = selectLastChannelUsed(store.getState())
-      const channel = client.channels.cache.get(lastChannelId)
-      if (!channel?.isText()) return
-      channel.send({
-        content: `👑 ${sovereign.name} has claimed the crown! Game over!`,
-        embeds: leaderboard(),
-      })
-      store.dispatch(winnerDeclared({ winner: sovereign }))
-    }
-    store.dispatch(tick())
+store.subscribe(() => {
+  const sovereign = selectSovereign(store.getState())
+  const announced = selectWinnerAnnounced(store.getState())
+  if (sovereign && !announced) {
+    const lastChannelId = selectLastChannelUsed(store.getState())
+    const channel = client.channels.cache.get(lastChannelId)
+    if (!channel?.isText()) return
+    channel.send({
+      content: `👑 ${sovereign.name} has claimed the crown! Game over!`,
+      embeds: leaderboard(),
+    })
+    store.dispatch(winnerDeclared({ winner: sovereign }))
   }
+})
+
+function startClock() {
+  const serverTick = () => store.dispatch(tick())
   serverTick()
   setInterval(serverTick, 6000)
 }
