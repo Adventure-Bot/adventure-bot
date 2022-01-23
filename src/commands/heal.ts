@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/Emoji'
+import { EmojiModifier } from '@adventure-bot/Emoji'
 import { getUserCharacter, hpBarField } from '@adventure-bot/character'
 import cooldowns from '@adventure-bot/commands/cooldowns'
 import quests from '@adventure-bot/commands/quests'
@@ -53,7 +53,7 @@ export const execute = async (
           healer.username === target.username
             ? 'self healed'
             : 'healed ' + target.username
-        } for ${Emoji('heal', result.amount)}`,
+        } for ${EmojiModifier('heal', result.amount)}`,
         fields: [
           hpBarField({
             character: getUserCharacter(target),

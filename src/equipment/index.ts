@@ -3,7 +3,6 @@ import { Item } from '@adventure-bot/equipment/Item'
 import { equipInventoryItemPrompt } from '@adventure-bot/equipment/equipInventoryItemPrompt'
 import { equipItemPrompt } from '@adventure-bot/equipment/equipItemPrompt'
 import { equippableInventory } from '@adventure-bot/equipment/equippableInventory'
-import { goldValue } from '@adventure-bot/equipment/goldValue'
 import { isEquipped } from '@adventure-bot/equipment/isEquipped'
 import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
 import { itemSelect } from '@adventure-bot/equipment/itemSelect'
@@ -135,7 +134,6 @@ export {
   equipInventoryItemPrompt,
   offerItemPrompt,
   useInventoryItemPrompt,
-  goldValue,
   randomShopItem,
   heavyCrownId,
 }

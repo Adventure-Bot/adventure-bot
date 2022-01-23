@@ -7,6 +7,7 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
+import { EmojiValue } from '@adventure-bot/Emoji'
 import {
   getCharacterUpdate,
   getUserCharacter,
@@ -15,7 +16,7 @@ import {
 import { getSaleRate } from '@adventure-bot/encounters/shop/getSaleRate'
 import { sellList } from '@adventure-bot/encounters/shop/sellList'
 import { sellValue } from '@adventure-bot/encounters/shop/sellValue'
-import { goldValue, itemEmbed } from '@adventure-bot/equipment'
+import { itemEmbed } from '@adventure-bot/equipment'
 import store from '@adventure-bot/store'
 import { itemSold } from '@adventure-bot/store/slices/characters'
 
@@ -88,10 +89,7 @@ export async function sellItemPrompt({
           gpGainField(sellValue(item)),
           {
             name: `${character.name}'s Total Gold`,
-            value: goldValue({
-              interaction,
-              goldValue: getCharacterUpdate(character).gold,
-            }),
+            value: EmojiValue('gold', getCharacterUpdate(character).gold),
           },
         ],
       }),

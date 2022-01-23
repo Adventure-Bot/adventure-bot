@@ -7,7 +7,7 @@ import {
 } from 'discord.js'
 import { clamp } from 'remeda'
 
-import { Emoji } from '@adventure-bot/Emoji'
+import { EmojiModifier } from '@adventure-bot/Emoji'
 import { Manifest } from '@adventure-bot/asset-manifest'
 import { getUserCharacter, hpBarField } from '@adventure-bot/character'
 import { isPotion, itemSelect, usableInventory } from '@adventure-bot/equipment'
@@ -144,7 +144,10 @@ function useInventoryItem({
       )
       embeds.push(
         new MessageEmbed({
-          title: `${character.name} healed +${healAmount} ${Emoji('heal')}`,
+          title: `${character.name} healed ${EmojiModifier(
+            'heal',
+            healAmount
+          )}`,
           fields: [
             hpBarField({
               character,

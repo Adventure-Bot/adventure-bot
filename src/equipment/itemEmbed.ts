@@ -1,9 +1,9 @@
 import { CommandInteraction, EmbedFieldData, MessageEmbed } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/Emoji'
+import { EmojiModifier, EmojiValue } from '@adventure-bot/Emoji'
 import { getUserCharacter, statTitles, stats } from '@adventure-bot/character'
 import { sellValue } from '@adventure-bot/encounters/shop/sellValue'
-import { Item, goldValue, isEquipped } from '@adventure-bot/equipment'
+import { Item, isEquipped } from '@adventure-bot/equipment'
 
 export function itemEmbed({
   item,
@@ -22,7 +22,7 @@ export function itemEmbed({
     if (!modifier) return
     fields.push({
       name: statTitles[stat],
-      value: Emoji(stat) + ' ' + modifier.toString(),
+      value: EmojiModifier(stat, modifier),
       inline: true,
     })
   })
@@ -47,18 +47,9 @@ export function itemEmbed({
       true
     )
   }
-  embed.addField(
-    'Gold Value',
-    goldValue({ goldValue: item.goldValue, interaction })
-  )
+  embed.addField('Gold Value', EmojiValue('gold', item.goldValue))
   if (saleRate !== undefined) {
-    embed.addField(
-      'Sell Value',
-      goldValue({
-        goldValue: sellValue(item),
-        interaction,
-      })
-    )
+    embed.addField('Sell Value', EmojiValue('gold', sellValue(item)))
   }
   return embed
 }
