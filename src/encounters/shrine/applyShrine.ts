@@ -2,8 +2,8 @@ import { CommandInteraction } from 'discord.js'
 
 import { getUserCharacter } from '@adventure-bot/character'
 import quests from '@adventure-bot/commands/quests'
+import { Shrine } from '@adventure-bot/encounters/shrine'
 import { isUserQuestComplete } from '@adventure-bot/quest'
-import { Shrine } from '@adventure-bot/shrines/Shrine'
 import { hasStatusEffect } from '@adventure-bot/statusEffects'
 import store from '@adventure-bot/store'
 import {
