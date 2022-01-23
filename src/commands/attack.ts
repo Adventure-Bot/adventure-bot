@@ -171,12 +171,12 @@ export const attackRollText = ({
   interaction: CommandInteraction
 }): string => {
   if (!result) return 'No result. This should not happen.'
-  const attackEmoji = Emoji(interaction, 'attack')
+  const attackEmoji = Emoji('attack')
   const attackBonus = getCharacterStatModified(result.attacker, 'attackBonus')
   const diceEmoji = d20Emoji({ interaction, n: result.attackRoll })
   const bonusText = (attackBonus > 0 ? '+' : '') + (attackBonus || '')
   const comparison = result.outcome === 'hit' ? '≥' : '<'
-  const acEmoji = Emoji(interaction, 'ac')
+  const acEmoji = Emoji('ac')
   const ac = result.defender.ac
 
   return `${attackEmoji}${diceEmoji}${bonusText} ${comparison} ${acEmoji} ${ac}`

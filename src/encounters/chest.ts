@@ -178,10 +178,7 @@ export async function chest(
     const gp = Math.floor(Math.random() * 20) + 5
     awardXP(interaction.user.id, xp)
     adjustGold(interaction.user.id, gp)
-    embed.addFields([
-      xpGainField(interaction, xp),
-      gpGainField(interaction, gp),
-    ])
+    embed.addFields([xpGainField(xp), gpGainField(gp)])
     if (Math.random() <= 0.005 && !selectIsHeavyCrownInPlay(store.getState())) {
       const crown = heavyCrown()
       const character = getUserCharacter(interaction.user)

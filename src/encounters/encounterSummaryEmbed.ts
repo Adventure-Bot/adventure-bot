@@ -15,7 +15,6 @@ import {
 
 export function encounterSummaryEmbed({
   encounter,
-  interaction,
 }: {
   encounter: Encounter
   interaction: CommandInteraction
@@ -42,10 +41,7 @@ export function encounterSummaryEmbed({
       embed.addField('In Progress', 'Encounter in progress!')
       break
     case 'monster fled':
-      embed.addField(
-        'Evaded!',
-        Emoji(interaction, 'run') + `${monster.name} escaped!`
-      )
+      embed.addField('Evaded!', Emoji('run') + `${monster.name} escaped!`)
       break
     case 'player defeated':
       embed.addField('Unconscious', `${character.name} was knocked out!`)
@@ -58,12 +54,12 @@ export function encounterSummaryEmbed({
         'Triumphant!',
         `${character.name} defeated ${monster.name}! 🎉`
       )
-      embed.addFields([xpGainField(interaction, monster.xpValue)])
+      embed.addFields([xpGainField(monster.xpValue)])
       break
   }
 
   if (encounter.lootResult?.goldTaken) {
-    embed.addFields([gpGainField(interaction, encounter.lootResult?.goldTaken)])
+    embed.addFields([gpGainField(encounter.lootResult?.goldTaken)])
   }
   const itemsTaken = encounter.lootResult?.itemsTaken
   if (itemsTaken && itemsTaken.length > 0) {

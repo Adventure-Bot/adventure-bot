@@ -4,14 +4,13 @@ import { LootResult, getCharacter, gpGainField } from '@adventure-bot/character'
 
 export function lootResultEmbed({
   result,
-  interaction,
 }: {
   result: LootResult
   interaction: CommandInteraction
 }): MessageEmbed {
   const embed = new MessageEmbed({
     timestamp: result.timestamp,
-    fields: [gpGainField(interaction, result.goldTaken)],
+    fields: [gpGainField(result.goldTaken)],
   })
   const looter = getCharacter(result.looterId)
   const lootee = getCharacter(result.targetId)

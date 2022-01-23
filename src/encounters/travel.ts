@@ -18,7 +18,7 @@ export const travel = async (
       new MessageEmbed({
         title: `${interaction.user.username} travels`,
         color: 'GREEN',
-        fields: [xpGainField(interaction, 1)],
+        fields: [xpGainField(1)],
         description: `You travel the lands.`,
       }).setImage(s3Url),
     ],

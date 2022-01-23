@@ -126,7 +126,7 @@ function useInventoryItem({
       store.dispatch(effectAdded({ characterId, effect }))
       const { s3Url } = asset('fantasy', 'items', potionArt[effectId])
       embeds.push(
-        statusEffectEmbed(effect, interaction)
+        statusEffectEmbed(effect)
           .setImage(s3Url)
           .setThumbnail(character.profile)
       )
@@ -144,10 +144,7 @@ function useInventoryItem({
       )
       embeds.push(
         new MessageEmbed({
-          title: `${character.name} healed +${healAmount} ${Emoji(
-            interaction,
-            'heal'
-          )}`,
+          title: `${character.name} healed +${healAmount} ${Emoji('heal')}`,
           fields: [
             hpBarField({
               character,

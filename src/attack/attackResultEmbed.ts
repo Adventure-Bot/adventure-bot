@@ -36,7 +36,7 @@ export function attackResultEmbed({
     })}
     ${
       result.monsterDamageRoll
-        ? `${Emoji(interaction, 'monsterDamageMax')} ${
+        ? `${Emoji('monsterDamageMax')} ${
             result.monsterDamageRoll
           } Monster Damage`
         : ''

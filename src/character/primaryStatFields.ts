@@ -8,7 +8,6 @@ import { selectCharacterById } from '@adventure-bot/store/selectors'
 export function primaryStatFields({
   characterId,
   adjustment = 0,
-  interaction,
 }: {
   characterId: string
   adjustment?: number
@@ -26,12 +25,12 @@ export function primaryStatFields({
     },
     {
       name: 'Experience',
-      value: Emoji(interaction, 'xp') + ' ' + character.xp.toString(),
+      value: Emoji('xp') + ' ' + character.xp.toString(),
       inline: true,
     },
     {
       name: 'Gold',
-      value: Emoji(interaction, 'gold') + ' ' + character.gold.toString(),
+      value: Emoji('gold') + ' ' + character.gold.toString(),
       inline: true,
     },
   ]

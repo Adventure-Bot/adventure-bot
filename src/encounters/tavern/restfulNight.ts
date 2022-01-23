@@ -62,14 +62,14 @@ export async function restfulNight(
             character: getUserCharacter(interaction.user),
             adjustment: actualHeal,
           }),
-          xpGainField(interaction, 1),
+          xpGainField(1),
         ].concat(
           character.quests.healer
             ? questProgressField(character.quests.healer)
             : []
         ),
       }).setImage('https://i.imgur.com/5FAD82X.png'),
-      statusEffectEmbed(effect, interaction),
+      statusEffectEmbed(effect),
     ],
   })
 

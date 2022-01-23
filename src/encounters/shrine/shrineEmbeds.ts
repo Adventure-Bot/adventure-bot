@@ -21,6 +21,6 @@ export function shrineEmbeds({
       fields: quest ? [questProgressField(quest)] : [],
       color: shrine.color,
     }).setImage(shrine.image),
-    statusEffectEmbed(shrine.effect, interaction),
+    statusEffectEmbed(shrine.effect),
   ]
 }

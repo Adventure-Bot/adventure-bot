@@ -39,13 +39,12 @@ export const fairyWell = async (
         title: `${
           interaction.user.username
         } drinks from a fairy's well and gains ${Emoji(
-          interaction,
           'heal'
         )} +${healAmount}!`,
         color: 'DARK_VIVID_PINK',
         description: `You drink from a fairy's well, it heals you for ${healAmount}!`,
         fields: [
-          xpGainField(interaction, 1),
+          xpGainField(1),
           hpBarField({ character, adjustment: healAmount }),
         ].concat(
           character.quests.healer

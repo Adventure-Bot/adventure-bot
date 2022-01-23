@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brian-gates/adventure-bot.git"
+    "url": "git+https://github.com/Adventure-Bot/adventure-bot.git"
   },
   "keywords": [
     "discord",
@@ -32,9 +32,9 @@
   "author": "Brian Gates (brian.g.gates@gmail.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/brian-gates/adventure-bot/issues"
+    "url": "https://github.com/Adventure-Bot/adventure-bot/issues"
   },
-  "homepage": "https://github.com/brian-gates/adventure-bot#readme",
+  "homepage": "https://github.com/Adventure-Bot/adventure-bot#readme",
   "devDependencies": {
     "@redux-devtools/cli": "^1.0.0-10",
     "@redux-devtools/remote": "^0.6.0",

@@ -48,7 +48,7 @@ export const chattyTavernkeepers = async (
         title: 'Chatty Tavernkeepers!',
         description:
           "Turns out they know someone's got a thing needs doing.\n\nCompensation? Of course!",
-        fields: [xpGainField(interaction, 1)],
+        fields: [xpGainField(1)],
       }).setImage('attachment://Tavernkeepers.jpg'),
     ].concat(questEmbed(character) ?? []),
     components: [

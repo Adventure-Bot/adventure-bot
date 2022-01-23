@@ -11,7 +11,6 @@ import {
 export function statText({
   character,
   stat,
-  interaction,
 }: {
   character: Character
   stat: Stat
@@ -20,8 +19,5 @@ export function statText({
   const modified = getCharacterStatModified(character, stat)
   const modifier = getCharacterStatModifier(character, stat)
   const sign = modifier > 0 ? '+' : ''
-  return (
-    Emoji(interaction, stat) +
-    ` ${modified}${modifier ? ` (${sign}${modifier})` : ''}`
-  )
+  return Emoji(stat) + ` ${modified}${modifier ? ` (${sign}${modifier})` : ''}`
 }

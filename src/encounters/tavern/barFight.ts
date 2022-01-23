@@ -25,7 +25,7 @@ export async function barFight(
     color: 'RED',
     description: 'You get into a drunken brawl and are kicked out.',
     fields: [
-      xpGainField(interaction, 1),
+      xpGainField(1),
       hpBarField({
         character: getUserCharacter(interaction.user),
         adjustment: -damage,

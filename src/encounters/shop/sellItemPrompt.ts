@@ -85,7 +85,7 @@ export async function sellItemPrompt({
     embeds: [
       new MessageEmbed({
         fields: [
-          gpGainField(interaction, sellValue(item)),
+          gpGainField(sellValue(item)),
           {
             name: `${character.name}'s Total Gold`,
             value: goldValue({
