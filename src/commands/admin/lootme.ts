@@ -9,8 +9,7 @@ import {
   loot,
   lootResultEmbed,
 } from '@adventure-bot/character'
-import { monsterEmbed } from '@adventure-bot/encounters/utils/monsterEmbed'
-import { getRandomMonster } from '@adventure-bot/monster'
+import { getRandomMonster, monsterEmbed } from '@adventure-bot/monster'
 
 export const command = new SlashCommandBuilder()
   .setName('lootme')

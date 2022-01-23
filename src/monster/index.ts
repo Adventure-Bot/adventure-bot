@@ -1,3 +1,4 @@
+import { monsterEmbed } from '@adventure-bot/encounters'
 import { Monster, isMonster } from '@adventure-bot/monster/Monster'
 import { createMonster } from '@adventure-bot/monster/createMonster'
 import { createRandomMonster } from '@adventure-bot/monster/createRandomMonster'
@@ -33,4 +34,5 @@ export {
   getRandomMonsterName,
   getRandomMonster,
   getMonster,
+  monsterEmbed,
 }
