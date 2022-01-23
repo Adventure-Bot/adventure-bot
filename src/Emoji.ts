@@ -1,5 +1,3 @@
-import { Interaction } from 'discord.js'
-
 import { Stat } from '@adventure-bot/character'
 import { client } from '@adventure-bot/index'
 
@@ -39,23 +37,18 @@ const defaultEmojis: {
   renew: '🤍',
 }
 
-/**
- * Use a guild's emojis, or fallback to defaults
- */
-export function Emoji(name: Emojis): string {
-  return `${
+export function Emoji(name: Emojis, adjustment?: number): string {
+  const adjustmentText = adjustment
+    ? `${adjustment > 0 ? '+' : ''}${adjustment}`
+    : ''
+  return `${adjustmentText}${
     client.emojis.cache.find((emoji) => emoji.name === name) ??
     defaultEmojis[name]
   }`
 }
 
-export function d20Emoji({
-  n,
-}: {
-  interaction: Interaction
-  n: number
-}): string {
-  const name = `d20_${n.toString().padStart(2, '0')}`
-  const emoji = client.emojis.cache.find((emoji) => emoji.name === name)
+export function d20Emoji(n: number): string {
+  const emojiName = `d20_${n.toString().padStart(2, '0')}`
+  const emoji = client.emojis.cache.find((emoji) => emoji.name === emojiName)
   return `${emoji ?? `${n}`}`
 }
