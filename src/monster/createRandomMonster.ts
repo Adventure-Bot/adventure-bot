@@ -1,5 +1,5 @@
-import { Monster } from '@adventure-bot/monster'
 import {
+  Monster,
   createDemon,
   createDragon,
   createGoblin,
