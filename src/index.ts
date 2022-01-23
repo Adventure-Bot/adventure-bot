@@ -2,7 +2,6 @@ import { REST } from '@discordjs/rest'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
 import Discord, { Intents } from 'discord.js'
-import dotenv from 'dotenv'
 import { readFile, writeFile } from 'fs/promises'
 import { exit } from 'process'
 
@@ -17,8 +16,6 @@ import {
 } from '@adventure-bot/store/selectors'
 
 console.time('ready')
-
-dotenv.config({ path: '.env' })
 
 if (!process.env.token) exit(1)
 
