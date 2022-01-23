@@ -1,4 +1,4 @@
-import { StatModifier } from '@adventure-bot/statusEffects/StatModifier'
+import { StatModifier } from '@adventure-bot/statusEffects'
 
 export type Item = {
   id: string

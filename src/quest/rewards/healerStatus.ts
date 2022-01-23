@@ -1,4 +1,4 @@
-import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
+import { StatusEffect } from '@adventure-bot/statusEffects'
 
 export const healerStatus: StatusEffect = {
   name: 'Healer',

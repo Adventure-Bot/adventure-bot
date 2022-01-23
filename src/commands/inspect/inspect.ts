@@ -12,7 +12,7 @@ import { actionEmbed } from '@adventure-bot/commands/inspect/actionEmbed'
 import { getHook } from '@adventure-bot/commands/inspect/getHook'
 import { itemEmbed } from '@adventure-bot/equipment'
 import { questEmbed } from '@adventure-bot/quest'
-import { statusEffectEmbed } from '@adventure-bot/statusEffects/statusEffectEmbed'
+import { statusEffectEmbed } from '@adventure-bot/statusEffects'
 
 export const command = new SlashCommandBuilder()
   .setName('inspect')

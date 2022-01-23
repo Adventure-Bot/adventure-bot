@@ -9,7 +9,7 @@ import {
   Weapon,
 } from '@adventure-bot/equipment'
 import { Quest, QuestId } from '@adventure-bot/quest'
-import { StatusEffect } from '@adventure-bot/statusEffects/StatusEffect'
+import { StatusEffect } from '@adventure-bot/statusEffects'
 
 export type Character = Stats & {
   id: string

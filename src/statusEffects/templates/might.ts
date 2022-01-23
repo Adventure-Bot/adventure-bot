@@ -1,4 +1,4 @@
-import { TemplateEffect } from '@adventure-bot/statusEffects/templates/TemplateEffect'
+import { TemplateEffect } from '@adventure-bot/statusEffects'
 
 export const might: TemplateEffect = {
   name: 'Might',
