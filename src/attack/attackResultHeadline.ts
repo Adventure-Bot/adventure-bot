@@ -4,7 +4,6 @@ import { Emoji } from '@adventure-bot/Emoji'
 import { AttackResult } from '@adventure-bot/attack'
 
 export function attackResultHeadline({
-  interaction,
   result,
 }: {
   interaction: CommandInteraction
@@ -13,11 +12,9 @@ export function attackResultHeadline({
   const { attacker, defender } = result
   const hitOrMissed = result.outcome === 'hit' ? 'hit' : 'missed'
   const forDamage =
-    result.outcome === 'hit'
-      ? ` for ${result.damage} ${Emoji(interaction, 'damage')}`
-      : ''
+    result.outcome === 'hit' ? ` for ${result.damage} ${Emoji('damage')}` : ''
 
-  return `${Emoji(interaction, result.outcome)} ${
-    attacker.name
-  } ${hitOrMissed} ${defender.name}${forDamage}`
+  return `${Emoji(result.outcome)} ${attacker.name} ${hitOrMissed} ${
+    defender.name
+  }${forDamage}`
 }

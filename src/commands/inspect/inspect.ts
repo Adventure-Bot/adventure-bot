@@ -83,7 +83,7 @@ async function inspectThread({
     }).then((hook) =>
       hook?.send({
         embeds: character.statusEffects?.map((effect) =>
-          statusEffectEmbed(effect, interaction)
+          statusEffectEmbed(effect)
         ),
         threadId: thread.id,
       })

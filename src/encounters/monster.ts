@@ -69,8 +69,8 @@ export const monster = async (
     selectEncounterById(store.getState(), encounter.id)?.outcome
   ) {
     encounter = selectEncounterById(store.getState(), encounter.id)
-    const attackEmoji = Emoji(interaction, 'attack')
-    const runEmoji = Emoji(interaction, 'run')
+    const attackEmoji = Emoji('attack')
+    const runEmoji = Emoji('run')
     await message.react(attackEmoji)
     await message.react(runEmoji)
     const collected = await message

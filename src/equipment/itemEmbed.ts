@@ -22,7 +22,7 @@ export function itemEmbed({
     if (!modifier) return
     fields.push({
       name: statTitles[stat],
-      value: Emoji(interaction, stat) + ' ' + modifier.toString(),
+      value: Emoji(stat) + ' ' + modifier.toString(),
       inline: true,
     })
   })

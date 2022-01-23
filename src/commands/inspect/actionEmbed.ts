@@ -6,7 +6,6 @@ import { isHealer } from '@adventure-bot/heal/isHealer'
 
 export function actionEmbed({
   character,
-  interaction,
 }: {
   character: Character
   interaction: CommandInteraction
@@ -15,15 +14,13 @@ export function actionEmbed({
     {
       name: 'Attack',
       value:
-        Emoji(interaction, 'attack') +
-        ' ' +
-        cooldownRemainingText(character.id, 'attack'),
+        Emoji('attack') + ' ' + cooldownRemainingText(character.id, 'attack'),
       inline: true,
     },
     {
       name: 'Adventure',
       value:
-        Emoji(interaction, 'adventure') +
+        Emoji('adventure') +
         ' ' +
         cooldownRemainingText(character.id, 'adventure'),
       inline: true,
@@ -31,9 +28,7 @@ export function actionEmbed({
     {
       name: 'Heal',
       value:
-        Emoji(interaction, 'heal') +
-        ' ' +
-        cooldownRemainingText(character.id, 'adventure'),
+        Emoji('heal') + ' ' + cooldownRemainingText(character.id, 'adventure'),
       inline: true,
     },
   ]
@@ -41,9 +36,7 @@ export function actionEmbed({
     fields.push({
       name: 'Renew',
       value:
-        Emoji(interaction, 'renew') +
-        ' ' +
-        cooldownRemainingText(character.id, 'renew'),
+        Emoji('renew') + ' ' + cooldownRemainingText(character.id, 'renew'),
       inline: true,
     })
   }

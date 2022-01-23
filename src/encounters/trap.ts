@@ -41,7 +41,7 @@ export const trap = async (interaction: CommandInteraction): Promise<void> => {
             title: `The trap hit ${character.name} for ${result.damage}!`,
             color: 'RED',
             fields: [
-              xpGainField(interaction, 1),
+              xpGainField(1),
               hpBarField({ character, adjustment: -result.damage }),
             ],
           })
@@ -58,7 +58,7 @@ export const trap = async (interaction: CommandInteraction): Promise<void> => {
             description: `You deftly evade!`,
           })
             .addField('Roll', trapRollText(result))
-            .addFields([xpGainField(interaction, 2)])
+            .addFields([xpGainField(2)])
             .setImage('https://imgur.com/gSgcrnN.png'),
         ],
       })

@@ -60,11 +60,13 @@ const updateCommands = async () => {
   }
 }
 
+let client: Discord.Client
+
 async function main() {
   updateCommands()
 
   console.time('discord client ready')
-  const client = new Discord.Client({
+  client = new Discord.Client({
     intents: [
       Intents.FLAGS.GUILDS,
       Intents.FLAGS.GUILD_MESSAGES,
@@ -75,6 +77,7 @@ async function main() {
 
   // fixes `TypeError: Do not know how to serialize a BigInt` for store.dispatch(commandInteraction(interaction));
   // https://github.com/GoogleChromeLabs/jsbi/issues/30#issuecomment-1006086291
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ;(BigInt.prototype as any).toJSON = function () {
     return this.toString()
   }
@@ -134,3 +137,5 @@ function startClock(client: Discord.Client) {
 }
 
 main()
+
+export { client }
