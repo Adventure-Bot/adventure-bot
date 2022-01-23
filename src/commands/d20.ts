@@ -12,10 +12,7 @@ export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   interaction.editReply({
-    content: d20Emoji({
-      interaction,
-      n: d20(),
-    }),
+    content: d20Emoji(d20()),
   })
 }
 

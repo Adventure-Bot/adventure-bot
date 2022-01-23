@@ -53,7 +53,7 @@ export const execute = async (
           healer.username === target.username
             ? 'self healed'
             : 'healed ' + target.username
-        } for +${result.amount} ${Emoji('heal')}`,
+        } for ${Emoji('heal', result.amount)}`,
         fields: [
           hpBarField({
             character: getUserCharacter(target),
