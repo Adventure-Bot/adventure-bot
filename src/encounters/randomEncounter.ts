@@ -12,7 +12,7 @@ import {
   trap,
   travel,
 } from '@adventure-bot/encounters'
-import { randomShrine } from '@adventure-bot/encounters/shrine/randomShrine'
+import { randomShrine } from '@adventure-bot/encounters/shrine'
 import { CommandHandler, weightedTable } from '@adventure-bot/utils'
 
 export const randomEncounter = (

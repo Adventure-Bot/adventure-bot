@@ -1,9 +1,11 @@
 import { randomUUID } from 'crypto'
 import { CommandInteraction } from 'discord.js'
 
-import { applyShrine } from '@adventure-bot/encounters/shrine/applyShrine'
-import { shrineEmbeds } from '@adventure-bot/encounters/shrine/shrineEmbeds'
-import { Shrine } from '@adventure-bot/shrines/Shrine'
+import {
+  Shrine,
+  applyShrine,
+  shrineEmbeds,
+} from '@adventure-bot/encounters/shrine'
 import { createEffect } from '@adventure-bot/statusEffects'
 import { asset } from '@adventure-bot/utils'
 

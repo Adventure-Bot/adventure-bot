@@ -1,8 +1,8 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { getUserCharacter } from '@adventure-bot/character'
+import { Shrine } from '@adventure-bot/encounters/shrine'
 import { questProgressField } from '@adventure-bot/quest'
-import { Shrine } from '@adventure-bot/shrines/Shrine'
 import { statusEffectEmbed } from '@adventure-bot/statusEffects'
 
 export function shrineEmbeds({

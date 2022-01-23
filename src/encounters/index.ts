@@ -11,10 +11,6 @@ import { getLoots } from '@adventure-bot/encounters/getLoots'
 import { monster } from '@adventure-bot/encounters/monster'
 import { randomEncounter } from '@adventure-bot/encounters/randomEncounter'
 import { shop } from '@adventure-bot/encounters/shop/shop'
-import { armorShrine } from '@adventure-bot/encounters/shrine/armor'
-import { attackShrine } from '@adventure-bot/encounters/shrine/attack'
-import { slayerShrine } from '@adventure-bot/encounters/shrine/slayer'
-import { vigorShrine } from '@adventure-bot/encounters/shrine/vigor'
 import { barFight } from '@adventure-bot/encounters/tavern/barFight'
 import { chattyTavernkeepers } from '@adventure-bot/encounters/tavern/chattyTavernkeepers'
 import { tavern } from '@adventure-bot/encounters/tavern/tavern'
@@ -33,10 +29,6 @@ export {
   travel,
   chattyTavernkeepers,
   barFight,
-  armorShrine,
-  attackShrine,
-  slayerShrine,
-  vigorShrine,
   encounterSummaryEmbed,
   getEncounters,
   getLoots,
