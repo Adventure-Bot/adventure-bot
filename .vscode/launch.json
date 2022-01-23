@@ -25,6 +25,16 @@
       "console": "integratedTerminal"
     },
     {
+      "name": "lint",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeVersion": "16",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["lint"],
+      "console": "integratedTerminal"
+    },
+    {
       "name": "start",
       "type": "node",
       "request": "launch",

@@ -1,7 +1,7 @@
 import { EmbedFieldData, MessageEmbed } from 'discord.js'
 import moment from 'moment'
 
-import { Emoji } from '@adventure-bot/Emoji'
+import { EmojiModifier } from '@adventure-bot/Emoji'
 import { statTitles, stats } from '@adventure-bot/character'
 import { StatusEffect } from '@adventure-bot/statusEffects'
 
@@ -13,7 +13,7 @@ export function statusEffectEmbed(effect: StatusEffect): MessageEmbed {
     if (!modifier) return
     fields.push({
       name: statTitles[stat],
-      value: Emoji(stat) + ' ' + modifier.toString(),
+      value: EmojiModifier(stat, modifier),
     })
   })
 

@@ -7,15 +7,11 @@ import {
 } from 'discord.js'
 import { times } from 'remeda'
 
+import { EmojiValue } from '@adventure-bot/Emoji'
 import { getCharacterUpdate, getUserCharacter } from '@adventure-bot/character'
 import { buyItemPrompt } from '@adventure-bot/encounters/shop/buyItemPrompt'
 import { sellItemPrompt } from '@adventure-bot/encounters/shop/sellItemPrompt'
-import {
-  goldValue,
-  heavyCrown,
-  itemEmbed,
-  randomShopItem,
-} from '@adventure-bot/equipment'
+import { heavyCrown, itemEmbed, randomShopItem } from '@adventure-bot/equipment'
 import store from '@adventure-bot/store'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
 import { asset } from '@adventure-bot/utils'
@@ -65,10 +61,7 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
       fields: [
         {
           name: 'Your Gold',
-          value: goldValue({
-            interaction,
-            goldValue: getCharacterUpdate(character).gold,
-          }),
+          value: EmojiValue('gold', getCharacterUpdate(character).gold),
         },
       ],
     }).setImage(asset('fantasy', 'places', 'blacksmith').s3Url)
