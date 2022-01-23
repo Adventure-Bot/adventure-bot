@@ -7,8 +7,7 @@ import {
   xpGainField,
 } from '@adventure-bot/character'
 import { updateUserQuestProgess } from '@adventure-bot/quest'
-import { trapAttack } from '@adventure-bot/trap/trapAttack'
-import { trapRollText } from '@adventure-bot/trap/trapRollText'
+import { trapAttack, trapRollText } from '@adventure-bot/trap'
 import { sleep } from '@adventure-bot/utils'
 
 export const trap = async (interaction: CommandInteraction): Promise<void> => {

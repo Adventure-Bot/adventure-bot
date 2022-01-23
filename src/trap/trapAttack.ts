@@ -4,7 +4,7 @@ import {
 } from '@adventure-bot/character'
 import store from '@adventure-bot/store'
 import { damaged } from '@adventure-bot/store/slices/characters'
-import { TrapResult } from '@adventure-bot/trap/TrapResult'
+import { TrapResult } from '@adventure-bot/trap'
 import { d6, d20 } from '@adventure-bot/utils'
 
 export const trapAttack = (

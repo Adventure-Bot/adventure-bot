@@ -23,7 +23,7 @@ import store from '@adventure-bot/store'
 import { itemReceived } from '@adventure-bot/store/actions'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
 import { damaged, effectAdded } from '@adventure-bot/store/slices/characters'
-import { trapAttack } from '@adventure-bot/trap/trapAttack'
+import { trapAttack } from '@adventure-bot/trap'
 
 const chestImage = new MessageAttachment('./images/chest.jpg', 'chest.jpg')
 
