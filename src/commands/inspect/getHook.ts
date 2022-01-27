@@ -13,6 +13,7 @@ type HookName =
   | 'Characters'
   | 'Combat'
   | 'Inventory'
+  | 'Roaming Monsters'
 
 export async function getHook({
   name,
