@@ -4,6 +4,7 @@ import { Routes } from 'discord-api-types/v9'
 import { Client, Intents } from 'discord.js'
 import { existsSync } from 'fs'
 import { readFile, writeFile } from 'fs/promises'
+import path from 'path'
 import { exit } from 'process'
 
 import commands from '@adventure-bot/commands'
@@ -26,19 +27,23 @@ type ClientOptions = {
 }
 
 export const assertEnv: () => void = () => {
-  if (!existsSync('.env')) {
-    console.error(
-      '\x1b[43m\x1b[30m ⚠ Environment config required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#setup-your-env \x1b[0m'
-    )
-    exit(1)
-  }
+  // const d = require('dotenv').config({
 
-  if (!process.env.token) {
-    console.error(
-      '\x1b[43m\x1b[30m ⚠ Discord token required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#create-your-bot-token \x1b[0m'
-    )
-    exit(1)
-  }
+  // })
+  // console.log('D', d)
+  // if (!existsSync(path.join(__dirname, '..', '..', '..', '.env'))) {
+  //   console.error(
+  //     '\x1b[43m\x1b[30m ⚠ Environment config required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#setup-your-env \x1b[0m'
+  //   )
+  //   exit(1)
+  // }
+  console.log('process.env.token', process.env.token)
+  // if (!process.env.token) {
+  //   console.error(
+  //     '\x1b[43m\x1b[30m ⚠ Discord token required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#create-your-bot-token \x1b[0m'
+  //   )
+  //   exit(1)
+  // }
 }
 
 const installCommands = async (

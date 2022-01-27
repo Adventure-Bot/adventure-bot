@@ -1,11 +1,17 @@
 import { Client } from 'discord.js'
+import dotenv from 'dotenv'
+import path from 'path'
 
 import {
   assertEnv,
   createClient,
   gameClock,
   waitForWinner,
-} from '@adventure-bot/game'
+} from '@adventure-bot/boot'
+
+dotenv.config({
+  path: path.join(__dirname, '..', '..', '..', '.env'),
+})
 
 let client: Client
 

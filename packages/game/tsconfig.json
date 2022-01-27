@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": ".build",
+    "baseUrl": "src",
+    "paths": {
+      "@adventure-bot/*": ["./*"]
+    }
+  },
+  "exclude": ["node_modules", "**/*.js"],
+  "include": ["next-env.d.ts", "src/**/*.ts"]
+}
