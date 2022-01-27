@@ -1,3 +1,4 @@
+import { diff } from 'deep-object-diff'
 import { Client } from 'discord.js'
 
 import {
@@ -6,6 +7,7 @@ import {
   gameClock,
   waitForWinner,
 } from '@adventure-bot/game'
+import { ReduxState } from '@adventure-bot/store'
 
 let client: Client
 
@@ -20,16 +22,24 @@ const startGame: (gameOptions: {
 }) => {
   assertEnv()
 
+  let lastState: ReduxState
+
   return createClient({
     type: 'discord',
     token,
     clientId,
     channelId,
     onBeforeInteraction: async (gameState) => {
-      console.log('before', gameState)
+      // Keep track of what the game state is prior to the users interaction
+      lastState = gameState
     },
     onAfterInteraction: async (gameState) => {
-      console.log('after', gameState)
+      const didStateChange = Boolean(
+        Object.keys(diff(lastState, gameState)).length
+      )
+      if (didStateChange) {
+        // Persist to DB
+      }
     },
     onError: (e) => console.error('Discord client error!', e),
 
