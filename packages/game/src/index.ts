@@ -1,5 +1,6 @@
 import { Client } from 'discord.js'
 import dotenv from 'dotenv'
+import workspace from 'find-yarn-workspace-root'
 import path from 'path'
 
 import {
@@ -10,7 +11,7 @@ import {
 } from '@adventure-bot/game/boot'
 
 dotenv.config({
-  path: path.join(__dirname, '..', '..', '..', '.env'),
+  path: path.join(workspace() ?? process.cwd(), '.env'),
 })
 
 let client: Client

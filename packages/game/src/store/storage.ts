@@ -1,15 +1,11 @@
+import workspace from 'find-yarn-workspace-root'
 import fsSync from 'fs'
 import { constants } from 'fs'
 import fs from 'fs/promises'
 import mkdirp from 'mkdirp'
 import path from 'path'
 
-console.log({
-  cwd: process.cwd(),
-  d: __dirname,
-})
-
-const dbFolder = path.join(process.cwd(), '..', '..', 'db')
+const dbFolder = path.join(workspace() ?? process.cwd(), 'db')
 const dbFile = path.join(dbFolder, `db.json`)
 
 const ensureDB = async () => {
