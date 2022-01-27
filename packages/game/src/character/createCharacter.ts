@@ -1,8 +1,8 @@
 import { randomUUID } from 'crypto'
 
-import { Character, defaultCharacter } from '@adventure-bot/character'
-import store from '@adventure-bot/store'
-import { created } from '@adventure-bot/store/slices/characters'
+import { Character, defaultCharacter } from '@adventure-bot/game/character'
+import store from '@adventure-bot/game/store'
+import { created } from '@adventure-bot/game/store/slices/characters'
 
 export const createCharacter = (
   character: Partial<Character> & { name: string }

@@ -1,15 +1,15 @@
 import { CommandInteraction } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import quests from '@adventure-bot/commands/quests'
-import { Shrine } from '@adventure-bot/encounters/shrine'
-import { isUserQuestComplete } from '@adventure-bot/quest'
-import { hasStatusEffect } from '@adventure-bot/statusEffects'
-import store from '@adventure-bot/store'
+import { getUserCharacter } from '@adventure-bot/game/character'
+import quests from '@adventure-bot/game/commands/quests'
+import { Shrine } from '@adventure-bot/game/encounters/shrine'
+import { isUserQuestComplete } from '@adventure-bot/game/quest'
+import { hasStatusEffect } from '@adventure-bot/game/statusEffects'
+import store from '@adventure-bot/game/store'
 import {
   effectAdded,
   questProgressed,
-} from '@adventure-bot/store/slices/characters'
+} from '@adventure-bot/game/store/slices/characters'
 
 export async function applyShrine({
   interaction,

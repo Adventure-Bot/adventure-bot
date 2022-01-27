@@ -7,14 +7,14 @@ import {
   Stats,
   getCharacterStatModifier,
   stats,
-} from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounters'
-import { Monster, isMonster } from '@adventure-bot/monster/Monster'
-import { Quest } from '@adventure-bot/quest/Quest'
-import { QuestId, quests } from '@adventure-bot/quest/quests'
-import { ReduxState } from '@adventure-bot/store'
-import { isStatusEffectExpired } from '@adventure-bot/store/slices/characters'
-import { asset } from '@adventure-bot/utils/asset'
+} from '@adventure-bot/game/character'
+import { Encounter } from '@adventure-bot/game/encounters'
+import { Monster, isMonster } from '@adventure-bot/game/monster/Monster'
+import { Quest } from '@adventure-bot/game/quest/Quest'
+import { QuestId, quests } from '@adventure-bot/game/quest/quests'
+import { ReduxState } from '@adventure-bot/game/store'
+import { isStatusEffectExpired } from '@adventure-bot/game/store/slices/characters'
+import { asset } from '@adventure-bot/game/utils/asset'
 
 const decorateCharacterWithAssetProfile = <T extends Character>(
   character: T

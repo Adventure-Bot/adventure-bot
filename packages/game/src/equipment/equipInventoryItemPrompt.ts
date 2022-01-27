@@ -5,10 +5,10 @@ import {
   MessageButton,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import { equippableInventory, itemSelect } from '@adventure-bot/equipment'
-import store from '@adventure-bot/store'
-import { itemEquipped } from '@adventure-bot/store/slices/characters'
+import { getUserCharacter } from '@adventure-bot/game/character'
+import { equippableInventory, itemSelect } from '@adventure-bot/game/equipment'
+import store from '@adventure-bot/game/store'
+import { itemEquipped } from '@adventure-bot/game/store/slices/characters'
 
 /**
  * Prompt to equip from available inventory items.

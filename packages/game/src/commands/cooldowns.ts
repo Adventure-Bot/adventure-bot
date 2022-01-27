@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import { actionEmbed } from '@adventure-bot/commands/inspect/actionEmbed'
+import { getUserCharacter } from '@adventure-bot/game/character'
+import { actionEmbed } from '@adventure-bot/game/commands/inspect/actionEmbed'
 
 export const command = new SlashCommandBuilder()
   .setName('cooldowns')

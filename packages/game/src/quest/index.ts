@@ -1,13 +1,13 @@
-import { Quest } from '@adventure-bot/quest/Quest'
-import { getCompletedQuests } from '@adventure-bot/quest/getCompletedQuests'
+import { Quest } from '@adventure-bot/game/quest/Quest'
+import { getCompletedQuests } from '@adventure-bot/game/quest/getCompletedQuests'
 import {
   isQuestComplete,
   isUserQuestComplete,
-} from '@adventure-bot/quest/isQuestComplete'
-import { questEmbed } from '@adventure-bot/quest/questEmbed'
-import { questProgressBar } from '@adventure-bot/quest/questProgressBar'
-import { questProgressField } from '@adventure-bot/quest/questProgressField'
-import { QuestId, isQuestId, quests } from '@adventure-bot/quest/quests'
+} from '@adventure-bot/game/quest/isQuestComplete'
+import { questEmbed } from '@adventure-bot/game/quest/questEmbed'
+import { questProgressBar } from '@adventure-bot/game/quest/questProgressBar'
+import { questProgressField } from '@adventure-bot/game/quest/questProgressField'
+import { QuestId, isQuestId, quests } from '@adventure-bot/game/quest/quests'
 import {
   blessedBuffQuestReward,
   buffQuestReward,
@@ -15,8 +15,8 @@ import {
   healerStatus,
   slayerBuffQuestReward,
   survivorBuffQuestReward,
-} from '@adventure-bot/quest/rewards'
-import { updateUserQuestProgess } from '@adventure-bot/quest/updateQuestProgess'
+} from '@adventure-bot/game/quest/rewards'
+import { updateUserQuestProgess } from '@adventure-bot/game/quest/updateQuestProgess'
 
 export {
   quests,

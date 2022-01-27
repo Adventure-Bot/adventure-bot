@@ -1,4 +1,4 @@
-import { Hat } from '@adventure-bot/equipment'
+import { Hat } from '@adventure-bot/game/equipment'
 
 export const heavyCrownId = 'heavy-crown'
 

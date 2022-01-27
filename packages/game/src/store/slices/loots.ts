@@ -1,7 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
 
-import { LootResult } from '@adventure-bot/character'
-import { newGame } from '@adventure-bot/store/actions'
+import { LootResult } from '@adventure-bot/game/character'
+import { newGame } from '@adventure-bot/game/store/actions'
 
 const lootsById: Record<string, LootResult> = {}
 

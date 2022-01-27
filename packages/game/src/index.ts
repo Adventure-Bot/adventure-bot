@@ -7,7 +7,7 @@ import {
   createClient,
   gameClock,
   waitForWinner,
-} from '@adventure-bot/boot'
+} from '@adventure-bot/game/boot'
 
 dotenv.config({
   path: path.join(__dirname, '..', '..', '..', '.env'),

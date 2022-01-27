@@ -7,7 +7,7 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
+import { getUserCharacter } from '@adventure-bot/game/character'
 import {
   Quest,
   QuestId,
@@ -17,8 +17,8 @@ import {
   isQuestId,
   slayerBuffQuestReward,
   survivorBuffQuestReward,
-} from '@adventure-bot/quest'
-import { progressBar } from '@adventure-bot/utils'
+} from '@adventure-bot/game/quest'
+import { progressBar } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('quests')

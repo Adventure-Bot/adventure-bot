@@ -1,10 +1,10 @@
-import { dagger } from '@adventure-bot/equipment'
+import { dagger } from '@adventure-bot/game/equipment'
 import {
   Monster,
   createMonster,
   getRandomMonsterName,
-} from '@adventure-bot/monster'
-import { asset } from '@adventure-bot/utils'
+} from '@adventure-bot/game/monster'
+import { asset } from '@adventure-bot/game/utils'
 
 export function createGoblin(): Monster {
   return createMonster({

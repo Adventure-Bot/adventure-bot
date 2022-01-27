@@ -1,12 +1,12 @@
 import { CommandInteraction } from 'discord.js'
 
-import { asset } from '@adventure-bot/utils/asset'
-import { crownArt } from '@adventure-bot/utils/crownArt'
-import { d, d6, d20 } from '@adventure-bot/utils/dice'
-import { progressBar } from '@adventure-bot/utils/progressBar'
-import { randomArrayElement } from '@adventure-bot/utils/randomArrayElement'
-import { weightedRandom } from '@adventure-bot/utils/weightedRandom'
-import { weightedTable } from '@adventure-bot/utils/weightedTable'
+import { asset } from '@adventure-bot/game/utils/asset'
+import { crownArt } from '@adventure-bot/game/utils/crownArt'
+import { d, d6, d20 } from '@adventure-bot/game/utils/dice'
+import { progressBar } from '@adventure-bot/game/utils/progressBar'
+import { randomArrayElement } from '@adventure-bot/game/utils/randomArrayElement'
+import { weightedRandom } from '@adventure-bot/game/utils/weightedRandom'
+import { weightedTable } from '@adventure-bot/game/utils/weightedTable'
 
 export {
   crownArt,

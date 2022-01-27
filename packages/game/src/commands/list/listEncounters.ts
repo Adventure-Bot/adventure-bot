@@ -1,6 +1,9 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { encounterSummaryEmbed, getEncounters } from '@adventure-bot/encounters'
+import {
+  encounterSummaryEmbed,
+  getEncounters,
+} from '@adventure-bot/game/encounters'
 
 export function listEncounters(interaction: CommandInteraction): void {
   const encounters = getEncounters()

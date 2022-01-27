@@ -1,7 +1,7 @@
-import { Character } from '@adventure-bot/character'
-import { isMonster } from '@adventure-bot/monster'
-import store from '@adventure-bot/store'
-import { selectHasItemNameInInventory } from '@adventure-bot/store/selectors'
+import { Character } from '@adventure-bot/game/character'
+import { isMonster } from '@adventure-bot/game/monster'
+import store from '@adventure-bot/game/store'
+import { selectHasItemNameInInventory } from '@adventure-bot/game/store/selectors'
 
 export const decoratedName = (character: Character): string => {
   const crown = selectHasItemNameInInventory(

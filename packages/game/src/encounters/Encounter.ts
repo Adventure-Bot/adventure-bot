@@ -1,5 +1,5 @@
-import { AttackResult } from '@adventure-bot/attack'
-import { LootResult } from '@adventure-bot/character'
+import { AttackResult } from '@adventure-bot/game/attack'
+import { LootResult } from '@adventure-bot/game/character'
 
 export type Encounter = {
   id: string

@@ -11,19 +11,22 @@ import {
   getUserCharacter,
   gpGainField,
   xpGainField,
-} from '@adventure-bot/character'
+} from '@adventure-bot/game/character'
 import {
   equipItemPrompt,
   heavyCrown,
   isEquippable,
   itemEmbed,
   randomChestItem,
-} from '@adventure-bot/equipment'
-import store from '@adventure-bot/store'
-import { itemReceived } from '@adventure-bot/store/actions'
-import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
-import { damaged, effectAdded } from '@adventure-bot/store/slices/characters'
-import { trapAttack } from '@adventure-bot/trap'
+} from '@adventure-bot/game/equipment'
+import store from '@adventure-bot/game/store'
+import { itemReceived } from '@adventure-bot/game/store/actions'
+import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
+import {
+  damaged,
+  effectAdded,
+} from '@adventure-bot/game/store/slices/characters'
+import { trapAttack } from '@adventure-bot/game/trap'
 
 const chestImage = new MessageAttachment('./images/chest.jpg', 'chest.jpg')
 

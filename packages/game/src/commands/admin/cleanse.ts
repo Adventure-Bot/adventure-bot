@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
 
-import store from '@adventure-bot/store'
-import { cleansed } from '@adventure-bot/store/slices/characters'
+import store from '@adventure-bot/game/store'
+import { cleansed } from '@adventure-bot/game/store/slices/characters'
 
 export const command = new SlashCommandBuilder()
   .setName('cleanse')

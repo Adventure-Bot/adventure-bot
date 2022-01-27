@@ -1,35 +1,35 @@
 import { CommandInteraction, Message, TextChannel } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/Emoji'
-import { attackResultEmbed, makeAttack } from '@adventure-bot/attack'
-import { decoratedName, loot } from '@adventure-bot/character'
-import { getHook } from '@adventure-bot/commands/inspect/getHook'
-import quests from '@adventure-bot/commands/quests'
+import { Emoji } from '@adventure-bot/game/Emoji'
+import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
+import { decoratedName, loot } from '@adventure-bot/game/character'
+import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
+import quests from '@adventure-bot/game/commands/quests'
 import {
   chest,
   createEncounter,
   encounterEmbed,
   encounterSummaryEmbed,
-} from '@adventure-bot/encounters'
-import { getRandomMonster } from '@adventure-bot/monster'
+} from '@adventure-bot/game/encounters'
+import { getRandomMonster } from '@adventure-bot/game/monster'
 import {
   isUserQuestComplete,
   questProgressField,
   updateUserQuestProgess,
-} from '@adventure-bot/quest'
-import store from '@adventure-bot/store'
+} from '@adventure-bot/game/quest'
+import store from '@adventure-bot/game/store'
 import {
   selectCharacterById,
   selectEncounterById,
   selectMonsterById,
-} from '@adventure-bot/store/selectors'
+} from '@adventure-bot/game/store/selectors'
 import {
   doubleKO,
   playerDefeat,
   playerFled,
   playerVictory,
   roundFinished,
-} from '@adventure-bot/store/slices/encounters'
+} from '@adventure-bot/game/store/slices/encounters'
 
 export const monster = async (
   interaction: CommandInteraction

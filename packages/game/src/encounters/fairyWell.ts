@@ -1,20 +1,23 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/Emoji'
+import { Emoji } from '@adventure-bot/game/Emoji'
 import {
   getUserCharacter,
   hpBarField,
   xpGainField,
-} from '@adventure-bot/character'
-import quests from '@adventure-bot/commands/quests'
-import { isUserQuestComplete, questProgressField } from '@adventure-bot/quest'
-import store from '@adventure-bot/store'
+} from '@adventure-bot/game/character'
+import quests from '@adventure-bot/game/commands/quests'
+import {
+  isUserQuestComplete,
+  questProgressField,
+} from '@adventure-bot/game/quest'
+import store from '@adventure-bot/game/store'
 import {
   healed,
   questProgressed,
   xpAwarded,
-} from '@adventure-bot/store/slices/characters'
-import { asset } from '@adventure-bot/utils'
+} from '@adventure-bot/game/store/slices/characters'
+import { asset } from '@adventure-bot/game/utils'
 
 export const fairyWell = async (
   interaction: CommandInteraction

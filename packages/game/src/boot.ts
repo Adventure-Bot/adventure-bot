@@ -7,15 +7,19 @@ import { readFile, writeFile } from 'fs/promises'
 import path from 'path'
 import { exit } from 'process'
 
-import commands from '@adventure-bot/commands'
-import { leaderboard } from '@adventure-bot/commands/leaderboard'
-import store from '@adventure-bot/store'
-import { commandUsed, tick, winnerDeclared } from '@adventure-bot/store/actions'
+import commands from '@adventure-bot/game/commands'
+import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
+import store from '@adventure-bot/game/store'
+import {
+  commandUsed,
+  tick,
+  winnerDeclared,
+} from '@adventure-bot/game/store/actions'
 import {
   selectLastChannelUsed,
   selectSovereign,
   selectWinnerAnnounced,
-} from '@adventure-bot/store/selectors'
+} from '@adventure-bot/game/store/selectors'
 
 type ClientOptions = {
   type: 'discord'
@@ -27,23 +31,19 @@ type ClientOptions = {
 }
 
 export const assertEnv: () => void = () => {
-  // const d = require('dotenv').config({
+  if (!existsSync(path.join(__dirname, '..', '..', '..', '.env'))) {
+    console.error(
+      '\x1b[43m\x1b[30m ⚠ Environment config required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#setup-your-env \x1b[0m'
+    )
+    exit(1)
+  }
 
-  // })
-  // console.log('D', d)
-  // if (!existsSync(path.join(__dirname, '..', '..', '..', '.env'))) {
-  //   console.error(
-  //     '\x1b[43m\x1b[30m ⚠ Environment config required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#setup-your-env \x1b[0m'
-  //   )
-  //   exit(1)
-  // }
-  console.log('process.env.token', process.env.token)
-  // if (!process.env.token) {
-  //   console.error(
-  //     '\x1b[43m\x1b[30m ⚠ Discord token required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#create-your-bot-token \x1b[0m'
-  //   )
-  //   exit(1)
-  // }
+  if (!process.env.token) {
+    console.error(
+      '\x1b[43m\x1b[30m ⚠ Discord token required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#create-your-bot-token \x1b[0m'
+    )
+    exit(1)
+  }
 }
 
 const installCommands = async (

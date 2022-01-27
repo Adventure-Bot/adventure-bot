@@ -7,21 +7,25 @@ import {
 } from 'discord.js'
 import { clamp } from 'remeda'
 
-import { EmojiModifier } from '@adventure-bot/Emoji'
-import { Manifest } from '@adventure-bot/asset-manifest'
-import { getUserCharacter, hpBarField } from '@adventure-bot/character'
-import { isPotion, itemSelect, usableInventory } from '@adventure-bot/equipment'
-import { createEffect } from '@adventure-bot/statusEffects'
-import { statusEffectEmbed } from '@adventure-bot/statusEffects'
-import { EffectTemplate } from '@adventure-bot/statusEffects'
-import store from '@adventure-bot/store'
-import { selectCharacterById } from '@adventure-bot/store/selectors'
+import { EmojiModifier } from '@adventure-bot/game/Emoji'
+import { Manifest } from '@adventure-bot/game/asset-manifest'
+import { getUserCharacter, hpBarField } from '@adventure-bot/game/character'
+import {
+  isPotion,
+  itemSelect,
+  usableInventory,
+} from '@adventure-bot/game/equipment'
+import { createEffect } from '@adventure-bot/game/statusEffects'
+import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects'
+import store from '@adventure-bot/game/store'
+import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import {
   effectAdded,
   healed,
   itemRemoved,
-} from '@adventure-bot/store/slices/characters'
-import { asset, d, randomArrayElement } from '@adventure-bot/utils'
+} from '@adventure-bot/game/store/slices/characters'
+import { asset, d, randomArrayElement } from '@adventure-bot/game/utils'
 
 /**
  * Prompt to equip from available inventory items.

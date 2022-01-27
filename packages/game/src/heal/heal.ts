@@ -2,11 +2,11 @@ import {
   getCharacter,
   isCharacterOnCooldown,
   startCooldown,
-} from '@adventure-bot/character'
-import { HealResult } from '@adventure-bot/heal/HealResult'
-import store from '@adventure-bot/store'
-import { healed } from '@adventure-bot/store/slices/characters'
-import { d6 } from '@adventure-bot/utils'
+} from '@adventure-bot/game/character'
+import { HealResult } from '@adventure-bot/game/heal/HealResult'
+import store from '@adventure-bot/game/store'
+import { healed } from '@adventure-bot/game/store/slices/characters'
+import { d6 } from '@adventure-bot/game/utils'
 
 export const heal = (
   initiatorId: string,

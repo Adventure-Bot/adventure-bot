@@ -8,8 +8,8 @@ import {
   TextChannel,
 } from 'discord.js'
 
-import { decoratedName, getUserCharacter } from '@adventure-bot/character'
-import { getHook } from '@adventure-bot/commands/inspect/getHook'
+import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
+import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import {
   equipInventoryItemPrompt,
   equippableInventory,
@@ -18,7 +18,7 @@ import {
   offerItemPrompt,
   usableInventory,
   useInventoryItemPrompt,
-} from '@adventure-bot/equipment'
+} from '@adventure-bot/game/equipment'
 
 export const command = new SlashCommandBuilder()
   .setName('inventory')

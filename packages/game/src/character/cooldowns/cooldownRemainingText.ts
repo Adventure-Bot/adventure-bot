@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-import { Character, getCooldownRemaining } from '@adventure-bot/character'
+import { Character, getCooldownRemaining } from '@adventure-bot/game/character'
 
 export const cooldownRemainingText = (
   characterId: string,

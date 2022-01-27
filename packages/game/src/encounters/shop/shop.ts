@@ -7,14 +7,21 @@ import {
 } from 'discord.js'
 import { times } from 'remeda'
 
-import { EmojiValue } from '@adventure-bot/Emoji'
-import { getCharacterUpdate, getUserCharacter } from '@adventure-bot/character'
-import { buyItemPrompt } from '@adventure-bot/encounters/shop/buyItemPrompt'
-import { sellItemPrompt } from '@adventure-bot/encounters/shop/sellItemPrompt'
-import { heavyCrown, itemEmbed, randomShopItem } from '@adventure-bot/equipment'
-import store from '@adventure-bot/store'
-import { selectIsHeavyCrownInPlay } from '@adventure-bot/store/selectors'
-import { asset } from '@adventure-bot/utils'
+import { EmojiValue } from '@adventure-bot/game/Emoji'
+import {
+  getCharacterUpdate,
+  getUserCharacter,
+} from '@adventure-bot/game/character'
+import { buyItemPrompt } from '@adventure-bot/game/encounters/shop/buyItemPrompt'
+import { sellItemPrompt } from '@adventure-bot/game/encounters/shop/sellItemPrompt'
+import {
+  heavyCrown,
+  itemEmbed,
+  randomShopItem,
+} from '@adventure-bot/game/equipment'
+import store from '@adventure-bot/game/store'
+import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
+import { asset } from '@adventure-bot/game/utils'
 
 export const shop = async (interaction: CommandInteraction): Promise<void> => {
   const character = getUserCharacter(interaction.user)

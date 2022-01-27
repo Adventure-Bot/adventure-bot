@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { LootResult } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounters'
-import { isMonster } from '@adventure-bot/monster'
-import { newGame } from '@adventure-bot/store/actions'
-import { attacked } from '@adventure-bot/store/slices/characters'
+import { LootResult } from '@adventure-bot/game/character'
+import { Encounter } from '@adventure-bot/game/encounters'
+import { isMonster } from '@adventure-bot/game/monster'
+import { newGame } from '@adventure-bot/game/store/actions'
+import { attacked } from '@adventure-bot/game/store/slices/characters'
 
 const encountersById: Record<string, Encounter> = {}
 

@@ -3,8 +3,8 @@ import {
   createRandomMonster,
   getRoamingMonsters,
   isMonster,
-} from '@adventure-bot/monster'
-import { randomArrayElement } from '@adventure-bot/utils'
+} from '@adventure-bot/game/monster'
+import { randomArrayElement } from '@adventure-bot/game/utils'
 
 export const getRandomMonster = (): Monster => {
   const roamingMonsters = getRoamingMonsters()

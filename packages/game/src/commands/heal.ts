@@ -1,17 +1,17 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { EmojiModifier } from '@adventure-bot/Emoji'
-import { getUserCharacter, hpBarField } from '@adventure-bot/character'
-import cooldowns from '@adventure-bot/commands/cooldowns'
-import quests from '@adventure-bot/commands/quests'
-import { heal } from '@adventure-bot/heal/heal'
+import { EmojiModifier } from '@adventure-bot/game/Emoji'
+import { getUserCharacter, hpBarField } from '@adventure-bot/game/character'
+import cooldowns from '@adventure-bot/game/commands/cooldowns'
+import quests from '@adventure-bot/game/commands/quests'
+import { heal } from '@adventure-bot/game/heal/heal'
 import {
   isUserQuestComplete,
   questProgressField,
   updateUserQuestProgess,
-} from '@adventure-bot/quest'
-import { asset } from '@adventure-bot/utils'
+} from '@adventure-bot/game/quest'
+import { asset } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('heal')

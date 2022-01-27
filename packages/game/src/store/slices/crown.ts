@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { heavyCrownId } from '@adventure-bot/equipment'
+import { heavyCrownId } from '@adventure-bot/game/equipment'
 import {
   backdateCrown,
   itemReceived,
   newGame,
   tick,
   winnerDeclared,
-} from '@adventure-bot/store/actions'
+} from '@adventure-bot/game/store/actions'
 
 export const crownDefaultState = {
   bearerId: '',

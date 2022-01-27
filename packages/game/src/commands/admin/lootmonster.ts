@@ -8,10 +8,10 @@ import {
   inventoryFields,
   loot,
   lootResultEmbed,
-} from '@adventure-bot/character'
-import { getRandomMonster, monsterEmbed } from '@adventure-bot/monster'
-import store from '@adventure-bot/store'
-import { selectMonsterById } from '@adventure-bot/store/selectors'
+} from '@adventure-bot/game/character'
+import { getRandomMonster, monsterEmbed } from '@adventure-bot/game/monster'
+import store from '@adventure-bot/game/store'
+import { selectMonsterById } from '@adventure-bot/game/store/selectors'
 
 export const command = new SlashCommandBuilder()
   .setName('lootmonster')

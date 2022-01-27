@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { commandUsed } from '@adventure-bot/store/actions'
+import { commandUsed } from '@adventure-bot/game/store/actions'
 
 export const defaultCommandsState = {
   lastChannelId: '',

@@ -7,12 +7,12 @@ import {
   characterEmbed,
   getUserCharacter,
   statsEmbed,
-} from '@adventure-bot/character'
-import { actionEmbed } from '@adventure-bot/commands/inspect/actionEmbed'
-import { getHook } from '@adventure-bot/commands/inspect/getHook'
-import { itemEmbed } from '@adventure-bot/equipment'
-import { questEmbed } from '@adventure-bot/quest'
-import { statusEffectEmbed } from '@adventure-bot/statusEffects'
+} from '@adventure-bot/game/character'
+import { actionEmbed } from '@adventure-bot/game/commands/inspect/actionEmbed'
+import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
+import { itemEmbed } from '@adventure-bot/game/equipment'
+import { questEmbed } from '@adventure-bot/game/quest'
+import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
 
 export const command = new SlashCommandBuilder()
   .setName('inspect')

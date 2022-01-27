@@ -1,8 +1,8 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/Emoji'
-import { Character, cooldownRemainingText } from '@adventure-bot/character'
-import { isHealer } from '@adventure-bot/heal/isHealer'
+import { Emoji } from '@adventure-bot/game/Emoji'
+import { Character, cooldownRemainingText } from '@adventure-bot/game/character'
+import { isHealer } from '@adventure-bot/game/heal/isHealer'
 
 export function actionEmbed({
   character,

@@ -2,11 +2,11 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
 import { keys } from 'remeda'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import { itemEmbed } from '@adventure-bot/equipment'
-import * as items from '@adventure-bot/equipment/items'
-import store from '@adventure-bot/store'
-import { itemReceived } from '@adventure-bot/store/actions'
+import { getUserCharacter } from '@adventure-bot/game/character'
+import { itemEmbed } from '@adventure-bot/game/equipment'
+import * as items from '@adventure-bot/game/equipment/items'
+import store from '@adventure-bot/game/store'
+import { itemReceived } from '@adventure-bot/game/store/actions'
 
 const camelToSnakeCase = (str: string) =>
   str.replace(/[A-Z]/g, (letter: string) => `_${letter.toLowerCase()}`)

@@ -1,11 +1,11 @@
 import {
   getCharacter,
   getCharacterStatModified,
-} from '@adventure-bot/character'
-import store from '@adventure-bot/store'
-import { damaged } from '@adventure-bot/store/slices/characters'
-import { TrapResult } from '@adventure-bot/trap'
-import { d6, d20 } from '@adventure-bot/utils'
+} from '@adventure-bot/game/character'
+import store from '@adventure-bot/game/store'
+import { damaged } from '@adventure-bot/game/store/slices/characters'
+import { TrapResult } from '@adventure-bot/game/trap'
+import { d6, d20 } from '@adventure-bot/game/utils'
 
 export const trapAttack = (
   characterId: string,

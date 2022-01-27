@@ -3,11 +3,11 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import moment from 'moment'
 import { values } from 'remeda'
 
-import { Character, getCharacter } from '@adventure-bot/character'
-import { Item } from '@adventure-bot/equipment'
-import store from '@adventure-bot/store'
-import { characterLooted } from '@adventure-bot/store/slices/loots'
-import { crownArt } from '@adventure-bot/utils'
+import { Character, getCharacter } from '@adventure-bot/game/character'
+import { Item } from '@adventure-bot/game/equipment'
+import store from '@adventure-bot/game/store'
+import { characterLooted } from '@adventure-bot/game/store/slices/loots'
+import { crownArt } from '@adventure-bot/game/utils'
 
 export type LootResult = {
   id: string

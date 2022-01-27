@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import { MessageAttachment } from 'discord.js'
 import path from 'path'
 
-import { Manifest, manifest } from '@adventure-bot/asset-manifest'
+import { Manifest, manifest } from '@adventure-bot/game/asset-manifest'
 
 function asset<
   Theme extends keyof Manifest,

@@ -18,8 +18,8 @@ import {
   ringOfAttack,
   towerShield,
   warAxe,
-} from '@adventure-bot/equipment'
-import { weightedRandom } from '@adventure-bot/utils'
+} from '@adventure-bot/game/equipment'
+import { weightedRandom } from '@adventure-bot/game/utils'
 
 const weights = new Map<() => Item, number>([
   [amuletOfAttack, 0.3],

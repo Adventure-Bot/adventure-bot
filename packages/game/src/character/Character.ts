@@ -1,4 +1,4 @@
-import { Stats } from '@adventure-bot/character'
+import { Stats } from '@adventure-bot/game/character'
 import {
   Amulet,
   Armor,
@@ -7,9 +7,9 @@ import {
   Ring,
   Shield,
   Weapon,
-} from '@adventure-bot/equipment'
-import { Quest, QuestId } from '@adventure-bot/quest'
-import { StatusEffect } from '@adventure-bot/statusEffects'
+} from '@adventure-bot/game/equipment'
+import { Quest, QuestId } from '@adventure-bot/game/quest'
+import { StatusEffect } from '@adventure-bot/game/statusEffects'
 
 export type Character = Stats & {
   id: string

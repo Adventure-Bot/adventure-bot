@@ -1,12 +1,12 @@
 import { CommandInteraction } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/Emoji'
+import { Emoji } from '@adventure-bot/game/Emoji'
 import {
   Character,
   Stat,
   getCharacterStatModified,
   getCharacterStatModifier,
-} from '@adventure-bot/character'
+} from '@adventure-bot/game/character'
 
 export function statText({
   character,

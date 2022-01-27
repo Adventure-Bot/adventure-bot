@@ -1,4 +1,4 @@
-import { TemplateEffect } from '@adventure-bot/statusEffects'
+import { TemplateEffect } from '@adventure-bot/game/statusEffects'
 
 export const aggression: TemplateEffect = {
   name: 'Agression',

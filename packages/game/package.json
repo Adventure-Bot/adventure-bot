@@ -5,8 +5,6 @@
   "main": ".build/index.js",
   "scripts": {
     "generate-asset-manifest": "ts-node ./scripts/generate-asset-manifest.ts",
-    "lint": "eslint . --ext .ts",
-    "lint-and-fix": "eslint . --ext .ts --fix",
     "preci:build": "rimraf .build && yarn generate-asset-manifest",
     "ci:build": "tsc",
     "ci:build:clean": "tsc --build --clean",
@@ -16,9 +14,7 @@
     "sync-s3-assets": "ts-node ./scripts/sync-s3-assets.ts",
     "postsync-s3-assets": "yarn generate-asset-manifest",
     "redux-devtools": "redux-devtools --hostname=localhost --port=5010",
-    "prune:watch": "nodemon --config nodemon-prune.json",
-    "format:check": "prettier --check .",
-    "format:write": "prettier --write ."
+    "prune:watch": "nodemon --config nodemon-prune.json"
   },
   "repository": {
     "type": "git",

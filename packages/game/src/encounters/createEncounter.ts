@@ -1,10 +1,10 @@
 import { randomUUID } from 'crypto'
 
-import { Character } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounters'
-import { Monster } from '@adventure-bot/monster'
-import store from '@adventure-bot/store'
-import { encounterCreated } from '@adventure-bot/store/slices/encounters'
+import { Character } from '@adventure-bot/game/character'
+import { Encounter } from '@adventure-bot/game/encounters'
+import { Monster } from '@adventure-bot/game/monster'
+import store from '@adventure-bot/game/store'
+import { encounterCreated } from '@adventure-bot/game/store/slices/encounters'
 
 export function createEncounter({
   monster,

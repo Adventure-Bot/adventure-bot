@@ -6,19 +6,22 @@ import {
   getUserCharacter,
   hpBarField,
   xpGainField,
-} from '@adventure-bot/character'
-import quests from '@adventure-bot/commands/quests'
-import { isUserQuestComplete, questProgressField } from '@adventure-bot/quest'
-import { createEffect } from '@adventure-bot/statusEffects'
-import { statusEffectEmbed } from '@adventure-bot/statusEffects'
-import store from '@adventure-bot/store'
+} from '@adventure-bot/game/character'
+import quests from '@adventure-bot/game/commands/quests'
+import {
+  isUserQuestComplete,
+  questProgressField,
+} from '@adventure-bot/game/quest'
+import { createEffect } from '@adventure-bot/game/statusEffects'
+import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
+import store from '@adventure-bot/game/store'
 import {
   effectAdded,
   healed,
   questProgressed,
   xpAwarded,
-} from '@adventure-bot/store/slices/characters'
-import { d6 } from '@adventure-bot/utils'
+} from '@adventure-bot/game/store/slices/characters'
+import { d6 } from '@adventure-bot/game/utils'
 
 export async function restfulNight(
   interaction: CommandInteraction
