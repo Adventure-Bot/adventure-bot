@@ -1,14 +1,13 @@
 import { REST } from '@discordjs/rest'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
-import Discord, { Client, Intents } from 'discord.js'
+import { Client, Intents } from 'discord.js'
 import { existsSync } from 'fs'
 import { readFile, writeFile } from 'fs/promises'
 import { exit } from 'process'
 
 import commands from '@adventure-bot/commands'
 import { leaderboard } from '@adventure-bot/commands/leaderboard'
-import { ReduxState } from '@adventure-bot/store'
 import store from '@adventure-bot/store'
 import { commandUsed, tick, winnerDeclared } from '@adventure-bot/store/actions'
 import {
@@ -22,10 +21,8 @@ type ClientOptions = {
   token: string
   clientId: string
   channelId: string
-  onBeforeInteraction: (gameState: ReduxState) => Promise<void> | void
-  onAfterInteraction: (gameState: ReduxState) => Promise<void> | void
   onError: (e: Error) => void
-  onReady: (client: Discord.Client) => void
+  onReady: (client: Client) => void
 }
 
 export const assertEnv: () => void = () => {
@@ -82,9 +79,9 @@ const installCommands = async (
   }
 }
 
-export const createClient: (
+export const createClient: (opts: ClientOptions) => Promise<Client> = async (
   opts: ClientOptions
-) => Promise<Discord.Client> = async (opts: ClientOptions) => {
+) => {
   installCommands({
     clientId: opts.clientId,
     channelId: opts.channelId,
@@ -92,7 +89,7 @@ export const createClient: (
   })
 
   console.time('discord client ready')
-  const client = new Discord.Client({
+  const client = new Client({
     intents: [
       Intents.FLAGS.GUILDS,
       Intents.FLAGS.GUILD_MESSAGES,
@@ -114,8 +111,6 @@ export const createClient: (
     console.log(`command ${interaction.commandName}`)
     console.time(interaction.commandName)
     try {
-      opts.onBeforeInteraction(store.getState())
-
       await interaction.deferReply()
       const command = commands.get(interaction.commandName)
       if (!command) {
@@ -123,8 +118,6 @@ export const createClient: (
         return
       }
       await command.execute(interaction)
-
-      opts.onAfterInteraction(store.getState())
     } catch (e) {
       console.error(e)
       await interaction.followUp(
@@ -146,7 +139,7 @@ export const createClient: (
   return client
 }
 
-export const waitForWinner: (client: Discord.Client) => void = (client) => {
+export const waitForWinner: (client: Client) => void = (client) => {
   store.subscribe(() => {
     const state = store.getState()
     const sovereign = selectSovereign(state)
