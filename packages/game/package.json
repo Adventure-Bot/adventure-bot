@@ -1,0 +1,63 @@
+{
+  "name": "@adventure-bot/game",
+  "version": "1.0.0",
+  "description": "Slay a monster! Stab your friends! Adventure bot!",
+  "main": ".build/index.js",
+  "scripts": {
+    "generate-asset-manifest": "ts-node ./scripts/generate-asset-manifest.ts",
+    "lint": "eslint . --ext .ts",
+    "lint-and-fix": "eslint . --ext .ts --fix",
+    "preci:build": "rimraf .build && yarn generate-asset-manifest",
+    "ci:build": "tsc",
+    "ci:build:clean": "tsc --build --clean",
+    "prestart": "yarn generate-asset-manifest",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "dev": "nodemon",
+    "sync-s3-assets": "ts-node ./scripts/sync-s3-assets.ts",
+    "postsync-s3-assets": "yarn generate-asset-manifest",
+    "redux-devtools": "redux-devtools --hostname=localhost --port=5010",
+    "prune:watch": "nodemon --config nodemon-prune.json",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adventure-Bot/adventure-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "typescript",
+    "bot"
+  ],
+  "author": "Brian Gates (brian.g.gates@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adventure-Bot/adventure-bot/issues"
+  },
+  "homepage": "https://github.com/Adventure-Bot/adventure-bot#readme",
+  "devDependencies": {
+    "@redux-devtools/cli": "^1.0.0-10",
+    "@redux-devtools/remote": "^0.6.0",
+    "@types/mkdirp": "^1.0.2",
+    "@types/progress": "^2.0.5",
+    "aws-sdk": "^2.1043.0",
+    "eslint": "^7.4.0",
+    "eslint-config-prettier": "^8.3.0",
+    "s3": "^4.4.0"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^0.8.1",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@reduxjs/toolkit": "^1.6.2",
+    "discord-api-types": "^0.24.0",
+    "discord.js": "^13.3.0",
+    "express": "^4.17.1",
+    "javascript-stringify": "^2.1.0",
+    "mkdirp": "^1.0.4",
+    "moment": "^2.29.1",
+    "openai-api": "^1.2.6",
+    "progress": "^2.0.3",
+    "redux-persist": "^6.0.0",
+    "remeda": "^0.0.30"
+  }
+}

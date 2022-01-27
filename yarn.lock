@@ -1085,7 +1085,7 @@
     "@types/qs" "*"
     "@types/range-parser" "*"
 
-"@types/express@4.17.13", "@types/express@^4.17.7":
+"@types/express@4.17.13":
   version "4.17.13"
   resolved "https://registry.npmjs.org/@types/express/-/express-4.17.13.tgz"
   integrity sha512-6bSZTPaTIACxn48l50SR+axgrqm6qXFIxrdAKaG6PaJk3+zuUr35hBlgT7vOmJcum+OEaIBLtHV/qloEAFITeA==
@@ -1195,7 +1195,12 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-10.17.60.tgz"
   integrity sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==
 
-"@types/node@^14.0.20", "@types/node@^14.6.2":
+"@types/node@^14.0.20":
+  version "14.18.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.9.tgz#0e5944eefe2b287391279a19b407aa98bd14436d"
+  integrity sha512-j11XSuRuAlft6vLDEX4RvhqC0KxNxx6QIyMXNb0vHHSNPXTPeiy3algESWmOOIzEtiEL0qiowPU3ewW9hHVa7Q==
+
+"@types/node@^14.6.2":
   version "14.17.34"
   resolved "https://registry.npmjs.org/@types/node/-/node-14.17.34.tgz"
   integrity sha512-USUftMYpmuMzeWobskoPfzDi+vkpe0dvcOBRNOscFrGxVp4jomnRxWuVohgqBow2xyIPC0S3gjxV/5079jhmDg==
@@ -2321,7 +2326,7 @@ cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
   resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz"
   integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
@@ -2615,7 +2620,22 @@ dot-prop@^6.0.1:
   dependencies:
     is-obj "^2.0.0"
 
-dotenv@^8.2.0:
+dotenv-cli@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/dotenv-cli/-/dotenv-cli-4.1.1.tgz#26a59fbb25876008985a15fa366b416607e8372c"
+  integrity sha512-XvKv1pa+UBrsr3CtLGBsR6NdsoS7znqaHUf4Knj0eZO+gOI/hjj9KgWDP+KjpfEbj6wAba1UpbhaP9VezNkWhg==
+  dependencies:
+    cross-spawn "^7.0.1"
+    dotenv "^8.1.0"
+    dotenv-expand "^5.1.0"
+    minimist "^1.1.3"
+
+dotenv-expand@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
+  integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
+dotenv@^8.1.0, dotenv@^8.2.0:
   version "8.6.0"
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-8.6.0.tgz"
   integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
@@ -4432,13 +4452,6 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lowdb@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/lowdb/-/lowdb-3.0.0.tgz"
-  integrity sha512-9KZRulmIcU8fZuWiaM0d5e2/nPnrFyXkeXVpqT+MJS+vgbgOf1EbtvgQmba8HwUFgDl1oeZR6XqEJnkJmQdKmg==
-  dependencies:
-    steno "^2.1.0"
-
 lowercase-keys@^1.0.0, lowercase-keys@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/lowercase-keys/-/lowercase-keys-1.0.1.tgz"
@@ -4590,7 +4603,7 @@ minimist@1.2.0:
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
 
-minimist@^1.2.0, minimist@^1.2.5:
+minimist@^1.1.3, minimist@^1.2.0, minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
@@ -6095,11 +6108,6 @@ static-extend@^0.1.1:
   version "1.5.0"
   resolved "https://registry.npmjs.org/statuses/-/statuses-1.5.0.tgz"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
-
-steno@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/steno/-/steno-2.1.0.tgz"
-  integrity sha512-mauOsiaqTNGFkWqIfwcm3y/fq+qKKaIWf1vf3ocOuTdco9XoHCO2AGF1gFYXuZFSWuP38Q8LBHBGJv2KnJSXyA==
 
 streamsink@~1.2.0:
   version "1.2.0"
