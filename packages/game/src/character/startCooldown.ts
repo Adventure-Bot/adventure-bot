@@ -1,6 +1,6 @@
-import { Character } from '@adventure-bot/character'
-import store from '@adventure-bot/store'
-import { cooldownStarted } from '@adventure-bot/store/slices/characters'
+import { Character } from '@adventure-bot/game/character'
+import store from '@adventure-bot/game/store'
+import { cooldownStarted } from '@adventure-bot/game/store/slices/characters'
 
 export function startCooldown({
   characterId,

@@ -1,4 +1,4 @@
-import { Character } from '@adventure-bot/character'
+import { Character } from '@adventure-bot/game/character'
 
 export const defaultCharacter: Omit<Character, 'id' | 'name'> = {
   profile: '',

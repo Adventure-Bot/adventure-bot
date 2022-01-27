@@ -1,6 +1,6 @@
 import { ColorResolvable } from 'discord.js'
 
-import { StatusEffect } from '@adventure-bot/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects'
 
 export type Shrine = {
   id: string

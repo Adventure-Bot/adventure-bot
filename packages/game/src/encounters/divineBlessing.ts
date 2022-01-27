@@ -1,10 +1,10 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { EmojiModifier } from '@adventure-bot/Emoji'
-import { getUserCharacter, statField } from '@adventure-bot/character'
-import store from '@adventure-bot/store'
-import { grantDivineBlessing } from '@adventure-bot/store/slices/characters'
-import { asset } from '@adventure-bot/utils'
+import { EmojiModifier } from '@adventure-bot/game/Emoji'
+import { getUserCharacter, statField } from '@adventure-bot/game/character'
+import store from '@adventure-bot/game/store'
+import { grantDivineBlessing } from '@adventure-bot/game/store/slices/characters'
+import { asset } from '@adventure-bot/game/utils'
 
 export const divineBlessing = async (
   interaction: CommandInteraction

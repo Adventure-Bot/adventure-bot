@@ -1,9 +1,9 @@
 import { CommandInteraction } from 'discord.js'
 
-import { Character, adjustGold } from '@adventure-bot/character'
-import { Item, equipItemPrompt } from '@adventure-bot/equipment'
-import store from '@adventure-bot/store'
-import { itemReceived } from '@adventure-bot/store/actions'
+import { Character, adjustGold } from '@adventure-bot/game/character'
+import { Item, equipItemPrompt } from '@adventure-bot/game/equipment'
+import store from '@adventure-bot/game/store'
+import { itemReceived } from '@adventure-bot/game/store/actions'
 
 export const buyItem = async (
   interaction: CommandInteraction,

@@ -5,10 +5,10 @@ import {
   getUserCharacter,
   hpBarField,
   xpGainField,
-} from '@adventure-bot/character'
-import { updateUserQuestProgess } from '@adventure-bot/quest'
-import { trapAttack, trapRollText } from '@adventure-bot/trap'
-import { sleep } from '@adventure-bot/utils'
+} from '@adventure-bot/game/character'
+import { updateUserQuestProgess } from '@adventure-bot/game/quest'
+import { trapAttack, trapRollText } from '@adventure-bot/game/trap'
+import { sleep } from '@adventure-bot/game/utils'
 
 export const trap = async (interaction: CommandInteraction): Promise<void> => {
   const message = await interaction.editReply({

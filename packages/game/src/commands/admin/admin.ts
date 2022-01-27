@@ -4,17 +4,17 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import { range } from 'remeda'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import { leaderboard } from '@adventure-bot/commands/leaderboard'
-import { healerStatus } from '@adventure-bot/quest'
-import store from '@adventure-bot/store'
-import { newGame, winnerDeclared } from '@adventure-bot/store/actions'
+import { getUserCharacter } from '@adventure-bot/game/character'
+import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
+import { healerStatus } from '@adventure-bot/game/quest'
+import store from '@adventure-bot/game/store'
+import { newGame, winnerDeclared } from '@adventure-bot/game/store/actions'
 import {
   effectAdded,
   goldSet,
   healthSet,
   purgeRoamingMonsters,
-} from '@adventure-bot/store/slices/characters'
+} from '@adventure-bot/game/store/slices/characters'
 
 export const command = new SlashCommandBuilder()
   .setName('admin')

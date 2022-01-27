@@ -1,13 +1,13 @@
 import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import { barFight } from '@adventure-bot/encounters/tavern/barFight'
-import { chattyTavernkeepers } from '@adventure-bot/encounters/tavern/chattyTavernkeepers'
-import { restfulNight } from '@adventure-bot/encounters/tavern/restfulNight'
-import store from '@adventure-bot/store'
-import { selectAvailableQuests } from '@adventure-bot/store/selectors'
-import { sleep, weightedTable } from '@adventure-bot/utils'
-import { asset } from '@adventure-bot/utils'
+import { getUserCharacter } from '@adventure-bot/game/character'
+import { barFight } from '@adventure-bot/game/encounters/tavern/barFight'
+import { chattyTavernkeepers } from '@adventure-bot/game/encounters/tavern/chattyTavernkeepers'
+import { restfulNight } from '@adventure-bot/game/encounters/tavern/restfulNight'
+import store from '@adventure-bot/game/store'
+import { selectAvailableQuests } from '@adventure-bot/game/store/selectors'
+import { sleep, weightedTable } from '@adventure-bot/game/utils'
+import { asset } from '@adventure-bot/game/utils'
 
 export const tavern = async (
   interaction: CommandInteraction

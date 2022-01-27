@@ -4,11 +4,11 @@ import {
   decoratedName,
   getUserCharacter,
   hpBarField,
-} from '@adventure-bot/character'
-import { getHook } from '@adventure-bot/commands/inspect/getHook'
-import { monsterEmbed } from '@adventure-bot/encounters'
-import store from '@adventure-bot/store'
-import { selectRoamingMonsters } from '@adventure-bot/store/selectors'
+} from '@adventure-bot/game/character'
+import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
+import { monsterEmbed } from '@adventure-bot/game/encounters'
+import store from '@adventure-bot/game/store'
+import { selectRoamingMonsters } from '@adventure-bot/game/store/selectors'
 
 export async function listMonsters(
   interaction: CommandInteraction

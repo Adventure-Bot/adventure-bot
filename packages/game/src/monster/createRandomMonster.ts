@@ -5,8 +5,8 @@ import {
   createGoblin,
   createSlime,
   createZombie,
-} from '@adventure-bot/monster'
-import { weightedTable } from '@adventure-bot/utils'
+} from '@adventure-bot/game/monster'
+import { weightedTable } from '@adventure-bot/game/utils'
 
 export function createRandomMonster(): Monster {
   return weightedTable([

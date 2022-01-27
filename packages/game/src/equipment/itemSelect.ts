@@ -1,6 +1,6 @@
 import { MessageSelectMenu } from 'discord.js'
 
-import { Item } from '@adventure-bot/equipment'
+import { Item } from '@adventure-bot/game/equipment'
 
 export const itemSelect = ({
   inventory,

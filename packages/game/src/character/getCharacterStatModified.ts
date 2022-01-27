@@ -2,7 +2,7 @@ import {
   Character,
   Stat,
   getCharacterStatModifier,
-} from '@adventure-bot/character'
+} from '@adventure-bot/game/character'
 
 export const getCharacterStatModified = (
   character: Character,

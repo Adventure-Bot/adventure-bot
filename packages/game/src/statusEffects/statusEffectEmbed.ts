@@ -1,9 +1,9 @@
 import { EmbedFieldData, MessageEmbed } from 'discord.js'
 import moment from 'moment'
 
-import { EmojiModifier } from '@adventure-bot/Emoji'
-import { statTitles, stats } from '@adventure-bot/character'
-import { StatusEffect } from '@adventure-bot/statusEffects'
+import { EmojiModifier } from '@adventure-bot/game/Emoji'
+import { statTitles, stats } from '@adventure-bot/game/character'
+import { StatusEffect } from '@adventure-bot/game/statusEffects'
 
 export function statusEffectEmbed(effect: StatusEffect): MessageEmbed {
   const fields: EmbedFieldData[] = []

@@ -1,10 +1,10 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import { questEmbed } from '@adventure-bot/quest'
-import store from '@adventure-bot/store'
-import { questGranted } from '@adventure-bot/store/slices/characters'
-import { asset } from '@adventure-bot/utils'
+import { getUserCharacter } from '@adventure-bot/game/character'
+import { questEmbed } from '@adventure-bot/game/quest'
+import store from '@adventure-bot/game/store'
+import { questGranted } from '@adventure-bot/game/store/slices/characters'
+import { asset } from '@adventure-bot/game/utils'
 
 export const angels = async (
   interaction: CommandInteraction

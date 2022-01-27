@@ -1,4 +1,4 @@
-import { Character } from '@adventure-bot/character'
+import { Character } from '@adventure-bot/game/character'
 
 export type AttackResult = {
   outcome: 'miss' | 'hit'

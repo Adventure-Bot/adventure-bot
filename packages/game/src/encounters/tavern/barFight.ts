@@ -4,14 +4,14 @@ import {
   getUserCharacter,
   hpBarField,
   xpGainField,
-} from '@adventure-bot/character'
+} from '@adventure-bot/game/character'
 import {
   questProgressField,
   updateUserQuestProgess,
-} from '@adventure-bot/quest'
-import store from '@adventure-bot/store'
-import { damaged, xpAwarded } from '@adventure-bot/store/slices/characters'
-import { d6 } from '@adventure-bot/utils'
+} from '@adventure-bot/game/quest'
+import store from '@adventure-bot/game/store'
+import { damaged, xpAwarded } from '@adventure-bot/game/store/slices/characters'
+import { d6 } from '@adventure-bot/game/utils'
 
 export async function barFight(
   interaction: CommandInteraction,

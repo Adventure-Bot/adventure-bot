@@ -1,9 +1,13 @@
 import { CommandInteraction, EmbedFieldData, MessageEmbed } from 'discord.js'
 
-import { EmojiModifier, EmojiValue } from '@adventure-bot/Emoji'
-import { getUserCharacter, statTitles, stats } from '@adventure-bot/character'
-import { sellValue } from '@adventure-bot/encounters/shop/sellValue'
-import { Item, isEquipped } from '@adventure-bot/equipment'
+import { EmojiModifier, EmojiValue } from '@adventure-bot/game/Emoji'
+import {
+  getUserCharacter,
+  statTitles,
+  stats,
+} from '@adventure-bot/game/character'
+import { sellValue } from '@adventure-bot/game/encounters/shop/sellValue'
+import { Item, isEquipped } from '@adventure-bot/game/equipment'
 
 export function itemEmbed({
   item,

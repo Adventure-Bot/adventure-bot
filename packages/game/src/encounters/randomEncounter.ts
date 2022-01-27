@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
+import { getUserCharacter } from '@adventure-bot/game/character'
 import {
   angels,
   chest,
@@ -11,9 +11,9 @@ import {
   tavern,
   trap,
   travel,
-} from '@adventure-bot/encounters'
-import { randomShrine } from '@adventure-bot/encounters/shrine'
-import { CommandHandler, weightedTable } from '@adventure-bot/utils'
+} from '@adventure-bot/game/encounters'
+import { randomShrine } from '@adventure-bot/game/encounters/shrine'
+import { CommandHandler, weightedTable } from '@adventure-bot/game/utils'
 
 export const randomEncounter = (
   interaction: CommandInteraction

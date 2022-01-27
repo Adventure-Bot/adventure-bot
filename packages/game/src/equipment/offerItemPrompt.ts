@@ -5,10 +5,17 @@ import {
   MessageButton,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/character'
-import { isTradeable, itemEmbed, itemSelect } from '@adventure-bot/equipment'
-import store from '@adventure-bot/store'
-import { itemGiven, itemRemoved } from '@adventure-bot/store/slices/characters'
+import { getUserCharacter } from '@adventure-bot/game/character'
+import {
+  isTradeable,
+  itemEmbed,
+  itemSelect,
+} from '@adventure-bot/game/equipment'
+import store from '@adventure-bot/game/store'
+import {
+  itemGiven,
+  itemRemoved,
+} from '@adventure-bot/game/store/slices/characters'
 
 export const offerItemPrompt = async (
   interaction: CommandInteraction

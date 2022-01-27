@@ -4,7 +4,7 @@ import {
   Character,
   decoratedName,
   primaryStatFields,
-} from '@adventure-bot/character'
+} from '@adventure-bot/game/character'
 
 export function characterEmbed({
   character,

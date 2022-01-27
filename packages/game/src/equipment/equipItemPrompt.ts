@@ -5,10 +5,10 @@ import {
   MessageButton,
 } from 'discord.js'
 
-import inspect from '@adventure-bot/commands/inspect/inspect'
-import { Item, itemEmbed } from '@adventure-bot/equipment'
-import store from '@adventure-bot/store'
-import { itemEquipped } from '@adventure-bot/store/slices/characters'
+import inspect from '@adventure-bot/game/commands/inspect/inspect'
+import { Item, itemEmbed } from '@adventure-bot/game/equipment'
+import store from '@adventure-bot/game/store'
+import { itemEquipped } from '@adventure-bot/game/store/slices/characters'
 
 /**
  * Prompt to equip a specific item

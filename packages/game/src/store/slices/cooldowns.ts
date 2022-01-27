@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { defaultCooldowns } from '@adventure-bot/character'
+import { defaultCooldowns } from '@adventure-bot/game/character'
 
 const cooldownsSlice = createSlice({
   name: 'cooldowns',

@@ -1,8 +1,8 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { decoratedName, getCharacter } from '@adventure-bot/character'
-import { Encounter } from '@adventure-bot/encounters'
-import { getMonster } from '@adventure-bot/monster'
+import { decoratedName, getCharacter } from '@adventure-bot/game/character'
+import { Encounter } from '@adventure-bot/game/encounters'
+import { getMonster } from '@adventure-bot/game/monster'
 
 export const encounterEmbed = ({
   encounter,

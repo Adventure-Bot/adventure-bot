@@ -6,7 +6,11 @@
   "private": true,
   "scripts": {
     "game": "yarn workspace @adventure-bot/game",
-    "postinstall": "yarn patch-package"
+    "postinstall": "yarn patch-package",
+    "lint": "eslint . --ext .ts",
+    "lint-and-fix": "eslint . --ext .ts --fix",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write ."
   },
   "repository": {
     "type": "git",

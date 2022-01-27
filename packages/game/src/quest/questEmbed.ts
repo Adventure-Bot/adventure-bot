@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 
-import { Character } from '@adventure-bot/character'
-import { questProgressField } from '@adventure-bot/quest'
+import { Character } from '@adventure-bot/game/character'
+import { questProgressField } from '@adventure-bot/game/quest'
 
 export const questEmbed = (character: Character): MessageEmbed | void => {
   if (Object.keys(character.quests).length === 0) return

@@ -11,7 +11,7 @@
       "cwd": "${workspaceFolder}",
       "runtimeVersion": "16",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["dev"],
+      "runtimeArgs": ["game", "dev"],
       "console": "integratedTerminal"
     },
     {
@@ -40,7 +40,7 @@
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["start"],
+      "runtimeArgs": ["game", "start"],
       "console": "integratedTerminal"
     },
     {
@@ -49,7 +49,7 @@
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["redux-devtools"],
+      "runtimeArgs": ["game", "redux-devtools"],
       "console": "integratedTerminal"
     },
     {
@@ -58,7 +58,7 @@
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["sync-s3-assets"],
+      "runtimeArgs": ["game", "sync-s3-assets"],
       "console": "integratedTerminal"
     }
   ]

@@ -1,11 +1,11 @@
-import { Manifest } from '@adventure-bot/asset-manifest'
-import { Item } from '@adventure-bot/equipment/Item'
-import { equipInventoryItemPrompt } from '@adventure-bot/equipment/equipInventoryItemPrompt'
-import { equipItemPrompt } from '@adventure-bot/equipment/equipItemPrompt'
-import { equippableInventory } from '@adventure-bot/equipment/equippableInventory'
-import { isEquipped } from '@adventure-bot/equipment/isEquipped'
-import { itemEmbed } from '@adventure-bot/equipment/itemEmbed'
-import { itemSelect } from '@adventure-bot/equipment/itemSelect'
+import { Manifest } from '@adventure-bot/game/asset-manifest'
+import { Item } from '@adventure-bot/game/equipment/Item'
+import { equipInventoryItemPrompt } from '@adventure-bot/game/equipment/equipInventoryItemPrompt'
+import { equipItemPrompt } from '@adventure-bot/game/equipment/equipItemPrompt'
+import { equippableInventory } from '@adventure-bot/game/equipment/equippableInventory'
+import { isEquipped } from '@adventure-bot/game/equipment/isEquipped'
+import { itemEmbed } from '@adventure-bot/game/equipment/itemEmbed'
+import { itemSelect } from '@adventure-bot/game/equipment/itemSelect'
 import {
   amuletOfAttack,
   amuletOfProtection,
@@ -27,14 +27,14 @@ import {
   towerShield,
   unidentifiedPotion,
   warAxe,
-} from '@adventure-bot/equipment/items'
-import { heavyCrownId } from '@adventure-bot/equipment/items/heavyCrown'
-import { offerItemPrompt } from '@adventure-bot/equipment/offerItemPrompt'
-import { randomChestItem } from '@adventure-bot/equipment/randomChestItem'
-import { randomShopItem } from '@adventure-bot/equipment/randomShopItem'
-import { usableInventory } from '@adventure-bot/equipment/usableInventory'
-import { useInventoryItemPrompt } from '@adventure-bot/equipment/useInventoryItemPrompt'
-import { EffectTemplate } from '@adventure-bot/statusEffects/templates'
+} from '@adventure-bot/game/equipment/items'
+import { heavyCrownId } from '@adventure-bot/game/equipment/items/heavyCrown'
+import { offerItemPrompt } from '@adventure-bot/game/equipment/offerItemPrompt'
+import { randomChestItem } from '@adventure-bot/game/equipment/randomChestItem'
+import { randomShopItem } from '@adventure-bot/game/equipment/randomShopItem'
+import { usableInventory } from '@adventure-bot/game/equipment/usableInventory'
+import { useInventoryItemPrompt } from '@adventure-bot/game/equipment/useInventoryItemPrompt'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects/templates'
 
 export type Equippable = Item & {
   equippable: true

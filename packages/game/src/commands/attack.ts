@@ -1,24 +1,24 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Emoji, d20Emoji } from '@adventure-bot/Emoji'
+import { Emoji, d20Emoji } from '@adventure-bot/game/Emoji'
 import {
   AttackResult,
   attackResultEmbed,
   makeAttack,
   playerAttack,
-} from '@adventure-bot/attack'
+} from '@adventure-bot/game/attack'
 import {
   getCharacterStatModified,
   getUserCharacter,
   loot,
   lootResultEmbed,
   mentionCharacter,
-} from '@adventure-bot/character'
-import cooldowns from '@adventure-bot/commands/cooldowns'
-import store from '@adventure-bot/store'
-import { selectCharacterById } from '@adventure-bot/store/selectors'
-import { randomArrayElement, sleep } from '@adventure-bot/utils'
+} from '@adventure-bot/game/character'
+import cooldowns from '@adventure-bot/game/commands/cooldowns'
+import store from '@adventure-bot/game/store'
+import { selectCharacterById } from '@adventure-bot/game/store/selectors'
+import { randomArrayElement, sleep } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('attack')

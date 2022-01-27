@@ -3,7 +3,7 @@ import {
   Stat,
   getEquipmentStatModifier,
   getStatusEffectStatModifier,
-} from '@adventure-bot/character'
+} from '@adventure-bot/game/character'
 
 export const getCharacterStatModifier = (
   character: Character,

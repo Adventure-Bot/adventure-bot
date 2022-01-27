@@ -1,5 +1,5 @@
-import { Stat } from '@adventure-bot/character'
-import { client } from '@adventure-bot/index'
+import { Stat } from '@adventure-bot/game/character'
+import { client } from '@adventure-bot/game/index'
 
 type Emojis =
   | Stat

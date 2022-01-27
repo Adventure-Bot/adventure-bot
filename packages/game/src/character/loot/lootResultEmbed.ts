@@ -1,6 +1,10 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { LootResult, getCharacter, gpGainField } from '@adventure-bot/character'
+import {
+  LootResult,
+  getCharacter,
+  gpGainField,
+} from '@adventure-bot/game/character'
 
 export function lootResultEmbed({
   result,

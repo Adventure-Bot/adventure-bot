@@ -1,10 +1,10 @@
 import { randomUUID } from 'crypto'
 
-import { defaultCharacter } from '@adventure-bot/character'
-import { Monster, MonsterKind } from '@adventure-bot/monster'
-import store from '@adventure-bot/store'
-import { selectMonsterById } from '@adventure-bot/store/selectors'
-import { monsterCreated } from '@adventure-bot/store/slices/characters'
+import { defaultCharacter } from '@adventure-bot/game/character'
+import { Monster, MonsterKind } from '@adventure-bot/game/monster'
+import store from '@adventure-bot/game/store'
+import { selectMonsterById } from '@adventure-bot/game/store/selectors'
+import { monsterCreated } from '@adventure-bot/game/store/slices/characters'
 
 export const createMonster = (
   monster: Partial<Monster> & { name: string; kind: MonsterKind }

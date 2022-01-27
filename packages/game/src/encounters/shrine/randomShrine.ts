@@ -3,8 +3,8 @@ import {
   attackShrine,
   slayerShrine,
   vigorShrine,
-} from '@adventure-bot/encounters/shrine'
-import { CommandHandler, weightedTable } from '@adventure-bot/utils'
+} from '@adventure-bot/game/encounters/shrine'
+import { CommandHandler, weightedTable } from '@adventure-bot/game/utils'
 
 export const randomShrine = (): CommandHandler =>
   weightedTable([

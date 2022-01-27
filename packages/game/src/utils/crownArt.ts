@@ -1,4 +1,4 @@
-import { asset, randomArrayElement } from '@adventure-bot/utils'
+import { asset, randomArrayElement } from '@adventure-bot/game/utils'
 
 export function crownArt(): ReturnType<typeof asset> {
   return randomArrayElement([

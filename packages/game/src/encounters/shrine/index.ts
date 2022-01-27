@@ -1,11 +1,11 @@
-import { Shrine } from '@adventure-bot/encounters/shrine/Shrine'
-import { applyShrine } from '@adventure-bot/encounters/shrine/applyShrine'
-import { armorShrine } from '@adventure-bot/encounters/shrine/armor'
-import { attackShrine } from '@adventure-bot/encounters/shrine/attack'
-import { randomShrine } from '@adventure-bot/encounters/shrine/randomShrine'
-import { shrineEmbeds } from '@adventure-bot/encounters/shrine/shrineEmbeds'
-import { slayerShrine } from '@adventure-bot/encounters/shrine/slayer'
-import { vigorShrine } from '@adventure-bot/encounters/shrine/vigor'
+import { Shrine } from '@adventure-bot/game/encounters/shrine/Shrine'
+import { applyShrine } from '@adventure-bot/game/encounters/shrine/applyShrine'
+import { armorShrine } from '@adventure-bot/game/encounters/shrine/armor'
+import { attackShrine } from '@adventure-bot/game/encounters/shrine/attack'
+import { randomShrine } from '@adventure-bot/game/encounters/shrine/randomShrine'
+import { shrineEmbeds } from '@adventure-bot/game/encounters/shrine/shrineEmbeds'
+import { slayerShrine } from '@adventure-bot/game/encounters/shrine/slayer'
+import { vigorShrine } from '@adventure-bot/game/encounters/shrine/vigor'
 
 export {
   armorShrine,

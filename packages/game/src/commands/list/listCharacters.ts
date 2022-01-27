@@ -4,8 +4,8 @@ import {
   getUserCharacter,
   getUserCharacters,
   limitedCharacterEmbed,
-} from '@adventure-bot/character'
-import { getHook } from '@adventure-bot/commands/inspect/getHook'
+} from '@adventure-bot/game/character'
+import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 
 export async function listCharacters(
   interaction: CommandInteraction
