@@ -10,7 +10,9 @@
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "format:check": "prettier --check .",
-    "format:write": "prettier --write ."
+    "format:write": "prettier --write .",
+    "prune-imports": "yarn ts-prune -ep ./packages/game/tsconfig.json",
+    "prune-imports:watch": "nodemon --config nodemon-prune.json"
   },
   "repository": {
     "type": "git",

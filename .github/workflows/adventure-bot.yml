@@ -72,4 +72,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
-      - run: yarn ts-prune -e
+      - run: yarn prune-imports
