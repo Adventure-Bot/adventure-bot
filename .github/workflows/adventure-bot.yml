@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
       - run: yarn game ci:build
 
   format:
@@ -37,7 +37,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
       - run: yarn format:check
 
   lint:
@@ -54,7 +54,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
       - run: yarn lint
 
   prune:
@@ -71,5 +71,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
       - run: yarn ts-prune -e
