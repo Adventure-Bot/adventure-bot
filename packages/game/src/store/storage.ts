@@ -4,7 +4,12 @@ import fs from 'fs/promises'
 import mkdirp from 'mkdirp'
 import path from 'path'
 
-const dbFolder = path.join(__dirname, '..', '..', 'db')
+console.log({
+  cwd: process.cwd(),
+  d: __dirname,
+})
+
+const dbFolder = path.join(process.cwd(), '..', '..', 'db')
 const dbFile = path.join(dbFolder, `db.json`)
 
 const ensureDB = async () => {
