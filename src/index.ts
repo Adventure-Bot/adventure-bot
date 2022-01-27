@@ -9,7 +9,7 @@ import {
 
 let client: Client
 
-const startGame: (gameOptions: {
+const startGameService: (gameOptions: {
   clientId: string
   token: string
   channelId: string
@@ -33,7 +33,7 @@ const startGame: (gameOptions: {
 
 assertEnv()
 
-startGame({
+startGameService({
   clientId: String(process.env.CLIENT_ID),
   token: String(process.env.token),
   channelId: String(process.env.GUILD_ID),
