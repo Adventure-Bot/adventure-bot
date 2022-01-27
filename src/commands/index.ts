@@ -57,7 +57,7 @@ if (process.env.DEV_COMMANDS === 'true') {
   commands.set('lootme', lootme)
   commands.set('lootmonster', lootmonster)
 } else {
-  console.warn('⚠ DEV COMMANDS DISABLED ⚠')
+  console.warn('🔒 Dev commands disabled')
 }
 
 export default commands

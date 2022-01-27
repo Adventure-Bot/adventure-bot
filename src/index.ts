@@ -2,6 +2,7 @@ import { REST } from '@discordjs/rest'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
 import Discord, { Intents } from 'discord.js'
+import { existsSync } from 'fs'
 import { readFile, writeFile } from 'fs/promises'
 import { exit } from 'process'
 
@@ -15,9 +16,21 @@ import {
   selectWinnerAnnounced,
 } from '@adventure-bot/store/selectors'
 
-console.time('ready')
+if (!existsSync('.env')) {
+  console.error(
+    '\x1b[43m\x1b[30m ⚠ Environment config required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#setup-your-env \x1b[0m'
+  )
+  exit(1)
+}
 
-if (!process.env.token) exit(1)
+if (!process.env.token) {
+  console.error(
+    '\x1b[43m\x1b[30m ⚠ Discord token required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#create-your-bot-token \x1b[0m'
+  )
+  exit(1)
+}
+
+console.time('ready')
 
 const rest = new REST({ version: '9' }).setToken(process.env.token)
 
