@@ -20,8 +20,6 @@ const startGame: (gameOptions: {
   token,
   channelId,
 }) => {
-  assertEnv()
-
   let lastState: ReduxState
 
   return createClient({
@@ -49,6 +47,8 @@ const startGame: (gameOptions: {
     },
   })
 }
+
+assertEnv()
 
 startGame({
   clientId: String(process.env.CLIENT_ID),
