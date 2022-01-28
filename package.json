@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "game": "yarn workspace @adventure-bot/game",
+    "web": "yarn workspace @adventure-bot/web",
     "postinstall": "yarn patch-package",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
@@ -34,7 +35,7 @@
     "@types/node": "^14.0.20",
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
-    "eslint": "^7.4.0",
+    "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "nodemon": "^2.0.4",
     "patch-package": "^6.4.7",

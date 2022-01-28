@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'NorthDragon';
+  src: url('/assets/north-dragon/North Dragon.eot'); /* IE9 Compat Modes */
+  src: url('/assets/north-dragon/North Dragon.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/assets/north-dragon/North Dragon.woff') format('woff'), /* Modern Browsers */
+       url('/assets/north-dragon/North Dragon.ttf') format('truetype'); /* Safari, Android, iOS */
+           font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-family: 'NorthDragon', Georgia;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  background-size: contain;
+}
