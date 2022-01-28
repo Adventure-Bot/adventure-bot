@@ -5,10 +5,12 @@
 @font-face {
   font-family: 'NorthDragon';
   src: url('/assets/north-dragon/North Dragon.eot'); /* IE9 Compat Modes */
-  src: url('/assets/north-dragon/North Dragon.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/assets/north-dragon/North Dragon.woff') format('woff'), /* Modern Browsers */
-       url('/assets/north-dragon/North Dragon.ttf') format('truetype'); /* Safari, Android, iOS */
-           font-style: normal;
+  src: url('/assets/north-dragon/North Dragon.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('/assets/north-dragon/North Dragon.woff') format('woff'),
+    /* Modern Browsers */ url('/assets/north-dragon/North Dragon.ttf')
+      format('truetype'); /* Safari, Android, iOS */
+  font-style: normal;
   font-weight: normal;
   text-rendering: optimizeLegibility;
 }
