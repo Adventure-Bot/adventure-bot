@@ -1,13 +1,14 @@
-import Image from "next/image";
-import { FunctionComponent } from "react";
-import { useSpring, animated, config, easings } from "react-spring";
-import { usePrefersReducedMotion } from "../utils/motions";
+import Image from 'next/image'
+import { FunctionComponent } from 'react'
+import { animated, config, easings, useSpring } from 'react-spring'
+
+import { usePrefersReducedMotion } from '../utils/motions'
 
 export const Home: FunctionComponent<{
-  background: string;
-  version: string;
+  background: string
+  version: string
 }> = ({ background, version }) => {
-  const topToBottom = Math.random() > 0.5;
+  const topToBottom = Math.random() > 0.5
 
   const { percent } = useSpring({
     from: { percent: topToBottom ? 0 : 100 },
@@ -20,12 +21,12 @@ export const Home: FunctionComponent<{
     loop: {
       reverse: true,
     },
-  });
+  })
 
-  const prefersReducedMotion = usePrefersReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion()
   const backgroundPositionY = prefersReducedMotion
-    ? "25%"
-    : percent.to((v) => `${v}%`);
+    ? '25%'
+    : percent.to((v) => `${v}%`)
 
   return (
     <div className="flex h-screen flex-col md:flex-row">
@@ -69,8 +70,6 @@ export const Home: FunctionComponent<{
             their weakest so you can steal all <i>their</i> gold.
           </p>
 
-
-
           <hr className="my-6 border-t" />
 
           <a
@@ -102,5 +101,5 @@ export const Home: FunctionComponent<{
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

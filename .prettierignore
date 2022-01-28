@@ -11,3 +11,4 @@ yarn.lock
 *.md
 .build
 db
+.next

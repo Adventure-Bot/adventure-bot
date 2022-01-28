@@ -1,9 +1,9 @@
-import { useSession, signIn, signOut } from "next-auth/react";
-import Image from "next/image";
-import { FunctionComponent } from "react";
+import { signIn, signOut, useSession } from 'next-auth/react'
+import Image from 'next/image'
+import { FunctionComponent } from 'react'
 
 export const SignInWithDiscord: FunctionComponent = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   if (session) {
     return (
@@ -15,14 +15,16 @@ export const SignInWithDiscord: FunctionComponent = () => {
           <Image
             width={32}
             height={32}
-            alt={session.user?.name || "Avatar"}
+            alt={session.user?.name || 'Avatar'}
             src={String(session.user?.image)}
             className="rounded-full"
           />
-          <span className='ml-2' onClick={() => signOut()}>Sign Out {session.user?.name}</span>
+          <span className="ml-2" onClick={() => signOut()}>
+            Sign Out {session.user?.name}
+          </span>
         </button>
       </div>
-    );
+    )
   }
 
   return (
@@ -33,5 +35,5 @@ export const SignInWithDiscord: FunctionComponent = () => {
     >
       Sign In with Discord
     </button>
-  );
-};
+  )
+}
