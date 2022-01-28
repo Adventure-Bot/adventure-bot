@@ -1,7 +1,11 @@
 import { CommandInteraction } from 'discord.js'
 
 import { Character, adjustGold } from '@adventure-bot/game/character'
-import { Item, equipItemPrompt } from '@adventure-bot/game/equipment'
+import {
+  Item,
+  equipItemPrompt,
+  isEquippable,
+} from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 
@@ -23,5 +27,5 @@ export const buyItem = async (
       item,
     })
   )
-  await equipItemPrompt({ interaction, item })
+  if (isEquippable(item)) await equipItemPrompt({ interaction, item })
 }
