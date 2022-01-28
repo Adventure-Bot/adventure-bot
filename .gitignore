@@ -15,3 +15,4 @@ db/*
 asset-manifest.ts
 *.blend1
 .command-hash
+.next

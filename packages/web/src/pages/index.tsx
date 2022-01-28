@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import fetch from 'node-fetch'
 
-import { Home } from '../components/Home'
+import { Home } from '@adventure-bot/web/components/Home'
 
 const randomItem = <T extends Array<unknown>>(list: T) => {
   return list[Math.floor(Math.random() * list.length)]
