@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { FunctionComponent } from 'react'
 import { animated, config, easings, useSpring } from 'react-spring'
 
-import { usePrefersReducedMotion } from '../utils/motions'
+import { usePrefersReducedMotion } from '@adventure-bot/web/utils/motions'
 
 export const Home: FunctionComponent<{
   background: string
