@@ -10,13 +10,9 @@
       "@adventure-bot/game/*": ["./*"]
     },
     "plugins": [
-      // Transform paths in output .js files
-      { "transform": "typescript-transform-paths" },
-
-      // Transform paths in output .d.ts files (Include this line if you output declarations files)
       { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ]
   },
   "exclude": ["node_modules", "**/*.js"],
-  "include": ["next-env.d.ts", "src/**/*.ts"]
+  "include": ["src/**/*.ts"]
 }

@@ -54,7 +54,7 @@ export function EmojiModifier(name: Emojis, value: number): string {
 }
 
 export function d20Emoji(n: number): string {
-  const emojiName = `d20_${n.toString().padStart(2, '0')}`
+  // const emojiName = `d20_${n.toString().padStart(2, '0')}`
   const emoji = null //client.emojis.cache.find((emoji) => emoji.name === emojiName)
   return `${emoji ?? `${n}`}`
 }
