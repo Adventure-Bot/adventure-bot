@@ -21,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
-      - run: yarn game ci:build
+      - run: yarn build
 
   format:
     runs-on: ubuntu-latest
@@ -72,4 +72,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
-      - run: yarn prune-imports
+      - run: yarn game prune-imports

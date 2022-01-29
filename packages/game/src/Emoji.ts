@@ -1,5 +1,6 @@
 import { Stat } from '@adventure-bot/game/character'
-import { client } from '@adventure-bot/game/index'
+
+// import { client } from '@adventure-bot/game/index'
 
 type Emojis =
   | Stat
@@ -39,7 +40,7 @@ const defaultEmojis: {
 
 export function Emoji(name: Emojis): string {
   return `${
-    client.emojis.cache.find((emoji) => emoji.name === name) ??
+    // client.emojis.cache.find((emoji) => emoji.name === name) ??
     defaultEmojis[name]
   }`
 }
@@ -54,6 +55,6 @@ export function EmojiModifier(name: Emojis, value: number): string {
 
 export function d20Emoji(n: number): string {
   const emojiName = `d20_${n.toString().padStart(2, '0')}`
-  const emoji = client.emojis.cache.find((emoji) => emoji.name === emojiName)
+  const emoji = null //client.emojis.cache.find((emoji) => emoji.name === emojiName)
   return `${emoji ?? `${n}`}`
 }
