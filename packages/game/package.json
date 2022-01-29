@@ -43,11 +43,8 @@
     "@redux-devtools/cli": "^1.0.0-10",
     "@redux-devtools/remote": "^0.6.0",
     "@types/mkdirp": "^1.0.2",
-    "@types/progress": "^2.0.5",
     "aws-sdk": "^2.1043.0",
     "eslint": "^7.4.0",
-    "eslint-config-prettier": "^8.3.0",
-    "s3": "^4.4.0",
     "ttypescript": "^1.5.13",
     "typescript-transform-paths": "^3.3.1"
   },
@@ -57,12 +54,9 @@
     "@reduxjs/toolkit": "^1.6.2",
     "discord-api-types": "^0.24.0",
     "discord.js": "^13.3.0",
-    "express": "^4.17.1",
     "javascript-stringify": "^2.1.0",
     "mkdirp": "^1.0.4",
     "moment": "^2.29.1",
-    "openai-api": "^1.2.6",
-    "progress": "^2.0.3",
     "redux-persist": "^6.0.0",
     "remeda": "^0.0.30"
   }
