@@ -7,69 +7,53 @@ on:
     branches: [main]
 
 jobs:
+  prepare: 
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile\
+
   build: 
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
-
+    needs: prepare
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: yarn install --frozen-lockfile
       - run: yarn build
 
   format:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
-
+    needs: prepare
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: yarn install --frozen-lockfile
       - run: yarn format:check
 
   lint:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
-
+    needs: prepare
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: yarn install --frozen-lockfile
       - run: yarn lint
 
   prune:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
-
+    needs: prepare
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: yarn install --frozen-lockfile
       - run: yarn game prune-imports
