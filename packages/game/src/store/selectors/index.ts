@@ -12,7 +12,7 @@ import { Encounter } from '@adventure-bot/game/encounters'
 import { Monster, isMonster } from '@adventure-bot/game/monster/Monster'
 import { Quest } from '@adventure-bot/game/quest/Quest'
 import { QuestId, quests } from '@adventure-bot/game/quest/quests'
-import { ReduxState, RootReducerState } from '@adventure-bot/game/store'
+import { ReduxState } from '@adventure-bot/game/store'
 import { isStatusEffectExpired } from '@adventure-bot/game/store/slices/characters'
 import { asset } from '@adventure-bot/game/utils/asset'
 

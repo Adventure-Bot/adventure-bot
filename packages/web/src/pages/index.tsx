@@ -38,7 +38,7 @@ export async function getServerSideProps() {
   const pkg = await fetch(
     'https://raw.githubusercontent.com/Adventure-Bot/adventure-bot/main/package.json'
   )
-    .then((res) => res.json() as any as { version: string })
+    .then((res) => res.json() as unknown as { version: string })
     .catch(() => ({ version: '0.0.0' }))
 
   return {

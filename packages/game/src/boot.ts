@@ -3,8 +3,6 @@ import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
 import { Client, Intents } from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
-import path from 'path'
-import { exit } from 'process'
 
 import commands from '@adventure-bot/game/commands'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'

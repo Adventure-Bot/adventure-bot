@@ -47,10 +47,25 @@ Visit the link to be prompted to add the bot to your server. Follow the prompts.
 
 You should now have a bot in your Discord server.
 
-## Start your bot
+## Common Scripts
+Adventure Bot uses Yarn Workspaces. You may run commands in any particular workspace via the aliases `web` and `game`. For example, to add a dependency to game: `yarn game add <dep>`, or to run build web: `yarn web build`, etc. [Read more Here](https://classic.yarnpkg.com/lang/en/docs/workspaces/)
 
 ```sh
-yarn start:dev
+# Common Global Commands
+yarn lint
+yarn format # or yarn format:write
+yarn build # runs build on all packages
+yarn dev # runs dev on all packages
+
+# Common Game Commands
+yarn game serve # Start the bot interaction listeners
+yarn game build # Transpile TS to JS
+yarn game dev # Build, but watches for changes
+
+# Common Web Commands
+yarn web start # Start the built project
+yarn web build # Compile the Next.js Application
+yarn web dev # Build, but watches for changes
 ```
 
 or

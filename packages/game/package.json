@@ -15,6 +15,7 @@
     "dev": "nodemon --config nodemon-dev.json",
     "build": "yarn generate-asset-manifest && yarn build:ts",
     "build:ts": "ttsc",
+    "lint": "eslint . --ext .ts",
     "clean": "rimraf .build node_modules",
     "prune-imports": "yarn ts-prune -ep ./tsconfig.json",
     "prune-imports:watch": "nodemon --config ./nodemon-prune.json",
