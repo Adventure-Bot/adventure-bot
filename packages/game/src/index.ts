@@ -1,18 +1,20 @@
+import { Client } from 'discord.js'
+
 import {
   createClient,
   gameClock,
   waitForWinner,
 } from '@adventure-bot/game/boot'
 
+let client: Client | undefined
+
+export const getClient: () => Client | undefined = () => client
+
 export const startGameService: (gameOptions: {
   clientId: string
   token: string
   channelId: string
-}) => ReturnType<typeof createClient> = async ({
-  clientId,
-  token,
-  channelId,
-}) =>
+}) => void = async ({ clientId, token, channelId }) => {
   createClient({
     type: 'discord',
     token,
@@ -24,4 +26,5 @@ export const startGameService: (gameOptions: {
       gameClock()
       waitForWinner(client)
     },
-  })
+  }).then((c) => (client = c))
+}
