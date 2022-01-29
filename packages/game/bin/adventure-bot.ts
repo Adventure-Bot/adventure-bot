@@ -4,9 +4,12 @@ import { existsSync } from 'fs'
 import path from 'path'
 import { exit } from 'process'
 
-import { startGameService } from '../src'
-
 const envPath = path.join(workspace() ?? process.cwd(), '.env')
+dotenv.config({
+  path: envPath,
+})
+
+import { startGameService } from '../src'
 
 if (!existsSync(envPath)) {
   console.error(
@@ -14,9 +17,6 @@ if (!existsSync(envPath)) {
   )
   exit(1)
 }
-dotenv.config({
-  path: envPath,
-})
 
 if (!process.env.token) {
   console.error(
