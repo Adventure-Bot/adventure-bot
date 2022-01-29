@@ -1,16 +1,24 @@
 {
   "name": "@adventure-bot/game",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Slay a monster! Stab your friends! Adventure bot!",
   "main": ".build/index.js",
+  "types": ".build/index.d.ts",
+  "files": [
+    ".build",
+    "src",
+    "tsconfig.json"
+  ],
   "scripts": {
+    "start": "echo 'Starting Adventure Bot from the CLI has been moved to `yarn game serve`'",
+    "serve": "ts-node -r tsconfig-paths/register bin/adventure-bot.ts",
+    "dev": "nodemon --config nodemon-dev.json",
+    "build": "yarn generate-asset-manifest && yarn build:ts",
+    "build:ts": "ttsc",
+    "clean": "rimraf .build node_modules",
+    "prune-imports": "yarn ts-prune -ep ./tsconfig.json",
+    "prune-imports:watch": "nodemon --config ./nodemon-prune.json",
     "generate-asset-manifest": "ts-node ./scripts/generate-asset-manifest.ts",
-    "preci:build": "rimraf .build && yarn generate-asset-manifest",
-    "ci:build": "tsc",
-    "ci:build:clean": "tsc --build --clean",
-    "prestart": "yarn generate-asset-manifest",
-    "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "dev": "nodemon",
     "sync-s3-assets": "ts-node ./scripts/sync-s3-assets.ts",
     "postsync-s3-assets": "yarn generate-asset-manifest",
     "redux-devtools": "redux-devtools --hostname=localhost --port=5010"
@@ -38,7 +46,9 @@
     "aws-sdk": "^2.1043.0",
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^8.3.0",
-    "s3": "^4.4.0"
+    "s3": "^4.4.0",
+    "ttypescript": "^1.5.13",
+    "typescript-transform-paths": "^3.3.1"
   },
   "dependencies": {
     "@discordjs/builders": "^0.8.1",

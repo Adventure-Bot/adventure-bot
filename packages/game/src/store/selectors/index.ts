@@ -12,7 +12,7 @@ import { Encounter } from '@adventure-bot/game/encounters'
 import { Monster, isMonster } from '@adventure-bot/game/monster/Monster'
 import { Quest } from '@adventure-bot/game/quest/Quest'
 import { QuestId, quests } from '@adventure-bot/game/quest/quests'
-import { ReduxState } from '@adventure-bot/game/store'
+import { ReduxState, RootReducerState } from '@adventure-bot/game/store'
 import { isStatusEffectExpired } from '@adventure-bot/game/store/slices/characters'
 import { asset } from '@adventure-bot/game/utils/asset'
 
@@ -91,21 +91,23 @@ export const selectMonsterById = (
   if (character && isMonster(character)) return character
 }
 
-export const selectAllCharacters = createSelector(
-  (state: ReduxState) => state.characters.charactersById,
-  (charactersById) =>
-    Object.values(charactersById)
-      .filter((character) => character.isMonster !== true)
-      .map((c) => decorateCharacterWithAssetProfile<Character>(c))
-)
+export const selectAllCharacters: (state: ReduxState) => Array<Character> =
+  createSelector(
+    (state: ReduxState) => state.characters.charactersById,
+    (charactersById) =>
+      Object.values(charactersById)
+        .filter((character) => character.isMonster !== true)
+        .map((c) => decorateCharacterWithAssetProfile<Character>(c))
+  )
 
-export const selectRoamingMonsters = createSelector(
-  (state: ReduxState) =>
-    state.characters.roamingMonsters.map(
-      (id) => state.characters.charactersById[id]
-    ),
-  (monsters) => monsters.filter(isMonster).filter((monster) => monster.hp > 0)
-)
+export const selectRoamingMonsters: (state: ReduxState) => Array<Monster> =
+  createSelector(
+    (state: ReduxState) =>
+      state.characters.roamingMonsters.map(
+        (id) => state.characters.charactersById[id]
+      ),
+    (monsters) => monsters.filter(isMonster).filter((monster) => monster.hp > 0)
+  )
 
 export const selectAllEncounters = (state: ReduxState): Encounter[] =>
   values(state.encounters.encountersById)
@@ -118,7 +120,11 @@ export const selectCooldownByType = (
   cooldownType: keyof ReduxState['cooldowns']
 ): number | undefined => state.cooldowns[cooldownType]
 
-export const selectHasItemNameInInventory = createSelector(
+export const selectHasItemNameInInventory: (
+  state: ReduxState,
+  character: Character,
+  itemName: string
+) => boolean = createSelector(
   (state: ReduxState, character: Character, itemName: string) =>
     state.characters.charactersById[character.id]?.inventory.some(
       (item) => item.name === itemName

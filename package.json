@@ -5,15 +5,17 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "build": "yarn game build && yarn web build",
+    "start": "yarn web start",
+    "dev": "yarn game dev & yarn web dev",
+    "clean": "yarn workspaces run clean && rimraf node_modules",
     "game": "yarn workspace @adventure-bot/game",
     "web": "yarn workspace @adventure-bot/web",
-    "postinstall": "yarn patch-package",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "prune-imports": "yarn ts-prune -ep ./packages/game/tsconfig.json",
-    "prune-imports:watch": "nodemon --config nodemon-prune.json"
+    "postinstall": "yarn patch-package"
   },
   "repository": {
     "type": "git",

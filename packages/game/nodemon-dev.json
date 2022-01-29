@@ -2,5 +2,5 @@
   "watch": ["src"],
   "ext": ".ts,.js",
   "ignore": ["src/asset-manifest.ts"],
-  "exec": "yarn start"
+  "exec": "yarn build:ts"
 }
