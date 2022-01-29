@@ -58,7 +58,7 @@ yarn build # runs build on all packages
 yarn dev # runs dev on all packages
 
 # Common Game Commands
-yarn game serve # Start the bot interaction listeners
+yarn game start # Start the bot interaction listeners
 yarn game build # Transpile TS to JS
 yarn game dev # Build, but watches for changes
 

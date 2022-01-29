@@ -10,8 +10,7 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "start": "echo 'Starting Adventure Bot from the CLI has been moved to `yarn game serve`'",
-    "serve": "ts-node -r tsconfig-paths/register bin/adventure-bot.ts",
+    "start": "ts-node -r tsconfig-paths/register bin/adventure-bot.ts",
     "dev": "nodemon --config nodemon-dev.json",
     "build": "yarn generate-asset-manifest && yarn build:ts",
     "build:ts": "ttsc",
