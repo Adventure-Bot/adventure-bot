@@ -47,28 +47,83 @@ Visit the link to be prompted to add the bot to your server. Follow the prompts.
 
 You should now have a bot in your Discord server.
 
-## Common Scripts
-Adventure Bot uses Yarn Workspaces. You may run commands in any particular workspace via the aliases `web` and `game`. For example, to add a dependency to game: `yarn game add <dep>`, or to run build web: `yarn web build`, etc. [Read more Here](https://classic.yarnpkg.com/lang/en/docs/workspaces/)
+## Workspace Commands
+
+Adventure Bot uses [Yarn Workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/). You may run commands in any particular workspace via the aliases `web` and `game`. For example, to add a dependency to game: `yarn game add <dep>`, or to run build web: `yarn web build`, etc.
+
+### Global Commands
+
+Build all workspaces.
 
 ```sh
-# Common Global Commands
-yarn lint
-yarn format # or yarn format:write
-yarn build # runs build on all packages
-yarn dev # runs dev on all packages
-
-# Common Game Commands
-yarn game start # Start the bot interaction listeners
-yarn game build # Transpile TS to JS
-yarn game dev # Build, but watches for changes
-
-# Common Web Commands
-yarn web start # Start the built project
-yarn web build # Compile the Next.js Application
-yarn web dev # Build, but watches for changes
+yarn build
 ```
 
-or
+Start development for all workspaces.
+
+```sh
+yarn dev
+```
+
+Lint all workspaces.
+
+```sh
+yarn lint
+```
+
+Check formatting for all workspaces.
+
+```sh
+yarn format
+```
+
+Fix the formatting for all workspaces.
+
+```sh
+yarn format:write
+```
+
+### Game Commands
+
+Start the Discord bot.
+
+```sh
+yarn game start
+```
+
+Transpile TS to JS.
+
+```sh
+yarn game build
+```
+
+Build and watch for changes.
+
+```sh
+yarn game dev
+```
+
+## Web Commands
+
+Compile the Next.js application.
+
+```sh
+yarn web build
+```
+
+Start the built project.
+
+```sh
+yarn web start
+```
+
+Build and watch for changes.
+
+```sh
+yarn web dev
+```
+
+Build and watch for changes (alias)
 
 ```sh
 npm run start:dev
@@ -80,12 +135,6 @@ To start a Redux Devtools server:
 
 ```sh
 yarn redux-devtools
-```
-
-or
-
-```sh
-npx redux-devtools
 ```
 
 ## Debugging
