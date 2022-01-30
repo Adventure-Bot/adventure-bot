@@ -47,7 +47,7 @@ Visit the link to be prompted to add the bot to your server. Follow the prompts.
 
 You should now have a bot in your Discord server.
 
-## Workspace Commands
+## Commands
 
 Adventure Bot uses [Yarn Workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/). You may run commands in any particular workspace via the aliases `web` and `game`. For example, to add a dependency to game: `yarn game add <dep>`, or to run build web: `yarn web build`, etc.
 
