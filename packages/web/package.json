@@ -9,7 +9,6 @@
     "clean": "rimraf .next node_modules"
   },
   "dependencies": {
-    "@adventure-bot/game": "0.0.0",
     "next": "12.0.8",
     "next-auth": "^4.1.2",
     "node-fetch": "^3.2.0",
