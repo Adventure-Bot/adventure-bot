@@ -97,7 +97,7 @@ Transpile TS to JS.
 yarn game build
 ```
 
-Build and watch for changes.
+Build, serve, and watch for changes.
 
 ```sh
 yarn game dev
@@ -117,16 +117,10 @@ Start the built project.
 yarn web start
 ```
 
-Build and watch for changes.
+Build, serve, and watch for changes.
 
 ```sh
 yarn web dev
-```
-
-Build and watch for changes (alias)
-
-```sh
-npm run start:dev
 ```
 
 ## Redux Devtools
