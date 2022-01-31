@@ -10,7 +10,7 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register bin/adventure-bot.ts",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "dev": "nodemon --config nodemon-dev.json",
     "build": "yarn generate-asset-manifest && yarn build:ts",
     "build:ts": "ttsc",

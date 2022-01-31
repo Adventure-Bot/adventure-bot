@@ -12,4 +12,4 @@ yarn.lock
 .build
 db
 .next
-packages/game/bin/adventure-bot.ts
+packages/game/src/index.ts

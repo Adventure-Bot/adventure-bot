@@ -3,15 +3,10 @@
   "compilerOptions": {
     "outDir": ".build",
     "baseUrl": "src",
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
     "paths": {
       "@adventure-bot/game/*": ["./*"]
     },
-    "plugins": [
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
+    "plugins": [{ "transform": "typescript-transform-paths" }]
   },
   "exclude": ["node_modules", "**/*.js"],
   "include": ["src/**/*.ts"]
