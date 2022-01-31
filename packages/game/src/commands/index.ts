@@ -45,7 +45,6 @@ commands.set('quests', quests)
 commands.set('renew', renew)
 commands.set('set', set)
 
-console.log('DEV_COMMANDS', process.env.DEV_COMMANDS)
 if (process.env.DEV_COMMANDS === 'true') {
   commands.set('db', db)
   console.warn('⚠ DEV COMMANDS LOADED ⚠')
