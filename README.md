@@ -8,15 +8,15 @@ As you do.
 
 Adventure Bot is the DM in your friend's Discord roleplaying game!
 
-![death by chest](./images/defeated-by-chest.png)
+![death by chest](./packages/game/images/defeated-by-chest.png)
 
-![example character 2](./images/inspect-example-2.png)
+![example character 2](./packages/game/images/inspect-example-2.png)
 
-![example character](./images/inspect-example.png)
+![example character](./packages/game/images/inspect-example.png)
 
-![example heal](./images/heal.png)
+![example heal](./packages/game/images/heal.png)
 
-![example divine blessing](./images/divine-blessing.png)
+![example divine blessing](./packages/game/images/divine-blessing.png)
 
 
 ## Developers
