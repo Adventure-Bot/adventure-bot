@@ -28,7 +28,9 @@ You should now have a bot token.
 
 ## Setup your .env
 
-`cp packages/game/.env.sample packages/game/.env`
+```sh
+cp packages/game/.env.sample packages/game/.env
+```
 
 Replace the `BOT_TOKEN` value with the [your bot token](#create-your-bot-token).
 
