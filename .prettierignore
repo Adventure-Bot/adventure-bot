@@ -12,4 +12,3 @@ yarn.lock
 .build
 db
 .next
-packages/game/src/index.ts
