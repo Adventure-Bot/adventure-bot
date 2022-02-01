@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum CharacterKind {
+  CHARACTER
+  MONSTER
+}
+
+// {
+//     id: string;
+//     type: 'weapon' | 'armor' | 'shield' | 'hat' | 'amulet' | 'ring' | 'potion' | 'scroll' | 'misc';
+//     name: string;
+//     description: string;
+//     goldValue: number;
+//     modifiers?: Partial<Stats> | undefined;
+//     equippable: boolean;
+//     lootable?: boolean | undefined;
+//     sellable?: boolean | undefined;
+//     tradeable?: boolean | undefined;
+//     usable?: boolean | undefined;
+// }
+
+enum ItemKind {
+  WEAPON
+  ARMOR
+  SHIELD
+  HAT
+  AMULET
+  RING
+  POTION
+  SCROLL
+  MISC
+}
+
+model Item {
+  id String @id @default(uuid())
+  character   Character? @relation(fields: [characterId], references: [id])
+  characterId String?
+  name String
+  description String
+  goldValue Int
+  equippable Boolean?
+  lootable Boolean?
+  sellable Boolean?
+  tradeable Boolean?
+  usable Boolean?
+}
+
+model Character {
+  id    String      @id @default(uuid())
+  name  String
+  profile String?
+  asset  String?
+  hp  Int @default(100)
+  xp  Int @default(0)
+  gold Int @default(0)
+  xpValue Int
+  kind CharacterKind @default(CHARACTER)
+
+  // # 1-n proof-of-concept
+  inventory Item[]
+
+}

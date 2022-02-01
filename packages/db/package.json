@@ -1,0 +1,45 @@
+{
+  "name": "@adventure-bot/db",
+  "version": "0.0.0",
+  "description": "Adventure Bot Database",
+  "main": ".build/index.js",
+  "types": ".build/index.d.ts",
+  "files": [
+    ".build",
+    "src",
+    "tsconfig.json"
+  ],
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
+  },
+  "scripts": {
+    "pull": "prisma db pull",
+    "push": "prisma db push",
+    "generate": "prisma generate",
+    "studio": "prisma studio --browser none",
+    "clean": "rimraf node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adventure-Bot/adventure-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "typescript",
+    "bot"
+  ],
+  "author": "Brian Gates (brian.g.gates@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adventure-Bot/adventure-bot/issues"
+  },
+  "homepage": "https://github.com/Adventure-Bot/adventure-bot#readme",
+  "devDependencies": {
+    "ttypescript": "^1.5.13",
+    "typescript-transform-paths": "^3.3.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.9.0",
+    "prisma": "^3.9.0"
+  }
+}
