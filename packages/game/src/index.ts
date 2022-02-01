@@ -1,6 +1,3 @@
-import { prepareEnv } from '@adventure-bot/game/env'
-prepareEnv()
-
 import { Client } from 'discord.js'
 
 import {
@@ -8,6 +5,9 @@ import {
   gameClock,
   waitForWinner,
 } from '@adventure-bot/game/boot'
+import { assertEnv } from '@adventure-bot/game/env'
+
+assertEnv()
 
 let client: Client | undefined
 
@@ -17,7 +17,7 @@ createClient({
   type: 'discord',
   clientId: String(process.env.CLIENT_ID),
   channelId: String(process.env.GUILD_ID),
-  token: String(process.env.token),
+  token: String(process.env.BOT_TOKEN),
   onError: (e) => console.error('Discord client error!', e),
 
   onReady: (client) => {

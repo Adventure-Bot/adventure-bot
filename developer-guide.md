@@ -28,9 +28,9 @@ You should now have a bot token.
 
 ## Setup your .env
 
-`cp example.env .env`
+`cp packages/game/.env.sample packages/game/.env`
 
-Replace the `token` value with the [your bot token](#create-your-bot-token).
+Replace the `BOT_TOKEN` value with the [your bot token](#create-your-bot-token).
 
 ## Invite the bot to your server
 
