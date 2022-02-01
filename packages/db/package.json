@@ -16,6 +16,7 @@
     "pull": "prisma db pull",
     "push": "prisma db push",
     "generate": "prisma generate",
+    "lint": "exit 0",
     "studio": "prisma studio --browser none",
     "clean": "rimraf node_modules"
   },
