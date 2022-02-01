@@ -1,11 +1,9 @@
-import dotenv from 'dotenv'
-import workspace from 'find-yarn-workspace-root'
 import { existsSync } from 'fs'
 import path from 'path'
 import { exit } from 'process'
 
-export const prepareEnv: () => void = () => {
-  const envPath = path.join(workspace() ?? process.cwd(), '.env')
+export const assertEnv: () => void = () => {
+  const envPath = path.join(process.cwd(), '.env')
   if (!existsSync(envPath)) {
     console.error(
       '\x1b[43m\x1b[30m ⚠ Environment config required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#setup-your-env \x1b[0m'
@@ -13,14 +11,10 @@ export const prepareEnv: () => void = () => {
     exit(1)
   }
 
-  dotenv.config({
-    path: envPath,
-  })
-
   const requiredEnvironmentVars = [
     [
-      'token',
-      '\x1b[43m\x1b[30m ⚠ Discord bot token required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#create-your-bot-token \x1b[0m',
+      'BOT_TOKEN',
+      '\x1b[43m\x1b[30m ⚠ Discord BOT_TOKEN required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#create-your-bot-token \x1b[0m',
     ],
     [
       'CLIENT_ID',
