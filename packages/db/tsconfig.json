@@ -1,9 +1,15 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "sourceMap": true,
     "outDir": ".build",
-    "strict": true,
-    "lib": ["esnext"],
-    "esModuleInterop": true
-  }
+    "baseUrl": ".",
+    "composite": true,
+    "declaration": true,
+    "paths": {
+      "@adventure-bot/db/*": ["./*"]
+    },
+    "plugins": [{ "transform": "typescript-transform-paths" }]
+  },
+  "exclude": ["node_modules", "**/*.js", "scripts/**/*.ts"],
+  "include": ["./index.ts"]
 }

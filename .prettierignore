@@ -10,5 +10,5 @@ yarn.lock
 .github
 *.md
 .build
-db
+db/*.json
 .next

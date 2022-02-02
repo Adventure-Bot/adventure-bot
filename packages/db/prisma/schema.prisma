@@ -11,7 +11,7 @@ datasource db {
 }
 
 enum CharacterKind {
-  CHARACTER
+  PLAYER
   MONSTER
 }
 
@@ -42,29 +42,37 @@ enum ItemKind {
 }
 
 model Item {
-  id String @id @default(uuid())
+  id          String     @id @default(uuid())
   character   Character? @relation(fields: [characterId], references: [id])
   characterId String?
-  name String
+  name        String
   description String
-  goldValue Int
-  equippable Boolean?
-  lootable Boolean?
-  sellable Boolean?
-  tradeable Boolean?
-  usable Boolean?
+  goldValue   Int
+  equippable  Boolean?
+  lootable    Boolean?
+  sellable    Boolean?
+  tradeable   Boolean?
+  usable      Boolean?
 }
 
 model Character {
-  id    String      @id @default(uuid())
-  name  String
+  id      String        @id @default(uuid())
+  name    String
   profile String?
-  asset  String?
-  hp  Int @default(100)
-  xp  Int @default(0)
-  gold Int @default(0)
+  asset   String?
+  hp      Int           @default(100)
+  xp      Int           @default(0)
+  gold    Int           @default(0)
   xpValue Int
-  kind CharacterKind @default(CHARACTER)
+  kind    CharacterKind @default(PLAYER)
+
+  // Stats
+  ac               Int
+  attackBonus      Int
+  damageBonus      Int
+  damageMax        Int
+  maxHP            Int
+  monsterDamageMax Int
 
   // # 1-n proof-of-concept
   inventory Item[]
