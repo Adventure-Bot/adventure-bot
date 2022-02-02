@@ -17,10 +17,8 @@ export const makeAttack = (
     ? selectEncounterById(store.getState(), encounterId)
     : undefined
 
-  const { attackBonus, damageBonus, damageMax, monsterDamageMax, ac } =
+  const { attackBonus, damageBonus, damageMax, monsterDamageMax } =
     attacker.statsModified
-
-  const targetDefense = ac
 
   const attackRoll = d20()
   const damageRoll = Math.ceil(Math.random() * damageMax)
@@ -29,7 +27,7 @@ export const makeAttack = (
     : 0
 
   const totalDamage = damageRoll + monsterDamageRoll + damageBonus
-  const hit = attackRoll + attackBonus >= targetDefense
+  const hit = attackRoll + attackBonus >= defender.statsModified.ac
 
   const attackResult: AttackResult = {
     outcome: hit ? 'hit' : 'miss',
