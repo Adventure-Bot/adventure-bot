@@ -69,14 +69,12 @@ export const monster = async (
     selectEncounterById(store.getState(), encounter.id)?.outcome
   ) {
     encounter = selectEncounterById(store.getState(), encounter.id)
-    const attackEmoji = Emoji('attack')
-    const runEmoji = Emoji('run')
-    await message.react(attackEmoji)
-    await message.react(runEmoji)
+    await message.react(Emoji('attack'))
+    await message.react(Emoji('run'))
     const collected = await message
       .awaitReactions({
         filter: (reaction, user) =>
-          [attackEmoji, 'attack', runEmoji, 'run'].includes(
+          [Emoji('attack'), 'attack', Emoji('run'), 'run'].includes(
             reaction.emoji.name ?? ''
           ) && user.id === interaction.user.id,
         max: 1,
@@ -92,7 +90,7 @@ export const monster = async (
       !collected ||
       timeout ||
       !reaction ||
-      [runEmoji, 'run'].includes(reaction.emoji.name ?? '')
+      [Emoji('run'), 'run'].includes(reaction.emoji.name ?? '')
 
     if (playerFlee) store.dispatch(playerFled({ encounterId: encounter.id }))
 
