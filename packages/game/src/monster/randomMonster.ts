@@ -6,7 +6,7 @@ import {
 } from '@adventure-bot/game/monster'
 import { randomArrayElement } from '@adventure-bot/game/utils'
 
-export const getRandomMonster = (): Monster => {
+export const randomMonster = (): Monster => {
   const roamingMonsters = getRoamingMonsters()
   if (roamingMonsters.length && Math.random() <= roamingMonsters.length / 10) {
     console.log('returning existing monster')

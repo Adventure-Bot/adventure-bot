@@ -9,7 +9,7 @@ import {
   loot,
   lootResultEmbed,
 } from '@adventure-bot/game/character'
-import { getRandomMonster, monsterEmbed } from '@adventure-bot/game/monster'
+import { monsterEmbed, randomMonster } from '@adventure-bot/game/monster'
 import store from '@adventure-bot/game/store'
 import { selectMonsterById } from '@adventure-bot/game/store/selectors'
 
@@ -20,7 +20,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const monster = getRandomMonster()
+  const monster = randomMonster()
   const character = getUserCharacter(interaction.user)
   const result = await loot({
     looterId: character.id,
