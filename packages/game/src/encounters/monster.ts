@@ -11,7 +11,7 @@ import {
   encounterEmbed,
   encounterSummaryEmbed,
 } from '@adventure-bot/game/encounters'
-import { getRandomMonster } from '@adventure-bot/game/monster'
+import { randomMonster } from '@adventure-bot/game/monster'
 import {
   isUserQuestComplete,
   questProgressField,
@@ -35,7 +35,7 @@ export const monster = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   // TODO: explore do/while refactor
-  let monster = getRandomMonster()
+  let monster = randomMonster()
   let player = selectCharacterById(store.getState(), interaction.user.id)
   if (!player) return
 

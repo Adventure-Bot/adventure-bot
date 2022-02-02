@@ -3,7 +3,6 @@ import { Monster, isMonster } from '@adventure-bot/game/monster/Monster'
 import { createMonster } from '@adventure-bot/game/monster/createMonster'
 import { createRandomMonster } from '@adventure-bot/game/monster/createRandomMonster'
 import { getMonster } from '@adventure-bot/game/monster/getMonster'
-import { getRandomMonster } from '@adventure-bot/game/monster/getRandomMonster'
 import { getRoamingMonsters } from '@adventure-bot/game/monster/getRoamingMonsters'
 import {
   createDemon,
@@ -17,6 +16,7 @@ import {
   getRandomMonsterName,
 } from '@adventure-bot/game/monster/names/getRandomMonsterName'
 import { namesByKind } from '@adventure-bot/game/monster/names/namesByKind'
+import { randomMonster } from '@adventure-bot/game/monster/randomMonster'
 
 export {
   MonsterKind,
@@ -32,7 +32,7 @@ export {
   getRoamingMonsters,
   createMonster,
   getRandomMonsterName,
-  getRandomMonster,
+  randomMonster,
   getMonster,
   monsterEmbed,
 }
