@@ -42,17 +42,26 @@ enum ItemKind {
 }
 
 model Item {
-  id          String     @id @default(uuid())
-  character   Character? @relation(fields: [characterId], references: [id])
-  characterId String?
-  name        String
-  description String
-  goldValue   Int
-  equippable  Boolean?
-  lootable    Boolean?
-  sellable    Boolean?
-  tradeable   Boolean?
-  usable      Boolean?
+  id            String          @id @default(uuid())
+  characterId   String?
+  name          String
+  description   String
+  goldValue     Int
+  equippable    Boolean?
+  lootable      Boolean?
+  sellable      Boolean?
+  tradeable     Boolean?
+  usable        Boolean?
+  InventoryItem InventoryItem[]
+}
+
+model InventoryItem {
+  id          String    @id @default(uuid())
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String
+  item        Item      @relation(fields: [itemId], references: [id])
+  itemId      String
+  quantity    Int
 }
 
 model Character {
@@ -67,14 +76,13 @@ model Character {
   kind    CharacterKind @default(PLAYER)
 
   // Stats
-  ac               Int
-  attackBonus      Int
+  defense          Int
+  accuracy         Int
   damageBonus      Int
   damageMax        Int
   maxHP            Int
   monsterDamageMax Int
 
-  // # 1-n proof-of-concept
-  inventory Item[]
 
+  InventoryItem InventoryItem[]
 }
