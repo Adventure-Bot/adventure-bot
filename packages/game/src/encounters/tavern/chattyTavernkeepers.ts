@@ -33,7 +33,7 @@ export const chattyTavernkeepers = async (
       files: [new MessageAttachment('./images/Tavernkeepers.jpg')],
       embeds: [
         new MessageEmbed({
-          title: `${decoratedName(character)} meets  Chatty Tavernkeepers!`,
+          title: `${decoratedName(character)} met the Chatty Tavernkeepers!`,
           description: `You're all caught up on the latest, friend!`,
         }).setImage('attachment://Tavernkeepers.jpg'),
       ].concat(questEmbed(character) ?? []),
@@ -45,7 +45,7 @@ export const chattyTavernkeepers = async (
     files: [new MessageAttachment('./images/Tavernkeepers.jpg')],
     embeds: [
       new MessageEmbed({
-        title: `${decoratedName(character)} meets the Chatty Tavernkeepers!`,
+        title: `${decoratedName(character)} met the Chatty Tavernkeepers!`,
         description:
           "Turns out they know someone's got a thing needs doing.\n\nCompensation? Of course!",
         fields: [xpGainField(1)],
