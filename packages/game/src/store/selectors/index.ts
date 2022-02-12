@@ -9,7 +9,7 @@ import {
   stats,
 } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
-import { Monster, isMonster } from '@adventure-bot/game/monster/Monster'
+import { Monster, isMonster } from '@adventure-bot/game/monster'
 import { Quest } from '@adventure-bot/game/quest/Quest'
 import { QuestId, quests } from '@adventure-bot/game/quest/quests'
 import { ReduxState } from '@adventure-bot/game/store'

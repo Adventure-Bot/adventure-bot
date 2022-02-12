@@ -6,7 +6,7 @@ import {
   hpBarField,
 } from '@adventure-bot/game/character'
 import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
-import { monsterEmbed } from '@adventure-bot/game/encounters'
+import { monsterEmbed } from '@adventure-bot/game/monster'
 import store from '@adventure-bot/game/store'
 import { selectRoamingMonsters } from '@adventure-bot/game/store/selectors'
 

@@ -1,9 +1,9 @@
-import { monsterEmbed } from '@adventure-bot/game/encounters'
 import { Monster, isMonster } from '@adventure-bot/game/monster/Monster'
 import { createMonster } from '@adventure-bot/game/monster/createMonster'
 import { createRandomMonster } from '@adventure-bot/game/monster/createRandomMonster'
 import { getMonster } from '@adventure-bot/game/monster/getMonster'
 import { getRoamingMonsters } from '@adventure-bot/game/monster/getRoamingMonsters'
+import { monsterEmbed } from '@adventure-bot/game/monster/monsterEmbed'
 import {
   createDemon,
   createDragon,

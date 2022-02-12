@@ -16,7 +16,6 @@ import { chattyTavernkeepers } from '@adventure-bot/game/encounters/tavern/chatt
 import { tavern } from '@adventure-bot/game/encounters/tavern/tavern'
 import { trap } from '@adventure-bot/game/encounters/trap'
 import { travel } from '@adventure-bot/game/encounters/travel'
-import { monsterEmbed } from '@adventure-bot/game/monster/monsterEmbed'
 
 export {
   angels,
@@ -37,5 +36,4 @@ export {
   createEncounter,
   randomEncounter,
   encounterEmbed,
-  monsterEmbed,
 }
