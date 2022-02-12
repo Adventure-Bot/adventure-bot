@@ -9,6 +9,7 @@ import {
 
 import {
   awardXP,
+  decoratedName,
   getUserCharacter,
   xpGainField,
 } from '@adventure-bot/game/character'
@@ -18,7 +19,6 @@ import store from '@adventure-bot/game/store'
 import { selectAvailableQuests } from '@adventure-bot/game/store/selectors'
 import { questGranted } from '@adventure-bot/game/store/slices/characters'
 
-// TODO: omit quests the user already has
 export const chattyTavernkeepers = async (
   interaction: CommandInteraction,
   followUp = false
@@ -33,7 +33,7 @@ export const chattyTavernkeepers = async (
       files: [new MessageAttachment('./images/Tavernkeepers.jpg')],
       embeds: [
         new MessageEmbed({
-          title: 'Chatty Tavernkeepers!',
+          title: `${decoratedName(character)} meets  Chatty Tavernkeepers!`,
           description: `You're all caught up on the latest, friend!`,
         }).setImage('attachment://Tavernkeepers.jpg'),
       ].concat(questEmbed(character) ?? []),
@@ -45,7 +45,7 @@ export const chattyTavernkeepers = async (
     files: [new MessageAttachment('./images/Tavernkeepers.jpg')],
     embeds: [
       new MessageEmbed({
-        title: 'Chatty Tavernkeepers!',
+        title: `${decoratedName(character)} meets the Chatty Tavernkeepers!`,
         description:
           "Turns out they know someone's got a thing needs doing.\n\nCompensation? Of course!",
         fields: [xpGainField(1)],
