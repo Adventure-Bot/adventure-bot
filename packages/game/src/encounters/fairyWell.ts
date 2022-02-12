@@ -41,11 +41,10 @@ export const fairyWell = async (
       new MessageEmbed({
         title: `${
           interaction.user.username
-        } drinks from a fairy's well and gains ${Emoji(
+        } drank from a fairy's well and gained ${Emoji(
           'heal'
         )} +${healAmount}!`,
         color: 'DARK_VIVID_PINK',
-        description: `You drink from a fairy's well, it heals you for ${healAmount}!`,
         fields: [
           xpGainField(1),
           hpBarField({ character, adjustment: healAmount }),
