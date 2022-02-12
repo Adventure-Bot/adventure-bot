@@ -49,7 +49,9 @@ export const chattyTavernkeepers = async (
         description:
           "Turns out they know someone's got a thing needs doing.\n\nCompensation? Of course!",
         fields: [xpGainField(1)],
-      }).setImage('attachment://Tavernkeepers.jpg'),
+      })
+        .setImage('attachment://Tavernkeepers.jpg')
+        .setThumbnail(character.profile),
     ].concat(questEmbed(character) ?? []),
     components: [
       new MessageActionRow({
@@ -83,7 +85,6 @@ export const chattyTavernkeepers = async (
       interaction.followUp('Another time, perhaps!')
     })
   if (!response) {
-    interaction.followUp('Another time, perhaps!')
     return
   }
   const questId = response.values[0]
