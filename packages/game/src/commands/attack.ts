@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Emoji, d20Emoji } from '@adventure-bot/game/Emoji'
+import { Emoji, EmojiValue, d20Emoji } from '@adventure-bot/game/Emoji'
 import {
   AttackResult,
   attackResultEmbed,
@@ -175,8 +175,7 @@ export const attackRollText = ({
   const diceEmoji = d20Emoji(result.attackRoll)
   const bonusText = (attackBonus > 0 ? '+' : '') + (attackBonus || '')
   const comparison = result.outcome === 'hit' ? '≥' : '<'
-  const acEmoji = Emoji('ac')
-  const ac = result.defender.ac
+  const ac = EmojiValue('ac', result.defender.statsModified.ac)
 
-  return `${attackEmoji}${diceEmoji}${bonusText} ${comparison} ${acEmoji} ${ac}`
+  return `${attackEmoji}${diceEmoji}${bonusText} ${comparison} ${ac}`
 }

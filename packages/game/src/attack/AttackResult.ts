@@ -1,9 +1,9 @@
-import { Character } from '@adventure-bot/game/character'
+import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
 
 export type AttackResult = {
   outcome: 'miss' | 'hit'
-  attacker: Character
-  defender: Character
+  attacker: SelectedCharacter
+  defender: SelectedCharacter
   attackRoll: number
   damage: number
   monsterDamageRoll: number
