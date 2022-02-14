@@ -57,7 +57,7 @@ const selectStats = (
   )
 }
 
-type SelectedCharacter = Character & {
+export type SelectedCharacter = Character & {
   stats: Stats
   statsModified: Stats
 }
