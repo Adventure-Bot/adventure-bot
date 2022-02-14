@@ -9,10 +9,9 @@ export const heavyCrown = (): Hat => ({
   goldValue: 300,
   type: 'hat',
   modifiers: {
-    maxHP: 5,
     attackBonus: +2,
     damageBonus: 3,
-    ac: -2,
+    ac: -4,
   },
   lootable: true,
   equippable: true,
