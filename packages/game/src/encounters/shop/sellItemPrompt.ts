@@ -31,7 +31,9 @@ export async function sellItemPrompt({
       new MessageEmbed({
         title: `${decoratedName(character)} considers what to sell.`,
         description: 'What would you like to sell?',
-      }).setImage(asset('fantasy', 'places', 'blacksmith').s3Url),
+      }).setImage(
+        asset('fantasy', 'places', 'blacksmith', interaction.id).s3Url
+      ),
     ],
     components: [
       new MessageActionRow({
