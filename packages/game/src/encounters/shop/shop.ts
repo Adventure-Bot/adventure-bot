@@ -71,7 +71,7 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
           value: EmojiValue('gold', getCharacterUpdate(character).gold),
         },
       ],
-    }).setImage(asset('fantasy', 'places', 'blacksmith').s3Url)
+    }).setImage(asset('fantasy', 'places', 'blacksmith', interaction.id).s3Url)
     return {
       embeds: [
         shopEmbed,
