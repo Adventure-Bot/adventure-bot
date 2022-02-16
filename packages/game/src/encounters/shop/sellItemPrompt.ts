@@ -2,45 +2,36 @@ import {
   CommandInteraction,
   Message,
   MessageActionRow,
-  MessageAttachment,
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
+  decoratedName,
   getCharacterUpdate,
   getUserCharacter,
   gpGainField,
 } from '@adventure-bot/game/character'
-import { getSaleRate } from '@adventure-bot/game/encounters/shop/getSaleRate'
 import { sellList } from '@adventure-bot/game/encounters/shop/sellList'
 import { sellValue } from '@adventure-bot/game/encounters/shop/sellValue'
-import { itemEmbed } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemSold } from '@adventure-bot/game/store/slices/characters'
+import { asset } from '@adventure-bot/game/utils'
 
 export async function sellItemPrompt({
   interaction,
 }: {
   interaction: CommandInteraction
 }): Promise<void> {
-  const saleRate = getSaleRate()
-  const shopImage = new MessageAttachment(
-    './images/weapon-shop.jpg',
-    'shop.png'
-  )
-
   const character = getUserCharacter(interaction.user)
   const inventory = character.inventory.filter((i) => i.sellable)
   const message = await interaction.editReply({
     embeds: [
-      new MessageEmbed({ title: 'Sell which item?' }).setImage(
-        `attachment://${shopImage.name}`
-      ),
-      ...inventory.map((item) =>
-        itemEmbed({ item, interaction, saleRate: saleRate })
-      ),
+      new MessageEmbed({
+        title: `${decoratedName(character)} considers what to sell.`,
+        description: 'What would you like to sell?',
+      }).setImage(asset('fantasy', 'places', 'blacksmith').s3Url),
     ],
     components: [
       new MessageActionRow({
@@ -85,6 +76,7 @@ export async function sellItemPrompt({
   interaction.followUp({
     embeds: [
       new MessageEmbed({
+        title: `${character.name} sold their ${item.name}.`,
         fields: [
           gpGainField(sellValue(item)),
           {
@@ -94,6 +86,5 @@ export async function sellItemPrompt({
         ],
       }),
     ],
-    content: `${character.name} sold their ${item.name}.`,
   })
 }
