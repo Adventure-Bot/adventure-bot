@@ -1,5 +1,7 @@
 import { amuletOfAttack } from '@adventure-bot/game/equipment/items/amuletOfAttack'
 import { amuletOfProtection } from '@adventure-bot/game/equipment/items/amuletOfProtection'
+import { assassinLeathers } from '@adventure-bot/game/equipment/items/assassinLeathers'
+import { berserkerHides } from '@adventure-bot/game/equipment/items/berserkerHides'
 import { buckler } from '@adventure-bot/game/equipment/items/buckler'
 import { chainArmor } from '@adventure-bot/game/equipment/items/chainArmor'
 import { dagger } from '@adventure-bot/game/equipment/items/dagger'
@@ -20,8 +22,10 @@ import { unidentifiedPotion } from '@adventure-bot/game/equipment/items/unidenti
 import { warAxe } from '@adventure-bot/game/equipment/items/warAxe'
 
 export {
+  assassinLeathers,
   amuletOfAttack,
   amuletOfProtection,
+  berserkerHides,
   buckler,
   chainArmor,
   dagger,
@@ -32,9 +36,9 @@ export {
   mace,
   plateArmor,
   potionOfHealing,
+  potionOfMight,
   potionOfProtection,
   potionOfSlaying,
-  potionOfMight,
   potionOfVigor,
   ringOfAttack,
   towerShield,
