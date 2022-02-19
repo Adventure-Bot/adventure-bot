@@ -1,6 +1,7 @@
 import { CommandInteraction, TextChannel } from 'discord.js'
 
 import {
+  decoratedName,
   getUserCharacter,
   getUserCharacters,
   limitedCharacterEmbed,
@@ -36,5 +37,5 @@ export async function listCharacters(
         thread.setArchived(true)
       })
   })
-  interaction.editReply(`${character.name} sizes up the competition.`)
+  interaction.editReply(`${decoratedName(character)} sizes up the competition.`)
 }

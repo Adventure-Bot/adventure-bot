@@ -2,6 +2,7 @@ import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
 
 import {
   awardXP,
+  decoratedName,
   getUserCharacter,
   hpBarField,
   xpGainField,
@@ -37,7 +38,9 @@ export const trap = async (interaction: CommandInteraction): Promise<void> => {
       await interaction.followUp({
         embeds: [
           new MessageEmbed({
-            title: `The trap hit ${character.name} for ${result.damage}!`,
+            title: `The trap hit ${decoratedName(character)} for ${
+              result.damage
+            }!`,
             color: 'RED',
             fields: [
               xpGainField(1),

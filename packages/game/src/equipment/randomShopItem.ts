@@ -2,6 +2,9 @@ import {
   Item,
   amuletOfAttack,
   amuletOfProtection,
+  assassinLeathers,
+  berserkerHides,
+  boomstick,
   buckler,
   chainArmor,
   dagger,
@@ -19,13 +22,10 @@ import {
   towerShield,
   warAxe,
 } from '@adventure-bot/game/equipment'
-import {
-  assassinLeathers,
-  berserkerHides,
-} from '@adventure-bot/game/equipment/items'
 import { weightedRandom } from '@adventure-bot/game/utils'
 
 const weights = new Map<() => Item, number>([
+  [boomstick, 0.1],
   [amuletOfAttack, 0.3],
   [amuletOfProtection, 0.3],
   [buckler, 1],

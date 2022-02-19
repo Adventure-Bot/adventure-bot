@@ -5,7 +5,7 @@ import {
   MessageButton,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
 import { equippableInventory, itemSelect } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemEquipped } from '@adventure-bot/game/store/slices/characters'
@@ -27,7 +27,7 @@ export const equipInventoryItemPrompt = async (
     return
   }
   const message = await interaction.followUp({
-    content: 'What would you like to equip?',
+    content: `${decoratedName(character)} considers equipping something.`,
     components: [
       new MessageActionRow({
         components: [
@@ -75,7 +75,9 @@ export const equipInventoryItemPrompt = async (
       store.dispatch(
         itemEquipped({ itemId: item.id, characterId: character.id })
       )
-      interaction.followUp(`${character.name} equipped their ${item.name}.`)
+      interaction.followUp(
+        `${decoratedName(character)} equipped their ${item.name}.`
+      )
     }
   }
 }

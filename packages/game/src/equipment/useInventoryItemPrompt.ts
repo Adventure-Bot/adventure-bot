@@ -9,7 +9,11 @@ import { clamp } from 'remeda'
 
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import { Manifest } from '@adventure-bot/game/asset-manifest'
-import { getUserCharacter, hpBarField } from '@adventure-bot/game/character'
+import {
+  decoratedName,
+  getUserCharacter,
+  hpBarField,
+} from '@adventure-bot/game/character'
 import {
   isPotion,
   itemSelect,
@@ -148,7 +152,7 @@ function useInventoryItem({
       )
       embeds.push(
         new MessageEmbed({
-          title: `${character.name} healed ${EmojiModifier(
+          title: `${decoratedName(character)} healed ${EmojiModifier(
             'heal',
             healAmount
           )}`,
@@ -172,7 +176,7 @@ function useInventoryItem({
     }
     store.dispatch(itemRemoved({ itemId, characterId }))
     interaction.followUp({
-      content: `${character.name} drank a ${item.name}`,
+      content: `${decoratedName(character)} drank a ${item.name}`,
       embeds,
     })
   }

@@ -78,11 +78,11 @@ export async function sellItemPrompt({
   interaction.followUp({
     embeds: [
       new MessageEmbed({
-        title: `${character.name} sold their ${item.name}.`,
+        title: `${decoratedName(character)} sold their ${item.name}.`,
         fields: [
           gpGainField(sellValue(item)),
           {
-            name: `${character.name}'s Total Gold`,
+            name: `${decoratedName(character)}'s Total Gold`,
             value: EmojiValue('gold', getCharacterUpdate(character).gold),
           },
         ],

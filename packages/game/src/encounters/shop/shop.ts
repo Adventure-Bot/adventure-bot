@@ -9,6 +9,7 @@ import { times } from 'remeda'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
+  decoratedName,
   getCharacterUpdate,
   getUserCharacter,
 } from '@adventure-bot/game/character'
@@ -64,7 +65,7 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
 
   function shopMain() {
     const shopEmbed = new MessageEmbed({
-      title: `${character.name} Visits the Shop`,
+      title: `${decoratedName(character)} Visits the Shop`,
       fields: [
         {
           name: 'Your Gold',

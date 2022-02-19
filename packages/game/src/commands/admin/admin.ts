@@ -93,6 +93,7 @@ export const execute = async (
       return
     case 'declare_winner':
       declareWinner(interaction)
+      store.dispatch(newGame())
       interaction.editReply({
         embeds: leaderboard(),
       })

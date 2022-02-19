@@ -11,6 +11,7 @@ import {
   amuletOfProtection,
   assassinLeathers,
   berserkerHides,
+  boomstick,
   buckler,
   chainArmor,
   dagger,
@@ -51,6 +52,7 @@ export type Usable = Item & {
 export type Weapon = Equippable & {
   type: 'weapon'
   damageMax: number
+  chanceToBackfire?: number
   accuracyDescriptors: {
     wideMiss: string[]
     nearMiss: string[]
@@ -109,6 +111,7 @@ export {
   amuletOfProtection,
   assassinLeathers,
   berserkerHides,
+  boomstick,
   buckler,
   chainArmor,
   dagger,
