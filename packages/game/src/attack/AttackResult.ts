@@ -9,4 +9,5 @@ export type AttackResult = {
   monsterDamageRoll: number
   damageRoll: number
   damageBonus: number
+  backfire: boolean
 }

@@ -44,15 +44,21 @@ export function encounterSummaryEmbed({
       embed.addField('Evaded!', Emoji('run') + `${monster.name} escaped!`)
       break
     case 'player defeated':
-      embed.addField('Unconscious', `${character.name} was knocked out!`)
+      embed.addField(
+        'Unconscious',
+        `${decoratedName(character)} was knocked out!`
+      )
       break
     case 'player fled':
-      embed.addField('Fled', `${character.name} escaped with their life!`)
+      embed.addField(
+        'Fled',
+        `${decoratedName(character)} escaped with their life!`
+      )
       break
     case 'player victory':
       embed.addField(
         'Triumphant!',
-        `${character.name} defeated ${monster.name}! 🎉`
+        `${decoratedName(character)} defeated ${monster.name}! 🎉`
       )
       embed.addFields([xpGainField(monster.xpValue)])
       break

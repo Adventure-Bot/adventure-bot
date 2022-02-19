@@ -28,7 +28,7 @@ export function attackResultEmbed({
       attackResultHeadline({
         interaction,
         result,
-      }) + (variant === 'retaliation' ? ' (retaliation)' : ''),
+      }) + supplementalHeadline(variant, result),
     description: `${attackFlavorText(result)}
     ${attackRollText({
       result,
@@ -51,6 +51,20 @@ export function attackResultEmbed({
   })
     .setThumbnail(result.attacker.profile)
     .setImage(result.defender.profile)
+}
+
+function supplementalHeadline(variant: string, result: AttackResult) {
+  const supplementalHeadlines = []
+  if (variant === 'retaliation') {
+    supplementalHeadlines.push('retaliation')
+  }
+  if (result.backfire) {
+    supplementalHeadlines.push('backfired!')
+  }
+  const supplementalHeadline = supplementalHeadlines.length
+    ? ` (${supplementalHeadlines.join(', ')})`
+    : ''
+  return supplementalHeadline
 }
 
 function attackResultEmbedCompact({

@@ -5,6 +5,7 @@ import { values } from 'remeda'
 import {
   Character,
   characterEmbed,
+  decoratedName,
   getUserCharacter,
   statsEmbed,
 } from '@adventure-bot/game/character'
@@ -29,7 +30,7 @@ export const execute = async (
     (interaction.options.data[0] && interaction.options.data[0].user) ||
     interaction.user
   const character = getUserCharacter(user)
-  console.log(`inspect ${character.name}`, character)
+  console.log(`inspect ${decoratedName(character)}`, character)
 
   await interaction.followUp({
     embeds: [
@@ -57,7 +58,7 @@ async function inspectThread({
   const channel = interaction.channel
   if (!(channel instanceof TextChannel)) return
   const thread = await channel.threads.create({
-    name: `Inspect ${character.name}`,
+    name: `Inspect ${decoratedName(character)}`,
   })
   const webhooks = await channel.fetchWebhooks()
   const equipmentEmbeds = values(character.equipment)

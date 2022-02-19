@@ -40,7 +40,7 @@ export const execute = async (
   const channel = interaction.channel
   if (!(channel instanceof TextChannel)) return
   const thread = await channel.threads.create({
-    name: `${character.name}'s inventory`,
+    name: `${decoratedName(character)}'s inventory`,
   })
   const webhooks = await channel.fetchWebhooks()
   const hook = await getHook({
