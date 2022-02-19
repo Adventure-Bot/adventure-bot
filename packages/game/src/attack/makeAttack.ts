@@ -11,7 +11,9 @@ export const makeAttack = (
   encounterId?: string
 ): AttackResult | void => {
   const attacker = getCharacter(attackerId)
-  const defender = getCharacter(defenderId)
+  const backfire =
+    (attacker?.equipment.weapon?.chanceToBackfire ?? 0) > Math.random()
+  const defender = backfire ? attacker : getCharacter(defenderId)
   if (!attacker || !defender) return
   const encounter = encounterId
     ? selectEncounterById(store.getState(), encounterId)
@@ -38,6 +40,7 @@ export const makeAttack = (
     monsterDamageRoll,
     attacker,
     defender,
+    backfire,
   }
   store.dispatch(
     attacked({

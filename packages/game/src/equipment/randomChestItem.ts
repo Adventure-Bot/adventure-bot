@@ -4,6 +4,7 @@ import {
   amuletOfProtection,
   assassinLeathers,
   berserkerHides,
+  boomstick,
   buckler,
   chainArmor,
   dagger,
@@ -26,6 +27,7 @@ import { weightedTable } from '@adventure-bot/game/utils'
 
 export function randomChestItem(): Item {
   return weightedTable<() => Item>([
+    [0.1, boomstick],
     [0.1, amuletOfAttack],
     [0.1, amuletOfProtection],
     [0.1, ringOfAttack],
