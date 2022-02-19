@@ -7,7 +7,7 @@ import {
   stats,
 } from '@adventure-bot/game/character'
 import { sellValue } from '@adventure-bot/game/encounters/shop/sellValue'
-import { Item, isEquipped } from '@adventure-bot/game/equipment'
+import { Item, isEquipped, isWeapon } from '@adventure-bot/game/equipment'
 
 export function itemEmbed({
   item,
@@ -22,7 +22,10 @@ export function itemEmbed({
 }): MessageEmbed {
   const fields: EmbedFieldData[] = []
   stats.forEach((stat) => {
-    const modifier = item.modifiers?.[stat]
+    const modifier =
+      stat === 'damageMax' && isWeapon(item)
+        ? item.damageMax
+        : item.modifiers?.[stat]
     if (!modifier) return
     fields.push({
       name: statTitles[stat],
