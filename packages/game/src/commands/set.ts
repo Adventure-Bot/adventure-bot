@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
 import { URL } from 'url'
 
+import { getUserCharacter } from '@adventure-bot/game/character'
 import { execute as inspect } from '@adventure-bot/game/commands/inspect/inspect'
 import store from '@adventure-bot/game/store'
 import { profileSet } from '@adventure-bot/game/store/slices/characters'
@@ -21,6 +22,7 @@ export const execute = async (
 ): Promise<void> => {
   const profile = interaction.options.data[0].value?.toString()
   if (!profile) return
+  getUserCharacter(interaction.user) // ensure the user has a character
 
   try {
     const url = new URL(profile)
