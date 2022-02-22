@@ -16,7 +16,7 @@ export const travel = async (
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: `${interaction.user.username} travels`,
+        title: `${interaction.user.username} traveled.`,
         color: 'GREEN',
         fields: [xpGainField(1)],
         description: `You travel the lands.`,
