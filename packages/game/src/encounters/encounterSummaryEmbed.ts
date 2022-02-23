@@ -31,7 +31,9 @@ export function encounterSummaryEmbed({
     embed.setTitle(`Monster ${encounter.monsterId} not found`)
     return embed
   }
-  embed.setTitle(`${decoratedName(character)} vs ${decoratedName(monster)}`)
+  embed.setTitle(
+    `${decoratedName(character)} encountered ${decoratedName(monster)}!`
+  )
 
   switch (encounter.outcome) {
     case 'double ko':

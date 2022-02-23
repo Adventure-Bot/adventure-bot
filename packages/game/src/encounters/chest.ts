@@ -8,6 +8,7 @@ import {
 import {
   adjustGold,
   awardXP,
+  decoratedName,
   getUserCharacter,
   gpGainField,
   xpGainField,
@@ -74,7 +75,7 @@ export async function chest(
 
   const message = await interaction.followUp({
     files: [chestImage],
-    embeds: [chestEmbed(chest)],
+    embeds: [chestEmbed(chest, interaction)],
     fetchReply: true,
   })
   if (!(message instanceof Message)) return
@@ -165,7 +166,7 @@ export async function chest(
     }
     message.edit({
       files: [chestImage],
-      embeds: [chestEmbed(chest)],
+      embeds: [chestEmbed(chest, interaction)],
     })
   } while (
     !chest.isLooted &&
@@ -173,7 +174,7 @@ export async function chest(
     getUserCharacter(interaction.user).hp > 0
   )
   message.reactions.removeAll()
-  const embed = chestEmbed(chest)
+  const embed = chestEmbed(chest, interaction)
   if (fled) embed.addField('Result', 'You leave the chest behind.')
 
   if (chest.isLooted && getUserCharacter(interaction.user).hp > 0) {
@@ -224,9 +225,13 @@ export async function chest(
   })
 }
 
-const chestEmbed = (chest: Chest): MessageEmbed => {
+const chestEmbed = (
+  chest: Chest,
+  interaction: CommandInteraction
+): MessageEmbed => {
+  const character = getUserCharacter(interaction.user)
   const embed = new MessageEmbed({
-    title: 'A chest!',
+    title: `${decoratedName(character)} encountered a chest!`,
     color: 'GOLD',
     description: `You found a treasure chest! What wonders wait within?`,
   }).setImage('attachment://chest.jpg')
