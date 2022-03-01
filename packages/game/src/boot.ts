@@ -105,9 +105,13 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
       await command.execute(interaction)
     } catch (e) {
       console.error(e)
-      await interaction.followUp(
-        `Command \`${interaction.commandName}\` failed with error: \`${e}\``
-      )
+      try {
+        await interaction.followUp(
+          `Command \`${interaction.commandName}\` failed with error: \`${e}\``
+        )
+      } catch {
+        console.error(`Failed to respond to interaction id ${interaction.id}`)
+      }
     }
     console.timeEnd(interaction.commandName)
   })
