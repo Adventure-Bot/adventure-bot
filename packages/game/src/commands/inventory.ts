@@ -53,12 +53,15 @@ export const execute = async (
     return
   }
 
-  character.inventory.forEach((item) => {
-    hook.send({
-      embeds: [itemEmbed({ item, interaction })],
-      threadId: thread.id,
-    })
-  })
+  await Promise.all(
+    character.inventory.map((item) =>
+      hook.send({
+        embeds: [itemEmbed({ item, interaction })],
+        threadId: thread.id,
+      })
+    )
+  )
+  thread.setArchived(true)
 
   let done = false
   while (!done) {
@@ -84,7 +87,6 @@ export const execute = async (
     await message.edit(inventoryMain(interaction))
   }
   message.edit({ components: [] })
-  thread.setArchived(true)
 }
 
 export default { command, execute }
