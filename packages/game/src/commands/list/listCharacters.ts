@@ -23,15 +23,14 @@ export async function listCharacters(
     .map((character) => limitedCharacterEmbed({ character, interaction }))
   const webhooks = await channel.fetchWebhooks()
   interaction.editReply(`${character.name} sized up the competition.`)
-  await getHook({
+  const hook = await getHook({
     name: 'Characters',
     webhooks,
     interaction,
-  }).then((hook) => {
-    hook?.send({
-      embeds,
-      threadId: thread.id,
-    })
+  })
+  await hook?.send({
+    embeds,
+    threadId: thread.id,
   })
   thread.setArchived(true)
 }
