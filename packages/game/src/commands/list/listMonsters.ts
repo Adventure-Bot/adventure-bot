@@ -32,11 +32,9 @@ export async function listMonsters(
   const thread = await channel.threads.create({
     name: 'Roaming Monsters',
   })
-  const webhooks = await channel.fetchWebhooks()
   await getHook({
     name: 'Roaming Monsters',
-    webhooks,
-    interaction,
+    channel,
   }).then((hook) => {
     if (!hook) return
     const embeds = roamingMonsters.map((monster) =>

@@ -33,7 +33,7 @@ export const execute = async (
 
   await interaction.followUp({
     embeds: [
-      characterEmbed({ character, interaction }),
+      characterEmbed({ character }),
       statsEmbed({ character, interaction }),
       actionEmbed({ character, interaction }),
     ],
@@ -59,15 +59,13 @@ async function inspectThread({
   const thread = await channel.threads.create({
     name: `Inspect ${character.name}`,
   })
-  const webhooks = await channel.fetchWebhooks()
   const equipmentEmbeds = values(character.equipment)
     .map((item) => itemEmbed({ item, interaction }))
     .slice(0, 9)
   if (equipmentEmbeds.length)
     await getHook({
       name: 'Equipment',
-      webhooks,
-      interaction,
+      channel,
     }).then((hook) => {
       hook?.send({
         embeds: equipmentEmbeds,
@@ -78,8 +76,7 @@ async function inspectThread({
   if ((character.statusEffects?.length ?? 0) > 0) {
     await getHook({
       name: 'Status Effects',
-      webhooks,
-      interaction,
+      channel,
     }).then((hook) =>
       hook?.send({
         embeds: character.statusEffects?.map((effect) =>
@@ -93,8 +90,7 @@ async function inspectThread({
   if (embed) {
     await getHook({
       name: 'Quests',
-      webhooks,
-      interaction,
+      channel,
     }).then((hook) =>
       hook?.send({
         embeds: [embed],
