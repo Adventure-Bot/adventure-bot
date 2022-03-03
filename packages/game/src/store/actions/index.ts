@@ -14,3 +14,6 @@ export const itemReceived = createAction<{
   item: Item
 }>('itemReceived')
 export const backdateCrown = createAction('backdateCrown') // for testing
+export const characterListCreated = createAction<{ threadId: string }>(
+  'characterListCreated'
+)
