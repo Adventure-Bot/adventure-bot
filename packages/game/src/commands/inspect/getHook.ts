@@ -1,10 +1,4 @@
-import {
-  ChannelWebhookCreateOptions,
-  Collection,
-  CommandInteraction,
-  TextChannel,
-  Webhook,
-} from 'discord.js'
+import { ChannelWebhookCreateOptions, TextChannel, Webhook } from 'discord.js'
 
 type HookName =
   | 'Equipment'
@@ -17,15 +11,12 @@ type HookName =
 
 export async function getHook({
   name,
-  interaction,
-  webhooks,
+  channel,
 }: {
   name: HookName
-  interaction: CommandInteraction
-  webhooks: Collection<string, Webhook>
+  channel: TextChannel
 }): Promise<Webhook | undefined> {
-  const channel = interaction.channel
-  if (!(channel instanceof TextChannel)) return
+  const webhooks = await channel.fetchWebhooks()
   const existingHook = webhooks.find((hook) => hook.name === name)
   if (existingHook) return existingHook
   return await channel.createWebhook(name, hookOptions(name))

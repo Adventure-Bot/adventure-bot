@@ -1,10 +1,15 @@
 import { REST } from '@discordjs/rest'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
-import { Client, Intents } from 'discord.js'
+import { Client, Intents, TextChannel } from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
 
+import {
+  getUserCharacters,
+  limitedCharacterEmbed,
+} from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
+import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
 import store from '@adventure-bot/game/store'
 import {
@@ -121,6 +126,29 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
     opts.onReady(client)
+    const channel = await client.channels.cache.get(
+      selectLastChannelUsed(store.getState())
+    )
+    if (!(channel instanceof TextChannel)) return
+    const thread = await channel.threads.create({
+      name: 'Characters',
+    })
+
+    const hook = await getHook({
+      name: 'Characters',
+      channel,
+    })
+
+    await hook?.send({
+      embeds: getUserCharacters()
+        .filter((character) => character.xp > 0)
+        .sort((a, b) => b.xp - a.xp)
+        .slice(0, 10)
+        .map((character) => limitedCharacterEmbed({ character })),
+      threadId: thread.id,
+    })
+
+    debugger
   })
 
   client.login(opts.token)

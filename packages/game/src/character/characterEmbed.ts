@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import {
   Character,
@@ -8,15 +8,11 @@ import {
 
 export function characterEmbed({
   character,
-  interaction,
 }: {
   character: Character
-  interaction: CommandInteraction
 }): MessageEmbed {
   return new MessageEmbed()
     .setTitle(decoratedName(character))
     .setImage(character.profile)
-    .addFields([
-      ...primaryStatFields({ characterId: character.id, interaction }),
-    ])
+    .addFields([...primaryStatFields({ characterId: character.id })])
 }

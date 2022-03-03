@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import {
   Character,
@@ -8,11 +8,9 @@ import {
 
 export function limitedCharacterEmbed({
   character,
-  interaction,
   adjustment = 0,
 }: {
   character: Character
-  interaction: CommandInteraction
   adjustment?: number
 }): MessageEmbed {
   return new MessageEmbed({
@@ -20,7 +18,6 @@ export function limitedCharacterEmbed({
     fields: primaryStatFields({
       characterId: character.id,
       adjustment,
-      interaction,
     }),
   }).setThumbnail(character.profile)
 }

@@ -42,11 +42,9 @@ export const execute = async (
   const thread = await channel.threads.create({
     name: `${character.name}'s inventory`,
   })
-  const webhooks = await channel.fetchWebhooks()
   const hook = await getHook({
     name: 'Inventory',
-    webhooks,
-    interaction,
+    channel,
   })
   if (!hook) {
     await interaction.followUp(`Inventory hook not found.`)

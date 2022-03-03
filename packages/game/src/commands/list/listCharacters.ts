@@ -20,13 +20,11 @@ export async function listCharacters(
     .filter((character) => character.xp > 0)
     .sort((a, b) => b.xp - a.xp)
     .slice(0, 10)
-    .map((character) => limitedCharacterEmbed({ character, interaction }))
-  const webhooks = await channel.fetchWebhooks()
+    .map((character) => limitedCharacterEmbed({ character }))
   interaction.editReply(`${character.name} sized up the competition.`)
   const hook = await getHook({
     name: 'Characters',
-    webhooks,
-    interaction,
+    channel,
   })
   await hook?.send({
     embeds,

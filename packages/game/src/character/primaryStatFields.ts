@@ -1,4 +1,4 @@
-import { CommandInteraction, EmbedFieldData } from 'discord.js'
+import { EmbedFieldData } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { hpBar } from '@adventure-bot/game/character'
@@ -11,7 +11,6 @@ export function primaryStatFields({
 }: {
   characterId: string
   adjustment?: number
-  interaction: CommandInteraction
 }): EmbedFieldData[] {
   const character = selectCharacterById(store.getState(), characterId)
   if (!character) return []

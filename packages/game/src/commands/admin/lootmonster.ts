@@ -39,7 +39,6 @@ export const execute = async (
       monsterEmbed(updatedMonster),
       characterEmbed({
         character: getCharacterUpdate(character),
-        interaction,
       }).addFields(...inventoryFields(character)),
     ].concat(result ? lootResultEmbed({ result, interaction }) : []),
   })

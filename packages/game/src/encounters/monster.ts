@@ -57,11 +57,9 @@ export const monster = async (
     startMessage: message,
   })
 
-  const webhooks = await channel.fetchWebhooks()
   const hook = await getHook({
     name: 'Combat',
-    webhooks,
-    interaction,
+    channel,
   })
 
   while (
