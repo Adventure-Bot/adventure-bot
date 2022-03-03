@@ -13,6 +13,7 @@ import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
 import store from '@adventure-bot/game/store'
 import {
+  characterListCreated,
   commandUsed,
   tick,
   winnerDeclared,
@@ -126,29 +127,8 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
     opts.onReady(client)
-    const channel = await client.channels.cache.get(
-      selectLastChannelUsed(store.getState())
-    )
-    if (!(channel instanceof TextChannel)) return
-    const thread = await channel.threads.create({
-      name: 'Characters',
-    })
 
-    const hook = await getHook({
-      name: 'Characters',
-      channel,
-    })
-
-    await hook?.send({
-      embeds: getUserCharacters()
-        .filter((character) => character.xp > 0)
-        .sort((a, b) => b.xp - a.xp)
-        .slice(0, 10)
-        .map((character) => limitedCharacterEmbed({ character })),
-      threadId: thread.id,
-    })
-
-    debugger
+    showCharacterList(client)
   })
 
   client.login(opts.token)
@@ -178,4 +158,31 @@ export const gameClock: () => void = () => {
   const serverTick = () => store.dispatch(tick())
   serverTick()
   setInterval(serverTick, 6000)
+}
+
+async function showCharacterList(client: Client) {
+  const threadId = store.getState().characters.listThreadId
+  if (threadId) return
+  const channel = client.channels.cache.get(
+    selectLastChannelUsed(store.getState())
+  )
+  if (!(channel instanceof TextChannel)) return
+  const thread = await channel.threads.create({
+    name: 'Characters',
+  })
+  store.dispatch(characterListCreated({ threadId: thread.id }))
+
+  const hook = await getHook({
+    name: 'Characters',
+    channel,
+  })
+
+  await hook?.send({
+    embeds: getUserCharacters()
+      .filter((character) => character.xp > 0)
+      .sort((a, b) => b.xp - a.xp)
+      .slice(0, 10)
+      .map((character) => limitedCharacterEmbed({ character })),
+    threadId: thread.id,
+  })
 }
