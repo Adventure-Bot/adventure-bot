@@ -3,13 +3,13 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import { getUserCharacter, statField } from '@adventure-bot/game/character'
 import store from '@adventure-bot/game/store'
-import { grantDivineBlessing } from '@adventure-bot/game/store/slices/characters'
+import { divineBlessingGranted } from '@adventure-bot/game/store/slices/characters'
 import { asset } from '@adventure-bot/game/utils'
 
 export const divineBlessing = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  store.dispatch(grantDivineBlessing(interaction.user.id))
+  store.dispatch(divineBlessingGranted(interaction.user.id))
   const art = asset('fantasy', 'magic', 'a divine blessing')
   const character = getUserCharacter(interaction.user)
 
