@@ -3,10 +3,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import { PERSIST, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 
 import * as actionCreators from '@adventure-bot/game/store/actions'
-import {
-  persistMigrate,
-  persistVersion,
-} from '@adventure-bot/game/store/migrations'
 import rootReducer from '@adventure-bot/game/store/reducers'
 import { disk } from '@adventure-bot/game/store/storage'
 
@@ -32,8 +28,6 @@ const persistedReducer = persistReducer(
   {
     key: 'root',
     storage: disk,
-    version: persistVersion,
-    migrate: persistMigrate,
   },
   rootReducer
 )
