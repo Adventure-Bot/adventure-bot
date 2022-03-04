@@ -1,8 +1,10 @@
 import { REST } from '@discordjs/rest'
+import { isAnyOf } from '@reduxjs/toolkit'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
 import { Client, Intents, TextChannel } from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
+import { debounce } from 'ts-debounce'
 
 import {
   getUserCharacters,
@@ -18,11 +20,33 @@ import {
   tick,
   winnerDeclared,
 } from '@adventure-bot/game/store/actions'
+import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import {
   selectLastChannelUsed,
   selectSovereign,
   selectWinnerAnnounced,
 } from '@adventure-bot/game/store/selectors'
+import {
+  cleansed,
+  cooldownStarted,
+  created,
+  damaged,
+  divineBlessingGranted,
+  effectAdded,
+  goldGained,
+  goldSet,
+  healed,
+  healthSet,
+  itemEquipped,
+  itemGiven,
+  itemRemoved,
+  itemSold,
+  profileSet,
+  questCompleted,
+  questGranted,
+  questProgressed,
+  xpAwarded,
+} from '@adventure-bot/game/store/slices/characters'
 
 type ClientOptions = {
   type: 'discord'
@@ -128,7 +152,34 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     console.timeEnd('discord client ready')
     opts.onReady(client)
 
-    showCharacterList(client)
+    createCharacterList(client)
+
+    startAppListening({
+      matcher: isAnyOf(
+        created,
+        questProgressed,
+        cleansed,
+        cooldownStarted,
+        damaged,
+        effectAdded,
+        goldGained,
+        goldSet,
+        divineBlessingGranted,
+        questGranted,
+        healed,
+        healthSet,
+        itemEquipped,
+        itemGiven,
+        itemRemoved,
+        itemSold,
+        profileSet,
+        questCompleted,
+        xpAwarded
+      ),
+      effect: () => {
+        debouncedUpdateCharacterList(client)
+      },
+    })
   })
 
   client.login(opts.token)
@@ -160,7 +211,7 @@ export const gameClock: () => void = () => {
   setInterval(serverTick, 6000)
 }
 
-async function showCharacterList(client: Client) {
+async function createCharacterList(client: Client) {
   const threadId = store.getState().characters.listThreadId
   if (threadId) return
   const channel = client.channels.cache.get(
@@ -184,5 +235,30 @@ async function showCharacterList(client: Client) {
       .slice(0, 10)
       .map((character) => limitedCharacterEmbed({ character })),
     threadId: thread.id,
+  })
+}
+
+const debouncedUpdateCharacterList = debounce(updateCharacterList, 500)
+
+async function updateCharacterList(client: Client) {
+  console.log('updateCharacterList')
+  const threadId = store.getState().characters.listThreadId
+  if (!threadId) return
+  const channel = client.channels.cache.get(
+    selectLastChannelUsed(store.getState())
+  )
+  if (!(channel instanceof TextChannel)) return
+  const thread = await channel.threads.fetch(threadId)
+  if (!thread) {
+    createCharacterList(client)
+    return
+  }
+  const messages = await thread.messages.fetch()
+  messages.first()?.edit({
+    embeds: getUserCharacters()
+      .filter((character) => character.xp > 0)
+      .sort((a, b) => b.xp - a.xp)
+      .slice(0, 10)
+      .map((character) => limitedCharacterEmbed({ character })),
   })
 }

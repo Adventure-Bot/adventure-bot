@@ -50,13 +50,14 @@
   "dependencies": {
     "@discordjs/builders": "^0.8.1",
     "@discordjs/rest": "^0.1.0-canary.0",
-    "@reduxjs/toolkit": "^1.6.2",
+    "@reduxjs/toolkit": "^1.8.0",
     "discord-api-types": "^0.24.0",
     "discord.js": "^13.3.0",
     "javascript-stringify": "^2.1.0",
     "mkdirp": "^1.0.4",
     "moment": "^2.29.1",
     "redux-persist": "^6.0.0",
-    "remeda": "^0.0.30"
+    "remeda": "^0.0.30",
+    "ts-debounce": "^4.0.0"
   }
 }

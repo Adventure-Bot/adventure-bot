@@ -132,7 +132,7 @@ const characterSlice = createSlice({
       state.charactersById[characterId].gold += amount
     },
 
-    grantDivineBlessing(state, action: PayloadAction<string>) {
+    divineBlessingGranted(state, action: PayloadAction<string>) {
       const character = state.charactersById[action.payload]
       if (!character) return
       character.maxHP += 1
@@ -348,7 +348,7 @@ export const {
   effectAdded,
   goldGained,
   goldSet,
-  grantDivineBlessing,
+  divineBlessingGranted,
   questGranted,
   healed,
   healthSet,
