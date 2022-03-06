@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": ".build",
+    "baseUrl": ".",
+    "composite": true,
+    "declaration": true,
+    "paths": {
+      "@adventure-bot/db/*": ["./*"]
+    },
+    "plugins": [{ "transform": "typescript-transform-paths" }]
+  },
+  "exclude": ["node_modules", "**/*.js", "scripts/**/*.ts"],
+  "include": ["./index.ts"]
+}

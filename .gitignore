@@ -1,14 +1,6 @@
-# API keys and secrets
 .env
-
-# Dependency directory
 node_modules
-
-# Ignore built ts files
 .build
-build
-build/**/*
-
 .DS_Store
 db/*
 .DS_Store
@@ -16,3 +8,4 @@ asset-manifest.ts
 *.blend1
 .command-hash
 .next
+*.log
