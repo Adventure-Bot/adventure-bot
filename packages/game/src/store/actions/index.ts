@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { CommandInteraction } from 'discord.js'
+import { CommandInteraction, Message } from 'discord.js'
 
 import { Character } from '@adventure-bot/game/character'
 import { Item } from '@adventure-bot/game/equipment/Item'
@@ -17,3 +17,8 @@ export const backdateCrown = createAction('backdateCrown') // for testing
 export const characterListCreated = createAction<{ threadId: string }>(
   'characterListCreated'
 )
+
+export const characterMessageCreated = createAction<{
+  character: Character
+  message: Message
+}>('characterMessageCreated')
