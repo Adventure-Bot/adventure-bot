@@ -2,7 +2,13 @@ import { REST } from '@discordjs/rest'
 import { isAnyOf } from '@reduxjs/toolkit'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
-import { Client, Intents, Message, TextChannel } from 'discord.js'
+import {
+  Client,
+  Intents,
+  Message,
+  TextChannel,
+  ThreadChannel,
+} from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
 import { debounce } from 'ts-debounce'
 
@@ -11,11 +17,10 @@ import {
   limitedCharacterEmbed,
 } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
-import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
 import store from '@adventure-bot/game/store'
 import {
-  characterListCreated,
+  characterListThreadCreated,
   characterMessageCreated,
   commandUsed,
   tick,
@@ -153,34 +158,7 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     console.timeEnd('discord client ready')
     opts.onReady(client)
 
-    createCharacterList(client)
-
-    startAppListening({
-      matcher: isAnyOf(
-        created,
-        questProgressed,
-        cleansed,
-        cooldownStarted,
-        damaged,
-        effectAdded,
-        goldGained,
-        goldSet,
-        divineBlessingGranted,
-        questGranted,
-        healed,
-        healthSet,
-        itemEquipped,
-        itemGiven,
-        itemRemoved,
-        itemSold,
-        profileSet,
-        questCompleted,
-        xpAwarded
-      ),
-      effect: () => {
-        debouncedUpdateCharacterList(client)
-      },
-    })
+    renderCharacterList(client)
   })
 
   client.login(opts.token)
@@ -212,84 +190,86 @@ export const gameClock: () => void = () => {
   setInterval(serverTick, 6000)
 }
 
-async function createCharacterList(client: Client) {
-  const threadId = store.getState().characters.listThreadId
-  if (threadId) return
-  const channel = client.channels.cache.get(
-    selectLastChannelUsed(store.getState())
-  )
-  if (!(channel instanceof TextChannel)) return
-  const thread = await channel.threads.create({
-    name: 'Characters',
-  })
-  store.dispatch(characterListCreated({ threadId: thread.id }))
+function renderCharacterList(client: Client<boolean>) {
+  listCharacters(client)
+  const debouncedUpdateCharacterList = debounce(listCharacters, 1000)
 
-  const hook = await getHook({
-    name: 'Characters',
-    channel,
-  })
-
-  const characters = getUserCharacters()
-    .filter((character) => character.xp > 0)
-    .sort((a, b) => b.xp - a.xp)
-
-  characters.map(async (character) => {
-    const message = await hook?.send({
-      embeds: [limitedCharacterEmbed({ character })],
-      threadId: thread.id,
-    })
-    if (!(message instanceof Message)) return
-    store.dispatch(
-      characterMessageCreated({
-        character,
-        message,
-      })
-    )
+  startAppListening({
+    matcher: isAnyOf(
+      created,
+      questProgressed,
+      cleansed,
+      cooldownStarted,
+      damaged,
+      effectAdded,
+      goldGained,
+      goldSet,
+      divineBlessingGranted,
+      questGranted,
+      healed,
+      healthSet,
+      itemEquipped,
+      itemGiven,
+      itemRemoved,
+      itemSold,
+      profileSet,
+      questCompleted,
+      xpAwarded
+    ),
+    effect: () => {
+      debouncedUpdateCharacterList(client)
+    },
   })
 }
 
-const debouncedUpdateCharacterList = debounce(updateCharacterList, 1000)
-
-async function updateCharacterList(client: Client) {
-  console.log('updateCharacterList')
-  const threadId = store.getState().characters.listThreadId
-  const messageIdsByCharacterId =
-    store.getState().characterList.messageIdsByCharacterId
-  const characters = getUserCharacters()
-    .filter((character) => character.xp > 0)
-    .sort((a, b) => b.xp - a.xp)
-
-  if (!threadId) return
+async function findOrCreateCharacterListThread(
+  client: Client
+): Promise<ThreadChannel | void> {
   const channel = client.channels.cache.get(
     selectLastChannelUsed(store.getState())
   )
   if (!(channel instanceof TextChannel)) return
-  const thread = await channel.threads.fetch(threadId)
-  if (!thread) {
-    createCharacterList(client)
-    return
-  }
-  const messages = await thread.messages.fetch()
-  characters.map(async (character) => {
-    if (!messageIdsByCharacterId[character.id]) {
-      const message = await thread.send({
-        embeds: [limitedCharacterEmbed({ character })],
-      })
-      if (!(message instanceof Message)) return
-      store.dispatch(
-        characterMessageCreated({
-          character,
-          message,
-        })
-      )
-    } else {
-      const message = messages.find(
-        (message) => message.id === messageIdsByCharacterId[character.id]
-      )
-      if (!(message instanceof Message)) return
-      message.edit({
-        embeds: [limitedCharacterEmbed({ character })],
-      })
-    }
+  const threadId = store.getState().characterList.threadId
+  const existingThread = channel.threads.cache.find(
+    (thread) => thread.id === threadId
+  )
+  if (existingThread) return existingThread
+  const thread = await channel.threads.create({
+    name: 'Characters',
   })
+  store.dispatch(characterListThreadCreated(thread))
+  return thread
+}
+
+async function listCharacters(client: Client) {
+  const thread = await findOrCreateCharacterListThread(client)
+  if (!thread) return
+  const { messageIdsByCharacterId } = store.getState().characterList
+  console.log('listCharacters')
+  const messages = await thread.messages.fetch()
+  getUserCharacters()
+    .filter((character) => character.xp > 0)
+    .sort((a, b) => b.xp - a.xp)
+    .map(async (character) => {
+      if (!messageIdsByCharacterId[character.id]) {
+        const message = await thread.send({
+          embeds: [limitedCharacterEmbed({ character })],
+        })
+        if (!(message instanceof Message)) return
+        store.dispatch(
+          characterMessageCreated({
+            character,
+            message,
+          })
+        )
+      } else {
+        const message = messages.find(
+          (message) => message.id === messageIdsByCharacterId[character.id]
+        )
+        if (!(message instanceof Message)) return
+        await message.edit({
+          embeds: [limitedCharacterEmbed({ character })],
+        })
+      }
+    })
 }

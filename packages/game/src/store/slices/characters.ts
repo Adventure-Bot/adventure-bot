@@ -21,11 +21,7 @@ import {
 import { Monster } from '@adventure-bot/game/monster'
 import { QuestId, quests } from '@adventure-bot/game/quest'
 import { StatusEffect } from '@adventure-bot/game/statusEffects'
-import {
-  characterListCreated,
-  itemReceived,
-  newGame,
-} from '@adventure-bot/game/store/actions'
+import { itemReceived, newGame } from '@adventure-bot/game/store/actions'
 import { characterLooted } from '@adventure-bot/game/store/slices/loots'
 
 export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
@@ -46,7 +42,6 @@ const characterSlice = createSlice({
   initialState: {
     charactersById,
     roamingMonsters,
-    listThreadId: '',
   },
   reducers: {
     cleansed(state, action: PayloadAction<{ characterId: string }>) {
@@ -333,9 +328,6 @@ const characterSlice = createSlice({
         const character = state.charactersById[characterId]
         if (!character) return
         character.inventory.push(item)
-      })
-      .addCase(characterListCreated, (state, action) => {
-        state.listThreadId = action.payload.threadId
       })
   },
 })
