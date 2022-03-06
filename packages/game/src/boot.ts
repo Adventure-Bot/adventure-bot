@@ -2,7 +2,7 @@ import { REST } from '@discordjs/rest'
 import { isAnyOf } from '@reduxjs/toolkit'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
-import { Client, Intents, TextChannel } from 'discord.js'
+import { Client, Intents, Message, TextChannel } from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
 import { debounce } from 'ts-debounce'
 
@@ -16,6 +16,7 @@ import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
 import store from '@adventure-bot/game/store'
 import {
   characterListCreated,
+  characterMessageCreated,
   commandUsed,
   tick,
   winnerDeclared,
@@ -228,21 +229,36 @@ async function createCharacterList(client: Client) {
     channel,
   })
 
-  await hook?.send({
-    embeds: getUserCharacters()
-      .filter((character) => character.xp > 0)
-      .sort((a, b) => b.xp - a.xp)
-      .slice(0, 10)
-      .map((character) => limitedCharacterEmbed({ character })),
-    threadId: thread.id,
+  const characters = getUserCharacters()
+    .filter((character) => character.xp > 0)
+    .sort((a, b) => b.xp - a.xp)
+
+  characters.map(async (character) => {
+    const message = await hook?.send({
+      embeds: [limitedCharacterEmbed({ character })],
+      threadId: thread.id,
+    })
+    if (!(message instanceof Message)) return
+    store.dispatch(
+      characterMessageCreated({
+        character,
+        message,
+      })
+    )
   })
 }
 
-const debouncedUpdateCharacterList = debounce(updateCharacterList, 500)
+const debouncedUpdateCharacterList = debounce(updateCharacterList, 1000)
 
 async function updateCharacterList(client: Client) {
   console.log('updateCharacterList')
   const threadId = store.getState().characters.listThreadId
+  const messageIdsByCharacterId =
+    store.getState().characterList.messageIdsByCharacterId
+  const characters = getUserCharacters()
+    .filter((character) => character.xp > 0)
+    .sort((a, b) => b.xp - a.xp)
+
   if (!threadId) return
   const channel = client.channels.cache.get(
     selectLastChannelUsed(store.getState())
@@ -254,11 +270,26 @@ async function updateCharacterList(client: Client) {
     return
   }
   const messages = await thread.messages.fetch()
-  messages.first()?.edit({
-    embeds: getUserCharacters()
-      .filter((character) => character.xp > 0)
-      .sort((a, b) => b.xp - a.xp)
-      .slice(0, 10)
-      .map((character) => limitedCharacterEmbed({ character })),
+  characters.map(async (character) => {
+    if (!messageIdsByCharacterId[character.id]) {
+      const message = await thread.send({
+        embeds: [limitedCharacterEmbed({ character })],
+      })
+      if (!(message instanceof Message)) return
+      store.dispatch(
+        characterMessageCreated({
+          character,
+          message,
+        })
+      )
+    } else {
+      const message = messages.find(
+        (message) => message.id === messageIdsByCharacterId[character.id]
+      )
+      if (!(message instanceof Message)) return
+      message.edit({
+        embeds: [limitedCharacterEmbed({ character })],
+      })
+    }
   })
 }

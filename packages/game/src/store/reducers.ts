@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
+import characterList from '@adventure-bot/game/store/slices/characterList'
 import characters from '@adventure-bot/game/store/slices/characters'
 import characters2 from '@adventure-bot/game/store/slices/characters2'
 import commands from '@adventure-bot/game/store/slices/commands'
@@ -11,6 +12,7 @@ import loots from '@adventure-bot/game/store/slices/loots'
 
 const rootReducer = combineReducers({
   characters,
+  characterList,
   characters2,
   commands,
   cooldowns,
