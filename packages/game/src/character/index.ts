@@ -28,6 +28,7 @@ import { hpBarField } from '@adventure-bot/game/character/hpBar/hpBarField'
 import { inventoryFields } from '@adventure-bot/game/character/inventoryFields'
 import { isCharacterOnCooldown } from '@adventure-bot/game/character/isCharacterOnCooldown'
 import { limitedCharacterEmbed } from '@adventure-bot/game/character/limitedCharacterEmbed'
+import { renderCharacterList } from '@adventure-bot/game/character/list/renderCharacterList'
 import {
   LootResult,
   equipmentFilter,
@@ -82,4 +83,5 @@ export {
   defaultCooldowns,
   getUserCharacters,
   equipmentFilter,
+  renderCharacterList,
 }

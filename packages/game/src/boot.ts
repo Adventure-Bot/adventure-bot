@@ -1,58 +1,23 @@
 import { REST } from '@discordjs/rest'
-import { isAnyOf } from '@reduxjs/toolkit'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
-import {
-  Client,
-  Intents,
-  Message,
-  TextChannel,
-  ThreadChannel,
-} from 'discord.js'
+import { Client, Intents } from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
-import { debounce } from 'ts-debounce'
 
-import {
-  getUserCharacters,
-  limitedCharacterEmbed,
-} from '@adventure-bot/game/character'
+import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
 import store from '@adventure-bot/game/store'
 import {
-  characterListThreadCreated,
-  characterMessageCreated,
   commandUsed,
   tick,
   winnerDeclared,
 } from '@adventure-bot/game/store/actions'
-import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import {
   selectLastChannelUsed,
   selectSovereign,
   selectWinnerAnnounced,
 } from '@adventure-bot/game/store/selectors'
-import {
-  cleansed,
-  cooldownStarted,
-  created,
-  damaged,
-  divineBlessingGranted,
-  effectAdded,
-  goldGained,
-  goldSet,
-  healed,
-  healthSet,
-  itemEquipped,
-  itemGiven,
-  itemRemoved,
-  itemSold,
-  profileSet,
-  questCompleted,
-  questGranted,
-  questProgressed,
-  xpAwarded,
-} from '@adventure-bot/game/store/slices/characters'
 
 type ClientOptions = {
   type: 'discord'
@@ -188,88 +153,4 @@ export const gameClock: () => void = () => {
   const serverTick = () => store.dispatch(tick())
   serverTick()
   setInterval(serverTick, 6000)
-}
-
-function renderCharacterList(client: Client<boolean>) {
-  listCharacters(client)
-  const debouncedUpdateCharacterList = debounce(listCharacters, 1000)
-
-  startAppListening({
-    matcher: isAnyOf(
-      created,
-      questProgressed,
-      cleansed,
-      cooldownStarted,
-      damaged,
-      effectAdded,
-      goldGained,
-      goldSet,
-      divineBlessingGranted,
-      questGranted,
-      healed,
-      healthSet,
-      itemEquipped,
-      itemGiven,
-      itemRemoved,
-      itemSold,
-      profileSet,
-      questCompleted,
-      xpAwarded
-    ),
-    effect: () => {
-      debouncedUpdateCharacterList(client)
-    },
-  })
-}
-
-async function findOrCreateCharacterListThread(
-  client: Client
-): Promise<ThreadChannel | void> {
-  const channel = client.channels.cache.get(
-    selectLastChannelUsed(store.getState())
-  )
-  if (!(channel instanceof TextChannel)) return
-  const threadId = store.getState().characterList.threadId
-  const existingThread = channel.threads.cache.find(
-    (thread) => thread.id === threadId
-  )
-  if (existingThread) return existingThread
-  const thread = await channel.threads.create({
-    name: 'Characters',
-  })
-  store.dispatch(characterListThreadCreated(thread))
-  return thread
-}
-
-async function listCharacters(client: Client) {
-  const thread = await findOrCreateCharacterListThread(client)
-  if (!thread) return
-  const { messageIdsByCharacterId } = store.getState().characterList
-  console.log('listCharacters')
-  const messages = await thread.messages.fetch()
-  getUserCharacters()
-    .filter((character) => character.xp > 0)
-    .sort((a, b) => b.xp - a.xp)
-    .map(async (character) => {
-      if (!messageIdsByCharacterId[character.id]) {
-        const message = await thread.send({
-          embeds: [limitedCharacterEmbed({ character })],
-        })
-        if (!(message instanceof Message)) return
-        store.dispatch(
-          characterMessageCreated({
-            character,
-            message,
-          })
-        )
-      } else {
-        const message = messages.find(
-          (message) => message.id === messageIdsByCharacterId[character.id]
-        )
-        if (!(message instanceof Message)) return
-        await message.edit({
-          embeds: [limitedCharacterEmbed({ character })],
-        })
-      }
-    })
 }
