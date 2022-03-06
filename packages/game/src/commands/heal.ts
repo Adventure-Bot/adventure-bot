@@ -2,7 +2,11 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
-import { getUserCharacter, hpBarField } from '@adventure-bot/game/character'
+import {
+  decoratedName,
+  getUserCharacter,
+  hpBarField,
+} from '@adventure-bot/game/character'
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
 import quests from '@adventure-bot/game/commands/quests'
 import { heal } from '@adventure-bot/game/heal/heal'
@@ -23,18 +27,13 @@ export const command = new SlashCommandBuilder()
 export const execute = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const target =
+  const target = getUserCharacter(
     (interaction.options.data[0] && interaction.options.data[0].user) ||
-    interaction.user
+      interaction.user
+  )
 
-  const healer = interaction.user
-  if (!target) {
-    await interaction.editReply(`You must specify a target @player`)
-    return
-  }
+  const healer = getUserCharacter(interaction.user)
 
-  // TODO: a better way?
-  getUserCharacter(target) // ensure character exists for proper interactions
   const result = heal(healer.id, target.id)
   if (!result) {
     interaction.editReply('No result. This should not happen.')
@@ -44,32 +43,31 @@ export const execute = async (
     await cooldowns.execute(interaction)
     return
   }
-  const character = updateUserQuestProgess(healer, 'healer', result.amount)
+  updateUserQuestProgess(interaction.user, 'healer', result.amount)
 
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: `${healer.username} ${
-          healer.username === target.username
+        title: `${decoratedName(healer)} ${
+          healer.id === target.id
             ? 'self healed'
-            : 'healed ' + target.username
+            : 'healed ' + decoratedName(target)
         } for ${EmojiModifier('heal', result.amount)}`,
         fields: [
           hpBarField({
-            character: getUserCharacter(target),
+            character: target,
             adjustment: result.amount,
           }),
         ].concat(
-          character.quests.healer
-            ? questProgressField(character.quests.healer)
-            : []
+          healer.quests.healer ? questProgressField(healer.quests.healer) : []
         ),
       }).setImage(
         asset('fantasy', 'magic', 'a glowing hand applying healing magic').s3Url
       ),
     ].concat(),
   })
-  if (isUserQuestComplete(healer, 'healer')) await quests.execute(interaction)
+  if (isUserQuestComplete(interaction.user, 'healer'))
+    await quests.execute(interaction)
 }
 
 export default { command, execute }
