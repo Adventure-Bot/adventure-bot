@@ -3,7 +3,10 @@ import { configureStore } from '@reduxjs/toolkit'
 import { PERSIST, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 
 import * as actionCreators from '@adventure-bot/game/store/actions'
-import { listenerMiddleware } from '@adventure-bot/game/store/listenerMiddleware'
+import {
+  persistMigrate,
+  persistVersion,
+} from '@adventure-bot/game/store/migrations'
 import rootReducer from '@adventure-bot/game/store/reducers'
 import { disk } from '@adventure-bot/game/store/storage'
 
@@ -29,6 +32,8 @@ const persistedReducer = persistReducer(
   {
     key: 'root',
     storage: disk,
+    version: persistVersion,
+    migrate: persistMigrate,
   },
   rootReducer
 )
@@ -42,7 +47,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [PERSIST, REHYDRATE],
       },
-    }).prepend(listenerMiddleware.middleware),
+    }),
 })
 
 // ts-prune-ignore-next
