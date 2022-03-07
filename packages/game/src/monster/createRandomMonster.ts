@@ -14,6 +14,6 @@ export function createRandomMonster(): Monster {
     [10, createGoblin],
     [10, createSlime],
     [10, createZombie],
-    [0.5, createDragon],
+    [1, createDragon],
   ])()
 }
