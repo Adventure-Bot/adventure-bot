@@ -8,7 +8,11 @@ import { getUserCharacter } from '@adventure-bot/game/character'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
 import { healerStatus } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
-import { newGame, winnerDeclared } from '@adventure-bot/game/store/actions'
+import {
+  newGame,
+  winnerDeclared,
+  winnerRevoked,
+} from '@adventure-bot/game/store/actions'
 import {
   effectAdded,
   goldSet,
@@ -49,6 +53,12 @@ export const command = new SlashCommandBuilder()
       .addUserOption((input) =>
         input.setName('winner').setDescription('The winner').setRequired(true)
       )
+  )
+  .addSubcommand((option) =>
+    option.setName('declare_winner_revoked').setDescription('Over ruled!')
+  )
+  .addSubcommand((option) =>
+    option.setName('display_leaderboard').setDescription('#winning')
   )
   .addSubcommand((option) =>
     option
@@ -93,6 +103,17 @@ export const execute = async (
       return
     case 'declare_winner':
       declareWinner(interaction)
+      interaction.editReply({
+        embeds: leaderboard(),
+      })
+      break
+    case 'declare_winner_revoked':
+      store.dispatch(winnerRevoked())
+      interaction.editReply({
+        embeds: leaderboard(),
+      })
+      break
+    case 'display_leaderboard':
       interaction.editReply({
         embeds: leaderboard(),
       })

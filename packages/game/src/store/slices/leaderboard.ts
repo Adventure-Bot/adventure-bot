@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { Character } from '@adventure-bot/game/character'
-import { commandUsed, winnerDeclared } from '@adventure-bot/game/store/actions'
+import {
+  commandUsed,
+  winnerDeclared,
+  winnerRevoked,
+} from '@adventure-bot/game/store/actions'
 
 type Score = { name: string; gold: number; wins: number; profile: string }
 
@@ -40,6 +44,16 @@ const leaderboardSlice = createSlice({
         currentScore.wins++
         currentScore.gold += winner.gold
         state.scoresByCharacter[winner.id] = currentScore
+        state.leaderboard = Object.values(state.scoresByCharacter).sort(
+          (a, b) => (b.wins == a.wins ? b.gold - a.gold : b.wins - a.wins)
+        )
+      })
+      .addCase(winnerRevoked, (state) => {
+        const winner = state.winners.pop()
+        if (!winner) return
+        const currentScore = state.scoresByCharacter[winner.id]
+        currentScore.wins--
+        currentScore.gold -= winner.gold
         state.leaderboard = Object.values(state.scoresByCharacter).sort(
           (a, b) => (b.wins == a.wins ? b.gold - a.gold : b.wins - a.wins)
         )

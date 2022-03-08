@@ -9,6 +9,7 @@ export const tick = createAction('tick')
 export const commandUsed = createAction<CommandInteraction>('commandUsed')
 export const winnerDeclared =
   createAction<{ winner: Character }>('winnerDeclared')
+export const winnerRevoked = createAction('winnerRevoked')
 export const itemReceived = createAction<{
   characterId: string
   item: Item
