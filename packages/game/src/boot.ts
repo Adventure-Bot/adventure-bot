@@ -95,7 +95,7 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     if (!interaction.isCommand()) return
     store.dispatch(commandUsed(interaction))
     console.log(`command ${interaction.commandName}`)
-    console.time(interaction.commandName)
+    console.time(interaction.commandName + ' ' + interaction.id)
     try {
       await interaction.deferReply()
       const command = commands.get(interaction.commandName)
@@ -114,7 +114,7 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
         console.error(`Failed to respond to interaction id ${interaction.id}`)
       }
     }
-    console.timeEnd(interaction.commandName)
+    console.timeEnd(interaction.commandName + ' ' + interaction.id)
   })
   client.on('error', opts.onError)
 
