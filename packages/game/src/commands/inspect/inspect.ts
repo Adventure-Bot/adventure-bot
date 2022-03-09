@@ -29,7 +29,6 @@ export const execute = async (
     (interaction.options.data[0] && interaction.options.data[0].user) ||
     interaction.user
   const character = getUserCharacter(user)
-  console.log(`inspect ${character.name}`, character)
 
   await interaction.followUp({
     embeds: [
