@@ -39,9 +39,7 @@ export const monster = async (
   let player = selectCharacterById(store.getState(), interaction.user.id)
   if (!player) return
 
-  console.log('monster encounter', monster, player)
   let encounter = createEncounter({ monster, player })
-  console.log('selected encounter', encounter)
   let timeout = false
   const message = await interaction.editReply({
     embeds: [encounterEmbed({ encounter, interaction })],
