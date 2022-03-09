@@ -45,7 +45,11 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [PERSIST, REHYDRATE],
+        ignoredActions: [
+          PERSIST,
+          REHYDRATE,
+          actionCreators.commandUsed.toString(),
+        ],
       },
     }),
 })
