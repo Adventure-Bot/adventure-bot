@@ -21,7 +21,7 @@
       "cwd": "${workspaceFolder}",
       "runtimeVersion": "16",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["prune:watch"],
+      "runtimeArgs": ["game", "prune-imports:watch"],
       "console": "integratedTerminal"
     },
     {
