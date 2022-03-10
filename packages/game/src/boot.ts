@@ -6,7 +6,7 @@ import { readFile, writeFile } from 'fs/promises'
 
 import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
-import { announceLoots as announceCrownLoots } from '@adventure-bot/game/crown/announceLoots'
+import { announceCrownLoots } from '@adventure-bot/game/crown/announceLoots'
 import { declareWinners } from '@adventure-bot/game/crown/declareWinners'
 import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'

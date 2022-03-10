@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { PERSIST, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 
 import * as actionCreators from '@adventure-bot/game/store/actions'
+import { listenerMiddleware } from '@adventure-bot/game/store/listenerMiddleware'
 import {
   persistMigrate,
   persistVersion,
@@ -51,7 +52,7 @@ const store = configureStore({
           actionCreators.commandUsed.toString(),
         ],
       },
-    }),
+    }).prepend(listenerMiddleware.middleware),
 })
 
 // ts-prune-ignore-next
