@@ -40,5 +40,5 @@ export const declareWinners: (client: Client) => void = (client) => {
         })
       )
     }
-  }, 100)
+  }, 60 * 1000)
 }
