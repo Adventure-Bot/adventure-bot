@@ -1,13 +1,11 @@
 import { randomUUID } from 'crypto'
-import { CommandInteraction, MessageEmbed } from 'discord.js'
-import moment from 'moment'
+import { CommandInteraction } from 'discord.js'
 import { values } from 'remeda'
 
 import { Character, getCharacter } from '@adventure-bot/game/character'
 import { Item } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { characterLooted } from '@adventure-bot/game/store/slices/loots'
-import { crownArt } from '@adventure-bot/game/utils'
 
 export type LootResult = {
   id: string
@@ -20,43 +18,9 @@ export type LootResult = {
 
 const isLootable = (item: Item): boolean => item.lootable ?? false
 
-const crownLootedAnnouncement = async ({
-  loot,
-  interaction,
-}: {
-  loot: LootResult
-  interaction: CommandInteraction
-}): Promise<void> => {
-  const looter = getCharacter(loot.looterId)
-  if (!looter) return
-  const { s3Url } = crownArt()
-  interaction.channel?.send({
-    embeds: [
-      new MessageEmbed({
-        title: `👑 ${looter.name} has the crown!`,
-        color: 'YELLOW',
-        description: [
-          `Attention @here!`,
-          ``,
-          `${looter.name} has acquired the crown and their rule will become sovereign at:`,
-          ``,
-          moment()
-            .add(1, 'days')
-            .format('h:mm a [on] dddd, [the] Do [day of] MMMM, YYYY'),
-          ``,
-          `If you do not wish to submit to their rule, rise up!`,
-        ].join('\n'),
-      })
-        .setImage(s3Url)
-        .setThumbnail(looter.profile),
-    ],
-  })
-}
-
 export async function loot({
   looterId,
   targetId,
-  interaction,
 }: {
   looterId: string
   targetId: string
@@ -77,8 +41,6 @@ export async function loot({
     timestamp: new Date().toString(),
   }
   store.dispatch(characterLooted(loot))
-  const crownTaken = loot.itemsTaken.some((item) => item.name === 'heavy crown')
-  if (crownTaken) await crownLootedAnnouncement({ loot, interaction })
   return loot
 }
 

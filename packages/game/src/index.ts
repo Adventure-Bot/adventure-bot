@@ -1,10 +1,7 @@
 import { Client } from 'discord.js'
 
-import {
-  createClient,
-  gameClock,
-  waitForWinner,
-} from '@adventure-bot/game/boot'
+import { createClient } from '@adventure-bot/game/boot'
+import { declareWinners } from '@adventure-bot/game/crown/declareWinners'
 import { assertEnv } from '@adventure-bot/game/env'
 
 assertEnv()
@@ -21,7 +18,6 @@ createClient({
   onError: (e) => console.error('Discord client error!', e),
 
   onReady: (client) => {
-    gameClock()
-    waitForWinner(client)
+    declareWinners(client)
   },
 }).then((c) => (client = c))
