@@ -141,9 +141,6 @@ export const selectIsHeavyCrownInPlay = (state: ReduxState): boolean =>
 export const selectBearer = (state: ReduxState): Character | undefined =>
   state.characters.charactersById[state.crown.bearerId]
 
-export const selectWinnerAnnounced = (state: ReduxState): boolean =>
-  state.crown.announced
-
 export const selectLeaderBoard = (
   state: ReduxState
 ): typeof state.leaderboard => state.leaderboard
