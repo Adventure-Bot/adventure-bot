@@ -7,5 +7,5 @@ export const might: TemplateEffect = {
   modifiers: {
     damageMax: 2,
   },
-  duration: 30 * 60000,
+  duration: 60 * 60000,
 }

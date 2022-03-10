@@ -7,5 +7,5 @@ export const aggression: TemplateEffect = {
   modifiers: {
     attackBonus: 2,
   },
-  duration: 30 * 60000,
+  duration: 60 * 60000,
 }

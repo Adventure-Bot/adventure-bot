@@ -4,7 +4,7 @@ export const invigorated: TemplateEffect = {
   name: 'Invigorated',
   buff: true,
   debuff: false,
-  duration: 30 * 60000,
+  duration: 60 * 60000,
   modifiers: {
     maxHP: 2,
   },

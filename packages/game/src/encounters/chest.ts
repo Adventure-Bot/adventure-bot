@@ -300,7 +300,7 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
               modifiers: {
                 attackBonus: -2,
               },
-              duration: 30 * 60000,
+              duration: 60 * 60000,
               started: new Date().toString(),
             },
           })
@@ -318,7 +318,7 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
               modifiers: {
                 ac: -2,
               },
-              duration: 30 * 60000,
+              duration: 60 * 60000,
               started: new Date().toString(),
             },
           })

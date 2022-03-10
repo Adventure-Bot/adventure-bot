@@ -7,5 +7,5 @@ export const slayer: TemplateEffect = {
   modifiers: {
     monsterDamageMax: 3,
   },
-  duration: 30 * 60000,
+  duration: 60 * 60000,
 }
