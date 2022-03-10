@@ -6,18 +6,10 @@ import { readFile, writeFile } from 'fs/promises'
 
 import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
-import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
+import { announceLoots as announceCrownLoots } from '@adventure-bot/game/crown/announceLoots'
+import { declareWinners } from '@adventure-bot/game/crown/declareWinners'
 import store from '@adventure-bot/game/store'
-import {
-  commandUsed,
-  tick,
-  winnerDeclared,
-} from '@adventure-bot/game/store/actions'
-import {
-  selectLastChannelUsed,
-  selectSovereign,
-  selectWinnerAnnounced,
-} from '@adventure-bot/game/store/selectors'
+import { commandUsed } from '@adventure-bot/game/store/actions'
 
 type ClientOptions = {
   type: 'discord'
@@ -122,6 +114,8 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
     opts.onReady(client)
+    declareWinners(client)
+    announceCrownLoots(client)
 
     renderCharacterList(client)
   })
@@ -129,28 +123,4 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
   client.login(opts.token)
 
   return client
-}
-
-export const waitForWinner: (client: Client) => void = (client) => {
-  store.subscribe(() => {
-    const state = store.getState()
-    const sovereign = selectSovereign(state)
-    const announced = selectWinnerAnnounced(state)
-    if (sovereign && !announced) {
-      const lastChannelId = selectLastChannelUsed(state)
-      const channel = client.channels.cache.get(lastChannelId)
-      if (!channel?.isText()) return
-      channel.send({
-        content: `👑 ${sovereign.name} has claimed the crown! Game over!`,
-        embeds: leaderboard(),
-      })
-      store.dispatch(winnerDeclared({ winner: sovereign }))
-    }
-  })
-}
-
-export const gameClock: () => void = () => {
-  const serverTick = () => store.dispatch(tick())
-  serverTick()
-  setInterval(serverTick, 6000)
 }
