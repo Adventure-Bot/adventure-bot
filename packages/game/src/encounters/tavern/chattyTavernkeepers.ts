@@ -2,7 +2,6 @@ import {
   CommandInteraction,
   Message,
   MessageActionRow,
-  MessageAttachment,
   MessageEmbed,
   MessageSelectMenu,
 } from 'discord.js'
@@ -18,6 +17,7 @@ import { isQuestId, questEmbed, quests } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { selectAvailableQuests } from '@adventure-bot/game/store/selectors'
 import { questGranted } from '@adventure-bot/game/store/slices/characters'
+import { asset } from '@adventure-bot/game/utils'
 
 export const chattyTavernkeepers = async (
   interaction: CommandInteraction,
@@ -30,13 +30,12 @@ export const chattyTavernkeepers = async (
 
   if (availableQuests.length === 0) {
     interaction[followUp ? 'followUp' : 'editReply']({
-      files: [new MessageAttachment('./images/Tavernkeepers.jpg')],
       embeds: [
         new MessageEmbed({
-          title: `${decoratedName(character)} met the Chatty Tavernkeepers!`,
+          title: `${decoratedName(character)} met a chatty tavernkeeper!`,
           description: `You're all caught up on the latest, friend!`,
         })
-          .setImage('attachment://Tavernkeepers.jpg')
+          .setImage(asset('fantasy', 'places', 'chatty tavernkeepers').s3Url)
           .setThumbnail(character.profile),
       ].concat(questEmbed(character) ?? []),
     })
@@ -44,15 +43,14 @@ export const chattyTavernkeepers = async (
   }
   const message = await interaction[followUp ? 'followUp' : 'editReply']({
     fetchReply: true,
-    files: [new MessageAttachment('./images/Tavernkeepers.jpg')],
     embeds: [
       new MessageEmbed({
-        title: `${decoratedName(character)} met the Chatty Tavernkeepers!`,
+        title: `${decoratedName(character)} met a chatty tavernkeeper!`,
         description:
           "Turns out they know someone's got a thing needs doing.\n\nCompensation? Of course!",
         fields: [xpGainField(1)],
       })
-        .setImage('attachment://Tavernkeepers.jpg')
+        .setImage(asset('fantasy', 'places', 'chatty tavernkeepers').s3Url)
         .setThumbnail(character.profile),
     ].concat(questEmbed(character) ?? []),
     components: [
@@ -95,9 +93,10 @@ export const chattyTavernkeepers = async (
     return
   }
   store.dispatch(questGranted({ characterId: character.id, questId }))
-  console.log(`quest accepted ${questId}`)
   await interaction.followUp(
-    `You have been charged with the ${quests[questId].title} quest.`
+    `${decoratedName(character)} was charged with the ${
+      quests[questId].title
+    } quest.`
   )
   await questsCommand.execute(interaction)
 }
