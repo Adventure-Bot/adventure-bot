@@ -1,6 +1,6 @@
 import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
 import { barFight } from '@adventure-bot/game/encounters/tavern/barFight'
 import { chattyTavernkeepers } from '@adventure-bot/game/encounters/tavern/chattyTavernkeepers'
 import { restfulNight } from '@adventure-bot/game/encounters/tavern/restfulNight'
@@ -16,10 +16,12 @@ export const tavern = async (
   const message = await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: 'Tavern',
+        title: `${decoratedName(character)} found a tavern.`,
         color: '#964B00',
         description: `You find a tavern and hope for a soft bed, warm meal, and strong drink...`,
-      }).setImage(asset('fantasy', 'places', 'tavern').s3Url),
+      })
+        .setImage(asset('fantasy', 'places', 'tavern').s3Url)
+        .setThumbnail(character.profile),
     ],
   })
   if (!(message instanceof Message)) return

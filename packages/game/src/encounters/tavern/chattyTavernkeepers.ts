@@ -35,7 +35,9 @@ export const chattyTavernkeepers = async (
         new MessageEmbed({
           title: `${decoratedName(character)} met the Chatty Tavernkeepers!`,
           description: `You're all caught up on the latest, friend!`,
-        }).setImage('attachment://Tavernkeepers.jpg'),
+        })
+          .setImage('attachment://Tavernkeepers.jpg')
+          .setThumbnail(character.profile),
       ].concat(questEmbed(character) ?? []),
     })
     return
