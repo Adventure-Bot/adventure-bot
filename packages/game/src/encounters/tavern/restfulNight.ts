@@ -2,6 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { clamp } from 'remeda'
 
 import {
+  decoratedName,
   getCharacterStatModified,
   getUserCharacter,
   hpBarField,
@@ -21,7 +22,7 @@ import {
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/game/store/slices/characters'
-import { d6 } from '@adventure-bot/game/utils'
+import { asset, d6 } from '@adventure-bot/game/utils'
 
 export async function restfulNight(
   interaction: CommandInteraction
@@ -57,7 +58,7 @@ export async function restfulNight(
   await interaction.followUp({
     embeds: [
       new MessageEmbed({
-        title: 'Restful Night',
+        title: `${decoratedName(character)} had a restful night.`,
         color: 'DARK_NAVY',
         description: 'You feel well rested. 💤',
         fields: [
@@ -71,7 +72,9 @@ export async function restfulNight(
             ? questProgressField(character.quests.healer)
             : []
         ),
-      }).setImage('https://i.imgur.com/5FAD82X.png'),
+      })
+        .setImage(asset('fantasy', 'magic', 'sleep spell').s3Url)
+        .setThumbnail(character.profile),
       statusEffectEmbed(effect),
     ],
   })

@@ -1,6 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import {
+  decoratedName,
   getUserCharacter,
   hpBarField,
   xpGainField,
@@ -11,7 +12,7 @@ import {
 } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { damaged, xpAwarded } from '@adventure-bot/game/store/slices/characters'
-import { d6 } from '@adventure-bot/game/utils'
+import { asset, d6 } from '@adventure-bot/game/utils'
 
 export async function barFight(
   interaction: CommandInteraction,
@@ -20,8 +21,9 @@ export async function barFight(
   const damage = d6()
   store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
   store.dispatch(damaged({ characterId: interaction.user.id, amount: damage }))
+  const character = getUserCharacter(interaction.user)
   const embed = new MessageEmbed({
-    title: 'Bar Fight!',
+    title: `${decoratedName(character)} got into a bar fight!`,
     color: 'RED',
     description: 'You get into a drunken brawl and are kicked out.',
     fields: [
@@ -31,8 +33,9 @@ export async function barFight(
         adjustment: -damage,
       }),
     ],
-  }).setImage('https://i.imgur.com/yo1JymD.png')
-  const character = getUserCharacter(interaction.user)
+  })
+    .setImage(asset('fantasy', 'places', 'drunken bar brawl in a tavern').s3Url)
+    .setThumbnail(character.profile)
   if (character.hp > 0 && character.quests.survivor) {
     const updated = updateUserQuestProgess(interaction.user, 'survivor', damage)
     if (updated && updated.quests.survivor)
