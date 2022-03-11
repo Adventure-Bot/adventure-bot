@@ -13,8 +13,8 @@ export async function listCharacters(client: Client): Promise<void> {
   const thread = await findOrCreateCharacterListThread(client)
   if (!thread) return
   const { messageIdsByCharacterId } = store.getState().characterList
-  console.log('listCharacters')
   const messages = await thread.messages.fetch()
+  if (thread.archived) await thread.setArchived(false)
   getUserCharacters()
     .filter((character) => character.xp > 0)
     .sort((a, b) => b.xp - a.xp)
