@@ -32,16 +32,16 @@ import {
 } from '@adventure-bot/game/store/slices/encounters'
 
 export const monster = async (
-  interaction: CommandInteraction
+  interaction: CommandInteraction,
+  replyType: 'editReply' | 'reply' = 'editReply'
 ): Promise<void> => {
-  // TODO: explore do/while refactor
   let monster = randomMonster()
   let player = selectCharacterById(store.getState(), interaction.user.id)
   if (!player) return
 
   let encounter = createEncounter({ monster, player })
   let timeout = false
-  const message = await interaction.editReply({
+  const message = await interaction[replyType]({
     embeds: [encounterEmbed({ encounter, interaction })],
   })
   if (!(message instanceof Message)) return

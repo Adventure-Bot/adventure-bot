@@ -1,5 +1,6 @@
 import { Encounter } from '@adventure-bot/game/encounters/Encounter'
 import { angels } from '@adventure-bot/game/encounters/angels'
+import { cairns } from '@adventure-bot/game/encounters/cairns'
 import { chest } from '@adventure-bot/game/encounters/chest'
 import { createEncounter } from '@adventure-bot/game/encounters/createEncounter'
 import { divineBlessing } from '@adventure-bot/game/encounters/divineBlessing'
@@ -36,4 +37,5 @@ export {
   createEncounter,
   randomEncounter,
   encounterEmbed,
+  cairns,
 }
