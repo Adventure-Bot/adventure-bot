@@ -18,6 +18,7 @@ import { potionOfSlaying } from '@adventure-bot/game/equipment/items/potionOfSla
 import { potionOfVigor } from '@adventure-bot/game/equipment/items/potionOfVigor'
 import { ringOfAttack } from '@adventure-bot/game/equipment/items/ringOfAttack'
 import { towerShield } from '@adventure-bot/game/equipment/items/towerShield'
+import { travelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
 import { unidentifiedPotion } from '@adventure-bot/game/equipment/items/unidentifiedPotion'
 import { warAxe } from '@adventure-bot/game/equipment/items/warAxe'
 
@@ -44,4 +45,5 @@ export {
   towerShield,
   unidentifiedPotion,
   warAxe,
+  travelersRing,
 }
