@@ -12,6 +12,7 @@ import {
   trap,
   travel,
 } from '@adventure-bot/game/encounters'
+import { cairns } from '@adventure-bot/game/encounters'
 import { randomShrine } from '@adventure-bot/game/encounters/shrine'
 import { CommandHandler, weightedTable } from '@adventure-bot/game/utils'
 
@@ -24,6 +25,7 @@ export const randomEncounter = (
     [0.2, () => divineBlessing],
     [angelChance, () => angels],
     [1, () => fairyWell],
+    [1, () => cairns],
     [1, () => shop],
     [1, () => tavern],
     [1, () => trap],
