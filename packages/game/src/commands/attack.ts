@@ -1,24 +1,20 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Emoji, EmojiValue, d20Emoji } from '@adventure-bot/game/Emoji'
 import {
-  AttackResult,
   attackResultEmbed,
   makeAttack,
   playerAttack,
 } from '@adventure-bot/game/attack'
 import {
-  getCharacterStatModified,
   getUserCharacter,
   loot,
   lootResultEmbed,
-  mentionCharacter,
 } from '@adventure-bot/game/character'
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
-import { randomArrayElement, sleep } from '@adventure-bot/game/utils'
+import { sleep } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('attack')
@@ -106,76 +102,9 @@ export const execute = async (
 
 export default { command, execute }
 
-const defaultAccuracyDescriptors = {
+export const defaultAccuracyDescriptors = {
   wideMiss: [`<@attacker> misses <@defender> utterly`],
   nearMiss: [`<@attacker> nearly misses <@defender>`],
   onTheNose: [`<@attacker> finds purchase against <@defender>`],
   veryAccurate: [`<@attacker> strikes <@defender> true`],
-}
-
-const accuracyDescriptor = (result: ReturnType<typeof playerAttack>) => {
-  if (!result) return `No result`
-  if (result.outcome === 'cooldown') return 'On cooldown'
-  const accuracy =
-    result.attackRoll +
-    getCharacterStatModified(result.attacker, 'attackBonus') -
-    getCharacterStatModified(result.defender, 'ac')
-  const attacker = mentionCharacter(result.attacker)
-  const defender = mentionCharacter(result.defender)
-  const descriptors =
-    result.attacker.equipment.weapon?.accuracyDescriptors ??
-    defaultAccuracyDescriptors
-
-  const descriptor =
-    accuracy > 5
-      ? descriptors.veryAccurate
-      : accuracy > 0
-      ? descriptors.onTheNose
-      : accuracy > -2
-      ? descriptors.nearMiss
-      : descriptors.wideMiss
-
-  return randomArrayElement(descriptor)
-    .replace(/<@attacker>/g, attacker)
-    .replace(/<@defender>/g, defender)
-}
-
-const damageDescriptor = (result: ReturnType<typeof playerAttack>) => {
-  if (!result) return `No result`
-
-  if (result.outcome === 'cooldown' || result.outcome === 'miss') return ''
-
-  const damage = result.damage
-  switch (true) {
-    case damage > 5:
-      return 'with a devastating blow!'
-    case damage > 2:
-      return 'with a solid strike.'
-    default:
-      return 'with a weak hit.'
-  }
-}
-
-export const attackFlavorText = (
-  result: ReturnType<typeof playerAttack>
-): string =>
-  result
-    ? `${accuracyDescriptor(result)} ${damageDescriptor(result)}`
-    : 'No result'
-
-export const attackRollText = ({
-  result,
-}: {
-  result: AttackResult
-  interaction: CommandInteraction
-}): string => {
-  if (!result) return 'No result. This should not happen.'
-  const attackEmoji = Emoji('attack')
-  const attackBonus = getCharacterStatModified(result.attacker, 'attackBonus')
-  const diceEmoji = d20Emoji(result.attackRoll)
-  const bonusText = (attackBonus > 0 ? '+' : '') + (attackBonus || '')
-  const comparison = result.outcome === 'hit' ? '≥' : '<'
-  const ac = EmojiValue('ac', result.defender.statsModified.ac)
-
-  return `${attackEmoji}${diceEmoji}${bonusText} ${comparison} ${ac}`
 }
