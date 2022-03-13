@@ -1,12 +1,17 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
-import { AttackResult, attackResultHeadline } from '@adventure-bot/game/attack'
+import {
+  AttackResult,
+  attackResultHeadline,
+  attackRollText,
+} from '@adventure-bot/game/attack'
 import { hpBarField } from '@adventure-bot/game/character'
+
 import {
   attackFlavorText,
-  attackRollText,
-} from '@adventure-bot/game/commands/attack'
+  attackResultEmbedCompact,
+} from './attackResultEmbedCompact'
 
 export function attackResultEmbed({
   result,
@@ -51,27 +56,4 @@ export function attackResultEmbed({
   })
     .setThumbnail(result.attacker.profile)
     .setImage(result.defender.profile)
-}
-
-function attackResultEmbedCompact({
-  result,
-  interaction,
-}: {
-  result: AttackResult
-  interaction: CommandInteraction
-}): MessageEmbed {
-  return new MessageEmbed({
-    title: attackResultHeadline({
-      interaction,
-      result,
-    }),
-    description: attackFlavorText(result),
-    fields: [
-      hpBarField({
-        character: result.defender,
-        adjustment: result.outcome === 'hit' ? -result.damage : 0,
-        showName: true,
-      }),
-    ],
-  }).setThumbnail(result.attacker.profile)
 }
