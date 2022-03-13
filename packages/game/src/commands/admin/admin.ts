@@ -19,6 +19,7 @@ import {
   healthSet,
   purgeRoamingMonsters,
 } from '@adventure-bot/game/store/slices/characters'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('admin')
@@ -72,9 +73,9 @@ export const command = new SlashCommandBuilder()
       )
   )
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   switch (interaction.options.getSubcommand()) {
     case 'new_game':
       store.dispatch(newGame())

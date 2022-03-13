@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import {
   awardXP,
@@ -13,11 +13,16 @@ import {
 } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { effectAdded } from '@adventure-bot/game/store/slices/characters'
-import { asset, randomArrayElement } from '@adventure-bot/game/utils'
+import {
+  CommandHandlerOptions,
+  asset,
+  randomArrayElement,
+} from '@adventure-bot/game/utils'
 
-export const travel = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const travel = async ({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> => {
   awardXP(interaction.user.id, 1)
   const character = getUserCharacter(interaction.user)
   const art = randomArrayElement([
@@ -26,7 +31,7 @@ export const travel = async (
     asset('fantasy', 'places', 'a lone traveler in the mountains'),
     asset('fantasy', 'places', 'a lone traveler in the plains'),
   ])
-  await interaction.editReply({
+  await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} traveled.`,

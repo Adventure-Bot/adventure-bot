@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import {
   getUserCharacter,
@@ -8,14 +8,15 @@ import {
 } from '@adventure-bot/game/character'
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
 import { randomEncounter } from '@adventure-bot/game/encounters'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('adventure')
   .setDescription('Set off in search of glory.')
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const player = getUserCharacter(interaction.user)
   if (player.hp === 0) {
     await interaction.editReply({
@@ -28,13 +29,13 @@ export const execute = async (
     return
   }
   if (isCharacterOnCooldown(player.id, 'adventure')) {
-    await cooldowns.execute(interaction)
+    await cooldowns.execute({ interaction })
     return
   }
   startCooldown({ characterId: player.id, cooldown: 'adventure' })
   const encounter = randomEncounter(interaction)
   console.log(encounter)
-  await encounter(interaction)
+  await encounter({ interaction })
 }
 
 export default { command, execute }

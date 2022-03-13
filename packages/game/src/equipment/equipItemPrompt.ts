@@ -67,5 +67,5 @@ export async function equipItemPrompt({
     components: [],
   })
   message.reply(`${interaction.user} equipped their ${item.name}.`)
-  await inspect.execute(interaction)
+  await inspect.execute({ interaction })
 }

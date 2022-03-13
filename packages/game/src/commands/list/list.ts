@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
 
 import { listCharacters } from '@adventure-bot/game/commands/list/listCharacters'
 import { listEncounters } from '@adventure-bot/game/commands/list/listEncounters'
 import { listLootResults } from '@adventure-bot/game/commands/list/listLootResults'
 import { listMonsters } from '@adventure-bot/game/commands/list/listMonsters'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('list')
@@ -24,9 +24,9 @@ export const command = new SlashCommandBuilder()
     option.setName('encounters').setDescription('Encounter history')
   )
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   switch (interaction.options.data[0].name) {
     case 'characters':
       listCharacters(interaction)

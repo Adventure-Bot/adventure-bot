@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import {
   attackResultEmbed,
@@ -14,7 +14,7 @@ import {
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
-import { sleep } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, sleep } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('attack')
@@ -23,9 +23,9 @@ export const command = new SlashCommandBuilder()
     option.setName('target').setDescription('Whom to attack').setRequired(true)
   )
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const target = interaction.options.data[0].user
   const initiator = interaction.user
   if (!target) {
@@ -53,7 +53,7 @@ export const execute = async (
   }
 
   if (result.outcome === 'cooldown') {
-    await cooldowns.execute(interaction)
+    await cooldowns.execute({ interaction })
     return
   }
   const embeds = [attackResultEmbed({ result, interaction })]

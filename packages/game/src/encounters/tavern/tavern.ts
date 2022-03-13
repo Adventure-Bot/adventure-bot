@@ -1,4 +1,4 @@
-import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 
 import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
 import { barFight } from '@adventure-bot/game/encounters/tavern/barFight'
@@ -6,14 +6,19 @@ import { chattyTavernkeepers } from '@adventure-bot/game/encounters/tavern/chatt
 import { restfulNight } from '@adventure-bot/game/encounters/tavern/restfulNight'
 import store from '@adventure-bot/game/store'
 import { selectAvailableQuests } from '@adventure-bot/game/store/selectors'
-import { sleep, weightedTable } from '@adventure-bot/game/utils'
+import {
+  CommandHandlerOptions,
+  sleep,
+  weightedTable,
+} from '@adventure-bot/game/utils'
 import { asset } from '@adventure-bot/game/utils'
 
-export const tavern = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const tavern = async ({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> => {
   const character = getUserCharacter(interaction.user)
-  const message = await interaction.editReply({
+  const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} found a tavern.`,

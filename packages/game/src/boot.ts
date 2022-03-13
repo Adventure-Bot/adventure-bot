@@ -95,7 +95,7 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
         interaction.editReply(`Command not found ${command}`)
         return
       }
-      await command.execute(interaction)
+      await command.execute({ interaction })
     } catch (e) {
       console.error(e)
       try {

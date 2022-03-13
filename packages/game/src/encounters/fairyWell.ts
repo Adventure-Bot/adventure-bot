@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import {
@@ -17,11 +17,12 @@ import {
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/game/store/slices/characters'
-import { asset } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
-export const fairyWell = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export async function fairyWell({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> {
   const healAmount = Math.ceil(Math.random() * 6)
   store.dispatch(
     healed({ characterId: interaction.user.id, amount: healAmount })
@@ -36,7 +37,7 @@ export const fairyWell = async (
   )
 
   const character = getUserCharacter(interaction.user)
-  await interaction.editReply({
+  await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: `${
@@ -57,5 +58,5 @@ export const fairyWell = async (
     ],
   })
   if (isUserQuestComplete(interaction.user, 'healer'))
-    await quests.execute(interaction)
+    await quests.execute({ interaction })
 }

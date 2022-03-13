@@ -98,5 +98,5 @@ export const chattyTavernkeepers = async (
       quests[questId].title
     } quest.`
   )
-  await questsCommand.execute(interaction)
+  await questsCommand.execute({ interaction })
 }

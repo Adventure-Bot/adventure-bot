@@ -13,6 +13,7 @@ import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import { itemEmbed } from '@adventure-bot/game/equipment'
 import { questEmbed } from '@adventure-bot/game/quest'
 import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('inspect')
@@ -21,10 +22,9 @@ export const command = new SlashCommandBuilder()
     option.setName('target').setDescription('Whom to inspect')
   )
 
-// TODO: inspect hp|stats|inventory|cooldowns
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const user =
     (interaction.options.data[0] && interaction.options.data[0].user) ||
     interaction.user

@@ -1,5 +1,4 @@
 import {
-  CommandInteraction,
   Message,
   MessageActionRow,
   MessageButton,
@@ -21,9 +20,12 @@ import {
 } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
-import { asset } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
-export const shop = async (interaction: CommandInteraction): Promise<void> => {
+export const shop = async ({
+  interaction,
+  replyType = 'followUp',
+}: CommandHandlerOptions): Promise<void> => {
   const character = getUserCharacter(interaction.user)
   const inventory = times(3, randomShopItem)
 
@@ -34,7 +36,7 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
   const hasStuffToSell =
     character.inventory.filter((i) => i.sellable).length > 0
 
-  const message = await interaction.followUp(shopMain())
+  const message = await interaction[replyType](shopMain())
   if (!(message instanceof Message)) return
   let hasLeft = false
   while (!hasLeft) {
@@ -57,10 +59,11 @@ export const shop = async (interaction: CommandInteraction): Promise<void> => {
     if (!response || !response.isButton()) return
     if (response.customId === 'leave') hasLeft = true
     if (response.customId === 'buy')
-      await buyItemPrompt({ interaction, inventory })
-    if (response.customId === 'sell') await sellItemPrompt({ interaction })
+      await buyItemPrompt({ interaction, inventory, message })
+    if (response.customId === 'sell')
+      await sellItemPrompt({ interaction, message })
   }
-  interaction.editReply({ components: [] })
+  message.edit({ components: [] })
 
   function shopMain() {
     const shopEmbed = new MessageEmbed({

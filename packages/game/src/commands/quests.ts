@@ -18,15 +18,15 @@ import {
   slayerBuffQuestReward,
   survivorBuffQuestReward,
 } from '@adventure-bot/game/quest'
-import { progressBar } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, progressBar } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('quests')
   .setDescription('Check your quest progress.')
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const character = getUserCharacter(interaction.user)
   const completedQuests = getCompletedQuests(character)
   if (Object.values(character.quests).length === 0) {

@@ -1,4 +1,4 @@
-import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 
 import {
   awardXP,
@@ -8,10 +8,13 @@ import {
 } from '@adventure-bot/game/character'
 import { updateUserQuestProgess } from '@adventure-bot/game/quest'
 import { trapAttack, trapRollText } from '@adventure-bot/game/trap'
-import { sleep } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, sleep } from '@adventure-bot/game/utils'
 
-export const trap = async (interaction: CommandInteraction): Promise<void> => {
-  const message = await interaction.editReply({
+export const trap = async ({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> => {
+  const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: 'Trap!',

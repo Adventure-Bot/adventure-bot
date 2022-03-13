@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import {
@@ -15,7 +15,7 @@ import {
   questProgressField,
   updateUserQuestProgess,
 } from '@adventure-bot/game/quest'
-import { asset } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('heal')
@@ -24,9 +24,9 @@ export const command = new SlashCommandBuilder()
     option.setName('target').setDescription('Whom to heal')
   )
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const target = getUserCharacter(
     (interaction.options.data[0] && interaction.options.data[0].user) ||
       interaction.user
@@ -40,7 +40,7 @@ export const execute = async (
     return
   }
   if (result.outcome === 'cooldown') {
-    await cooldowns.execute(interaction)
+    await cooldowns.execute({ interaction })
     return
   }
   updateUserQuestProgess(interaction.user, 'healer', result.amount)
@@ -67,7 +67,7 @@ export const execute = async (
     ].concat(),
   })
   if (isUserQuestComplete(interaction.user, 'healer'))
-    await quests.execute(interaction)
+    await quests.execute({ interaction })
 }
 
 export default { command, execute }

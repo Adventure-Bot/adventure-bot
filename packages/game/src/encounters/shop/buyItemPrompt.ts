@@ -12,12 +12,14 @@ import { Item } from '@adventure-bot/game/equipment'
 
 export async function buyItemPrompt({
   interaction,
+  message,
   inventory,
 }: {
   interaction: CommandInteraction
+  message: Message
   inventory: Item[]
 }): Promise<void | Item> {
-  const message = await interaction.editReply({
+  await message.edit({
     components: [
       new MessageActionRow({
         components: [buyList({ inventory, interaction })],
