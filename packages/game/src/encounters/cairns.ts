@@ -113,15 +113,20 @@ export const cairns = async ({
   })
 
   if (!(message instanceof Message)) return
-  const response = await message.awaitMessageComponent({
-    filter: (interaction) => {
-      interaction.deferUpdate()
-      return interaction.user.id === interaction.user.id
-    },
-    time: 60000,
-  })
+  const response = await message
+    .awaitMessageComponent({
+      filter: (interaction) => {
+        interaction.deferUpdate()
+        return interaction.user.id === interaction.user.id
+      },
+      time: 60000,
+    })
+    .catch(() => null)
   message.edit({ components: [] })
-  if (!response?.isButton()) return
+  if (!response?.isButton()) {
+    interaction.followUp(`Destiny does not wait forever.`)
+    return
+  }
   switch (response.customId) {
     case 'divineBlessing':
       divineBlessing({ interaction, replyType: 'followUp' })
