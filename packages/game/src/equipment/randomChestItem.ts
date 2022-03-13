@@ -22,6 +22,7 @@ import {
   unidentifiedPotion,
   warAxe,
 } from '@adventure-bot/game/equipment'
+import { travelersRing } from '@adventure-bot/game/equipment/items'
 import { weightedTable } from '@adventure-bot/game/utils'
 
 export function randomChestItem(): Item {
@@ -42,6 +43,7 @@ export function randomChestItem(): Item {
     [1, chainArmor],
     [1, kiteShield],
     [1, longsword],
+    [1, travelersRing],
     [1, unidentifiedPotion],
     [1, mace],
     [1.2, buckler],

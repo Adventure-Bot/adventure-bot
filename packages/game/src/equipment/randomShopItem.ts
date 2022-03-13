@@ -22,6 +22,7 @@ import {
 import {
   assassinLeathers,
   berserkerHides,
+  travelersRing,
 } from '@adventure-bot/game/equipment/items'
 import { weightedRandom } from '@adventure-bot/game/utils'
 
@@ -44,6 +45,7 @@ const weights = new Map<() => Item, number>([
   [potionOfSlaying, 1],
   [potionOfVigor, 1],
   [ringOfAttack, 0.3],
+  [travelersRing, 1],
   [towerShield, 1],
   [warAxe, 0.5],
 ])
