@@ -28,6 +28,7 @@ import {
   effectAdded,
 } from '@adventure-bot/game/store/slices/characters'
 import { trapAttack } from '@adventure-bot/game/trap'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 const chestImage = new MessageAttachment('./images/chest.jpg', 'chest.jpg')
 
@@ -48,7 +49,7 @@ type Chest = {
 }
 
 export async function chest(
-  interaction: CommandInteraction,
+  { interaction, replyType = 'followUp' }: CommandHandlerOptions,
   chestConfig?: Partial<Chest>
 ): Promise<void> {
   let fled = false
@@ -73,7 +74,7 @@ export async function chest(
     ...chestConfig,
   }
 
-  const message = await interaction.followUp({
+  const message = await interaction[replyType]({
     files: [chestImage],
     embeds: [chestEmbed(chest, interaction)],
     fetchReply: true,

@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
 
 import {
   characterEmbed,
@@ -10,6 +9,7 @@ import {
   lootResultEmbed,
 } from '@adventure-bot/game/character'
 import { monsterEmbed, randomMonster } from '@adventure-bot/game/monster'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('lootme')
@@ -17,9 +17,9 @@ export const command = new SlashCommandBuilder()
     'Be knocked out and dragged off by some random monstrocity. Who put this command here and why?'
   )
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const monster = randomMonster()
   const character = getUserCharacter(interaction.user)
   const result = await loot({

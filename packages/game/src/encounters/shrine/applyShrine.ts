@@ -33,5 +33,5 @@ export async function applyShrine({
   )
 
   if (isUserQuestComplete(interaction.user, 'blessed'))
-    await quests.execute(interaction)
+    await quests.execute({ interaction })
 }

@@ -1,5 +1,4 @@
 import { randomUUID } from 'crypto'
-import { CommandInteraction } from 'discord.js'
 
 import {
   Shrine,
@@ -7,11 +6,12 @@ import {
   shrineEmbeds,
 } from '@adventure-bot/game/encounters/shrine'
 import { createEffect } from '@adventure-bot/game/statusEffects'
-import { asset } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
-export const slayerShrine = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const slayerShrine = async ({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> => {
   const shrine: Shrine = {
     id: randomUUID(),
     name: "Slayer's Shrine",
@@ -23,7 +23,7 @@ export const slayerShrine = async (
 
   applyShrine({ shrine, interaction })
 
-  interaction.editReply({
+  interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
 }

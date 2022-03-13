@@ -19,14 +19,15 @@ import {
   usableInventory,
   useInventoryItemPrompt,
 } from '@adventure-bot/game/equipment'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('inventory')
   .setDescription('View your inventory.')
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const character = getUserCharacter(interaction.user)
   if (!character.inventory.length) {
     await interaction.followUp('Your inventory is empty.')

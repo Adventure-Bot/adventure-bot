@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
 import { keys } from 'remeda'
 
 import { getUserCharacter } from '@adventure-bot/game/character'
@@ -7,6 +6,7 @@ import { itemEmbed } from '@adventure-bot/game/equipment'
 import * as items from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 const camelToSnakeCase = (str: string) =>
   str.replace(/[A-Z]/g, (letter: string) => `_${letter.toLowerCase()}`)
@@ -34,9 +34,9 @@ command.addStringOption((option) => {
   return option
 })
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const character = getUserCharacter(interaction.user)
   const itemName = snakeToCamelCase(interaction.options.getString('item') ?? '')
   const itemNames = keys(items)

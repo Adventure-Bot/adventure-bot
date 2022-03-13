@@ -21,12 +21,14 @@ import { asset } from '@adventure-bot/game/utils'
 
 export async function sellItemPrompt({
   interaction,
+  message,
 }: {
   interaction: CommandInteraction
+  message: Message
 }): Promise<void> {
   const character = getUserCharacter(interaction.user)
   const inventory = character.inventory.filter((i) => i.sellable)
-  const message = await interaction.editReply({
+  await message.edit({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} considers what to sell.`,

@@ -1,19 +1,20 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import { getUserCharacter, statField } from '@adventure-bot/game/character'
 import store from '@adventure-bot/game/store'
 import { divineBlessingGranted } from '@adventure-bot/game/store/slices/characters'
-import { asset } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
-export const divineBlessing = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export async function divineBlessing({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> {
   store.dispatch(divineBlessingGranted(interaction.user.id))
   const art = asset('fantasy', 'magic', 'a divine blessing')
   const character = getUserCharacter(interaction.user)
 
-  await interaction.editReply({
+  await interaction[replyType]({
     files: [art.attachment],
     embeds: [
       new MessageEmbed({

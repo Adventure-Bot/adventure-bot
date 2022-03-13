@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
 
 import {
   characterEmbed,
@@ -12,14 +11,17 @@ import {
 import { monsterEmbed, randomMonster } from '@adventure-bot/game/monster'
 import store from '@adventure-bot/game/store'
 import { selectMonsterById } from '@adventure-bot/game/store/selectors'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
+
+1
 
 export const command = new SlashCommandBuilder()
   .setName('lootmonster')
   .setDescription('Loot a random monster.')
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const monster = randomMonster()
   const character = getUserCharacter(interaction.user)
   const result = await loot({

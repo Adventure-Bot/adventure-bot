@@ -1,10 +1,10 @@
 import {
-  CommandInteraction,
   Message,
   MessageActionRow,
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
+import { filter } from 'remeda'
 
 import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
 import {
@@ -20,6 +20,7 @@ import {
 } from '@adventure-bot/game/encounters'
 import { randomShrine } from '@adventure-bot/game/encounters/shrine'
 import {
+  CommandHandlerOptions,
   asset,
   randomArrayElement,
   weightedTable,
@@ -50,45 +51,35 @@ const labels: Record<EncounterId, string> = {
   randomShrine: 'Shrine',
 }
 
-const encounters: Record<
-  EncounterId,
-  () => (interaction: CommandInteraction) => Promise<void>
-> = {
-  divineBlessing: () => divineBlessing,
-  angels: () => angels,
-  fairyWell: () => fairyWell,
-  shop: () => shop,
-  tavern: () => tavern,
-  trap: () => trap,
-  travel: () => travel,
-  monster: () => monster,
-  chest: () => chest,
-  randomShrine,
-}
-
-export const cairns = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const cairns = async ({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> => {
   const character = getUserCharacter(interaction.user)
 
-  const randomOption = () =>
-    weightedTable<EncounterId>([
-      [0.2, 'divineBlessing'],
-      [character.quests.healer ? 0 : 0.5, 'angels'],
-      [1, 'fairyWell'],
-      [1, 'shop'],
-      [1, 'tavern'],
-      [1, 'trap'],
-      [1, 'travel'],
-      [2, 'monster'],
-      [2, 'chest'],
-      [2, 'randomShrine'],
-    ])
+  const randomOption = ({ omit }: { omit?: EncounterId } = {}) =>
+    weightedTable<EncounterId>(
+      filter(
+        [
+          [0.2, 'divineBlessing'],
+          [character.quests.healer ? 0 : 0.5, 'angels'],
+          [1, 'fairyWell'],
+          [1, 'shop'],
+          [1, 'tavern'],
+          [1, 'trap'],
+          [1, 'travel'],
+          [2, 'monster'],
+          [2, 'chest'],
+          [2, 'randomShrine'],
+        ],
+        ([, id]) => id !== omit
+      )
+    )
 
   const option1 = randomOption()
-  const option2 = randomOption()
+  const option2 = randomOption({ omit: option1 })
 
-  const message = await interaction.editReply({
+  const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} found guidance in the cairns!`,
@@ -122,21 +113,45 @@ export const cairns = async (
   })
 
   if (!(message instanceof Message)) return
-  const response = await message
-    .awaitMessageComponent({
-      filter: (interaction) => {
-        interaction.deferUpdate()
-        return interaction.user.id === interaction.user.id
-      },
-      time: 60000,
-    })
-    .catch(() => {
-      message.edit({ components: [] })
-    })
+  const response = await message.awaitMessageComponent({
+    filter: (interaction) => {
+      interaction.deferUpdate()
+      return interaction.user.id === interaction.user.id
+    },
+    time: 60000,
+  })
+  message.edit({ components: [] })
   if (!response?.isButton()) return
-  if (response.customId === option1) {
-    encounters[option1]()(interaction)
-  } else {
-    encounters[option2]()(interaction)
+  switch (response.customId) {
+    case 'divineBlessing':
+      divineBlessing({ interaction, replyType: 'followUp' })
+      return
+    case 'angels':
+      angels({ interaction, replyType: 'followUp' })
+      return
+    case 'fairyWell':
+      fairyWell({ interaction, replyType: 'followUp' })
+      return
+    case 'shop':
+      shop({ interaction, replyType: 'followUp' })
+      return
+    case 'tavern':
+      tavern({ interaction, replyType: 'followUp' })
+      return
+    case 'trap':
+      trap({ interaction, replyType: 'followUp' })
+      return
+    case 'travel':
+      travel({ interaction, replyType: 'followUp' })
+      return
+    case 'monster':
+      monster({ interaction, replyType: 'followUp' })
+      return
+    case 'chest':
+      chest({ interaction, replyType: 'followUp' })
+      return
+    case 'randomShrine':
+      randomShrine()({ interaction, replyType: 'followUp' })
+      return
   }
 }

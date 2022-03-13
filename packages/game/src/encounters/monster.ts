@@ -1,4 +1,4 @@
-import { CommandInteraction, Message, TextChannel } from 'discord.js'
+import { Message, TextChannel } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
@@ -30,11 +30,12 @@ import {
   playerVictory,
   roundFinished,
 } from '@adventure-bot/game/store/slices/encounters'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
-export const monster = async (
-  interaction: CommandInteraction,
-  replyType: 'editReply' | 'reply' = 'editReply'
-): Promise<void> => {
+export const monster = async ({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> => {
   let monster = randomMonster()
   let player = selectCharacterById(store.getState(), interaction.user.id)
   if (!player) return
@@ -211,10 +212,10 @@ export const monster = async (
     })
 
   if (encounter.outcome === 'player victory' && Math.random() <= 0.3)
-    await chest(interaction)
+    await chest({ interaction })
   if (
     isUserQuestComplete(interaction.user, 'slayer') ||
     isUserQuestComplete(interaction.user, 'survivor')
   )
-    await quests.execute(interaction)
+    await quests.execute({ interaction })
 }

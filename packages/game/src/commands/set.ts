@@ -1,11 +1,11 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
 import { URL } from 'url'
 
 import { getUserCharacter } from '@adventure-bot/game/character'
 import { execute as inspect } from '@adventure-bot/game/commands/inspect/inspect'
 import store from '@adventure-bot/game/store'
 import { profileSet } from '@adventure-bot/game/store/slices/characters'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('set')
@@ -17,9 +17,9 @@ export const command = new SlashCommandBuilder()
       .setRequired(true)
   )
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const profile = interaction.options.data[0].value?.toString()
   if (!profile) return
   getUserCharacter(interaction.user) // ensure the user has a character
@@ -61,7 +61,7 @@ export const execute = async (
     })
   )
 
-  await inspect(interaction)
+  await inspect({ interaction })
 }
 
 export default { command, execute }

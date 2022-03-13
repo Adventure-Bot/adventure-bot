@@ -1,13 +1,15 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
+
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('dance')
   .setDescription('Do a little dance.')
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   interaction.editReply({
     embeds: [
       new MessageEmbed({

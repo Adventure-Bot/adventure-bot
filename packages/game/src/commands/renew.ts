@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 
 import {
   cooldownRemainingText,
@@ -11,6 +11,7 @@ import {
 import { isHealer } from '@adventure-bot/game/heal/isHealer'
 import store from '@adventure-bot/game/store'
 import { healed } from '@adventure-bot/game/store/slices/characters'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('renew')
@@ -19,9 +20,9 @@ export const command = new SlashCommandBuilder()
     option.setName('target').setDescription('Whom to heal')
   )
 
-export const execute = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export const execute = async ({
+  interaction,
+}: CommandHandlerOptions): Promise<void> => {
   const character = getUserCharacter(interaction.user)
 
   if (!isHealer(character)) {

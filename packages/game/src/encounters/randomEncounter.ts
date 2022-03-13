@@ -21,11 +21,11 @@ export const randomEncounter = (
 ): CommandHandler => {
   const character = getUserCharacter(interaction.user)
   const angelChance = character.quests.healer ? 0 : 0.5
-  return weightedTable([
+  return weightedTable<() => CommandHandler>([
     [0.2, () => divineBlessing],
     [angelChance, () => angels],
     [1, () => fairyWell],
-    [1, () => cairns],
+    [2, () => cairns],
     [1, () => shop],
     [1, () => tavern],
     [1, () => trap],

@@ -1,14 +1,15 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
 import { questEmbed } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { questGranted } from '@adventure-bot/game/store/slices/characters'
-import { asset } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
-export const angels = async (
-  interaction: CommandInteraction
-): Promise<void> => {
+export async function angels({
+  interaction,
+  replyType = 'editReply',
+}: CommandHandlerOptions): Promise<void> {
   store.dispatch(
     questGranted({
       characterId: interaction.user.id,
@@ -18,11 +19,11 @@ export const angels = async (
   const character = getUserCharacter(interaction.user)
   const angel = asset('fantasy', 'characters', 'angel')
 
-  interaction.followUp({
+  interaction[replyType]({
     files: [angel.attachment],
     embeds: [
       new MessageEmbed({
-        title: 'Angels',
+        title: `${decoratedName(character)} encountered an angel!`,
         color: 'WHITE',
         description:
           'An angel implores you to mend what is broken.\nA taste of their power in return is thier token.',
