@@ -193,7 +193,9 @@ export const monster = async ({
     encounter,
     interaction,
   })
-  if (player.quests.slayer && encounter.outcome === 'player victory')
+
+  player = selectCharacterById(store.getState(), player.id)
+  if (player && player.quests.slayer && encounter.outcome === 'player victory')
     embed.addFields([questProgressField(player.quests.slayer)])
 
   const embeds = [embed]
