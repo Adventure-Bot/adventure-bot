@@ -34,7 +34,7 @@ export function createZombie(): Monster {
       },
     },
     name: getRandomMonsterName('Zombie'),
-    asset: asset('fantasy', 'monsters', 'zombie').values,
+    profile: asset('fantasy', 'monsters', 'zombie').s3Url,
     gold: Math.floor(Math.random() * 4) + 1,
     xpValue: 1,
   })
