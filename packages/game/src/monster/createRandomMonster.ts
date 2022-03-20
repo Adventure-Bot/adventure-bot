@@ -9,7 +9,6 @@ import {
 import { weightedTable } from '@adventure-bot/game/utils'
 
 export function createRandomMonster(): Monster {
-  return createZombie()
   return weightedTable([
     [10, createDemon],
     [10, createGoblin],
