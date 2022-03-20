@@ -15,7 +15,7 @@ export function createGoblin(): Monster {
     equipment: {
       weapon: dagger(),
     },
-    asset: asset('fantasy', 'monsters', 'goblin').values,
+    profile: asset('fantasy', 'monsters', 'goblin').s3Url,
     xpValue: 2,
     gold: Math.floor(Math.random() * 8) + 6,
   })
