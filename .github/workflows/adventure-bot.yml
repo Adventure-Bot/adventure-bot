@@ -23,6 +23,11 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build
 
+      - name: Upload artifact for deployment
+      uses: actions/upload-artifact@v3
+      with:
+        name: adventure-bot
+
   format:
     runs-on: ubuntu-latest
 
@@ -73,3 +78,17 @@ jobs:
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
       - run: yarn game prune-imports
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    strategy:
+      matrix:
+        node-version: [16.x]
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: adventure-bot
+
+    - name: 'Start game'
+    - run: yarn game start
