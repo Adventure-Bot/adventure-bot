@@ -139,6 +139,7 @@ export const monster = async ({
         )
         if (player.quests.slayer) {
           updateUserQuestProgess(interaction.user, 'slayer', 1)
+          player = selectCharacterById(store.getState(), player.id) ?? player
         }
         break
       case player.hp === 0 && monster.hp > 0:
