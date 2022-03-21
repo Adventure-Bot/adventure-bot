@@ -116,6 +116,12 @@ const characterSlice = createSlice({
       character.gold = gold
     },
 
+    xpSet(state, action: PayloadAction<{ characterId: string; xp: number }>) {
+      const { characterId, xp } = action.payload
+      const character = state.charactersById[characterId]
+      character.xp = xp
+    },
+
     goldGained(
       state,
       action: PayloadAction<{
@@ -352,6 +358,7 @@ export const {
   profileSet,
   questCompleted,
   xpAwarded,
+  xpSet,
   purgeRoamingMonsters,
 } = characterSlice.actions
 

@@ -18,6 +18,7 @@ import {
   goldSet,
   healthSet,
   purgeRoamingMonsters,
+  xpSet,
 } from '@adventure-bot/game/store/slices/characters'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
@@ -33,6 +34,14 @@ export const command = new SlashCommandBuilder()
           .setName('gold')
           .setDescription('The amount of gold you have.')
           .setRequired(true)
+      )
+  )
+  .addSubcommand((option) =>
+    option
+      .setName('set_xp')
+      .setDescription('Sets your current experience score.')
+      .addIntegerOption((input) =>
+        input.setName('xp').setDescription('XP score to set.').setRequired(true)
       )
   )
   .addSubcommand((option) =>
@@ -87,6 +96,12 @@ export const execute = async ({
     case 'purge_roaming':
       store.dispatch(purgeRoamingMonsters())
       interaction.editReply('Roaming monsters purged')
+      break
+    case 'set_xp':
+      setXp(interaction)
+      interaction.editReply(
+        `XP set to ${interaction.options.getInteger('xp')}.`
+      )
       break
     case 'set_gold':
       setGold(interaction)
@@ -164,6 +179,16 @@ const setGold = async (interaction: CommandInteraction) => {
     goldSet({
       characterId: interaction.user.id,
       gold,
+    })
+  )
+}
+const setXp = async (interaction: CommandInteraction) => {
+  const xp = interaction.options.getInteger('xp')
+  if (!xp) return
+  store.dispatch(
+    xpSet({
+      characterId: interaction.user.id,
+      xp,
     })
   )
 }
