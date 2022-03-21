@@ -22,13 +22,15 @@ const decorateCharacterWithAssetProfile = <T extends Character>(
   if (character && character.asset) {
     return {
       ...character,
-      profile: asset(
-        // @ts-ignore
-        character.asset[0],
-        character.asset[1],
-        character.asset[2],
-        character.id
-      ).s3Url,
+      profile:
+        character.profile ??
+        asset(
+          // @ts-ignore
+          character.asset[0],
+          character.asset[1],
+          character.asset[2],
+          character.id
+        ).s3Url,
     }
   } else return character
 }

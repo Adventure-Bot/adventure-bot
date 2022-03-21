@@ -48,7 +48,7 @@ export function createDragon(): Monster {
         sellable: false,
       },
     },
-    asset: asset('fantasy', 'monsters', 'dragon').values,
+    profile: asset('fantasy', 'monsters', 'dragon').s3Url,
     xpValue: 50,
     gold: Math.floor(Math.random() * 150) + 300,
   })
