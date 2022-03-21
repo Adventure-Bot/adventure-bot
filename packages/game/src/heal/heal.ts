@@ -8,12 +8,15 @@ import store from '@adventure-bot/game/store'
 import { healed } from '@adventure-bot/game/store/slices/characters'
 import { d6 } from '@adventure-bot/game/utils'
 
-export const heal = (
-  initiatorId: string,
+export function heal({
+  healerId,
+  targetId,
+}: {
+  healerId: string
   targetId: string
-): HealResult | undefined => {
-  if (isCharacterOnCooldown(initiatorId, 'heal')) return { outcome: 'cooldown' }
-  const healer = getCharacter(initiatorId)
+}): HealResult | undefined {
+  if (isCharacterOnCooldown(healerId, 'heal')) return { outcome: 'cooldown' }
+  const healer = getCharacter(healerId)
   if (!healer) return
   const targetBeforeHeal = getCharacter(targetId)
   if (!targetBeforeHeal) return

@@ -32,9 +32,9 @@ export const execute = async ({
       interaction.user
   )
 
-  const healer = getUserCharacter(interaction.user)
+  let character = getUserCharacter(interaction.user)
 
-  const result = heal(healer.id, target.id)
+  const result = heal({ healerId: character.id, targetId: target.id })
   if (!result) {
     interaction.editReply('No result. This should not happen.')
     return
@@ -45,13 +45,13 @@ export const execute = async ({
   }
   updateUserQuestProgess(interaction.user, 'healer', result.amount)
 
+  character = getUserCharacter(interaction.user)
+
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: `${decoratedName(healer)} ${
-          healer.id === target.id
-            ? 'self healed'
-            : 'healed ' + decoratedName(target)
+        title: `${decoratedName(character)} healed ${
+          character.id === target.id ? '' : decoratedName(target)
         } for ${EmojiModifier('heal', result.amount)}`,
         fields: [
           hpBarField({
@@ -59,7 +59,9 @@ export const execute = async ({
             adjustment: result.amount,
           }),
         ].concat(
-          healer.quests.healer ? questProgressField(healer.quests.healer) : []
+          character.quests.healer
+            ? questProgressField(character.quests.healer)
+            : []
         ),
       }).setImage(
         asset('fantasy', 'magic', 'a glowing hand applying healing magic').s3Url
