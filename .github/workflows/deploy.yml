@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [brian-gates/issue130]
 
 jobs:
   deploy: 
