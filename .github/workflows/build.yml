@@ -27,6 +27,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: adventure-bot
+          path: .
 
   format:
     runs-on: ubuntu-latest
