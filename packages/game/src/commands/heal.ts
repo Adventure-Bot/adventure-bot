@@ -47,12 +47,18 @@ export const execute = async ({
 
   character = getUserCharacter(interaction.user)
 
+  const maybeTargetName =
+    target.id === character.id ? '' : ' ' + decoratedName(target)
+
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: `${decoratedName(character)} healed ${
-          character.id === target.id ? '' : decoratedName(target)
-        } for ${EmojiModifier('heal', result.amount)}`,
+        title: `${decoratedName(
+          character
+        )} healed${maybeTargetName} for ${EmojiModifier(
+          'heal',
+          result.amount
+        )}`,
         fields: [
           hpBarField({
             character: target,
