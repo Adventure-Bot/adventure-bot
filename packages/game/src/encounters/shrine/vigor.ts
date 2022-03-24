@@ -15,7 +15,7 @@ export async function vigorShrine({
   const shrine: Shrine = {
     id: randomUUID(),
     name: 'Vigor Shrine',
-    description: `The shrine fills you with renewed vigor.`,
+    description: `The shrine fills you with renewed vigor!`,
     image: asset(
       'fantasy',
       'places',

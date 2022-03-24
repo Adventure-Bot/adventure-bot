@@ -15,7 +15,7 @@ export const slayerShrine = async ({
   const shrine: Shrine = {
     id: randomUUID(),
     name: "Slayer's Shrine",
-    description: `This shrine fills you with an instincts of a hunter!`,
+    description: `This shrine fills you with the instincts of a hunter!`,
     image: asset('fantasy', 'characters', 'hidden hunter').s3Url,
     color: 'GREY',
     effect: createEffect('slayer'),

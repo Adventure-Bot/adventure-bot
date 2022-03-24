@@ -16,7 +16,7 @@ export function shrineEmbeds({
   const quest = character.quests.blessed
   return [
     new MessageEmbed({
-      title: `${character.name} encounters a ${shrine.name}`,
+      title: `${character.name} encountered a ${shrine.name}!`,
       description: shrine.description,
       fields: quest ? [questProgressField(quest)] : [],
       color: shrine.color,

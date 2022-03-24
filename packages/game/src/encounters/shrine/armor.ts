@@ -15,7 +15,7 @@ export const armorShrine = async ({
   const shrine: Shrine = {
     id: randomUUID(),
     color: 'YELLOW',
-    description: `This shrine will protect you during your journeys.`,
+    description: `This shrine will protect you in your journeys.`,
     image: asset('fantasy', 'items', 'a shield chiseled out of a stone').s3Url,
     effect: createEffect('protectedEffect'),
     name: 'Shrine of Protection',
