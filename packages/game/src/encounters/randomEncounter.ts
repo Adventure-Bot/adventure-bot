@@ -3,6 +3,7 @@ import { CommandInteraction } from 'discord.js'
 import { getUserCharacter } from '@adventure-bot/game/character'
 import {
   angels,
+  cave,
   chest,
   divineBlessing,
   fairyWell,
@@ -28,6 +29,7 @@ export const randomEncounter = (
     [2, () => cairns],
     [1, () => shop],
     [1, () => tavern],
+    [1, () => cave],
     [1, () => trap],
     [1, () => travel],
     [2, () => monster],

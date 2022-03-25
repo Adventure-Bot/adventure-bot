@@ -9,6 +9,7 @@ import { filter } from 'remeda'
 import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
 import {
   angels,
+  cave,
   chest,
   divineBlessing,
   fairyWell,
@@ -37,6 +38,7 @@ type EncounterId =
   | 'chest'
   | 'randomShrine'
   | 'angels'
+  | 'cave'
 
 const labels: Record<EncounterId, string> = {
   divineBlessing: 'Divine Blessing',
@@ -49,6 +51,7 @@ const labels: Record<EncounterId, string> = {
   monster: 'Monster',
   chest: 'Chest',
   randomShrine: 'Shrine',
+  cave: 'Cave',
 }
 
 export const cairns = async ({
@@ -69,6 +72,7 @@ export const cairns = async ({
           [1, 'trap'],
           [1, 'travel'],
           [2, 'monster'],
+          [2, 'cave'],
           [2, 'chest'],
           [2, 'randomShrine'],
         ],
@@ -157,6 +161,9 @@ export const cairns = async ({
       return
     case 'randomShrine':
       randomShrine()({ interaction, replyType: 'followUp' })
+      return
+    case 'cave':
+      cave({ interaction, replyType: 'followUp' })
       return
   }
 }
