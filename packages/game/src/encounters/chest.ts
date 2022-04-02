@@ -13,13 +13,7 @@ import {
   gpGainField,
   xpGainField,
 } from '@adventure-bot/game/character'
-import {
-  equipItemPrompt,
-  heavyCrown,
-  isEquippable,
-  itemEmbed,
-  randomChestItem,
-} from '@adventure-bot/game/equipment'
+import { heavyCrown, randomChestItem } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
@@ -194,14 +188,6 @@ export async function chest(
           interaction,
         })
       )
-      embed.addField(
-        'Heavy Crown',
-        `You have found the heavy crown. ${crown.description}`
-      )
-      await interaction.followUp({
-        embeds: [itemEmbed({ item: crown, interaction })],
-      })
-      await equipItemPrompt({ interaction, item: crown })
     }
     if (Math.random() <= 0.2) {
       const item = randomChestItem()
@@ -212,11 +198,6 @@ export async function chest(
           interaction,
         })
       )
-      await interaction.followUp({
-        embeds: [itemEmbed({ item, interaction })],
-      })
-      if (isEquippable(item))
-        equipItemPrompt({ interaction, item, showItem: false })
     }
   }
   if (getUserCharacter(interaction.user).hp === 0) {
