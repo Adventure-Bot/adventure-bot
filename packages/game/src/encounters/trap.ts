@@ -2,6 +2,7 @@ import { Message, MessageEmbed } from 'discord.js'
 
 import {
   awardXP,
+  decoratedName,
   getUserCharacter,
   hpBarField,
   xpGainField,
@@ -14,12 +15,13 @@ export const trap = async ({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
+  let character = getUserCharacter(interaction.user)
   const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({
-        title: 'Trap!',
+        title: `${decoratedName(character)} encountered a trap!`,
         color: 'RED',
-        description: `It's a trap!`,
+        description: `${decoratedName(character)}`,
       }).setImage('https://imgur.com/TDMLxyE.png'),
     ],
   })
@@ -31,7 +33,7 @@ export const trap = async ({
     return
   }
   await sleep(2000)
-  const character = getUserCharacter(interaction.user)
+  character = getUserCharacter(interaction.user)
   switch (result.outcome) {
     case 'hit':
       awardXP(interaction.user.id, 1)
@@ -57,7 +59,7 @@ export const trap = async ({
       await interaction.followUp({
         embeds: [
           new MessageEmbed({
-            description: `You deftly evade!`,
+            title: `${decoratedName(character)} deftly evaded!`,
           })
             .addField('Roll', trapRollText(result))
             .addFields([xpGainField(2)])
