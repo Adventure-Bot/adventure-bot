@@ -10,5 +10,5 @@ export const getCharacterStatModified = (
 ): number => {
   if (stat === 'damageMax')
     return character.equipment.weapon?.damageMax ?? character.damageMax
-  return character[stat] + getCharacterStatModifier(character, stat)
+  return (character[stat] ?? 0) + getCharacterStatModifier(character, stat)
 }

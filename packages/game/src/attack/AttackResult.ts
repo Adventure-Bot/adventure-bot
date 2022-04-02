@@ -7,6 +7,7 @@ export type AttackResult = {
   attackRoll: number
   damage: number
   monsterDamageRoll: number
+  dragonSlayingRoll?: number
   damageRoll: number
   damageBonus: number
 }

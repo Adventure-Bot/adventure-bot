@@ -46,14 +46,15 @@ const selectStats = (
     return stats.reduce(
       (acc, stat) => ({
         ...acc,
-        [stat]: character[stat],
+        [stat]: character[stat] ?? 0,
       }),
       {} as Stats
     )
   return stats.reduce(
     (acc, stat) => ({
       ...acc,
-      [stat]: character[stat] + getCharacterStatModifier(character, stat),
+      [stat]:
+        (character[stat] ?? 0) + getCharacterStatModifier(character, stat),
     }),
     {} as Stats
   )

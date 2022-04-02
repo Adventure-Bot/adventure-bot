@@ -5,6 +5,7 @@ export const stats = [
   'damageMax',
   'maxHP',
   'monsterDamageMax',
+  'dragonSlaying',
 ] as const
 
 export type Stat = typeof stats[number]
@@ -19,5 +20,6 @@ export const statTitles: { [key in Stat]: string } = {
   damageBonus: 'Damage Bonus',
   damageMax: 'Damage Max',
   maxHP: 'Max Health',
-  monsterDamageMax: 'Monster Damage Max',
+  monsterDamageMax: 'Monster Slaying',
+  dragonSlaying: 'Dragon Slaying',
 }

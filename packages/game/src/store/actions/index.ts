@@ -12,6 +12,7 @@ export const winnerRevoked = createAction('winnerRevoked')
 export const itemReceived = createAction<{
   characterId: string
   item: Item
+  interaction: CommandInteraction
 }>('itemReceived')
 export const backdateCrown = createAction('backdateCrown') // for testing
 export const characterListThreadCreated = createAction<ThreadChannel>(
