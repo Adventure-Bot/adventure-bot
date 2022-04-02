@@ -1,10 +1,13 @@
-import { trapAttack } from '@adventure-bot/game/trap'
+import { EmojiValue, d20Emoji } from '@adventure-bot/game/Emoji'
+import { TrapAttackResult } from '@adventure-bot/game/trap'
 
-export const trapRollText = (result: ReturnType<typeof trapAttack>): string =>
-  result
-    ? `${result.attackRoll}+${result.attackBonus} (${
-        result.attackRoll + result.attackBonus
-      }) vs ${result.defender.statsModified.ac} ac${
-        result.outcome === 'hit' ? ` for ${result.damage} damage` : ''
-      }.`
-    : 'No result'
+const bonusText = (attackBonus: number): string =>
+  attackBonus ? `+${attackBonus}` : ''
+
+const comparison = (result: TrapAttackResult): string =>
+  result.outcome === 'hit' ? '≥' : '<'
+
+export const trapRollText = (result: TrapAttackResult): string =>
+  `${d20Emoji(result.attackRoll) + bonusText(result.attackBonus)} ${comparison(
+    result
+  )} ${EmojiValue('ac', result.defender.statsModified.ac)}`

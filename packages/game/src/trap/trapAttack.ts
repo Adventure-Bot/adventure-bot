@@ -1,22 +1,20 @@
-import { getCharacter } from '@adventure-bot/game/character'
 import store from '@adventure-bot/game/store'
+import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
 import { damaged } from '@adventure-bot/game/store/slices/characters'
-import { TrapResult } from '@adventure-bot/game/trap'
+import { TrapAttackResult } from '@adventure-bot/game/trap'
 import { d6, d20 } from '@adventure-bot/game/utils'
 
 export const trapAttack = (
-  characterId: string,
+  defender: SelectedCharacter,
   attackBonus = 1
-): TrapResult | void => {
-  const defender = getCharacter(characterId)
-  if (!defender) return
+): TrapAttackResult => {
   const attackRoll = d20()
   const damage = d6()
 
   if (attackRoll + attackBonus > defender.statsModified.ac) {
     store.dispatch(
       damaged({
-        characterId,
+        characterId: defender.id,
         amount: damage,
       })
     )

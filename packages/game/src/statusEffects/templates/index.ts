@@ -1,4 +1,5 @@
 import { aggression } from '@adventure-bot/game/statusEffects/templates/aggression'
+import { blind } from '@adventure-bot/game/statusEffects/templates/blind'
 import { frailty } from '@adventure-bot/game/statusEffects/templates/frailty'
 import { invigorated } from '@adventure-bot/game/statusEffects/templates/invigorated'
 import { might } from '@adventure-bot/game/statusEffects/templates/might'
@@ -12,6 +13,9 @@ export const effects = {
   aggression,
   protectedEffect,
   might,
+  blind,
 } as const
+
+export const defaultEffectDuration = 60 * 60000
 
 export type EffectTemplate = keyof typeof effects
