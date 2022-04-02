@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, TextChannel } from 'discord.js'
+import { Message, TextChannel } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
