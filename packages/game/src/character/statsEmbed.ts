@@ -1,8 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { prop } from 'remeda'
 
 import { Character, statField, stats } from '@adventure-bot/game/character'
-import { statTitles } from '@adventure-bot/game/character/Stats'
 
 export function statsEmbed({
   character,
