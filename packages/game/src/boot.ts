@@ -6,6 +6,7 @@ import { readFile, writeFile } from 'fs/promises'
 
 import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
+import { announceItemsReceived } from '@adventure-bot/game/crown/announceItemsReceived'
 import { announceCrownLoots } from '@adventure-bot/game/crown/announceLoots'
 import { declareWinners } from '@adventure-bot/game/crown/declareWinners'
 import store from '@adventure-bot/game/store'
@@ -115,8 +116,8 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     console.timeEnd('discord client ready')
     opts.onReady(client)
     declareWinners(client)
+    announceItemsReceived()
     announceCrownLoots(client)
-
     renderCharacterList(client)
   })
 

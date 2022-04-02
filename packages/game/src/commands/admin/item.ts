@@ -47,11 +47,11 @@ export const execute = async ({
       itemReceived({
         characterId: character.id,
         item,
+        interaction,
       })
     )
     interaction.editReply({
       content: `${item.name} conjured`,
-      embeds: [itemEmbed({ item, interaction })],
     })
   }
 }

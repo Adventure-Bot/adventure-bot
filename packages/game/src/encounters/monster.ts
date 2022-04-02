@@ -1,4 +1,4 @@
-import { Message, TextChannel } from 'discord.js'
+import { Message, MessageEmbed, TextChannel } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
@@ -11,6 +11,7 @@ import {
   encounterEmbed,
   encounterSummaryEmbed,
 } from '@adventure-bot/game/encounters'
+import { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items/swordOfDragonSlaying'
 import { randomMonster } from '@adventure-bot/game/monster'
 import {
   isUserQuestComplete,
@@ -18,6 +19,7 @@ import {
   updateUserQuestProgess,
 } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
+import { itemReceived } from '@adventure-bot/game/store/actions'
 import {
   selectCharacterById,
   selectEncounterById,
@@ -213,6 +215,22 @@ export const monster = async ({
     .then(() => {
       thread.setArchived(true)
     })
+
+  if (
+    player &&
+    monster.kind === 'Dragon' &&
+    encounter.outcome === 'player victory' &&
+    Math.random() < 0.5
+  ) {
+    const item = swordOfDragonSlaying()
+    store.dispatch(
+      itemReceived({
+        characterId: player.id,
+        item,
+        interaction,
+      })
+    )
+  }
 
   if (encounter.outcome === 'player victory' && Math.random() <= 0.3)
     await chest({ interaction })

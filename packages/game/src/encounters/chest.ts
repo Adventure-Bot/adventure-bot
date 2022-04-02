@@ -191,6 +191,7 @@ export async function chest(
         itemReceived({
           characterId: character.id,
           item: crown,
+          interaction,
         })
       )
       embed.addField(
@@ -208,6 +209,7 @@ export async function chest(
         itemReceived({
           characterId: interaction.user.id,
           item,
+          interaction,
         })
       )
       await interaction.followUp({

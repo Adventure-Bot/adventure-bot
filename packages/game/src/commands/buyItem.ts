@@ -25,6 +25,7 @@ export const buyItem = async (
     itemReceived({
       characterId: player.id,
       item,
+      interaction,
     })
   )
   if (isEquippable(item)) await equipItemPrompt({ interaction, item })
