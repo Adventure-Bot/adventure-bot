@@ -1,5 +1,3 @@
-import { MessageEmbed } from 'discord.js'
-
 import { decoratedName } from '@adventure-bot/game/character'
 import {
   equipItemPrompt,
@@ -18,12 +16,8 @@ export function announceItemsReceived(): void {
       const character = selectCharacterById(store.getState(), characterId)
       if (!character) return
       interaction.followUp({
-        embeds: [
-          new MessageEmbed({
-            title: `${decoratedName(character)} received ${item.name}!`,
-          }),
-          itemEmbed({ item, interaction }),
-        ],
+        content: `${decoratedName(character)} found: ${item.name}!`,
+        embeds: [itemEmbed({ item, interaction })],
       })
 
       if (isEquippable(item))
