@@ -107,6 +107,7 @@ const potionArt: {
   might: 'magic potion with glowing red liquid',
   protectedEffect: 'magic potion with glowing yellow liquid',
   slayer: 'magic potion with glowing green liquid',
+  blind: 'magic potion with glowing blue liquid',
 }
 
 function useInventoryItem({

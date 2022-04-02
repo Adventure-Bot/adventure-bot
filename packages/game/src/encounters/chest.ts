@@ -9,6 +9,7 @@ import {
   adjustGold,
   awardXP,
   decoratedName,
+  getCharacter,
   getUserCharacter,
   gpGainField,
   xpGainField,
@@ -258,11 +259,10 @@ const chestResponses = (chest: Chest): string[] => {
 }
 
 function triggerTrap(interaction: CommandInteraction, chest: Chest) {
+  const character = getCharacter(interaction.user.id)
+  if (!character) return
   chest.trapTriggered = true
-  const attack = trapAttack(interaction.user.id, 1)
-  if (!attack)
-    return interaction.editReply('No attack. This should not happen.')
-
+  const attack = trapAttack(character, 1)
   if (attack.outcome === 'hit') {
     const roll = Math.random()
 
