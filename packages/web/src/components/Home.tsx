@@ -57,18 +57,24 @@ export const Home: FunctionComponent<{
               src="https://github.com/Adventure-Bot/adventure-bot/actions/workflows/adventure-bot.yml/badge.svg"
             />
 
-            <span className="bg-gray-200 font-mono text-xs px-2 py-1 rounded">
+            <span className="bg-gray-200 text-xs px-2 py-1 rounded">
               v{version}
             </span>
           </div>
           <hr className="my-6 border-t" />
 
-          <p className="text-sm mb-6 text-gray-700">
-            Embark on a journey with your friends or team to explore a rich
-            world of fantasy. Slay monsters, earn gold, evade traps, travel,
-            gear up, complete quests, and stab your friends when they&apos;re at
-            their weakest so you can steal all <i>their</i> gold.
-          </p>
+          <div className="max-w-fit">
+            <p className="text-sm mb-6 text-gray-700">
+              Slay monsters, earn gold, evade traps, travel, gear up, complete
+              quests, and stab your friends when they&apos;re at their weakest
+              so you can steal all <em>their</em> gold.
+            </p>
+            <p className="text-sm mb-6 text-gray-700">As you do.</p>
+            <p className="text-sm mb-6 text-gray-700">
+              Adventure Bot is the dungeon master in your friend&apos;s Discord
+              roleplaying game!
+            </p>
+          </div>
 
           <hr className="my-6 border-t" />
 
