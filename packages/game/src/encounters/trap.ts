@@ -9,16 +9,13 @@ import {
   xpGainField,
 } from '@adventure-bot/game/character'
 import { updateUserQuestProgess } from '@adventure-bot/game/quest'
-import { trapAttack, trapRollText } from '@adventure-bot/game/trap'
+import {
+  Trap,
+  getRandomTrap,
+  trapAttack,
+  trapRollText,
+} from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, sleep } from '@adventure-bot/game/utils'
-
-import { getRandomTrap } from './getRandomTrap'
-
-export type Trap = {
-  name: string
-  image: string
-  description: string
-}
 
 export const trap = async ({
   interaction,
@@ -41,7 +38,7 @@ export const trap = async ({
   })
   if (!(message instanceof Message)) return
 
-  const result = trapAttack(character)
+  const result = trapAttack({ defender: character })
 
   await sleep(2000)
   character = getCharacter(interaction.user.id)

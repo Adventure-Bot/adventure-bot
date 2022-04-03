@@ -4,10 +4,13 @@ import { damaged } from '@adventure-bot/game/store/slices/characters'
 import { TrapAttackResult } from '@adventure-bot/game/trap'
 import { d6, d20 } from '@adventure-bot/game/utils'
 
-export const trapAttack = (
-  defender: SelectedCharacter,
-  attackBonus = 1
-): TrapAttackResult => {
+export function trapAttack({
+  defender,
+  attackBonus = 1,
+}: {
+  defender: SelectedCharacter
+  attackBonus?: number
+}): TrapAttackResult {
   const attackRoll = d20()
   const damage = d6()
 

@@ -1,4 +1,4 @@
-import { Trap } from '@adventure-bot/game/encounters/trap'
+import { Trap } from '@adventure-bot/game/trap'
 import { asset } from '@adventure-bot/game/utils'
 
 export const traps: Record<string, () => Trap> = {

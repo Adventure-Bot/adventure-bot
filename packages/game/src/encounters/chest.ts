@@ -262,7 +262,7 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
   const character = getCharacter(interaction.user.id)
   if (!character) return
   chest.trapTriggered = true
-  const attack = trapAttack(character, 1)
+  const attack = trapAttack({ defender: character, attackBonus: 1 })
   if (attack.outcome === 'hit') {
     const roll = Math.random()
 

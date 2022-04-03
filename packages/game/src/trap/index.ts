@@ -1,5 +1,6 @@
-import { TrapAttackResult } from '@adventure-bot/game/trap/TrapAttackResult'
-import { trapAttack } from '@adventure-bot/game/trap/trapAttack'
-import { trapRollText } from '@adventure-bot/game/trap/trapRollText'
-
-export { trapAttack, TrapAttackResult, trapRollText }
+export { TrapAttackResult } from './TrapAttackResult'
+export { trapAttack } from './trapAttack'
+export { trapRollText } from './trapRollText'
+export { getRandomTrap } from '@adventure-bot/game/trap/getRandomTrap'
+export { traps } from './traps'
+export { Trap } from './Trap'
