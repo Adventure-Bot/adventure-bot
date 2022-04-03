@@ -11,7 +11,7 @@
       "cwd": "${workspaceFolder}",
       "runtimeVersion": "16",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["game", "dev"],
+      "runtimeArgs": ["dev"],
       "console": "integratedTerminal"
     },
     {
