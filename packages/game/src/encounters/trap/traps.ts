@@ -1,6 +1,5 @@
+import { Trap } from '@adventure-bot/game/encounters/trap'
 import { asset } from '@adventure-bot/game/utils'
-
-import { Trap } from '.'
 
 export const traps: Record<string, () => Trap> = {
   glyph: () => ({
