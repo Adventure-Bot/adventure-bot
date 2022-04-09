@@ -111,7 +111,7 @@ const potionArt: {
   protectedEffect: 'magic potion with glowing yellow liquid',
   slayer: 'magic potion with glowing green liquid',
   blind: 'magic potion with glowing blue liquid',
-  haste: 'magic potion with glowing blue liquid', // todo: update the art
+  haste: 'magic potion with vapors',
 }
 
 function useInventoryItem({
