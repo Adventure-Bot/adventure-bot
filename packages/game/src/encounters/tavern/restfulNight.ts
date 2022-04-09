@@ -3,8 +3,8 @@ import { clamp } from 'remeda'
 
 import {
   decoratedName,
+  findOrCreateCharacter,
   getCharacterStatModified,
-  getUserCharacter,
   hpBarField,
   xpGainField,
 } from '@adventure-bot/game/character'
@@ -27,7 +27,7 @@ import { asset, d6 } from '@adventure-bot/game/utils'
 export async function restfulNight(
   interaction: CommandInteraction
 ): Promise<void> {
-  const preHealCharacter = getUserCharacter(interaction.user)
+  const preHealCharacter = findOrCreateCharacter(interaction.user)
   const healAmount = d6()
   const actualHeal = clamp(healAmount, {
     max:
@@ -54,7 +54,7 @@ export async function restfulNight(
     })
   )
 
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   await interaction.followUp({
     embeds: [
       new MessageEmbed({
@@ -63,7 +63,7 @@ export async function restfulNight(
         description: 'You feel well rested. 💤',
         fields: [
           hpBarField({
-            character: getUserCharacter(interaction.user),
+            character: findOrCreateCharacter(interaction.user),
             adjustment: actualHeal,
           }),
           xpGainField(1),

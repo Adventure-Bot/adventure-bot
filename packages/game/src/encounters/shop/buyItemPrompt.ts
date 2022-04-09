@@ -5,7 +5,7 @@ import {
   MessageButton,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { buyItem } from '@adventure-bot/game/commands/buyItem'
 import { buyList } from '@adventure-bot/game/encounters/shop/buyList'
 import { Item } from '@adventure-bot/game/equipment'
@@ -54,6 +54,6 @@ export async function buyItemPrompt({
 
   const item = inventory[parseInt(response.values[0])]
   if (!item) return
-  await buyItem(interaction, getUserCharacter(interaction.user), item)
+  await buyItem(interaction, findOrCreateCharacter(interaction.user), item)
   return item
 }

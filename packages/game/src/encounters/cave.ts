@@ -5,7 +5,10 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
-import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
+import {
+  decoratedName,
+  findOrCreateCharacter,
+} from '@adventure-bot/game/character'
 import { chest } from '@adventure-bot/game/encounters/chest'
 import { monster } from '@adventure-bot/game/encounters/monster'
 import { trap } from '@adventure-bot/game/encounters/trap'
@@ -20,7 +23,7 @@ export const cave = async ({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({

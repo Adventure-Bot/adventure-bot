@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import {
-  getUserCharacter,
+  findOrCreateCharacter,
   hpBarField,
   xpGainField,
 } from '@adventure-bot/game/character'
@@ -36,7 +36,7 @@ export async function fairyWell({
     })
   )
 
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   await interaction[replyType]({
     embeds: [
       new MessageEmbed({

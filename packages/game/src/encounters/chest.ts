@@ -9,8 +9,8 @@ import {
   adjustGold,
   awardXP,
   decoratedName,
+  findOrCreateCharacter,
   getCharacter,
-  getUserCharacter,
   gpGainField,
   xpGainField,
 } from '@adventure-bot/game/character'
@@ -167,13 +167,13 @@ export async function chest(
   } while (
     !chest.isLooted &&
     !fled &&
-    getUserCharacter(interaction.user).hp > 0
+    findOrCreateCharacter(interaction.user).hp > 0
   )
   message.reactions.removeAll()
   const embed = chestEmbed(chest, interaction)
   if (fled) embed.addField('Result', 'You leave the chest behind.')
 
-  if (chest.isLooted && getUserCharacter(interaction.user).hp > 0) {
+  if (chest.isLooted && findOrCreateCharacter(interaction.user).hp > 0) {
     const xp = 1 + (chest.hasTrap ? 2 : 0) + (chest.hasLock ? 1 : 0)
     const gp = Math.floor(Math.random() * 20) + 5
     awardXP(interaction.user.id, xp)
@@ -181,7 +181,7 @@ export async function chest(
     embed.addFields([xpGainField(xp), gpGainField(gp)])
     if (Math.random() <= 0.005 && !selectIsHeavyCrownInPlay(store.getState())) {
       const crown = heavyCrown()
-      const character = getUserCharacter(interaction.user)
+      const character = findOrCreateCharacter(interaction.user)
       store.dispatch(
         itemReceived({
           characterId: character.id,
@@ -201,7 +201,7 @@ export async function chest(
       )
     }
   }
-  if (getUserCharacter(interaction.user).hp === 0) {
+  if (findOrCreateCharacter(interaction.user).hp === 0) {
     embed.addField('Result', `You have been defeated by a chest.`)
   }
   message.edit({
@@ -214,7 +214,7 @@ const chestEmbed = (
   chest: Chest,
   interaction: CommandInteraction
 ): MessageEmbed => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const embed = new MessageEmbed({
     title: `${decoratedName(character)} encountered a chest!`,
     color: 'GOLD',

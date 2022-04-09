@@ -9,7 +9,10 @@ import { clamp } from 'remeda'
 
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import { Manifest } from '@adventure-bot/game/asset-manifest'
-import { getUserCharacter, hpBarField } from '@adventure-bot/game/character'
+import {
+  findOrCreateCharacter,
+  hpBarField,
+} from '@adventure-bot/game/character'
 import {
   isPotion,
   itemSelect,
@@ -35,7 +38,7 @@ import { asset, d, randomArrayElement } from '@adventure-bot/game/utils'
 export const useInventoryItemPrompt = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const inventory = usableInventory(character)
   if (inventory.length === 0) {
     interaction.editReply({
@@ -88,7 +91,7 @@ export const useInventoryItemPrompt = async (
     }
     if (response.isSelectMenu()) {
       const item = inventory[parseInt(response.values[0])]
-      const character = getUserCharacter(interaction.user)
+      const character = findOrCreateCharacter(interaction.user)
       useInventoryItem({
         itemId: item.id,
         characterId: character.id,
@@ -108,6 +111,7 @@ const potionArt: {
   protectedEffect: 'magic potion with glowing yellow liquid',
   slayer: 'magic potion with glowing green liquid',
   blind: 'magic potion with glowing blue liquid',
+  haste: 'magic potion with glowing blue liquid', // todo: update the art
 }
 
 function useInventoryItem({

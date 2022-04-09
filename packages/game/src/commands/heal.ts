@@ -4,7 +4,7 @@ import { MessageEmbed } from 'discord.js'
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import {
   decoratedName,
-  getUserCharacter,
+  findOrCreateCharacter,
   hpBarField,
 } from '@adventure-bot/game/character'
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
@@ -27,12 +27,12 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const target = getUserCharacter(
+  const target = findOrCreateCharacter(
     (interaction.options.data[0] && interaction.options.data[0].user) ||
       interaction.user
   )
 
-  let character = getUserCharacter(interaction.user)
+  let character = findOrCreateCharacter(interaction.user)
 
   const result = heal({ healerId: character.id, targetId: target.id })
   if (!result) {
@@ -45,7 +45,7 @@ export const execute = async ({
   }
   updateUserQuestProgess(interaction.user, 'healer', result.amount)
 
-  character = getUserCharacter(interaction.user)
+  character = findOrCreateCharacter(interaction.user)
 
   const maybeTargetName =
     target.id === character.id ? '' : ' ' + decoratedName(target)

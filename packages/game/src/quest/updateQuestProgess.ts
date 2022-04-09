@@ -1,6 +1,6 @@
 import { User } from 'discord.js'
 
-import { Character, getUserCharacter } from '@adventure-bot/game/character'
+import { Character, findOrCreateCharacter } from '@adventure-bot/game/character'
 import { QuestId } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { questProgressed } from '@adventure-bot/game/store/slices/characters'
@@ -18,5 +18,5 @@ export const updateUserQuestProgess = (
     })
   )
 
-  return getUserCharacter(user)
+  return findOrCreateCharacter(user)
 }

@@ -2,7 +2,7 @@ import { CommandInteraction, EmbedFieldData, MessageEmbed } from 'discord.js'
 
 import { EmojiModifier, EmojiValue } from '@adventure-bot/game/Emoji'
 import {
-  getUserCharacter,
+  findOrCreateCharacter,
   statTitles,
   stats,
 } from '@adventure-bot/game/character'
@@ -44,7 +44,7 @@ export function itemEmbed({
   embed.addField('Tradeable?', item.tradeable ? 'Yes' : 'No', true)
 
   if (showEqupStatus) {
-    const character = getUserCharacter(interaction.user)
+    const character = findOrCreateCharacter(interaction.user)
     embed.addField(
       'Equipped?',
       isEquipped({ character, item }) ? 'Yes' : 'No',

@@ -2,7 +2,7 @@ import { CommandInteraction, MessageEmbed, TextChannel } from 'discord.js'
 
 import {
   decoratedName,
-  getUserCharacter,
+  findOrCreateCharacter,
   hpBarField,
 } from '@adventure-bot/game/character'
 import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
@@ -14,7 +14,7 @@ export async function listMonsters(
   interaction: CommandInteraction
 ): Promise<void> {
   const roamingMonsters = selectRoamingMonsters(store.getState())
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const channel = interaction.channel
   if (!(channel instanceof TextChannel)) return
   if (!roamingMonsters.length) {

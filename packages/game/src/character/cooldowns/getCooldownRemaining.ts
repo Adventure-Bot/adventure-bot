@@ -8,10 +8,13 @@ import {
 export const getCooldownRemaining = (
   characterId: string,
   type: keyof Character['cooldowns']
-): number => {
+): number | void => {
   const state = store.getState()
+  const character = selectCharacterById(state, characterId)
+  if (!character) return
+  const haste = Math.min(50, 1 - (character.stats.haste ?? 0) / 100)
   try {
-    const cooldown = selectCooldownByType(state, type) ?? 5 * 60000
+    const cooldown = (selectCooldownByType(state, type) ?? 5 * 60000) * haste
     const lastUsed = selectCharacterById(state, characterId)?.cooldowns[type]
     if (!lastUsed) return 0
     const remaining = new Date(lastUsed).valueOf() + cooldown - Date.now()

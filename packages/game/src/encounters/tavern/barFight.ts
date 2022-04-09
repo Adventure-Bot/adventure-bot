@@ -2,7 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import {
   decoratedName,
-  getUserCharacter,
+  findOrCreateCharacter,
   hpBarField,
   xpGainField,
 } from '@adventure-bot/game/character'
@@ -21,7 +21,7 @@ export async function barFight(
   const damage = d6()
   store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
   store.dispatch(damaged({ characterId: interaction.user.id, amount: damage }))
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const embed = new MessageEmbed({
     title: `${decoratedName(character)} got into a bar fight!`,
     color: 'RED',
@@ -29,7 +29,7 @@ export async function barFight(
     fields: [
       xpGainField(1),
       hpBarField({
-        character: getUserCharacter(interaction.user),
+        character: findOrCreateCharacter(interaction.user),
         adjustment: -damage,
       }),
     ],

@@ -3,7 +3,7 @@ import { MessageEmbed } from 'discord.js'
 import {
   awardXP,
   decoratedName,
-  getUserCharacter,
+  findOrCreateCharacter,
   xpGainField,
 } from '@adventure-bot/game/character'
 import { isTravelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
@@ -24,7 +24,7 @@ export const travel = async ({
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
   awardXP(interaction.user.id, 1)
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const art = randomArrayElement([
     asset('fantasy', 'places', 'a lone traveler in the desert'),
     asset('fantasy', 'places', 'a lone traveler in the forest'),

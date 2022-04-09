@@ -8,7 +8,10 @@ import {
   TextChannel,
 } from 'discord.js'
 
-import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
+import {
+  decoratedName,
+  findOrCreateCharacter,
+} from '@adventure-bot/game/character'
 import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import {
   equipInventoryItemPrompt,
@@ -28,7 +31,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   if (!character.inventory.length) {
     await interaction.followUp('Your inventory is empty.')
     return
@@ -91,7 +94,7 @@ export const execute = async ({
 export default { command, execute }
 
 function inventoryMain(interaction: CommandInteraction): MessageOptions {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const hasItemsToOffer = character.inventory.filter(isTradeable).length > 0
   const hasItemsToEquip = equippableInventory(character).length > 0
   const hasItemsToUse = usableInventory(character).length > 0

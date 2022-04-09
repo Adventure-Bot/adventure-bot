@@ -2,8 +2,8 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 
 import {
   characterEmbed,
+  findOrCreateCharacter,
   getCharacterUpdate,
-  getUserCharacter,
   inventoryFields,
   loot,
   lootResultEmbed,
@@ -21,7 +21,7 @@ export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
   const monster = randomMonster()
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const result = await loot({
     looterId: monster.id,
     targetId: interaction.user.id,

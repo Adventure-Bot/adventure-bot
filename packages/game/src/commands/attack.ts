@@ -7,7 +7,7 @@ import {
   playerAttack,
 } from '@adventure-bot/game/attack'
 import {
-  getUserCharacter,
+  findOrCreateCharacter,
   loot,
   lootResultEmbed,
 } from '@adventure-bot/game/character'
@@ -33,8 +33,8 @@ export const execute = async ({
     return
   }
 
-  const attacker = getUserCharacter(initiator)
-  const defender = getUserCharacter(target)
+  const attacker = findOrCreateCharacter(initiator)
+  const defender = findOrCreateCharacter(target)
   let lootResult
   if (attacker.hp === 0) {
     await interaction.editReply({

@@ -4,7 +4,7 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import { range } from 'remeda'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
 import { healerStatus } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
@@ -144,7 +144,7 @@ export const execute = async ({
 function declareWinner(interaction: CommandInteraction) {
   const winnerUser = interaction.options.getUser('winner')
   if (!winnerUser) return
-  const winner = getUserCharacter(winnerUser)
+  const winner = findOrCreateCharacter(winnerUser)
   store.dispatch(winnerDeclared({ winner }))
 }
 

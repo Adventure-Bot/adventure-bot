@@ -9,8 +9,8 @@ import {
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
   decoratedName,
+  findOrCreateCharacter,
   getCharacterUpdate,
-  getUserCharacter,
   gpGainField,
 } from '@adventure-bot/game/character'
 import { sellList } from '@adventure-bot/game/encounters/shop/sellList'
@@ -26,7 +26,7 @@ export async function sellItemPrompt({
   interaction: CommandInteraction
   message: Message
 }): Promise<void> {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const inventory = character.inventory.filter((i) => i.sellable)
   await message.edit({
     embeds: [

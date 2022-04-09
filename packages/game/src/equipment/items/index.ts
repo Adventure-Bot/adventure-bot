@@ -11,12 +11,14 @@ import { leatherArmor } from '@adventure-bot/game/equipment/items/leatherArmor'
 import { longsword } from '@adventure-bot/game/equipment/items/longsword'
 import { mace } from '@adventure-bot/game/equipment/items/mace'
 import { plateArmor } from '@adventure-bot/game/equipment/items/plateArmor'
+import { potionOfHaste } from '@adventure-bot/game/equipment/items/potionOfHaste'
 import { potionOfHealing } from '@adventure-bot/game/equipment/items/potionOfHealing'
 import { potionOfMight } from '@adventure-bot/game/equipment/items/potionOfMight'
 import { potionOfProtection } from '@adventure-bot/game/equipment/items/potionOfProtection'
 import { potionOfSlaying } from '@adventure-bot/game/equipment/items/potionOfSlaying'
 import { potionOfVigor } from '@adventure-bot/game/equipment/items/potionOfVigor'
 import { ringOfAttack } from '@adventure-bot/game/equipment/items/ringOfAttack'
+import { ringOfHaste } from '@adventure-bot/game/equipment/items/ringOfHaste'
 import { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items/swordOfDragonSlaying'
 import { towerShield } from '@adventure-bot/game/equipment/items/towerShield'
 import { travelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
@@ -37,12 +39,14 @@ export {
   longsword,
   mace,
   plateArmor,
+  potionOfHaste,
   potionOfHealing,
   potionOfMight,
   potionOfProtection,
   potionOfSlaying,
   potionOfVigor,
   ringOfAttack,
+  ringOfHaste,
   swordOfDragonSlaying,
   towerShield,
   unidentifiedPotion,
