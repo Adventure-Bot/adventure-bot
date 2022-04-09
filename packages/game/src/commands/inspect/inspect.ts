@@ -5,7 +5,7 @@ import { values } from 'remeda'
 import {
   Character,
   characterEmbed,
-  getUserCharacter,
+  findOrCreateCharacter,
   statsEmbed,
 } from '@adventure-bot/game/character'
 import { actionEmbed } from '@adventure-bot/game/commands/inspect/actionEmbed'
@@ -13,6 +13,8 @@ import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import { itemEmbed } from '@adventure-bot/game/equipment'
 import { questEmbed } from '@adventure-bot/game/quest'
 import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
+import store from '@adventure-bot/game/store'
+import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
@@ -28,7 +30,9 @@ export const execute = async ({
   const user =
     (interaction.options.data[0] && interaction.options.data[0].user) ||
     interaction.user
-  const character = getUserCharacter(user)
+  findOrCreateCharacter(user) // ensure the character exists
+  const character = selectCharacterById(store.getState(), user.id)
+  if (!character) return
 
   await interaction.followUp({
     embeds: [

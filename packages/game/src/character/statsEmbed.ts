@@ -1,12 +1,13 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Character, statField, stats } from '@adventure-bot/game/character'
+import { statField, stats } from '@adventure-bot/game/character'
+import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
 
 export function statsEmbed({
   character,
   interaction,
 }: {
-  character: Character
+  character: SelectedCharacter
   interaction: CommandInteraction
 }): MessageEmbed {
   return new MessageEmbed({

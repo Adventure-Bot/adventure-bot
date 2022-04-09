@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import {
   angels,
   cave,
@@ -20,7 +20,7 @@ import { CommandHandler, weightedTable } from '@adventure-bot/game/utils'
 export const randomEncounter = (
   interaction: CommandInteraction
 ): CommandHandler => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const angelChance = character.quests.healer ? 0 : 0.5
   return weightedTable<() => CommandHandler>([
     [0.2, () => divineBlessing],

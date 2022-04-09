@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from 'discord.js'
 
 import {
   cooldownRemainingText,
-  getUserCharacter,
+  findOrCreateCharacter,
   hpBarField,
   isCharacterOnCooldown,
   startCooldown,
@@ -23,7 +23,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
 
   if (!isHealer(character)) {
     interaction.editReply('You must seek the boon of the divine to use this.')
@@ -60,7 +60,7 @@ export const execute = async ({
     new MessageEmbed({
       fields: [
         hpBarField({
-          character: getUserCharacter(target),
+          character: findOrCreateCharacter(target),
           adjustment: healAmount,
           showName: true,
         }),
@@ -72,14 +72,14 @@ export const execute = async ({
     embeds,
   })
   if (!(message instanceof Message)) return
-  console.log('renew', { healAmount, hp: getUserCharacter(target).hp })
+  console.log('renew', { healAmount, hp: findOrCreateCharacter(target).hp })
   const timer = setInterval(() => {
     store.dispatch(healed({ characterId: target.id, amount: healAmount }))
     embeds.push(
       new MessageEmbed({
         fields: [
           hpBarField({
-            character: getUserCharacter(target),
+            character: findOrCreateCharacter(target),
             adjustment: healAmount,
             showName: true,
           }),

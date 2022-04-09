@@ -8,8 +8,8 @@ import { times } from 'remeda'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
+  findOrCreateCharacter,
   getCharacterUpdate,
-  getUserCharacter,
 } from '@adventure-bot/game/character'
 import { buyItemPrompt } from '@adventure-bot/game/encounters/shop/buyItemPrompt'
 import { sellItemPrompt } from '@adventure-bot/game/encounters/shop/sellItemPrompt'
@@ -26,7 +26,7 @@ export const shop = async ({
   interaction,
   replyType = 'followUp',
 }: CommandHandlerOptions): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const inventory = times(3, randomShopItem)
 
   if (!selectIsHeavyCrownInPlay(store.getState()) && Math.random() <= 0.1) {

@@ -6,7 +6,10 @@ import {
 } from 'discord.js'
 import { filter } from 'remeda'
 
-import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
+import {
+  decoratedName,
+  findOrCreateCharacter,
+} from '@adventure-bot/game/character'
 import {
   angels,
   cave,
@@ -58,7 +61,7 @@ export const cairns = async ({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
 
   const randomOption = ({ omit }: { omit?: EncounterId } = {}) =>
     weightedTable<EncounterId>(

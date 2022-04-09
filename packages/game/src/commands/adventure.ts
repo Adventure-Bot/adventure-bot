@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageEmbed } from 'discord.js'
 
 import {
-  getUserCharacter,
+  findOrCreateCharacter,
   isCharacterOnCooldown,
   startCooldown,
 } from '@adventure-bot/game/character'
@@ -17,7 +17,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const player = getUserCharacter(interaction.user)
+  const player = findOrCreateCharacter(interaction.user)
   if (player.hp === 0) {
     await interaction.editReply({
       embeds: [

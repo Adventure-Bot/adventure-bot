@@ -1,12 +1,12 @@
 import { CommandInteraction } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { buffQuestReward } from '@adventure-bot/game/quest'
 
 export const survivorBuffQuestReward = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const quest = character.quests.survivor
   if (!quest) return
   buffQuestReward(

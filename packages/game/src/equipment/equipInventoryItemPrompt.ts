@@ -5,7 +5,7 @@ import {
   MessageButton,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { equippableInventory, itemSelect } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemEquipped } from '@adventure-bot/game/store/slices/characters'
@@ -18,7 +18,7 @@ import { itemEquipped } from '@adventure-bot/game/store/slices/characters'
 export const equipInventoryItemPrompt = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const inventory = equippableInventory(character)
   if (inventory.length === 0) {
     interaction.editReply({
@@ -71,7 +71,7 @@ export const equipInventoryItemPrompt = async (
     }
     if (response.isSelectMenu()) {
       const item = inventory[parseInt(response.values[0])]
-      const character = getUserCharacter(interaction.user)
+      const character = findOrCreateCharacter(interaction.user)
       store.dispatch(
         itemEquipped({ itemId: item.id, characterId: character.id })
       )

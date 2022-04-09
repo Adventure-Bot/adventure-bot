@@ -36,6 +36,7 @@ const defaultEmojis: {
   adventure: '🚶‍♀️',
   renew: '🤍',
   dragonSlaying: '🐲',
+  haste: '⏳',
 }
 
 export function Emoji(name: Emojis): string {

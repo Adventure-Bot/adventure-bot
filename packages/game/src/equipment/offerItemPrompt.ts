@@ -5,7 +5,7 @@ import {
   MessageButton,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import {
   isTradeable,
   itemEmbed,
@@ -20,7 +20,7 @@ import {
 export const offerItemPrompt = async (
   interaction: CommandInteraction
 ): Promise<void> => {
-  const sender = getUserCharacter(interaction.user)
+  const sender = findOrCreateCharacter(interaction.user)
   const inventory = sender.inventory.filter(isTradeable)
   if (inventory.length === 0) {
     interaction.followUp(`No items to offer.`)
@@ -110,7 +110,7 @@ export const offerItemPrompt = async (
       })
     })
   if (reply && reply.isButton()) {
-    const recipient = getUserCharacter(reply.user)
+    const recipient = findOrCreateCharacter(reply.user)
     store.dispatch(
       itemGiven({
         fromCharacterId: sender.id,

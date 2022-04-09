@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { Shrine } from '@adventure-bot/game/encounters/shrine'
 import { questProgressField } from '@adventure-bot/game/quest'
 import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
@@ -12,7 +12,7 @@ export function shrineEmbeds({
   shrine: Shrine
   interaction: CommandInteraction
 }): MessageEmbed[] {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const quest = character.quests.blessed
   return [
     new MessageEmbed({

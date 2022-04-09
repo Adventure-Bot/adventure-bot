@@ -14,13 +14,13 @@ import { createCharacter } from '@adventure-bot/game/character/createCharacter'
 import { decoratedName } from '@adventure-bot/game/character/decoratedName'
 import { defaultCharacter } from '@adventure-bot/game/character/defaultCharacter'
 import { defaultCooldowns } from '@adventure-bot/game/character/defaultCooldowns'
+import { findOrCreateCharacter } from '@adventure-bot/game/character/findOrCreateCharacter'
 import { getCharacter } from '@adventure-bot/game/character/getCharacter'
 import { getCharacterStatModified } from '@adventure-bot/game/character/getCharacterStatModified'
 import { getCharacterStatModifier } from '@adventure-bot/game/character/getCharacterStatModifier'
 import { getCharacterUpdate } from '@adventure-bot/game/character/getCharacterUpdate'
 import { getEquipmentStatModifier } from '@adventure-bot/game/character/getEquipmentStatModifier'
 import { getStatusEffectStatModifier } from '@adventure-bot/game/character/getStatusEffectStatModifier'
-import { getUserCharacter } from '@adventure-bot/game/character/getUserCharacter'
 import { getUserCharacters } from '@adventure-bot/game/character/getUserCharacters'
 import { gpGainField } from '@adventure-bot/game/character/gpGainField'
 import { hpBar } from '@adventure-bot/game/character/hpBar/hpBar'
@@ -76,7 +76,7 @@ export {
   stats,
   LootResult,
   gpGainField,
-  getUserCharacter,
+  findOrCreateCharacter,
   loot,
   lootResultEmbed,
   cooldownRemainingText,

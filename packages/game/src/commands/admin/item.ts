@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { keys } from 'remeda'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import * as items from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
@@ -36,7 +36,7 @@ command.addStringOption((option) => {
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const itemName = snakeToCamelCase(interaction.options.getString('item') ?? '')
   const itemNames = keys(items)
   if (itemNames.includes(itemName)) {

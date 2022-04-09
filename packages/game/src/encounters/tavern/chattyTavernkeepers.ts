@@ -9,7 +9,7 @@ import {
 import {
   awardXP,
   decoratedName,
-  getUserCharacter,
+  findOrCreateCharacter,
   xpGainField,
 } from '@adventure-bot/game/character'
 import questsCommand from '@adventure-bot/game/commands/quests'
@@ -24,7 +24,7 @@ export const chattyTavernkeepers = async (
   followUp = false
 ): Promise<void> => {
   awardXP(interaction.user.id, 1)
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const state = store.getState()
   const availableQuests = selectAvailableQuests(state, character)
 

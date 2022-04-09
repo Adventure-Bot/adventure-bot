@@ -7,7 +7,7 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
-import { getUserCharacter } from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import {
   Quest,
   QuestId,
@@ -27,7 +27,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const completedQuests = getCompletedQuests(character)
   if (Object.values(character.quests).length === 0) {
     await interaction.followUp(

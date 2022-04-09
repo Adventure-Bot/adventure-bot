@@ -1,6 +1,9 @@
 import { MessageEmbed } from 'discord.js'
 
-import { decoratedName, getUserCharacter } from '@adventure-bot/game/character'
+import {
+  decoratedName,
+  findOrCreateCharacter,
+} from '@adventure-bot/game/character'
 import { questEmbed } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { questGranted } from '@adventure-bot/game/store/slices/characters'
@@ -16,7 +19,7 @@ export async function angels({
       questId: 'healer',
     })
   )
-  const character = getUserCharacter(interaction.user)
+  const character = findOrCreateCharacter(interaction.user)
   const angel = asset('fantasy', 'characters', 'angel')
 
   interaction[replyType]({

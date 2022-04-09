@@ -24,34 +24,30 @@ import {
   berserkerHides,
   travelersRing,
 } from '@adventure-bot/game/equipment/items'
-import { weightedRandom } from '@adventure-bot/game/utils'
-
-const weights = new Map<() => Item, number>([
-  [amuletOfAttack, 0.3],
-  [amuletOfProtection, 0.3],
-  [buckler, 1],
-  [chainArmor, 1],
-  [dagger, 1],
-  [kiteShield, 1],
-  [leatherArmor, 1],
-  [longsword, 1],
-  [mace, 1],
-  [plateArmor, 0.8],
-  [assassinLeathers, 0.8],
-  [berserkerHides, 0.8],
-  [potionOfHealing, 1],
-  [potionOfMight, 1],
-  [potionOfProtection, 1],
-  [potionOfSlaying, 1],
-  [potionOfVigor, 1],
-  [ringOfAttack, 0.3],
-  [travelersRing, 1],
-  [towerShield, 1],
-  [warAxe, 0.5],
-])
+import { weightedTable } from '@adventure-bot/game/utils'
 
 export function randomShopItem(): Item {
-  return Array.from(weights.keys())[
-    weightedRandom(Array.from(weights.values()))
-  ]()
+  return weightedTable<() => Item>([
+    [0.3, amuletOfAttack],
+    [0.3, amuletOfProtection],
+    [0.8, assassinLeathers],
+    [0.8, berserkerHides],
+    [1, buckler],
+    [1, chainArmor],
+    [1, dagger],
+    [1, kiteShield],
+    [1, leatherArmor],
+    [1, longsword],
+    [1, mace],
+    [0.8, plateArmor],
+    [1, potionOfHealing],
+    [1, potionOfMight],
+    [1, potionOfProtection],
+    [1, potionOfSlaying],
+    [1, potionOfVigor],
+    [0.3, ringOfAttack],
+    [1, towerShield],
+    [1, travelersRing],
+    [0.5, warAxe],
+  ])()
 }
