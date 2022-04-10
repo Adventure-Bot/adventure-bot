@@ -22,7 +22,11 @@ import {
   unidentifiedPotion,
   warAxe,
 } from '@adventure-bot/game/equipment'
-import { travelersRing } from '@adventure-bot/game/equipment/items'
+import {
+  potionOfHaste,
+  ringOfHaste,
+  travelersRing,
+} from '@adventure-bot/game/equipment/items'
 import { weightedTable } from '@adventure-bot/game/utils'
 
 export function randomChestItem(): Item {
@@ -30,6 +34,7 @@ export function randomChestItem(): Item {
     [0.1, amuletOfAttack],
     [0.1, amuletOfProtection],
     [0.1, ringOfAttack],
+    [0.1, ringOfHaste],
     [0.3, plateArmor],
     [0.3, assassinLeathers],
     [0.3, berserkerHides],
@@ -39,6 +44,7 @@ export function randomChestItem(): Item {
     [0.5, potionOfProtection],
     [0.5, potionOfSlaying],
     [0.5, potionOfVigor],
+    [0.5, potionOfHaste],
     [1, potionOfHealing],
     [1, chainArmor],
     [1, kiteShield],
