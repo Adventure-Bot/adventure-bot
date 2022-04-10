@@ -13,7 +13,7 @@ export function statsEmbed({
   return new MessageEmbed({
     title: `Stats`,
     fields: stats
-      .filter((stat) => character[stat])
+      .filter((stat) => character.statsModified[stat])
       .map((stat) => statField(character, interaction, stat)),
   })
 }
