@@ -16,7 +16,7 @@ export function announceItemsReceived(): void {
       const character = selectCharacterById(store.getState(), characterId)
       if (!character) return
       interaction.followUp({
-        content: `${decoratedName(character)} found: ${item.name}!`,
+        content: `${decoratedName(character)} received: ${item.name}!`,
         embeds: [itemEmbed({ item, interaction })],
       })
 
