@@ -11,7 +11,7 @@ export const ringOfHaste = (): Ring => ({
   modifiers: {
     haste: 10,
   },
-  goldValue: 200,
+  goldValue: 800,
   equippable: true,
   sellable: true,
   tradeable: true,
