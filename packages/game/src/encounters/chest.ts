@@ -1,9 +1,4 @@
-import {
-  CommandInteraction,
-  Message,
-  MessageAttachment,
-  MessageEmbed,
-} from 'discord.js'
+import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
 
 import {
   adjustGold,
@@ -23,9 +18,7 @@ import {
   effectAdded,
 } from '@adventure-bot/game/store/slices/characters'
 import { trapAttack } from '@adventure-bot/game/trap'
-import { CommandHandlerOptions } from '@adventure-bot/game/utils'
-
-const chestImage = new MessageAttachment('./images/chest.jpg', 'chest.jpg')
+import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 type Chest = {
   hasTrap: boolean
@@ -70,7 +63,6 @@ export async function chest(
   }
 
   const message = await interaction[replyType]({
-    files: [chestImage],
     embeds: [chestEmbed(chest, interaction)],
     fetchReply: true,
   })
@@ -93,12 +85,10 @@ export async function chest(
       })
     if (!collected || timeout) {
       message.reactions.removeAll()
-      await interaction.followUp(`Timed out`)
       return
     }
     const reaction = collected.first()
     if (!reaction) {
-      await interaction.followUp(`No reaction received.`)
       return
     }
     if (reaction.emoji.name === '🏃‍♀️') {
@@ -161,7 +151,6 @@ export async function chest(
       console.error('Failed to remove reactions.')
     }
     message.edit({
-      files: [chestImage],
       embeds: [chestEmbed(chest, interaction)],
     })
   } while (
@@ -205,7 +194,6 @@ export async function chest(
     embed.addField('Result', `You have been defeated by a chest.`)
   }
   message.edit({
-    files: [chestImage],
     embeds: [embed],
   })
 }
@@ -219,7 +207,15 @@ const chestEmbed = (
     title: `${decoratedName(character)} encountered a chest!`,
     color: 'GOLD',
     description: `You found a treasure chest! What wonders wait within?`,
-  }).setImage('attachment://chest.jpg')
+  })
+    .setImage(
+      asset(
+        'fantasy',
+        'items',
+        'iron reinforced chest overflowing with gems and jewels'
+      ).s3Url
+    )
+    .setThumbnail(character.profile)
 
   if (chest.inspected) {
     embed.addField('Inspected', 'You inspected the chest.')
