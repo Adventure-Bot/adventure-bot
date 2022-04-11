@@ -212,7 +212,8 @@ const chestEmbed = (
       asset(
         'fantasy',
         'items',
-        'iron reinforced chest overflowing with gems and jewels'
+        'iron reinforced chest overflowing with gems and jewels',
+        interaction.id
       ).s3Url
     )
     .setThumbnail(character.profile)
