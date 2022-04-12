@@ -25,7 +25,9 @@ export function attackResultEmbedCompact({
     fields: [
       hpBarField({
         character: result.defender,
-        adjustment: result.outcome === 'hit' ? -result.damage : 0,
+        adjustment: ['hit', 'crit'].includes(result.outcome)
+          ? -result.damage
+          : 0,
         showName: true,
       }),
     ],

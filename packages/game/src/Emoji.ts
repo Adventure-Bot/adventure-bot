@@ -9,6 +9,7 @@ type Emojis =
   | 'damage'
   | 'heal'
   | 'attack'
+  | 'crit'
   | 'hit'
   | 'miss'
   | 'run'
@@ -30,6 +31,7 @@ const defaultEmojis: {
   maxHP: '♥',
   damageMax: '💔',
   monsterDamageMax: '👹',
+  crit: '💥💥💥',
   hit: '💥',
   miss: '🛡',
   run: '🏃‍♀️',

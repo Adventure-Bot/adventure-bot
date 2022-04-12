@@ -4,6 +4,7 @@ export const damageDescriptor = (
   result: ReturnType<typeof playerAttack>
 ): string => {
   if (!result) return `No result`
+  if (result.outcome === 'crit') return 'with a critical strike!'
 
   if (result.outcome === 'cooldown' || result.outcome === 'miss') return ''
 

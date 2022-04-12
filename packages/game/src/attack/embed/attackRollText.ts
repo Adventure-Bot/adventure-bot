@@ -12,7 +12,7 @@ export const attackRollText = ({
   const { attackBonus, ac } = result.attacker.statsModified
   const { attackRoll } = result
   const bonusText = (attackBonus > 0 ? '+' : '') + (attackBonus || '')
-  const comparison = result.outcome === 'hit' ? '≥' : '<'
+  const comparison = ['crit', 'hit'].includes(result.outcome) ? '≥' : '<'
 
   return `${
     Emoji('attack') + d20Emoji(attackRoll) + bonusText

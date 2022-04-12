@@ -32,11 +32,17 @@ export const makeAttack = (
   const dragonSlayingRoll = d(dragonSlaying)
 
   const totalDamage =
-    damageRoll + monsterDamageRoll + dragonSlayingRoll + damageBonus
-  const hit = attackRoll + attackBonus >= defender.statsModified.ac
+    (damageRoll + monsterDamageRoll + dragonSlayingRoll + damageBonus) *
+    (attackRoll == 20 ? 2 : 1)
+  const outcome =
+    attackRoll === 20
+      ? 'crit'
+      : attackRoll + attackBonus >= defender.statsModified.ac
+      ? 'hit'
+      : 'miss'
 
   const attackResult: AttackResult = {
-    outcome: hit ? 'hit' : 'miss',
+    outcome,
     attackRoll,
     damage: totalDamage,
     damageBonus,
@@ -53,7 +59,7 @@ export const makeAttack = (
     })
   )
 
-  if (hit) {
+  if (['hit', 'crit'].includes(outcome)) {
     store.dispatch(
       damaged({
         characterId: defenderId,

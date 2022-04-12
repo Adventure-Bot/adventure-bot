@@ -10,11 +10,17 @@ export function attackResultHeadline({
   result: AttackResult
 }): string {
   const { attacker, defender } = result
-  const hitOrMissed = result.outcome === 'hit' ? 'hit' : 'missed'
-  const forDamage =
-    result.outcome === 'hit' ? ` for ${result.damage} ${Emoji('damage')}` : ''
+  const hitOrMissed =
+    result.outcome === 'crit'
+      ? 'critically hit'
+      : result.outcome === 'hit'
+      ? 'hit'
+      : 'missed'
+  const forDamage = ['hit', 'crit'].includes(result.outcome)
+    ? ` for ${result.damage} ${Emoji('damage')}`
+    : ''
 
   return `${Emoji(result.outcome)} ${attacker.name} ${hitOrMissed} ${
     defender.name
-  }${forDamage}`
+  }${forDamage}!`
 }

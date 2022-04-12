@@ -1,7 +1,7 @@
 import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
 
 export type AttackResult = {
-  outcome: 'miss' | 'hit'
+  outcome: 'miss' | 'hit' | 'crit'
   attacker: SelectedCharacter
   defender: SelectedCharacter
   attackRoll: number
