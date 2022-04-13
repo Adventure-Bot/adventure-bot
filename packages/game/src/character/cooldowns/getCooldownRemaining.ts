@@ -12,6 +12,10 @@ export const getCooldownRemaining = (
   const state = store.getState()
   const character = selectCharacterById(state, characterId)
   if (!character) return
+  const stun = character.statusEffects
+    .filter((effect) => effect.name === 'Stunned')
+    .sort((a, b) => (a.started > b.started ? 1 : -1))[0]
+  if (stun) return Date.now() - stun.duration - new Date(stun.started).valueOf()
   const haste = Math.min(50, 1 - (character.stats.haste ?? 0) / 100)
   try {
     const cooldown = (selectCooldownByType(state, type) ?? 5 * 60000) * haste

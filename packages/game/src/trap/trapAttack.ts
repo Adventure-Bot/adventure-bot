@@ -2,19 +2,21 @@ import store from '@adventure-bot/game/store'
 import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
 import { damaged } from '@adventure-bot/game/store/slices/characters'
 import { TrapAttackResult } from '@adventure-bot/game/trap'
-import { d6, d20 } from '@adventure-bot/game/utils'
+import { Trap } from '@adventure-bot/game/trap/Trap'
+import { d, d20 } from '@adventure-bot/game/utils'
 
 export function trapAttack({
   defender,
-  attackBonus = 1,
+  trap,
 }: {
   defender: SelectedCharacter
-  attackBonus?: number
+  trap: Trap
 }): TrapAttackResult {
   const attackRoll = d20()
-  const damage = d6()
+  const { attackBonus, damageMax } = trap
+  const damage = damageMax ? d(damageMax) : 0
 
-  if (attackRoll + attackBonus > defender.statsModified.ac) {
+  if (damage && attackRoll + attackBonus > defender.statsModified.ac) {
     store.dispatch(
       damaged({
         characterId: defender.id,
