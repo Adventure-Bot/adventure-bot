@@ -38,7 +38,7 @@ export const trap = async ({
   })
   if (!(message instanceof Message)) return
 
-  const result = trapAttack({ defender: character })
+  const result = trapAttack({ defender: character, trap })
 
   await sleep(2000)
   character = getCharacter(interaction.user.id)

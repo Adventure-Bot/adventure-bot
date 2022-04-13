@@ -6,6 +6,7 @@ import { invigorated } from '@adventure-bot/game/statusEffects/templates/invigor
 import { might } from '@adventure-bot/game/statusEffects/templates/might'
 import { protectedEffect } from '@adventure-bot/game/statusEffects/templates/protectedEffect'
 import { slayer } from '@adventure-bot/game/statusEffects/templates/slayer'
+import { stunned } from '@adventure-bot/game/statusEffects/templates/stunned'
 
 export const effects = {
   invigorated,
@@ -16,6 +17,7 @@ export const effects = {
   might,
   blind,
   haste,
+  stunned,
 } as const
 
 export const defaultEffectDuration = 60 * 60000

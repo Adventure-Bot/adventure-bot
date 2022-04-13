@@ -8,7 +8,7 @@ export type StatusEffect = {
    * Duration in milliseconds
    */
   duration: number
-  modifiers: Partial<Stats>
+  modifiers?: Partial<Stats>
   buff: boolean
   debuff: boolean
 }
