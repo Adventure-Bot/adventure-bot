@@ -7,4 +7,4 @@ export const getStatusEffectStatModifier = (
 ): number =>
   (character.statusEffects || [])
     .filter((x) => !isStatusEffectExpired(x))
-    .reduce((acc, effect) => acc + (effect.modifiers[stat] || 0), 0)
+    .reduce((acc, effect) => acc + (effect.modifiers?.[stat] || 0), 0)

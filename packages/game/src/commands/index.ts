@@ -2,6 +2,7 @@ import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types'
 
 import admin from '@adventure-bot/game/commands/admin/admin'
 import cleanse from '@adventure-bot/game/commands/admin/cleanse'
+import effect from '@adventure-bot/game/commands/admin/effect'
 import encounter from '@adventure-bot/game/commands/admin/encounter'
 import item from '@adventure-bot/game/commands/admin/item'
 import lootchest from '@adventure-bot/game/commands/admin/lootchest'
@@ -51,10 +52,12 @@ if (process.env.DEV_COMMANDS === 'true') {
   commands.set('admin', admin)
   commands.set('encounter', encounter)
   commands.set('item', item)
+  commands.set('effect', effect)
   commands.set('cleanse', cleanse)
   commands.set('hpbartest', hpbartest)
   commands.set('lootchest', lootchest)
   commands.set('lootme', lootme)
+  commands.set('lootmonster', lootmonster)
   commands.set('lootmonster', lootmonster)
 } else {
   console.warn('🔒 Dev commands disabled')

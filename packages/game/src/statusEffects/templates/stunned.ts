@@ -4,5 +4,5 @@ export const stunned: TemplateEffect = {
   name: 'Stunned',
   buff: false,
   debuff: true,
-  duration: 20 * 60000,
+  duration: 10 * 60000,
 }

@@ -8,7 +8,7 @@ import {
   findOrCreateCharacter,
   statsEmbed,
 } from '@adventure-bot/game/character'
-import { actionEmbed } from '@adventure-bot/game/commands/inspect/actionEmbed'
+import { cooldownsEmbed } from '@adventure-bot/game/commands/inspect/cooldownsEmbed'
 import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import { itemEmbed } from '@adventure-bot/game/equipment'
 import { questEmbed } from '@adventure-bot/game/quest'
@@ -38,7 +38,7 @@ export const execute = async ({
     embeds: [
       characterEmbed({ character }),
       statsEmbed({ character, interaction }),
-      actionEmbed({ character, interaction }),
+      cooldownsEmbed({ character, interaction }),
     ],
   })
 

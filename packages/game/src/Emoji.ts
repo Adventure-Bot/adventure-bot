@@ -15,6 +15,7 @@ type Emojis =
   | 'run'
   | 'adventure'
   | 'renew'
+  | 'stunned'
 
 const defaultEmojis: {
   [k in Emojis]: string
@@ -39,6 +40,7 @@ const defaultEmojis: {
   renew: '🤍',
   dragonSlaying: '🐲',
   haste: '⏳',
+  stunned: '😵‍💫',
 }
 
 export function Emoji(name: Emojis): string {

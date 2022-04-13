@@ -9,7 +9,7 @@ export function statusEffectEmbed(effect: StatusEffect): MessageEmbed {
   const fields: EmbedFieldData[] = []
 
   stats.forEach((stat) => {
-    const modifier = effect.modifiers[stat]
+    const modifier = effect.modifiers?.[stat]
     if (!modifier) return
     fields.push({
       name: statTitles[stat],

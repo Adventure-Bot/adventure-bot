@@ -4,19 +4,23 @@ import { frailty } from '@adventure-bot/game/statusEffects/templates/frailty'
 import { haste } from '@adventure-bot/game/statusEffects/templates/haste'
 import { invigorated } from '@adventure-bot/game/statusEffects/templates/invigorated'
 import { might } from '@adventure-bot/game/statusEffects/templates/might'
+import { poisoned } from '@adventure-bot/game/statusEffects/templates/poisoned'
 import { protectedEffect } from '@adventure-bot/game/statusEffects/templates/protectedEffect'
 import { slayer } from '@adventure-bot/game/statusEffects/templates/slayer'
+import { slowed } from '@adventure-bot/game/statusEffects/templates/slowed'
 import { stunned } from '@adventure-bot/game/statusEffects/templates/stunned'
 
 export const effects = {
-  invigorated,
-  frailty,
-  slayer,
   aggression,
-  protectedEffect,
-  might,
   blind,
+  frailty,
   haste,
+  invigorated,
+  might,
+  poisoned,
+  protectedEffect,
+  slayer,
+  slowed,
   stunned,
 } as const
 

@@ -1,7 +1,7 @@
 import { Client } from 'discord.js'
 
+import { declareWinners } from '@adventure-bot/game/announcements/declareWinners'
 import { createClient } from '@adventure-bot/game/boot'
-import { declareWinners } from '@adventure-bot/game/crown/declareWinners'
 import { assertEnv } from '@adventure-bot/game/env'
 
 assertEnv()

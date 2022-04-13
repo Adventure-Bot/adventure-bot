@@ -10,6 +10,7 @@ import {
   xpGainField,
 } from '@adventure-bot/game/character'
 import { heavyCrown, randomChestItem } from '@adventure-bot/game/equipment'
+import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
@@ -17,7 +18,7 @@ import {
   damaged,
   effectAdded,
 } from '@adventure-bot/game/store/slices/characters'
-import { trapAttack } from '@adventure-bot/game/trap'
+import { trapAttack, traps } from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 type Chest = {
@@ -259,7 +260,7 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
   const character = getCharacter(interaction.user.id)
   if (!character) return
   chest.trapTriggered = true
-  const attack = trapAttack({ defender: character, attackBonus: 1 })
+  const attack = trapAttack({ defender: character, trap: traps.glyph() })
   if (attack.outcome === 'hit') {
     const roll = Math.random()
 
@@ -274,16 +275,7 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
         store.dispatch(
           effectAdded({
             characterId: interaction.user.id,
-            effect: {
-              name: 'Poison Trap',
-              debuff: true,
-              buff: false,
-              modifiers: {
-                attackBonus: -2,
-              },
-              duration: 60 * 60000,
-              started: new Date().toString(),
-            },
+            effect: createEffect('poisoned'),
           })
         )
         chest.trapResult = `A needle pricks your finger. You take ${attack.damage} damage and feel ill!`
@@ -292,16 +284,7 @@ function triggerTrap(interaction: CommandInteraction, chest: Chest) {
         store.dispatch(
           effectAdded({
             characterId: interaction.user.id,
-            effect: {
-              name: 'Slow Trap',
-              debuff: true,
-              buff: false,
-              modifiers: {
-                ac: -2,
-              },
-              duration: 60 * 60000,
-              started: new Date().toString(),
-            },
+            effect: createEffect('slowed'),
           })
         )
         chest.trapResult = `A strange dust explodes in your face. You take ${attack.damage} damage and feel sluggish!`
