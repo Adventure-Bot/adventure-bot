@@ -19,7 +19,6 @@ import {
   usableInventory,
 } from '@adventure-bot/game/equipment'
 import { createEffect } from '@adventure-bot/game/statusEffects'
-import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
@@ -112,6 +111,9 @@ const potionArt: {
   slayer: 'magic potion with glowing green liquid',
   blind: 'magic potion with glowing blue liquid',
   haste: 'magic potion with vapors',
+  stunned: 'magic potion with glowing white liquid', // TODO: unique art
+  slowed: 'magic potion with glowing blue liquid', // TODO: unique art
+  poisoned: 'magic potion with glowing green liquid', // TODO: unique art
 }
 
 function useInventoryItem({
@@ -132,12 +134,12 @@ function useInventoryItem({
     if (item.useEffects.randomEffect) {
       const effectId = randomArrayElement(item.useEffects.randomEffect)
       const effect = createEffect(effectId)
-      store.dispatch(effectAdded({ characterId, effect }))
-      const { s3Url } = asset('fantasy', 'items', potionArt[effectId])
-      embeds.push(
-        statusEffectEmbed(effect)
-          .setImage(s3Url)
-          .setThumbnail(character.profile)
+      store.dispatch(
+        effectAdded({
+          characterId,
+          effect,
+          image: asset('fantasy', 'items', potionArt[effectId]).s3Url,
+        })
       )
     }
     if (item.useEffects.maxHeal) {

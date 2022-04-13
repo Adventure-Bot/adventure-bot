@@ -118,11 +118,6 @@ export const selectAllEncounters = (state: ReduxState): Encounter[] =>
 export const selectEncounterById = (state: ReduxState, id: string): Encounter =>
   state.encounters.encountersById[id]
 
-export const selectCooldownByType = (
-  state: ReduxState,
-  cooldownType: keyof ReduxState['cooldowns']
-): number | undefined => state.cooldowns[cooldownType]
-
 export const selectHasItemNameInInventory: (
   state: ReduxState,
   character: Character,

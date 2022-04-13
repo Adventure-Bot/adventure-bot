@@ -73,6 +73,7 @@ const characterSlice = createSlice({
       action: PayloadAction<{
         characterId: string
         effect: StatusEffect
+        image?: string
       }>
     ) {
       const { characterId, effect } = action.payload

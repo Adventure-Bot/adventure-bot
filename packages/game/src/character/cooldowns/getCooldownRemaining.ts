@@ -1,9 +1,13 @@
-import { Character } from '@adventure-bot/game/character'
-import store from '@adventure-bot/game/store'
+import moment from 'moment'
+import { clamp } from 'remeda'
+
 import {
-  selectCharacterById,
-  selectCooldownByType,
-} from '@adventure-bot/game/store/selectors'
+  Character,
+  abilityCooldowns,
+  stunDurationRemaining,
+} from '@adventure-bot/game/character'
+import store from '@adventure-bot/game/store'
+import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 
 export const getCooldownRemaining = (
   characterId: string,
@@ -12,20 +16,11 @@ export const getCooldownRemaining = (
   const state = store.getState()
   const character = selectCharacterById(state, characterId)
   if (!character) return
-  const stun = character.statusEffects
-    .filter((effect) => effect.name === 'Stunned')
-    .sort((a, b) => (a.started > b.started ? 1 : -1))[0]
-  if (stun) return Date.now() - stun.duration - new Date(stun.started).valueOf()
-  const haste = Math.min(50, 1 - (character.stats.haste ?? 0) / 100)
-  try {
-    const cooldown = (selectCooldownByType(state, type) ?? 5 * 60000) * haste
-    const lastUsed = selectCharacterById(state, characterId)?.cooldowns[type]
-    if (!lastUsed) return 0
-    const remaining = new Date(lastUsed).valueOf() + cooldown - Date.now()
-    if (remaining < 0) return 0
-    return remaining
-  } catch (e) {
-    console.error(`failed to getCooldownRemaining for user ${characterId}`, e)
-    return 0
-  }
+  const haste =
+    clamp(100 - character.statsModified.haste, { min: 50, max: 150 }) / 100
+
+  const cooldownRemaining = moment(character.cooldowns[type] ?? 0)
+    .add(abilityCooldowns[type] * haste, 'milliseconds')
+    .diff(moment())
+  return Math.max(cooldownRemaining, stunDurationRemaining(character), 0)
 }
