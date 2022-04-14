@@ -10,19 +10,15 @@ import {
   xpGainField,
 } from '@adventure-bot/game/character'
 import { heavyCrown, randomChestItem } from '@adventure-bot/game/equipment'
-import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
-import {
-  damaged,
-  effectAdded,
-} from '@adventure-bot/game/store/slices/characters'
-import { trapAttack, traps } from '@adventure-bot/game/trap'
+import { Trap, getRandomTrap, trapAttack } from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 type Chest = {
   hasTrap: boolean
+  trap?: Trap
   hasLock: boolean
   isTrapped: boolean
   isLocked: boolean
@@ -50,6 +46,7 @@ export async function chest(
   const chest: Chest = {
     hasLock,
     hasTrap,
+    trap: hasTrap ? getRandomTrap() : undefined,
     isTrapped: hasTrap,
     isLocked: hasLock,
     lockFound: false,
@@ -257,38 +254,10 @@ const chestResponses = (chest: Chest): string[] => {
 }
 
 function triggerTrap(interaction: CommandInteraction, chest: Chest) {
+  const { trap } = chest
+  if (!trap) return
   const character = getCharacter(interaction.user.id)
   if (!character) return
   chest.trapTriggered = true
-  const attack = trapAttack({ defender: character, trap: traps.glyph() })
-  if (attack.outcome === 'hit') {
-    const roll = Math.random()
-
-    store.dispatch(
-      damaged({
-        characterId: interaction.user.id,
-        amount: attack.damage,
-      })
-    )
-    switch (true) {
-      case roll <= 0.5:
-        store.dispatch(
-          effectAdded({
-            characterId: interaction.user.id,
-            effect: createEffect('poisoned'),
-          })
-        )
-        chest.trapResult = `A needle pricks your finger. You take ${attack.damage} damage and feel ill!`
-        break
-      default:
-        store.dispatch(
-          effectAdded({
-            characterId: interaction.user.id,
-            effect: createEffect('slowed'),
-          })
-        )
-        chest.trapResult = `A strange dust explodes in your face. You take ${attack.damage} damage and feel sluggish!`
-        break
-    }
-  }
+  trapAttack({ defender: character, trap })
 }

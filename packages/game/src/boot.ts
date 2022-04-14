@@ -7,6 +7,7 @@ import { readFile, writeFile } from 'fs/promises'
 import { announceEffectAdded } from '@adventure-bot/game/announcements/announceEffectAdded'
 import { announceItemsReceived } from '@adventure-bot/game/announcements/announceItemsReceived'
 import { announceCrownLoots } from '@adventure-bot/game/announcements/announceLoots'
+import { announceTrapAttacked } from '@adventure-bot/game/announcements/announceTrapAttacked'
 import { declareWinners } from '@adventure-bot/game/announcements/declareWinners'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
@@ -121,6 +122,7 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     announceEffectAdded(client)
     announceCrownLoots(client)
     renderCharacterList(client)
+    announceTrapAttacked(client)
   })
 
   client.login(opts.token)
