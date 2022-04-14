@@ -6,35 +6,50 @@ export const traps = {
   glyph: (): Trap => ({
     ...defaultCharacter,
     name: 'glyph trap',
-    description: 'As your foot hits the ground, runes begin to glow!',
+    attackText: 'As your foot hits the ground, runes begin to glow!',
+    hitText: 'The runes flash and you are stunned!',
+    onHitEffect: 'stunned',
+    missText: 'You deftly evade!',
     image: asset(
       'fantasy',
       'places',
       'dungeon floor with glowing magical glyphs'
     ).s3Url,
-    onHitEffect: 'stunned',
   }),
   ball: (): Trap => ({
     ...defaultCharacter,
-    damageMax: 6,
+    damageMax: 8,
     name: 'stone ball trap',
-    description: 'A huge stone ball comes bowling down on you!',
-    image: 'https://imgur.com/TDMLxyE.png',
+    attackText: 'A huge stone ball comes bowling down on you!',
+    hitText: 'You are crushed!',
+    missText: 'You deftly evade!',
+    image: asset(
+      'fantasy',
+      'items',
+      'a large tumbling boulder with motion blur'
+    ).s3Url,
   }),
   poisonNeedle: (): Trap => ({
     ...defaultCharacter,
     damageMax: 4,
     name: 'poison needle trap',
+    attackText: 'A needle attempts to prick you!',
     onHitEffect: 'poisoned',
-    image: 'https://imgur.com/TDMLxyE.png', // todo: AI artwork
-    description: 'A needle attempts to prick you!',
+    hitText: 'The needle punctures your flesh and you feel ill!',
+    missText: 'You quickly pull away and avoid the needle!',
+    image: asset(
+      'fantasy',
+      'items',
+      'a sharp metal needle dripping with glowing green poison'
+    ).s3Url,
   }),
   slowDust: (): Trap => ({
     ...defaultCharacter,
-    damageMax: 4,
     name: 'slow dust trap',
     onHitEffect: 'slowed',
+    attackText: 'A strange dust explodes in your face!',
+    hitText: 'You cough and sputter, suddenly feeling quite drowsy.',
+    missText: 'You deftly evade!',
     image: asset('fantasy', 'magic', 'sparkle dust').s3Url,
-    description: 'A strange dust explodes in your face!',
   }),
 } as const

@@ -1,10 +1,6 @@
-import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
+import { trapAttacked } from '@adventure-bot/game/store/actions'
 import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
-import {
-  damaged,
-  effectAdded,
-} from '@adventure-bot/game/store/slices/characters'
 import { TrapAttackResult } from '@adventure-bot/game/trap'
 import { Trap } from '@adventure-bot/game/trap/Trap'
 import { d, d20 } from '@adventure-bot/game/utils'
@@ -20,22 +16,26 @@ export function trapAttack({
   const { attackBonus, damageMax } = trap
   const damage = damageMax ? d(damageMax) : 0
 
-  if (attackRoll + attackBonus > defender.statsModified.ac) {
-    store.dispatch(
-      damaged({
-        characterId: defender.id,
-        amount: damage,
-      })
-    )
-    if (trap.onHitEffect) {
-      store.dispatch(
-        effectAdded({
-          characterId: defender.id,
-          effect: createEffect(trap.onHitEffect),
-        })
-      )
-    }
-    return { outcome: 'hit', attackRoll, attackBonus, damage, defender }
+  const result: TrapAttackResult = {
+    outcome:
+      attackRoll + attackBonus > defender.statsModified.ac ? 'hit' : 'miss',
+    attackRoll,
+    attackBonus,
+    damage,
+    defender,
+    trap,
   }
-  return { outcome: 'miss', attackRoll, attackBonus, damage, defender }
+  store.dispatch(
+    trapAttacked({
+      outcome:
+        attackRoll + attackBonus > defender.statsModified.ac ? 'hit' : 'miss',
+      attackRoll,
+      attackBonus,
+      damage,
+      defender,
+      trap,
+    })
+  )
+
+  return result
 }
