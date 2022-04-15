@@ -2,6 +2,7 @@ import { MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import {
+  decoratedName,
   findOrCreateCharacter,
   hpBarField,
   xpGainField,
@@ -40,9 +41,9 @@ export async function fairyWell({
   await interaction[replyType]({
     embeds: [
       new MessageEmbed({
-        title: `${
-          interaction.user.username
-        } drank from a fairy's well and gained ${Emoji(
+        title: `${decoratedName(
+          character
+        )} drank from a fairy's well and gained ${Emoji(
           'heal'
         )} +${healAmount}!`,
         color: 'DARK_VIVID_PINK',
