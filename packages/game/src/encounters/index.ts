@@ -19,8 +19,6 @@ import {
   slayerShrine,
   vigorShrine,
 } from '@adventure-bot/game/encounters/shrine'
-import { barFight } from '@adventure-bot/game/encounters/tavern/barFight'
-import { chattyTavernkeepers } from '@adventure-bot/game/encounters/tavern/chattyTavernkeepers'
 import { tavern } from '@adventure-bot/game/encounters/tavern/tavern'
 import { trap } from '@adventure-bot/game/encounters/trap'
 import { travel } from '@adventure-bot/game/encounters/travel'
@@ -36,8 +34,6 @@ export {
   tavern,
   trap,
   travel,
-  chattyTavernkeepers,
-  barFight,
   encounterSummaryEmbed,
   getEncounters,
   getLoots,
