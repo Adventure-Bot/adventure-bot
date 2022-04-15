@@ -14,7 +14,6 @@ import {
   questProgressField,
 } from '@adventure-bot/game/quest'
 import { createEffect } from '@adventure-bot/game/statusEffects'
-import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import {
   effectAdded,
@@ -75,7 +74,6 @@ export async function restfulNight(
       })
         .setImage(asset('fantasy', 'magic', 'sleep spell').s3Url)
         .setThumbnail(character.profile),
-      statusEffectEmbed(effect),
     ],
   })
 

@@ -3,7 +3,6 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { Shrine } from '@adventure-bot/game/encounters/shrine'
 import { questProgressField } from '@adventure-bot/game/quest'
-import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
 
 export function shrineEmbeds({
   shrine,
@@ -21,6 +20,5 @@ export function shrineEmbeds({
       fields: quest ? [questProgressField(quest)] : [],
       color: shrine.color,
     }).setImage(shrine.image),
-    statusEffectEmbed(shrine.effect),
   ]
 }
