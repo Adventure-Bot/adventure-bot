@@ -111,9 +111,12 @@ const potionArt: {
   slayer: 'magic potion with glowing green liquid',
   blind: 'magic potion with glowing blue liquid',
   haste: 'magic potion with vapors',
-  stunned: 'magic potion with glowing white liquid', // TODO: unique art
-  slowed: 'magic potion with glowing blue liquid', // TODO: unique art
-  poisoned: 'magic potion with glowing green liquid', // TODO: unique art
+  stunned: 'magic potion with glowing white liquid',
+  slowed: 'magic potion with glowing blue liquid',
+  poisoned: 'magic potion with glowing green liquid',
+  blessed: 'magic potion with glowing yellow liquid',
+  survivor: 'magic potion with glowing white liquid',
+  healer: 'magic potion with glowing white liquid',
 }
 
 function useInventoryItem({

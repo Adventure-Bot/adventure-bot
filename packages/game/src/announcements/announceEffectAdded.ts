@@ -21,7 +21,7 @@ export const announceEffectAdded: (client: Client) => void = (client) => {
       const channel = client.channels.cache.get(lastChannelId)
       if (!channel?.isText()) return
       const embed = statusEffectEmbed(effect).setTitle(
-        `${decoratedName(character)} became ${effect.name}!`
+        `${decoratedName(character)} ${effect.announcement}!`
       )
       if (image) embed.setImage(image)
       channel.send({

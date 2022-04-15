@@ -8,4 +8,5 @@ export const might: TemplateEffect = {
     damageMax: 2,
   },
   duration: 60 * 60000,
+  announcement: 'became mighty!',
 }

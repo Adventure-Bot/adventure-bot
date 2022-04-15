@@ -8,4 +8,5 @@ export const slayer: TemplateEffect = {
     monsterDamageMax: 3,
   },
   duration: 60 * 60000,
+  announcement: 'became a slayer!',
 }

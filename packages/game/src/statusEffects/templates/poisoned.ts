@@ -9,4 +9,5 @@ export const poisoned: TemplateEffect = {
   modifiers: {
     attackBonus: -2,
   },
+  announcement: 'was poisoned!',
 }

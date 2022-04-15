@@ -8,4 +8,5 @@ export const invigorated: TemplateEffect = {
   modifiers: {
     maxHP: 2,
   },
+  announcement: 'became invigorated!',
 }

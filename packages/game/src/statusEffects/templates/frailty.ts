@@ -9,4 +9,5 @@ export const frailty: TemplateEffect = {
     ac: -3,
     maxHP: -3,
   },
+  announcement: 'became frail!',
 }

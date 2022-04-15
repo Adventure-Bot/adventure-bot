@@ -12,7 +12,6 @@ import {
   blessedBuffQuestReward,
   buffQuestReward,
   healerQuestReward,
-  healerStatus,
   slayerBuffQuestReward,
   survivorBuffQuestReward,
 } from '@adventure-bot/game/quest/rewards'
@@ -35,5 +34,4 @@ export {
   isQuestComplete,
   Quest,
   buffQuestReward,
-  healerStatus,
 }

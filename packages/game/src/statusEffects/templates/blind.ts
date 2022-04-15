@@ -9,4 +9,5 @@ export const blind: TemplateEffect = {
   modifiers: {
     attackBonus: -3,
   },
+  announcement: 'was blinded!',
 }
