@@ -3,7 +3,7 @@ import {
   createMonster,
   getRandomMonsterName,
 } from '@adventure-bot/game/monster'
-import { asset } from '@adventure-bot/game/utils'
+import { asset, d } from '@adventure-bot/game/utils'
 
 export function createDragon(): Monster {
   return createMonster({
@@ -50,6 +50,6 @@ export function createDragon(): Monster {
     },
     profile: asset('fantasy', 'monsters', 'dragon').s3Url,
     xpValue: 50,
-    gold: Math.floor(Math.random() * 150) + 300,
+    gold: d(150) + 300,
   })
 }

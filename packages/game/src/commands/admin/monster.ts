@@ -2,24 +2,22 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageEmbed } from 'discord.js'
 
 import {
-  characterEmbed,
   decoratedName,
   findOrCreateCharacter,
-  getCharacterUpdate,
-  inventoryFields,
-  loot,
-  lootResultEmbed,
 } from '@adventure-bot/game/character'
+import { monster } from '@adventure-bot/game/encounters'
 import {
-  monsterEmbed,
+  Monster,
+  createGiantCrab,
+  createShark,
   monsterList,
   monstersByName,
 } from '@adventure-bot/game/monster'
-import { CommandHandlerOptions } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, weightedTable } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
-  .setName('lootmonster')
-  .setDescription('Loot a random monster.')
+  .setName('monster')
+  .setDescription('Encounter a monster')
 
 export const execute = async ({
   interaction,
@@ -39,26 +37,20 @@ export const execute = async ({
     time: 15000,
   })
 
-  collector.on('collect', async (message) => {
+  collector.on('collect', (message) => {
     const input = parseInt(message.content)
-    if (!monstersByName[input - 1]) {
+    const selectedMonster = monstersByName[input - 1]
+    if (!selectedMonster) {
       interaction.editReply(`That's not a valid monster.`)
       return
     }
-    const monster = monstersByName[input - 1][1]()
-    const character = findOrCreateCharacter(interaction.user)
-    const result = await loot({
-      looterId: character.id,
-      targetId: monster.id,
+    monster({
       interaction,
-    })
-    interaction.followUp({
-      embeds: [
-        monsterEmbed(monster),
-        characterEmbed({
-          character: getCharacterUpdate(character),
-        }).addFields(...inventoryFields(character)),
-      ].concat(result ? lootResultEmbed({ result, interaction }) : []),
+      replyType: 'followUp',
+      monster: weightedTable<() => Monster>([
+        [1, createShark],
+        [1, createGiantCrab],
+      ])(),
     })
   })
 }
