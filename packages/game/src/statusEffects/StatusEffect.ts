@@ -11,4 +11,5 @@ export type StatusEffect = {
   modifiers?: Partial<Stats>
   buff: boolean
   debuff: boolean
+  announcement: string
 }

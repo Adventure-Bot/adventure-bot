@@ -9,4 +9,5 @@ export const slowed: TemplateEffect = {
   modifiers: {
     haste: -10,
   },
+  announcement: 'started moving more slowly!',
 }

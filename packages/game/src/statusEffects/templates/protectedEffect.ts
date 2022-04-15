@@ -8,4 +8,5 @@ export const protectedEffect: TemplateEffect = {
   duration: 60 * 60000,
   buff: true,
   debuff: false,
+  announcement: 'became protected!',
 }

@@ -8,4 +8,5 @@ export const haste: TemplateEffect = {
     haste: 10,
   },
   duration: 60 * 60000,
+  announcement: 'started moving faster!',
 }

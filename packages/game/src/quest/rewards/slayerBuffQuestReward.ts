@@ -2,6 +2,7 @@ import { CommandInteraction } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { buffQuestReward } from '@adventure-bot/game/quest'
+import { createEffect } from '@adventure-bot/game/statusEffects'
 
 export const slayerBuffQuestReward = async (
   interaction: CommandInteraction
@@ -9,18 +10,5 @@ export const slayerBuffQuestReward = async (
   const character = findOrCreateCharacter(interaction.user)
   const quest = character.quests.slayer
   if (!quest) return
-  buffQuestReward(
-    interaction,
-    {
-      name: 'Slayer',
-      buff: true,
-      debuff: false,
-      duration: 4 * 60 * 60000,
-      modifiers: {
-        monsterDamageMax: 6,
-      },
-      started: new Date().toString(),
-    },
-    quest
-  )
+  buffQuestReward(interaction, createEffect('slayer'), quest)
 }
