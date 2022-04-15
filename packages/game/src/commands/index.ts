@@ -8,6 +8,7 @@ import item from '@adventure-bot/game/commands/admin/item'
 import lootchest from '@adventure-bot/game/commands/admin/lootchest'
 import lootme from '@adventure-bot/game/commands/admin/lootme'
 import lootmonster from '@adventure-bot/game/commands/admin/lootmonster'
+import monster from '@adventure-bot/game/commands/admin/monster'
 import adventure from '@adventure-bot/game/commands/adventure'
 import attack from '@adventure-bot/game/commands/attack'
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
@@ -51,6 +52,7 @@ if (process.env.DEV_COMMANDS === 'true') {
   console.warn('⚠ DEV COMMANDS LOADED ⚠')
   commands.set('admin', admin)
   commands.set('encounter', encounter)
+  commands.set('monster', monster)
   commands.set('item', item)
   commands.set('effect', effect)
   commands.set('cleanse', cleanse)

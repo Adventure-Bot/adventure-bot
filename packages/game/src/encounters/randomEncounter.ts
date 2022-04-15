@@ -3,8 +3,10 @@ import { CommandInteraction } from 'discord.js'
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import {
   angels,
+  cairns,
   cave,
   chest,
+  coralReef,
   divineBlessing,
   fairyWell,
   monster,
@@ -13,7 +15,6 @@ import {
   trap,
   travel,
 } from '@adventure-bot/game/encounters'
-import { cairns } from '@adventure-bot/game/encounters'
 import { randomShrine } from '@adventure-bot/game/encounters/shrine'
 import { CommandHandler, weightedTable } from '@adventure-bot/game/utils'
 
@@ -22,6 +23,8 @@ export const randomEncounter = (
 ): CommandHandler => {
   const character = findOrCreateCharacter(interaction.user)
   const angelChance = character.quests.healer ? 0 : 0.5
+  const coralReefChance = character.xp >= 100 ? 1 : 0
+  const caveChance = character.xp >= 10 ? 1 : 0
   return weightedTable<() => CommandHandler>([
     [0.2, () => divineBlessing],
     [angelChance, () => angels],
@@ -29,7 +32,8 @@ export const randomEncounter = (
     [2, () => cairns],
     [1, () => shop],
     [1, () => tavern],
-    [1, () => cave],
+    [caveChance, () => cave],
+    [coralReefChance, () => coralReef],
     [1, () => trap],
     [1, () => travel],
     [2, () => monster],

@@ -107,7 +107,6 @@ export const execute = async ({
       return
     case 'set_health':
       setHealth(interaction)
-      interaction.editReply('Health set.')
       return
     case 'declare_winner':
       declareWinner(interaction)
@@ -188,7 +187,7 @@ const setXp = async (interaction: CommandInteraction) => {
 const setHealth = async (interaction: CommandInteraction) => {
   const hp = interaction.options.getInteger('hp')
   if (hp === null) return
-  console.log(`Setting health to ${hp}`)
+  interaction.editReply(`Health set to ${hp}.`)
   store.dispatch(
     healthSet({
       characterId: interaction.user.id,
