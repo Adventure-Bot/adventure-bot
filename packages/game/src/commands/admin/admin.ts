@@ -6,7 +6,6 @@ import { range } from 'remeda'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
-import { healerStatus } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import {
   newGame,
@@ -14,7 +13,6 @@ import {
   winnerRevoked,
 } from '@adventure-bot/game/store/actions'
 import {
-  effectAdded,
   goldSet,
   healthSet,
   purgeRoamingMonsters,
@@ -110,12 +108,6 @@ export const execute = async ({
     case 'set_health':
       setHealth(interaction)
       interaction.editReply('Health set.')
-      return
-    case 'become_healer':
-      store.dispatch(
-        effectAdded({ characterId: interaction.user.id, effect: healerStatus })
-      )
-      interaction.editReply('You are now a healer.')
       return
     case 'declare_winner':
       declareWinner(interaction)
