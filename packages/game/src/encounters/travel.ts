@@ -7,10 +7,7 @@ import {
   xpGainField,
 } from '@adventure-bot/game/character'
 import { isTravelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
-import {
-  createEffect,
-  statusEffectEmbed,
-} from '@adventure-bot/game/statusEffects'
+import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { effectAdded } from '@adventure-bot/game/store/slices/characters'
 import {
@@ -42,15 +39,11 @@ export const travel = async ({
     ],
   })
   if (character.inventory.find(isTravelersRing)) {
-    const effect = createEffect('invigorated')
     store.dispatch(
       effectAdded({
         characterId: interaction.user.id,
-        effect,
+        effect: createEffect('invigorated'),
       })
     )
-    interaction.followUp({
-      embeds: [statusEffectEmbed(effect)],
-    })
   }
 }
