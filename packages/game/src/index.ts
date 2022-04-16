@@ -6,8 +6,8 @@ import {
   announceItemsReceived,
   announceLoots,
   announceTrapAttacked,
+  declareGameWon,
 } from '@adventure-bot/game/announcements'
-import { declareGameWon } from '@adventure-bot/game/announcements/declareGameWon'
 import { createClient } from '@adventure-bot/game/boot'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import { assertEnv } from '@adventure-bot/game/env'
