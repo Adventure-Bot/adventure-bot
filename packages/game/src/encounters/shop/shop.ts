@@ -4,7 +4,6 @@ import {
   MessageButton,
   MessageEmbed,
 } from 'discord.js'
-import { times } from 'remeda'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
@@ -13,25 +12,28 @@ import {
 } from '@adventure-bot/game/character'
 import { buyItemPrompt } from '@adventure-bot/game/encounters/shop/buyItemPrompt'
 import { sellItemPrompt } from '@adventure-bot/game/encounters/shop/sellItemPrompt'
-import {
-  heavyCrown,
-  itemEmbed,
-  randomShopItem,
-} from '@adventure-bot/game/equipment'
+import { heavyCrown, itemEmbed } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
-import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
+import {
+  selectShopInventory,
+  shopInventoryAdded,
+  shopRestocked,
+} from '@adventure-bot/game/store/slices/shop'
+import { CommandHandlerOptions, asset, d } from '@adventure-bot/game/utils'
 
 export const shop = async ({
   interaction,
   replyType = 'followUp',
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
-  const inventory = times(3, randomShopItem)
 
-  if (!selectIsHeavyCrownInPlay(store.getState()) && Math.random() <= 0.1) {
-    inventory.push(heavyCrown())
+  store.dispatch(shopRestocked())
+  if (!selectIsHeavyCrownInPlay(store.getState()) && d(10) === 10) {
+    store.dispatch(shopInventoryAdded(heavyCrown()))
   }
+
+  const inventory = () => selectShopInventory(store.getState())
 
   const hasStuffToSell =
     character.inventory.filter((i) => i.sellable).length > 0
@@ -59,7 +61,7 @@ export const shop = async ({
     if (!response || !response.isButton()) return
     if (response.customId === 'leave') hasLeft = true
     if (response.customId === 'buy')
-      await buyItemPrompt({ interaction, inventory, message })
+      await buyItemPrompt({ interaction, inventory: inventory(), message })
     if (response.customId === 'sell')
       await sellItemPrompt({ interaction, message })
   }
@@ -78,7 +80,7 @@ export const shop = async ({
     return {
       embeds: [
         shopEmbed,
-        ...inventory.map((item) => itemEmbed({ item, interaction })),
+        ...inventory().map((item) => itemEmbed({ item, interaction })),
       ],
       components: [
         new MessageActionRow({
