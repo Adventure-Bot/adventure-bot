@@ -78,10 +78,7 @@ export const shop = async ({
       ],
     }).setImage(asset('fantasy', 'places', 'blacksmith', interaction.id).s3Url)
     return {
-      embeds: [
-        shopEmbed,
-        ...inventory().map((item) => itemEmbed({ item, interaction })),
-      ],
+      embeds: [shopEmbed, ...inventory().map((item) => itemEmbed({ item }))],
       components: [
         new MessageActionRow({
           components: [

@@ -63,7 +63,7 @@ async function inspectThread({
     name: `Inspect ${character.name}`,
   })
   const equipmentEmbeds = values(character.equipment)
-    .map((item) => itemEmbed({ item, interaction }))
+    .map((item) => itemEmbed({ item, showEquipStatusFor: character }))
     .slice(0, 9)
   if (equipmentEmbeds.length)
     await getHook({

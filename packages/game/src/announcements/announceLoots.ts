@@ -107,7 +107,7 @@ const announceCrownLooted = async ({
 export function announceLoots(client: Client): void {
   startAppListening({
     actionCreator: characterLooted,
-    effect: ({ payload: { loot, interaction } }) => {
+    effect: ({ payload: { loot } }) => {
       const state = store.getState()
       const looter = selectCharacterById(state, loot.looterId)
       const target = selectCharacterById(state, loot.targetId)
@@ -126,7 +126,7 @@ export function announceLoots(client: Client): void {
             .setImage(target.profile)
             .setThumbnail(looter.profile),
           ...loot.itemsTaken.map((item) =>
-            itemEmbed({ item, interaction }).setTitle(
+            itemEmbed({ item }).setTitle(
               `${decoratedName(looter)} looted ${decoratedName(target)}'s ${
                 item.name
               }`

@@ -58,7 +58,7 @@ export const execute = async ({
   await Promise.all(
     character.inventory.map((item) =>
       hook.send({
-        embeds: [itemEmbed({ item, interaction })],
+        embeds: [itemEmbed({ item, showEquipStatusFor: character })],
         threadId: thread.id,
       })
     )
