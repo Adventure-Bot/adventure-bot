@@ -18,7 +18,7 @@ export function announceItemsReceived(): void {
       if (!character) return
       interaction.followUp({
         content: `${decoratedName(character)} received: ${item.name}!`,
-        embeds: [itemEmbed({ item, interaction })],
+        embeds: [itemEmbed({ item })],
       })
 
       if (isEquippable(item))
@@ -32,7 +32,7 @@ export function announceItemsReceived(): void {
       if (!character) return
       interaction.followUp({
         content: `${decoratedName(character)} purchased: ${item.name}!`,
-        embeds: [itemEmbed({ item, interaction })],
+        embeds: [itemEmbed({ item })],
       })
 
       if (isEquippable(item))

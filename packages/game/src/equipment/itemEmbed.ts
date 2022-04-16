@@ -1,23 +1,17 @@
-import { CommandInteraction, EmbedFieldData, MessageEmbed } from 'discord.js'
+import { EmbedFieldData, MessageEmbed } from 'discord.js'
 
 import { EmojiModifier, EmojiValue } from '@adventure-bot/game/Emoji'
-import {
-  findOrCreateCharacter,
-  statTitles,
-  stats,
-} from '@adventure-bot/game/character'
+import { Character, statTitles, stats } from '@adventure-bot/game/character'
 import { sellValue } from '@adventure-bot/game/encounters/shop/sellValue'
 import { Item, isEquipped } from '@adventure-bot/game/equipment'
 
 export function itemEmbed({
   item,
-  interaction,
-  showEquipStatus = false,
   saleRate,
+  showEquipStatusFor,
 }: {
   item: Item
-  interaction: CommandInteraction
-  showEquipStatus?: boolean
+  showEquipStatusFor?: Character
   saleRate?: number
 }): MessageEmbed {
   const fields: EmbedFieldData[] = []
@@ -43,11 +37,10 @@ export function itemEmbed({
   embed.addField('Sellable?', item.sellable ? 'Yes' : 'No', true)
   embed.addField('Tradeable?', item.tradeable ? 'Yes' : 'No', true)
 
-  if (showEquipStatus) {
-    const character = findOrCreateCharacter(interaction.user)
+  if (showEquipStatusFor) {
     embed.addField(
       'Equipped?',
-      isEquipped({ character, item }) ? 'Yes' : 'No',
+      isEquipped({ character: showEquipStatusFor, item }) ? 'Yes' : 'No',
       true
     )
   }

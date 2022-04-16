@@ -28,7 +28,7 @@ export async function equipItemPrompt({
   const content = `Would you like to equip the ${item.name}?`
   const message = await interaction.followUp({
     content,
-    embeds: showItem ? [itemEmbed({ item, interaction })] : [],
+    embeds: showItem ? [itemEmbed({ item })] : [],
     components: [
       new MessageActionRow({
         components: [
