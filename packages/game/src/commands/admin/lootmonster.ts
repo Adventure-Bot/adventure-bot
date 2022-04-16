@@ -21,7 +21,7 @@ export const execute = async ({
       new MessageEmbed({
         title: `${decoratedName(
           findOrCreateCharacter(interaction.user)
-        )} searches for trouble!`,
+        )} wants to loot a monster!`,
         description: `Which shall it be?\n\n${monsterList()}\n\nEnter a number.`,
       }),
     ],
