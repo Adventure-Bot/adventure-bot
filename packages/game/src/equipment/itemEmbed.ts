@@ -12,7 +12,7 @@ import { Item, isEquipped } from '@adventure-bot/game/equipment'
 export function itemEmbed({
   item,
   interaction,
-  showEquipStatus: showEqupStatus = false,
+  showEquipStatus = false,
   saleRate,
 }: {
   item: Item
@@ -43,7 +43,7 @@ export function itemEmbed({
   embed.addField('Sellable?', item.sellable ? 'Yes' : 'No', true)
   embed.addField('Tradeable?', item.tradeable ? 'Yes' : 'No', true)
 
-  if (showEqupStatus) {
+  if (showEquipStatus) {
     const character = findOrCreateCharacter(interaction.user)
     embed.addField(
       'Equipped?',

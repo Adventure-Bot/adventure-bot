@@ -2,6 +2,7 @@ import remoteReduxEnhancer from '@redux-devtools/remote'
 import { configureStore } from '@reduxjs/toolkit'
 import { PERSIST, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 
+import { commandUsed } from '@adventure-bot/game/store/actions'
 import * as actionCreators from '@adventure-bot/game/store/actions'
 import { listenerMiddleware } from '@adventure-bot/game/store/listenerMiddleware'
 import {
@@ -9,6 +10,7 @@ import {
   persistVersion,
 } from '@adventure-bot/game/store/migrations'
 import rootReducer from '@adventure-bot/game/store/reducers'
+import { itemPurchased } from '@adventure-bot/game/store/slices/shop'
 import { disk } from '@adventure-bot/game/store/storage'
 
 const enhancers = []
@@ -49,7 +51,8 @@ const store = configureStore({
         ignoredActions: [
           PERSIST,
           REHYDRATE,
-          actionCreators.commandUsed.toString(),
+          commandUsed.toString(),
+          itemPurchased.toString(),
         ],
       },
     }).prepend(listenerMiddleware.middleware),

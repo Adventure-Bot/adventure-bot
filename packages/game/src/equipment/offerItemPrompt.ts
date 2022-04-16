@@ -77,7 +77,7 @@ export const offerItemPrompt = async (
   const offer = await interaction.followUp({
     fetchReply: true,
     content: `${sender.name} offers their ${item.name}.`,
-    embeds: [itemEmbed({ item, interaction })],
+    embeds: [itemEmbed({ item })],
     components: [
       new MessageActionRow({
         components: [
