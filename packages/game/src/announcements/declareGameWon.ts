@@ -11,7 +11,7 @@ import {
 import { timeTillSovereign } from '@adventure-bot/game/store/slices/crown'
 import { asset } from '@adventure-bot/game/utils'
 
-export const declareWinners: (client: Client) => void = (client) => {
+export const declareGameWon: (client: Client) => void = (client) => {
   setInterval(() => {
     const state = store.getState()
     if (state.crown.announced) {

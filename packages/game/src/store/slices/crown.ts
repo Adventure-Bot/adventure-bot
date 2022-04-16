@@ -29,8 +29,10 @@ const crownSlice = createSlice({
         }
       })
       .addCase(characterLooted, (state, action) => {
-        if (action.payload.itemsTaken.some((item) => item.id == heavyCrownId)) {
-          state.bearerId = action.payload.looterId
+        if (
+          action.payload.loot.itemsTaken.some((item) => item.id == heavyCrownId)
+        ) {
+          state.bearerId = action.payload.loot.looterId
           state.claimedAt = Date.now()
         }
       })

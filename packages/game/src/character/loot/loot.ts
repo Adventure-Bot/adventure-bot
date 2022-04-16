@@ -21,6 +21,7 @@ const isLootable = (item: Item): boolean => item.lootable ?? false
 export async function loot({
   looterId,
   targetId,
+  interaction,
 }: {
   looterId: string
   targetId: string
@@ -40,7 +41,7 @@ export async function loot({
     targetId: target.id,
     timestamp: new Date().toString(),
   }
-  store.dispatch(characterLooted(loot))
+  store.dispatch(characterLooted({ loot, interaction }))
   return loot
 }
 

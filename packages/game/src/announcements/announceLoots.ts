@@ -5,8 +5,9 @@ import {
   LootResult,
   decoratedName,
   getCharacter,
+  gpGainField,
 } from '@adventure-bot/game/character'
-import { heavyCrownId } from '@adventure-bot/game/equipment'
+import { heavyCrownId, itemEmbed } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
@@ -21,10 +22,11 @@ export function announceCrownLoots(client: Client): void {
   startAppListening({
     actionCreator: characterLooted,
     effect: ({ payload }) => {
-      if (!payload.itemsTaken.some((item) => item.id === heavyCrownId)) return
+      if (!payload.loot.itemsTaken.some((item) => item.id === heavyCrownId))
+        return
       announceCrownLooted({
         client,
-        loot: payload,
+        loot: payload.loot,
       })
     },
   })
@@ -100,5 +102,38 @@ const announceCrownLooted = async ({
         .setImage(crownArt().s3Url)
         .setThumbnail(looter.profile),
     ],
+  })
+}
+export function announceLoots(client: Client): void {
+  startAppListening({
+    actionCreator: characterLooted,
+    effect: ({ payload: { loot, interaction } }) => {
+      const state = store.getState()
+      const looter = selectCharacterById(state, loot.looterId)
+      const target = selectCharacterById(state, loot.targetId)
+      if (!looter || !target) return
+      const lastChannelId = selectLastChannelUsed(state)
+      const channel = client.channels.cache.get(lastChannelId)
+      if (!channel?.isText()) return
+      if (loot.goldTaken === 0 && loot.itemsTaken.length === 0) return
+      const fields = loot.goldTaken ? [gpGainField(loot.goldTaken)] : []
+      channel.send({
+        embeds: [
+          new MessageEmbed({
+            title: `${decoratedName(looter)} looted ${decoratedName(target)}`,
+            fields,
+          })
+            .setImage(target.profile)
+            .setThumbnail(looter.profile),
+          ...loot.itemsTaken.map((item) =>
+            itemEmbed({ item, interaction }).setTitle(
+              `${decoratedName(looter)} looted ${decoratedName(target)}'s ${
+                item.name
+              }`
+            )
+          ),
+        ],
+      })
+    },
   })
 }

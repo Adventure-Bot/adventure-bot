@@ -1,7 +1,15 @@
 import { Client } from 'discord.js'
 
-import { declareWinners } from '@adventure-bot/game/announcements/declareWinners'
+import {
+  announceCrownLoots,
+  announceEffectAdded,
+  announceItemsReceived,
+  announceLoots,
+  announceTrapAttacked,
+} from '@adventure-bot/game/announcements'
+import { declareGameWon } from '@adventure-bot/game/announcements/declareGameWon'
 import { createClient } from '@adventure-bot/game/boot'
+import { renderCharacterList } from '@adventure-bot/game/character'
 import { assertEnv } from '@adventure-bot/game/env'
 
 assertEnv()
@@ -18,6 +26,12 @@ createClient({
   onError: (e) => console.error('Discord client error!', e),
 
   onReady: (client) => {
-    declareWinners(client)
+    declareGameWon(client)
+    announceItemsReceived()
+    announceEffectAdded(client)
+    announceCrownLoots(client)
+    announceLoots(client)
+    renderCharacterList(client)
+    announceTrapAttacked(client)
   },
 }).then((c) => (client = c))

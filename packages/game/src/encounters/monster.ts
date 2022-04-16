@@ -11,7 +11,7 @@ import {
   encounterEmbed,
   encounterSummaryEmbed,
 } from '@adventure-bot/game/encounters'
-import { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items/swordOfDragonSlaying'
+import { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items'
 import { Monster, randomMonster } from '@adventure-bot/game/monster'
 import {
   isUserQuestComplete,

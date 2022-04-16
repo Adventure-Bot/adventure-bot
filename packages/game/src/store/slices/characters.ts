@@ -314,7 +314,8 @@ const characterSlice = createSlice({
         state.charactersById[action.payload.id] = action.payload
       })
       .addCase(characterLooted, (state, action) => {
-        const { itemsTaken, goldTaken, looterId, targetId } = action.payload
+        const { itemsTaken, goldTaken, looterId, targetId } =
+          action.payload.loot
         const looter = state.charactersById[looterId]
         const target = state.charactersById[targetId]
 

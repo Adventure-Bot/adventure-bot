@@ -1,11 +1,15 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
+import { CommandInteraction } from 'discord.js'
 
 import { LootResult } from '@adventure-bot/game/character'
 import { newGame } from '@adventure-bot/game/store/actions'
 
 const lootsById: Record<string, LootResult> = {}
 
-export const characterLooted = createAction<LootResult>('loots/characterLooted')
+export const characterLooted = createAction<{
+  loot: LootResult
+  interaction: CommandInteraction
+}>('loots/characterLooted')
 
 const lootsSlice = createSlice({
   name: 'loots',
@@ -16,7 +20,7 @@ const lootsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(characterLooted, (state, action) => {
-        const loot = action.payload
+        const loot = action.payload.loot
         state.lootsById[loot.id] = loot
       })
       .addCase(newGame, (state) => {
