@@ -4,12 +4,6 @@ import { Routes } from 'discord-api-types/v9'
 import { Client, Intents } from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
 
-import { announceEffectAdded } from '@adventure-bot/game/announcements/announceEffectAdded'
-import { announceItemsReceived } from '@adventure-bot/game/announcements/announceItemsReceived'
-import { announceCrownLoots } from '@adventure-bot/game/announcements/announceLoots'
-import { announceTrapAttacked } from '@adventure-bot/game/announcements/announceTrapAttacked'
-import { declareWinners } from '@adventure-bot/game/announcements/declareWinners'
-import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
 import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'
@@ -117,12 +111,6 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
     opts.onReady(client)
-    declareWinners(client)
-    announceItemsReceived()
-    announceEffectAdded(client)
-    announceCrownLoots(client)
-    renderCharacterList(client)
-    announceTrapAttacked(client)
   })
 
   client.login(opts.token)

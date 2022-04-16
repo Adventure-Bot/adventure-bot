@@ -2,24 +2,16 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageEmbed } from 'discord.js'
 
 import {
-  characterEmbed,
   decoratedName,
   findOrCreateCharacter,
-  getCharacterUpdate,
-  inventoryFields,
   loot,
-  lootResultEmbed,
 } from '@adventure-bot/game/character'
-import {
-  monsterEmbed,
-  monsterList,
-  monstersByName,
-} from '@adventure-bot/game/monster'
+import { monsterList, monstersByName } from '@adventure-bot/game/monster'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('lootmonster')
-  .setDescription('Loot a random monster.')
+  .setDescription('Loot a monster.')
 
 export const execute = async ({
   interaction,
@@ -46,19 +38,11 @@ export const execute = async ({
       return
     }
     const monster = monstersByName[input - 1][1]()
-    const character = findOrCreateCharacter(interaction.user)
-    const result = await loot({
-      looterId: character.id,
+
+    loot({
+      looterId: interaction.user.id,
       targetId: monster.id,
       interaction,
-    })
-    interaction.followUp({
-      embeds: [
-        monsterEmbed(monster),
-        characterEmbed({
-          character: getCharacterUpdate(character),
-        }).addFields(...inventoryFields(character)),
-      ].concat(result ? lootResultEmbed({ result, interaction }) : []),
     })
   })
 }

@@ -26,7 +26,7 @@ export const makeAttack = (
   } = attacker.statsModified
 
   const attackRoll = d20()
-  const damageRoll = Math.ceil(Math.random() * damageMax)
+  const damageRoll = d(damageMax)
   const monsterDamageRoll = defender.isMonster ? d(monsterDamageMax) : 0
 
   const dragonSlayingRoll = d(dragonSlaying)

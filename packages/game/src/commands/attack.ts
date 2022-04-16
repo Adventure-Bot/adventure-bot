@@ -6,11 +6,7 @@ import {
   makeAttack,
   playerAttack,
 } from '@adventure-bot/game/attack'
-import {
-  findOrCreateCharacter,
-  loot,
-  lootResultEmbed,
-} from '@adventure-bot/game/character'
+import { findOrCreateCharacter, loot } from '@adventure-bot/game/character'
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
@@ -35,7 +31,6 @@ export const execute = async ({
 
   const attacker = findOrCreateCharacter(initiator)
   const defender = findOrCreateCharacter(target)
-  let lootResult
   if (attacker.hp === 0) {
     await interaction.editReply({
       embeds: [
@@ -58,13 +53,11 @@ export const execute = async ({
   }
   const embeds = [attackResultEmbed({ result, interaction })]
   if (0 === selectCharacterById(store.getState(), defender.id)?.hp) {
-    lootResult = await loot({
+    await loot({
       looterId: attacker.id,
       targetId: defender.id,
       interaction,
     })
-    if (lootResult)
-      embeds.push(lootResultEmbed({ result: lootResult, interaction }))
   }
   await interaction.editReply({
     embeds,
@@ -83,15 +76,11 @@ export const execute = async ({
       attackResultEmbed({ result, interaction, variant: 'retaliation' })
     )
     if (selectCharacterById(store.getState(), defender.id)?.hp === 0) {
-      lootResult = await loot({
+      loot({
         looterId: defender.id,
         targetId: attacker.id,
         interaction,
       })
-      if (lootResult)
-        retaliationEmbeds.push(
-          lootResultEmbed({ result: lootResult, interaction })
-        )
     }
 
     await interaction.followUp({
