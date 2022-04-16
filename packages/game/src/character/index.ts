@@ -30,7 +30,6 @@ export { getUserCharacters } from '@adventure-bot/game/character/getUserCharacte
 export { gpGainField } from '@adventure-bot/game/character/gpGainField'
 export { hpBar } from '@adventure-bot/game/character/hpBar/hpBar'
 export { hpBarField } from '@adventure-bot/game/character/hpBar/hpBarField'
-export { inventoryFields } from '@adventure-bot/game/character/inventoryFields'
 export { isCharacterOnCooldown } from '@adventure-bot/game/character/isCharacterOnCooldown'
 export { limitedCharacterEmbed } from '@adventure-bot/game/character/limitedCharacterEmbed'
 export { lootResultEmbed } from '@adventure-bot/game/character/loot/lootResultEmbed'
