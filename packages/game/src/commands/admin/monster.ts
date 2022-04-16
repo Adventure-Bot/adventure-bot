@@ -6,14 +6,8 @@ import {
   findOrCreateCharacter,
 } from '@adventure-bot/game/character'
 import { monster } from '@adventure-bot/game/encounters'
-import {
-  Monster,
-  createGiantCrab,
-  createShark,
-  monsterList,
-  monstersByName,
-} from '@adventure-bot/game/monster'
-import { CommandHandlerOptions, weightedTable } from '@adventure-bot/game/utils'
+import { monsterList, monstersByName } from '@adventure-bot/game/monster'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
   .setName('monster')
@@ -38,20 +32,19 @@ export const execute = async ({
   })
 
   collector.on('collect', (message) => {
+    if (message.author.id !== interaction.user.id) return
     const input = parseInt(message.content)
     const selectedMonster = monstersByName[input - 1]
     if (!selectedMonster) {
-      interaction.editReply(`That's not a valid monster.`)
+      interaction.followUp(`${selectedMonster} is not a valid choice.`)
       return
     }
     monster({
       interaction,
       replyType: 'followUp',
-      monster: weightedTable<() => Monster>([
-        [1, createShark],
-        [1, createGiantCrab],
-      ])(),
+      monster: selectedMonster[1](),
     })
+    collector.stop()
   })
 }
 
