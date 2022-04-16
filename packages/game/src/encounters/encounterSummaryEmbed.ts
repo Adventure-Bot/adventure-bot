@@ -1,11 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
-import {
-  decoratedName,
-  gpGainField,
-  xpGainField,
-} from '@adventure-bot/game/character'
+import { decoratedName, xpGainField } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
 import store from '@adventure-bot/game/store'
 import {
@@ -60,16 +56,6 @@ export function encounterSummaryEmbed({
       break
   }
 
-  if (encounter.lootResult?.goldTaken) {
-    embed.addFields([gpGainField(encounter.lootResult?.goldTaken)])
-  }
-  const itemsTaken = encounter.lootResult?.itemsTaken
-  if (itemsTaken && itemsTaken.length > 0) {
-    embed.addField(
-      'Items Looted',
-      itemsTaken.map((item) => item.name).join(', ')
-    )
-  }
   embed.setImage(monster.profile).setThumbnail(character.profile)
 
   return embed
