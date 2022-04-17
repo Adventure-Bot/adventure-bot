@@ -14,7 +14,7 @@ import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
 import { Trap, getRandomTrap, trapAttack } from '@adventure-bot/game/trap'
-import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset, d } from '@adventure-bot/game/utils'
 
 type Chest = {
   hasTrap: boolean
@@ -108,7 +108,7 @@ export async function chest(
     if (reaction.emoji.name === '⚙') {
       message.reactions.cache.get('⚙')?.remove()
       chest.trapDisarmAttempted = true
-      if (Math.random() <= 0.7) {
+      if (d(20) > 6) {
         chest.trapDisarmed = true
       } else {
         message.reactions.cache.get('👐')?.remove()
