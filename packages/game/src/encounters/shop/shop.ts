@@ -12,7 +12,8 @@ import {
 } from '@adventure-bot/game/character'
 import { buyItemPrompt } from '@adventure-bot/game/encounters/shop/buyItemPrompt'
 import { sellItemPrompt } from '@adventure-bot/game/encounters/shop/sellItemPrompt'
-import { heavyCrown, itemEmbed } from '@adventure-bot/game/equipment'
+import { itemEmbed } from '@adventure-bot/game/equipment'
+import { heavyCrown } from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
 import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
 import {

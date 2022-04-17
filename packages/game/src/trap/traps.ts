@@ -1,6 +1,6 @@
 import { defaultCharacter } from '@adventure-bot/game/character'
 import { Trap } from '@adventure-bot/game/trap/Trap'
-import { asset } from '@adventure-bot/game/utils'
+import { asset, randomArrayElement } from '@adventure-bot/game/utils'
 
 export const traps = {
   glyph: (): Trap => ({
@@ -23,11 +23,10 @@ export const traps = {
     attackText: 'A huge stone ball comes bowling down on you!',
     hitText: 'You are crushed!',
     missText: 'You deftly evade!',
-    image: asset(
-      'fantasy',
-      'items',
-      'a large tumbling boulder with motion blur'
-    ).s3Url,
+    image: randomArrayElement([
+      asset('fantasy', 'items', 'a large tumbling boulder with motion blur'),
+      asset('fantasy', 'items', 'a massive stone sphere tumbling towards you'),
+    ]).s3Url,
   }),
   poisonNeedle: (): Trap => ({
     ...defaultCharacter,

@@ -1,7 +1,9 @@
+import { Item } from '@adventure-bot/game/equipment'
 import {
-  Item,
   amuletOfAttack,
   amuletOfProtection,
+  assassinLeathers,
+  berserkerHides,
   buckler,
   chainArmor,
   dagger,
@@ -10,21 +12,19 @@ import {
   longsword,
   mace,
   plateArmor,
+  potionOfHaste,
   potionOfHealing,
   potionOfMight,
   potionOfProtection,
   potionOfSlaying,
   potionOfVigor,
   ringOfAttack,
-  towerShield,
-  warAxe,
-} from '@adventure-bot/game/equipment'
-import {
-  assassinLeathers,
-  berserkerHides,
-  potionOfHaste,
   ringOfHaste,
+  roguesBrew,
+  roguesRing,
+  towerShield,
   travelersRing,
+  warAxe,
 } from '@adventure-bot/game/equipment/items'
 import { weightedTable } from '@adventure-bot/game/utils'
 
@@ -33,6 +33,7 @@ export function randomShopItem(): Item {
     [0.3, amuletOfAttack],
     [0.3, amuletOfProtection],
     [0.3, ringOfAttack],
+    [0.3, roguesRing],
     [0.3, ringOfHaste],
     [0.5, warAxe],
     [0.8, assassinLeathers],
@@ -50,6 +51,7 @@ export function randomShopItem(): Item {
     [1, potionOfMight],
     [1, potionOfProtection],
     [1, potionOfSlaying],
+    [1, roguesBrew],
     [1, potionOfVigor],
     [1, towerShield],
     [1, travelersRing],

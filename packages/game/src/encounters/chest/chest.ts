@@ -9,7 +9,8 @@ import {
   xpGainField,
 } from '@adventure-bot/game/character'
 import { chestEmbed } from '@adventure-bot/game/encounters/chest'
-import { heavyCrown, randomChestItem } from '@adventure-bot/game/equipment'
+import { randomChestItem } from '@adventure-bot/game/equipment'
+import { heavyCrown } from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import {
@@ -43,6 +44,7 @@ export async function chest(
   findOrCreateCharacter(interaction.user)
   const character = selectCharacterById(store.getState(), interaction.user.id)
   if (!character) return
+  const { perception, lockpicking, luck } = character.statsModified
   let fled = false
   let timeout = false
 
@@ -97,11 +99,10 @@ export async function chest(
       fled = true
       break
     }
-    // todo: add perception stat
     if (reaction.emoji.name === '👀') {
       message.reactions.cache.get('👀')?.remove()
       chest.inspected = true
-      if (chest.isTrapped && d(20) > 6) {
+      if (chest.isTrapped && d(20) + perception > 6) {
         chest.trapFound = true
         await message.react('⚙')
       }
@@ -112,21 +113,20 @@ export async function chest(
     }
     if (reaction.emoji.name === '⚙') {
       message.reactions.cache.get('⚙')?.remove()
-      chest.disarmAttempt = d(20)
+      chest.disarmAttempt = d(20) + lockpicking
       if (chest.disarmAttempt > 6) {
         chest.trapDisarmed = true
       } else {
         message.reactions.cache.get('👐')?.remove()
       }
     }
-    // todo: add lockpicking stat
     if (reaction.emoji.name === '🔓') {
       message.reactions.cache.get('🔓')?.remove()
-      chest.unlockAttempt = d(20)
-      if (chest.isTrapped && d(20) > 14) {
+      chest.unlockAttempt = d(20) + lockpicking
+      if (chest.isTrapped && d(20) + luck > 14) {
         triggerTrap(interaction, chest)
       }
-      if (d(20) > 6) {
+      if (d(20) + lockpicking > 6) {
         chest.isLocked = false
         await message.react('👐')
       } else {
@@ -183,8 +183,7 @@ export async function chest(
         })
       )
     }
-    // todo: add luck stat
-    if (d(20) > 16) {
+    if (d(20) + luck > 16) {
       store.dispatch(
         itemReceived({
           characterId: interaction.user.id,

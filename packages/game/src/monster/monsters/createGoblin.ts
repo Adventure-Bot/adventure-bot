@@ -1,4 +1,4 @@
-import { dagger } from '@adventure-bot/game/equipment'
+import { dagger } from '@adventure-bot/game/equipment/items'
 import {
   Monster,
   createMonster,

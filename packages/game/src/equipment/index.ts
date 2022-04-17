@@ -6,30 +6,6 @@ import { equippableInventory } from '@adventure-bot/game/equipment/equippableInv
 import { isEquipped } from '@adventure-bot/game/equipment/isEquipped'
 import { itemEmbed } from '@adventure-bot/game/equipment/itemEmbed'
 import { itemSelect } from '@adventure-bot/game/equipment/itemSelect'
-import {
-  amuletOfAttack,
-  amuletOfProtection,
-  assassinLeathers,
-  berserkerHides,
-  buckler,
-  chainArmor,
-  dagger,
-  heavyCrown,
-  kiteShield,
-  leatherArmor,
-  longsword,
-  mace,
-  plateArmor,
-  potionOfHealing,
-  potionOfMight,
-  potionOfProtection,
-  potionOfSlaying,
-  potionOfVigor,
-  ringOfAttack,
-  towerShield,
-  unidentifiedPotion,
-  warAxe,
-} from '@adventure-bot/game/equipment/items'
 import { heavyCrownId } from '@adventure-bot/game/equipment/items/heavyCrown'
 import { offerItemPrompt } from '@adventure-bot/game/equipment/offerItemPrompt'
 import { randomChestItem } from '@adventure-bot/game/equipment/randomChestItem'
@@ -105,39 +81,17 @@ export const isPotion = (item: Item): item is Potion => item.type === 'potion'
 export const isUsable = (item: Item): item is Usable => item.usable ?? false
 
 export {
-  amuletOfAttack,
-  amuletOfProtection,
-  assassinLeathers,
-  berserkerHides,
-  buckler,
-  chainArmor,
-  dagger,
   equipInventoryItemPrompt,
   equipItemPrompt,
   equippableInventory,
-  heavyCrown,
   heavyCrownId,
   isEquipped,
   Item,
   itemEmbed,
   itemSelect,
-  kiteShield,
-  leatherArmor,
-  longsword,
-  mace,
   offerItemPrompt,
-  plateArmor,
-  potionOfHealing,
-  potionOfMight,
-  potionOfProtection,
-  potionOfSlaying,
-  potionOfVigor,
   randomChestItem,
   randomShopItem,
-  ringOfAttack,
-  towerShield,
-  unidentifiedPotion,
   usableInventory,
   useInventoryItemPrompt,
-  warAxe,
 }
