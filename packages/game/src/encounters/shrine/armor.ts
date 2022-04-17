@@ -20,9 +20,9 @@ export const armorShrine = async ({
     effect: createEffect('protectedEffect'),
     name: 'Shrine of Protection',
   }
-  applyShrine({ shrine, interaction })
 
   interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
+  applyShrine({ shrine, interaction })
 }

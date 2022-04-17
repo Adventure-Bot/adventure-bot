@@ -22,9 +22,8 @@ export const attackShrine = async ({
     effect: createEffect('aggression'),
   }
 
-  applyShrine({ shrine, interaction })
-
   interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
+  applyShrine({ shrine, interaction })
 }
