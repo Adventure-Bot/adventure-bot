@@ -21,9 +21,8 @@ export const slayerShrine = async ({
     effect: createEffect('slayer'),
   }
 
-  applyShrine({ shrine, interaction })
-
   interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
+  applyShrine({ shrine, interaction })
 }
