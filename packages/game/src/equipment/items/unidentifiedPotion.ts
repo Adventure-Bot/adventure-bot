@@ -31,6 +31,7 @@ export const unidentifiedPotion = (): Omit<Potion, 'description'> & {
       'stunned',
       'slowed',
       'poisoned',
+      'rogue',
     ],
   },
   usable: true,

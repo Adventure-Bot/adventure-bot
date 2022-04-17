@@ -59,7 +59,7 @@ const syncDir = ({
       )
     }
 
-    if (exists) console.log(`Skipping ${bucket}/${bucketPath}`)
+    if (exists) console.log(`⏩ Skipped ${bucket}/${bucketPath}`)
     else {
       s3.putObject(
         {
@@ -70,7 +70,7 @@ const syncDir = ({
         },
         (err) => {
           if (err) console.log(err)
-          else console.log(`Uploaded ${bucket}/${bucketPath}`)
+          else console.log(`⤴ Uploaded ${bucket}/${bucketPath}`)
         }
       )
     }

@@ -10,6 +10,7 @@ import { shop } from '@adventure-bot/game/encounters/shop/shop'
 import {
   armorShrine,
   attackShrine,
+  roguesGuild,
   slayerShrine,
   vigorShrine,
 } from '@adventure-bot/game/encounters/shrine'
@@ -32,6 +33,7 @@ export const encountersByName: [string, CommandHandler][] = [
   ['Attack Shrine', attackShrine],
   ['Slayer Shrine', slayerShrine],
   ['Vigor Shrine', vigorShrine],
+  ["Rogue's Guild", roguesGuild],
   ['Tavern', tavern],
   ['Trap', trap],
   ['Travel', travel],

@@ -8,14 +8,15 @@ import { invigorated } from '@adventure-bot/game/statusEffects/templates/invigor
 import { might } from '@adventure-bot/game/statusEffects/templates/might'
 import { poisoned } from '@adventure-bot/game/statusEffects/templates/poisoned'
 import { protectedEffect } from '@adventure-bot/game/statusEffects/templates/protectedEffect'
+import { rogue } from '@adventure-bot/game/statusEffects/templates/rogue'
 import { slayer } from '@adventure-bot/game/statusEffects/templates/slayer'
 import { slowed } from '@adventure-bot/game/statusEffects/templates/slowed'
 import { stunned } from '@adventure-bot/game/statusEffects/templates/stunned'
 import { survivor } from '@adventure-bot/game/statusEffects/templates/survivor'
 
 export const effects = {
-  blessed,
   aggression,
+  blessed,
   blind,
   frailty,
   haste,
@@ -24,6 +25,7 @@ export const effects = {
   might,
   poisoned,
   protectedEffect,
+  rogue,
   slayer,
   slowed,
   stunned,

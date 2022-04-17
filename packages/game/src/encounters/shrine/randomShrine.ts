@@ -1,6 +1,7 @@
 import {
   armorShrine,
   attackShrine,
+  roguesGuild,
   slayerShrine,
   vigorShrine,
 } from '@adventure-bot/game/encounters/shrine'
@@ -12,4 +13,5 @@ export const randomShrine = (): CommandHandler =>
     [1, attackShrine],
     [1, slayerShrine],
     [1, vigorShrine],
+    [1, roguesGuild],
   ])
