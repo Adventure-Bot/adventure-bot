@@ -41,6 +41,9 @@ const defaultEmojis: {
   dragonSlaying: '🐲',
   haste: '⏳',
   stunned: '😵‍💫',
+  lockpicking: '🔑',
+  luck: '🍀',
+  perception: '🔍',
 }
 
 export function Emoji(name: Emojis): string {
