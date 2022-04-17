@@ -48,8 +48,8 @@ export async function chest(
   let fled = false
   let timeout = false
 
-  const hasTrap = d(4) == 1
-  const hasLock = d(4) == 1
+  const hasTrap = d(3) === 1
+  const hasLock = d(3) === 1
 
   const chest: Chest = {
     hasLock,
