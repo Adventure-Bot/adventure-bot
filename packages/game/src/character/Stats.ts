@@ -5,6 +5,7 @@ export const stats = [
   'damageMax',
   'dragonSlaying',
   'haste',
+  'lockpicking',
   'maxHP',
   'monsterDamageMax',
 ] as const
@@ -28,6 +29,7 @@ export const statTitles: { [key in Stat]: string } = {
   damageMax: 'Damage',
   dragonSlaying: 'Dragon Slaying',
   haste: 'Haste',
+  lockpicking: 'Lockpicking',
   maxHP: 'Max Health',
   monsterDamageMax: 'Monster Slaying',
 }
