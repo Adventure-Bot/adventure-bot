@@ -19,6 +19,8 @@ export function shrineEmbeds({
       description: shrine.description,
       fields: quest ? [questProgressField(quest)] : [],
       color: shrine.color,
-    }).setImage(shrine.image),
+    })
+      .setImage(shrine.image)
+      .setThumbnail(character.profile),
   ]
 }
