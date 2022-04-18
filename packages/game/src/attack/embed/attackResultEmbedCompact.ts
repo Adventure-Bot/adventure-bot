@@ -3,7 +3,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import {
   AttackResult,
   attackResultHeadline,
-  playerAttack,
+  attackRollText,
 } from '@adventure-bot/game/attack'
 import { accuracyDescriptor } from '@adventure-bot/game/attack/embed/accuracyDescriptor'
 import { damageDescriptor } from '@adventure-bot/game/attack/embed/damageDescriptor'
@@ -21,7 +21,13 @@ export function attackResultEmbedCompact({
       interaction,
       result,
     }),
-    description: attackFlavorText(result),
+    description:
+      attackFlavorText(result) +
+      '\n' +
+      attackRollText({
+        result,
+        interaction,
+      }),
     fields: [
       hpBarField({
         character: result.defender,
@@ -33,9 +39,7 @@ export function attackResultEmbedCompact({
     ],
   }).setThumbnail(result.attacker.profile)
 }
-export const attackFlavorText = (
-  result: ReturnType<typeof playerAttack>
-): string =>
+export const attackFlavorText = (result: AttackResult): string =>
   result
     ? `${accuracyDescriptor(result)} ${damageDescriptor(result)}`
     : 'No result'

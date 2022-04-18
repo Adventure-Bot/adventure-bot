@@ -2,8 +2,7 @@ import { Message, TextChannel } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
-import { decoratedName, loot } from '@adventure-bot/game/character'
-import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
+import { loot } from '@adventure-bot/game/character'
 import quests from '@adventure-bot/game/commands/quests'
 import {
   chest,
@@ -43,31 +42,20 @@ export const monster = async ({
   if (!player) return
 
   let encounter = createEncounter({ monster, player })
+  const encounterId = encounter.id
   let timeout = false
   const message = await interaction[replyType]({
-    embeds: [encounterEmbed({ encounter, interaction })],
+    embeds: [encounterEmbed({ encounterId })],
   })
   if (!(message instanceof Message)) return
   const channel = interaction.channel
   if (!(channel instanceof TextChannel)) return
 
-  const thread = await channel.threads.create({
-    name: `Combat log for ${decoratedName(player)} vs ${decoratedName(
-      monster
-    )}`,
-    startMessage: message,
-  })
-
-  const hook = await getHook({
-    name: 'Combat',
-    channel,
-  })
-
   while (
     'in progress' ===
-    selectEncounterById(store.getState(), encounter.id)?.outcome
+    selectEncounterById(store.getState(), encounterId)?.outcome
   ) {
-    encounter = selectEncounterById(store.getState(), encounter.id)
+    encounter = selectEncounterById(store.getState(), encounterId)
     await message.react(Emoji('attack'))
     await message.react(Emoji('run'))
     const collected = await message
@@ -91,24 +79,12 @@ export const monster = async ({
       !reaction ||
       [Emoji('run'), 'run'].includes(reaction.emoji.name ?? '')
 
-    if (playerFlee) store.dispatch(playerFled({ encounterId: encounter.id }))
+    if (playerFlee) store.dispatch(playerFled({ encounterId }))
 
     const playerResult = playerFlee
       ? undefined
-      : makeAttack(player.id, monster.id, encounter.id)
-    if (playerResult) {
-      hook?.send({
-        embeds: [attackResultEmbed({ result: playerResult, interaction })],
-        threadId: thread.id,
-      })
-    }
-    const monsterResult = makeAttack(monster.id, player.id, encounter.id)
-    if (monsterResult) {
-      hook?.send({
-        embeds: [attackResultEmbed({ result: monsterResult, interaction })],
-        threadId: thread.id,
-      })
-    }
+      : makeAttack(player.id, monster.id, encounterId)
+    const monsterResult = makeAttack(monster.id, player.id, encounterId)
 
     const updatedMonster = selectMonsterById(store.getState(), monster.id)
     player = selectCharacterById(store.getState(), player.id)
@@ -130,7 +106,7 @@ export const monster = async ({
       case player.hp > 0 && monster.hp === 0:
         store.dispatch(
           playerVictory({
-            encounterId: encounter.id,
+            encounterId,
             lootResult:
               (await loot({
                 looterId: player.id,
@@ -147,7 +123,7 @@ export const monster = async ({
       case player.hp === 0 && monster.hp > 0:
         store.dispatch(
           playerDefeat({
-            encounterId: encounter.id,
+            encounterId,
             lootResult:
               (await loot({
                 looterId: monster.id,
@@ -158,14 +134,17 @@ export const monster = async ({
         )
         break
       case player.hp === 0 && monster.hp === 0:
-        store.dispatch(doubleKO({ encounterId: encounter.id }))
+        store.dispatch(doubleKO({ encounterId }))
         break
     }
 
-    store.dispatch(roundFinished(encounter.id))
-    encounter = selectEncounterById(store.getState(), encounter.id)
+    store.dispatch(roundFinished(encounterId))
     message.edit({
-      embeds: [encounterEmbed({ encounter, interaction })]
+      embeds: [
+        encounterEmbed({
+          encounterId,
+        }),
+      ]
         .concat(
           playerResult
             ? [
@@ -191,7 +170,7 @@ export const monster = async ({
 
   message.reactions.removeAll()
 
-  encounter = selectEncounterById(store.getState(), encounter.id)
+  encounter = selectEncounterById(store.getState(), encounterId)
   const embed = encounterSummaryEmbed({
     encounter,
     interaction,
@@ -206,15 +185,6 @@ export const monster = async ({
   await message.reply({
     embeds,
   })
-
-  hook
-    ?.send({
-      embeds,
-      threadId: thread.id,
-    })
-    .then(() => {
-      thread.setArchived(true)
-    })
 
   if (
     player &&
