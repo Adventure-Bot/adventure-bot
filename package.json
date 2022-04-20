@@ -8,6 +8,7 @@
     "build": "lerna run --parallel build",
     "start": "lerna run --parallel start",
     "dev": "lerna run --parallel dev",
+    "test": "lerna run --parallel test",
     "clean": "yarn workspaces run clean && rimraf node_modules",
     "game": "yarn workspace @adventure-bot/game",
     "web": "yarn workspace @adventure-bot/web",
