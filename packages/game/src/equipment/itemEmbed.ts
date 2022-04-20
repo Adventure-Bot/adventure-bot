@@ -3,7 +3,7 @@ import { EmbedFieldData, MessageEmbed } from 'discord.js'
 import { EmojiModifier, EmojiValue } from '@adventure-bot/game/Emoji'
 import { Character, statTitles, stats } from '@adventure-bot/game/character'
 import { sellValue } from '@adventure-bot/game/encounters/shop/sellValue'
-import { Item, isEquipped } from '@adventure-bot/game/equipment'
+import { Item, isEquipped, isWeapon } from '@adventure-bot/game/equipment'
 
 export function itemEmbed({
   item,
@@ -32,6 +32,8 @@ export function itemEmbed({
   })
 
   if (process.env.SHOW_ITEM_IDS === 'true') embed.addField('ID', item.id, true)
+  if (isWeapon(item))
+    embed.addField('Damage', EmojiValue('damage', item.damageMax), true)
   embed.addField('Type', item.type, true)
   embed.addField('Lootable?', item.lootable ? 'Yes' : 'No', true)
   embed.addField('Sellable?', item.sellable ? 'Yes' : 'No', true)
