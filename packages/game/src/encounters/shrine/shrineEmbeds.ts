@@ -12,12 +12,12 @@ export function shrineEmbeds({
   interaction: CommandInteraction
 }): MessageEmbed[] {
   const character = findOrCreateCharacter(interaction.user)
-  const quest = character.quests.blessed
+  const { blessed } = character.quests
   return [
     new MessageEmbed({
       title: `${character.name} encountered a ${shrine.name}!`,
       description: shrine.description,
-      fields: quest ? [questProgressField(quest)] : [],
+      fields: blessed ? [questProgressField(blessed)] : [],
       color: shrine.color,
     })
       .setImage(shrine.image)

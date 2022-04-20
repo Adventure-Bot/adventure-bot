@@ -1,21 +1,10 @@
-import { Shrine } from '@adventure-bot/game/encounters/shrine/Shrine'
-import { applyShrine } from '@adventure-bot/game/encounters/shrine/applyShrine'
-import { armorShrine } from '@adventure-bot/game/encounters/shrine/armor'
-import { attackShrine } from '@adventure-bot/game/encounters/shrine/attack'
-import { randomShrine } from '@adventure-bot/game/encounters/shrine/randomShrine'
-import { roguesGuild } from '@adventure-bot/game/encounters/shrine/rogue'
-import { shrineEmbeds } from '@adventure-bot/game/encounters/shrine/shrineEmbeds'
-import { slayerShrine } from '@adventure-bot/game/encounters/shrine/slayer'
-import { vigorShrine } from '@adventure-bot/game/encounters/shrine/vigor'
-
-export {
-  armorShrine,
-  attackShrine,
-  slayerShrine,
-  roguesGuild,
-  vigorShrine,
-  randomShrine,
-  shrineEmbeds,
-  applyShrine,
-  Shrine,
-}
+export { Shrine } from '@adventure-bot/game/encounters/shrine/Shrine'
+export { applyShrine } from '@adventure-bot/game/encounters/shrine/applyShrine'
+export { armorShrine } from '@adventure-bot/game/encounters/shrine/armor'
+export { attackShrine } from '@adventure-bot/game/encounters/shrine/attack'
+export { randomShrine } from '@adventure-bot/game/encounters/shrine/randomShrine'
+export { roguesGuild } from '@adventure-bot/game/encounters/shrine/rogue'
+export { shrineEmbeds } from '@adventure-bot/game/encounters/shrine/shrineEmbeds'
+export { slayerShrine } from '@adventure-bot/game/encounters/shrine/slayer'
+export { vigorShrine } from '@adventure-bot/game/encounters/shrine/vigor'
+export { shrineEncounter } from '@adventure-bot/game/encounters/shrine/Shrine'
