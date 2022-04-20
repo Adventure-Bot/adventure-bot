@@ -21,7 +21,7 @@ export async function roguesGuild({
     effect: createEffect('rogue'),
   }
 
-  interaction[replyType]({
+  await interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
   applyShrine({ shrine, interaction })

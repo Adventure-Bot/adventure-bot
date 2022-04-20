@@ -25,7 +25,7 @@ export async function vigorShrine({
     effect: createEffect('invigorated'),
   }
 
-  interaction[replyType]({
+  await interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
   applyShrine({ shrine, interaction })

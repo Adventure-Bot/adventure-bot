@@ -21,7 +21,7 @@ export const armorShrine = async ({
     name: 'Shrine of Protection',
   }
 
-  interaction[replyType]({
+  await interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
   applyShrine({ shrine, interaction })
