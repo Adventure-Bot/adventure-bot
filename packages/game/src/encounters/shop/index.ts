@@ -1,0 +1,1 @@
+export { getSaleRate } from './getSaleRate'

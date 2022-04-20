@@ -8,7 +8,7 @@ import {
   getCharacterStatModified,
 } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
-import { getSaleRate } from '@adventure-bot/game/encounters/shop/getSaleRate'
+import { getSaleRate } from '@adventure-bot/game/encounters/shop'
 import {
   Item,
   isAmulet,
@@ -20,12 +20,12 @@ import {
 } from '@adventure-bot/game/equipment'
 import { Monster } from '@adventure-bot/game/monster'
 import { QuestId, quests } from '@adventure-bot/game/quest'
-import { StatusEffect } from '@adventure-bot/game/statusEffects'
+import {
+  StatusEffect,
+  isStatusEffectExpired,
+} from '@adventure-bot/game/statusEffects'
 import { itemReceived, newGame } from '@adventure-bot/game/store/actions'
 import { characterLooted } from '@adventure-bot/game/store/slices/loots'
-
-export const isStatusEffectExpired = (effect: StatusEffect): boolean =>
-  Date.now() > new Date(effect.started).valueOf() + effect.duration
 
 type AttackAction = {
   encounter?: Encounter

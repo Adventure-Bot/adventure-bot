@@ -1,21 +1,11 @@
-import { StatModifier } from '@adventure-bot/game/statusEffects/StatModifier'
-import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
-import { createEffect } from '@adventure-bot/game/statusEffects/createEffect'
-import { hasStatusEffect } from '@adventure-bot/game/statusEffects/hasStatusEffect'
-import { statusEffectEmbed } from '@adventure-bot/game/statusEffects/statusEffectEmbed'
-import {
+export { StatModifier } from '@adventure-bot/game/statusEffects/StatModifier'
+export { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+export { createEffect } from '@adventure-bot/game/statusEffects/createEffect'
+export { hasStatusEffect } from '@adventure-bot/game/statusEffects/hasStatusEffect'
+export { statusEffectEmbed } from '@adventure-bot/game/statusEffects/statusEffectEmbed'
+export {
   EffectTemplate,
   effects,
 } from '@adventure-bot/game/statusEffects/templates'
-import { TemplateEffect } from '@adventure-bot/game/statusEffects/templates/TemplateEffect'
-
-export {
-  createEffect,
-  StatusEffect,
-  statusEffectEmbed,
-  EffectTemplate,
-  hasStatusEffect,
-  StatModifier,
-  effects,
-  TemplateEffect,
-}
+export { TemplateEffect } from '@adventure-bot/game/statusEffects/templates/TemplateEffect'
+export { isStatusEffectExpired } from '@adventure-bot/game/statusEffects/isStatusEffectExpired'
