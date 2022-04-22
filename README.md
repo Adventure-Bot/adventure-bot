@@ -8,19 +8,24 @@ As you do.
 
 Adventure Bot is the DM in your friend's Discord roleplaying game!
 
-![death by chest](./packages/game/images/defeated-by-chest.png)
+Features:
 
-![character 2](./packages/game/images/inspect-example-2.png)
+- AI generated art
+- Persistent monsters
+- PvP gameplay
+- Quests
 
-![character](./packages/game/images/inspect-example.png)
+![death by chest](./example-gameplay/defeated-by-chest.png)
 
-![heal](./packages/game/images/heal.png)
+![character 2](./example-gameplay/inspect-2.png)
 
-![divine blessing](./packages/game/images/divine-blessing.png)
+![character](./example-gameplay/inspect.png)
 
-![divine blessing](./packages/game/images/divine-blessing.png)
+![heal](./example-gameplay/heal.png)
 
-![cairns](./packages/game/images/cairns.png)
+![divine blessing](./example-gameplay/divine-blessing.png)
+
+![cairns](./example-gameplay/cairns.png)
 
 
 
