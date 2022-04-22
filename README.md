@@ -10,13 +10,18 @@ Adventure Bot is the DM in your friend's Discord roleplaying game!
 
 ![death by chest](./packages/game/images/defeated-by-chest.png)
 
-![example character 2](./packages/game/images/inspect-example-2.png)
+![character 2](./packages/game/images/inspect-example-2.png)
 
-![example character](./packages/game/images/inspect-example.png)
+![character](./packages/game/images/inspect-example.png)
 
-![example heal](./packages/game/images/heal.png)
+![heal](./packages/game/images/heal.png)
 
-![example divine blessing](./packages/game/images/divine-blessing.png)
+![divine blessing](./packages/game/images/divine-blessing.png)
+
+![divine blessing](./packages/game/images/divine-blessing.png)
+
+![cairns](./packages/game/images/cairns.png)
+
 
 
 ## Developers
