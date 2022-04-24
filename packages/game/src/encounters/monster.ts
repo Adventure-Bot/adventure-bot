@@ -150,7 +150,6 @@ export const monster = async ({
             ? [
                 attackResultEmbed({
                   result: playerResult,
-                  interaction,
                   variant: 'compact',
                 }),
               ]
@@ -160,7 +159,6 @@ export const monster = async ({
           monsterResult
             ? attackResultEmbed({
                 result: monsterResult,
-                interaction,
                 variant: 'compact',
               })
             : []
