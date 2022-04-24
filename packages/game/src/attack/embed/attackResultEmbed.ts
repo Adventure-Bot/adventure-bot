@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import {
@@ -15,17 +15,14 @@ import {
 
 export function attackResultEmbed({
   result,
-  interaction,
   variant = 'default',
 }: {
   result: AttackResult
-  interaction: CommandInteraction
   variant?: 'default' | 'compact' | 'retaliation'
 }): MessageEmbed {
   if (variant === 'compact')
     return attackResultEmbedCompact({
       result,
-      interaction,
     })
 
   return new MessageEmbed({
@@ -36,7 +33,6 @@ export function attackResultEmbed({
     description: `${attackFlavorText(result)}
     ${attackRollText({
       result,
-      interaction,
     })}
     ${
       result.monsterDamageRoll

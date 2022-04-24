@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import {
   AttackResult,
@@ -11,10 +11,8 @@ import { hpBarField } from '@adventure-bot/game/character'
 
 export function attackResultEmbedCompact({
   result,
-  interaction,
 }: {
   result: AttackResult
-  interaction: CommandInteraction
 }): MessageEmbed {
   return new MessageEmbed({
     title: attackResultHeadline({
@@ -25,7 +23,6 @@ export function attackResultEmbedCompact({
       '\n' +
       attackRollText({
         result,
-        interaction,
       }),
     fields: [
       hpBarField({

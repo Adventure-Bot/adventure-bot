@@ -1,5 +1,3 @@
-import { CommandInteraction } from 'discord.js'
-
 import { Emoji, EmojiValue, d20Emoji } from '@adventure-bot/game/Emoji'
 import { AttackResult } from '@adventure-bot/game/attack'
 
@@ -7,7 +5,6 @@ export const attackRollText = ({
   result,
 }: {
   result: AttackResult
-  interaction: CommandInteraction
 }): string => {
   const { attackBonus, ac } = result.attacker.statsModified
   const { attackRoll } = result
