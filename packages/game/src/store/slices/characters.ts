@@ -310,7 +310,7 @@ const characterSlice = createSlice({
         state.charactersById = {}
         state.roamingMonsters = []
       })
-      .addCase(created, (state, action: PayloadAction<Character>) => {
+      .addCase(created, (state, action) => {
         state.charactersById[action.payload.id] = action.payload
       })
       .addCase(characterLooted, (state, action) => {
