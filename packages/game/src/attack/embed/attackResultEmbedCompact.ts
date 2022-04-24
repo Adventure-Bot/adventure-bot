@@ -18,7 +18,6 @@ export function attackResultEmbedCompact({
 }): MessageEmbed {
   return new MessageEmbed({
     title: attackResultHeadline({
-      interaction,
       result,
     }),
     description:

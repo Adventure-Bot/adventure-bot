@@ -31,7 +31,6 @@ export function attackResultEmbed({
   return new MessageEmbed({
     title:
       attackResultHeadline({
-        interaction,
         result,
       }) + (variant === 'retaliation' ? ' (retaliation)' : ''),
     description: `${attackFlavorText(result)}
