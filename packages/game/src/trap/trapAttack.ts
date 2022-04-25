@@ -1,6 +1,6 @@
 import store from '@adventure-bot/game/store'
 import { trapAttacked } from '@adventure-bot/game/store/actions'
-import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
+import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 import { TrapAttackResult } from '@adventure-bot/game/trap'
 import { Trap } from '@adventure-bot/game/trap/Trap'
 import { d, d20 } from '@adventure-bot/game/utils'
@@ -9,7 +9,7 @@ export function trapAttack({
   defender,
   trap,
 }: {
-  defender: SelectedCharacter
+  defender: CharacterWithStats
   trap: Trap
 }): TrapAttackResult {
   const attackRoll = d20()

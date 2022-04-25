@@ -1,5 +1,5 @@
 import { StatusEffect } from '@adventure-bot/game/statusEffects'
-import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
+import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 import { Trap } from '@adventure-bot/game/trap/Trap'
 
 export type TrapAttackResult = {
@@ -7,7 +7,7 @@ export type TrapAttackResult = {
   attackRoll: number
   attackBonus: number
   damage: number
-  defender: SelectedCharacter
+  defender: CharacterWithStats
   effect?: StatusEffect
   trap: Trap
 }

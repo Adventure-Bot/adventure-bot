@@ -8,12 +8,12 @@ import {
 } from '@adventure-bot/game/character'
 import { stunDurationRemaining } from '@adventure-bot/game/character/cooldowns/stunDurationRemaining'
 import { isHealer } from '@adventure-bot/game/heal/isHealer'
-import { SelectedCharacter } from '@adventure-bot/game/store/selectors'
+import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 
 export function cooldownsEmbed({
   character,
 }: {
-  character: SelectedCharacter
+  character: CharacterWithStats
   interaction: CommandInteraction
 }): MessageEmbed {
   const embed = new MessageEmbed({

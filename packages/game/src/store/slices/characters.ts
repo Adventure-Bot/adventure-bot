@@ -25,6 +25,7 @@ import {
   isStatusEffectExpired,
 } from '@adventure-bot/game/statusEffects'
 import { itemReceived, newGame } from '@adventure-bot/game/store/actions'
+import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 import { characterLooted } from '@adventure-bot/game/store/slices/loots'
 
 type AttackAction = {
@@ -33,7 +34,7 @@ type AttackAction = {
 }
 
 export const attacked = createAction<AttackAction>('character/attacked')
-export const created = createAction<Character>('character/created')
+export const created = createAction<CharacterWithStats>('character/created')
 
 const charactersById: Record<string, Character> = {}
 const roamingMonsters: string[] = []

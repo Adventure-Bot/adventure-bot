@@ -60,14 +60,14 @@ const selectStats = (
   )
 }
 
-export type SelectedCharacter = Character & {
+export type CharacterWithStats = Character & {
   stats: Stats
   statsModified: Stats
 }
 export const selectCharacterById = (
   state: ReduxState,
   id: string
-): SelectedCharacter | void => {
+): CharacterWithStats | void => {
   const character = state.characters.charactersById[id]
   if (!character) return
   const stats = selectStats(state, character.id)
@@ -84,12 +84,15 @@ export const selectCharacterById = (
   }
 }
 
-type SelectedMonster = SelectedCharacter & Monster
+type MonsterWithStats = Monster & {
+  stats: Stats
+  statsModified: Stats
+}
 
 export const selectMonsterById = (
   state: ReduxState,
   id: string
-): SelectedMonster | void => {
+): MonsterWithStats | void => {
   const character = selectCharacterById(state, id)
   if (character && isMonster(character)) return character
 }
