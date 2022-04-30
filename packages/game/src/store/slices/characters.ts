@@ -27,6 +27,7 @@ import {
 import { itemReceived, newGame } from '@adventure-bot/game/store/actions'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 import { characterLooted } from '@adventure-bot/game/store/slices/loots'
+import { itemPurchased } from '@adventure-bot/game/store/slices/shop'
 
 type AttackAction = {
   encounter?: Encounter
@@ -331,6 +332,13 @@ const characterSlice = createSlice({
           target.equipment,
           (item) => !isTakenItem(item)
         )
+      })
+      .addCase(itemPurchased, (state, action) => {
+        const { characterId, item } = action.payload
+        const character = state.charactersById[characterId]
+        if (!character) return
+        character.gold -= item.goldValue
+        character.inventory.push(item)
       })
       .addCase(itemReceived, (state, action) => {
         const { characterId, item } = action.payload
