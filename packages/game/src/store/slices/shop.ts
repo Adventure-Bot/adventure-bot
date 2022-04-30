@@ -5,7 +5,7 @@ import { times } from 'remeda'
 import { Item, randomShopItem } from '@adventure-bot/game/equipment'
 import { ReduxState } from '@adventure-bot/game/store'
 
-const inventory: Item[] = times(3, randomShopItem)
+const inventory: Item[] = []
 
 export const shopRestocked = createAction('shop/restocked')
 export const itemPurchased = createAction<{
