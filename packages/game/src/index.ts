@@ -6,7 +6,7 @@ import {
   announceItemsReceived,
   announceLoots,
   announceTrapAttacked,
-  declareGameWon,
+  declareWinners,
 } from '@adventure-bot/game/announcements'
 import { createClient } from '@adventure-bot/game/boot'
 import { renderCharacterList } from '@adventure-bot/game/character'
@@ -26,7 +26,7 @@ createClient({
   onError: (e) => console.error('Discord client error!', e),
 
   onReady: (client) => {
-    declareGameWon(client)
+    declareWinners(client)
     announceItemsReceived()
     announceEffectAdded(client)
     announceCrownLoots(client)

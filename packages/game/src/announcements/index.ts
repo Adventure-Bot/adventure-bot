@@ -5,4 +5,4 @@ export {
   announceCrownLoots,
 } from '@adventure-bot/game/announcements/announceLoots'
 export { announceTrapAttacked } from '@adventure-bot/game/announcements/announceTrapAttacked'
-export { declareGameWon } from '@adventure-bot/game/announcements/declareGameWon'
+export { declareWinners } from '@adventure-bot/game/announcements/declareGameWon'
