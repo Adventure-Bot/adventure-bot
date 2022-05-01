@@ -8,14 +8,20 @@ import {
 } from '@adventure-bot/game/store/actions'
 
 type Score = { name: string; gold: number; wins: number; profile: string }
+type Victory = {
+  winner: Character
+  date: number
+}
 
 export const defaultLeaderboardState: {
   winners: Character[]
+  victoriesByCharacter: { [characterId: string]: Victory[] }
   scoresByCharacter: { [id: string]: Score }
   leaderboard: Score[]
   channelId: string
 } = {
   winners: [],
+  victoriesByCharacter: {},
   channelId: '',
   leaderboard: [],
   scoresByCharacter: {},
@@ -34,6 +40,15 @@ const leaderboardSlice = createSlice({
       })
       .addCase(winnerDeclared, (state, action) => {
         const winner = action.payload.winner
+        const date = Date.now()
+        const victory: Victory = {
+          winner,
+          date,
+        }
+        if (!state.victoriesByCharacter[winner.id]) {
+          state.victoriesByCharacter[winner.id] = []
+        }
+        state.victoriesByCharacter[winner.id].push(victory)
         state.winners.push(winner)
         const currentScore = state.scoresByCharacter[winner.id] ?? {
           name: winner.name,

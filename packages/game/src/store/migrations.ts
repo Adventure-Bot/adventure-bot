@@ -9,13 +9,19 @@ import { defaultLeaderboardState } from '@adventure-bot/game/store/slices/leader
 /*
  * This is the current version and should match the latest version
  */
-export const persistVersion = 6
+export const persistVersion = 7
 
 /**
  * Here we use RootReducerState instead of ReduxState to avoid cyclical type references
  */
-type PersistedReduxStateV6 = RootReducerState
+type PersistedReduxStateV7 = RootReducerState
 
+type PersistedReduxStateV6 = Omit<PersistedReduxStateV7, 'leaderboard'> & {
+  leaderboard: Omit<
+    PersistedReduxStateV7['leaderboard'],
+    'victoriesByCharacter'
+  >
+}
 type PersistedReduxStateV5 = Omit<PersistedReduxStateV6, 'commands'> & {
   commands: Omit<PersistedReduxStateV6['commands'], 'userCommands'> & {
     userCommands: {
@@ -82,11 +88,18 @@ const persistMigrations = {
       commandsUsed: {},
     },
   }),
-  6: (state: PersistedReduxStateV5): RootReducerState => ({
+  6: (state: PersistedReduxStateV5): PersistedReduxStateV6 => ({
     ...state,
     commands: {
       ...state.commands,
       userCommands: {},
+    },
+  }),
+  7: (state: PersistedReduxStateV6): RootReducerState => ({
+    ...state,
+    leaderboard: {
+      ...state.leaderboard,
+      victoriesByCharacter: {},
     },
   }),
 }
