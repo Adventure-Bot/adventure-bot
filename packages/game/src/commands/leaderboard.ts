@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js'
 
+import { EmojiValue } from '@adventure-bot/game/Emoji'
 import store from '@adventure-bot/game/store'
 import { selectLeaderBoard } from '@adventure-bot/game/store/selectors'
 import { crownArt } from '@adventure-bot/game/utils'
@@ -18,12 +19,12 @@ export function leaderboard(): MessageEmbed[] {
         fields: [
           {
             name: 'Wins',
-            value: `${score.wins}`,
+            value: EmojiValue('crown', score.wins),
             inline: true,
           },
           {
             name: 'Gold',
-            value: `${score.gold}`,
+            value: EmojiValue('gold', score.gold),
             inline: true,
           },
         ],

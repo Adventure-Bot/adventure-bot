@@ -66,7 +66,7 @@ export const command = new SlashCommandBuilder()
     option.setName('declare_winner_revoked').setDescription('Over ruled!')
   )
   .addSubcommand((option) =>
-    option.setName('display_leaderboard').setDescription('#winning')
+    option.setName('leaderboard').setDescription('#winning')
   )
   .addSubcommand((option) =>
     option
@@ -117,7 +117,7 @@ export const execute = async ({
         embeds: leaderboard(),
       })
       break
-    case 'display_leaderboard':
+    case 'leaderboard':
       interaction.editReply({
         embeds: leaderboard(),
       })
