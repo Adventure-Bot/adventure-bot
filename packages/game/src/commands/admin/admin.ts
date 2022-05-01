@@ -110,9 +110,6 @@ export const execute = async ({
       return
     case 'declare_winner':
       declareWinner(interaction)
-      interaction.editReply({
-        embeds: leaderboard(),
-      })
       break
     case 'declare_winner_revoked':
       store.dispatch(winnerRevoked())
