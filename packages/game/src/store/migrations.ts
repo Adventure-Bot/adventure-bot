@@ -19,7 +19,7 @@ type PersistedReduxStateV7 = RootReducerState
 type PersistedReduxStateV6 = Omit<PersistedReduxStateV7, 'leaderboard'> & {
   leaderboard: Omit<
     PersistedReduxStateV7['leaderboard'],
-    'victoriesByCharacter'
+    'victoriesByCharacterId'
   >
 }
 type PersistedReduxStateV5 = Omit<PersistedReduxStateV6, 'commands'> & {
