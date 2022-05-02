@@ -30,20 +30,25 @@ export const announceWinners: (client: Client) => void = (client) => {
 
   startAppListening({
     actionCreator: winnerDeclared,
-    effect: ({ payload: { winner } }) => {
+    effect: ({ payload: { winner, interaction } }) => {
+      const embeds = [
+        new MessageEmbed({
+          title: `${decoratedName(winner)} won the crown!`,
+          description: 'Game over!',
+          color: 'YELLOW',
+        }).setImage(asset('fantasy', 'magic', 'glitter dust').s3Url),
+        ...leaderboard(),
+      ]
+      if (interaction) {
+        interaction.editReply({ embeds })
+        return
+      }
       const state = store.getState()
       const lastChannelId = selectLastChannelUsed(state)
       const channel = client.channels.cache.get(lastChannelId)
       if (!channel?.isText()) return
       channel.send({
-        embeds: [
-          new MessageEmbed({
-            title: `${decoratedName(winner)} won the crown!`,
-            description: 'Game over!',
-            color: 'YELLOW',
-          }).setImage(asset('fantasy', 'magic', 'glitter dust').s3Url),
-          ...leaderboard(),
-        ],
+        embeds,
       })
     },
   })
