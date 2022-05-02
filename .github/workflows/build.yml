@@ -77,7 +77,6 @@ jobs:
   deploy:
     runs-on: self-hosted
     environment: development
-    needs: build
     strategy:
       matrix:
         node-version: [16.x]
