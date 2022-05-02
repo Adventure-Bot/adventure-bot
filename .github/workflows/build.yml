@@ -73,6 +73,7 @@ jobs:
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
       - run: yarn game prune-imports
+
   deploy: 
     runs-on: self-hosted
     needs: build
@@ -89,4 +90,3 @@ jobs:
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
       - run: yarn build
-      -
