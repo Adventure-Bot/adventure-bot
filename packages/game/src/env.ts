@@ -1,16 +1,6 @@
-import { existsSync } from 'fs'
-import path from 'path'
 import { exit } from 'process'
 
 export const assertEnv: () => void = () => {
-  const envPath = path.join(process.cwd(), '.env')
-  if (!existsSync(envPath)) {
-    console.error(
-      '\x1b[43m\x1b[30m ⚠ Environment config required \n https://github.com/Adventure-Bot/adventure-bot/blob/main/developer-guide.md#setup-your-env \x1b[0m'
-    )
-    exit(1)
-  }
-
   const requiredEnvironmentVars = [
     [
       'BOT_TOKEN',
