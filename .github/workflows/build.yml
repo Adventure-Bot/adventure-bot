@@ -76,7 +76,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-    environment: production
+    environment: development
     needs: build
     strategy:
       matrix:
@@ -91,3 +91,4 @@ jobs:
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
       - run: yarn build
+      - run: yarn game start --port=8080
