@@ -133,7 +133,7 @@ function declareWinner(interaction: CommandInteraction) {
   const winnerUser = interaction.options.getUser('winner')
   if (!winnerUser) return
   const winner = findOrCreateCharacter(winnerUser)
-  store.dispatch(winnerDeclared({ winner }))
+  store.dispatch(winnerDeclared({ winner, interaction }))
 }
 
 async function addEmoji(interaction: CommandInteraction) {
