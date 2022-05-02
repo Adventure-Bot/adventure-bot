@@ -13,10 +13,10 @@ jobs:
         node-version: [16.x]
 
     steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v3
-      with:
-        name: adventure-bot
+      - name: Download artifact from build job
+      - uses: actions/download-artifact@v3
+        with:
+          name: adventure-bot
 
-    - name: 'Start game'
-    - run: yarn game start
+      - name: 'Start game'
+      - run: yarn game start
