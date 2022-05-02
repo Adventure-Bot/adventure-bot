@@ -7,7 +7,13 @@ import {
   winnerRevoked,
 } from '@adventure-bot/game/store/actions'
 
-type Score = { name: string; gold: number; wins: number; profile: string }
+type Score = {
+  name: string
+  characterId: string
+  gold: number
+  wins: number
+  profile: string
+}
 type Victory = {
   winner: Character
   date: number
@@ -40,25 +46,27 @@ const leaderboardSlice = createSlice({
       })
       .addCase(winnerDeclared, (state, action) => {
         const winner = action.payload.winner
+        const { victoriesByCharacter } = state
         const date = Date.now()
         const victory: Victory = {
           winner,
           date,
         }
-        if (!state.victoriesByCharacter[winner.id]) {
-          state.victoriesByCharacter[winner.id] = []
+        if (!victoriesByCharacter[winner.id]) {
+          victoriesByCharacter[winner.id] = []
         }
-        state.victoriesByCharacter[winner.id].push(victory)
+        victoriesByCharacter[winner.id].push(victory)
         state.winners.push(winner)
-        const currentScore = state.scoresByCharacter[winner.id] ?? {
+        state.scoresByCharacter[winner.id] = {
           name: winner.name,
-          gold: 0,
-          wins: 0,
+          characterId: winner.id,
+          gold: victoriesByCharacter[winner.id].reduce(
+            (acc, curr) => acc + curr.winner.gold,
+            0
+          ),
+          wins: victoriesByCharacter[winner.id].length,
           profile: winner.profile,
         }
-        currentScore.wins++
-        currentScore.gold += winner.gold
-        state.scoresByCharacter[winner.id] = currentScore
         state.leaderboard = Object.values(state.scoresByCharacter).sort(
           (a, b) => (b.wins == a.wins ? b.gold - a.gold : b.wins - a.wins)
         )
