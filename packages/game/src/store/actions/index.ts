@@ -8,7 +8,9 @@ import { TrapAttackResult } from '@adventure-bot/game/trap'
 export const newGame = createAction('newGame')
 export const commandUsed = createAction<CommandInteraction>('commandUsed')
 export const winnerDeclared =
-  createAction<{ winner: Character }>('winnerDeclared')
+  createAction<{ winner: Character; interaction?: CommandInteraction }>(
+    'winnerDeclared'
+  )
 export const winnerRevoked = createAction('winnerRevoked')
 export const itemReceived = createAction<{
   characterId: string
