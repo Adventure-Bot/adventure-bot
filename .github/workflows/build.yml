@@ -83,6 +83,14 @@ jobs:
 
     steps:
       - shell: bash
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn game start
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
@@ -95,12 +103,3 @@ jobs:
           GUILD_ID: ${{ secrets.GUILD_ID }}
           PORT: ${{ secrets.PORT }}
           REDUX_DEVTOOLS_ENABLED: ${{ secrets.REDUX_DEVTOOLS_ENABLED }}
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-      - run: yarn game start
