@@ -82,10 +82,10 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - run: echo "the value is: $TEST_ENVIRONMENT_VARIABLE" 
-        shell: bash
+      - shell: bash
         env:
           TEST_ENVIRONMENT_VARIABLE: "{{ secrets.TEST_ENVIRONMENT_VARIABLE }}"
+        run: echo "the value is: $TEST_ENVIRONMENT_VARIABLE" 
       # - uses: actions/checkout@v2
       # - name: Use Node.js ${{ matrix.node-version }}
       #   uses: actions/setup-node@v2
