@@ -82,7 +82,7 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - run: echo "$TEST_ENVIRONMENT_VARIABLE" 
+      - run: echo "the value is: $TEST_ENVIRONMENT_VARIABLE" 
         shell: bash
         env:
           TEST_ENVIRONMENT_VARIABLE: "{{ secrets.TEST_ENVIRONMENT_VARIABLE }}"
