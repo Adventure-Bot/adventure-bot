@@ -50,16 +50,5 @@ jobs:
     environment: development
 
     steps:
-      - run: pm2 start packages/game/.build/index.js
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_S3_HOST: ${{ secrets.AWS_S3_HOST }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          COOLDOWNS_DISABLED: ${{ secrets.COOLDOWNS_DISABLED }}
-          DEV_COMMANDS: ${{ secrets.DEV_COMMANDS }}
-          GUILD_ID: ${{ secrets.GUILD_ID }}
-          PORT: ${{ secrets.PORT }}
-          REDUX_DEVTOOLS_ENABLED: ${{ secrets.REDUX_DEVTOOLS_ENABLED }}
+      - run: BOT_TOKEN=${{ secrets.BOT_TOKEN }} AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }} AWS_S3_HOST=${{ secrets.AWS_S3_HOST }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} CLIENT_ID=${{ secrets.CLIENT_ID }} COOLDOWNS_DISABLED=${{ secrets.COOLDOWNS_DISABLED }} DEV_COMMANDS=${{ secrets.DEV_COMMANDS }} GUILD_ID=${{ secrets.GUILD_ID }} PORT=${{ secrets.PORT }} REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }}  pm2 start packages/game/.build/
+          
