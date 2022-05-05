@@ -9,5 +9,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnPaste": true
+  "editor.formatOnPaste": true,
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*"
+  }
 }
