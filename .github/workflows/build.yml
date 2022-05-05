@@ -50,7 +50,7 @@ jobs:
     environment: development
 
     steps:
-      - run: yarn game start
+      - run: pm2 start ./build/index.js
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
