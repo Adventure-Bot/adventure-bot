@@ -5,7 +5,8 @@ import fs from 'fs/promises'
 import mkdirp from 'mkdirp'
 import path from 'path'
 
-const dbFolder = path.join(workspace() ?? process.cwd(), 'db')
+const dbFolder =
+  process.env.DATABASE_PATH || path.join(workspace() ?? process.cwd(), 'db')
 const dbFile = path.join(dbFolder, `db.json`)
 
 const ensureDB = async () => {
