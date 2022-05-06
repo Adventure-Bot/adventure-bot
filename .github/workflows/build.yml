@@ -50,8 +50,7 @@ jobs:
     environment: development
 
     steps:
-      - run: pm2 delete game 2> /dev/null
-      - name: Start Game
+      - name: Start or Restart Game
         run: >
           DATABASE_PATH=~/.adventure-bot
           BOT_TOKEN=${{ secrets.BOT_TOKEN }} 
@@ -65,4 +64,4 @@ jobs:
           GUILD_ID=${{ secrets.GUILD_ID }} 
           PORT=${{ secrets.PORT }} 
           REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }} 
-          pm2 start --name game -f packages/game/.build/
+          pm2 flush && pm2 startOrReload ecosystem.config.js
