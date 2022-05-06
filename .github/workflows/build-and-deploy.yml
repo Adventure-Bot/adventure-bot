@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Start or Restart Game
         run: >
-          DATABASE_PATH=~/.adventure-bot
+          pm2 flush && DATABASE_PATH=~/.adventure-bot
           BOT_TOKEN=${{ secrets.BOT_TOKEN }} 
           AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} 
           AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }} 
@@ -64,4 +64,4 @@ jobs:
           GUILD_ID=${{ secrets.GUILD_ID }} 
           PORT=${{ secrets.PORT }} 
           REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }} 
-          pm2 flush && pm2 startOrReload ecosystem.config.js
+          pm2 startOrReload ecosystem.config.js
