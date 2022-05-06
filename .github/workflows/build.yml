@@ -50,7 +50,7 @@ jobs:
     environment: development
 
     steps:
-      - run: pm2 stop game 2>/dev/null
+      - run: pm2 stop game 2> /dev/null
       - name: Start Game
         run: >
           DATABASE_PATH=~/.adventure-bot
