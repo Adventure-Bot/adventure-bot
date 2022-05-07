@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'Adventure Bot',
-      script: 'packages/game/src/index.ts',
-      watch: ['packages/game/src', 'packages/game/src/index.ts'],
+      script: 'packages/game/.build/index.js',
+      watch: true,
       ignore_watch: ['node_modules'],
     },
   ],
