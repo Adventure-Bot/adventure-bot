@@ -99,7 +99,7 @@ export const selectMonsterById = (
 
 export const selectAllCharacters: (state: ReduxState) => Array<Character> =
   createSelector(
-    (state: ReduxState) => state.characters?.charactersById || {},
+    (state: ReduxState) => state.characters.charactersById,
     (charactersById) =>
       Object.values(charactersById)
         .filter((character) => character.isMonster !== true)
