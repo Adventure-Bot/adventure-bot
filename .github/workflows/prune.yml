@@ -1,0 +1,18 @@
+name: Prune
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types: 
+      - completed
+    
+jobs:
+
+  prune:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Prune
+    runs-on: self-hosted
+    needs: [build]
+
+    steps:
+      - run: yarn game prune-imports
