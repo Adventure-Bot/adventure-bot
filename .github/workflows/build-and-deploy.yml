@@ -45,7 +45,7 @@ jobs:
       - run: yarn game prune-imports
         
 
-  create-envfile:
+  make-envfile:
  
     runs-on: self-hosted
  
