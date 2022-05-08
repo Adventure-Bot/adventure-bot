@@ -1,16 +1,17 @@
-name: Deploy / Prod
+name: Deploy
 
 on:
   push:
     branches: [main, brian-gates/issue130] # TODO: remove this
-
+  pull_request:
+    branches: [main]
 jobs:
       
 
-  deploy-dev:
-    name: Deploy Dev
+  deploy:
+    name: Deploy
     runs-on: self-hosted
-    environment: development
+    environment: production
     needs: [build]
  
     steps:
