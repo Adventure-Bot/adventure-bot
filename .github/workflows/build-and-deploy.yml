@@ -51,24 +51,25 @@ jobs:
  
     steps:
     - name: Make envfile
+      working-directory: ./packages/game/
       run: |
-        echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }} " > ./packages/game/.env
-        echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> ./packages/game/.env
-        echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> ./packages/game/.env"
-        echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ./packages/game/.env"
-        echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> ./packages/game/.env"
-        echo "AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}" >> ./packages/game/.env"
-        echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ./packages/game/.env"
-        echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> ./packages/game/.env"
-        echo "COOLDOWNS_DISABLED=${{ secrets.COOLDOWNS_DISABLED }}" >> ./packages/game/.env"
-        echo "DEV_COMMANDS=${{ secrets.DEV_COMMANDS }}" >> ./packages/game/.env"
-        echo "GUILD_ID=${{ secrets.GUILD_ID }}" >> ./packages/game/.env"
-        echo "PORT=${{ secrets.PORT }}" >> ./packages/game/.env"
-        echo "REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }}" >> ./packages/game/.env"
+        echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }} " > .env
+        echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> .env
+        echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> .env"
+        echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env"
+        echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> .env"
+        echo "AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}" >> .env"
+        echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env"
+        echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env"
+        echo "COOLDOWNS_DISABLED=${{ secrets.COOLDOWNS_DISABLED }}" >> .env"
+        echo "DEV_COMMANDS=${{ secrets.DEV_COMMANDS }}" >> .env"
+        echo "GUILD_ID=${{ secrets.GUILD_ID }}" >> .env"
+        echo "PORT=${{ secrets.PORT }}" >> .env"
+        echo "REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }}" >> .env"
 
   deploy:
     runs-on: self-hosted
-    needs: [build]
+    needs: [build, make-envfile]
 
     steps:
       - name: Start or Restart Game
