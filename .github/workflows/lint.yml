@@ -1,0 +1,19 @@
+name: Lint
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    branches: [main]
+    types: 
+      - completed
+    
+jobs:
+
+  lint:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Lint
+    runs-on: self-hosted
+    needs: [build]
+
+    steps:
+      - run: yarn lint

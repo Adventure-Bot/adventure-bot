@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    
+jobs:
+  build: 
+    name: Build
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+
+  format:
+    name: Format
+    runs-on: self-hosted
+    needs: [build]
+
+    steps:
+      - run: yarn format:check
+
+  lint:
+    name: Lint
+    runs-on: self-hosted
+    needs: [build]
+
+    steps:
+      - run: yarn lint
+
+  prune:
+    name: Prune
+    runs-on: self-hosted
+    needs: [build]
+
+    steps:
+      - run: yarn game prune-imports
+        
