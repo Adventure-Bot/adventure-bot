@@ -3,7 +3,6 @@ name: Lint
 on:
   workflow_run:
     workflows: ["Build"]
-    branches: [main, brian-gates/issue130] # TODO: remove this
     types: 
       - completed
     
