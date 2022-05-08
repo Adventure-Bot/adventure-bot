@@ -2,7 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'Adventure Bot',
-      script: 'packages/game/.build/index.js',
+      script: 'yarn',
+      args: 'game start',
       watch: true,
       ignore_watch: ['node_modules'],
     },

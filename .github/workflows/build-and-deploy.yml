@@ -43,25 +43,34 @@ jobs:
 
     steps:
       - run: yarn game prune-imports
+        
 
+  create-envfile:
+ 
+    runs-on: self-hosted
+ 
+    steps:
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        envkey_BOT_TOKEN: ${{ secrets.BOT_TOKEN }} 
+        envkey_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+        envkey_AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }} 
+        envkey_AWS_S3_HOST: ${{ secrets.AWS_S3_HOST }} 
+        envkey_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+        envkey_CLIENT_ID: ${{ secrets.CLIENT_ID }} 
+        envkey_COOLDOWNS_DISABLED: ${{ secrets.COOLDOWNS_DISABLED }} 
+        envkey_DEV_COMMANDS: ${{ secrets.DEV_COMMANDS }} 
+        envkey_GUILD_ID: ${{ secrets.GUILD_ID }} 
+        envkey_PORT: ${{ secrets.PORT }} 
+        envkey_REDUX_DEVTOOLS_ENABLED: ${{ secrets.REDUX_DEVTOOLS_ENABLED }}
+        directory: ./packages/game
   deploy:
     runs-on: self-hosted
     needs: [build]
-    environment: development
 
     steps:
       - name: Start or Restart Game
         run: >
           pm2 flush && DATABASE_PATH=~/.adventure-bot
-          BOT_TOKEN=${{ secrets.BOT_TOKEN }} 
-          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} 
-          AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }} 
-          AWS_S3_HOST=${{ secrets.AWS_S3_HOST }} 
-          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} 
-          CLIENT_ID=${{ secrets.CLIENT_ID }} 
-          COOLDOWNS_DISABLED=${{ secrets.COOLDOWNS_DISABLED }} 
-          DEV_COMMANDS=${{ secrets.DEV_COMMANDS }} 
-          GUILD_ID=${{ secrets.GUILD_ID }} 
-          PORT=${{ secrets.PORT }} 
-          REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }} 
           pm2 start ecosystem.config.js
