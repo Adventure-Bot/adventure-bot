@@ -59,6 +59,7 @@ jobs:
       working-directory: ./packages/game/
       run: |
         touch .env
+        echo "" > .env
         echo BOT_TOKEN=${{ secrets.BOT_TOKEN }}  >> .env
         echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID >> .env
         echo BOT_TOKEN=${{ secrets.BOT_TOKEN }} >> .env
