@@ -5,6 +5,7 @@ on:
     branches: [main, brian-gates/issue130] # TODO: remove this
 jobs:
   deploy: 
+    environment: production
     runs-on: self-hosted
     strategy:
       matrix:
