@@ -52,7 +52,7 @@ jobs:
     name: Deploy Dev
     runs-on: self-hosted
     environment: development
-    needs: [build, make-envfile]
+    needs: [build]
  
     steps:
     - name: Create .env file
