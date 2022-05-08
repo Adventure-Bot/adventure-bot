@@ -45,40 +45,41 @@ jobs:
       - run: yarn game prune-imports
         
 
-  make-envfile:
+  # make-envfile:
  
-    runs-on: self-hosted
+  #   runs-on: self-hosted
  
-    steps:
-    - name: Make envfile
-      run: >
-        echo "BOT_TOKEN=$BOT_TOKEN" > ./packages/game/.env
-        echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> ./packages/game/.env
-        echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> ./packages/game/.env"
-        echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ./packages/game/.env"
-        echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> ./packages/game/.env"
-        echo "AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}" >> ./packages/game/.env"
-        echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ./packages/game/.env"
-        echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> ./packages/game/.env"
-        echo "COOLDOWNS_DISABLED=${{ secrets.COOLDOWNS_DISABLED }}" >> ./packages/game/.env"
-        echo "DEV_COMMANDS=${{ secrets.DEV_COMMANDS }}" >> ./packages/game/.env"
-        echo "GUILD_ID=${{ secrets.GUILD_ID }}" >> ./packages/game/.env"
-        echo "PORT=${{ secrets.PORT }}" >> ./packages/game/.env"
-        echo "REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }" >> ./packages/game/.env"
+  #   steps:
+  #   - name: Make envfile
+  #     run: >
+  #       echo "BOT_TOKEN=$BOT_TOKEN" > ./packages/game/.env
+  #       echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> ./packages/game/.env
+  #       echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> ./packages/game/.env"
+  #       echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ./packages/game/.env"
+  #       echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> ./packages/game/.env"
+  #       echo "AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}" >> ./packages/game/.env"
+  #       echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ./packages/game/.env"
+  #       echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> ./packages/game/.env"
+  #       echo "COOLDOWNS_DISABLED=${{ secrets.COOLDOWNS_DISABLED }}" >> ./packages/game/.env"
+  #       echo "DEV_COMMANDS=${{ secrets.DEV_COMMANDS }}" >> ./packages/game/.env"
+  #       echo "GUILD_ID=${{ secrets.GUILD_ID }}" >> ./packages/game/.env"
+  #       echo "PORT=${{ secrets.PORT }}" >> ./packages/game/.env"
+  #       echo "REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }" >> ./packages/game/.env"
 
-      env:
-        BOT_TOKEN: ${{ secrets.BOT_TOKEN }} 
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }} 
-        AWS_S3_HOST: ${{ secrets.AWS_S3_HOST }} 
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
-        CLIENT_ID: ${{ secrets.CLIENT_ID }} 
-        COOLDOWNS_DISABLED: ${{ secrets.COOLDOWNS_DISABLED }} 
-        DEV_COMMANDS: ${{ secrets.DEV_COMMANDS }} 
-        GUILD_ID: ${{ secrets.GUILD_ID }} 
-        PORT: ${{ secrets.PORT }} 
-        REDUX_DEVTOOLS_ENABLED: ${{ secrets.REDUX_DEVTOOLS_ENABLED }}
-        directory: ./packages/game
+  #     env:
+  #       BOT_TOKEN: ${{ secrets.BOT_TOKEN }} 
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+  #       AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }} 
+  #       AWS_S3_HOST: ${{ secrets.AWS_S3_HOST }} 
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+  #       CLIENT_ID: ${{ secrets.CLIENT_ID }} 
+  #       COOLDOWNS_DISABLED: ${{ secrets.COOLDOWNS_DISABLED }} 
+  #       DEV_COMMANDS: ${{ secrets.DEV_COMMANDS }} 
+  #       GUILD_ID: ${{ secrets.GUILD_ID }} 
+  #       PORT: ${{ secrets.PORT }} 
+  #       REDUX_DEVTOOLS_ENABLED: ${{ secrets.REDUX_DEVTOOLS_ENABLED }}
+  #       directory: ./packages/game
+
   deploy:
     runs-on: self-hosted
     needs: [build]
