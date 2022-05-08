@@ -2,10 +2,8 @@ name: Deploy / Prod
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-    
+    branches: [main, brian-gates/issue130] # TODO: remove this
+
 jobs:
       
 
