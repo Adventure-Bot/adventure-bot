@@ -8,6 +8,7 @@ on:
 
 jobs:
   build: 
+    name: Build
     runs-on: self-hosted
     strategy:
       matrix:
@@ -23,6 +24,7 @@ jobs:
       - run: yarn install --frozen-lockfile
 
   format:
+    name: Format
     runs-on: self-hosted
     needs: [build]
 
@@ -30,6 +32,7 @@ jobs:
       - run: yarn format:check
 
   lint:
+    name: Lint
     runs-on: self-hosted
     needs: [build]
 
@@ -37,18 +40,22 @@ jobs:
       - run: yarn lint
 
   prune:
+    name: Prune
     runs-on: self-hosted
     needs: [build]
 
     steps:
       - run: yarn game prune-imports
         
-  make-envfile:
-    environment: development
+
+  deploy-dev:
+    name: Deploy Dev
     runs-on: self-hosted
+    environment: development
+    needs: [build, make-envfile]
  
     steps:
-    - name: Make envfile
+    - name: Create .env file
       working-directory: ./packages/game/
       run: |
         touch .env
@@ -65,13 +72,7 @@ jobs:
         echo GUILD_ID=${{ secrets.GUILD_ID }} >> .env
         echo PORT=${{ secrets.PORT }} >> .env
         echo REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }} >> .env
-
-  deploy:
-    runs-on: self-hosted
-    needs: [build, make-envfile]
-
-    steps:
-      - name: Start or Restart Game
-        run: >
-          pm2 flush && DATABASE_PATH=~/.adventure-bot
-          pm2 start ecosystem.config.js
+    - name: Start
+      run: >
+        pm2 flush && DATABASE_PATH=~/.adventure-bot
+        pm2 start ecosystem.config.js
