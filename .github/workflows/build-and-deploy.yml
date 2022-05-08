@@ -62,8 +62,6 @@ jobs:
         echo "" > .env
         echo BOT_TOKEN=${{ secrets.BOT_TOKEN }}  >> .env
         echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID >> .env
-        echo BOT_TOKEN=${{ secrets.BOT_TOKEN }} >> .env
-        echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env
         echo AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }} >> .env
         echo AWS_S3_HOST=${{ secrets.AWS_S3_HOST }} >> .env
         echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env
