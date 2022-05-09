@@ -2,14 +2,12 @@ import { REST } from '@discordjs/rest'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
 import { Client, Intents } from 'discord.js'
-import * as dotenv from 'dotenv'
 import { readFile, writeFile } from 'fs/promises'
 
 import commands from '@adventure-bot/game/commands'
 import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'
 
-dotenv.config({ path: __dirname + '../.env' })
 
 type ClientOptions = {
   type: 'discord'
