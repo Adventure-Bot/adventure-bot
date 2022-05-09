@@ -24,3 +24,7 @@ jobs:
       - run: yarn format:check
       - run: yarn lint
       - run: yarn game prune-imports
+      - uses: actions/upload-artifact@v3
+        with:
+          name: game-build
+          path: packages/game/.build
