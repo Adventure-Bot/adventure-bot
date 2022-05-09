@@ -8,7 +8,6 @@ import commands from '@adventure-bot/game/commands'
 import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'
 
-
 type ClientOptions = {
   type: 'discord'
   token: string
