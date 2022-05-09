@@ -9,7 +9,7 @@ import commands from '@adventure-bot/game/commands'
 import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'
 
-dotenv.config({ path: __dirname + '/.env' })
+dotenv.config({ path: __dirname + '../.env' })
 
 type ClientOptions = {
   type: 'discord'
