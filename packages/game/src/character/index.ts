@@ -39,6 +39,5 @@ export { renderCharacterList } from '@adventure-bot/game/character/list/renderCh
 export { startCooldown } from '@adventure-bot/game/character/startCooldown'
 export { statField } from '@adventure-bot/game/character/statField'
 export { statsEmbed } from '@adventure-bot/game/character/statsEmbed'
-export { statText } from '@adventure-bot/game/commands/statText'
 export { stunDurationRemaining } from '@adventure-bot/game/character/cooldowns/stunDurationRemaining'
 export { xpGainField } from '@adventure-bot/game/character/xpGainField'
