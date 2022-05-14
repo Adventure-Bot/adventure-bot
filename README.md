@@ -1,6 +1,6 @@
 # Adventure Bot
 
-![Build](https://github.com/Adventure-Bot/adventure-bot/actions/workflows/adventure-bot.yml/badge.svg)
+![Build](https://github.com/Adventure-Bot/adventure-bot/actions/workflows/build.yml/badge.svg)
 
 Slay monsters, earn gold, evade traps, travel, gear up, complete quests, and stab your friends when they're at their weakest so you can steal all _their_ gold.
 
