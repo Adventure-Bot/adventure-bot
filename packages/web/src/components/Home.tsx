@@ -54,7 +54,7 @@ export const Home: FunctionComponent<{
               width={105}
               height={20}
               alt="Build"
-              src="https://github.com/Adventure-Bot/adventure-bot/actions/workflows/adventure-bot.yml/badge.svg"
+              src="https://github.com/Adventure-Bot/adventure-bot/actions/workflows/build.yml/badge.svg"
             />
 
             <span className="bg-gray-200 text-xs px-2 py-1 rounded">
