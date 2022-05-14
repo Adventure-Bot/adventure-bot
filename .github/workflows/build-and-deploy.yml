@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, web-cd-2] # TODO: remove, for testing only
     
 jobs:
   build: 
@@ -19,13 +19,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
-      - run: yarn format:check
-      - run: yarn lint
-      - run: yarn game prune-imports
       - uses: actions/upload-artifact@v3
         with:
           name: game-build
           path: packages/game/.build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: web-build
+          path: packages/web/.next
 
   deploy:
     needs: [build]
@@ -40,6 +41,10 @@ jobs:
         with:
           name: game-build
           path: packages/game/.build
+      - uses: actions/download-artifact@v3
+        with:
+          name: web-build
+          path: packages/web/.next
       - name: Create .env file
         working-directory: ./packages/game/
         run: |
