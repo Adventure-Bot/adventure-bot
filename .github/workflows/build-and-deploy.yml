@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [main, web-cd-2] # TODO: remove, for testing only
+    branches: [main]
     
 jobs:
   build: 
