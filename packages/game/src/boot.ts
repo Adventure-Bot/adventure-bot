@@ -16,51 +16,20 @@ type ClientOptions = {
   onError: (e: Error) => void
   onReady: (client: Client) => void
 }
-const installCommands = async (
-  opts: Pick<ClientOptions, 'clientId' | 'channelId' | 'token'>
-) => {
-  const rest = new REST({ version: '9' }).setToken(opts.token)
-  if (!opts.token || !opts.clientId || !opts.channelId) return
 
-  try {
-    const body = Array.from(commands.values()).map(({ command }) =>
-      command.toJSON()
-    )
-    const commandHash = crypto
-      .createHash('md5')
-      .update(JSON.stringify(body))
-      .digest('hex')
-    const priorHash = (
-      await readFile('.command-hash').catch(() => '')
-    ).toString()
-    if (commandHash === priorHash) {
-      console.log('✅ Commands are up-to-date')
-      return
-    }
-
-    console.time('updating commands')
-    await rest.put(
-      Routes.applicationGuildCommands(opts.clientId, opts.channelId),
-      {
-        body,
-      }
-    )
-
-    writeFile('.command-hash', commandHash)
-
-    console.timeEnd('updating commands')
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export const createClient: (opts: ClientOptions) => Promise<Client> = async (
-  opts: ClientOptions
-) => {
+export const createClient: (
+  options: ClientOptions
+) => Promise<Client> = async ({
+  clientId,
+  channelId,
+  token,
+  onReady,
+  onError,
+}: ClientOptions) => {
   installCommands({
-    clientId: opts.clientId,
-    channelId: opts.channelId,
-    token: opts.token,
+    clientId,
+    channelId,
+    token,
   })
 
   console.time('discord client ready')
@@ -89,7 +58,7 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
       await interaction.deferReply()
       const command = commands.get(interaction.commandName)
       if (!command) {
-        interaction.editReply(`Command not found ${command}`)
+        interaction.editReply(`Command not found ${interaction.commandName}`)
         return
       }
       await command.execute({ interaction })
@@ -105,15 +74,51 @@ export const createClient: (opts: ClientOptions) => Promise<Client> = async (
     }
     console.timeEnd(interaction.commandName + ' ' + interaction.id)
   })
-  client.on('error', opts.onError)
+  client.on('error', onError)
 
   client.on('ready', async () => {
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
-    opts.onReady(client)
+    onReady(client)
   })
 
-  client.login(opts.token)
+  client.login(token)
 
   return client
+}
+
+const installCommands = async ({
+  token,
+  clientId,
+  channelId,
+}: Pick<ClientOptions, 'clientId' | 'channelId' | 'token'>) => {
+  const rest = new REST({ version: '9' }).setToken(token)
+
+  try {
+    const body = Array.from(commands.values()).map(({ command }) =>
+      command.toJSON()
+    )
+    const commandHash = crypto
+      .createHash('md5')
+      .update(JSON.stringify(body))
+      .digest('hex')
+    const priorHash = (
+      await readFile('.command-hash').catch(() => '')
+    ).toString()
+    if (commandHash === priorHash) {
+      console.log('✅ Commands are up-to-date')
+      return
+    }
+
+    console.time('updating commands')
+    await rest.put(Routes.applicationGuildCommands(clientId, channelId), {
+      body,
+    })
+
+    writeFile('.command-hash', commandHash)
+
+    console.timeEnd('updating commands')
+  } catch (error) {
+    console.log(error)
+  }
 }
