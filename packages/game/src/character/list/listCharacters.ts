@@ -15,10 +15,12 @@ export async function listCharacters(client: Client): Promise<void> {
   const { messageIdsByCharacterId } = store.getState().characterList
   const messages = await thread.messages.fetch()
   if (thread.archived) await thread.setArchived(false)
-  getUserCharacters()
+  const characters = getUserCharacters()
+  if (!characters.length) return
+  characters
     .filter((character) => character.xp > 0)
     .sort((a, b) => b.xp - a.xp)
-    .map(async (character) => {
+    .forEach(async (character) => {
       if (!messageIdsByCharacterId[character.id]) {
         const message = await thread.send({
           embeds: [limitedCharacterEmbed({ character })],
