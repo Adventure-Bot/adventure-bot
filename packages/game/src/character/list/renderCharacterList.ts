@@ -1,5 +1,5 @@
 import { isAnyOf } from '@reduxjs/toolkit'
-import { Client } from 'discord.js'
+import { Guild } from 'discord.js'
 import { debounce } from 'ts-debounce'
 
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
@@ -27,8 +27,8 @@ import {
 
 import { listCharacters } from './listCharacters'
 
-export function renderCharacterList(client: Client<boolean>): void {
-  listCharacters(client)
+export function renderCharacterList(guild: Guild): void {
+  listCharacters(guild)
   const debouncedUpdateCharacterList = debounce(listCharacters, 1000)
 
   startAppListening({
@@ -54,7 +54,7 @@ export function renderCharacterList(client: Client<boolean>): void {
       xpAwarded
     ),
     effect: () => {
-      debouncedUpdateCharacterList(client)
+      debouncedUpdateCharacterList(guild)
     },
   })
 }

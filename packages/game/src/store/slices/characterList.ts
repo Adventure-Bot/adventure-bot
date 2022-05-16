@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import {
-  characterListThreadCreated,
+  characterListCreated,
   characterMessageCreated,
 } from '@adventure-bot/game/store/actions'
 
@@ -23,7 +23,7 @@ const characterListSlice = createSlice({
         state.messageIdsByCharacterId[action.payload.character.id] =
           action.payload.message.id
       })
-      .addCase(characterListThreadCreated, (state, action) => {
+      .addCase(characterListCreated, (state, action) => {
         state.threadId = action.payload.id
         state.messageIdsByCharacterId = {}
       })

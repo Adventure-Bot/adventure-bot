@@ -15,6 +15,10 @@ import {
 import { announceNewgames } from '@adventure-bot/game/announcements/announceNewgames'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
+import {
+  findOrCreateCategory,
+  findOrCreateTextChannel,
+} from '@adventure-bot/game/guild'
 import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'
 import { dispatchScheduledActions } from '@adventure-bot/game/store/schedule/dispatchScheduledActions'
@@ -93,13 +97,12 @@ export const createClient: (
     announceEffectAdded(client)
     announceCrownLoots(client)
     announceLoots(client)
-    renderCharacterList(client)
     announceTrapAttacked(client)
     dispatchScheduledActions()
     announceNewgames(client)
     client.guilds.cache.forEach((guild) => {
-      console.log(`Joined guild ${guild.name}`)
-      setupGuild(guild)
+      console.log(`guild ${guild.name}`)
+      setupGuild({ guild, client })
     })
   })
 
@@ -108,17 +111,20 @@ export const createClient: (
   return client
 }
 
-const setupGuild = async (guild: Guild) => {
-  if (
-    !guild.channels.cache.find((channel) => channel.name === 'Adventure Bot')
-  ) {
-    await guild.channels.create('Adventure Bot', {
-      type: 'GUILD_CATEGORY',
-    })
-  }
+async function setupGuild({ guild, client }: { guild: Guild; client: Client }) {
+  const category = await findOrCreateCategory(guild, 'Adventure Bot')
+  await findOrCreateTextChannel({
+    guild,
+    name: 'game',
+    options: { parent: category.id },
+  })
+  renderCharacterList(guild)
+  const botId = client.application?.id
+  if (!botId) return
+
   guild.channels.cache.forEach((channel) => {
     if (channel.isText()) return
-    console.log(`Joined channel ${channel.name}`)
+    console.log(`channel ${channel.name}`)
   })
 }
 
