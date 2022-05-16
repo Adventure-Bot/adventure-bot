@@ -1,24 +1,16 @@
 import { Client, MessageEmbed } from 'discord.js'
 
-import store from '@adventure-bot/game/store'
 import { newgame } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
-import { selectLastChannelUsed } from '@adventure-bot/game/store/selectors'
 import { asset } from '@adventure-bot/game/utils'
 
-const getMainTextChannel = (client: Client) => {
-  const state = store.getState()
-  const lastChannelId = selectLastChannelUsed(state)
-  const channel = client.channels.cache.get(lastChannelId)
-  if (!channel?.isText()) return
-  return channel
-}
+import { getLastChannelUsed } from '../client/getLastChannelUsed'
 
-export const announceNewgame: (client: Client) => void = (client) => {
+export const announceNewgames: (client: Client) => void = (client) => {
   startAppListening({
     actionCreator: newgame,
     effect: () => {
-      const channel = getMainTextChannel(client)
+      const channel = getLastChannelUsed(client)
       if (!channel) return
       channel.send({
         embeds: [
