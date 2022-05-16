@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { randomUUID } from 'crypto'
+import { MessageEmbed } from 'discord.js'
 import moment from 'moment'
 
 import store from '@adventure-bot/game/store'
@@ -14,17 +14,22 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const starts = moment().add(1, 'second')
+  const starts = moment().add(1, 'minute')
   store.dispatch(
     actionScheduled({
-      id: randomUUID(),
-      date: starts.unix(),
+      id: 'newgame',
+      date: starts.valueOf(),
       event: newgame(),
     })
   )
-  await interaction.editReply(
-    `New game begins: ${starts.format('MMMM Do YYYY, h:mm:ss a')}`
-  )
+  await interaction.editReply({
+    embeds: [
+      new MessageEmbed({
+        title: 'New game scheduled',
+        description: `The game will start in ${starts.fromNow()}.`,
+      }), // TODO: .setImage
+    ],
+  })
 }
 
 export default { command, execute }
