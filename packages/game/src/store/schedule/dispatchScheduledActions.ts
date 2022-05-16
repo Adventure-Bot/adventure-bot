@@ -5,10 +5,11 @@ export const dispatchScheduledActions: () => void = () => {
   setInterval(() => {
     let event
     do {
-      event = store.getState().schedule.eventsByTime[0]
+      event = store.getState().schedule.queue[0]
       if (!event) return
+      if (Date.now() < event.date) return
       store.dispatch(event.event)
       store.dispatch(scheduledActionDispatched(event))
     } while (event)
-  }, 10000)
+  }, 1000)
 }
