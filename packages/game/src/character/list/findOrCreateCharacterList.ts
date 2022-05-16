@@ -26,7 +26,9 @@ export async function findOrCreateCharacterList(
         { id: appId, allow: ['SEND_MESSAGES'], deny: [] },
       ],
     },
+    onCreate: (channel) => {
+      store.dispatch(characterListCreated(channel))
+    },
   })
-  store.dispatch(characterListCreated(characterList))
   return characterList
 }

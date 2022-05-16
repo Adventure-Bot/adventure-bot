@@ -19,7 +19,7 @@ export const itemReceived = createAction<{
 }>('itemReceived')
 export const backdateCrown = createAction('backdateCrown') // for testing
 export const characterListCreated = createAction<GuildChannel>(
-  'characterListThreadCreated'
+  'characterListCreated'
 )
 
 export const trapAttacked = createAction<TrapAttackResult>('trapAttacked')
