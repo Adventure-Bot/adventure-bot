@@ -1,7 +1,7 @@
 import { Client, MessageEmbed } from 'discord.js'
 
 import store from '@adventure-bot/game/store'
-import { newGame } from '@adventure-bot/game/store/actions'
+import { newgame } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { selectLastChannelUsed } from '@adventure-bot/game/store/selectors'
 import { asset } from '@adventure-bot/game/utils'
@@ -16,7 +16,7 @@ const getMainTextChannel = (client: Client) => {
 
 export const announceNewgame: (client: Client) => void = (client) => {
   startAppListening({
-    actionCreator: newGame,
+    actionCreator: newgame,
     effect: () => {
       const channel = getMainTextChannel(client)
       if (!channel) return

@@ -4,9 +4,19 @@ import { Routes } from 'discord-api-types/v9'
 import { Client, Intents } from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
 
+import {
+  announceCrownLoots,
+  announceEffectAdded,
+  announceItemsReceived,
+  announceLoots,
+  announceTrapAttacked,
+  announceWinners,
+} from '@adventure-bot/game/announcements'
+import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
 import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'
+import { dispatchScheduledActions } from '@adventure-bot/game/store/schedule/dispatchScheduledActions'
 
 type ClientOptions = {
   type: 'discord'
@@ -23,7 +33,6 @@ export const createClient: (
   clientId,
   channelId,
   token,
-  onReady,
   onError,
 }: ClientOptions) => {
   installCommands({
@@ -79,7 +88,14 @@ export const createClient: (
   client.on('ready', async () => {
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
-    onReady(client)
+    announceWinners(client)
+    announceItemsReceived()
+    announceEffectAdded(client)
+    announceCrownLoots(client)
+    announceLoots(client)
+    renderCharacterList(client)
+    announceTrapAttacked(client)
+    dispatchScheduledActions()
   })
 
   client.login(token)

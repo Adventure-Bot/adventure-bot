@@ -24,7 +24,7 @@ import {
   StatusEffect,
   isStatusEffectExpired,
 } from '@adventure-bot/game/statusEffects'
-import { itemReceived, newGame } from '@adventure-bot/game/store/actions'
+import { itemReceived, newgame } from '@adventure-bot/game/store/actions'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 import { characterLooted } from '@adventure-bot/game/store/slices/loots'
 import { itemPurchased } from '@adventure-bot/game/store/slices/shop'
@@ -308,7 +308,7 @@ const characterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(newGame, (state) => {
+      .addCase(newgame, (state) => {
         state.charactersById = {}
         state.roamingMonsters = []
       })
