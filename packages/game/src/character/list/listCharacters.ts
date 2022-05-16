@@ -1,20 +1,20 @@
-import { Client, Message } from 'discord.js'
+import { Guild, Message } from 'discord.js'
 
 import {
   getUserCharacters,
   limitedCharacterEmbed,
 } from '@adventure-bot/game/character'
+import { getClient } from '@adventure-bot/game/index'
 import store from '@adventure-bot/game/store'
 import { characterMessageCreated } from '@adventure-bot/game/store/actions'
 
-import { findOrCreateCharacterListThread } from './findOrCreateCharacterListThread'
+import { findOrCreateCharacterList } from './findOrCreateCharacterList'
 
-export async function listCharacters(client: Client): Promise<void> {
-  const thread = await findOrCreateCharacterListThread(client)
-  if (!thread) return
+export async function listCharacters(guild: Guild): Promise<void> {
+  const appId = getClient()?.application?.id
+  if (!appId) return
+  const channel = await findOrCreateCharacterList(guild, appId)
   const { messageIdsByCharacterId } = store.getState().characterList
-  const messages = await thread.messages.fetch()
-  if (thread.archived) await thread.setArchived(false)
   const characters = getUserCharacters()
   if (!characters.length) return
   characters
@@ -22,7 +22,7 @@ export async function listCharacters(client: Client): Promise<void> {
     .sort((a, b) => b.xp - a.xp)
     .forEach(async (character) => {
       if (!messageIdsByCharacterId[character.id]) {
-        const message = await thread.send({
+        const message = await channel.send({
           embeds: [limitedCharacterEmbed({ character })],
         })
         if (!(message instanceof Message)) return
@@ -33,7 +33,7 @@ export async function listCharacters(client: Client): Promise<void> {
           })
         )
       } else {
-        const message = messages.find(
+        const message = channel.messages.cache.find(
           (message) => message.id === messageIdsByCharacterId[character.id]
         )
         if (!(message instanceof Message)) return
