@@ -3,7 +3,7 @@ import { Action, createAction, createSlice } from '@reduxjs/toolkit'
 type ScheduledAction<T extends Action> = {
   id: string
   date: number
-  event: T
+  action: T
 }
 
 export const actionScheduled = createAction<ScheduledAction<Action>>(
