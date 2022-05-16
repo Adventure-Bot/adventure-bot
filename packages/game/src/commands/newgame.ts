@@ -19,7 +19,7 @@ export const execute = async ({
     actionScheduled({
       id: 'newgame',
       date: starts.valueOf(),
-      event: newgame(),
+      action: newgame(),
     })
   )
   await interaction.editReply({

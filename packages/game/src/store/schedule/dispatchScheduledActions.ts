@@ -3,13 +3,13 @@ import { scheduledActionDispatched } from '@adventure-bot/game/store/schedule/sc
 
 export const dispatchScheduledActions: () => void = () => {
   setInterval(() => {
-    let event
+    let scheduled
     do {
-      event = store.getState().schedule.queue[0]
-      if (!event) return
-      if (Date.now() < event.date) return
-      store.dispatch(event.event)
-      store.dispatch(scheduledActionDispatched(event))
-    } while (event)
+      scheduled = store.getState().schedule.queue[0]
+      if (!scheduled) return
+      if (Date.now() < scheduled.date) return
+      store.dispatch(scheduled.action)
+      store.dispatch(scheduledActionDispatched(scheduled))
+    } while (scheduled)
   }, 1000)
 }
