@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto'
 import moment from 'moment'
 
 import store from '@adventure-bot/game/store'
-import { newGame } from '@adventure-bot/game/store/actions'
+import { newgame } from '@adventure-bot/game/store/actions'
 import { actionScheduled } from '@adventure-bot/game/store/schedule/schedule'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
@@ -19,7 +19,7 @@ export const execute = async ({
     actionScheduled({
       id: randomUUID(),
       date: starts.unix(),
-      event: newGame(),
+      event: newgame(),
     })
   )
   await interaction.editReply(

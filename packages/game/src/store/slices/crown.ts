@@ -4,7 +4,7 @@ import { heavyCrownId } from '@adventure-bot/game/equipment'
 import {
   backdateCrown,
   itemReceived,
-  newGame,
+  newgame,
   winnerDeclared,
 } from '@adventure-bot/game/store/actions'
 import { characterLooted } from '@adventure-bot/game/store/slices/loots'
@@ -42,7 +42,7 @@ const crownSlice = createSlice({
       .addCase(winnerDeclared, (state) => {
         state.announced = true
       })
-      .addCase(newGame, (state) => {
+      .addCase(newgame, (state) => {
         Object.assign(state, crownDefaultState)
       })
   },
