@@ -27,8 +27,6 @@ Features:
 
 ![cairns](./example-gameplay/cairns.png)
 
-
-
 ## Developers
 
 Adventure Bot is developer friendly. Fork, hack, contribute!
