@@ -6,8 +6,8 @@ export const dispatchScheduledActions: () => void = () => {
     let scheduled
     do {
       scheduled = store.getState().schedule.queue[0]
-      if (!scheduled) return
-      if (Date.now() < scheduled.date) return
+      if (!scheduled) break
+      if (Date.now() < scheduled.date) break
       store.dispatch(scheduled.action)
       store.dispatch(scheduledActionDispatched(scheduled))
     } while (scheduled)
