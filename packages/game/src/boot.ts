@@ -1,7 +1,7 @@
 import { REST } from '@discordjs/rest'
 import crypto from 'crypto'
 import { Routes } from 'discord-api-types/v9'
-import { Client, Intents } from 'discord.js'
+import { Client, Guild, Intents } from 'discord.js'
 import { readFile, writeFile } from 'fs/promises'
 
 import {
@@ -97,11 +97,29 @@ export const createClient: (
     announceTrapAttacked(client)
     dispatchScheduledActions()
     announceNewgames(client)
+    client.guilds.cache.forEach((guild) => {
+      console.log(`Joined guild ${guild.name}`)
+      setupGuild(guild)
+    })
   })
 
   client.login(token)
 
   return client
+}
+
+const setupGuild = async (guild: Guild) => {
+  if (
+    !guild.channels.cache.find((channel) => channel.name === 'Adventure Bot')
+  ) {
+    await guild.channels.create('Adventure Bot', {
+      type: 'GUILD_CATEGORY',
+    })
+  }
+  guild.channels.cache.forEach((channel) => {
+    if (channel.isText()) return
+    console.log(`Joined channel ${channel.name}`)
+  })
 }
 
 const installCommands = async ({

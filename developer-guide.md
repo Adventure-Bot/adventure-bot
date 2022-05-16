@@ -39,12 +39,11 @@ Replace the `BOT_TOKEN` value with the [your bot token](#create-your-bot-token).
 Follow this guide:
 [Adding your bot to servers](https://discordjs.guide/preparations/adding-your-bot-to-servers.html#bot-invite-links)
 
-The permissions required are `545192934464`. 
+The permissions required are `536334563408`.
 
 You can replace `YOUR_CLIENT_ID_HERE` in the URL below to create an invite link for your bot.
 
-https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&permissions=545192934464&scope=bot
-
+https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&permissions=536334563408&scope=bot%20applications.commands
 Visit the link to be prompted to add the bot to your server. Follow the prompts.
 
 You should now have a bot in your Discord server.
