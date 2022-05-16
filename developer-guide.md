@@ -43,7 +43,8 @@ The permissions required are `536334563408`.
 
 You can replace `YOUR_CLIENT_ID_HERE` in the URL below to create an invite link for your bot.
 
-https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&permissions=536334563408&scope=bot%20applications.commands
+`https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&permissions=536334563408&scope=bot%20applications.commands`
+
 Visit the link to be prompted to add the bot to your server. Follow the prompts.
 
 You should now have a bot in your Discord server.
