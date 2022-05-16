@@ -8,7 +8,6 @@ import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
 import store from '@adventure-bot/game/store'
 import {
-  newGame,
   winnerDeclared,
   winnerRevoked,
 } from '@adventure-bot/game/store/actions'
@@ -41,9 +40,6 @@ export const command = new SlashCommandBuilder()
       .addIntegerOption((input) =>
         input.setName('xp').setDescription('XP score to set.').setRequired(true)
       )
-  )
-  .addSubcommand((option) =>
-    option.setName('new_game').setDescription('Starts a new game.')
   )
   .addSubcommand((option) =>
     option.setName('add_emoji').setDescription('Adds emoji to your server.')
@@ -84,10 +80,6 @@ export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
   switch (interaction.options.getSubcommand()) {
-    case 'new_game':
-      store.dispatch(newGame())
-      interaction.editReply('New game started')
-      break
     case 'add_emoji':
       addEmoji(interaction)
       break

@@ -11,6 +11,7 @@ import {
 import { createClient } from '@adventure-bot/game/boot'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import { assertEnv } from '@adventure-bot/game/env'
+import { dispatchScheduledActions } from '@adventure-bot/game/store/schedule/dispatchScheduledActions'
 
 assertEnv()
 
@@ -33,5 +34,6 @@ createClient({
     announceLoots(client)
     renderCharacterList(client)
     announceTrapAttacked(client)
+    dispatchScheduledActions()
   },
 }).then((c) => (client = c))
