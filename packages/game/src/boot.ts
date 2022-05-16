@@ -12,6 +12,7 @@ import {
   announceTrapAttacked,
   announceWinners,
 } from '@adventure-bot/game/announcements'
+import { announceNewgames } from '@adventure-bot/game/announcements/announceNewgames'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import commands from '@adventure-bot/game/commands'
 import store from '@adventure-bot/game/store'
@@ -24,7 +25,6 @@ type ClientOptions = {
   clientId: string
   channelId: string
   onError: (e: Error) => void
-  onReady: (client: Client) => void
 }
 
 export const createClient: (
@@ -35,7 +35,7 @@ export const createClient: (
   token,
   onError,
 }: ClientOptions) => {
-  installCommands({
+  await installCommands({
     clientId,
     channelId,
     token,
@@ -96,6 +96,7 @@ export const createClient: (
     renderCharacterList(client)
     announceTrapAttacked(client)
     dispatchScheduledActions()
+    announceNewgames(client)
   })
 
   client.login(token)
