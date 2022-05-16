@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
+import schedule from '@adventure-bot/game/store/schedule/schedule'
 import characterList from '@adventure-bot/game/store/slices/characterList'
 import characters from '@adventure-bot/game/store/slices/characters'
 import characters2 from '@adventure-bot/game/store/slices/characters2'
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   encounters,
   leaderboard,
   loots,
+  schedule,
   shop,
 })
 
