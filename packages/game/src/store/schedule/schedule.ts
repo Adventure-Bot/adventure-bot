@@ -14,12 +14,12 @@ export const scheduledActionDispatched = createAction<ScheduledAction<Action>>(
   'schedule/action_dispatched'
 )
 
-const eventsById: { [id: string]: ScheduledAction<Action> } = {}
-const eventsByTime: ScheduledAction<Action>[] = []
+const byId: { [id: string]: ScheduledAction<Action> } = {}
+const queue: ScheduledAction<Action>[] = []
 
 const initialState = {
-  eventsById,
-  eventsByTime,
+  byId,
+  queue,
 }
 
 const scheduleSlice = createSlice({
@@ -29,16 +29,15 @@ const scheduleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(actionScheduled, (state, { payload }) => {
-        state.eventsById[payload.id] = payload
-        state.eventsByTime = [...state.eventsByTime, payload].sort((a, b) =>
+        if (byId[payload.id]) return
+        state.byId[payload.id] = payload
+        state.queue = [...state.queue, payload].sort((a, b) =>
           a.date > b.date ? 1 : -1
         )
       })
       .addCase(scheduledActionDispatched, (state, { payload }) => {
-        delete state.eventsById[payload.id]
-        state.eventsByTime = state.eventsByTime.filter(
-          (event) => event.id !== payload.id
-        )
+        delete state.byId[payload.id]
+        state.queue = state.queue.filter((event) => event.id !== payload.id)
       })
   },
 })
