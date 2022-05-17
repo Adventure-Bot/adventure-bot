@@ -4,6 +4,7 @@ import {
   startCooldown,
 } from '@adventure-bot/game/character'
 import { HealResult } from '@adventure-bot/game/heal/HealResult'
+import { isHealer } from '@adventure-bot/game/heal/isHealer'
 import store from '@adventure-bot/game/store'
 import { healed } from '@adventure-bot/game/store/slices/characters'
 import { d6 } from '@adventure-bot/game/utils'
@@ -21,7 +22,7 @@ export function heal({
   const targetBeforeHeal = getCharacter(targetId)
   if (!targetBeforeHeal) return
   startCooldown({ characterId: healer.id, cooldown: 'heal' })
-  const rawHeal = d6()
+  const rawHeal = d6() + (isHealer(healer) ? 2 : 0)
   store.dispatch(
     healed({
       characterId: targetId,
