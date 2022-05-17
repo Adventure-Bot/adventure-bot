@@ -72,7 +72,7 @@ export const quests: {
     progress: 0,
     totalRequired: 25,
     objective: 'Heal 25 hp',
-    reward: 'Gain ability `/renew`, which heals over time.',
+    reward: '`/heal` for +2.',
     repeatable: false,
     victoryText: 'Flesh rended and renewed. The cycle of life.',
   },
