@@ -1,20 +1,22 @@
+import { createAction } from '@reduxjs/toolkit'
 import { Guild, TextChannel } from 'discord.js'
 
-import { characterListCreated } from '@adventure-bot/game/character/list/characterListCreated'
 import {
   findOrCreateCategory,
   findOrCreateTextChannel,
 } from '@adventure-bot/game/guild'
 import store from '@adventure-bot/game/store'
 
-export async function findOrCreateCharacterList(
+const leaderboardCreated = createAction<TextChannel>('leaderboardCreated')
+
+export async function findOrCreateLeaderboard(
   guild: Guild,
   appId: string
 ): Promise<TextChannel> {
   const category = await findOrCreateCategory(guild, 'Adventure Bot')
   const characterList = await findOrCreateTextChannel({
     guild,
-    name: 'characters',
+    name: 'leaderboard',
     options: {
       parent: category.id,
       permissionOverwrites: [
@@ -27,7 +29,7 @@ export async function findOrCreateCharacterList(
       ],
     },
     onCreate: (channel) => {
-      store.dispatch(characterListCreated(channel))
+      store.dispatch(leaderboardCreated(channel))
     },
   })
   return characterList

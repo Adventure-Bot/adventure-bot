@@ -6,7 +6,7 @@ import store from '@adventure-bot/game/store'
 import { selectLeaderBoard } from '@adventure-bot/game/store/selectors'
 import { crownArt } from '@adventure-bot/game/utils'
 
-export function leaderboard(): MessageEmbed[] {
+export function leaderboardEmbeds(): MessageEmbed[] {
   const { leaderboard, victoriesByCharacter } = selectLeaderBoard(
     store.getState()
   )

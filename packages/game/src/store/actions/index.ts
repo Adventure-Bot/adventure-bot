@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { CommandInteraction, GuildChannel, Message } from 'discord.js'
+import { CommandInteraction, Message } from 'discord.js'
 
 import { Character } from '@adventure-bot/game/character'
 import { Item } from '@adventure-bot/game/equipment/Item'
@@ -18,10 +18,6 @@ export const itemReceived = createAction<{
   interaction: CommandInteraction
 }>('itemReceived')
 export const backdateCrown = createAction('backdateCrown') // for testing
-export const characterListCreated = createAction<GuildChannel>(
-  'characterListCreated'
-)
-
 export const trapAttacked = createAction<TrapAttackResult>('trapAttacked')
 
 export const characterMessageCreated = createAction<{

@@ -14,11 +14,11 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const starts = moment().add(1, 'minute')
+  const gameStart = moment().add(1, 'minute')
   store.dispatch(
     actionScheduled({
       id: 'newgame',
-      date: starts.valueOf(),
+      date: gameStart.valueOf(),
       action: newgame(),
     })
   )
@@ -26,7 +26,7 @@ export const execute = async ({
     embeds: [
       new MessageEmbed({
         title: 'New game scheduled',
-        description: `The game will start in ${starts.fromNow()}.`,
+        description: `The game will begin in ${gameStart.fromNow()}.\n`,
       }), // TODO: .setImage
     ],
   })
