@@ -4,7 +4,7 @@ import { RootReducerState } from '@adventure-bot/game/store'
 import { defaultCommandsState } from '@adventure-bot/game/store/slices/commands'
 import { crownDefaultState } from '@adventure-bot/game/store/slices/crown'
 import { defaultEncounterWeights } from '@adventure-bot/game/store/slices/encounters'
-import { defaultLeaderboardState } from '@adventure-bot/game/store/slices/leaderboard'
+import { defaultLeaderboardState } from '@adventure-bot/game/store/slices/leaderboardSlice'
 
 /*
  * This is the current version and should match the latest version

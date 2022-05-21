@@ -1,6 +1,6 @@
 import { Client } from 'discord.js'
 
-import { createClient } from '@adventure-bot/game/boot'
+import { createClient } from '@adventure-bot/game/boot/createClient'
 import { assertEnv } from '@adventure-bot/game/env'
 
 assertEnv()

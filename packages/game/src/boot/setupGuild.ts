@@ -6,7 +6,7 @@ import {
   findOrCreateCategory,
   findOrCreateTextChannel,
 } from '@adventure-bot/game/guild'
-import { findOrCreateLeaderboard } from '@adventure-bot/game/leaderboard/findOrCreateLeaderboard'
+import { findOrCreateLeaderboardChannel } from '@adventure-bot/game/leaderboard/findOrCreateLeaderboard'
 import store from '@adventure-bot/game/store'
 
 export const gameChannelCreated =
@@ -29,7 +29,7 @@ export async function setupGuild({
   renderCharacterList(guild)
   const appId = client.application?.id
   if (!appId) return
-  findOrCreateLeaderboard(guild, appId)
+  findOrCreateLeaderboardChannel(guild, appId)
 
   guild.channels.cache.forEach((channel) => {
     if (channel.isText()) return

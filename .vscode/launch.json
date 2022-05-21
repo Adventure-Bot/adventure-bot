@@ -15,6 +15,12 @@
       "console": "integratedTerminal"
     },
     {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Redux Debugger",
+      "url": "http://localhost:5010"
+    },
+    {
       "name": "prune",
       "type": "node",
       "request": "launch",
@@ -35,30 +41,12 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "start",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["game", "start"],
-      "console": "integratedTerminal"
-    },
-    {
       "name": "redux-devtools",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["game", "redux-devtools"],
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "sync-s3-assets",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["game", "sync-s3-assets"],
       "console": "integratedTerminal"
     }
   ]

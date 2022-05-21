@@ -9,7 +9,7 @@ import store from '@adventure-bot/game/store'
 
 const leaderboardCreated = createAction<TextChannel>('leaderboardCreated')
 
-export async function findOrCreateLeaderboard(
+export async function findOrCreateLeaderboardChannel(
   guild: Guild,
   appId: string
 ): Promise<TextChannel> {
