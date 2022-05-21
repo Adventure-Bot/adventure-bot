@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import {
-  characterListCreated,
-  characterMessageCreated,
-} from '@adventure-bot/game/store/actions'
+import { characterListCreated } from '@adventure-bot/game/character/list/characterListCreated'
+import { characterMessageCreated } from '@adventure-bot/game/store/actions'
 
 const messageIdsByCharacterId: Record<string, string> = {}
 
@@ -11,7 +9,7 @@ const characterListSlice = createSlice({
   name: 'characterList',
   initialState: {
     messageIdsByCharacterId,
-    threadId: '',
+    channelId: '',
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -24,7 +22,7 @@ const characterListSlice = createSlice({
           action.payload.message.id
       })
       .addCase(characterListCreated, (state, action) => {
-        state.threadId = action.payload.id
+        state.channelId = action.payload.id
         state.messageIdsByCharacterId = {}
       })
   },

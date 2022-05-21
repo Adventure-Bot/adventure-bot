@@ -1,7 +1,7 @@
 import { Client, MessageEmbed } from 'discord.js'
 
 import { decoratedName } from '@adventure-bot/game/character'
-import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
+import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard/leaderboardEmbeds'
 import store from '@adventure-bot/game/store'
 import { winnerDeclared } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
@@ -37,7 +37,7 @@ export const announceWinners: (client: Client) => void = (client) => {
           description: 'Game over!',
           color: 'YELLOW',
         }).setImage(asset('fantasy', 'magic', 'glitter dust').s3Url),
-        ...leaderboard(),
+        ...leaderboardEmbeds(),
       ]
       if (interaction) {
         interaction.editReply({ embeds })

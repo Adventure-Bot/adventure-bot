@@ -5,7 +5,7 @@ import { join } from 'path'
 import { range } from 'remeda'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
-import { leaderboard } from '@adventure-bot/game/commands/leaderboard'
+import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard/leaderboardEmbeds'
 import store from '@adventure-bot/game/store'
 import {
   winnerDeclared,
@@ -106,12 +106,12 @@ export const execute = async ({
     case 'declare_winner_revoked':
       store.dispatch(winnerRevoked())
       interaction.editReply({
-        embeds: leaderboard(),
+        embeds: leaderboardEmbeds(),
       })
       break
     case 'leaderboard':
       interaction.editReply({
-        embeds: leaderboard(),
+        embeds: leaderboardEmbeds(),
       })
       break
     default:
