@@ -6,7 +6,7 @@ import {
   findOrCreateCategory,
   findOrCreateTextChannel,
 } from '@adventure-bot/game/guild'
-import { findOrCreateLeaderboardChannel } from '@adventure-bot/game/leaderboard/findOrCreateLeaderboard'
+import { findOrCreateLeaderboardChannel } from '@adventure-bot/game/leaderboard/findOrCreateLeaderboardChannel'
 import store from '@adventure-bot/game/store'
 
 export const gameChannelCreated =
