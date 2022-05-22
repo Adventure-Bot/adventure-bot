@@ -5,10 +5,13 @@ import {
   findOrCreateTextChannelByName,
 } from '@adventure-bot/game/guild'
 
-export async function charactersChannel(
-  guild: Guild,
+export async function charactersChannel({
+  guild,
+  appId,
+}: {
+  guild: Guild
   appId: string
-): Promise<TextChannel> {
+}): Promise<TextChannel> {
   return findOrCreateTextChannelByName({
     guild,
     name: 'characters',
