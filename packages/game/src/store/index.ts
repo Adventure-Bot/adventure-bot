@@ -10,7 +10,6 @@ import {
   persistVersion,
 } from '@adventure-bot/game/store/migrations'
 import rootReducer from '@adventure-bot/game/store/reducers'
-import { channelCreated } from '@adventure-bot/game/store/slices/channels'
 import { itemPurchased } from '@adventure-bot/game/store/slices/shop'
 import { disk } from '@adventure-bot/game/store/storage'
 
@@ -52,9 +51,7 @@ const store = configureStore({
         ignoredActions: [
           PERSIST,
           REHYDRATE,
-          ...[commandUsed, itemPurchased, channelCreated].map((x) =>
-            x.toString()
-          ),
+          ...[commandUsed, itemPurchased].map((x) => x.toString()),
         ],
       },
     }).prepend(listenerMiddleware.middleware),
