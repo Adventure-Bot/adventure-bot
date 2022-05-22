@@ -1,6 +1,6 @@
 import { Guild, GuildChannelCreateOptions, TextChannel } from 'discord.js'
 
-export async function findOrCreateTextChannel({
+export async function findOrCreateTextChannelByName({
   guild,
   name,
   options,

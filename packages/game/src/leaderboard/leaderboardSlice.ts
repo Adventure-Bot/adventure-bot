@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { Character } from '@adventure-bot/game/character'
+import { leaderboardCreated } from '@adventure-bot/game/leaderboard/leaderboardCreated'
 import {
-  commandUsed,
   winnerDeclared,
   winnerRevoked,
 } from '@adventure-bot/game/store/actions'
@@ -41,8 +41,8 @@ const leaderboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(commandUsed, (state, action) => {
-        state.channelId = action.payload.channelId
+      .addCase(leaderboardCreated, (state, action) => {
+        state.channelId = action.payload.id
       })
       .addCase(winnerDeclared, (state, action) => {
         const winner = action.payload.winner
