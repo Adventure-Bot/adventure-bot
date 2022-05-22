@@ -17,19 +17,18 @@ import { dispatchScheduledActions } from '@adventure-bot/game/store/schedule/dis
 import { installCommands } from './installCommands'
 import { setupGuild } from './setupGuild'
 
-export type ClientOptions = {
-  type: 'discord'
-  token: string
-  clientId: string
-  channelId: string
-  onError: (e: Error) => void
-}
 export async function createClient({
   clientId,
   channelId,
   token,
   onError,
-}: ClientOptions): Promise<Client<boolean>> {
+}: {
+  type: 'discord'
+  token: string
+  clientId: string
+  channelId: string
+  onError: (e: Error) => void
+}): Promise<Client<boolean>> {
   console.time('createClient')
   console.time('installCommands')
   await installCommands({
