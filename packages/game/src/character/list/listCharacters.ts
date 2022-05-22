@@ -13,7 +13,7 @@ import { charactersChannel } from './charactersChannel'
 export async function listCharacters(guild: Guild): Promise<void> {
   const appId = getClient()?.application?.id
   if (!appId) return
-  const channel = await charactersChannel(guild, appId)
+  const channel = await charactersChannel({ guild, appId })
   const { messageIdsByCharacterId } = store.getState().characterList
   const characters = getUserCharacters()
   if (!characters.length) return
