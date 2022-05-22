@@ -8,12 +8,12 @@ import { getClient } from '@adventure-bot/game/index'
 import store from '@adventure-bot/game/store'
 import { characterMessageCreated } from '@adventure-bot/game/store/actions'
 
-import { findOrCreateCharacterList } from './findOrCreateCharacterList'
+import { charactersChannel } from './charactersChannel'
 
 export async function listCharacters(guild: Guild): Promise<void> {
   const appId = getClient()?.application?.id
   if (!appId) return
-  const channel = await findOrCreateCharacterList(guild, appId)
+  const channel = await charactersChannel(guild, appId)
   const { messageIdsByCharacterId } = store.getState().characterList
   const characters = getUserCharacters()
   if (!characters.length) return

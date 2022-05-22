@@ -1,2 +1,1 @@
-export { findOrCreateLeaderboardChannel } from './findOrCreateLeaderboardChannel'
-export { leaderboardCreated } from './leaderboardCreated'
+export { leaderboardChannel } from './leaderboardChannel'
