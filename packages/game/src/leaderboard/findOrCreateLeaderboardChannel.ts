@@ -1,20 +1,24 @@
-import { createAction } from '@reduxjs/toolkit'
 import { Guild, TextChannel } from 'discord.js'
 
 import {
   findOrCreateCategory,
-  findOrCreateTextChannel,
+  findOrCreateTextChannelByName,
 } from '@adventure-bot/game/guild'
 import store from '@adventure-bot/game/store'
+import { channelCreated } from '@adventure-bot/game/store/slices/channels'
 
-const leaderboardCreated = createAction<TextChannel>('leaderboardCreated')
+import { leaderboardCreated } from './leaderboardCreated'
 
 export async function findOrCreateLeaderboardChannel(
   guild: Guild,
   appId: string
 ): Promise<TextChannel> {
+  const channelId = store.getState().channels.channelIdsByName['leaderboard']
+
+  const existingChannel = guild.channels.cache.get(channelId)
+  if (existingChannel instanceof TextChannel) return existingChannel
   const category = await findOrCreateCategory(guild, 'Adventure Bot')
-  const characterList = await findOrCreateTextChannel({
+  const characterList = await findOrCreateTextChannelByName({
     guild,
     name: 'leaderboard',
     options: {
@@ -29,6 +33,7 @@ export async function findOrCreateLeaderboardChannel(
       ],
     },
     onCreate: (channel) => {
+      store.dispatch(channelCreated(channel))
       store.dispatch(leaderboardCreated(channel))
     },
   })

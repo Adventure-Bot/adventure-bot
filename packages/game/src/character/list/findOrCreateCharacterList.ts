@@ -3,7 +3,7 @@ import { Guild, TextChannel } from 'discord.js'
 import { characterListCreated } from '@adventure-bot/game/character/list/characterListCreated'
 import {
   findOrCreateCategory,
-  findOrCreateTextChannel,
+  findOrCreateTextChannelByName,
 } from '@adventure-bot/game/guild'
 import store from '@adventure-bot/game/store'
 
@@ -12,7 +12,7 @@ export async function findOrCreateCharacterList(
   appId: string
 ): Promise<TextChannel> {
   const category = await findOrCreateCategory(guild, 'Adventure Bot')
-  const characterList = await findOrCreateTextChannel({
+  const characterList = await findOrCreateTextChannelByName({
     guild,
     name: 'characters',
     options: {

@@ -1,2 +1,2 @@
-export { findOrCreateTextChannel } from '@adventure-bot/game/guild/findOrCreateTextChannel'
+export { findOrCreateTextChannelByName } from '@adventure-bot/game/guild/findOrCreateTextChannelByName'
 export { findOrCreateCategory } from '@adventure-bot/game/guild/findOrCreateCategory'

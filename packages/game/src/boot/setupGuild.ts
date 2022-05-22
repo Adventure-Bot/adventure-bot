@@ -1,16 +1,16 @@
-import { createAction } from '@reduxjs/toolkit'
-import { Client, Guild, TextChannel } from 'discord.js'
+import { compose } from '@reduxjs/toolkit'
+import { Client, Guild } from 'discord.js'
 
 import { renderCharacterList } from '@adventure-bot/game/character'
 import {
   findOrCreateCategory,
-  findOrCreateTextChannel,
+  findOrCreateTextChannelByName,
 } from '@adventure-bot/game/guild'
 import { findOrCreateLeaderboardChannel } from '@adventure-bot/game/leaderboard/findOrCreateLeaderboardChannel'
 import store from '@adventure-bot/game/store'
+import { channelCreated } from '@adventure-bot/game/store/slices/channels'
 
-export const gameChannelCreated =
-  createAction<TextChannel>('gameChannelCreated')
+const { dispatch } = store
 
 export async function setupGuild({
   guild,
@@ -20,12 +20,12 @@ export async function setupGuild({
   client: Client
 }): Promise<void> {
   const category = await findOrCreateCategory(guild, 'Adventure Bot')
-  const gameChannel = await findOrCreateTextChannel({
+  await findOrCreateTextChannelByName({
     guild,
     name: 'game',
     options: { parent: category.id },
+    onCreate: compose(dispatch, channelCreated),
   })
-  store.dispatch(gameChannelCreated(gameChannel))
   renderCharacterList(guild)
   const appId = client.application?.id
   if (!appId) return
