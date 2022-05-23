@@ -17,8 +17,4 @@ export async function setupGuild({
   if (!appId) return
   gameChannel({ guild, appId })
   leaderboardChannel({ guild, appId })
-  guild.channels.cache.forEach((channel) => {
-    if (channel.isText()) return
-    console.log(`channel ${channel.name}`)
-  })
 }
