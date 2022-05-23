@@ -14,29 +14,16 @@ import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'
 import { dispatchScheduledActions } from '@adventure-bot/game/store/schedule/dispatchScheduledActions'
 
-import { installCommands } from './installCommands'
 import { setupGuild } from './setupGuild'
 
 export async function createClient({
-  clientId,
-  channelId,
   token,
   onError,
 }: {
-  type: 'discord'
   token: string
-  clientId: string
-  channelId: string
   onError: (e: Error) => void
 }): Promise<Client<boolean>> {
   console.time('createClient')
-  console.time('installCommands')
-  await installCommands({
-    clientId,
-    channelId,
-    token,
-  })
-  console.timeEnd('installCommands')
 
   console.time('discord client ready')
   const client = new Client({
@@ -89,7 +76,7 @@ export async function createClient({
     announceTrapAttacked(client)
     dispatchScheduledActions()
     announceNewgames(client)
-    client.guilds.cache.forEach((guild) => {
+    client.guilds.cache.forEach(async (guild) => {
       console.log(`guild ${guild.name}`)
       setupGuild({ guild, client })
     })

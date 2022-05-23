@@ -8,11 +8,11 @@ import commands from '@adventure-bot/game/commands'
 export async function installCommands({
   token,
   clientId,
-  channelId,
+  guildId,
 }: {
   token: string
   clientId: string
-  channelId: string
+  guildId: string
 }): Promise<void> {
   const rest = new REST({ version: '9' }).setToken(token)
 
@@ -33,7 +33,7 @@ export async function installCommands({
     }
 
     console.time('updating commands')
-    await rest.put(Routes.applicationGuildCommands(clientId, channelId), {
+    await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
       body,
     })
 
