@@ -12,12 +12,11 @@ export async function setupGuild({
   guild: Guild
   client: Client
 }): Promise<void> {
-  gameChannel({ guild })
   renderCharacterList(guild)
   const appId = client.application?.id
   if (!appId) return
+  gameChannel({ guild, appId })
   leaderboardChannel({ guild, appId })
-
   guild.channels.cache.forEach((channel) => {
     if (channel.isText()) return
     console.log(`channel ${channel.name}`)

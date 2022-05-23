@@ -10,9 +10,6 @@ let client: Client | undefined
 export const getClient: () => Client | undefined = () => client
 
 createClient({
-  type: 'discord',
-  clientId: String(process.env.CLIENT_ID),
-  channelId: String(process.env.GUILD_ID),
   token: String(process.env.BOT_TOKEN),
   onError: (e) => console.error('Discord client error!', e),
 }).then((c) => (client = c))
