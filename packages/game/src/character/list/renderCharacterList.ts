@@ -27,14 +27,14 @@ import {
 
 import { listCharacters } from './listCharacters'
 
-export function renderCharacterList({
+export async function renderCharacterList({
   guild,
   appId,
 }: {
   guild: Guild
   appId: string
-}): void {
-  listCharacters({ guild, appId })
+}): Promise<void> {
+  await listCharacters({ guild, appId })
   const debouncedUpdateCharacterList = debounce(listCharacters, 1000)
 
   startAppListening({

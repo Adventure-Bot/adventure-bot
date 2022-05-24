@@ -16,6 +16,7 @@ export async function charactersChannel({
     guild,
     name: 'characters',
     options: {
+      position: 1,
       parent: (await findOrCreateCategory(guild, 'Adventure Bot')).id,
       permissionOverwrites: [
         {

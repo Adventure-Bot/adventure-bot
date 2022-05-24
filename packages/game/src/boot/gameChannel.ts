@@ -16,6 +16,7 @@ export async function gameChannel({
     guild,
     name: 'game',
     options: {
+      position: 0,
       parent: (await findOrCreateCategory(guild, 'Adventure Bot')).id,
       permissionOverwrites: [
         {
