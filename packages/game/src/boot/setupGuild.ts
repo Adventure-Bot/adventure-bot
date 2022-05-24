@@ -15,7 +15,6 @@ export async function setupGuild({
 }): Promise<void> {
   const appId = client.application?.id
   if (!appId) return
-  renderCharacterList({ guild, appId })
 
   const { BOT_TOKEN, CLIENT_ID } = process.env
   if (BOT_TOKEN && CLIENT_ID)
@@ -24,6 +23,7 @@ export async function setupGuild({
       clientId: CLIENT_ID,
       guildId: guild.id,
     })
-  gameChannel({ guild, appId })
-  leaderboardChannel({ guild, appId })
+  await renderCharacterList({ guild, appId })
+  await gameChannel({ guild, appId })
+  await leaderboardChannel({ guild, appId })
 }

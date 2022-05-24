@@ -16,6 +16,7 @@ export async function leaderboardChannel({
     guild,
     name: 'leaderboard',
     options: {
+      position: 2,
       parent: (await findOrCreateCategory(guild, 'Adventure Bot')).id,
       permissionOverwrites: [
         {
