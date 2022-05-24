@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { CommandInteraction, Message } from 'discord.js'
+import { CommandInteraction, Guild, Message } from 'discord.js'
 
 import { Character } from '@adventure-bot/game/character'
 import { Item } from '@adventure-bot/game/equipment/Item'
@@ -23,4 +23,5 @@ export const trapAttacked = createAction<TrapAttackResult>('trapAttacked')
 export const characterMessageCreated = createAction<{
   character: Character
   message: Message
+  guild: Guild
 }>('characterMessageCreated')

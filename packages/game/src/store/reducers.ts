@@ -2,7 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 
 import leaderboard from '@adventure-bot/game/leaderboard/leaderboardSlice'
 import schedule from '@adventure-bot/game/store/schedule/schedule'
-import characterList from '@adventure-bot/game/store/slices/characterList'
+import characterMessages from '@adventure-bot/game/store/slices/characterMessages'
 import characters from '@adventure-bot/game/store/slices/characters'
 import commands from '@adventure-bot/game/store/slices/commands'
 import crown from '@adventure-bot/game/store/slices/crown'
@@ -12,7 +12,7 @@ import shop from '@adventure-bot/game/store/slices/shop'
 
 const rootReducer = combineReducers({
   characters,
-  characterList,
+  characterMessages,
   commands,
   crown,
   encounters,
