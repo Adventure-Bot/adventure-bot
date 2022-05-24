@@ -4,42 +4,33 @@ import {
   getUserCharacters,
   limitedCharacterEmbed,
 } from '@adventure-bot/game/character'
-import { getClient } from '@adventure-bot/game/index'
 import store from '@adventure-bot/game/store'
 import { characterMessageCreated } from '@adventure-bot/game/store/actions'
 
 import { charactersChannel } from './charactersChannel'
 
-export async function listCharacters(guild: Guild): Promise<void> {
-  const appId = getClient()?.application?.id
-  if (!appId) return
+export async function listCharacters({
+  guild,
+  appId,
+}: {
+  guild: Guild
+  appId: string
+}): Promise<(void | Message<boolean>)[] | undefined> {
   const channel = await charactersChannel({ guild, appId })
+  const messages = await channel.messages.fetch()
   const { messageIdsByCharacterId } = store.getState().characterList
-  const characters = getUserCharacters()
-  if (!characters.length) return
-  characters
-    .filter((character) => character.xp > 0)
-    .sort((a, b) => b.xp - a.xp)
-    .forEach(async (character) => {
-      if (!messageIdsByCharacterId[character.id]) {
-        const message = await channel.send({
-          embeds: [limitedCharacterEmbed({ character })],
-        })
-        if (!(message instanceof Message)) return
-        store.dispatch(
-          characterMessageCreated({
-            character,
-            message,
-          })
-        )
-      } else {
-        const message = channel.messages.cache.find(
-          (message) => message.id === messageIdsByCharacterId[character.id]
-        )
-        if (!(message instanceof Message)) return
-        await message.edit({
-          embeds: [limitedCharacterEmbed({ character })],
-        })
-      }
-    })
+  return Promise.all(
+    getUserCharacters()
+      .filter((character) => character.xp > 0)
+      .sort((a, b) => b.xp - a.xp)
+      .map((character) => {
+        const embeds = [limitedCharacterEmbed({ character })]
+        const message = messages.get(messageIdsByCharacterId[character.id])
+        return message
+          ? message.edit({ embeds })
+          : channel.send({ embeds }).then((message) => {
+              store.dispatch(characterMessageCreated({ character, message }))
+            })
+      })
+  )
 }

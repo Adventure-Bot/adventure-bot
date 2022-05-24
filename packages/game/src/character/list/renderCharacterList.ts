@@ -27,8 +27,14 @@ import {
 
 import { listCharacters } from './listCharacters'
 
-export function renderCharacterList(guild: Guild): void {
-  listCharacters(guild)
+export function renderCharacterList({
+  guild,
+  appId,
+}: {
+  guild: Guild
+  appId: string
+}): void {
+  listCharacters({ guild, appId })
   const debouncedUpdateCharacterList = debounce(listCharacters, 1000)
 
   startAppListening({
@@ -54,7 +60,7 @@ export function renderCharacterList(guild: Guild): void {
       xpAwarded
     ),
     effect: () => {
-      debouncedUpdateCharacterList(guild)
+      debouncedUpdateCharacterList({ guild, appId })
     },
   })
 }
