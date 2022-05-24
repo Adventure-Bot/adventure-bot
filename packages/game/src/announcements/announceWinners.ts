@@ -1,7 +1,7 @@
 import { Client, MessageEmbed } from 'discord.js'
 
 import { decoratedName } from '@adventure-bot/game/character'
-import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard/leaderboardEmbeds'
+import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard'
 import store from '@adventure-bot/game/store'
 import { winnerDeclared } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
