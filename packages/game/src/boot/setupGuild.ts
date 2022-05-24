@@ -2,7 +2,7 @@ import { Client, Guild } from 'discord.js'
 
 import { installCommands } from '@adventure-bot/game/boot/installCommands'
 import { renderCharacterList } from '@adventure-bot/game/character'
-import { leaderboardChannel } from '@adventure-bot/game/leaderboard'
+import { renderLeaderboard } from '@adventure-bot/game/character/list/renderLeaderboard'
 
 import { gameChannel } from './gameChannel'
 
@@ -25,5 +25,5 @@ export async function setupGuild({
     })
   await renderCharacterList({ guild, appId })
   await gameChannel({ guild, appId })
-  await leaderboardChannel({ guild, appId })
+  await renderLeaderboard({ guild, appId })
 }

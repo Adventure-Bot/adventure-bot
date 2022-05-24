@@ -5,7 +5,7 @@ import { join } from 'path'
 import { range } from 'remeda'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
-import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard/leaderboardEmbeds'
+import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard'
 import store from '@adventure-bot/game/store'
 import {
   winnerDeclared,
