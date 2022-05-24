@@ -13,9 +13,9 @@ export async function setupGuild({
   guild: Guild
   client: Client
 }): Promise<void> {
-  renderCharacterList(guild)
   const appId = client.application?.id
   if (!appId) return
+  renderCharacterList({ guild, appId })
 
   const { BOT_TOKEN, CLIENT_ID } = process.env
   if (BOT_TOKEN && CLIENT_ID)
