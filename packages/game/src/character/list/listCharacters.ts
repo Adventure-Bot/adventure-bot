@@ -18,18 +18,21 @@ export async function listCharacters({
 }): Promise<(void | Message<boolean>)[] | undefined> {
   const channel = await charactersChannel({ guild, appId })
   const messages = await channel.messages.fetch()
-  const { messageIdsByCharacterId } = store.getState().characterList
   return Promise.all(
     getUserCharacters()
       .filter((character) => character.xp > 0)
       .sort((a, b) => b.xp - a.xp)
       .map((character) => {
         const embeds = [limitedCharacterEmbed({ character })]
-        const message = messages.get(messageIdsByCharacterId[character.id])
+        const message = messages.get(
+          store.getState().characterMessages[guild.id]?.[character.id]
+        )
         return message
           ? message.edit({ embeds })
           : channel.send({ embeds }).then((message) => {
-              store.dispatch(characterMessageCreated({ character, message }))
+              store.dispatch(
+                characterMessageCreated({ character, message, guild })
+              )
             })
       })
   )
