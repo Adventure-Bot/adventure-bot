@@ -51,7 +51,6 @@ commands.set('set', set)
 commands.set('newgame', newgame)
 
 if (process.env.DEV_COMMANDS === 'true') {
-  commands.set('db', db)
   console.warn('⚠ DEV COMMANDS LOADED ⚠')
   commands.set('admin', admin)
   commands.set('encounter', encounter)
