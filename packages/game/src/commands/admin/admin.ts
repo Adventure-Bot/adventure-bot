@@ -20,6 +20,7 @@ import {
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
+  .setDefaultPermission(false)
   .setName('admin')
   .setDescription('Administrative functions.')
   .addSubcommand((option) =>
