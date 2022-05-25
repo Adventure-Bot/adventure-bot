@@ -1,4 +1,5 @@
 import { Action, createAction, createSlice } from '@reduxjs/toolkit'
+import { values } from 'remeda'
 
 type ScheduledAction<T extends Action> = {
   id: string
@@ -29,9 +30,8 @@ const scheduleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(actionScheduled, (state, { payload }) => {
-        if (byId[payload.id]) return
         state.byId[payload.id] = payload
-        state.queue = [...state.queue, payload].sort((a, b) =>
+        state.queue = values(state.byId).sort((a, b) =>
           a.date > b.date ? 1 : -1
         )
       })
