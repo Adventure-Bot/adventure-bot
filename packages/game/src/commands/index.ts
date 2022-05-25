@@ -11,10 +11,8 @@ import lootmonster from '@adventure-bot/game/commands/admin/lootmonster'
 import monster from '@adventure-bot/game/commands/admin/monster'
 import adventure from '@adventure-bot/game/commands/adventure'
 import attack from '@adventure-bot/game/commands/attack'
-// import cooldowns from '@adventure-bot/game/commands/cooldowns'
 // import d20 from '@adventure-bot/game/commands/d20'
 // import dance from '@adventure-bot/game/commands/dance'
-import db from '@adventure-bot/game/commands/db'
 import heal from '@adventure-bot/game/commands/heal'
 import hp from '@adventure-bot/game/commands/hp'
 import hpbartest from '@adventure-bot/game/commands/hpbartest'
@@ -37,7 +35,6 @@ const commands = new Map<
 
 commands.set('adventure', adventure)
 commands.set('attack', attack)
-// commands.set('cooldowns', cooldowns)
 // commands.set('dance', dance)
 commands.set('heal', heal)
 // commands.set('d20', d20)
@@ -49,10 +46,10 @@ commands.set('inventory', inventory)
 // commands.set('renew', renew)
 commands.set('set', set)
 commands.set('newgame', newgame)
+commands.set('admin', admin)
 
 if (process.env.DEV_COMMANDS === 'true') {
   console.warn('⚠ DEV COMMANDS LOADED ⚠')
-  commands.set('admin', admin)
   commands.set('encounter', encounter)
   commands.set('monster', monster)
   commands.set('item', item)
