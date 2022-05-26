@@ -16,28 +16,38 @@ export function leaderboardEmbeds(): MessageEmbed[] {
     new MessageEmbed({
       title: 'Crown Leaderboard',
     }).setImage(crown.s3Url),
-    ...leaderboard.map((score) =>
-      new MessageEmbed({
-        title: score.name,
-        fields: [
-          {
-            name: 'Wins',
-            value: EmojiValue('crown', score.wins),
-            inline: true,
-          },
-          {
-            name: 'Gold',
-            value: EmojiValue('gold', score.gold),
-            inline: true,
-          },
-          ...(victoriesByCharacter[score.characterId] || []).map((score) => ({
-            name: moment(score.date).format('dddd, MMMM Do YYYY, h:mm:ss a'),
-            value: EmojiValue('gold', score.winner.gold),
-            inline: false,
-          })),
-        ],
-      }).setImage(score.profile)
-    ),
+    ...(leaderboard.length === 0
+      ? [
+          new MessageEmbed({
+            title: 'No winners yet. Be the first!',
+          }),
+        ]
+      : leaderboard.map((score) =>
+          new MessageEmbed({
+            title: score.name,
+            fields: [
+              {
+                name: 'Wins',
+                value: EmojiValue('crown', score.wins),
+                inline: true,
+              },
+              {
+                name: 'Gold',
+                value: EmojiValue('gold', score.gold),
+                inline: true,
+              },
+              ...(victoriesByCharacter[score.characterId] || []).map(
+                (score) => ({
+                  name: moment(score.date).format(
+                    'dddd, MMMM Do YYYY, h:mm:ss a'
+                  ),
+                  value: EmojiValue('gold', score.winner.gold),
+                  inline: false,
+                })
+              ),
+            ],
+          }).setImage(score.profile)
+        )),
   ]
   return embeds
 }

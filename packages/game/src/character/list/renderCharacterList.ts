@@ -2,6 +2,7 @@ import { isAnyOf } from '@reduxjs/toolkit'
 import { Guild } from 'discord.js'
 import { debounce } from 'ts-debounce'
 
+import { newgame } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import {
   cleansed,
@@ -39,6 +40,7 @@ export async function renderCharacterList({
 
   startAppListening({
     matcher: isAnyOf(
+      newgame,
       created,
       questProgressed,
       cleansed,
