@@ -40,25 +40,24 @@ const leaderboardSlice = createSlice({
     builder
       .addCase(winnerDeclared, (state, action) => {
         const winner = action.payload.winner
-        const { victoriesByCharacter } = state
-        const date = Date.now()
-        const victory: Victory = {
-          winner,
-          date,
-        }
+        const { victoriesByCharacter, winners, scoresByCharacter } = state
         if (!victoriesByCharacter[winner.id]) {
           victoriesByCharacter[winner.id] = []
         }
-        victoriesByCharacter[winner.id].push(victory)
-        state.winners.push(winner)
-        state.scoresByCharacter[winner.id] = {
+        const victories = victoriesByCharacter[winner.id]
+        victories.push({
+          winner,
+          date: Date.now(),
+        })
+        winners.push(winner)
+
+        scoresByCharacter[winner.id] = {
           name: winner.name,
           characterId: winner.id,
-          gold: victoriesByCharacter[winner.id].reduce(
-            (acc, curr) => acc + curr.winner.gold,
-            0
-          ),
-          wins: victoriesByCharacter[winner.id].length,
+          gold: victories
+            .map(({ winner: { gold } }) => gold)
+            .reduce((a, b) => a + b, 0),
+          wins: victories.length,
           profile: winner.profile,
         }
         state.leaderboard = Object.values(state.scoresByCharacter).sort(
