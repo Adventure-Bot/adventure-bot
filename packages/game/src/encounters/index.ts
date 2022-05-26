@@ -11,7 +11,6 @@ export { encountersByName } from '@adventure-bot/game/encounters/encountersByNam
 export { encounterSummaryEmbed } from '@adventure-bot/game/encounters/encounterSummaryEmbed'
 export { fairyWell } from '@adventure-bot/game/encounters/fairyWell'
 export { getEncounters } from '@adventure-bot/game/encounters/getEncounters'
-export { getLoots } from '@adventure-bot/game/encounters/getLoots'
 export { monster } from '@adventure-bot/game/encounters/monster'
 export { randomEncounter } from '@adventure-bot/game/encounters/randomEncounter'
 export { shop } from '@adventure-bot/game/encounters/shop/shop'

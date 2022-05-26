@@ -7,7 +7,7 @@ import {
   newgame,
   winnerDeclared,
 } from '@adventure-bot/game/store/actions'
-import { characterLooted } from '@adventure-bot/game/store/slices/loots'
+import { looted } from '@adventure-bot/game/store/slices/characters'
 
 export function crownDefaultState(): {
   bearerId: string
@@ -36,11 +36,9 @@ const crownSlice = createSlice({
           state.claimedAt = Date.now()
         }
       })
-      .addCase(characterLooted, (state, action) => {
-        if (
-          action.payload.loot.itemsTaken.some((item) => item.id == heavyCrownId)
-        ) {
-          state.bearerId = action.payload.loot.looterId
+      .addCase(looted, (state, action) => {
+        if (action.payload.itemsTaken.some((item) => item.id == heavyCrownId)) {
+          state.bearerId = action.payload.looterId
           state.claimedAt = Date.now()
         }
       })

@@ -5,7 +5,7 @@ import { values } from 'remeda'
 import { Character, getCharacter } from '@adventure-bot/game/character'
 import { Item } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
-import { characterLooted } from '@adventure-bot/game/store/slices/loots'
+import { looted } from '@adventure-bot/game/store/slices/characters'
 
 export type LootResult = {
   id: string
@@ -21,7 +21,6 @@ const isLootable = (item: Item): boolean => item.lootable ?? false
 export async function loot({
   looterId,
   targetId,
-  interaction,
 }: {
   looterId: string
   targetId: string
@@ -41,7 +40,7 @@ export async function loot({
     targetId: target.id,
     timestamp: new Date().toString(),
   }
-  store.dispatch(characterLooted({ loot, interaction }))
+  store.dispatch(looted(loot))
   return loot
 }
 

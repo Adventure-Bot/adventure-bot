@@ -15,19 +15,18 @@ import {
   selectCharacterById,
   selectLastChannelUsed,
 } from '@adventure-bot/game/store/selectors'
-import { characterLooted } from '@adventure-bot/game/store/slices/loots'
+import { looted } from '@adventure-bot/game/store/slices/characters'
 import { crownArt } from '@adventure-bot/game/utils'
 
 export function announceCrownLoots(client: Client): void {
   startAppListening({
-    actionCreator: characterLooted,
+    actionCreator: looted,
     effect: ({ payload }) => {
-      if (!payload.loot.itemsTaken.some((item) => item.id === heavyCrownId))
-        return
-      announceCrownLooted({
-        client,
-        loot: payload.loot,
-      })
+      if (payload.itemsTaken.some((item) => item.id === heavyCrownId))
+        announceCrownLooted({
+          client,
+          loot: payload,
+        })
     },
   })
   startAppListening({
@@ -106,8 +105,8 @@ const announceCrownLooted = async ({
 }
 export function announceLoots(client: Client): void {
   startAppListening({
-    actionCreator: characterLooted,
-    effect: ({ payload: { loot } }) => {
+    actionCreator: looted,
+    effect: ({ payload: loot }) => {
       const state = store.getState()
       const looter = selectCharacterById(state, loot.looterId)
       const target = selectCharacterById(state, loot.targetId)
