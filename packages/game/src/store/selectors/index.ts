@@ -3,7 +3,6 @@ import { values } from 'remeda'
 
 import {
   Character,
-  LootResult,
   Stats,
   getCharacterStatModifier,
   stats,
@@ -132,9 +131,6 @@ export const selectHasItemNameInInventory: (
     ),
   (hasItem) => hasItem
 )
-
-export const selectLoot = (state: ReduxState): LootResult[] =>
-  values(state.loots.lootsById)
 
 export const selectIsHeavyCrownInPlay = (state: ReduxState): boolean =>
   state.crown.bearerId !== ''

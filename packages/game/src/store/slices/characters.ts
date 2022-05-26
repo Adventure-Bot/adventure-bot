@@ -4,6 +4,7 @@ import { clamp } from 'remeda'
 import { AttackResult } from '@adventure-bot/game/attack'
 import {
   Character,
+  LootResult,
   equipmentFilter,
   getCharacterStatModified,
 } from '@adventure-bot/game/character'
@@ -26,7 +27,6 @@ import {
 } from '@adventure-bot/game/statusEffects'
 import { itemReceived, newgame } from '@adventure-bot/game/store/actions'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
-import { characterLooted } from '@adventure-bot/game/store/slices/loots'
 import { itemPurchased } from '@adventure-bot/game/store/slices/shop'
 
 type AttackAction = {
@@ -36,6 +36,7 @@ type AttackAction = {
 
 export const attacked = createAction<AttackAction>('character/attacked')
 export const created = createAction<CharacterWithStats>('character/created')
+export const looted = createAction<LootResult>('character/looted')
 
 const charactersById: Record<string, Character> = {}
 const roamingMonsters: string[] = []
@@ -315,9 +316,8 @@ const characterSlice = createSlice({
       .addCase(created, (state, action) => {
         state.charactersById[action.payload.id] = action.payload
       })
-      .addCase(characterLooted, (state, action) => {
-        const { itemsTaken, goldTaken, looterId, targetId } =
-          action.payload.loot
+      .addCase(looted, (state, action) => {
+        const { itemsTaken, goldTaken, looterId, targetId } = action.payload
         const looter = state.charactersById[looterId]
         const target = state.charactersById[targetId]
 
