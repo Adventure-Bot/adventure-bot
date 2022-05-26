@@ -9,16 +9,24 @@ import {
 } from '@adventure-bot/game/store/actions'
 import { characterLooted } from '@adventure-bot/game/store/slices/loots'
 
-export const crownDefaultState = {
-  bearerId: '',
-  claimedAt: 0,
-  announced: false,
+export function crownDefaultState(): {
+  bearerId: string
+  claimedAt: number
+  gameStartedAt: number
+  announced: boolean
+} {
+  return {
+    bearerId: '',
+    claimedAt: 0,
+    gameStartedAt: Date.now(),
+    announced: false,
+  }
 }
 export const timeTillSovereign = 1000 * 60 * 60 * 24
 
 const crownSlice = createSlice({
   name: 'crown',
-  initialState: crownDefaultState,
+  initialState: crownDefaultState(),
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -43,7 +51,7 @@ const crownSlice = createSlice({
         state.announced = true
       })
       .addCase(newgame, (state) => {
-        Object.assign(state, crownDefaultState)
+        Object.assign(state, crownDefaultState())
       })
   },
 })

@@ -78,7 +78,7 @@ const persistMigrations = {
   4: (state: PersistedReduxStateV3): PersistedReduxStateV4 => ({
     ...state,
     leaderboard: defaultLeaderboardState,
-    crown: crownDefaultState,
+    crown: crownDefaultState(),
     commands: defaultCommandsState,
   }),
   5: (state: PersistedReduxStateV4): PersistedReduxStateV5 => ({
@@ -97,10 +97,7 @@ const persistMigrations = {
   }),
   7: (state: PersistedReduxStateV6): RootReducerState => ({
     ...state,
-    leaderboard: {
-      ...state.leaderboard,
-      victoriesByCharacter: {},
-    },
+    leaderboard: defaultLeaderboardState,
   }),
 }
 
