@@ -2,7 +2,6 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 
 import { listCharacters } from '@adventure-bot/game/commands/list/listCharacters'
 import { listEncounters } from '@adventure-bot/game/commands/list/listEncounters'
-import { listLootResults } from '@adventure-bot/game/commands/list/listLootResults'
 import { listMonsters } from '@adventure-bot/game/commands/list/listMonsters'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
@@ -36,9 +35,6 @@ export const execute = async ({
       break
     case 'encounters':
       listEncounters(interaction)
-      break
-    case 'loots':
-      listLootResults(interaction)
       break
   }
 }
