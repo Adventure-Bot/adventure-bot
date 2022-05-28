@@ -38,7 +38,7 @@ export const attacked = createAction<AttackAction>('character/attacked')
 export const created = createAction<CharacterWithStats>('character/created')
 export const looted = createAction<LootResult>('character/looted')
 
-export const defaultCharactersState: {
+const defaultCharactersState: {
   charactersById: Record<string, Character>
   roamingMonsters: string[]
 } = {
