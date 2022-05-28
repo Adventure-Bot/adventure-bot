@@ -38,14 +38,17 @@ export const attacked = createAction<AttackAction>('character/attacked')
 export const created = createAction<CharacterWithStats>('character/created')
 export const looted = createAction<LootResult>('character/looted')
 
-const charactersById: Record<string, Character> = {}
-const roamingMonsters: string[] = []
+export const defaultCharactersState: {
+  charactersById: Record<string, Character>
+  roamingMonsters: string[]
+} = {
+  charactersById: {},
+  roamingMonsters: [],
+}
+
 const characterSlice = createSlice({
   name: 'characters',
-  initialState: {
-    charactersById,
-    roamingMonsters,
-  },
+  initialState: defaultCharactersState,
   reducers: {
     cleansed(state, action: PayloadAction<{ characterId: string }>) {
       const character = state.charactersById[action.payload.characterId]
