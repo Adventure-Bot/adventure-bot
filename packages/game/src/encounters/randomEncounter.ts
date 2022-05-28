@@ -26,7 +26,7 @@ export const randomEncounter = (
   const caveChance = character.xp >= 10 ? 1 : 0
   return weightedTable<() => CommandHandler>([
     [0.2, () => divineBlessing],
-    [0, () => angels],
+    [1, () => angels],
     [1, () => fairyWell],
     [2, () => cairns],
     [1, () => shop],
