@@ -1,6 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 
-import { listCharacters } from '@adventure-bot/game/commands/list/listCharacters'
 import { listEncounters } from '@adventure-bot/game/commands/list/listEncounters'
 import { listMonsters } from '@adventure-bot/game/commands/list/listMonsters'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
@@ -27,9 +26,6 @@ export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
   switch (interaction.options.data[0].name) {
-    case 'characters':
-      listCharacters(interaction)
-      break
     case 'monsters':
       listMonsters(interaction)
       break
