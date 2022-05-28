@@ -2,7 +2,7 @@ import { Client, Guild } from 'discord.js'
 
 import { installCommands } from '@adventure-bot/game/boot/installCommands'
 import { renderCharacterList } from '@adventure-bot/game/character'
-import { renderLeaderboard } from '@adventure-bot/game/character/list/renderLeaderboard'
+import { renderLeaderboard } from '@adventure-bot/game/leaderboard'
 
 import { gameChannel } from './gameChannel'
 
