@@ -13,9 +13,10 @@ export async function leaderboardChannel({
   appId: string
 }): Promise<TextChannel> {
   return findOrCreateTextChannelByName({
-    guild,
     name: 'leaderboard',
+    guild,
     options: {
+      topic: `The legends.`,
       position: 2,
       parent: (await findOrCreateCategory(guild, 'Adventure Bot')).id,
       permissionOverwrites: [
