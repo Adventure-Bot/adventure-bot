@@ -15,7 +15,7 @@
     "lint-and-fix": "eslint . --ext .ts --fix",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "postinstall": "yarn patch-package && yarn build"
+    "postinstall": "yarn patch-package"
   },
   "repository": {
     "type": "git",
