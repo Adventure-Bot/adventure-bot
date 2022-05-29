@@ -38,12 +38,10 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: game-build
-          path: packages/game/.build
-      - uses: actions/download-artifact@v3
-        with:
-          name: web-build
-          path: packages/web/.next
+          name: build
+          path: |
+            packages/**/.build
+            ecosystem.config.js
       - name: Create .env file
         working-directory: ./packages/game/
         run: |
