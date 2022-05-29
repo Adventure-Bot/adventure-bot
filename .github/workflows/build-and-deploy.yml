@@ -39,9 +39,6 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: build
-          path: |
-            packages/**/.build
-            ecosystem.config.js
       - name: Create .env file
         working-directory: ./packages/game/
         run: |
