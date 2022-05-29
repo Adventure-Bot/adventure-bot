@@ -31,7 +31,10 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: ecosystem
-          path: ecosystem.config.js
+          path: |
+            packages/game/.build
+            packages/web/.next
+            ecosystem.config.js
 
   deploy:
     needs: [build]
@@ -42,7 +45,10 @@ jobs:
         node-version: [16.x]
 
     steps:
+      - run: rm -rf *
       - uses: actions/download-artifact@v3
+        with:
+          name: ecosystem
       - name: Create .env
         run: |
           touch .env
