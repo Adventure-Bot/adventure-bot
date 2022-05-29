@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, fix-build] # TODO: fix-build branch, for testing only.
     
 jobs:
   build: 
