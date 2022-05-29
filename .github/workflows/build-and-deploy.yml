@@ -27,7 +27,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: web
-          path: packages/web/.build
+          path: packages/web/.next
       - uses: actions/upload-artifact@v3
         with:
           name: ecosystem
