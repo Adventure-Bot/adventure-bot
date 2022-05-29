@@ -6,7 +6,7 @@ module.exports = {
     },
     {
       name: 'Adventure Bot Web',
-      script: 'packages/web/.build',
+      script: 'packages/web/.next',
       env: {
         PORT: '8080',
       },
