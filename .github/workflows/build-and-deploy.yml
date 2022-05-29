@@ -26,7 +26,6 @@ jobs:
           path: |
             packages/**/.build
             ecosystem.config.js
-            node_modules/
 
   deploy:
     needs: [build]

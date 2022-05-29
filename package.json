@@ -49,6 +49,7 @@
     "tscpaths": "^0.0.9"
   },
   "dependencies": {
+    "@vercel/ncc": "^0.34.0",
     "dotenv": "^8.2.0",
     "find-yarn-workspace-root": "^2.0.0",
     "rimraf": "^3.0.2",
