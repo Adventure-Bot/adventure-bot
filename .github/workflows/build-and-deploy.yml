@@ -22,12 +22,11 @@ jobs:
       - run: yarn build
       - uses: actions/upload-artifact@v3
         with:
-          name: game-build
-          path: packages/game/.build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: web-build
-          path: packages/web/.next
+          name: build
+          path: |
+            packages/**/.build
+            ecosystem.config.js
+            node_modules/
 
   deploy:
     needs: [build]
