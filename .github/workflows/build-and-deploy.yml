@@ -22,10 +22,16 @@ jobs:
       - run: yarn build
       - uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: |
-            packages/**/.build
-            ecosystem.config.js
+          name: game
+          path: packages/game/.build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: web
+          path: packages/web/.build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ecosystem
+          path: ecosystem.config.js
 
   deploy:
     needs: [build]
@@ -37,10 +43,7 @@ jobs:
 
     steps:
       - uses: actions/download-artifact@v3
-        with:
-          name: build
-      - name: Create .env file
-        working-directory: ./packages/game/
+      - name: Create .env
         run: |
           touch .env
           echo "" > .env
