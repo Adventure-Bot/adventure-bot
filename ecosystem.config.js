@@ -2,7 +2,9 @@ module.exports = {
   apps: [
     {
       name: 'Adventure Bot Game',
-      script: 'packages/game/.build',
+      script: 'yarn',
+      args: 'game start',
+      interpreter: '/bin/bash',
     },
     {
       name: 'Adventure Bot Web',

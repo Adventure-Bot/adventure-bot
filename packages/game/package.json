@@ -12,7 +12,7 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register -r dotenv/config src/index.ts",
     "dev": "nodemon --config nodemon-dev.json",
-    "build": "yarn generate-asset-manifest && ncc build src/index.ts -o .build",
+    "build": "yarn generate-asset-manifest",
     "lint": "eslint . --ext .ts",
     "clean": "rimraf .build node_modules",
     "prune-imports": "yarn ts-prune -ep ./tsconfig.json",
