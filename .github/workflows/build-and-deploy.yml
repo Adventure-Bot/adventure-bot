@@ -28,13 +28,6 @@ jobs:
         with:
           name: web
           path: packages/web/.next
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ecosystem
-          path: |
-            packages/game/.build
-            packages/web/.next
-            ecosystem.config.js
 
   deploy:
     needs: [build]
@@ -45,25 +38,8 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - run: rm -rf *
+      - uses: actions/checkout@v2
       - uses: actions/download-artifact@v3
-        with:
-          name: ecosystem
-      # - name: Create .env
-      #   run: |
-      #     touch .env
-      #     echo "" > .env
-      #     echo BOT_TOKEN=${{ secrets.BOT_TOKEN }} >> .env
-      #     echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID >> .env
-      #     echo AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }} >> .env
-      #     echo AWS_S3_HOST=${{ secrets.AWS_S3_HOST }} >> .env
-      #     echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env
-      #     echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-      #     echo COOLDOWNS_DISABLED=${{ secrets.COOLDOWNS_DISABLED }} >> .env
-      #     echo DEV_COMMANDS=${{ secrets.DEV_COMMANDS }} >> .env
-      #     echo GUILD_ID=${{ secrets.GUILD_ID }} >> .env
-      #     echo PORT=${{ secrets.PORT }} >> .env
-      #     echo REDUX_DEVTOOLS_ENABLED=${{ secrets.REDUX_DEVTOOLS_ENABLED }} >> .env
       - name: Start
         run: >
           pm2 flush && 
