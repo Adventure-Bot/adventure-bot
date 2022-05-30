@@ -6,10 +6,12 @@ module.exports = {
     },
     {
       name: 'Adventure Bot Web',
-      script: 'packages/web/.next',
+      script: 'yarn',
+      args: 'web start',
       env: {
         PORT: '8080',
       },
+      interpreter: '/bin/bash',
     },
   ],
 }

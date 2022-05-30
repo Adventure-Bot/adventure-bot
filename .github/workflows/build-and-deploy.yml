@@ -22,12 +22,9 @@ jobs:
       - run: yarn build
       - uses: actions/upload-artifact@v3
         with:
-          name: game
-          path: packages/game/.build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: web
-          path: packages/web/.next
+          path: |
+            packages/game/.build
+            packages/web/.next
 
   deploy:
     needs: [build]
