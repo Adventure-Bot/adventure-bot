@@ -5,14 +5,39 @@ on:
     branches: [main, fix-build] # TODO: fix-build branch, for testing only.
     
 jobs:
-  deploy:
-    environment: production
-    runs-on: self-hosted
+  build: 
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
-      - run: yarn install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
       - run: yarn build
+      - uses: actions/upload-artifact@v3
+        with:
+          path: |
+            packages/web/.next
+
+  deploy:
+    needs: [build]
+    environment: production
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn install --frozen-lockfile
+      - run: yarn game build
+      - uses: actions/download-artifact@v3
       - name: Start
         run: >
           pm2 flush && 
