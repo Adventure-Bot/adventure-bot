@@ -11,9 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v3
-        with:
-          path: .
+      - run: yarn install
+      - run: yarn build
       - name: Start
         run: >
           pm2 flush && 
