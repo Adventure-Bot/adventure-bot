@@ -22,4 +22,5 @@ jobs:
           DATABASE_PATH=~/.adventure-bot
           BOT_TOKEN=${{ secrets.BOT_TOKEN }}
           CLIENT_ID=${{ secrets.CLIENT_ID }}
+          PORT=8080
           pm2 start
