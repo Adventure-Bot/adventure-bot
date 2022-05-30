@@ -1,0 +1,25 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main, fix-build] # TODO: fix-build branch, for testing only.
+    
+jobs:
+
+
+  deploy:
+    environment: development
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - uses: actions/download-artifact@v3
+      - name: Start
+        run: >
+          pm2 flush && 
+          DATABASE_PATH=~/.adventure-bot
+          BOT_TOKEN=${{ secrets.BOT_TOKEN }}
+          CLIENT_ID=${{ secrets.CLIENT_ID }}
+          pm2 start
