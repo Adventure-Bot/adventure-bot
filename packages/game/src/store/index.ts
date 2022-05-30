@@ -2,7 +2,10 @@ import remoteReduxEnhancer from '@redux-devtools/remote'
 import { configureStore } from '@reduxjs/toolkit'
 import { PERSIST, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 
-import { commandUsed } from '@adventure-bot/game/store/actions'
+import {
+  characterMessageCreated,
+  commandUsed,
+} from '@adventure-bot/game/store/actions'
 import * as actionCreators from '@adventure-bot/game/store/actions'
 import { listenerMiddleware } from '@adventure-bot/game/store/listenerMiddleware'
 import {
@@ -51,7 +54,9 @@ const store = configureStore({
         ignoredActions: [
           PERSIST,
           REHYDRATE,
-          ...[commandUsed, itemPurchased].map((x) => x.toString()),
+          ...[commandUsed, itemPurchased, characterMessageCreated].map((x) =>
+            x.toString()
+          ),
         ],
       },
     }).prepend(listenerMiddleware.middleware),
