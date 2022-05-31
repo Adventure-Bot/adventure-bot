@@ -2,12 +2,12 @@ name: Deploy
 
 on:
   push:
-    branches: [main, fix-build] # TODO: fix-build branch, for testing only.
+    branches: [main]
     
 jobs:
 
   deploy:
-    environment: development
+    environment: production
     runs-on: self-hosted
 
     steps:
