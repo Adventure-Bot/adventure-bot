@@ -36,6 +36,7 @@ export const execute = async ({
     await interaction.followUp('Your inventory is empty.')
     return
   }
+
   const message = await interaction.followUp({
     ...inventoryMain(interaction),
     fetchReply: true,

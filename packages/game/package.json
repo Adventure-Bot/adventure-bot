@@ -12,7 +12,10 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register -r dotenv/config src/index.ts",
     "dev": "nodemon --config nodemon-dev.json",
-    "build": "yarn generate-asset-manifest",
+    "_build": "yarn generate-asset-manifest",
+    "transpile": "ttsc -b .",
+    "build": "yarn ncc build ./src/index.ts -o ./.build",
+    "run-game": "yarn ncc run ./.build/index.js -C",
     "lint": "eslint . --ext .ts",
     "clean": "rimraf .build node_modules",
     "prune-imports": "yarn ts-prune -ep ./tsconfig.json",
@@ -43,8 +46,13 @@
     "@types/mkdirp": "^1.0.2",
     "aws-sdk": "^2.1043.0",
     "eslint": "^7.4.0",
+    "ts-loader": "^9.3.0",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
     "ttypescript": "^1.5.13",
-    "typescript-transform-paths": "^3.3.1"
+    "typescript-transform-paths": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
     "@discordjs/builders": "^0.8.1",
