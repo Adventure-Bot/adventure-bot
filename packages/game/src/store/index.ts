@@ -19,6 +19,7 @@ import { disk } from '@adventure-bot/game/store/storage'
 const enhancers = []
 
 if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
+  console.log('redux-devtools enabled')
   enhancers.push(
     remoteReduxEnhancer({
       name:
