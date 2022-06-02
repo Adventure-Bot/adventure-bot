@@ -1,17 +1,21 @@
 module.exports = {
   apps: [
     {
-      name: 'Adventure Bot Game',
+      name: '[dev] Adventure Bot Game',
       script: 'yarn',
       args: 'game start',
+      env: {
+        REDUX_DEVTOOLS_ENABLED: true,
+        REDUX_DEVTOOLS_PORT: 5011,
+      },
       interpreter: '/bin/bash',
     },
     {
-      name: 'Adventure Bot Web',
+      name: '[dev] Adventure Bot Web',
       script: 'yarn',
       args: 'web start',
       env: {
-        PORT: '8080',
+        PORT: '8081',
       },
       interpreter: '/bin/bash',
     },
