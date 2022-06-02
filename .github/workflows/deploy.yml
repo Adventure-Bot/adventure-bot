@@ -8,7 +8,7 @@ jobs:
 
   deploy:
     environment: production
-    runs-on: self-hosted
+    runs-on: [self-hosted, production]
     concurrency: production
 
     steps:
