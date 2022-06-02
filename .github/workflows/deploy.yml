@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, enable-redux-devtools]
     
 jobs:
 
@@ -21,4 +21,5 @@ jobs:
           BOT_TOKEN=${{ secrets.BOT_TOKEN }}
           CLIENT_ID=${{ secrets.CLIENT_ID }}
           AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}
+          REDUX_DEVTOOLS_ENABLED=true
           pm2 start
