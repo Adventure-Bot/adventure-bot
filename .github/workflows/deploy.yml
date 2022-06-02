@@ -10,6 +10,7 @@ jobs:
     environment: production
     runs-on: [self-hosted, production]
     concurrency: production
+    cancel-in-progress: true
 
     steps:
       - uses: actions/checkout@v2
