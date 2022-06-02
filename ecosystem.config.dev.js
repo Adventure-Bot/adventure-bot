@@ -1,5 +1,4 @@
 module.exports = {
-  name: 'Development',
   apps: [
     {
       name: 'Game [dev]',
