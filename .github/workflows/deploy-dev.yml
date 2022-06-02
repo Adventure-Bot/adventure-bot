@@ -1,15 +1,15 @@
-name: Deploy
+name: Deploy Dev
 
 on:
   push:
-    branches: [main]
+    branches: [enable-redux-devtools]
     
 jobs:
 
   deploy:
-    environment: production
+    environment: development
     runs-on: self-hosted
-    concurrency: production
+    concurrency: development
 
     steps:
       - uses: actions/checkout@v2
@@ -22,4 +22,5 @@ jobs:
           BOT_TOKEN=${{ secrets.BOT_TOKEN }}
           CLIENT_ID=${{ secrets.CLIENT_ID }}
           AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}
+          REDUX_DEVTOOLS_ENABLED=true
           pm2 start
