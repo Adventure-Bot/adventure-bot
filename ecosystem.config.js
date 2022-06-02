@@ -4,9 +4,15 @@ module.exports = {
       name: 'Game',
       script: 'yarn',
       args: 'game start',
-      env: {
+      env_production: {
         DATABASE_PATH: '~/.adventure-bot',
         NODE_ENV: 'production',
+      },
+      env_development: {
+        DATABASE_PATH: '~/.adventure-bot-dev',
+        NODE_ENV: 'development',
+        REDUX_DEVTOOLS_ENABLED: true,
+        REDUX_DEVTOOLS_PORT: 5011,
       },
       interpreter: '/bin/bash',
     },
@@ -14,9 +20,13 @@ module.exports = {
       name: 'Web',
       script: 'yarn',
       args: 'web start',
-      env: {
+      env_production: {
         PORT: '8080',
         NODE_ENV: 'production',
+      },
+      env_development: {
+        PORT: '8081',
+        NODE_ENV: 'development',
       },
       interpreter: '/bin/bash',
     },
