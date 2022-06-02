@@ -9,8 +9,9 @@ jobs:
   deploy:
     environment: development
     runs-on: [self-hosted, development]
-    concurrency: development
-    cancel-in-progress: true
+    concurrency: 
+      group: development
+      cancel-in-progress: true
 
     steps:
       - uses: actions/checkout@v2
