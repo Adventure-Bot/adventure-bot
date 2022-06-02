@@ -18,7 +18,7 @@ jobs:
       - name: Start
         run: >
           pm2 flush && 
-          DATABASE_PATH=~/.adventure-bot
+          DATABASE_PATH=~/.adventure-bot-dev
           BOT_TOKEN=${{ secrets.BOT_TOKEN }}
           CLIENT_ID=${{ secrets.CLIENT_ID }}
           AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}
