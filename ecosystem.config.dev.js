@@ -1,4 +1,5 @@
 module.exports = {
+  name: 'Development',
   apps: [
     {
       name: 'Game [dev]',
@@ -8,6 +9,7 @@ module.exports = {
         DATABASE_PATH: '~/.adventure-bot-dev',
         REDUX_DEVTOOLS_ENABLED: true,
         REDUX_DEVTOOLS_PORT: 5011,
+        NODE_ENV: 'development',
       },
       interpreter: '/bin/bash',
     },
@@ -17,6 +19,7 @@ module.exports = {
       args: 'web start',
       env: {
         PORT: '8081',
+        NODE_ENV: 'development',
       },
       interpreter: '/bin/bash',
     },

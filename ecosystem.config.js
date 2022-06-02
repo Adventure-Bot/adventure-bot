@@ -1,4 +1,5 @@
 module.exports = {
+  name: 'Production',
   apps: [
     {
       name: 'Game',
@@ -6,6 +7,7 @@ module.exports = {
       args: 'game start',
       env: {
         DATABASE_PATH: '~/.adventure-bot',
+        NODE_ENV: 'production',
       },
       interpreter: '/bin/bash',
     },
@@ -15,6 +17,7 @@ module.exports = {
       args: 'web start',
       env: {
         PORT: '8080',
+        NODE_ENV: 'production',
       },
       interpreter: '/bin/bash',
     },
