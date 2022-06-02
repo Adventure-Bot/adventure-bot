@@ -4,6 +4,9 @@ module.exports = {
       name: 'Adventure Bot Game',
       script: 'yarn',
       args: 'game start',
+      env: {
+        DATABASE_PATH: '~/.adventure-bot',
+      },
       interpreter: '/bin/bash',
     },
     {

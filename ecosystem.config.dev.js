@@ -5,6 +5,7 @@ module.exports = {
       script: 'yarn',
       args: 'game start',
       env: {
+        DATABASE_PATH: '~/.adventure-bot-dev',
         REDUX_DEVTOOLS_ENABLED: true,
         REDUX_DEVTOOLS_PORT: 5011,
       },
