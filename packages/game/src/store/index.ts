@@ -33,6 +33,8 @@ if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
       actionCreators,
     })
   )
+} else {
+  console.log('redux-devtools disabled')
 }
 
 const persistedReducer = persistReducer(
