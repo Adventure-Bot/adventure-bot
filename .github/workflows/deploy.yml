@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, enable-redux-devtools] # TODO: remove enable-redux-devtools, for testing only
     
 jobs:
 
