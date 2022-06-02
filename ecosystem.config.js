@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'Adventure Bot Game',
+      name: 'Game',
       script: 'yarn',
       args: 'game start',
       env: {
@@ -10,7 +10,7 @@ module.exports = {
       interpreter: '/bin/bash',
     },
     {
-      name: 'Adventure Bot Web',
+      name: 'Web',
       script: 'yarn',
       args: 'web start',
       env: {
