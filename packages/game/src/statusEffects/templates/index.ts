@@ -32,6 +32,6 @@ export const effects = {
   survivor,
 } as const
 
-export const defaultEffectDuration = 60 * 60000
+export const defaultEffectDuration = 4 * 60 * 60000
 
 export type EffectTemplate = keyof typeof effects
