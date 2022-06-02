@@ -23,4 +23,6 @@ jobs:
           CLIENT_ID=${{ secrets.CLIENT_ID }}
           AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}
           REDUX_DEVTOOLS_ENABLED=true
+          PORT=8081
+          REDUX_DEVTOOLS_PORT=5011
           pm2 start -- --name adventure-bot-dev

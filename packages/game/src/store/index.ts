@@ -19,7 +19,8 @@ import { disk } from '@adventure-bot/game/store/storage'
 const enhancers = []
 
 if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
-  console.log('redux-devtools enabled')
+  const port = parseInt(process.env.REDUX_DEVTOOLS_PORT ?? '5010')
+  console.log(`redux-devtools enabled on port ${port}`)
   enhancers.push(
     remoteReduxEnhancer({
       name:
@@ -29,7 +30,7 @@ if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
           : ' (production)'),
       realtime: true,
       hostname: 'localhost',
-      port: 5010,
+      port,
       actionCreators,
     })
   )
