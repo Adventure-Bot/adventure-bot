@@ -8,7 +8,7 @@ jobs:
 
   deploy:
     environment: development
-    runs-on: self-hosted
+    runs-on: [self-hosted, development]
     concurrency: development
 
     steps:
@@ -23,4 +23,4 @@ jobs:
           CLIENT_ID=${{ secrets.CLIENT_ID }}
           AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}
           REDUX_DEVTOOLS_ENABLED=true
-          pm2 start
+          pm2 start -- --name adventure-bot-dev
