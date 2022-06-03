@@ -12,8 +12,14 @@ module.exports = {
         DATABASE_PATH: '~/.adventure-bot-dev',
         NODE_ENV: 'development',
         REDUX_DEVTOOLS_ENABLED: true,
-        REDUX_DEVTOOLS_PORT: 5011,
+        REDUX_DEVTOOLS_PORT: 8000,
       },
+      interpreter: '/bin/bash',
+    },
+    {
+      name: 'Redux Devtools',
+      script: 'yarn',
+      args: 'game redux-devtools',
       interpreter: '/bin/bash',
     },
     {
