@@ -18,15 +18,16 @@ module.exports = {
       args: 'game redux-devtools',
       interpreter: '/bin/bash',
     },
-    {
-      name: 'Web.dev',
-      script: 'yarn',
-      args: 'web start',
-      env: {
-        PORT: '8081',
-        NODE_ENV: 'development',
-      },
-      interpreter: '/bin/bash',
-    },
+    // TODO: port is not honored
+    // {
+    //   name: 'Web.dev',
+    //   script: 'yarn',
+    //   args: 'web start',
+    //   env: {
+    //     PORT: '8081',
+    //     NODE_ENV: 'development',
+    //   },
+    //   interpreter: '/bin/bash',
+    // },
   ],
 }
