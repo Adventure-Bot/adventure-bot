@@ -4,37 +4,21 @@ module.exports = {
       name: 'Game',
       script: 'yarn',
       args: 'game start',
-      env_production: {
+      env: {
         DATABASE_PATH: '/home/brian/.adventure-bot', // TODO: make this not hardcoded
         NODE_ENV: 'production',
         REDUX_DEVTOOLS_ENABLED: true,
         REDUX_DEVTOOLS_PORT: 8000,
       },
-      env_development: {
-        DATABASE_PATH: '/home/brian/.adventure-bot-dev', // TODO: make this not hardcoded
-        NODE_ENV: 'development',
-        REDUX_DEVTOOLS_ENABLED: true,
-        REDUX_DEVTOOLS_PORT: 8000,
-      },
-      interpreter: '/bin/bash',
-    },
-    {
-      name: 'Redux Devtools',
-      script: 'yarn',
-      args: 'game redux-devtools',
       interpreter: '/bin/bash',
     },
     {
       name: 'Web',
       script: 'yarn',
       args: 'web start',
-      env_production: {
+      env: {
         PORT: '8080',
         NODE_ENV: 'production',
-      },
-      env_development: {
-        PORT: '8081',
-        NODE_ENV: 'development',
       },
       interpreter: '/bin/bash',
     },
