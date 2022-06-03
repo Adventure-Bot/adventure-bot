@@ -24,3 +24,4 @@ jobs:
           CLIENT_ID=${{ secrets.CLIENT_ID }}
           AWS_S3_HOST=${{ secrets.AWS_S3_HOST }}
           pm2 start ecosystem.config.dev.js
+          --name "dev"
