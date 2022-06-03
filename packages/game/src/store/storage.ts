@@ -8,7 +8,7 @@ import path from 'path'
 const dbFolder =
   process.env.DATABASE_PATH || path.join(workspace() ?? process.cwd(), 'db')
 const dbFile = path.join(dbFolder, `db.json`)
-console.log(`Database file ${dbFile}`)
+console.log(`🗃 Database file ${dbFile}`)
 
 const ensureDB = async () => {
   mkdirp(dbFolder)
