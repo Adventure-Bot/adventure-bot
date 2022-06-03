@@ -19,8 +19,7 @@
     "prune-imports:watch": "nodemon --config ./nodemon-prune.json",
     "generate-asset-manifest": "ts-node ./scripts/generate-asset-manifest.ts",
     "sync-s3-assets": "ts-node ./scripts/sync-s3-assets.ts",
-    "postsync-s3-assets": "yarn generate-asset-manifest",
-    "redux-devtools": "redux-devtools --hostname=localhost --port=5010"
+    "postsync-s3-assets": "yarn generate-asset-manifest"
   },
   "repository": {
     "type": "git",
