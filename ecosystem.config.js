@@ -5,11 +5,13 @@ module.exports = {
       script: 'yarn',
       args: 'game start',
       env_production: {
-        DATABASE_PATH: '~/.adventure-bot',
+        DATABASE_PATH: '/home/brian/.adventure-bot', // TODO: make this not hardcoded
         NODE_ENV: 'production',
+        REDUX_DEVTOOLS_ENABLED: true,
+        REDUX_DEVTOOLS_PORT: 8000,
       },
       env_development: {
-        DATABASE_PATH: '~/.adventure-bot-dev',
+        DATABASE_PATH: '/home/brian/.adventure-bot-dev', // TODO: make this not hardcoded
         NODE_ENV: 'development',
         REDUX_DEVTOOLS_ENABLED: true,
         REDUX_DEVTOOLS_PORT: 8000,
