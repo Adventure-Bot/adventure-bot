@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'Game',
+      name: 'game',
       script: 'yarn',
       args: 'game start',
       env: {
@@ -13,7 +13,13 @@ module.exports = {
       interpreter: '/bin/bash',
     },
     {
-      name: 'Web',
+      name: 'redux-devtools',
+      script: 'yarn',
+      args: 'game redux-devtools',
+      interpreter: '/bin/bash',
+    },
+    {
+      name: 'web',
       script: 'yarn',
       args: 'web start',
       env: {
