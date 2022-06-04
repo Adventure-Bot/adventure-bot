@@ -19,35 +19,6 @@
       "request": "launch",
       "name": "Redux Debugger",
       "url": "http://localhost:5010"
-    },
-    {
-      "name": "prune",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeVersion": "16",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["game", "prune-imports:watch"],
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "lint",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeVersion": "16",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["lint"],
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "redux-devtools",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["game", "redux-devtools"],
-      "console": "integratedTerminal"
     }
   ]
 }
