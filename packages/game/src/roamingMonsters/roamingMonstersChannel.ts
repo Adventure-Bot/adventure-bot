@@ -5,7 +5,7 @@ import {
   findOrCreateTextChannelByName,
 } from '@adventure-bot/game/guild'
 
-export async function leaderboardChannel({
+export async function roamingMonstersChannel({
   guild,
   appId,
 }: {
@@ -13,11 +13,11 @@ export async function leaderboardChannel({
   appId: string
 }): Promise<TextChannel> {
   return findOrCreateTextChannelByName({
-    name: 'leaderboard',
+    name: 'roaming-monsters',
     guild,
     options: {
-      topic: `The legends.`,
-      position: 3,
+      topic: `The ones that got away...`,
+      position: 2,
       parent: (await findOrCreateCategory(guild, 'Adventure Bot')).id,
       permissionOverwrites: [
         {

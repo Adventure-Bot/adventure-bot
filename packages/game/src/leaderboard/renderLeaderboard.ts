@@ -1,7 +1,9 @@
 import { Guild } from 'discord.js'
 
-import { leaderboardChannel } from '@adventure-bot/game/leaderboard'
-import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard'
+import {
+  leaderboardChannel,
+  leaderboardEmbeds,
+} from '@adventure-bot/game/leaderboard'
 import { winnerDeclared } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 
