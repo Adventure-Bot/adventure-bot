@@ -3,6 +3,7 @@ import { Client, Guild } from 'discord.js'
 import { installCommands } from '@adventure-bot/game/boot/installCommands'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import { renderLeaderboard } from '@adventure-bot/game/leaderboard'
+import { renderRoamingMonsters } from '@adventure-bot/game/roamingMonsters/renderRoamingMonsters'
 
 import { gameChannel } from './gameChannel'
 
@@ -26,4 +27,5 @@ export async function setupGuild({
   await renderCharacterList({ guild, appId })
   await gameChannel({ guild, appId })
   await renderLeaderboard({ guild, appId })
+  await renderRoamingMonsters({ guild, appId })
 }
