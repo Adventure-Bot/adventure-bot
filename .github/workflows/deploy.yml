@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [main, enable-redux-devtools] # TODO: remove this
+    branches: [main]
     
 jobs:
 
