@@ -1,15 +1,12 @@
 import { Collection, Guild, Message } from 'discord.js'
-import { mapValues, values } from 'remeda'
+import { values } from 'remeda'
 
 import {
   getUserCharacters,
   limitedCharacterEmbed,
 } from '@adventure-bot/game/character'
 import store from '@adventure-bot/game/store'
-import {
-  characterMessageCreated,
-  characterMessageDeleted,
-} from '@adventure-bot/game/store/actions'
+import { characterMessageCreated } from '@adventure-bot/game/store/actions'
 
 import { charactersChannel } from './charactersChannel'
 
@@ -24,9 +21,7 @@ export async function listCharacters({
   const messages = await channel.messages.fetch()
   const { characterMessages } = store.getState()
   const guildMessages = characterMessages[guild.id] || []
-  console.time('purgeDeletedMessages')
-  purgeDeletedMessages({ messages, guildMessages, guild })
-  console.timeEnd('purgeDeletedMessages')
+
   console.time('deleteMissingMessages')
   await deleteMissingMessages({ messages, guildMessages })
   console.timeEnd('deleteMissingMessages')
@@ -59,23 +54,5 @@ async function deleteMissingMessages({
         await message.delete()
       }
     })
-  )
-}
-
-function purgeDeletedMessages({
-  guildMessages,
-  messages,
-  guild,
-}: {
-  guildMessages: Record<string, string>
-  messages: Collection<string, Message<boolean>>
-  guild: Guild
-}) {
-  mapValues(guildMessages, (characterId, messageId) =>
-    messages.get(messageId)
-      ? null
-      : store.dispatch(
-          characterMessageDeleted({ messageId, guildId: guild.id, characterId })
-        )
   )
 }

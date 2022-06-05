@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import {
   characterMessageCreated,
-  characterMessageDeleted,
   newgame,
 } from '@adventure-bot/game/store/actions'
 
@@ -14,19 +13,13 @@ const characterMessagesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(newgame, () => {
-        return {}
-      })
+      .addCase(newgame, () => ({}))
       .addCase(characterMessageCreated, (state, action) => {
         const { character, message, guild } = action.payload
         state[guild.id] = {
           ...state[guild.id],
           [character.id]: message.id,
         }
-      })
-      .addCase(characterMessageDeleted, (state, action) => {
-        const { guildId, characterId } = action.payload
-        delete state[guildId][characterId]
       })
   },
 })
