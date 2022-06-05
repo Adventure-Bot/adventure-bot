@@ -16,7 +16,7 @@ export async function roamingMonstersChannel({
     name: 'roaming-monsters',
     guild,
     options: {
-      topic: `The ones that got away...`,
+      topic: `Monsters seen in the area.`,
       position: 2,
       parent: (await findOrCreateCategory(guild, 'Adventure Bot')).id,
       permissionOverwrites: [
