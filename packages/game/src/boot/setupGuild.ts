@@ -1,5 +1,6 @@
 import { Client, Guild } from 'discord.js'
 
+import { announceXpAwarded } from '@adventure-bot/game/announcements'
 import { installCommands } from '@adventure-bot/game/boot/installCommands'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import { renderLeaderboard } from '@adventure-bot/game/leaderboard'
@@ -24,8 +25,10 @@ export async function setupGuild({
       clientId: CLIENT_ID,
       guildId: guild.id,
     })
-  await renderCharacterList({ guild, appId })
-  await gameChannel({ guild, appId })
-  await renderLeaderboard({ guild, appId })
-  await renderRoamingMonsters({ guild, appId })
+  renderCharacterList({ guild, appId })
+  gameChannel({ guild, appId }).then((channel) => {
+    announceXpAwarded({ channel })
+  })
+  renderLeaderboard({ guild, appId })
+  renderRoamingMonsters({ guild, appId })
 }
