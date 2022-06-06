@@ -1,5 +1,12 @@
 import { chanceToFindCrown } from './chanceToFindCrown'
 
 export function didFindCrown(): boolean {
-  return chanceToFindCrown() < Math.random()
+  const difficulty = 1 - chanceToFindCrown()
+  const roll = Math.random()
+  console.log(
+    `didFindCrown? ${
+      roll > difficulty ? 'yes!' : 'no'
+    }: difficulty: ${difficulty}, roll: ${roll}, diff: ${difficulty - roll}`
+  )
+  return roll > difficulty
 }
