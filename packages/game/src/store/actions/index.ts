@@ -25,8 +25,3 @@ export const characterMessageCreated = createAction<{
   message: Message
   guild: Guild
 }>('characterMessageCreated')
-export const characterMessageDeleted = createAction<{
-  messageId: string
-  guildId: string
-  characterId: string
-}>('characterMessageDeleted')
