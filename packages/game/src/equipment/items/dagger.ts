@@ -16,7 +16,7 @@ export const dagger = (): Weapon => ({
     wideMiss: [
       "<@attacker>'s dagger slashes in the approximate direction of <@defender>",
     ],
-    nearMiss: ["<@attacker>'d dagger nearly stabs <@defender>"],
+    nearMiss: ["<@attacker>'s dagger nearly stabs <@defender>"],
     onTheNose: ["<@attacker>'s dagger pierces <@defender>"],
     veryAccurate: ["<@attacker>'s dagger pierces <@defender> true"],
   },
