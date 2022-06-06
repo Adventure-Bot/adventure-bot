@@ -5,7 +5,6 @@ import {
   decoratedName,
   findOrCreateCharacter,
   hpBarField,
-  xpGainField,
 } from '@adventure-bot/game/character'
 import quests from '@adventure-bot/game/commands/quests'
 import {
@@ -25,17 +24,6 @@ export async function fairyWell({
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> {
   const healAmount = Math.ceil(Math.random() * 6)
-  store.dispatch(
-    healed({ characterId: interaction.user.id, amount: healAmount })
-  )
-  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
-  store.dispatch(
-    questProgressed({
-      characterId: interaction.user.id,
-      questId: 'healer',
-      amount: healAmount,
-    })
-  )
 
   const character = findOrCreateCharacter(interaction.user)
   await interaction[replyType]({
@@ -47,10 +35,7 @@ export async function fairyWell({
           'heal'
         )} +${healAmount}!`,
         color: 'DARK_VIVID_PINK',
-        fields: [
-          xpGainField(1),
-          hpBarField({ character, adjustment: healAmount }),
-        ].concat(
+        fields: [hpBarField({ character, adjustment: healAmount })].concat(
           character.quests.healer
             ? questProgressField(character.quests.healer)
             : []
@@ -58,6 +43,17 @@ export async function fairyWell({
       }).setImage(asset('fantasy', 'places', "a fairy's well").s3Url),
     ],
   })
+  store.dispatch(
+    healed({ characterId: interaction.user.id, amount: healAmount })
+  )
+  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
+  store.dispatch(
+    questProgressed({
+      characterId: interaction.user.id,
+      questId: 'healer',
+      amount: healAmount,
+    })
+  )
   if (isUserQuestComplete(interaction.user, 'healer'))
     await quests.execute({ interaction })
 }

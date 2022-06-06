@@ -10,7 +10,6 @@ import {
   awardXP,
   decoratedName,
   findOrCreateCharacter,
-  xpGainField,
 } from '@adventure-bot/game/character'
 import questsCommand from '@adventure-bot/game/commands/quests'
 import { isQuestId, questEmbed, quests } from '@adventure-bot/game/quest'
@@ -23,7 +22,6 @@ export const chattyTavernkeepers = async (
   interaction: CommandInteraction,
   followUp = false
 ): Promise<void> => {
-  awardXP(interaction.user.id, 1)
   const character = findOrCreateCharacter(interaction.user)
   const state = store.getState()
   const availableQuests = selectAvailableQuests(state, character)
@@ -48,7 +46,6 @@ export const chattyTavernkeepers = async (
         title: `${decoratedName(character)} met a chatty tavernkeeper!`,
         description:
           "Turns out they know someone's got a thing needs doing.\n\nCompensation? Of course!",
-        fields: [xpGainField(1)],
       })
         .setImage(asset('fantasy', 'places', 'chatty tavernkeepers').s3Url)
         .setThumbnail(character.profile),
@@ -98,5 +95,6 @@ export const chattyTavernkeepers = async (
       quests[questId].title
     } quest.`
   )
+  awardXP(interaction.user.id, 1)
   await questsCommand.execute({ interaction })
 }

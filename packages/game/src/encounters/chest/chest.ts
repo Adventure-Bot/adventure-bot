@@ -6,7 +6,6 @@ import {
   findOrCreateCharacter,
   getCharacter,
   gpGainField,
-  xpGainField,
 } from '@adventure-bot/game/character'
 import { chestEmbed } from '@adventure-bot/game/encounters/chest'
 import { randomChestItem } from '@adventure-bot/game/equipment'
@@ -171,7 +170,7 @@ export async function chest(
     const gp = d(20) + 5
     awardXP(interaction.user.id, xp)
     adjustGold(interaction.user.id, gp)
-    embed.addFields([xpGainField(xp), gpGainField(gp)])
+    embed.addFields([gpGainField(gp)])
     if (Math.random() <= 0.005 && !selectIsHeavyCrownInPlay(store.getState())) {
       const crown = heavyCrown()
       const character = findOrCreateCharacter(interaction.user)

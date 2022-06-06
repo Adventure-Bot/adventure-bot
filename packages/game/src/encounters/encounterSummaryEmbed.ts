@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
-import { decoratedName, xpGainField } from '@adventure-bot/game/character'
+import { decoratedName } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
 import store from '@adventure-bot/game/store'
 import {
@@ -75,7 +75,6 @@ export function encounterSummaryEmbed({
         'Triumphant!',
         `${decoratedName(character)} defeated ${decoratedName(monster)}! 🎉`
       )
-      embed.addFields([xpGainField(monster.xpValue)])
       break
   }
 

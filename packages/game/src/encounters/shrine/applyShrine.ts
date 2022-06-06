@@ -9,6 +9,7 @@ import store from '@adventure-bot/game/store'
 import {
   effectAdded,
   questProgressed,
+  xpAwarded,
 } from '@adventure-bot/game/store/slices/characters'
 
 export async function applyShrine({
@@ -31,6 +32,8 @@ export async function applyShrine({
       amount: 1,
     })
   )
+
+  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
 
   if (isUserQuestComplete(interaction.user, 'blessed'))
     await quests.execute({ interaction })

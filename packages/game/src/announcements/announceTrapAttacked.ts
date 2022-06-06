@@ -6,7 +6,6 @@ import {
   decoratedName,
   getCharacter,
   hpBarField,
-  xpGainField,
 } from '@adventure-bot/game/character'
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
@@ -50,13 +49,11 @@ export const announceTrapAttacked: (client: Client) => void = (client) => {
         case 'hit':
           awardXP(character.id, 1)
           embed.addFields([
-            xpGainField(1),
             hpBarField({ character, adjustment: -result.damage }),
           ])
           break
         case 'miss':
           awardXP(character.id, 2)
-          embed.addFields([xpGainField(2)])
           break
       }
 
