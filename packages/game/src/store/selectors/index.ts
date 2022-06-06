@@ -132,9 +132,6 @@ export const selectHasItemNameInInventory: (
   (hasItem) => hasItem
 )
 
-export const selectIsHeavyCrownInPlay = (state: ReduxState): boolean =>
-  state.crown.bearerId !== ''
-
 export const selectBearer = (state: ReduxState): Character | undefined =>
   state.characters.charactersById[state.crown.bearerId]
 
