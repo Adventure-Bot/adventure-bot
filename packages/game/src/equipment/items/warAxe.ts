@@ -18,7 +18,7 @@ export const warAxe = (): Weapon => ({
     ],
     nearMiss: ["<@attacker>'s war axe nearly cuts <@defender>"],
     onTheNose: ["<@attacker>'s war axe chops <@defender>"],
-    veryAccurate: ["<@attacker>'s war axe cleaves <@defender> through!"],
+    veryAccurate: ["<@attacker>'s war axe cleaves <@defender> through"],
   },
   equippable: true,
   sellable: true,
