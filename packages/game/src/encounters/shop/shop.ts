@@ -10,18 +10,18 @@ import {
   findOrCreateCharacter,
   getCharacterUpdate,
 } from '@adventure-bot/game/character'
+import { didFindCrown } from '@adventure-bot/game/crown'
 import { buyItemPrompt } from '@adventure-bot/game/encounters/shop/buyItemPrompt'
 import { sellItemPrompt } from '@adventure-bot/game/encounters/shop/sellItemPrompt'
 import { itemEmbed } from '@adventure-bot/game/equipment'
 import { heavyCrown } from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
-import { selectIsHeavyCrownInPlay } from '@adventure-bot/game/store/selectors'
 import {
   selectShopInventory,
   shopInventoryAdded,
   shopRestocked,
 } from '@adventure-bot/game/store/slices/shop'
-import { CommandHandlerOptions, asset, d } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export const shop = async ({
   interaction,
@@ -30,7 +30,7 @@ export const shop = async ({
   const character = findOrCreateCharacter(interaction.user)
 
   store.dispatch(shopRestocked())
-  if (!selectIsHeavyCrownInPlay(store.getState()) && d(10) === 10) {
+  if (didFindCrown()) {
     store.dispatch(shopInventoryAdded(heavyCrown()))
   }
 
