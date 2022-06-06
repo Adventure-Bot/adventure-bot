@@ -16,7 +16,7 @@ export const warAxe = (): Weapon => ({
     wideMiss: [
       "<@attacker>'s war axe slashes in the approximate direction of <@defender>",
     ],
-    nearMiss: ["<@attacker>'d war axe nearly cuts <@defender>"],
+    nearMiss: ["<@attacker>'s war axe nearly cuts <@defender>"],
     onTheNose: ["<@attacker>'s war axe chops <@defender>"],
     veryAccurate: ["<@attacker>'s war axe cleaves <@defender> through!"],
   },
