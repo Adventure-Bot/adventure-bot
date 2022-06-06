@@ -7,6 +7,7 @@ import {
   getCharacter,
   gpGainField,
 } from '@adventure-bot/game/character'
+import { crownArt } from '@adventure-bot/game/crown'
 import { heavyCrownId, itemEmbed } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
@@ -16,7 +17,6 @@ import {
   selectLastChannelUsed,
 } from '@adventure-bot/game/store/selectors'
 import { looted } from '@adventure-bot/game/store/slices/characters'
-import { crownArt } from '@adventure-bot/game/utils'
 
 export function announceCrownLoots(client: Client): void {
   startAppListening({
