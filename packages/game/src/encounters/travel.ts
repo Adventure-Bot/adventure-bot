@@ -4,7 +4,6 @@ import {
   awardXP,
   decoratedName,
   findOrCreateCharacter,
-  xpGainField,
 } from '@adventure-bot/game/character'
 import { isTravelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -20,7 +19,6 @@ export const travel = async ({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
-  awardXP(interaction.user.id, 1)
   const character = findOrCreateCharacter(interaction.user)
   const art = randomArrayElement([
     asset('fantasy', 'places', 'a lone traveler in the desert'),
@@ -33,11 +31,11 @@ export const travel = async ({
       new MessageEmbed({
         title: `${decoratedName(character)} traveled.`,
         color: 'GREEN',
-        fields: [xpGainField(1)],
         description: `You travel the lands.`,
       }).setImage(art.s3Url),
     ],
   })
+  awardXP(interaction.user.id, 1)
   if (character.inventory.find(isTravelersRing)) {
     store.dispatch(
       effectAdded({
