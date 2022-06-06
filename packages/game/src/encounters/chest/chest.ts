@@ -7,15 +7,13 @@ import {
   getCharacter,
   gpGainField,
 } from '@adventure-bot/game/character'
+import { didFindCrown } from '@adventure-bot/game/crown'
 import { chestEmbed } from '@adventure-bot/game/encounters/chest'
 import { randomChestItem } from '@adventure-bot/game/equipment'
 import { heavyCrown } from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
-import {
-  selectCharacterById,
-  selectIsHeavyCrownInPlay,
-} from '@adventure-bot/game/store/selectors'
+import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { Trap, getRandomTrap, trapAttack } from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, d } from '@adventure-bot/game/utils'
 
@@ -171,13 +169,11 @@ export async function chest(
     awardXP(interaction.user.id, xp)
     adjustGold(interaction.user.id, gp)
     embed.addFields([gpGainField(gp)])
-    if (Math.random() <= 0.005 && !selectIsHeavyCrownInPlay(store.getState())) {
-      const crown = heavyCrown()
-      const character = findOrCreateCharacter(interaction.user)
+    if (didFindCrown()) {
       store.dispatch(
         itemReceived({
           characterId: character.id,
-          item: crown,
+          item: heavyCrown(),
           interaction,
         })
       )
