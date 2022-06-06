@@ -2,9 +2,9 @@ import { MessageEmbed } from 'discord.js'
 import moment from 'moment'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
+import { crownArt } from '@adventure-bot/game/crown'
 import store from '@adventure-bot/game/store'
 import { selectLeaderBoard } from '@adventure-bot/game/store/selectors'
-import { crownArt } from '@adventure-bot/game/utils'
 
 export function leaderboardEmbeds(): MessageEmbed[] {
   const { leaderboard, victoriesByCharacter } = selectLeaderBoard(
