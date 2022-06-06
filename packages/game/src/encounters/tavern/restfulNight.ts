@@ -6,7 +6,6 @@ import {
   findOrCreateCharacter,
   getCharacterStatModified,
   hpBarField,
-  xpGainField,
 } from '@adventure-bot/game/character'
 import quests from '@adventure-bot/game/commands/quests'
 import {
@@ -32,26 +31,6 @@ export async function restfulNight(
     max:
       getCharacterStatModified(preHealCharacter, 'maxHP') - preHealCharacter.hp,
   })
-  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
-  store.dispatch(
-    healed({ characterId: interaction.user.id, amount: actualHeal })
-  )
-
-  const effect = createEffect('invigorated')
-
-  store.dispatch(
-    effectAdded({
-      characterId: interaction.user.id,
-      effect,
-    })
-  )
-  store.dispatch(
-    questProgressed({
-      characterId: interaction.user.id,
-      questId: 'healer',
-      amount: actualHeal,
-    })
-  )
 
   const character = findOrCreateCharacter(interaction.user)
   await interaction.followUp({
@@ -65,7 +44,6 @@ export async function restfulNight(
             character: findOrCreateCharacter(interaction.user),
             adjustment: actualHeal,
           }),
-          xpGainField(1),
         ].concat(
           character.quests.healer
             ? questProgressField(character.quests.healer)
@@ -76,6 +54,25 @@ export async function restfulNight(
         .setThumbnail(character.profile),
     ],
   })
+  store.dispatch(
+    healed({ characterId: interaction.user.id, amount: actualHeal })
+  )
+
+  store.dispatch(
+    effectAdded({
+      characterId: interaction.user.id,
+      effect: createEffect('invigorated'),
+    })
+  )
+  store.dispatch(
+    questProgressed({
+      characterId: interaction.user.id,
+      questId: 'healer',
+      amount: actualHeal,
+    })
+  )
+
+  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
 
   if (isUserQuestComplete(interaction.user, 'healer'))
     await quests.execute({ interaction })
