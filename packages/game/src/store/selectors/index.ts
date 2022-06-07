@@ -135,10 +135,6 @@ export const selectHasItemNameInInventory: (
 export const selectBearer = (state: ReduxState): Character | undefined =>
   state.characters.charactersById[state.crown.bearerId]
 
-export const selectLeaderBoard = (
-  state: ReduxState
-): typeof state.leaderboard => state.leaderboard
-
 export const selectLastChannelUsed = (state: ReduxState): string =>
   state.commands.lastChannelId
 
