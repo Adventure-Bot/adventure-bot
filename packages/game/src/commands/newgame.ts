@@ -6,6 +6,7 @@ import store from '@adventure-bot/game/store'
 import { newgame } from '@adventure-bot/game/store/actions'
 import { actionScheduled } from '@adventure-bot/game/store/schedule/schedule'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
+import moment from 'moment'
 
 export const command = new SlashCommandBuilder()
   .setDefaultPermission(false)
@@ -39,8 +40,8 @@ export const execute = async ({
     embeds: [
       new MessageEmbed({
         title: 'New game scheduled',
-        description: `The game will begin ${date}.\n`,
-      }), // TODO: .setImage
+        description: `The game will begin ${moment(date).fromNow()}.\n`,
+      }).setTimestamp(date),
     ],
   })
 }
