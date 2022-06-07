@@ -1,3 +1,4 @@
+import { isAnyOf } from '@reduxjs/toolkit'
 import { Guild } from 'discord.js'
 
 import {
@@ -6,6 +7,7 @@ import {
 } from '@adventure-bot/game/leaderboard'
 import { winnerDeclared } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
+import { crownReceived } from '@adventure-bot/game/store/slices/crown'
 
 export async function renderLeaderboard({
   appId,
@@ -20,7 +22,7 @@ export async function renderLeaderboard({
     (await channel.messages.fetch()).first() ?? (await channel.send({ embeds }))
   await message.edit({ embeds: leaderboardEmbeds() })
   startAppListening({
-    actionCreator: winnerDeclared,
+    matcher: isAnyOf(winnerDeclared, crownReceived),
     effect: () => {
       message.edit({ embeds: leaderboardEmbeds() })
     },

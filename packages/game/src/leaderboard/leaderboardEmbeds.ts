@@ -2,27 +2,41 @@ import { MessageEmbed } from 'discord.js'
 import moment from 'moment'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
+import { decoratedName } from '@adventure-bot/game/character'
 import { crownArt } from '@adventure-bot/game/crown'
 import store from '@adventure-bot/game/store'
-import { selectLeaderBoard } from '@adventure-bot/game/store/selectors'
+import { selectBearer } from '@adventure-bot/game/store/selectors'
+import { timeTillSovereign } from '@adventure-bot/game/store/slices/crown'
 
 export function leaderboardEmbeds(): MessageEmbed[] {
-  const { leaderboard, victoriesByCharacter } = selectLeaderBoard(
-    store.getState()
-  )
+  const state = store.getState()
+  const bearer = selectBearer(state)
+  const { leaderboard, victoriesByCharacter } = state.leaderboard
+
+  const gameEndsAt = moment(state.crown.claimedAt).add(timeTillSovereign)
+
   const crown = crownArt()
 
-  const embeds = [
+  let embeds = [
     new MessageEmbed({
       title: 'Crown Leaderboard',
     }).setImage(crown.s3Url),
-    ...(leaderboard.length === 0
-      ? [
-          new MessageEmbed({
-            title: 'No winners yet. Be the first!',
-          }),
-        ]
-      : leaderboard.map((score) =>
+  ]
+
+  if (bearer && !state.crown.announced)
+    embeds = embeds.concat(
+      new MessageEmbed({
+        title: `Crown Bearer: ${bearer.name}`,
+        description: `${decoratedName(
+          bearer
+        )} will win ${gameEndsAt.fromNow()}.`,
+      }).setTimestamp(gameEndsAt.toDate())
+    )
+
+  if (leaderboard.length === 0)
+    if (leaderboard.length)
+      embeds = embeds.concat(
+        leaderboard.map((score) =>
           new MessageEmbed({
             title: score.name,
             fields: [
@@ -47,7 +61,8 @@ export function leaderboardEmbeds(): MessageEmbed[] {
               ),
             ],
           }).setImage(score.profile)
-        )),
-  ]
+        )
+      )
+
   return embeds
 }
