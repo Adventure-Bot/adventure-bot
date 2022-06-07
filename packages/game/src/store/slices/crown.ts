@@ -1,4 +1,4 @@
-import { createAction, createSlice, isAnyOf } from '@reduxjs/toolkit'
+import { createAction, createSlice } from '@reduxjs/toolkit'
 import { prop } from 'remeda'
 
 import { heavyCrownId } from '@adventure-bot/game/equipment'
