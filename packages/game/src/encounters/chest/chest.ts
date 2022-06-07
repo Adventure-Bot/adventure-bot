@@ -169,7 +169,7 @@ export async function chest(
     awardXP(interaction.user.id, xp)
     adjustGold(interaction.user.id, gp)
     embed.addFields([gpGainField(gp)])
-    if (didFindCrown()) {
+    if (didFindCrown())
       store.dispatch(
         itemReceived({
           characterId: character.id,
@@ -177,8 +177,7 @@ export async function chest(
           interaction,
         })
       )
-    }
-    if (d(20) + luck > 16) {
+    if (d(20) + luck > 16)
       store.dispatch(
         itemReceived({
           characterId: interaction.user.id,
@@ -186,7 +185,6 @@ export async function chest(
           interaction,
         })
       )
-    }
   }
 
   if (findOrCreateCharacter(interaction.user).hp === 0)
