@@ -16,7 +16,6 @@ export const buyItem = async (
     )
     return
   }
-  adjustGold(player.id, -item.goldValue)
   store.dispatch(
     itemPurchased({
       characterId: player.id,
