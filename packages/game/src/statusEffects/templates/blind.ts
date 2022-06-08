@@ -1,5 +1,5 @@
 import { TemplateEffect } from '@adventure-bot/game/statusEffects'
-import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates'
+import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
 export const blind: TemplateEffect = {
   name: 'Blind',
