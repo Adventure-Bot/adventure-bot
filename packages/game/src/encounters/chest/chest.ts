@@ -4,7 +4,6 @@ import {
   awardXP,
   findOrCreateCharacter,
   getCharacter,
-  gpGainField,
 } from '@adventure-bot/game/character'
 import { didFindCrown } from '@adventure-bot/game/crown'
 import { chestEmbed } from '@adventure-bot/game/encounters/chest'
@@ -173,7 +172,6 @@ export async function chest(
         characterId: interaction.user.id,
       })
     )
-    embed.addFields([gpGainField(gp)])
     if (didFindCrown())
       store.dispatch(
         itemReceived({
