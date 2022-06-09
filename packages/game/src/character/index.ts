@@ -10,7 +10,6 @@ export {
   stats,
 } from '@adventure-bot/game/character/Stats'
 export { abilityCooldowns } from '@adventure-bot/game/character/abilityCooldowns'
-export { adjustGold } from '@adventure-bot/game/character/adjustGold'
 export { awardXP } from '@adventure-bot/game/character/awardXP'
 export { Character } from '@adventure-bot/game/character/Character'
 export { characterEmbed } from '@adventure-bot/game/character/characterEmbed'

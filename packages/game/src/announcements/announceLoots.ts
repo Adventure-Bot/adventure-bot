@@ -5,7 +5,6 @@ import {
   LootResult,
   decoratedName,
   getCharacter,
-  gpGainField,
 } from '@adventure-bot/game/character'
 import { crownArt } from '@adventure-bot/game/crown'
 import { heavyCrownId, itemEmbed } from '@adventure-bot/game/equipment'
@@ -115,12 +114,10 @@ export function announceLoots(client: Client): void {
       const channel = client.channels.cache.get(lastChannelId)
       if (!channel?.isText()) return
       if (loot.goldTaken === 0 && loot.itemsTaken.length === 0) return
-      const fields = loot.goldTaken ? [gpGainField(loot.goldTaken)] : []
       channel.send({
         embeds: [
           new MessageEmbed({
             title: `${decoratedName(looter)} looted ${decoratedName(target)}`,
-            fields,
           })
             .setImage(target.profile)
             .setThumbnail(looter.profile),
