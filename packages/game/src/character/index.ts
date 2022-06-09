@@ -26,7 +26,6 @@ export { getCooldownRemaining } from '@adventure-bot/game/character/cooldowns/ge
 export { getEquipmentStatModifier } from '@adventure-bot/game/character/getEquipmentStatModifier'
 export { getStatusEffectStatModifier } from '@adventure-bot/game/character/getStatusEffectStatModifier'
 export { getUserCharacters } from '@adventure-bot/game/character/getUserCharacters'
-export { gpGainField } from '@adventure-bot/game/character/gpGainField'
 export { hpBar } from '@adventure-bot/game/character/hpBar/hpBar'
 export { hpBarField } from '@adventure-bot/game/character/hpBar/hpBarField'
 export { isCharacterOnCooldown } from '@adventure-bot/game/character/isCharacterOnCooldown'

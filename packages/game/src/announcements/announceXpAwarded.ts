@@ -19,6 +19,7 @@ export function announceXpAwarded({ channel }: { channel: TextChannel }): void {
             'xp',
             amount
           )} experience!`,
+          description: `Total: ${EmojiValue('xp', character.xp)}`,
           color: 'YELLOW',
         }),
       ]

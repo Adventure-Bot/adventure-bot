@@ -6,12 +6,9 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
-import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
   decoratedName,
   findOrCreateCharacter,
-  getCharacterUpdate,
-  gpGainField,
 } from '@adventure-bot/game/character'
 import { sellList } from '@adventure-bot/game/encounters/shop/sellList'
 import { sellValue } from '@adventure-bot/game/encounters/shop/sellValue'
@@ -75,19 +72,19 @@ export async function sellItemPrompt({
   if (!response.isSelectMenu()) return
   const item = inventory[parseInt(response.values[0])]
   if (!item) return
-  store.dispatch(itemSold({ itemId: item.id, characterId: character.id }))
+
+  store.dispatch(
+    itemSold({
+      itemId: item.id,
+      characterId: character.id,
+      sellValue: sellValue(item),
+    })
+  )
 
   interaction.followUp({
     embeds: [
       new MessageEmbed({
         title: `${character.name} sold their ${item.name}.`,
-        fields: [
-          gpGainField(sellValue(item)),
-          {
-            name: `${character.name}'s Total Gold`,
-            value: EmojiValue('gold', getCharacterUpdate(character).gold),
-          },
-        ],
       }),
     ],
   })
