@@ -209,6 +209,7 @@ const characterSlice = createSlice({
       action: PayloadAction<{
         characterId: string
         itemId: string
+        sellValue: number
       }>
     ) {
       const { characterId, itemId } = action.payload
