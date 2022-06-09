@@ -7,3 +7,4 @@ export {
 export { announceTrapAttacked } from '@adventure-bot/game/announcements/announceTrapAttacked'
 export { announceWinners } from '@adventure-bot/game/announcements/announceWinners'
 export { announceXpAwarded } from '@adventure-bot/game/announcements/announceXpAwarded'
+export { announceGoldGained } from '@adventure-bot/game/announcements/announceGoldGained'
