@@ -1,7 +1,6 @@
 import { CommandInteraction, Message } from 'discord.js'
 
 import {
-  adjustGold,
   awardXP,
   findOrCreateCharacter,
   getCharacter,
@@ -14,6 +13,7 @@ import { heavyCrown } from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
+import { goldGained } from '@adventure-bot/game/store/slices/characters'
 import { Trap, getRandomTrap, trapAttack } from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, d } from '@adventure-bot/game/utils'
 
@@ -167,7 +167,12 @@ export async function chest(
     const xp = 1 + (chest.hasTrap ? 2 : 0) + (chest.hasLock ? 1 : 0)
     const gp = d(20) + 5
     awardXP(interaction.user.id, xp)
-    adjustGold(interaction.user.id, gp)
+    store.dispatch(
+      goldGained({
+        amount: gp,
+        characterId: interaction.user.id,
+      })
+    )
     embed.addFields([gpGainField(gp)])
     if (didFindCrown())
       store.dispatch(

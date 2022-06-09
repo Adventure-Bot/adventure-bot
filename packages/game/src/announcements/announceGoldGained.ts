@@ -7,7 +7,11 @@ import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { goldGained } from '@adventure-bot/game/store/slices/characters'
 
-export function announceGpAwarded({ channel }: { channel: TextChannel }): void {
+export function announceGoldGained({
+  channel,
+}: {
+  channel: TextChannel
+}): void {
   startAppListening({
     actionCreator: goldGained,
     effect: ({ payload: { characterId, amount } }) => {
