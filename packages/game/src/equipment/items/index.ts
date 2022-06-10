@@ -1,59 +1,29 @@
-import { amuletOfAttack } from '@adventure-bot/game/equipment/items/amuletOfAttack'
-import { amuletOfProtection } from '@adventure-bot/game/equipment/items/amuletOfProtection'
-import { assassinLeathers } from '@adventure-bot/game/equipment/items/assassinLeathers'
-import { berserkerHides } from '@adventure-bot/game/equipment/items/berserkerHides'
-import { buckler } from '@adventure-bot/game/equipment/items/buckler'
-import { chainArmor } from '@adventure-bot/game/equipment/items/chainArmor'
-import { dagger } from '@adventure-bot/game/equipment/items/dagger'
-import { heavyCrown } from '@adventure-bot/game/equipment/items/heavyCrown'
-import { kiteShield } from '@adventure-bot/game/equipment/items/kiteShield'
-import { leatherArmor } from '@adventure-bot/game/equipment/items/leatherArmor'
-import { longsword } from '@adventure-bot/game/equipment/items/longsword'
-import { mace } from '@adventure-bot/game/equipment/items/mace'
-import { plateArmor } from '@adventure-bot/game/equipment/items/plateArmor'
-import { potionOfHaste } from '@adventure-bot/game/equipment/items/potionOfHaste'
-import { potionOfHealing } from '@adventure-bot/game/equipment/items/potionOfHealing'
-import { potionOfMight } from '@adventure-bot/game/equipment/items/potionOfMight'
-import { potionOfProtection } from '@adventure-bot/game/equipment/items/potionOfProtection'
-import { potionOfSlaying } from '@adventure-bot/game/equipment/items/potionOfSlaying'
-import { potionOfVigor } from '@adventure-bot/game/equipment/items/potionOfVigor'
-import { ringOfAttack } from '@adventure-bot/game/equipment/items/ringOfAttack'
-import { ringOfHaste } from '@adventure-bot/game/equipment/items/ringOfHaste'
-import { roguesBrew } from '@adventure-bot/game/equipment/items/roguesBrew'
-import { roguesRing } from '@adventure-bot/game/equipment/items/roguesRing'
-import { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items/swordOfDragonSlaying'
-import { towerShield } from '@adventure-bot/game/equipment/items/towerShield'
-import { travelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
-import { unidentifiedPotion } from '@adventure-bot/game/equipment/items/unidentifiedPotion'
-import { warAxe } from '@adventure-bot/game/equipment/items/warAxe'
-
-export {
-  amuletOfAttack,
-  amuletOfProtection,
-  assassinLeathers,
-  berserkerHides,
-  buckler,
-  chainArmor,
-  dagger,
-  heavyCrown,
-  kiteShield,
-  leatherArmor,
-  longsword,
-  mace,
-  plateArmor,
-  potionOfHaste,
-  potionOfHealing,
-  potionOfMight,
-  potionOfProtection,
-  potionOfSlaying,
-  potionOfVigor,
-  ringOfAttack,
-  ringOfHaste,
-  roguesBrew,
-  roguesRing,
-  swordOfDragonSlaying,
-  towerShield,
-  travelersRing,
-  unidentifiedPotion,
-  warAxe,
-}
+export { amuletOfAttack } from '@adventure-bot/game/equipment/items/amuletOfAttack'
+export { amuletOfProtection } from '@adventure-bot/game/equipment/items/amuletOfProtection'
+export { assassinLeathers } from '@adventure-bot/game/equipment/items/assassinLeathers'
+export { berserkerHides } from '@adventure-bot/game/equipment/items/berserkerHides'
+export { buckler } from '@adventure-bot/game/equipment/items/buckler'
+export { chainArmor } from '@adventure-bot/game/equipment/items/chainArmor'
+export { dagger } from '@adventure-bot/game/equipment/items/dagger'
+export { heavyCrown } from '@adventure-bot/game/equipment/items/heavyCrown'
+export { kiteShield } from '@adventure-bot/game/equipment/items/kiteShield'
+export { leatherArmor } from '@adventure-bot/game/equipment/items/leatherArmor'
+export { longsword } from '@adventure-bot/game/equipment/items/longsword'
+export { mace } from '@adventure-bot/game/equipment/items/mace'
+export { plateArmor } from '@adventure-bot/game/equipment/items/plateArmor'
+export { poisonedDagger } from '@adventure-bot/game/equipment/items/poisonedDagger'
+export { potionOfHaste } from '@adventure-bot/game/equipment/items/potionOfHaste'
+export { potionOfHealing } from '@adventure-bot/game/equipment/items/potionOfHealing'
+export { potionOfMight } from '@adventure-bot/game/equipment/items/potionOfMight'
+export { potionOfProtection } from '@adventure-bot/game/equipment/items/potionOfProtection'
+export { potionOfSlaying } from '@adventure-bot/game/equipment/items/potionOfSlaying'
+export { potionOfVigor } from '@adventure-bot/game/equipment/items/potionOfVigor'
+export { ringOfAttack } from '@adventure-bot/game/equipment/items/ringOfAttack'
+export { ringOfHaste } from '@adventure-bot/game/equipment/items/ringOfHaste'
+export { roguesBrew } from '@adventure-bot/game/equipment/items/roguesBrew'
+export { roguesRing } from '@adventure-bot/game/equipment/items/roguesRing'
+export { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items/swordOfDragonSlaying'
+export { towerShield } from '@adventure-bot/game/equipment/items/towerShield'
+export { travelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
+export { unidentifiedPotion } from '@adventure-bot/game/equipment/items/unidentifiedPotion'
+export { warAxe } from '@adventure-bot/game/equipment/items/warAxe'

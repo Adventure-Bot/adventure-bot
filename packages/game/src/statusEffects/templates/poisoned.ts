@@ -6,8 +6,6 @@ export const poisoned: TemplateEffect = {
   buff: false,
   debuff: true,
   duration: defaultEffectDuration,
-  modifiers: {
-    attackBonus: -2,
-  },
+  damageOverTime: 2,
   announcement: 'was poisoned!',
 }
