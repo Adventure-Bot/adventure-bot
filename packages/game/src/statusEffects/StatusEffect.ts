@@ -12,4 +12,6 @@ export type StatusEffect = {
   buff: boolean
   debuff: boolean
   announcement: string
+  damageOverTime?: number
+  healOverTime?: number
 }

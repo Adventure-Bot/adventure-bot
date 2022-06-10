@@ -27,6 +27,7 @@ export type Usable = Item & {
 export type Weapon = Equippable & {
   type: 'weapon'
   damageMax: number
+  onHitEffect?: EffectTemplate
   accuracyDescriptors: {
     wideMiss: string[]
     nearMiss: string[]
