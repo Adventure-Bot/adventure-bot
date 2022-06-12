@@ -69,7 +69,7 @@ const leaderboardSlice = createSlice({
   },
 })
 
-export default leaderboardSlice.reducer
+export const leaderboard = leaderboardSlice.reducer
 
 function characterScore(victories: Victory[]): Score {
   const winner = victories[0].winner

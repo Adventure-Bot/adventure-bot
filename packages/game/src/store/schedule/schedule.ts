@@ -42,4 +42,4 @@ const scheduleSlice = createSlice({
   },
 })
 
-export default scheduleSlice.reducer
+export const schedule = scheduleSlice.reducer

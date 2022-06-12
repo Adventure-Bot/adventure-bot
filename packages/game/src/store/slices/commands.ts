@@ -28,4 +28,4 @@ const commandsSlice = createSlice({
   },
 })
 
-export default commandsSlice.reducer
+export const commands = commandsSlice.reducer

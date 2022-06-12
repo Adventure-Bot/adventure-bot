@@ -18,7 +18,7 @@ export const shopInventoryAdded = createAction<Item>('shop/inventoryAdded')
 export const selectShopInventory = (state: ReduxState): Item[] =>
   state.shop.inventory
 
-const shopSlice = createSlice({
+export const shop = createSlice({
   name: 'shop',
   initialState: {
     inventory,
@@ -38,6 +38,4 @@ const shopSlice = createSlice({
         )
       })
   },
-})
-
-export default shopSlice.reducer
+}).reducer
