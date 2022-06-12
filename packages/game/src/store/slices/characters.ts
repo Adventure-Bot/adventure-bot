@@ -208,10 +208,17 @@ const characterSlice = createSlice({
         amount: number
       }>
     ) {
-      const { amount, character } = action.payload
+      const {
+        amount,
+        character: {
+          id,
+          statsModified: { maxHP },
+        },
+      } = action.payload
+      const character = state.charactersById[id]
       character.hp = clamp(character.hp - amount, {
         min: 0,
-        max: character.stats.maxHP,
+        max: maxHP,
       })
 
       if (character.hp > 0 && character.quests.survivor)

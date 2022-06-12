@@ -2,7 +2,6 @@ import { randomUUID } from 'crypto'
 
 import { Weapon } from '@adventure-bot/game/equipment'
 
-// TODO: add to chests and shops
 export const venomousBlade = (): Weapon => ({
   id: randomUUID(),
   type: 'weapon',
