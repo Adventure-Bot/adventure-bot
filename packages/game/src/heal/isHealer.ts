@@ -1,7 +1,10 @@
-import { Character } from '@adventure-bot/game/character'
+import { ReduxState } from '@adventure-bot/game/store'
 import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
 
-export const isHealer = (character: Character): boolean =>
-  (selectCharacterEffects(character.id).filter(
+export const selectIsHealer = (
+  state: ReduxState,
+  characterId: string
+): boolean =>
+  selectCharacterEffects(state, characterId).some(
     (effect) => effect.name === 'Healer'
-  ).length ?? 0) > 0
+  )

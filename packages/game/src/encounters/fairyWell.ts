@@ -17,13 +17,13 @@ import {
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/game/store/slices/characters'
-import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, asset, d } from '@adventure-bot/game/utils'
 
 export async function fairyWell({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> {
-  const healAmount = Math.ceil(Math.random() * 6)
+  const healAmount = d(6)
 
   const character = findOrCreateCharacter(interaction.user)
   await interaction[replyType]({
@@ -43,9 +43,7 @@ export async function fairyWell({
       }).setImage(asset('fantasy', 'places', "a fairy's well").s3Url),
     ],
   })
-  store.dispatch(
-    healed({ characterId: interaction.user.id, amount: healAmount })
-  )
+  store.dispatch(healed({ character, amount: healAmount }))
   store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
   store.dispatch(
     questProgressed({

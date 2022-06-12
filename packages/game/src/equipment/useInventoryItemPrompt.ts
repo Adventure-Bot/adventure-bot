@@ -154,7 +154,7 @@ function useInventoryItem({
       store.dispatch(
         healed({
           amount: healAmount,
-          characterId: character.id,
+          character,
         })
       )
       embeds.push(

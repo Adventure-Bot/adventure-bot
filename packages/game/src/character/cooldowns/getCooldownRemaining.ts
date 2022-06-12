@@ -1,13 +1,12 @@
 import moment from 'moment'
 import { clamp } from 'remeda'
 
-import {
-  Character,
-  abilityCooldowns,
-  stunDurationRemaining,
-} from '@adventure-bot/game/character'
+import { Character, abilityCooldowns } from '@adventure-bot/game/character'
 import store from '@adventure-bot/game/store'
-import { selectCharacterById } from '@adventure-bot/game/store/selectors'
+import {
+  selectCharacterById,
+  selectStunDurationRemaining,
+} from '@adventure-bot/game/store/selectors'
 
 export const getCooldownRemaining = (
   characterId: string,
@@ -22,5 +21,9 @@ export const getCooldownRemaining = (
   const cooldownRemaining = moment(character.cooldowns[type] ?? 0)
     .add(abilityCooldowns[type] * haste, 'milliseconds')
     .diff(moment())
-  return Math.max(cooldownRemaining, stunDurationRemaining(character), 0)
+  return Math.max(
+    cooldownRemaining,
+    selectStunDurationRemaining(state, character.id),
+    0
+  )
 }

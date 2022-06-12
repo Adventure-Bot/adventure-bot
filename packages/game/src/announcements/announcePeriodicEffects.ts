@@ -8,6 +8,7 @@ import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 
 // TODO: trigger this
+// ts-prune-ignore-next
 export const periodicEffectApplied = createAction<{
   characterId: string
   effect: StatusEffect

@@ -1,8 +1,5 @@
 import { playerAttack } from '@adventure-bot/game/attack'
-import {
-  getCharacterStatModified,
-  mentionCharacter,
-} from '@adventure-bot/game/character'
+import { mentionCharacter } from '@adventure-bot/game/character'
 import { randomArrayElement } from '@adventure-bot/game/utils'
 
 import { defaultAccuracyDescriptors } from '../../commands/attack'
@@ -12,10 +9,8 @@ export const accuracyDescriptor = (
 ): string => {
   if (!result) return `No result`
   if (result.outcome === 'cooldown') return 'On cooldown'
-  const accuracy =
-    result.attackRoll +
-    getCharacterStatModified(result.attacker, 'attackBonus') -
-    getCharacterStatModified(result.defender, 'ac')
+  const { attackBonus, ac } = result.attacker.statsModified
+  const accuracy = result.attackRoll + attackBonus - ac
   const attacker = mentionCharacter(result.attacker)
   const defender = mentionCharacter(result.defender)
   const descriptors =

@@ -1,9 +1,12 @@
 import { effects, isAppliedEffect } from '@adventure-bot/game/statusEffects'
-import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
+import { ReduxState } from '@adventure-bot/game/store'
 import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
 
-export function stunDurationRemaining(character: CharacterWithStats): number {
-  const stunned = selectCharacterEffects(character.id)
+export function selectStunDurationRemaining(
+  state: ReduxState,
+  characterId: string
+): number {
+  const stunned = selectCharacterEffects(state, characterId)
     .filter((effect) => effect.name === effects.stunned.name)
     .filter(isAppliedEffect)
     .sort((a, b) => (a.started < b.started ? 1 : -1))[0]

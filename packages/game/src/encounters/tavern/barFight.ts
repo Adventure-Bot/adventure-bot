@@ -18,8 +18,8 @@ export async function barFight(
   followUp = true
 ): Promise<void> {
   const damage = d6()
-  store.dispatch(damaged({ characterId: interaction.user.id, amount: damage }))
   const character = findOrCreateCharacter(interaction.user)
+  store.dispatch(damaged({ character, amount: damage }))
   const embed = new MessageEmbed({
     title: `${decoratedName(character)} got into a bar fight!`,
     color: 'RED',

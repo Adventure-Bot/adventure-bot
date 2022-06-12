@@ -1,18 +1,22 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { values } from 'remeda'
 
-import {
-  Character,
-  Stats,
-  getCharacterStatModifier,
-  stats,
-} from '@adventure-bot/game/character'
+import { Character, Stats } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
 import { Monster, isMonster } from '@adventure-bot/game/monster'
 import { Quest } from '@adventure-bot/game/quest/Quest'
 import { QuestId, quests } from '@adventure-bot/game/quest/quests'
 import { ReduxState } from '@adventure-bot/game/store'
+import { selectCharacterStats } from '@adventure-bot/game/store/selectors/selectCharacterStats'
 import { asset } from '@adventure-bot/game/utils/asset'
+
+export { selectCharacterEffects } from './selectCharacterEffects'
+export { selectStatusEffectStatModifier } from './selectStatusEffectStatModifier'
+export { selectCharacterStatModified } from './selectCharacterStatModified'
+export { selectCharacterStatModifier } from './selectCharacterStatModifier'
+export { selectEquipmentStatModifier } from './selectEquipmentStatModifier'
+export { selectStunDurationRemaining } from './selectStunDurationRemaining'
+export { selectCharacterStats } from './selectCharacterStats'
 
 const decorateCharacterWithAssetProfile = <T extends Character>(
   character: T
@@ -33,31 +37,6 @@ const decorateCharacterWithAssetProfile = <T extends Character>(
   } else return character
 }
 
-const selectStats = (
-  state: ReduxState,
-  characterId: string,
-  includeModifiers = true
-): Stats | void => {
-  const character = state.characters.charactersById[characterId]
-  if (!character) return
-  if (!includeModifiers)
-    return stats.reduce(
-      (acc, stat) => ({
-        ...acc,
-        [stat]: character[stat] ?? 0,
-      }),
-      {} as Stats
-    )
-  return stats.reduce(
-    (acc, stat) => ({
-      ...acc,
-      [stat]:
-        (character[stat] ?? 0) + getCharacterStatModifier(character, stat),
-    }),
-    {} as Stats
-  )
-}
-
 export type CharacterWithStats = Character & {
   stats: Stats
   statsModified: Stats
@@ -68,8 +47,8 @@ export const selectCharacterById = (
 ): CharacterWithStats | void => {
   const character = state.characters.charactersById[id]
   if (!character) return
-  const stats = selectStats(state, character.id)
-  const statsModified = selectStats(state, character.id, true)
+  const stats = selectCharacterStats(state, character)
+  const statsModified = selectCharacterStats(state, character, true)
   if (!(character && stats && statsModified)) return
 
   return {
@@ -159,5 +138,3 @@ export function selectAvailableQuests(
     })
   })
 }
-
-export { selectCharacterEffects } from './selectCharacterEffects'
