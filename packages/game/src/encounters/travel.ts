@@ -8,7 +8,7 @@ import {
 import { isTravelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
-import { effectAdded } from '@adventure-bot/game/store/slices/characters'
+import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import {
   CommandHandlerOptions,
   asset,

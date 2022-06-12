@@ -23,10 +23,10 @@ import { EffectId } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import {
-  effectAdded,
   healed,
   itemRemoved,
 } from '@adventure-bot/game/store/slices/characters'
+import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { asset, d, randomArrayElement } from '@adventure-bot/game/utils'
 
 /**

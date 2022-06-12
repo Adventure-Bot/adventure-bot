@@ -8,7 +8,7 @@ import {
   selectCharacterById,
   selectLastChannelUsed,
 } from '@adventure-bot/game/store/selectors'
-import { effectAdded } from '@adventure-bot/game/store/slices/characters'
+import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 
 export const announceEffectAdded: (client: Client) => void = (client) => {
   startAppListening({

@@ -10,7 +10,6 @@ import {
   created,
   damaged,
   divineBlessingGranted,
-  effectAdded,
   goldGained,
   goldSet,
   healed,
@@ -25,6 +24,7 @@ import {
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/game/store/slices/characters'
+import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 
 import { listCharacters } from './listCharacters'
 
