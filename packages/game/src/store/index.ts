@@ -20,7 +20,7 @@ const enhancers = []
 
 if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
   const port = parseInt(process.env.REDUX_DEVTOOLS_PORT ?? '5010')
-  console.log(`redux-devtools enabled on port ${port}`)
+  console.log(`✅ redux-devtools enabled on port ${port}`)
   enhancers.push(
     remoteReduxEnhancer({
       name:
@@ -35,7 +35,7 @@ if (process.env.REDUX_DEVTOOLS_ENABLED === 'true') {
     })
   )
 } else {
-  console.log('redux-devtools disabled')
+  console.log('❌ redux-devtools disabled')
 }
 
 const persistedReducer = persistReducer(

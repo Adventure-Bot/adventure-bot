@@ -1,6 +1,6 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const protectedEffect: TemplateEffect = {
+export const protectedEffect: StatusEffect = {
   name: 'Protected',
   modifiers: {
     ac: 2,
@@ -9,4 +9,5 @@ export const protectedEffect: TemplateEffect = {
   buff: true,
   debuff: false,
   announcement: 'became protected!',
+  announcementColor: 'NOT_QUITE_BLACK',
 }

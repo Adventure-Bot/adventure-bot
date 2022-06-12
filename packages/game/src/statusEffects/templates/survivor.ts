@@ -1,6 +1,6 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const survivor: TemplateEffect = {
+export const survivor: StatusEffect = {
   name: 'Survivor',
   buff: true,
   debuff: false,
@@ -9,4 +9,5 @@ export const survivor: TemplateEffect = {
     maxHP: 5,
   },
   announcement: 'endured!',
+  announcementColor: 'DARK_RED',
 }

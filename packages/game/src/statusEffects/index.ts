@@ -7,5 +7,5 @@ export {
   EffectTemplate,
   effects,
 } from '@adventure-bot/game/statusEffects/templates'
-export { TemplateEffect } from '@adventure-bot/game/statusEffects/templates/TemplateEffect'
 export { isStatusEffectExpired } from '@adventure-bot/game/statusEffects/isStatusEffectExpired'
+export { isAppliedEffect } from '@adventure-bot/game/statusEffects/StatusEffect'

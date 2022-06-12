@@ -1,7 +1,7 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
-export const blind: TemplateEffect = {
+export const blind: StatusEffect = {
   name: 'Blind',
   buff: false,
   debuff: true,
@@ -10,4 +10,5 @@ export const blind: TemplateEffect = {
     attackBonus: -3,
   },
   announcement: 'was blinded!',
+  announcementColor: 'NOT_QUITE_BLACK',
 }

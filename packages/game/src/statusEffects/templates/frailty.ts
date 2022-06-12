@@ -1,6 +1,6 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const frailty: TemplateEffect = {
+export const frailty: StatusEffect = {
   name: 'Frailty',
   buff: false,
   debuff: true,
@@ -10,4 +10,5 @@ export const frailty: TemplateEffect = {
     maxHP: -3,
   },
   announcement: 'became frail!',
+  announcementColor: 'LIGHT_GREY',
 }

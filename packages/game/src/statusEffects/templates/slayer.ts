@@ -1,6 +1,6 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const slayer: TemplateEffect = {
+export const slayer: StatusEffect = {
   name: 'Slayer',
   buff: true,
   debuff: false,
@@ -9,4 +9,5 @@ export const slayer: TemplateEffect = {
   },
   duration: 60 * 60000,
   announcement: 'became a slayer!',
+  announcementColor: 'DARK_GREEN',
 }

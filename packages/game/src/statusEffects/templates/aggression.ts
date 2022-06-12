@@ -1,6 +1,6 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const aggression: TemplateEffect = {
+export const aggression: StatusEffect = {
   name: 'Agression',
   buff: true,
   debuff: false,
@@ -8,5 +8,6 @@ export const aggression: TemplateEffect = {
     attackBonus: 2,
   },
   announcement: 'became aggressive!',
+  announcementColor: 'RED',
   duration: 60 * 60000,
 }

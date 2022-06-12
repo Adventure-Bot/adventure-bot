@@ -4,6 +4,7 @@ import {
   announceGoldGained,
   announceXpAwarded,
 } from '@adventure-bot/game/announcements'
+import { announcePeriodicEffects } from '@adventure-bot/game/announcements/announcePeriodicEffects'
 import { installCommands } from '@adventure-bot/game/boot/installCommands'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import { renderLeaderboard } from '@adventure-bot/game/leaderboard'
@@ -32,6 +33,7 @@ export async function setupGuild({
   gameChannel({ guild, appId }).then((channel) => {
     announceXpAwarded({ channel })
     announceGoldGained({ channel })
+    announcePeriodicEffects({ channel })
   })
   renderLeaderboard({ guild, appId })
   renderRoamingMonsters({ guild, appId })

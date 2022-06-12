@@ -1,7 +1,7 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects/templates/TemplateEffect'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
-export const slowed: TemplateEffect = {
+export const slowed: StatusEffect = {
   name: 'Slowed',
   buff: false,
   debuff: true,
@@ -10,4 +10,5 @@ export const slowed: TemplateEffect = {
     haste: -10,
   },
   announcement: 'started moving more slowly!',
+  announcementColor: 'DARK_BLUE',
 }
