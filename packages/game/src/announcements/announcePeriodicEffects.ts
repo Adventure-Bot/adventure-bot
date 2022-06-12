@@ -7,6 +7,7 @@ import store from '@adventure-bot/game/store'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 
+// TODO: trigger this
 export const periodicEffectApplied = createAction<{
   characterId: string
   effect: StatusEffect
