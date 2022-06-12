@@ -225,10 +225,12 @@ const characterSlice = createSlice({
         amount: number
       }>
     ) {
-      const { amount, character } = action.payload
-      const { maxHP } = character.stats
-      if (character.hp > maxHP) return
-      character.hp = clamp(character.hp + amount, {
+      const { amount } = action.payload
+      const { hp, id } = action.payload.character
+      const { maxHP } = action.payload.character.stats
+      const character = state.charactersById[id]
+      if (hp > maxHP) return
+      character.hp = clamp(hp + amount, {
         min: 0,
         max: maxHP,
       })

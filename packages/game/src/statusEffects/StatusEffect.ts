@@ -22,6 +22,3 @@ export type StatusEffect = EffectTemplate & {
   started: string
   id: string
 }
-
-export const isAppliedEffect = (effect: StatusEffect): effect is StatusEffect =>
-  !!effect.started
