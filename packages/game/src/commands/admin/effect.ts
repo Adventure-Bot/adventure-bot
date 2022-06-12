@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
+import { randomUUID } from 'crypto'
 import { MessageEmbed } from 'discord.js'
 import { values } from 'remeda'
 
@@ -51,6 +52,7 @@ export const execute = async ({
         characterId: interaction.user.id,
         effect: {
           ...effect,
+          id: randomUUID(),
           started: new Date().toString(),
         },
       })

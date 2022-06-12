@@ -1,6 +1,6 @@
-import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const frailty: StatusEffect = {
+export const frailty: EffectTemplate = {
   name: 'Frailty',
   buff: false,
   debuff: true,

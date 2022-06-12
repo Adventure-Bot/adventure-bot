@@ -19,7 +19,7 @@ import {
   usableInventory,
 } from '@adventure-bot/game/equipment'
 import { createEffect } from '@adventure-bot/game/statusEffects'
-import { EffectTemplate } from '@adventure-bot/game/statusEffects'
+import { EffectId } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import {
@@ -101,7 +101,7 @@ export const useInventoryItemPrompt = async (
 }
 
 const potionArt: {
-  [key in EffectTemplate]: Manifest['fantasy']['items']
+  [key in EffectId]: Manifest['fantasy']['items']
 } = {
   aggression: 'magic potion with glowing orange liquid',
   frailty: 'magic potion with glowing purple liquid',

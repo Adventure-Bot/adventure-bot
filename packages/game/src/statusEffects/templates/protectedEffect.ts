@@ -1,6 +1,6 @@
-import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const protectedEffect: StatusEffect = {
+export const protectedEffect: EffectTemplate = {
   name: 'Protected',
   modifiers: {
     ac: 2,
