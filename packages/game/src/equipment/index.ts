@@ -12,7 +12,7 @@ import { randomChestItem } from '@adventure-bot/game/equipment/randomChestItem'
 import { randomShopItem } from '@adventure-bot/game/equipment/randomShopItem'
 import { usableInventory } from '@adventure-bot/game/equipment/usableInventory'
 import { useInventoryItemPrompt } from '@adventure-bot/game/equipment/useInventoryItemPrompt'
-import { EffectTemplate } from '@adventure-bot/game/statusEffects/templates'
+import { EffectId } from '@adventure-bot/game/statusEffects/templates'
 
 export type Equippable = Item & {
   equippable: true
@@ -27,7 +27,7 @@ export type Usable = Item & {
 export type Weapon = Equippable & {
   type: 'weapon'
   damageMax: number
-  onHitEffect?: EffectTemplate
+  onHitEffect?: EffectId
   accuracyDescriptors: {
     wideMiss: string[]
     nearMiss: string[]
@@ -65,7 +65,7 @@ export type Potion = Item &
     type: 'potion'
     useEffects: {
       maxHeal?: number
-      randomEffect?: EffectTemplate[]
+      randomEffect?: EffectId[]
     }
   }
 

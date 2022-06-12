@@ -1,6 +1,6 @@
-import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const slayer: StatusEffect = {
+export const slayer: EffectTemplate = {
   name: 'Slayer',
   buff: true,
   debuff: false,

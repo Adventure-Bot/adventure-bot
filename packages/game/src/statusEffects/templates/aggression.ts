@@ -1,6 +1,6 @@
-import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const aggression: StatusEffect = {
+export const aggression: EffectTemplate = {
   name: 'Agression',
   buff: true,
   debuff: false,

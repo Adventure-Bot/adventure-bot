@@ -1,7 +1,10 @@
-import { StatusEffect } from '@adventure-bot/game/statusEffects'
-import { EffectTemplate, effects } from '@adventure-bot/game/statusEffects'
+import { randomUUID } from 'crypto'
 
-export const createEffect = (effect: EffectTemplate): StatusEffect => ({
+import { StatusEffect } from '@adventure-bot/game/statusEffects'
+import { EffectId, effects } from '@adventure-bot/game/statusEffects'
+
+export const createEffect = (effect: EffectId): StatusEffect => ({
   ...effects[effect],
+  id: randomUUID(),
   started: new Date().toString(),
 })

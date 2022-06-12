@@ -1,6 +1,6 @@
-import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const healer: StatusEffect = {
+export const healer: EffectTemplate = {
   name: 'Healer',
   buff: true,
   debuff: false,

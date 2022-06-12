@@ -1,6 +1,6 @@
-import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const haste: StatusEffect = {
+export const haste: EffectTemplate = {
   name: 'Haste',
   buff: true,
   debuff: false,

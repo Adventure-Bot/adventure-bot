@@ -32,4 +32,4 @@ export const effects = {
   survivor,
 } as const
 
-export type EffectTemplate = keyof typeof effects
+export type EffectId = keyof typeof effects

@@ -1,7 +1,7 @@
-import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects/StatusEffect'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
-export const blind: StatusEffect = {
+export const blind: EffectTemplate = {
   name: 'Blind',
   buff: false,
   debuff: true,

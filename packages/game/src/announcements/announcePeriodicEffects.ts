@@ -2,14 +2,14 @@ import { createAction } from '@reduxjs/toolkit'
 import { MessageEmbed, TextChannel } from 'discord.js'
 
 import { decoratedName, hpBarField } from '@adventure-bot/game/character'
-import { PeriodicEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { StatusEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 
 export const periodicEffectApplied = createAction<{
   characterId: string
-  effect: PeriodicEffect
+  effect: StatusEffect
 }>('periodicEffectApplied')
 
 export function announcePeriodicEffects({
@@ -22,7 +22,7 @@ export function announcePeriodicEffects({
     effect: ({ payload: { characterId, effect } }) => {
       const character = selectCharacterById(store.getState(), characterId)
       if (!character) return
-      const { healthAdjustment } = effect.overTime
+      const { healthAdjustment } = effect
 
       const fields = healthAdjustment
         ? [hpBarField({ character, adjustment: healthAdjustment })]
