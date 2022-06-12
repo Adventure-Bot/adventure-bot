@@ -64,7 +64,7 @@ export const makeAttack = (
   if (['hit', 'crit'].includes(outcome)) {
     store.dispatch(
       damaged({
-        characterId: defenderId,
+        character: defender,
         amount: totalDamage,
       })
     )

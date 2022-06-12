@@ -65,7 +65,7 @@ export const announceTrapAttacked: (client: Client) => void = (client) => {
         if (result.damage) {
           store.dispatch(
             damaged({
-              characterId: character.id,
+              character: character,
               amount: result.damage,
             })
           )

@@ -3,8 +3,9 @@ import { CommandInteraction } from 'discord.js'
 import quests from '@adventure-bot/game/commands/quests'
 import { Shrine } from '@adventure-bot/game/encounters/shrine'
 import { isUserQuestComplete } from '@adventure-bot/game/quest'
-import { hasStatusEffect } from '@adventure-bot/game/statusEffects'
+import { effects } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
+import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
 import {
   questProgressed,
   xpAwarded,
@@ -19,13 +20,11 @@ export async function applyShrine({
   shrine: Shrine
 }): Promise<void> {
   const effect = shrine.effect
-  if (
-    hasStatusEffect({
-      characterId: interaction.user.id,
-      name: 'Blessed',
-    }) &&
-    effect.duration
-  ) {
+  const isBlessed = selectCharacterEffects(
+    store.getState(),
+    interaction.user.id
+  ).some((effect) => effect.name === effects.blessed.name)
+  if (effect.duration && isBlessed) {
     effect.duration *= 2
   }
   store.dispatch(effectAdded({ characterId: interaction.user.id, effect }))

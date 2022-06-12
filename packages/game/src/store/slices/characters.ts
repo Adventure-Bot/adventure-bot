@@ -6,7 +6,6 @@ import {
   Character,
   LootResult,
   equipmentFilter,
-  getCharacterStatModified,
 } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
 import { getSaleRate } from '@adventure-bot/game/encounters/shop'
@@ -205,15 +204,14 @@ const characterSlice = createSlice({
     damaged(
       state,
       action: PayloadAction<{
-        characterId: string
+        character: CharacterWithStats
         amount: number
       }>
     ) {
-      const { amount } = action.payload
-      const character = state.charactersById[action.payload.characterId]
+      const { amount, character } = action.payload
       character.hp = clamp(character.hp - amount, {
         min: 0,
-        max: getCharacterStatModified(character, 'maxHP'),
+        max: character.stats.maxHP,
       })
 
       if (character.hp > 0 && character.quests.survivor)
@@ -223,17 +221,16 @@ const characterSlice = createSlice({
     healed(
       state,
       action: PayloadAction<{
-        characterId: string
+        character: CharacterWithStats
         amount: number
       }>
     ) {
-      const { amount, characterId } = action.payload
-      const character = state.charactersById[characterId]
-      if (!character) return
-      if (character.hp > getCharacterStatModified(character, 'maxHP')) return
+      const { amount, character } = action.payload
+      const { maxHP } = character.stats
+      if (character.hp > maxHP) return
       character.hp = clamp(character.hp + amount, {
         min: 0,
-        max: getCharacterStatModified(character, 'maxHP'),
+        max: maxHP,
       })
     },
 

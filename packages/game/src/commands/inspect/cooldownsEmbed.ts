@@ -6,8 +6,9 @@ import {
   cooldownRemainingText,
   decoratedName,
 } from '@adventure-bot/game/character'
-import { stunDurationRemaining } from '@adventure-bot/game/character/cooldowns/stunDurationRemaining'
-import { isHealer } from '@adventure-bot/game/heal/isHealer'
+import { selectIsHealer } from '@adventure-bot/game/heal/isHealer'
+import store from '@adventure-bot/game/store'
+import { selectStunDurationRemaining } from '@adventure-bot/game/store/selectors'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 
 export function cooldownsEmbed({
@@ -16,19 +17,19 @@ export function cooldownsEmbed({
   character: CharacterWithStats
   interaction: CommandInteraction
 }): MessageEmbed {
+  const state = store.getState()
   const embed = new MessageEmbed({
     title: `${decoratedName(character)}'s cooldowns`,
   })
-  if (stunDurationRemaining(character))
+  const stunDuration = selectStunDurationRemaining(state, character.id)
+  if (stunDuration)
     embed.addFields([
       {
         name: 'Stunned',
         value:
           Emoji('stunned') +
           ' recovery ' +
-          moment()
-            .add(stunDurationRemaining(character), 'milliseconds')
-            .fromNow(),
+          moment().add(stunDuration, 'milliseconds').fromNow(),
       },
     ])
   embed.addFields([
@@ -52,7 +53,7 @@ export function cooldownsEmbed({
       inline: true,
     },
   ])
-  if (isHealer(character)) {
+  if (selectIsHealer(state, character.id)) {
     embed.addFields([
       {
         name: 'Renew',

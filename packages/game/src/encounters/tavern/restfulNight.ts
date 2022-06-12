@@ -4,7 +4,6 @@ import { clamp } from 'remeda'
 import {
   decoratedName,
   findOrCreateCharacter,
-  getCharacterStatModified,
   hpBarField,
 } from '@adventure-bot/game/character'
 import quests from '@adventure-bot/game/commands/quests'
@@ -27,9 +26,10 @@ export async function restfulNight(
 ): Promise<void> {
   const preHealCharacter = findOrCreateCharacter(interaction.user)
   const healAmount = d6()
+  const { maxHP } = preHealCharacter.statsModified
+  const { hp } = preHealCharacter
   const actualHeal = clamp(healAmount, {
-    max:
-      getCharacterStatModified(preHealCharacter, 'maxHP') - preHealCharacter.hp,
+    max: maxHP - hp,
   })
 
   const character = findOrCreateCharacter(interaction.user)
@@ -41,7 +41,7 @@ export async function restfulNight(
         description: 'You feel well rested. 💤',
         fields: [
           hpBarField({
-            character: findOrCreateCharacter(interaction.user),
+            character,
             adjustment: actualHeal,
           }),
         ].concat(
@@ -54,9 +54,7 @@ export async function restfulNight(
         .setThumbnail(character.profile),
     ],
   })
-  store.dispatch(
-    healed({ characterId: interaction.user.id, amount: actualHeal })
-  )
+  store.dispatch(healed({ character, amount: actualHeal }))
 
   store.dispatch(
     effectAdded({

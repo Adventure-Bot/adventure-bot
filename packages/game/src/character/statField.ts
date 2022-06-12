@@ -2,13 +2,12 @@ import { APIEmbedField } from 'discord-api-types'
 import { CommandInteraction } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
+import { Character, Stat, statTitles } from '@adventure-bot/game/character'
+import store from '@adventure-bot/game/store'
 import {
-  Character,
-  Stat,
-  getCharacterStatModified,
-  getCharacterStatModifier,
-  statTitles,
-} from '@adventure-bot/game/character'
+  selectCharacterStatModified,
+  selectCharacterStatModifier,
+} from '@adventure-bot/game/store/selectors'
 
 export function statField(
   character: Character,
@@ -29,8 +28,9 @@ function statText({
   stat: Stat
   interaction: CommandInteraction
 }): string {
-  const modified = getCharacterStatModified(character, stat)
-  const modifier = getCharacterStatModifier(character, stat)
+  const state = store.getState()
+  const modified = selectCharacterStatModified(state, character, stat)
+  const modifier = selectCharacterStatModifier(state, character.id, stat)
   const sign = modifier > 0 ? '+' : ''
   return Emoji(stat) + ` ${modified}${modifier ? ` (${sign}${modifier})` : ''}`
 }
