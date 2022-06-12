@@ -9,7 +9,7 @@ const initialState = {
   effectsByCharacterId: {} as Record<string, Record<string, boolean>>,
 }
 
-const statusEffects = createSlice({
+export const statusEffects = createSlice({
   name: 'statusEffects',
   initialState,
   reducers: {},
@@ -26,6 +26,4 @@ const statusEffects = createSlice({
         }
       })
   },
-})
-
-export default statusEffects.reducer
+}).reducer

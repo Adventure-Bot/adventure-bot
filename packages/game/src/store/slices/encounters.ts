@@ -106,4 +106,4 @@ export const {
   doubleKO,
 } = encountersSlice.actions
 
-export default encountersSlice.reducer
+export const encounters = encountersSlice.reducer

@@ -377,4 +377,4 @@ export const {
   purgeRoamingMonsters,
 } = characterSlice.actions
 
-export default characterSlice.reducer
+export const characters = characterSlice.reducer

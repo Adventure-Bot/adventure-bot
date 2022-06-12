@@ -67,4 +67,4 @@ const crownSlice = createSlice({
   },
 })
 
-export default crownSlice.reducer
+export const crown = crownSlice.reducer

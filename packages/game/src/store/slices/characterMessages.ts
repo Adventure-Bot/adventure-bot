@@ -24,4 +24,4 @@ const characterMessagesSlice = createSlice({
   },
 })
 
-export default characterMessagesSlice.reducer
+export const characterMessages = characterMessagesSlice.reducer
