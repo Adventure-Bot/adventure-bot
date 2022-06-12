@@ -1,6 +1,6 @@
 import { Character, Stats, stats } from '@adventure-bot/game/character'
 import { ReduxState } from '@adventure-bot/game/store'
-import { selectCharacterStatModified } from '@adventure-bot/game/store/selectors'
+import { selectCharacterStatModifier } from '@adventure-bot/game/store/selectors'
 
 export function selectCharacterStats(
   state: ReduxState,
@@ -13,7 +13,7 @@ export function selectCharacterStats(
       [stat]:
         (character[stat] ?? 0) +
         (includeModifiers
-          ? selectCharacterStatModified(state, character, stat)
+          ? selectCharacterStatModifier(state, character.id, stat)
           : 0),
     }),
     {} as Stats
