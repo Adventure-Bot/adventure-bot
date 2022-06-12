@@ -1,4 +1,5 @@
 import { createMigrate } from 'redux-persist'
+import { mapValues } from 'remeda'
 
 import { defaultLeaderboardState } from '@adventure-bot/game/leaderboard/leaderboardSlice'
 import { RootReducerState } from '@adventure-bot/game/store'
@@ -9,12 +10,13 @@ import { defaultEncounterWeights } from '@adventure-bot/game/store/slices/encoun
 /*
  * This is the current version and should match the latest version
  */
-export const persistVersion = 7
+export const persistVersion = 8
 
 /**
  * Here we use RootReducerState instead of ReduxState to avoid cyclical type references
  */
-type PersistedReduxStateV7 = RootReducerState
+type PersistedReduxStateV8 = RootReducerState
+type PersistedReduxStateV7 = PersistedReduxStateV8
 
 type PersistedReduxStateV6 = Omit<PersistedReduxStateV7, 'leaderboard'> & {
   leaderboard: Omit<
@@ -95,10 +97,20 @@ const persistMigrations = {
       userCommands: {},
     },
   }),
-  7: (state: PersistedReduxStateV6): RootReducerState => ({
+  7: (state: PersistedReduxStateV6): PersistedReduxStateV7 => ({
     ...state,
     leaderboard: defaultLeaderboardState,
   }),
+  8: (state: PersistedReduxStateV7): RootReducerState => {
+    state.characters.charactersById = mapValues(
+      state.characters.charactersById,
+      (character) => ({
+        ...character,
+        statusEffects: undefined,
+      })
+    )
+    return state
+  },
 }
 
 export const persistMigrate = createMigrate<MigrationState>(persistMigrations)

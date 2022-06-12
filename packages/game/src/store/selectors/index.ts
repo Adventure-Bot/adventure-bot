@@ -11,7 +11,6 @@ import { Encounter } from '@adventure-bot/game/encounters'
 import { Monster, isMonster } from '@adventure-bot/game/monster'
 import { Quest } from '@adventure-bot/game/quest/Quest'
 import { QuestId, quests } from '@adventure-bot/game/quest/quests'
-import { isStatusEffectExpired } from '@adventure-bot/game/statusEffects'
 import { ReduxState } from '@adventure-bot/game/store'
 import { asset } from '@adventure-bot/game/utils/asset'
 
@@ -75,9 +74,6 @@ export const selectCharacterById = (
 
   return {
     ...decorateCharacterWithAssetProfile(character),
-    statusEffects: character?.statusEffects?.filter(
-      (effect) => !isStatusEffectExpired(effect)
-    ),
     stats,
     statsModified,
   }
@@ -163,3 +159,5 @@ export function selectAvailableQuests(
     })
   })
 }
+
+export { selectCharacterEffects } from './selectCharacterEffects'

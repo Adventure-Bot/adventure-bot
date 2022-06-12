@@ -9,7 +9,6 @@ import {
   Weapon,
 } from '@adventure-bot/game/equipment'
 import { Quest, QuestId } from '@adventure-bot/game/quest'
-import { StatusEffect } from '@adventure-bot/game/statusEffects'
 
 export type Character = Stats & {
   id: string
@@ -34,7 +33,6 @@ export type Character = Stats & {
     heal?: string
     renew?: string
   }
-  statusEffects: StatusEffect[]
   quests: {
     [id in QuestId]?: Quest
   }
