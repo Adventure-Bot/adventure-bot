@@ -17,6 +17,7 @@ export { selectCharacterStatModifier } from './selectCharacterStatModifier'
 export { selectEquipmentStatModifier } from './selectEquipmentStatModifier'
 export { selectStunDurationRemaining } from './selectStunDurationRemaining'
 export { selectCharacterStats } from './selectCharacterStats'
+export { selectIsHealer } from './selectIsHealer'
 
 const decorateCharacterWithAssetProfile = <T extends Character>(
   character: T

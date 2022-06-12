@@ -4,8 +4,8 @@ import {
   startCooldown,
 } from '@adventure-bot/game/character'
 import { HealResult } from '@adventure-bot/game/heal/HealResult'
-import { selectIsHealer } from '@adventure-bot/game/heal/isHealer'
 import store from '@adventure-bot/game/store'
+import { selectIsHealer } from '@adventure-bot/game/store/selectors'
 import { healed } from '@adventure-bot/game/store/slices/characters'
 import { d6 } from '@adventure-bot/game/utils'
 
