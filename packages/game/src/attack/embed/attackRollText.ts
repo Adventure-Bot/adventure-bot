@@ -6,7 +6,8 @@ export const attackRollText = ({
 }: {
   result: AttackResult
 }): string => {
-  const { attackBonus, ac } = result.attacker.statsModified
+  const { attackBonus } = result.attacker.statsModified
+  const { ac } = result.defender.statsModified
   const { attackRoll } = result
   const bonusText = (attackBonus > 0 ? '+' : '') + (attackBonus || '')
   const comparison = ['crit', 'hit'].includes(result.outcome) ? '≥' : '<'
