@@ -1,6 +1,5 @@
 import { CommandInteraction } from 'discord.js'
 
-import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import quests from '@adventure-bot/game/commands/quests'
 import { Shrine } from '@adventure-bot/game/encounters/shrine'
 import { isUserQuestComplete } from '@adventure-bot/game/quest'
@@ -22,9 +21,10 @@ export async function applyShrine({
   const effect = shrine.effect
   if (
     hasStatusEffect({
-      character: findOrCreateCharacter(interaction.user),
+      characterId: interaction.user.id,
       name: 'Blessed',
-    })
+    }) &&
+    effect.duration
   ) {
     effect.duration *= 2
   }

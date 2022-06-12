@@ -1,14 +1,13 @@
-import { Character } from '@adventure-bot/game/character'
 import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
 
 export function hasStatusEffect({
-  character, // TODO: pass characterId: string instead
+  characterId,
   name,
 }: {
-  character: Character
+  characterId: string
   name: string
 }): boolean {
-  return selectCharacterEffects(character.id).some(
+  return selectCharacterEffects(characterId).some(
     (effect) => effect.name === name
   )
 }
