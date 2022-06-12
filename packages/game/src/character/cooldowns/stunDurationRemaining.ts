@@ -7,6 +7,6 @@ export function stunDurationRemaining(character: CharacterWithStats): number {
     .filter((effect) => effect.name === effects.stunned.name)
     .filter(isAppliedEffect)
     .sort((a, b) => (a.started < b.started ? 1 : -1))[0]
-  if (!stunned || !stunned.started) return 0
+  if (!stunned || !stunned.started || !stunned.duration) return 0
   return Date.now() - new Date(stunned.started).valueOf() + stunned.duration
 }

@@ -1,4 +1,4 @@
-import { EffectTemplate } from '@adventure-bot/game/statusEffects/StatusEffect'
+import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 
 export const slayer: EffectTemplate = {
   name: 'Slayer',

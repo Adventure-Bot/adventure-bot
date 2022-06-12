@@ -8,7 +8,7 @@ export type EffectTemplate = {
   /**
    * Duration in milliseconds
    */
-  duration: number
+  duration?: number
   modifiers?: Partial<Stats>
   buff: boolean
   debuff: boolean
