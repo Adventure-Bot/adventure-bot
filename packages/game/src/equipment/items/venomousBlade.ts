@@ -2,7 +2,8 @@ import { randomUUID } from 'crypto'
 
 import { Weapon } from '@adventure-bot/game/equipment'
 
-export const poisonedDagger = (): Weapon => ({
+// TODO: add to chests and shops
+export const venomousBlade = (): Weapon => ({
   id: randomUUID(),
   type: 'weapon',
   name: 'Venomous Blade',
@@ -12,14 +13,14 @@ export const poisonedDagger = (): Weapon => ({
     attackBonus: 3,
   },
   onHitEffect: 'poisoned',
-  goldValue: 20,
+  goldValue: 1500,
   accuracyDescriptors: {
     wideMiss: [
-      "<@attacker>'s dagger slashes in the approximate direction of <@defender>",
+      "<@attacker>'s Venomous Blade slashes in the approximate direction of <@defender>",
     ],
-    nearMiss: ["<@attacker>'s dagger nearly stabs <@defender>"],
-    onTheNose: ["<@attacker>'s dagger pierces <@defender>"],
-    veryAccurate: ["<@attacker>'s dagger pierces <@defender> true"],
+    nearMiss: ["<@attacker>'s Venomous Blade nearly stabs <@defender>"],
+    onTheNose: ["<@attacker>'s Venomous Blade pierces <@defender>"],
+    veryAccurate: ["<@attacker>'s Venomous Blade pierces <@defender> true"],
   },
   equippable: true,
   sellable: true,

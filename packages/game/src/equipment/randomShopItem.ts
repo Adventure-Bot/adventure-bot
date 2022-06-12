@@ -23,13 +23,14 @@ import {
   roguesBrew,
   roguesRing,
   towerShield,
-  travelersRing,
+  travelersRing, // venomousBlade,
   warAxe,
 } from '@adventure-bot/game/equipment/items'
 import { weightedTable } from '@adventure-bot/game/utils'
 
 export function randomShopItem(): Item {
   return weightedTable<() => Item>([
+    // [0.3, venomousBlade], // TODO: add venomousBlade
     [0.3, amuletOfAttack],
     [0.3, amuletOfProtection],
     [0.3, ringOfAttack],
