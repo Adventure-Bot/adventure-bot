@@ -6,8 +6,8 @@ import {
   cooldownRemainingText,
   decoratedName,
 } from '@adventure-bot/game/character'
-import { selectIsHealer } from '@adventure-bot/game/heal/isHealer'
 import store from '@adventure-bot/game/store'
+import { selectIsHealer } from '@adventure-bot/game/store/selectors'
 import { selectStunDurationRemaining } from '@adventure-bot/game/store/selectors'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 
