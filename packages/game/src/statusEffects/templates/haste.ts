@@ -1,6 +1,6 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const haste: TemplateEffect = {
+export const haste: StatusEffect = {
   name: 'Haste',
   buff: true,
   debuff: false,
@@ -9,4 +9,5 @@ export const haste: TemplateEffect = {
   },
   duration: 60 * 60000,
   announcement: 'started moving faster!',
+  announcementColor: 'WHITE',
 }

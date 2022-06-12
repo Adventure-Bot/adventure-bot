@@ -1,6 +1,6 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const invigorated: TemplateEffect = {
+export const invigorated: StatusEffect = {
   name: 'Invigorated',
   buff: true,
   debuff: false,
@@ -9,4 +9,5 @@ export const invigorated: TemplateEffect = {
     maxHP: 2,
   },
   announcement: 'became invigorated!',
+  announcementColor: 'WHITE',
 }

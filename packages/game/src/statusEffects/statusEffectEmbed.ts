@@ -17,14 +17,14 @@ export function statusEffectEmbed(effect: StatusEffect): MessageEmbed {
     })
   })
 
+  if (effect.started)
+    fields.push({
+      name: 'Expires',
+      value: moment(new Date(effect.started)).add(effect.duration).calendar(),
+    })
+
   return new MessageEmbed({
     title: effect.name,
-    fields: [
-      ...fields,
-      {
-        name: 'Expires',
-        value: moment(new Date(effect.started)).add(effect.duration).calendar(),
-      },
-    ],
+    fields,
   })
 }

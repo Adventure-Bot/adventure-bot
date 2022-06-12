@@ -1,9 +1,10 @@
-import { TemplateEffect } from '@adventure-bot/game/statusEffects/templates/TemplateEffect'
+import { StatusEffect } from '@adventure-bot/game/statusEffects/StatusEffect'
 
-export const stunned: TemplateEffect = {
+export const stunned: StatusEffect = {
   name: 'Stunned',
   buff: false,
   debuff: true,
   duration: 10 * 60000,
   announcement: 'became stunned!',
+  announcementColor: 'ORANGE',
 }
