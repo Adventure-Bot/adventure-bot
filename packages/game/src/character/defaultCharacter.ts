@@ -19,7 +19,6 @@ export const defaultCharacter: Omit<Character, 'id' | 'name'> = {
   perception: 0,
   profile: '',
   quests: {},
-  statusEffects: [],
   xp: 0,
   xpValue: 10,
 }

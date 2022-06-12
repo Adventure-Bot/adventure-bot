@@ -15,6 +15,7 @@ import { questEmbed } from '@adventure-bot/game/quest'
 import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
+import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
@@ -42,12 +43,7 @@ export const execute = async ({
     ],
   })
 
-  if (
-    values(character.equipment).length ||
-    (character.statusEffects?.length ?? 0) ||
-    values(character.quests).length
-  )
-    inspectThread({ interaction, character })
+  inspectThread({ interaction, character })
 }
 
 async function inspectThread({
@@ -57,14 +53,23 @@ async function inspectThread({
   interaction: CommandInteraction
   character: Character
 }): Promise<void> {
+  const effectEmbeds = selectCharacterEffects(character.id).map(
+    statusEffectEmbed
+  )
+  const equipmentEmbeds = values(character.equipment)
+    .map((item) => itemEmbed({ item, showEquipStatusFor: character }))
+    .slice(0, 9)
+  const somethingToShow =
+    0 <
+    (equipmentEmbeds.length ||
+      effectEmbeds.length ||
+      values(character.quests).length)
+  if (!somethingToShow) return
   const channel = interaction.channel
   if (!(channel instanceof TextChannel)) return
   const thread = await channel.threads.create({
     name: `Inspect ${character.name}`,
   })
-  const equipmentEmbeds = values(character.equipment)
-    .map((item) => itemEmbed({ item, showEquipStatusFor: character }))
-    .slice(0, 9)
   if (equipmentEmbeds.length)
     await getHook({
       name: 'Equipment',
@@ -76,15 +81,13 @@ async function inspectThread({
       })
     })
 
-  if ((character.statusEffects?.length ?? 0) > 0) {
+  if (effectEmbeds.length > 0) {
     await getHook({
       name: 'Status Effects',
       channel,
     }).then((hook) =>
       hook?.send({
-        embeds: character.statusEffects?.map((effect) =>
-          statusEffectEmbed(effect)
-        ),
+        embeds: effectEmbeds,
         threadId: thread.id,
       })
     )

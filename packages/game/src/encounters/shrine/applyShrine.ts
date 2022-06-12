@@ -20,7 +20,12 @@ export async function applyShrine({
   shrine: Shrine
 }): Promise<void> {
   const effect = shrine.effect
-  if (hasStatusEffect(findOrCreateCharacter(interaction.user), 'Blessed')) {
+  if (
+    hasStatusEffect({
+      character: findOrCreateCharacter(interaction.user),
+      name: 'Blessed',
+    })
+  ) {
     effect.duration *= 2
   }
   store.dispatch(effectAdded({ characterId: interaction.user.id, effect }))
