@@ -7,10 +7,10 @@ import { isUserQuestComplete } from '@adventure-bot/game/quest'
 import { hasStatusEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import {
-  effectAdded,
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/game/store/slices/characters'
+import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 
 export async function applyShrine({
   interaction,

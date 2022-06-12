@@ -15,11 +15,11 @@ import {
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import {
-  effectAdded,
   healed,
   questProgressed,
   xpAwarded,
 } from '@adventure-bot/game/store/slices/characters'
+import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { asset, d6 } from '@adventure-bot/game/utils'
 
 export async function restfulNight(

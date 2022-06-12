@@ -17,9 +17,9 @@ import {
 } from '@adventure-bot/game/store/selectors'
 import {
   damaged,
-  effectAdded,
   questProgressed,
 } from '@adventure-bot/game/store/slices/characters'
+import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { trapRollText } from '@adventure-bot/game/trap'
 
 export const announceTrapAttacked: (client: Client) => void = (client) => {

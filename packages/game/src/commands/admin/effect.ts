@@ -9,7 +9,7 @@ import {
 } from '@adventure-bot/game/character'
 import { effects } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
-import { effectAdded } from '@adventure-bot/game/store/slices/characters'
+import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()

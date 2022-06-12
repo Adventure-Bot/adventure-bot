@@ -21,10 +21,6 @@ import {
 } from '@adventure-bot/game/equipment'
 import { Monster } from '@adventure-bot/game/monster'
 import { QuestId, quests } from '@adventure-bot/game/quest'
-import {
-  StatusEffect,
-  isStatusEffectExpired,
-} from '@adventure-bot/game/statusEffects'
 import { itemReceived, newgame } from '@adventure-bot/game/store/actions'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 import { itemPurchased } from '@adventure-bot/game/store/slices/shop'
@@ -72,21 +68,6 @@ const characterSlice = createSlice({
       const monster = action.payload
       state.charactersById[monster.id] = monster
       state.roamingMonsters.push(monster.id)
-    },
-
-    effectAdded(
-      state,
-      action: PayloadAction<{
-        characterId: string
-        effect: StatusEffect
-        image?: string
-      }>
-    ) {
-      const { characterId, effect } = action.payload
-      const character = state.charactersById[characterId]
-      character.statusEffects = character.statusEffects
-        .concat(effect)
-        .filter((effect) => !isStatusEffectExpired(effect))
     },
 
     questProgressed(
@@ -358,7 +339,6 @@ export const {
   cleansed,
   cooldownStarted,
   damaged,
-  effectAdded,
   goldGained,
   goldSet,
   divineBlessingGranted,
