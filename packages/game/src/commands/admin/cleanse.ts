@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 
 import store from '@adventure-bot/game/store'
-import { cleansed } from '@adventure-bot/game/store/slices/characters'
+import { characterCleansed } from '@adventure-bot/game/store/slices/statusEffects'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
@@ -11,7 +11,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  store.dispatch(cleansed({ characterId: interaction.user.id }))
+  store.dispatch(characterCleansed({ characterId: interaction.user.id }))
   interaction.followUp(`${interaction.user.username} cleansed themself`)
 }
 

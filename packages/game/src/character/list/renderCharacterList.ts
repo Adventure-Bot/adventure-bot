@@ -5,7 +5,6 @@ import { debounce } from 'ts-debounce'
 import { newgame } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import {
-  cleansed,
   cooldownStarted,
   created,
   damaged,
@@ -43,7 +42,6 @@ export async function renderCharacterList({
       newgame,
       created,
       questProgressed,
-      cleansed,
       cooldownStarted,
       damaged,
       effectAdded,

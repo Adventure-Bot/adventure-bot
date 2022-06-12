@@ -46,11 +46,6 @@ const characterSlice = createSlice({
   name: 'characters',
   initialState: defaultCharactersState,
   reducers: {
-    cleansed(state, action: PayloadAction<{ characterId: string }>) {
-      const character = state.charactersById[action.payload.characterId]
-      character.statusEffects = []
-    },
-
     cooldownStarted(
       state,
       action: PayloadAction<{
@@ -336,7 +331,6 @@ const characterSlice = createSlice({
 
 export const {
   questProgressed,
-  cleansed,
   cooldownStarted,
   damaged,
   goldGained,

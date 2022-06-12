@@ -14,6 +14,10 @@ export const effectAdded = createAction<{
   image?: string
 }>('effect/added')
 
+export const characterCleansed = createAction<{
+  characterId: string
+}>('character/cleansed')
+
 export const statusEffects = createSlice({
   name: 'statusEffects',
   initialState,
@@ -21,6 +25,13 @@ export const statusEffects = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(newgame, () => initialState)
+      .addCase(characterCleansed, (state, action) => {
+        const { characterId } = action.payload
+        for (const effectId in state.effectsByCharacterId[characterId]) {
+          delete state.effectsById[effectId]
+        }
+        state.effectsByCharacterId[characterId] = {}
+      })
       .addCase(effectAdded, (state, action) => {
         const { effect, characterId } = action.payload
         state.effectsById[effect.id] = effect
