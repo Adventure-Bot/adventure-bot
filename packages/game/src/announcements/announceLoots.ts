@@ -47,14 +47,13 @@ export function announceCrownLoots(client: Client): void {
             description: [
               `Attention @here!`,
               ``,
-              `${character.name} has acquired the crown and their rule will become sovereign at:`,
+              `${character.name} has acquired the crown and their rule will become sovereign in twenty four ours at precisely:`,
               ``,
               moment()
                 .add(1, 'days')
                 .format('h:mm a [on] dddd, [the] Do [day of] MMMM, YYYY'),
               ``,
-              ``,
-              `If you do not wish to submit to their, rise up!`,
+              `If you do not wish to submit to their rule, rise up!`,
             ].join('\n'),
           })
             .setImage(crownArt().s3Url)
