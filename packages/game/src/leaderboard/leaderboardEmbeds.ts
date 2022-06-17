@@ -4,6 +4,7 @@ import moment from 'moment'
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import { decoratedName } from '@adventure-bot/game/character'
 import { crownArt } from '@adventure-bot/game/crown'
+import { chanceToFindCrown } from '@adventure-bot/game/crown/chanceToFindCrown'
 import store from '@adventure-bot/game/store'
 import { selectBearer } from '@adventure-bot/game/store/selectors'
 import { timeTillSovereign } from '@adventure-bot/game/store/slices/crown'
@@ -31,6 +32,14 @@ export function leaderboardEmbeds(): MessageEmbed[] {
           bearer
         )} will win ${gameEndsAt.fromNow()}.`,
       }).setTimestamp(gameEndsAt.toDate())
+    )
+
+  if (!bearer)
+    embeds = embeds.concat(
+      new MessageEmbed({
+        title: 'Crown Chance',
+        description: EmojiValue('crown', chanceToFindCrown()),
+      })
     )
 
   if (leaderboard.length === 0)

@@ -9,7 +9,7 @@ import store from '@adventure-bot/game/store'
 export function chanceToFindCrown(): number {
   const { gameStartedAt, bearerId } = store.getState().crown
   if (bearerId) return 0
-  const hoursElapsed = moment().diff(gameStartedAt, 'hours')
-  // exponential growth towards 1 in ~7 days
-  return Math.pow(2, hoursElapsed / 24) / 128
+  const days = moment().diff(gameStartedAt, 'hours') / 24
+  // logrithmic 0-1 for days 0-14
+  return (Math.pow(2, days) - 1) / Math.pow(2, 14)
 }
