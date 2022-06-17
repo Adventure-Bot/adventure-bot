@@ -27,3 +27,10 @@ export type CommandHandlerOptions = {
 }
 
 export type CommandHandler = (options: CommandHandlerOptions) => Promise<void>
+
+export function isKeyOfObject<T>(
+  key: string | number | symbol,
+  obj: T
+): key is keyof T {
+  return key in obj
+}

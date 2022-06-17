@@ -26,6 +26,7 @@ import { randomShrine } from '@adventure-bot/game/encounters/shrine'
 import {
   CommandHandlerOptions,
   asset,
+  isKeyOfObject,
   randomArrayElement,
   weightedTable,
 } from '@adventure-bot/game/utils'
@@ -134,39 +135,24 @@ export const cairns = async ({
     interaction.followUp(`Destiny does not wait forever.`)
     return
   }
-  switch (response.customId) {
-    case 'divineBlessing':
-      divineBlessing({ interaction, replyType: 'followUp' })
-      return
-    case 'angels':
-      angels({ interaction, replyType: 'followUp' })
-      return
-    case 'fairyWell':
-      fairyWell({ interaction, replyType: 'followUp' })
-      return
-    case 'shop':
-      shop({ interaction, replyType: 'followUp' })
-      return
-    case 'tavern':
-      tavern({ interaction, replyType: 'followUp' })
-      return
-    case 'trap':
-      trap({ interaction, replyType: 'followUp' })
-      return
-    case 'travel':
-      travel({ interaction, replyType: 'followUp' })
-      return
-    case 'monster':
-      monster({ interaction, replyType: 'followUp' })
-      return
-    case 'chest':
-      chest({ interaction, replyType: 'followUp' })
-      return
-    case 'randomShrine':
-      randomShrine()({ interaction, replyType: 'followUp' })
-      return
-    case 'cave':
-      cave({ interaction, replyType: 'followUp' })
-      return
+
+  const handlers = {
+    angels,
+    cave,
+    chest,
+    divineBlessing,
+    fairyWell,
+    monster,
+    randomShrine: randomShrine(),
+    shop,
+    tavern,
+    trap,
+    travel,
+  }
+
+  if (isKeyOfObject(response.customId, handlers)) {
+    handlers[response.customId]({ interaction, replyType: 'followUp' })
+  } else {
+    interaction.followUp(`${response.customId} is not a valid option.`)
   }
 }
