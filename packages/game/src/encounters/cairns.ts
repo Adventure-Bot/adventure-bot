@@ -122,9 +122,9 @@ export const cairns = async ({
   if (!(message instanceof Message)) return
   const response = await message
     .awaitMessageComponent({
-      filter: (interaction) => {
-        interaction.deferUpdate()
-        return interaction.user.id === interaction.user.id
+      filter: (i) => {
+        i.deferUpdate()
+        return i.user.id === interaction.user.id
       },
       time: 60000,
     })
