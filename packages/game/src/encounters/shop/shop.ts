@@ -77,7 +77,9 @@ export const shop = async ({
           value: EmojiValue('gold', getCharacterUpdate(character).gold),
         },
       ],
-    }).setImage(asset('fantasy', 'places', 'blacksmith', interaction.id).s3Url)
+    })
+      .setImage(asset('fantasy', 'places', 'blacksmith', interaction.id).s3Url)
+      .setThumbnail(character.profile)
     return {
       embeds: [shopEmbed, ...inventory().map((item) => itemEmbed({ item }))],
       components: [
