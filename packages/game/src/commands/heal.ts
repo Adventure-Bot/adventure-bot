@@ -69,9 +69,12 @@ export const execute = async ({
             ? questProgressField(character.quests.healer)
             : []
         ),
-      }).setImage(
-        asset('fantasy', 'magic', 'a glowing hand applying healing magic').s3Url
-      ),
+      })
+        .setImage(
+          asset('fantasy', 'magic', 'a glowing hand applying healing magic')
+            .s3Url
+        )
+        .setThumbnail(character.profile),
     ].concat(),
   })
   if (isUserQuestComplete(interaction.user, 'healer'))
