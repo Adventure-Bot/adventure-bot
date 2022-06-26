@@ -3,7 +3,6 @@ import { Message, MessageEmbed } from 'discord.js'
 import {
   decoratedName,
   findOrCreateCharacter,
-  getCharacter,
 } from '@adventure-bot/game/character'
 import { Trap, getRandomTrap, trapAttack } from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, sleep } from '@adventure-bot/game/utils'
@@ -13,8 +12,7 @@ export const trap = async ({
   replyType = 'editReply',
   trap = getRandomTrap(),
 }: CommandHandlerOptions & { trap?: Trap }): Promise<void> => {
-  findOrCreateCharacter(interaction.user)
-  const character = getCharacter(interaction.user.id)
+  const character = findOrCreateCharacter(interaction.user)
   if (!character) return
 
   const embed = new MessageEmbed({
