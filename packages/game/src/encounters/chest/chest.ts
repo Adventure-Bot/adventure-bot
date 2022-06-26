@@ -13,7 +13,6 @@ import { randomChestItem } from '@adventure-bot/game/equipment'
 import { heavyCrown } from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
-import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { goldGained } from '@adventure-bot/game/store/slices/characters'
 import { Trap, getRandomTrap, trapAttack } from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, d } from '@adventure-bot/game/utils'
@@ -39,9 +38,7 @@ export async function chest(
   { interaction, replyType = 'followUp' }: CommandHandlerOptions,
   chestConfig?: Partial<Chest>
 ): Promise<void> {
-  findOrCreateCharacter(interaction.user)
-  const character = selectCharacterById(store.getState(), interaction.user.id)
-  if (!character) return
+  const character = findOrCreateCharacter(interaction.user)
   let fled = false
   let timeout = false
 
