@@ -30,5 +30,6 @@ export { mentionCharacter } from '@adventure-bot/game/character/mentionCharacter
 export { primaryStatFields } from '@adventure-bot/game/character/primaryStatFields'
 export { renderCharacterList } from '@adventure-bot/game/character/list/renderCharacterList'
 export { startCooldown } from '@adventure-bot/game/character/startCooldown'
+export { statContested } from '@adventure-bot/game/character/statContest'
 export { statField } from '@adventure-bot/game/character/statField'
 export { statsEmbed } from '@adventure-bot/game/character/statsEmbed'
