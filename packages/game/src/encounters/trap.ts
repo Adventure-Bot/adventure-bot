@@ -13,7 +13,6 @@ export const trap = async ({
   trap = getRandomTrap(),
 }: CommandHandlerOptions & { trap?: Trap }): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
-  if (!character) return
 
   const embed = new MessageEmbed({
     title: `${decoratedName(character)} encountered a ${trap.name}!`,
