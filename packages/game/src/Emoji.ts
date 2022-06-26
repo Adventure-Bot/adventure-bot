@@ -41,7 +41,7 @@ const defaultEmojis: {
   dragonSlaying: '🐲',
   haste: '⏳',
   stunned: '😵‍💫',
-  lockpicking: '🔑',
+  lockpicking: '🔓',
   luck: '🍀',
   perception: '🔍',
 }
@@ -58,7 +58,7 @@ export function EmojiValue(name: Emojis, value: number): string {
 }
 
 export function EmojiModifier(name: Emojis, value: number): string {
-  return `${value > 0 ? '+' : ''}${value} ${Emoji(name)}`
+  return `${value >= 0 ? '+' : ''}${value} ${Emoji(name)}`
 }
 
 export function d20Emoji(n: number): string {

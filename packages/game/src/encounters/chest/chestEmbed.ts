@@ -28,28 +28,5 @@ export function chestEmbed(
     )
     .setThumbnail(character.profile)
 
-  if (chest.inspected) {
-    embed.addField('Inspected', 'You inspected the chest.')
-    chest.trapFound
-      ? embed.addField("It's a Trap!", 'The chest is trapped.')
-      : embed.addField('Trap?', "You don't _believe_ the chest is trapped...")
-  }
-
-  if (chest.disarmAttempt !== undefined)
-    embed.addField(
-      'Trap Disarmed',
-      'You _believe_ the trap has been disabled...'
-    )
-
-  if (chest.lockFound && !chest.isLocked)
-    embed.addField('Unlocked', 'The chest is unlocked.')
-  if (chest.lockFound && chest.isLocked && !chest.unlockAttempt)
-    embed.addField('Locked', 'The chest is locked.')
-  if (chest.lockFound && chest.isLocked && chest.unlockAttempt) {
-    embed.addField('Locked', 'This lock is beyond your ability.')
-  }
-  if (chest.trapResult) {
-    embed.addField('Trap Triggered!', chest.trapResult)
-  }
   return embed
 }
