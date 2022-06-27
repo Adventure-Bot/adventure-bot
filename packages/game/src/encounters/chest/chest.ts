@@ -1,11 +1,7 @@
 import { CommandInteraction, Message } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
-import {
-  awardXP,
-  findOrCreateCharacter,
-  getCharacter,
-} from '@adventure-bot/game/character'
+import { awardXP, findOrCreateCharacter } from '@adventure-bot/game/character'
 import { statContest } from '@adventure-bot/game/character/statContest'
 import { didFindCrown } from '@adventure-bot/game/crown'
 import { chestEmbed } from '@adventure-bot/game/encounters/chest'
@@ -99,7 +95,7 @@ export async function chest(
       const perceptionCheck = statContest({
         character,
         stat: 'perception',
-        difficulty: 6,
+        difficulty: d(6) + 4,
         messageId: message.id,
         successText: chest.isTrapped
           ? 'spotted a trap!'
@@ -122,7 +118,7 @@ export async function chest(
         statContest({
           character,
           stat: 'lockpicking',
-          difficulty: 6,
+          difficulty: d(6) + 4,
           messageId: message.id,
           successText: "disarmed the chest's trap!",
           failureText: "thinks chest's traps are disabled?",
@@ -142,7 +138,7 @@ export async function chest(
         !statContest({
           character,
           stat: 'luck',
-          difficulty: 16,
+          difficulty: d(6) + 14,
           messageId: message.id,
           successText: "luckily avoided the chest's trap!",
           failureText: "triggered the chest's trap!",
@@ -154,7 +150,7 @@ export async function chest(
         statContest({
           character,
           stat: 'lockpicking',
-          difficulty: 6,
+          difficulty: d(6) + 4,
           messageId: message.id,
           successText: "picked the chest's lock!",
           failureText: "failed to pick the chest's lock!",
@@ -204,7 +200,7 @@ export async function chest(
       statContest({
         character,
         stat: 'luck',
-        difficulty: 16,
+        difficulty: d(6) + 14,
         messageId: message.id,
         successText: 'found an item in the chest!',
         failureText: 'found no items in the chest...',
@@ -261,8 +257,6 @@ function chestResponses(chest: Chest): string[] {
 function triggerTrap(interaction: CommandInteraction, chest: Chest) {
   const { trap, trapTriggered } = chest
   if (!trap || trapTriggered) return
-  const character = getCharacter(interaction.user.id)
-  if (!character) return
   chest.trapTriggered = true
-  trapAttack({ defender: character, trap })
+  trapAttack({ trap, defender: findOrCreateCharacter(interaction.user) })
 }
