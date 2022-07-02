@@ -2,7 +2,7 @@ import { Message, TextChannel } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
-import { loot } from '@adventure-bot/game/character'
+import { findOrCreateCharacter, loot } from '@adventure-bot/game/character'
 import quests from '@adventure-bot/game/commands/quests'
 import {
   chest,
@@ -38,9 +38,7 @@ export const monster = async ({
   replyType = 'editReply',
   monster = randomMonster(),
 }: CommandHandlerOptions & { monster?: Monster }): Promise<void> => {
-  let player = selectCharacterById(store.getState(), interaction.user.id)
-  if (!player) return
-
+  let player = findOrCreateCharacter(interaction.user)
   let encounter = createEncounter({ monster, player })
   const encounterId = encounter.id
   let timeout = false
@@ -87,8 +85,8 @@ export const monster = async ({
     const monsterResult = makeAttack(monster.id, player.id, encounterId)
 
     const updatedMonster = selectMonsterById(store.getState(), monster.id)
-    player = selectCharacterById(store.getState(), player.id)
-    if (!player || !updatedMonster) return
+    if (!updatedMonster) return
+    player = findOrCreateCharacter(interaction.user)
     monster = updatedMonster
 
     const userReactions = message.reactions.cache.filter((reaction) =>
@@ -174,7 +172,7 @@ export const monster = async ({
     interaction,
   })
 
-  player = selectCharacterById(store.getState(), player.id)
+  player = findOrCreateCharacter(interaction.user)
   if (player && player.quests.slayer && encounter.outcome === 'player victory')
     embed.addFields([questProgressField(player.quests.slayer)])
 
