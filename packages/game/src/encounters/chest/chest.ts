@@ -121,7 +121,7 @@ export async function chest(
           difficulty: d(6) + 4,
           messageId: message.id,
           successText: "disarmed the chest's trap!",
-          failureText: "thinks chest's traps are disabled?",
+          failureText: "thinks the chest's trap is disabled?",
         }).success
       ) {
         chest.trapDisarmed = true
@@ -134,6 +134,7 @@ export async function chest(
 
       if (
         chest.isTrapped &&
+        !chest.trapDisarmed &&
         !chest.trapTriggered &&
         !statContest({
           character,
@@ -163,7 +164,7 @@ export async function chest(
       }
     }
     if (reaction.emoji.name === '👐') {
-      if (chest.isTrapped) {
+      if (chest.isTrapped && !chest.trapDisarmed) {
         triggerTrap(interaction, chest)
       }
       if (!chest.isLocked) chest.isLooted = true
