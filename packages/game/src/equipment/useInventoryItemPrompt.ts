@@ -91,7 +91,7 @@ export const useInventoryItemPrompt = async (
     if (response.isSelectMenu()) {
       const item = inventory[parseInt(response.values[0])]
       const character = findOrCreateCharacter(interaction.user)
-      useInventoryItem({
+      await useInventoryItem({
         itemId: item.id,
         characterId: character.id,
         interaction,
@@ -120,7 +120,7 @@ const potionArt: {
   rogue: 'magic potion with dark cloudy liquid',
 }
 
-function useInventoryItem({
+async function useInventoryItem({
   itemId,
   characterId,
   interaction,
@@ -135,17 +135,6 @@ function useInventoryItem({
   if (!item) return
   if (isPotion(item)) {
     const embeds = []
-    if (item.useEffects.randomEffect) {
-      const effectId = randomArrayElement(item.useEffects.randomEffect)
-      const effect = createEffect(effectId)
-      store.dispatch(
-        effectAdded({
-          characterId,
-          effect,
-          image: asset('fantasy', 'items', potionArt[effectId]).s3Url,
-        })
-      )
-    }
     if (item.useEffects.maxHeal) {
       const rawHeal = d(item.useEffects.maxHeal)
       const healAmount = clamp(rawHeal, {
@@ -182,9 +171,22 @@ function useInventoryItem({
       )
     }
     store.dispatch(itemRemoved({ itemId, characterId }))
-    interaction.followUp({
+    const message = await interaction.followUp({
       content: `${character.name} drank a ${item.name}`,
       embeds,
+      fetchReply: true,
     })
+    if (item.useEffects.randomEffect) {
+      const effectId = randomArrayElement(item.useEffects.randomEffect)
+      const effect = createEffect(effectId)
+      store.dispatch(
+        effectAdded({
+          characterId,
+          effect,
+          image: asset('fantasy', 'items', potionArt[effectId]).s3Url,
+          messageId: message.id,
+        })
+      )
+    }
   }
 }

@@ -3,16 +3,18 @@ import {
   isCharacterOnCooldown,
   startCooldown,
 } from '@adventure-bot/game/character'
+import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 
-export const playerAttack = (
-  attackerId: string,
-  defenderId: string
-): AttackResult | { outcome: 'cooldown' } | void => {
-  if (isCharacterOnCooldown(attackerId, 'attack')) {
+export function playerAttack(
+  attacker: CharacterWithStats,
+  defender: CharacterWithStats
+): AttackResult | { outcome: 'cooldown' } {
+  if (isCharacterOnCooldown(attacker.id, 'attack')) {
     return { outcome: 'cooldown' }
   }
-  const result = makeAttack(attackerId, defenderId)
-  if (!result) return
-  startCooldown({ characterId: attackerId, cooldown: 'attack' })
-  return result
+  startCooldown({ characterId: attacker.id, cooldown: 'attack' })
+  return makeAttack({
+    attacker,
+    defender,
+  })
 }

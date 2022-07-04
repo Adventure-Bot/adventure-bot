@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import {
   decoratedName,
@@ -22,11 +22,9 @@ export const trap = async ({
     .setImage(trap.image)
     .setThumbnail(character.profile)
 
-  const message = await interaction[replyType]({
+  const { id: messageId } = await interaction[replyType]({
     embeds: [embed],
   })
-  if (!(message instanceof Message)) return
-
   await sleep(2000)
-  trapAttack({ defender: character, trap })
+  trapAttack({ defender: character, trap, messageId })
 }

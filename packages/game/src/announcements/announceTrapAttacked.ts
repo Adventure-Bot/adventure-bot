@@ -1,8 +1,7 @@
-import { Client, MessageEmbed } from 'discord.js'
+import { MessageEmbed, TextChannel } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import {
-  awardXP,
   decoratedName,
   getCharacter,
   hpBarField,
@@ -11,10 +10,7 @@ import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { trapAttacked } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
-import {
-  selectCharacterById,
-  selectLastChannelUsed,
-} from '@adventure-bot/game/store/selectors'
+import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import {
   damaged,
   questProgressed,
@@ -22,67 +18,70 @@ import {
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { trapRollText } from '@adventure-bot/game/trap'
 
-export const announceTrapAttacked: (client: Client) => void = (client) => {
+export function announceTrapAttacked(channel: TextChannel): void {
   startAppListening({
     actionCreator: trapAttacked,
-    effect: ({ payload: result }) => {
-      const { trap } = result
+    effect: async ({ payload }) => {
+      const { messageId, result } = payload
+      const {
+        trap,
+        defender: { id: characterId },
+        outcome,
+        damage,
+      } = result
       const state = store.getState()
-      const character = selectCharacterById(state, result.defender.id)
-      if (!character) return
-      const lastChannelId = selectLastChannelUsed(state)
-      const channel = client.channels.cache.get(lastChannelId)
-      if (!channel?.isText()) return
-
-      const hitOrMissed = result.outcome === 'hit' ? 'hit' : 'missed'
+      const defender = selectCharacterById(state, characterId)
+      if (!defender) return
+      const hitOrMissed = outcome === 'hit' ? 'hit' : 'missed'
       const embed = new MessageEmbed({
-        title: `${Emoji(result.outcome)} ${decoratedName(
-          character
+        title: `${Emoji(outcome)} ${decoratedName(
+          defender
         )} was ${hitOrMissed} by a ${trap.name}!`,
         color: 'RED',
-        description: result.outcome === 'hit' ? trap.hitText : trap.missText,
+        description: outcome === 'hit' ? trap.hitText : trap.missText,
       })
         .setImage(trap.image)
-        .setThumbnail(character.profile)
+        .setThumbnail(defender.profile)
       embed.addField('Trap Attack', trapRollText(result))
-      switch (result.outcome) {
-        case 'hit':
-          awardXP({ characterId: character.id, amount: 1 })
-          embed.addFields([
-            hpBarField({ character, adjustment: -result.damage }),
-          ])
-          break
-        case 'miss':
-          awardXP({ characterId: character.id, amount: 2 })
-          break
+      if ('hit' === outcome) {
+        embed.addFields([
+          hpBarField({ character: defender, adjustment: -damage }),
+        ])
+      }
+      const message = messageId
+        ? await channel.messages.fetch(messageId).catch(() => null)
+        : null
+
+      const embeds = [embed]
+      if (message) {
+        message.reply({ embeds })
+      } else {
+        channel.send({ embeds })
       }
 
-      channel.send({
-        embeds: [embed],
-      })
-
-      if ('hit' === result.outcome) {
-        if (result.damage) {
+      if ('hit' === outcome) {
+        if (damage) {
           store.dispatch(
             damaged({
-              character: character,
-              amount: result.damage,
+              character: defender,
+              amount: damage,
             })
           )
-          if (getCharacter(character.id)?.hp ?? 0 > 0)
+          if (getCharacter(defender.id)?.hp ?? 0 > 0)
             store.dispatch(
               questProgressed({
-                characterId: character.id,
+                characterId,
                 questId: 'survivor',
-                amount: result.damage,
+                amount: damage,
               })
             )
         }
         if (trap.onHitEffect)
           store.dispatch(
             effectAdded({
-              characterId: character.id,
+              characterId,
               effect: createEffect(trap.onHitEffect),
+              messageId,
             })
           )
       }

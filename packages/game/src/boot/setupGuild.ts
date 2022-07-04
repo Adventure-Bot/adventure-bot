@@ -3,6 +3,7 @@ import { Client, Guild } from 'discord.js'
 import {
   announceGoldGained,
   announceStatContested,
+  announceTrapAttacked,
   announceXpAwarded,
 } from '@adventure-bot/game/announcements'
 import { announcePeriodicEffects } from '@adventure-bot/game/announcements/announcePeriodicEffects'
@@ -32,10 +33,11 @@ export async function setupGuild({
     })
   renderCharacterList({ guild, appId })
   gameChannel({ guild, appId }).then((channel) => {
-    announceXpAwarded({ channel })
-    announceGoldGained({ channel })
-    announcePeriodicEffects({ channel })
-    announceStatContested({ channel })
+    announceXpAwarded(channel)
+    announceGoldGained(channel)
+    announcePeriodicEffects(channel)
+    announceStatContested(channel)
+    announceTrapAttacked(channel)
   })
   renderLeaderboard({ guild, appId })
   renderRoamingMonsters({ guild, appId })

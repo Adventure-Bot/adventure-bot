@@ -11,11 +11,7 @@ import {
   looted,
 } from '@adventure-bot/game/store/slices/characters'
 
-export function announceGoldGained({
-  channel,
-}: {
-  channel: TextChannel
-}): void {
+export function announceGoldGained(channel: TextChannel): void {
   startAppListening({
     actionCreator: goldGained,
     effect: ({ payload: { characterId, amount } }) =>

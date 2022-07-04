@@ -14,11 +14,7 @@ export const periodicEffectApplied = createAction<{
   effect: StatusEffect
 }>('periodicEffectApplied')
 
-export function announcePeriodicEffects({
-  channel,
-}: {
-  channel: TextChannel
-}): void {
+export function announcePeriodicEffects(channel: TextChannel): void {
   startAppListening({
     actionCreator: periodicEffectApplied,
     effect: ({ payload: { characterId, effect } }) => {

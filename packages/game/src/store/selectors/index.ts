@@ -59,7 +59,7 @@ export const selectCharacterById = (
   }
 }
 
-type MonsterWithStats = Monster & {
+export type MonsterWithStats = Monster & {
   stats: Stats
   statsModified: Stats
 }
@@ -111,6 +111,7 @@ export const selectHasItemNameInInventory: (
 export const selectBearer = (state: ReduxState): Character | undefined =>
   state.characters.charactersById[state.crown.bearerId]
 
+// todo: delete this in favor of passing the channel in setupGuild
 export const selectLastChannelUsed = (state: ReduxState): string =>
   state.commands.lastChannelId
 
@@ -131,11 +132,12 @@ export function selectAvailableQuests(
   state: ReduxState,
   character: Character
 ): Quest[] {
-  return [quests.blessed, quests.slayer, quests.survivor].filter((quest) => {
-    return !selectIsCharacterOnQuest({
-      state,
-      characterId: character.id,
-      questId: quest.id,
-    })
-  })
+  return [quests.blessed, quests.slayer, quests.survivor].filter(
+    (quest) =>
+      !selectIsCharacterOnQuest({
+        state,
+        characterId: character.id,
+        questId: quest.id,
+      })
+  )
 }
