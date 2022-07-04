@@ -286,6 +286,7 @@ const characterSlice = createSlice({
       action: PayloadAction<{
         characterId: string
         amount: number
+        messageId?: string
       }>
     ) {
       const { characterId, amount } = action.payload

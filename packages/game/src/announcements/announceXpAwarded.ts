@@ -10,7 +10,7 @@ import { xpAwarded } from '@adventure-bot/game/store/slices/characters'
 export function announceXpAwarded({ channel }: { channel: TextChannel }): void {
   startAppListening({
     actionCreator: xpAwarded,
-    effect: ({ payload: { characterId, amount } }) => {
+    effect: async ({ payload: { characterId, amount, messageId } }) => {
       const character = selectCharacterById(store.getState(), characterId)
       if (!character) return
       const embeds = [
@@ -23,9 +23,15 @@ export function announceXpAwarded({ channel }: { channel: TextChannel }): void {
           color: 'YELLOW',
         }),
       ]
-      channel.send({
-        embeds,
-      })
+      const message = messageId
+        ? await channel.messages.fetch(messageId).catch(() => null)
+        : null
+
+      if (message) {
+        message.reply({ embeds })
+      } else {
+        channel.send({ embeds })
+      }
     },
   })
 }

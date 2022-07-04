@@ -47,13 +47,13 @@ export const announceTrapAttacked: (client: Client) => void = (client) => {
       embed.addField('Trap Attack', trapRollText(result))
       switch (result.outcome) {
         case 'hit':
-          awardXP(character.id, 1)
+          awardXP({ characterId: character.id, amount: 1 })
           embed.addFields([
             hpBarField({ character, adjustment: -result.damage }),
           ])
           break
         case 'miss':
-          awardXP(character.id, 2)
+          awardXP({ characterId: character.id, amount: 2 })
           break
       }
 

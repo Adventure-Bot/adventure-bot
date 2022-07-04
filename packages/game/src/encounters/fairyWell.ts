@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import {
@@ -26,7 +26,7 @@ export async function fairyWell({
   const healAmount = d(6)
 
   const character = findOrCreateCharacter(interaction.user)
-  await interaction[replyType]({
+  const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(
@@ -43,8 +43,15 @@ export async function fairyWell({
       }).setImage(asset('fantasy', 'places', "a fairy's well").s3Url),
     ],
   })
+  if (!(message instanceof Message)) return
   store.dispatch(healed({ character, amount: healAmount }))
-  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
+  store.dispatch(
+    xpAwarded({
+      characterId: interaction.user.id,
+      amount: 1,
+      messageId: message.id,
+    })
+  )
   store.dispatch(
     questProgressed({
       characterId: interaction.user.id,
