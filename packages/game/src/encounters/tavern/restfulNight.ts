@@ -59,7 +59,7 @@ export async function restfulNight(
 
   store.dispatch(
     effectAdded({
-      characterId: interaction.user.id,
+      character,
       effect: createEffect('invigorated'),
       messageId,
     })

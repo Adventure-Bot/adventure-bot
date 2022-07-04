@@ -2,6 +2,7 @@ import { createAction, createSlice } from '@reduxjs/toolkit'
 
 import { StatusEffect } from '@adventure-bot/game/statusEffects'
 import { newgame } from '@adventure-bot/game/store/actions'
+import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 
 const initialState = {
   effectsById: {} as Record<string, StatusEffect>,
@@ -9,7 +10,7 @@ const initialState = {
 }
 
 export const effectAdded = createAction<{
-  characterId: string
+  character: CharacterWithStats
   effect: StatusEffect
   image?: string
   messageId?: string
@@ -34,10 +35,10 @@ export const statusEffects = createSlice({
         state.effectsByCharacterId[characterId] = {}
       })
       .addCase(effectAdded, (state, action) => {
-        const { effect, characterId } = action.payload
+        const { effect, character } = action.payload
         state.effectsById[effect.id] = effect
-        state.effectsByCharacterId[characterId] = {
-          ...state.effectsByCharacterId[characterId],
+        state.effectsByCharacterId[character.id] = {
+          ...state.effectsByCharacterId[character.id],
           [effect.id]: true,
         }
       })

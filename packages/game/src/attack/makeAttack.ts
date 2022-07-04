@@ -75,7 +75,7 @@ export function makeAttack({
     if (attacker.equipment.weapon?.onHitEffect)
       store.dispatch(
         effectAdded({
-          characterId: defender.id,
+          character: defender,
           effect: createEffect(attacker.equipment.weapon.onHitEffect),
         })
       )

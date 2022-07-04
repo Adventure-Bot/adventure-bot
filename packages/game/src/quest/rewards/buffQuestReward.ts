@@ -1,5 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import inspect from '@adventure-bot/game/commands/inspect/inspect'
 import { Quest } from '@adventure-bot/game/quest'
 import { StatusEffect } from '@adventure-bot/game/statusEffects'
@@ -12,6 +13,7 @@ export async function buffQuestReward(
   effect: StatusEffect,
   quest: Quest
 ): Promise<void> {
+  const character = findOrCreateCharacter(interaction.user)
   const embeds = [
     new MessageEmbed({
       title: `${quest.title} Complete!`,
@@ -24,13 +26,13 @@ export async function buffQuestReward(
   })
   store.dispatch(
     effectAdded({
-      characterId: interaction.user.id,
+      character,
       effect,
       messageId: message.id,
     })
   )
   store.dispatch(
-    questCompleted({ questId: quest.id, characterId: interaction.user.id })
+    questCompleted({ questId: quest.id, characterId: character.id })
   )
 
   await inspect.execute({ interaction })

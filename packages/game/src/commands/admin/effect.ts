@@ -25,12 +25,11 @@ function effectList(): string {
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
+  const character = findOrCreateCharacter(interaction.user)
   const { id: messageId } = await interaction.editReply({
     embeds: [
       new MessageEmbed({
-        title: `${decoratedName(
-          findOrCreateCharacter(interaction.user)
-        )} conjures an effect!`,
+        title: `${decoratedName(character)} conjures an effect!`,
         description: `Which shall it be?\n\n${effectList()}\n\nEnter the number of the effect you wish to conjure.`,
       }),
     ],
@@ -49,7 +48,7 @@ export const execute = async ({
     }
     store.dispatch(
       effectAdded({
-        characterId: interaction.user.id,
+        character,
         effect: {
           ...effect,
           id: randomUUID(),

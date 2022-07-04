@@ -43,7 +43,7 @@ export const travel = async ({
   if (character.inventory.find(isTravelersRing)) {
     store.dispatch(
       effectAdded({
-        characterId: interaction.user.id,
+        character,
         effect: createEffect('invigorated'),
         messageId: message.id,
       })
