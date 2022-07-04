@@ -41,7 +41,7 @@ export function trapAttack({
   if ('hit' === outcome && trap.onHitEffect)
     store.dispatch(
       effectAdded({
-        characterId: defender.id,
+        character: defender,
         effect: createEffect(trap.onHitEffect),
         messageId,
       })
