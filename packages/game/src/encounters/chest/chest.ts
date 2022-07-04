@@ -226,7 +226,11 @@ export async function chest(
     }
     const xp = 1 + (chest.hasTrap ? 2 : 0) + (chest.hasLock ? 1 : 0)
     const gp = d(20) + 5
-    awardXP(interaction.user.id, xp)
+    awardXP({
+      characterId: interaction.user.id,
+      amount: xp,
+      messageId: message.id,
+    })
     store.dispatch(
       goldGained({
         amount: gp,

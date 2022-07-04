@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 
 import {
   awardXP,
@@ -26,7 +26,7 @@ export const travel = async ({
     asset('fantasy', 'places', 'a lone traveler in the mountains'),
     asset('fantasy', 'places', 'a lone traveler in the plains'),
   ])
-  await interaction[replyType]({
+  const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} traveled.`,
@@ -35,7 +35,12 @@ export const travel = async ({
       }).setImage(art.s3Url),
     ],
   })
-  awardXP(interaction.user.id, 1)
+  if (!(message instanceof Message)) return
+  awardXP({
+    characterId: interaction.user.id,
+    amount: 1,
+    messageId: message.id,
+  })
   if (character.inventory.find(isTravelersRing)) {
     store.dispatch(
       effectAdded({

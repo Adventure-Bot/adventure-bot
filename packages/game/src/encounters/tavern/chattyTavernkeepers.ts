@@ -19,15 +19,14 @@ import { questGranted } from '@adventure-bot/game/store/slices/characters'
 import { asset } from '@adventure-bot/game/utils'
 
 export const chattyTavernkeepers = async (
-  interaction: CommandInteraction,
-  followUp = false
+  interaction: CommandInteraction
 ): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
   const state = store.getState()
   const availableQuests = selectAvailableQuests(state, character)
 
   if (availableQuests.length === 0) {
-    interaction[followUp ? 'followUp' : 'editReply']({
+    interaction.followUp({
       embeds: [
         new MessageEmbed({
           title: `${decoratedName(character)} met a chatty tavernkeeper!`,
@@ -39,7 +38,7 @@ export const chattyTavernkeepers = async (
     })
     return
   }
-  const message = await interaction[followUp ? 'followUp' : 'editReply']({
+  const message = await interaction.followUp({
     fetchReply: true,
     embeds: [
       new MessageEmbed({
@@ -95,6 +94,10 @@ export const chattyTavernkeepers = async (
       quests[questId].title
     } quest.`
   )
-  awardXP(interaction.user.id, 1)
+  awardXP({
+    characterId: interaction.user.id,
+    amount: 1,
+    messageId: message.id,
+  })
   await questsCommand.execute({ interaction })
 }

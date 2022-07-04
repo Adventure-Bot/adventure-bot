@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { CommandInteraction, Message, MessageEmbed } from 'discord.js'
 import { clamp } from 'remeda'
 
 import {
@@ -33,7 +33,7 @@ export async function restfulNight(
   })
 
   const character = findOrCreateCharacter(interaction.user)
-  await interaction.followUp({
+  const message = await interaction.followUp({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} had a restful night.`,
@@ -54,6 +54,8 @@ export async function restfulNight(
         .setThumbnail(character.profile),
     ],
   })
+  if (!(message instanceof Message)) return
+
   store.dispatch(healed({ character, amount: actualHeal }))
 
   store.dispatch(
@@ -70,7 +72,13 @@ export async function restfulNight(
     })
   )
 
-  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
+  store.dispatch(
+    xpAwarded({
+      characterId: interaction.user.id,
+      amount: 1,
+      messageId: message.id,
+    })
+  )
 
   if (isUserQuestComplete(interaction.user, 'healer'))
     await quests.execute({ interaction })
