@@ -1,6 +1,9 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { findOrCreateCharacter } from '@adventure-bot/game/character'
+import {
+  decoratedName,
+  findOrCreateCharacter,
+} from '@adventure-bot/game/character'
 import { Shrine } from '@adventure-bot/game/encounters/shrine'
 import { questProgressField } from '@adventure-bot/game/quest'
 
@@ -15,7 +18,7 @@ export function shrineEmbeds({
   const { blessed } = character.quests
   return [
     new MessageEmbed({
-      title: `${character.name} encountered a ${shrine.name}!`,
+      title: `${decoratedName(character)} encountered a ${shrine.name}!`,
       description: shrine.description,
       fields: blessed ? [questProgressField(blessed)] : [],
       color: shrine.color,
