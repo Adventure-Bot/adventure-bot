@@ -1,18 +1,15 @@
-import { Client, MessageEmbed } from 'discord.js'
+import { MessageEmbed, TextChannel } from 'discord.js'
 
 import { decoratedName } from '@adventure-bot/game/character'
 import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard'
 import store from '@adventure-bot/game/store'
 import { winnerDeclared } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
-import {
-  selectBearer,
-  selectLastChannelUsed,
-} from '@adventure-bot/game/store/selectors'
+import { selectBearer } from '@adventure-bot/game/store/selectors'
 import { timeTillSovereign } from '@adventure-bot/game/store/slices/crown'
 import { asset } from '@adventure-bot/game/utils'
 
-export const announceWinners: (client: Client) => void = (client) => {
+export function announceWinners(channel: TextChannel): void {
   setInterval(() => {
     const state = store.getState()
     if (state.crown.announced) {
@@ -43,10 +40,6 @@ export const announceWinners: (client: Client) => void = (client) => {
         interaction.editReply({ embeds })
         return
       }
-      const state = store.getState()
-      const lastChannelId = selectLastChannelUsed(state)
-      const channel = client.channels.cache.get(lastChannelId)
-      if (!channel?.isText()) return
       channel.send({
         embeds,
       })

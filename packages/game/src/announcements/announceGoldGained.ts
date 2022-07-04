@@ -1,6 +1,7 @@
 import { MessageEmbed, TextChannel } from 'discord.js'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
+import { sendEmbeds } from '@adventure-bot/game/announcements/sendEmbeds'
 import { decoratedName } from '@adventure-bot/game/character'
 import store from '@adventure-bot/game/store'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
@@ -50,7 +51,5 @@ function announce({
       color: 'YELLOW',
     }),
   ]
-  channel.send({
-    embeds,
-  })
+  sendEmbeds({ channel, embeds })
 }

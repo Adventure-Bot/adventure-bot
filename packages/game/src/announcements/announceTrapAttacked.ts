@@ -6,7 +6,6 @@ import {
   getCharacter,
   hpBarField,
 } from '@adventure-bot/game/character'
-import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { trapAttacked } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
@@ -15,7 +14,6 @@ import {
   damaged,
   questProgressed,
 } from '@adventure-bot/game/store/slices/characters'
-import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { trapRollText } from '@adventure-bot/game/trap'
 
 export function announceTrapAttacked(channel: TextChannel): void {
@@ -76,14 +74,6 @@ export function announceTrapAttacked(channel: TextChannel): void {
               })
             )
         }
-        if (trap.onHitEffect)
-          store.dispatch(
-            effectAdded({
-              characterId,
-              effect: createEffect(trap.onHitEffect),
-              messageId,
-            })
-          )
       }
     },
   })
