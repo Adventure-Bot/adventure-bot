@@ -7,6 +7,8 @@ import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { xpAwarded } from '@adventure-bot/game/store/slices/characters'
 
+import { sendEmbeds } from './sendEmbeds'
+
 export function announceXpAwarded(channel: TextChannel): void {
   startAppListening({
     actionCreator: xpAwarded,
@@ -23,15 +25,7 @@ export function announceXpAwarded(channel: TextChannel): void {
           color: 'YELLOW',
         }),
       ]
-      const message = messageId
-        ? await channel.messages.fetch(messageId).catch(() => null)
-        : null
-
-      if (message) {
-        message.reply({ embeds })
-      } else {
-        channel.send({ embeds })
-      }
+      sendEmbeds({ messageId, channel, embeds })
     },
   })
 }

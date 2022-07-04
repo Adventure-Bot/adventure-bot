@@ -1,32 +1,25 @@
-import { Client } from 'discord.js'
+import { TextChannel } from 'discord.js'
 
+import { sendEmbeds } from '@adventure-bot/game/announcements/sendEmbeds'
 import { decoratedName } from '@adventure-bot/game/character'
 import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
-import {
-  selectCharacterById,
-  selectLastChannelUsed,
-} from '@adventure-bot/game/store/selectors'
+import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 
-export const announceEffectAdded: (client: Client) => void = (client) => {
+export function announceEffectAdded(channel: TextChannel): void {
   startAppListening({
     actionCreator: effectAdded,
-    effect: ({ payload: { effect, characterId, image } }) => {
+    effect: async ({ payload: { effect, characterId, image, messageId } }) => {
       const state = store.getState()
       const character = selectCharacterById(state, characterId)
       if (!character) return
-      const lastChannelId = selectLastChannelUsed(state)
-      const channel = client.channels.cache.get(lastChannelId)
-      if (!channel?.isText()) return
       const embed = statusEffectEmbed(effect).setTitle(
         `${decoratedName(character)} ${effect.announcement}`
       )
       if (image) embed.setImage(image)
-      channel.send({
-        embeds: [embed],
-      })
+      sendEmbeds({ messageId, channel, embeds: [embed] })
     },
   })
 }

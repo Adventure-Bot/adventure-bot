@@ -2,10 +2,8 @@ import { Client, Intents } from 'discord.js'
 
 import {
   announceCrownLoots,
-  announceEffectAdded,
   announceItemsReceived,
   announceLoots,
-  announceWinners,
 } from '@adventure-bot/game/announcements'
 import { announceNewgames } from '@adventure-bot/game/announcements/announceNewgames'
 import commands from '@adventure-bot/game/commands'
@@ -68,9 +66,7 @@ export async function createClient({
   client.on('ready', async () => {
     console.log('🎉 Adventures begin!')
     console.timeEnd('discord client ready')
-    announceWinners(client)
     announceItemsReceived()
-    announceEffectAdded(client)
     announceCrownLoots(client)
     announceLoots(client)
     dispatchScheduledActions()
