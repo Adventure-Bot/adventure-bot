@@ -7,7 +7,7 @@ import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { xpAwarded } from '@adventure-bot/game/store/slices/characters'
 
-export function announceXpAwarded({ channel }: { channel: TextChannel }): void {
+export function announceXpAwarded(channel: TextChannel): void {
   startAppListening({
     actionCreator: xpAwarded,
     effect: async ({ payload: { characterId, amount, messageId } }) => {

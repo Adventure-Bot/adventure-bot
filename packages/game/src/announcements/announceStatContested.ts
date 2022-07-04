@@ -6,11 +6,7 @@ import store from '@adventure-bot/game/store'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 
-export function announceStatContested({
-  channel,
-}: {
-  channel: TextChannel
-}): void {
+export function announceStatContested(channel: TextChannel): void {
   startAppListening({
     actionCreator: statContested,
     effect: async ({

@@ -6,7 +6,11 @@ import {
   findOrCreateCharacter,
 } from '@adventure-bot/game/character'
 import { monster } from '@adventure-bot/game/encounters'
-import { monsterList, monstersByName } from '@adventure-bot/game/monster'
+import {
+  createMonster,
+  monsterList,
+  monstersByName,
+} from '@adventure-bot/game/monster'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
@@ -42,7 +46,7 @@ export const execute = async ({
     monster({
       interaction,
       replyType: 'followUp',
-      monster: selectedMonster[1](),
+      monster: createMonster(selectedMonster[1]()),
     })
     collector.stop()
   })

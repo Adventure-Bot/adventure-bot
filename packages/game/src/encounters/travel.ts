@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 
 import {
   awardXP,
@@ -35,7 +35,6 @@ export const travel = async ({
       }).setImage(art.s3Url),
     ],
   })
-  if (!(message instanceof Message)) return
   awardXP({
     characterId: interaction.user.id,
     amount: 1,
@@ -46,6 +45,7 @@ export const travel = async ({
       effectAdded({
         characterId: interaction.user.id,
         effect: createEffect('invigorated'),
+        messageId: message.id,
       })
     )
   }

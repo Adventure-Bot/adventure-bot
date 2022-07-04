@@ -1,4 +1,4 @@
-import { ColorResolvable, Message } from 'discord.js'
+import { ColorResolvable } from 'discord.js'
 
 import {
   applyShrine,
@@ -21,12 +21,9 @@ export async function shrineEncounter({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions & { shrine: Shrine }): Promise<void> {
-  const message = await interaction[replyType]({
+  const { id: messageId } = await interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
-    fetchReply: true,
   })
 
-  if (!(message instanceof Message)) return
-
-  applyShrine({ shrine, interaction, message })
+  applyShrine({ shrine, interaction, messageId })
 }

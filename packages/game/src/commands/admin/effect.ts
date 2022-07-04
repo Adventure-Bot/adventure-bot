@@ -25,7 +25,7 @@ function effectList(): string {
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  await interaction.editReply({
+  const { id: messageId } = await interaction.editReply({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(
@@ -55,6 +55,7 @@ export const execute = async ({
           id: randomUUID(),
           started: new Date().toString(),
         },
+        messageId,
       })
     )
   })

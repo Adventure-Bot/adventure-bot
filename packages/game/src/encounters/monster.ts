@@ -11,7 +11,7 @@ import {
   encounterSummaryEmbed,
 } from '@adventure-bot/game/encounters'
 import { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items'
-import { Monster, randomMonster } from '@adventure-bot/game/monster'
+import { randomMonster } from '@adventure-bot/game/monster'
 import {
   isUserQuestComplete,
   questProgressField,
@@ -20,6 +20,7 @@ import {
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import {
+  MonsterWithStats,
   selectCharacterById,
   selectEncounterById,
   selectMonsterById,
@@ -37,7 +38,7 @@ export const monster = async ({
   interaction,
   replyType = 'editReply',
   monster = randomMonster(),
-}: CommandHandlerOptions & { monster?: Monster }): Promise<void> => {
+}: CommandHandlerOptions & { monster?: MonsterWithStats }): Promise<void> => {
   let player = findOrCreateCharacter(interaction.user)
   let encounter = createEncounter({ monster, player })
   const encounterId = encounter.id
@@ -81,8 +82,14 @@ export const monster = async ({
 
     const playerResult = playerFlee
       ? undefined
-      : makeAttack(player.id, monster.id, encounterId)
-    const monsterResult = makeAttack(monster.id, player.id, encounterId)
+      : makeAttack({
+          attacker: player,
+          defender: monster,
+        })
+    const monsterResult = makeAttack({
+      attacker: monster,
+      defender: player,
+    })
 
     const updatedMonster = selectMonsterById(store.getState(), monster.id)
     if (!updatedMonster) return

@@ -19,16 +19,19 @@ export async function buffQuestReward(
     }),
   ]
 
-  store.dispatch(effectAdded({ characterId: interaction.user.id, effect }))
-
+  const message = await interaction.followUp({
+    embeds,
+  })
+  store.dispatch(
+    effectAdded({
+      characterId: interaction.user.id,
+      effect,
+      messageId: message.id,
+    })
+  )
   store.dispatch(
     questCompleted({ questId: quest.id, characterId: interaction.user.id })
   )
-
-  await interaction.followUp({
-    fetchReply: true,
-    embeds,
-  })
 
   await inspect.execute({ interaction })
 }

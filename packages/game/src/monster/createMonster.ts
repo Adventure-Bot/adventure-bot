@@ -3,19 +3,27 @@ import { randomUUID } from 'crypto'
 import { defaultCharacter } from '@adventure-bot/game/character'
 import { Monster, MonsterKind } from '@adventure-bot/game/monster'
 import store from '@adventure-bot/game/store'
-import { selectMonsterById } from '@adventure-bot/game/store/selectors'
+import {
+  MonsterWithStats,
+  selectCharacterStats,
+} from '@adventure-bot/game/store/selectors'
 import { monsterCreated } from '@adventure-bot/game/store/slices/characters'
 
 export const createMonster = (
   monster: Partial<Monster> & { name: string; kind: MonsterKind }
-): Monster => {
+): MonsterWithStats => {
   const newMonster: Monster = {
     ...defaultCharacter,
     id: monster?.id ?? randomUUID(),
     ...monster,
     isMonster: true,
   }
-  store.dispatch(monsterCreated(newMonster))
+  const monsterWithStats: MonsterWithStats = {
+    ...newMonster,
+    stats: selectCharacterStats(store.getState(), newMonster),
+    statsModified: selectCharacterStats(store.getState(), newMonster, true),
+  }
+  store.dispatch(monsterCreated(monsterWithStats))
   console.log(`created monster ${newMonster.id}`)
-  return selectMonsterById(store.getState(), newMonster.id) ?? newMonster
+  return monsterWithStats
 }

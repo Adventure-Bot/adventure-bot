@@ -60,6 +60,7 @@ export async function chest(
     embeds: [chestEmbed(chest, interaction)],
     fetchReply: true,
   })
+  const messageId = message.id
   if (!(message instanceof Message)) return
   await message.react(Emoji('perception'))
   await message.react('👐')
@@ -96,7 +97,7 @@ export async function chest(
         character,
         stat: 'perception',
         difficulty: d(6) + 4,
-        messageId: message.id,
+        messageId,
         successText: chest.isTrapped
           ? 'spotted a trap!'
           : 'cleared the chest of any traps!',
@@ -119,7 +120,7 @@ export async function chest(
           character,
           stat: 'lockpicking',
           difficulty: d(6) + 4,
-          messageId: message.id,
+          messageId,
           successText: "disarmed the chest's trap!",
           failureText: "thinks the chest's trap is disabled?",
         }).success
@@ -140,19 +141,19 @@ export async function chest(
           character,
           stat: 'luck',
           difficulty: d(6) + 14,
-          messageId: message.id,
+          messageId,
           successText: "luckily avoided the chest's trap!",
           failureText: "triggered the chest's trap!",
         }).success
       ) {
-        triggerTrap(interaction, chest)
+        triggerTrap(interaction, chest, message.id)
       }
       if (
         statContest({
           character,
           stat: 'lockpicking',
           difficulty: d(6) + 4,
-          messageId: message.id,
+          messageId,
           successText: "picked the chest's lock!",
           failureText: "failed to pick the chest's lock!",
         }).success
@@ -165,7 +166,7 @@ export async function chest(
     }
     if (reaction.emoji.name === '👐') {
       if (chest.isTrapped && !chest.trapDisarmed) {
-        triggerTrap(interaction, chest)
+        triggerTrap(interaction, chest, message.id)
       }
       if (!chest.isLocked) chest.isLooted = true
       if (chest.isLocked) {
@@ -202,7 +203,7 @@ export async function chest(
         character,
         stat: 'luck',
         difficulty: d(6) + 14,
-        messageId: message.id,
+        messageId,
         successText: 'found an item in the chest!',
         failureText: 'found no items in the chest...',
       }).success
@@ -229,7 +230,7 @@ export async function chest(
     awardXP({
       characterId: interaction.user.id,
       amount: xp,
-      messageId: message.id,
+      messageId,
     })
     store.dispatch(
       goldGained({
@@ -259,9 +260,17 @@ function chestResponses(chest: Chest): string[] {
   return responses
 }
 
-function triggerTrap(interaction: CommandInteraction, chest: Chest) {
+function triggerTrap(
+  interaction: CommandInteraction,
+  chest: Chest,
+  messageId: string
+) {
   const { trap, trapTriggered } = chest
   if (!trap || trapTriggered) return
   chest.trapTriggered = true
-  trapAttack({ trap, defender: findOrCreateCharacter(interaction.user) })
+  trapAttack({
+    trap,
+    defender: findOrCreateCharacter(interaction.user),
+    messageId,
+  })
 }

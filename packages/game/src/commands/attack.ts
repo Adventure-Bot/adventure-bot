@@ -41,7 +41,7 @@ export const execute = async ({
     })
     return
   }
-  const result = playerAttack(attacker.id, defender.id)
+  const result = playerAttack(attacker, defender)
   if (!result) {
     await interaction.editReply(`No attack result. This should not happen.`)
     return
@@ -65,7 +65,10 @@ export const execute = async ({
   await sleep(2000)
   const retaliationEmbeds: MessageEmbed[] = []
   if (0 < (selectCharacterById(store.getState(), defender.id)?.hp ?? 0)) {
-    const result = makeAttack(defender.id, attacker.id)
+    const result = makeAttack({
+      attacker,
+      defender,
+    })
     if (!result) {
       await interaction.editReply({
         content: `No attack result or retaliation outcome is cooldown. This should not happen.`,

@@ -1,20 +1,24 @@
 import { AttackResult } from '@adventure-bot/game/attack'
-import { getCharacter } from '@adventure-bot/game/character'
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
-import { selectEncounterById } from '@adventure-bot/game/store/selectors'
+import {
+  CharacterWithStats,
+  MonsterWithStats,
+  selectEncounterById,
+} from '@adventure-bot/game/store/selectors'
 import { attacked, damaged } from '@adventure-bot/game/store/slices/characters'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { d, d20 } from '@adventure-bot/game/utils'
 
-export const makeAttack = (
-  attackerId: string,
-  defenderId: string,
+export function makeAttack({
+  attacker,
+  defender,
+  encounterId,
+}: {
+  attacker: CharacterWithStats
+  defender: CharacterWithStats | MonsterWithStats
   encounterId?: string
-): AttackResult | void => {
-  const attacker = getCharacter(attackerId)
-  const defender = getCharacter(defenderId)
-  if (!attacker || !defender) return
+}): AttackResult {
   const encounter = encounterId
     ? selectEncounterById(store.getState(), encounterId)
     : undefined
@@ -71,7 +75,7 @@ export const makeAttack = (
     if (attacker.equipment.weapon?.onHitEffect)
       store.dispatch(
         effectAdded({
-          characterId: defenderId,
+          characterId: defender.id,
           effect: createEffect(attacker.equipment.weapon.onHitEffect),
         })
       )

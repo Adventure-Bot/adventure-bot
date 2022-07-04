@@ -5,7 +5,6 @@ import {
   announceEffectAdded,
   announceItemsReceived,
   announceLoots,
-  announceTrapAttacked,
   announceWinners,
 } from '@adventure-bot/game/announcements'
 import { announceNewgames } from '@adventure-bot/game/announcements/announceNewgames'
@@ -74,7 +73,6 @@ export async function createClient({
     announceEffectAdded(client)
     announceCrownLoots(client)
     announceLoots(client)
-    announceTrapAttacked(client)
     dispatchScheduledActions()
     announceNewgames(client)
     client.guilds.cache.forEach(async (guild) => {

@@ -11,7 +11,7 @@ import {
 } from '@adventure-bot/game/character'
 import { chest } from '@adventure-bot/game/encounters/chest'
 import { monster } from '@adventure-bot/game/encounters/monster'
-import { Monster } from '@adventure-bot/game/monster'
+import { createMonster } from '@adventure-bot/game/monster'
 import { createGiantCrab } from '@adventure-bot/game/monster/monsters/createGiantCrab'
 import { createShark } from '@adventure-bot/game/monster/monsters/createShark'
 import {
@@ -75,10 +75,12 @@ export async function coralReef({
         monster({
           interaction,
           replyType: 'followUp',
-          monster: weightedTable<() => Monster>([
-            [1, createShark],
-            [1, createGiantCrab],
-          ])(),
+          monster: createMonster(
+            weightedTable([
+              [1, createShark],
+              [1, createGiantCrab],
+            ])()
+          ),
         }),
     ],
   ])()

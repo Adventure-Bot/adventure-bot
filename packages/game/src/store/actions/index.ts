@@ -18,7 +18,8 @@ export const itemReceived = createAction<{
   interaction: CommandInteraction
 }>('itemReceived')
 export const backdateCrown = createAction('backdateCrown') // for testing
-export const trapAttacked = createAction<TrapAttackResult>('trapAttacked')
+export const trapAttacked =
+  createAction<{ result: TrapAttackResult; messageId: string }>('trapAttacked')
 
 export const characterMessageCreated = createAction<{
   character: Character
