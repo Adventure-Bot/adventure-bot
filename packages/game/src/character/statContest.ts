@@ -6,7 +6,7 @@ import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 import { d } from '@adventure-bot/game/utils'
 
 type StatContest = {
-  characterId: string
+  character: CharacterWithStats
   stat: Stat
   modifier: number
   difficulty: number
@@ -38,7 +38,7 @@ export function statContest({
   const check = d(20)
   const modifier = character.statsModified[stat]
   const contest: StatContest = {
-    characterId: character.id,
+    character,
     stat,
     difficulty,
     check,

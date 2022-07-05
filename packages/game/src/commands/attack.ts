@@ -22,16 +22,16 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const target = interaction.options.data[0].user
-  const initiator = interaction.user
-  if (!target) {
+  const targetUser = interaction.options.data[0].user
+  const initiatorUser = interaction.user
+  if (!targetUser) {
     await interaction.editReply(`You must specify a target @player`)
     return
   }
 
-  const attacker = findOrCreateCharacter(initiator)
-  const defender = findOrCreateCharacter(target)
-  if (attacker.hp === 0) {
+  const initiator = findOrCreateCharacter(initiatorUser)
+  const target = findOrCreateCharacter(targetUser)
+  if (initiator.hp === 0) {
     await interaction.editReply({
       embeds: [
         new MessageEmbed({
@@ -41,21 +41,17 @@ export const execute = async ({
     })
     return
   }
-  const result = playerAttack(attacker, defender)
-  if (!result) {
-    await interaction.editReply(`No attack result. This should not happen.`)
-    return
-  }
+  const attackResult = playerAttack(initiator, target)
 
-  if (result.outcome === 'cooldown') {
+  if (attackResult.outcome === 'cooldown') {
     await cooldowns.execute({ interaction })
     return
   }
-  const embeds = [attackResultEmbed({ result })]
-  if (0 === selectCharacterById(store.getState(), defender.id)?.hp) {
+  const embeds = [attackResultEmbed({ result: attackResult })]
+  if (0 === selectCharacterById(store.getState(), target.id)?.hp) {
     await loot({
-      looterId: attacker.id,
-      targetId: defender.id,
+      looterId: initiator.id,
+      targetId: target.id,
       interaction,
     })
   }
@@ -64,24 +60,24 @@ export const execute = async ({
   })
   await sleep(2000)
   const retaliationEmbeds: MessageEmbed[] = []
-  if (0 < (selectCharacterById(store.getState(), defender.id)?.hp ?? 0)) {
-    const result = makeAttack({
-      attacker,
-      defender,
+  if (0 < findOrCreateCharacter(targetUser).hp) {
+    const retaliationResult = makeAttack({
+      attacker: target,
+      defender: initiator,
     })
-    if (!result) {
+    if (!retaliationResult) {
       await interaction.editReply({
         content: `No attack result or retaliation outcome is cooldown. This should not happen.`,
       })
       return
     }
     retaliationEmbeds.push(
-      attackResultEmbed({ result, variant: 'retaliation' })
+      attackResultEmbed({ result: retaliationResult, variant: 'retaliation' })
     )
-    if (selectCharacterById(store.getState(), defender.id)?.hp === 0) {
+    if (0 === findOrCreateCharacter(initiatorUser).hp) {
       loot({
-        looterId: defender.id,
-        targetId: attacker.id,
+        looterId: target.id,
+        targetId: initiator.id,
         interaction,
       })
     }

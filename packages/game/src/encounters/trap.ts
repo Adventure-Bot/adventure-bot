@@ -4,14 +4,18 @@ import {
   decoratedName,
   findOrCreateCharacter,
 } from '@adventure-bot/game/character'
-import { Trap, getRandomTrap, trapAttack } from '@adventure-bot/game/trap'
+import {
+  TrapWithStats,
+  getRandomTrap,
+  trapAttack,
+} from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, sleep } from '@adventure-bot/game/utils'
 
 export const trap = async ({
   interaction,
   replyType = 'editReply',
   trap = getRandomTrap(),
-}: CommandHandlerOptions & { trap?: Trap }): Promise<void> => {
+}: CommandHandlerOptions & { trap?: TrapWithStats }): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
 
   const embed = new MessageEmbed({
@@ -19,7 +23,7 @@ export const trap = async ({
     color: 'RED',
     description: trap.attackText,
   })
-    .setImage(trap.image)
+    .setImage(trap.profile)
     .setThumbnail(character.profile)
 
   const { id: messageId } = await interaction[replyType]({

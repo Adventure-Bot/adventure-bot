@@ -10,12 +10,16 @@ import { heavyCrown } from '@adventure-bot/game/equipment/items'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import { goldGained } from '@adventure-bot/game/store/slices/characters'
-import { Trap, getRandomTrap, trapAttack } from '@adventure-bot/game/trap'
+import {
+  TrapWithStats,
+  getRandomTrap,
+  trapAttack,
+} from '@adventure-bot/game/trap'
 import { CommandHandlerOptions, d } from '@adventure-bot/game/utils'
 
 export type Chest = {
   hasTrap: boolean
-  trap?: Trap
+  trap?: TrapWithStats
   hasLock: boolean
   isTrapped: boolean
   isLocked: boolean

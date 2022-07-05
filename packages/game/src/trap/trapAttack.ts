@@ -8,8 +8,7 @@ import {
   questProgressed,
 } from '@adventure-bot/game/store/slices/characters'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
-import { TrapAttackResult } from '@adventure-bot/game/trap'
-import { Trap } from '@adventure-bot/game/trap/Trap'
+import { TrapAttackResult, TrapWithStats } from '@adventure-bot/game/trap'
 import { d, d20 } from '@adventure-bot/game/utils'
 
 export function trapAttack({
@@ -18,7 +17,7 @@ export function trapAttack({
   messageId,
 }: {
   defender: CharacterWithStats
-  trap: Trap
+  trap: TrapWithStats
   messageId: string
 }): TrapAttackResult {
   const attackRoll = d20()

@@ -21,7 +21,7 @@ export function announceTrapAttacked(channel: TextChannel): void {
         color: 'RED',
         description: outcome === 'hit' ? trap.hitText : trap.missText,
       })
-        .setImage(trap.image)
+        .setImage(trap.profile)
         .setThumbnail(defender.profile)
       embed.addField('Trap Attack', trapRollText(result))
       if ('hit' === outcome) {
