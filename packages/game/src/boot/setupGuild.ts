@@ -1,16 +1,7 @@
 import { Client, Guild } from 'discord.js'
 import { map } from 'remeda'
 
-import {
-  announceEffectAdded,
-  announceGoldGained,
-  announcePeriodicEffects,
-  announceQuestGranted,
-  announceStatContested,
-  announceTrapAttacked,
-  announceWinners,
-  announceXpAwarded,
-} from '@adventure-bot/game/announcements'
+import { announcements } from '@adventure-bot/game/announcements'
 import { installCommands } from '@adventure-bot/game/boot/installCommands'
 import { renderCharacterList } from '@adventure-bot/game/character'
 import { renderLeaderboard } from '@adventure-bot/game/leaderboard'
@@ -37,19 +28,7 @@ export async function setupGuild({
     })
   renderCharacterList({ guild, appId })
   gameChannel({ guild, appId }).then((channel) => {
-    map(
-      [
-        announceEffectAdded,
-        announceGoldGained,
-        announcePeriodicEffects,
-        announceQuestGranted,
-        announceStatContested,
-        announceTrapAttacked,
-        announceWinners,
-        announceXpAwarded,
-      ],
-      (announce) => announce(channel)
-    )
+    map(announcements, (announce) => announce(channel))
   })
   renderLeaderboard({ guild, appId })
   renderRoamingMonsters({ guild, appId })
