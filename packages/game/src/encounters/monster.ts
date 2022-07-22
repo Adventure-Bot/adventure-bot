@@ -1,4 +1,5 @@
 import { Message, TextChannel } from 'discord.js'
+import { values } from 'remeda'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
@@ -189,24 +190,30 @@ export const monster = async ({
     embeds,
   })
 
-  if (
+  const monsterQuest = values(player.quests).find(
+    (quest) => quest.monsterKind == monster.kind
+  )
+  if (monsterQuest && encounter.outcome === 'player victory')
+    updateUserQuestProgess(interaction.user, monsterQuest.id, 1)
+
+  const didFindDragonSword =
     player &&
     monster.kind === 'Dragon' &&
     encounter.outcome === 'player victory' &&
     Math.random() < 0.5
-  ) {
-    const item = swordOfDragonSlaying()
+
+  if (didFindDragonSword)
     store.dispatch(
       itemReceived({
         characterId: player.id,
-        item,
+        item: swordOfDragonSlaying(),
         interaction,
       })
     )
-  }
 
   if (encounter.outcome === 'player victory' && Math.random() <= 0.3)
     await chest({ interaction })
+
   if (
     isUserQuestComplete(interaction.user, 'slayer') ||
     isUserQuestComplete(interaction.user, 'survivor')

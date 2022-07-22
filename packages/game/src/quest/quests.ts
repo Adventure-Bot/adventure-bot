@@ -1,6 +1,7 @@
 import { Quest } from '@adventure-bot/game/quest'
 
 const questIds = [
+  'goblinSlayer',
   'slayer',
   'survivor',
   'blessed',
@@ -18,6 +19,17 @@ export const isQuestId = (id: string): id is QuestId =>
 export const quests: {
   [id in QuestId]: Quest
 } = {
+  goblinSlayer: {
+    id: 'goblinSlayer',
+    title: 'Goblin Slayer',
+    progress: 0,
+    totalRequired: 5,
+    objective: 'Kill 5 goblins',
+    reward: '50 gold',
+    repeatable: true,
+    victoryText: 'You are a goblin slayer!',
+    monsterKind: 'Goblin',
+  },
   slayer: {
     id: 'slayer',
     title: 'Slayer',

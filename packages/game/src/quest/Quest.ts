@@ -1,3 +1,4 @@
+import { MonsterKind } from '@adventure-bot/game/monster'
 import { QuestId } from '@adventure-bot/game/quest'
 
 export type Quest = {
@@ -9,4 +10,5 @@ export type Quest = {
   reward: string
   repeatable: boolean
   victoryText: string
+  monsterKind?: MonsterKind
 }
