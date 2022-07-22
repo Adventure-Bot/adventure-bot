@@ -9,6 +9,7 @@ import lootchest from '@adventure-bot/game/commands/admin/lootchest'
 import lootme from '@adventure-bot/game/commands/admin/lootme'
 import lootmonster from '@adventure-bot/game/commands/admin/lootmonster'
 import monster from '@adventure-bot/game/commands/admin/monster'
+import quest from '@adventure-bot/game/commands/admin/quest'
 import adventure from '@adventure-bot/game/commands/adventure'
 import attack from '@adventure-bot/game/commands/attack'
 // import d20 from '@adventure-bot/game/commands/d20'
@@ -59,7 +60,7 @@ if (process.env.DEV_COMMANDS === 'true') {
   commands.set('lootchest', lootchest)
   commands.set('lootme', lootme)
   commands.set('lootmonster', lootmonster)
-  commands.set('lootmonster', lootmonster)
+  commands.set('quest', quest)
 } else {
   console.warn('🔒 Dev commands disabled')
 }

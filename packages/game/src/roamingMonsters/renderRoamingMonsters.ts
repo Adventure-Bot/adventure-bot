@@ -23,11 +23,11 @@ export async function renderRoamingMonsters({
   const channel = await roamingMonstersChannel({ appId, guild })
   const message =
     (await channel.messages.fetch()).first() ?? (await channel.send({ embeds }))
-  await message.edit({ embeds: roamingMonstersEmbeds().slice(0, 9) })
+  await message.edit({ embeds })
   startAppListening({
     matcher: isAnyOf(monsterCreated, playerDefeat, doubleKO),
     effect: () => {
-      message.edit({ embeds: roamingMonstersEmbeds() })
+      message.edit({ embeds })
     },
   })
 }

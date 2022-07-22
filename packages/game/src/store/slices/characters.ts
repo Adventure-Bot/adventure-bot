@@ -248,6 +248,7 @@ const characterSlice = createSlice({
       action: PayloadAction<{
         characterId: string
         questId: QuestId
+        messageId?: string
       }>
     ) {
       const { characterId, questId } = action.payload

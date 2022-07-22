@@ -1,10 +1,16 @@
 import { MessageEmbed } from 'discord.js'
+import { pipe, sort, take } from 'remeda'
 
 import { hpBarField } from '@adventure-bot/game/character'
 import { getRoamingMonsters, monsterEmbed } from '@adventure-bot/game/monster'
 
 export function roamingMonstersEmbeds(): MessageEmbed[] {
-  const roamingMonsters = getRoamingMonsters()
+  const roamingMonsters = pipe(
+    getRoamingMonsters(),
+    sort((a, b) => a.gold - b.gold),
+    take(9)
+  )
+
   if (roamingMonsters.length === 0)
     return [
       new MessageEmbed({
