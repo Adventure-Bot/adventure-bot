@@ -34,7 +34,7 @@ export const ranger = async ({
       new MessageEmbed({
         title: `${decoratedName(character)} encountered a ranger!`,
         color: 'GREEN',
-        description: `Which prey do you seek?`,
+        description: `A seasoned traveler greets you. They've seen monster tracks in the area and can guide you to them.\n\nWhich do you seek?`,
       }).setImage(
         randomArrayElement([
           asset('fantasy', 'places', 'a lone traveler in the desert'),
@@ -80,7 +80,6 @@ export const ranger = async ({
 
   if (!response.isButton()) return
   if (response.customId === 'leave') {
-    await interaction.followUp('You leave.')
     return
   }
 
