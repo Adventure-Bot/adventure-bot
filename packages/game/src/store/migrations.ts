@@ -1,7 +1,8 @@
 import { createMigrate } from 'redux-persist'
-import { mapValues } from 'remeda'
+import { mapValues, values } from 'remeda'
 
 import { defaultLeaderboardState } from '@adventure-bot/game/leaderboard/leaderboardSlice'
+import { isMonster } from '@adventure-bot/game/monster'
 import { RootReducerState } from '@adventure-bot/game/store'
 import { defaultCommandsState } from '@adventure-bot/game/store/slices/commands'
 import { crownDefaultState } from '@adventure-bot/game/store/slices/crown'
@@ -10,12 +11,12 @@ import { defaultEncounterWeights } from '@adventure-bot/game/store/slices/encoun
 /*
  * This is the current version and should match the latest version
  */
-export const persistVersion = 8
-
+export const persistVersion = 9
 /**
  * Here we use RootReducerState instead of ReduxState to avoid cyclical type references
  */
-type PersistedReduxStateV8 = RootReducerState
+type PersistedReduxStateV9 = RootReducerState
+type PersistedReduxStateV8 = PersistedReduxStateV9
 type PersistedReduxStateV7 = PersistedReduxStateV8
 
 type PersistedReduxStateV6 = Omit<PersistedReduxStateV7, 'leaderboard'> & {
@@ -67,7 +68,6 @@ const persistMigrations = {
     ...state,
     characters: {
       ...state.characters,
-      roamingMonsters: [],
     },
   }),
   3: (state: PersistedReduxStateV2): PersistedReduxStateV3 => ({
@@ -111,6 +111,22 @@ const persistMigrations = {
     )
     return state
   },
+  9: (state: RootReducerState): PersistedReduxStateV9 => ({
+    ...state,
+    characters: {
+      ...state.characters,
+      roamingMonsterIds: values(state.characters.charactersById)
+        .filter(isMonster)
+        .filter(({ hp }) => hp > 0)
+        .reduce(
+          (acc, monster) => ({
+            ...acc,
+            [monster.id]: true,
+          }),
+          {}
+        ),
+    },
+  }),
 }
 
 export const persistMigrate = createMigrate<MigrationState>(persistMigrations)

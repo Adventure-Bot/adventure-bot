@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { values } from 'remeda'
+import { keys, values } from 'remeda'
 
 import { Character, Stats } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
@@ -81,14 +81,21 @@ export const selectAllCharacters: (state: ReduxState) => Array<Character> =
         .map((c) => decorateCharacterWithAssetProfile<Character>(c))
   )
 
-export const selectRoamingMonsters: (state: ReduxState) => Array<Monster> =
-  createSelector(
-    (state: ReduxState) =>
-      state.characters.roamingMonsters.map(
-        (id) => state.characters.charactersById[id]
-      ),
-    (monsters) => monsters.filter(isMonster).filter((monster) => monster.hp > 0)
-  )
+export function selectRoamingMonsters(state: ReduxState): MonsterWithStats[] {
+  return keys(state.characters.roamingMonsterIds)
+    .map((id) => state.characters.charactersById[id])
+    .filter(isMonster)
+    .filter((monster) => monster.hp > 0)
+    .map((monster) => {
+      const stats = selectCharacterStats(state, monster)
+      const statsModified = selectCharacterStats(state, monster, true)
+      return {
+        ...monster,
+        stats,
+        statsModified,
+      }
+    })
+}
 
 export const selectAllEncounters = (state: ReduxState): Encounter[] =>
   values(state.encounters.encountersById)
