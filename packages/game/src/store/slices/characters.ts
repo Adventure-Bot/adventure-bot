@@ -35,10 +35,10 @@ export const looted = createAction<LootResult>('character/looted')
 
 const defaultCharactersState: {
   charactersById: Record<string, Character>
-  roamingMonsters: string[]
+  roamingMonsterIds: Record<string, true>
 } = {
   charactersById: {},
-  roamingMonsters: [],
+  roamingMonsterIds: {},
 }
 
 const characterSlice = createSlice({
@@ -61,7 +61,7 @@ const characterSlice = createSlice({
     monsterCreated(state, action: PayloadAction<Monster>) {
       const monster = action.payload
       state.charactersById[monster.id] = monster
-      state.roamingMonsters.push(monster.id)
+      state.roamingMonsterIds[monster.id] = true
     },
 
     questProgressed(
@@ -266,7 +266,7 @@ const characterSlice = createSlice({
     },
 
     purgeRoamingMonsters(state) {
-      state.roamingMonsters = []
+      state.roamingMonsterIds = {}
     },
 
     healthSet(
@@ -298,7 +298,7 @@ const characterSlice = createSlice({
     builder
       .addCase(newgame, (state) => {
         state.charactersById = {}
-        state.roamingMonsters = []
+        state.roamingMonsterIds = {}
       })
       .addCase(created, (state, action) => {
         state.charactersById[action.payload.id] = action.payload

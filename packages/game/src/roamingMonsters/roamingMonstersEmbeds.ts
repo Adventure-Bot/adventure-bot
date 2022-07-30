@@ -16,10 +16,8 @@ export function roamingMonstersEmbeds(): MessageEmbed[] {
     new MessageEmbed({
       title: 'Roaming Monsters',
     }),
-    ...roamingMonsters
-      .slice(0, 9)
-      .map((monster) =>
-        monsterEmbed(monster).addFields([hpBarField({ character: monster })])
-      ),
+    ...roamingMonsters.map((monster) =>
+      monsterEmbed(monster).addFields([hpBarField({ character: monster })])
+    ),
   ]
 }

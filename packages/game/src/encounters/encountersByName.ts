@@ -6,6 +6,7 @@ import { coralReef } from '@adventure-bot/game/encounters/coralReef'
 import { divineBlessing } from '@adventure-bot/game/encounters/divineBlessing'
 import { fairyWell } from '@adventure-bot/game/encounters/fairyWell'
 import { monster } from '@adventure-bot/game/encounters/monster'
+import { ranger } from '@adventure-bot/game/encounters/ranger'
 import { shop } from '@adventure-bot/game/encounters/shop/shop'
 import {
   armorShrine,
@@ -28,6 +29,7 @@ export const encountersByName: [string, CommandHandler][] = [
   ['Divine Blessing', divineBlessing],
   ['Fairy Well', fairyWell],
   ['Monster', monster],
+  ['Ranger', ranger],
   ['Shop', shop],
   ['Armor Shrine', armorShrine],
   ['Attack Shrine', attackShrine],
