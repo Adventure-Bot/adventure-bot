@@ -9,6 +9,7 @@ const monsterKinds = [
   'Dragon',
   'Shark',
   'Giant Crab',
+  'Fireling',
 ] as const
 export type MonsterKind = typeof monsterKinds[number]
 
