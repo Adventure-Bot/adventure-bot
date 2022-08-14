@@ -34,8 +34,7 @@ export function createFireling(): Monster {
         sellable: false,
       },
     },
-    profile:
-      'https://static.wikia.nocookie.net/orcsmustdie/images/1/15/Fireling.png/revision/latest?cb=20120904133648',
+    profile: 'https://i.imgur.com/nPVWOYp.png',
     xpValue: 10,
     gold: Math.floor(Math.random() * 20) + 15,
   })
