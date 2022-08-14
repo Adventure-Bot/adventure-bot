@@ -10,6 +10,7 @@ export const stats = [
   'monsterDamageMax',
   'perception',
   'luck',
+  'revenge',
 ] as const
 
 export type Stat = typeof stats[number]
@@ -33,7 +34,8 @@ export const statTitles: { [key in Stat]: string } = {
   haste: 'Haste',
   lockpicking: 'Lockpicking',
   luck: 'Luck',
-  perception: 'Perception',
   maxHP: 'Max Health',
   monsterDamageMax: 'Monster Slaying',
+  perception: 'Perception',
+  revenge: 'Revenge',
 }

@@ -19,6 +19,7 @@ export const defaultCharacter: Omit<Character, 'id' | 'name'> = {
   perception: 0,
   profile: '',
   quests: {},
+  revenge: 0,
   xp: 0,
   xpValue: 10,
 }
