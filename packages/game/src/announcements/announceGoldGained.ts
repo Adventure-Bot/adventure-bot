@@ -40,7 +40,7 @@ function announce({
   channel: TextChannel
 }): void {
   const character = selectCharacterById(store.getState(), characterId)
-  if (!character) return
+  if (!character || amount === 0) return
   const embeds = [
     new MessageEmbed({
       title: `${decoratedName(character)} gained ${EmojiValue(

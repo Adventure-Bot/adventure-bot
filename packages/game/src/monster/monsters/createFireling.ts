@@ -38,6 +38,6 @@ export function createFireling(): Monster {
     },
     profile: 'https://i.imgur.com/nPVWOYp.png',
     xpValue: 10,
-    gold: Math.floor(Math.random() * 20) + 15,
+    gold: 0,
   })
 }

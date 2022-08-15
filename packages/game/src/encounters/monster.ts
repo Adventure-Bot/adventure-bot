@@ -120,6 +120,7 @@ export const monster = async ({
           }),
         ],
       })
+      player = findOrCreateCharacter(interaction.user)
     }
 
     const userReactions = message.reactions.cache.filter((reaction) =>
