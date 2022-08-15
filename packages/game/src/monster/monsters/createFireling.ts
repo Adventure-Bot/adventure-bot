@@ -13,6 +13,8 @@ export function createFireling(): Monster {
     ac: 10,
     attackBonus: 15,
     damageMax: 2,
+    revenge: 4,
+    revengeText: 'Lava spewed out from the Fireling!',
     equipment: {
       weapon: {
         name: 'Fireling Claws',

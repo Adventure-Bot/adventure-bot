@@ -41,4 +41,5 @@ export type Character = Stats & {
   gold: number
   xpValue: number
   isMonster?: boolean
+  revengeText?: string
 }

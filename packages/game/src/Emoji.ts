@@ -44,6 +44,7 @@ const defaultEmojis: {
   lockpicking: '🔓',
   luck: '🍀',
   perception: '🔍',
+  revenge: '☠',
 }
 
 export function Emoji(name: Emojis): string {
