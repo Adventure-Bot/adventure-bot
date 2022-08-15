@@ -1,6 +1,6 @@
-import { Message, TextChannel } from 'discord.js'
+import { Message, MessageEmbed, TextChannel } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/game/Emoji'
+import { Emoji, EmojiValue } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
 import { findOrCreateCharacter, loot } from '@adventure-bot/game/character'
 import quests from '@adventure-bot/game/commands/quests'
@@ -25,6 +25,7 @@ import {
   selectEncounterById,
   selectMonsterById,
 } from '@adventure-bot/game/store/selectors'
+import { damaged } from '@adventure-bot/game/store/slices/characters'
 import {
   doubleKO,
   playerDefeat,
@@ -32,7 +33,7 @@ import {
   playerVictory,
   roundFinished,
 } from '@adventure-bot/game/store/slices/encounters'
-import { CommandHandlerOptions } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions, d } from '@adventure-bot/game/utils'
 
 export const monster = async ({
   interaction,
@@ -95,6 +96,31 @@ export const monster = async ({
     if (!updatedMonster) return
     player = findOrCreateCharacter(interaction.user)
     monster = updatedMonster
+    if (monster.hp === 0 && monster.statsModified.revenge > 0) {
+      const revengeDamage = d(monster.statsModified.revenge)
+      store.dispatch(
+        damaged({
+          character: player,
+          amount: revengeDamage,
+        })
+      )
+      await interaction.followUp({
+        embeds: [
+          new MessageEmbed({
+            title: 'Revenge!',
+            description: [
+              monster.revengeText,
+              `${player.name} took ${EmojiValue(
+                'revenge',
+                revengeDamage
+              )} revenge damage from ${monster.name}!`,
+            ]
+              .filter(Boolean)
+              .join('\n\n'),
+          }),
+        ],
+      })
+    }
 
     const userReactions = message.reactions.cache.filter((reaction) =>
       reaction.users.cache.has(interaction.user.id)
