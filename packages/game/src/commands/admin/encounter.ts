@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 
 import {
   decoratedName,
@@ -35,6 +35,7 @@ export const execute = async ({
   if (!interaction.channel) return
   const collector = interaction.channel.createMessageCollector({
     time: 15000,
+    filter: (message: Message) => message.author.id === interaction.user.id,
   })
 
   collector.on('collect', (message) => {

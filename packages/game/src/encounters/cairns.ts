@@ -94,12 +94,7 @@ export const cairns = async ({
         color: 'YELLOW',
         description: `Choose your destiny.`,
       }).setImage(
-        randomArrayElement([
-          asset('fantasy', 'places', 'a glowing cairn set in the desert'),
-          asset('fantasy', 'places', 'a glowing cairn set in the forest'),
-          asset('fantasy', 'places', 'a glowing cairn set in the mountains'),
-          asset('fantasy', 'places', 'a glowing cairn set in the plains'),
-        ]).s3Url
+        randomArrayElement([asset('fantasy', 'places', 'cairn')]).s3Url
       ),
     ],
     components: [
