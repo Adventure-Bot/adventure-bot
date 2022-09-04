@@ -53,6 +53,7 @@ export const execute = async ({
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
+        color: 'WHITE',
         title: `${decoratedName(
           character
         )} healed${maybeTargetName} for ${EmojiModifier(
