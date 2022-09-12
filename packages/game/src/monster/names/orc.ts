@@ -1,0 +1,35 @@
+export const orcNames = `
+Aarok
+Zug
+Borok
+Gorok
+Oruk
+Vugmug
+Mongo
+Mungus
+Bongo
+Forok
+Arag
+Brag
+Drog
+Grag
+Krag
+Mrag
+Narg
+Rag
+Rog
+Srag
+Zrag
+Bulgan
+Gnarg
+Xurl
+Hrolkug
+Nughilug
+Haguk
+Ikkath
+Spoguk
+Zurghed
+Ulgan
+`
+  .split('\n')
+  .filter(Boolean)
