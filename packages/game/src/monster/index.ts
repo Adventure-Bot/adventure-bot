@@ -10,6 +10,7 @@ export {
   createGoblin,
   createSlime,
   createZombie,
+  createOrc,
 } from '@adventure-bot/game/monster/monsters'
 export { createGiantCrab } from '@adventure-bot/game/monster/monsters/createGiantCrab'
 export { createShark } from '@adventure-bot/game/monster/monsters/createShark'
