@@ -1,5 +1,4 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { clamp } from 'remeda'
 
 import {
   decoratedName,
@@ -19,20 +18,30 @@ import {
   xpAwarded,
 } from '@adventure-bot/game/store/slices/characters'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
-import { asset, d6 } from '@adventure-bot/game/utils'
+import { asset } from '@adventure-bot/game/utils'
 
 export async function restfulNight(
   interaction: CommandInteraction
 ): Promise<void> {
-  const preHealCharacter = findOrCreateCharacter(interaction.user)
-  const healAmount = d6()
-  const { maxHP } = preHealCharacter.statsModified
-  const { hp } = preHealCharacter
-  const actualHeal = clamp(healAmount, {
-    max: maxHP - hp,
-  })
-
+  const startingHitpoints = findOrCreateCharacter(interaction.user).hp
+  store.dispatch(
+    effectAdded({
+      character: findOrCreateCharacter(interaction.user),
+      effect: createEffect('invigorated'),
+    })
+  )
   const character = findOrCreateCharacter(interaction.user)
+  const amountHealed = character.statsModified.maxHP - startingHitpoints
+  // heal to full
+  if (amountHealed > 0) {
+    store.dispatch(
+      healed({
+        character,
+        amount: amountHealed,
+      })
+    )
+  }
+
   const { id: messageId } = await interaction.followUp({
     embeds: [
       new MessageEmbed({
@@ -42,7 +51,7 @@ export async function restfulNight(
         fields: [
           hpBarField({
             character,
-            adjustment: actualHeal,
+            adjustment: amountHealed,
           }),
         ].concat(
           character.quests.healer
@@ -50,25 +59,16 @@ export async function restfulNight(
             : []
         ),
       })
-        .setImage(asset('fantasy', 'magic', 'sleep spell').s3Url)
+        .setImage(asset('fantasy', 'places', 'restful tavern').s3Url)
         .setThumbnail(character.profile),
     ],
   })
 
-  store.dispatch(healed({ character, amount: actualHeal }))
-
-  store.dispatch(
-    effectAdded({
-      character,
-      effect: createEffect('invigorated'),
-      messageId,
-    })
-  )
   store.dispatch(
     questProgressed({
       characterId: interaction.user.id,
       questId: 'healer',
-      amount: actualHeal,
+      amount: amountHealed,
     })
   )
 
