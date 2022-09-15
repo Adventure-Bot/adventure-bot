@@ -1,0 +1,9 @@
+name: Clean ✨
+on:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  cleanup:
+    runs-on: self-hosted
+    steps:
+      - run: find /tmp/ -name "yarn*" -type d -mtime +1 -exec rm -rf {} \; > /dev/null
