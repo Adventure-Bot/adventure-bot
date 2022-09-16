@@ -15,7 +15,9 @@ Features:
 - PvP gameplay
 - Quests
 
-![death by chest](./example-gameplay/defeated-by-chest.png)
+![cave](./example-gameplay/cave.png)
+
+![chest](./example-gameplay/chest.png)
 
 ![character 2](./example-gameplay/inspect-2.png)
 
@@ -24,6 +26,10 @@ Features:
 ![heal](./example-gameplay/heal.png)
 
 ![divine blessing](./example-gameplay/divine-blessing.png)
+
+![demon](./example-gameplay/demon.png)
+
+![vigor shrine](./example-gameplay/vigor%20shrine.png)
 
 ![cairns](./example-gameplay/cairns.png)
 
