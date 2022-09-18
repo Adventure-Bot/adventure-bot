@@ -6,32 +6,55 @@ Slay monsters, earn gold, evade traps, travel, gear up, complete quests, and sta
 
 As you do.
 
+- [Adventure Bot](#adventure-bot)
+  - [Gameplay](#gameplay)
+    - [Adventuring](#adventuring)
+    - [Your Character](#your-character)
+  - [Developers](#developers)
+
 Adventure Bot is the DM in your friend's Discord roleplaying game!
 
 Features:
 
-- AI generated art
+- AI generated art (♥ [stable-diffusion](https://github.com/CompVis/stable-diffusion))
 - Persistent monsters
 - PvP gameplay
 - Quests
+
+## Gameplay
+
+### Adventuring
+
+Use `/adventure` to trigger a random encounter. It could be a fearsome enemy guarding valuable treasure, or a majestic shrine to grant you strength.
 
 ![cave](./example-gameplay/cave.png)
 
 ![chest](./example-gameplay/chest.png)
 
-![character 2](./example-gameplay/inspect-2.png)
+![cairns](./example-gameplay/cairns.png)
 
-![character](./example-gameplay/inspect.png)
+![vigor shrine](./example-gameplay/vigor%20shrine.png)
 
-![heal](./example-gameplay/heal.png)
+![shop](./example-gameplay/shop.png)
 
 ![divine blessing](./example-gameplay/divine-blessing.png)
 
 ![demon](./example-gameplay/demon.png)
 
-![vigor shrine](./example-gameplay/vigor%20shrine.png)
+If you become injured, be sure to use `/heal` to restore your health.
 
-![cairns](./example-gameplay/cairns.png)
+![heal](./example-gameplay/heal.png)
+
+### Your Character
+
+Use `/inspect` to see your character's stats, inventory, and equipment.
+
+Use it on another player with `/inspect <@user>` to see what they're carrying.
+
+![character 2](./example-gameplay/inspect-2.png)
+
+![character](./example-gameplay/inspect.png)
+
 
 ## Developers
 
