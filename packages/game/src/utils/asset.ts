@@ -40,13 +40,15 @@ function asset<
     .join('--')
     .replace(/ /g, '-')
 
+  const s3Url = encodeURI(
+    `${process.env.AWS_S3_HOST}/${theme}/${kind}/${entity}/${image}`
+  )
+
   return {
     path: absolutePath,
     attachment: new MessageAttachment(absolutePath, file),
     attachmentString: `attachment://${file}`,
-    s3Url: `${process.env.AWS_S3_HOST}/${theme}/${kind}/${String(
-      entity
-    ).replace(/[\s]+/g, '+')}/${image}`,
+    s3Url,
     values: [theme, kind, entity],
   }
 }
