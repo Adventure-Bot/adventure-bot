@@ -6,4 +6,4 @@ jobs:
   cleanup:
     runs-on: self-hosted
     steps:
-      - run: find /tmp/ -name "yarn*" ! -readable -prune -o -print -mtime +1 -type f -exec rm {} \; > /dev/null
+      - run: find /tmp/ -name "yarn*" -writable -o -print -mtime +1 -type f -delete
