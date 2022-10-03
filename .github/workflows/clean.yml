@@ -6,4 +6,4 @@ jobs:
   cleanup:
     runs-on: self-hosted
     steps:
-      - run: find /tmp/ -maxdepth 1 -type d -name "yarn*" -mtime +1 -exec rm -rf {}
+      - run: find /tmp/ -maxdepth 1 -type d -name "yarn*" -mtime +1 -exec rm -rf {} \;
