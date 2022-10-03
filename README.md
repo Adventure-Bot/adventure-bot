@@ -6,6 +6,8 @@ Slay monsters, earn gold, evade traps, travel, gear up, complete quests, and sta
 
 As you do.
 
+Table of Contents:
+
 - [Adventure Bot](#adventure-bot)
   - [Gameplay](#gameplay)
     - [Adventuring](#adventuring)
