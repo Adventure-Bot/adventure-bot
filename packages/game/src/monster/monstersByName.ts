@@ -1,14 +1,16 @@
 import {
   createDemon,
   createDragon,
+  createFireling,
+  createGiantCrab,
   createGoblin,
   createOrc,
   createRandomMonster,
+  createShark,
   createSlime,
+  createSnowGoblin,
   createZombie,
 } from '@adventure-bot/game/monster'
-import { createGiantCrab, createShark } from '@adventure-bot/game/monster'
-import { createFireling } from '@adventure-bot/game/monster/monsters/createFireling'
 
 export const monstersByName = [
   ['Demon', createDemon],
@@ -20,5 +22,6 @@ export const monstersByName = [
   ['Random', createRandomMonster],
   ['Shark', createShark],
   ['Slime', createSlime],
+  ['Snow Goblin', createSnowGoblin],
   ['Zombie', createZombie],
 ] as const

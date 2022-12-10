@@ -15,6 +15,7 @@ export const namesByKind = new Map<MonsterKind, string[]>([
   ['Fireling', firelingNames],
   ['Giant Crab', giantCrabNames],
   ['Goblin', goblinNames],
+  ['Snow Goblin', goblinNames],
   ['Orc', orcNames],
   ['Shark', sharkNames],
   ['Slime', slimeNames],
