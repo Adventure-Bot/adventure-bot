@@ -8,6 +8,8 @@ export {
   createDemon,
   createDragon,
   createGoblin,
+  createSnowGoblin,
+  createFireling,
   createSlime,
   createZombie,
   createOrc,

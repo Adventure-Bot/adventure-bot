@@ -4,6 +4,7 @@ import { randomArrayElement } from '@adventure-bot/game/utils'
 const monsterKinds = [
   'Slime',
   'Goblin',
+  'Snow Goblin',
   'Zombie',
   'Demon',
   'Dragon',
