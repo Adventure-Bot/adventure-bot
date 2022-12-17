@@ -3,6 +3,7 @@ import { createDragon } from '@adventure-bot/game/monster/monsters/createDragon'
 import { createFireling } from '@adventure-bot/game/monster/monsters/createFireling'
 import { createGoblin } from '@adventure-bot/game/monster/monsters/createGoblin'
 import { createOrc } from '@adventure-bot/game/monster/monsters/createOrc'
+import { createPyromancer } from '@adventure-bot/game/monster/monsters/createPyromancer'
 import { createSlime } from '@adventure-bot/game/monster/monsters/createSlime'
 import { createSnowGoblin } from '@adventure-bot/game/monster/monsters/createSnowGoblin'
 import { createZombie } from '@adventure-bot/game/monster/monsters/createZombie'
@@ -16,4 +17,5 @@ export {
   createOrc,
   createSlime,
   createZombie,
+  createPyromancer,
 }
