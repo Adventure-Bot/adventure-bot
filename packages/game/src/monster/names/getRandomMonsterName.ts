@@ -2,16 +2,20 @@ import { namesByKind } from '@adventure-bot/game/monster'
 import { randomArrayElement } from '@adventure-bot/game/utils'
 
 const monsterKinds = [
-  'Slime',
-  'Goblin',
-  'Snow Goblin',
-  'Zombie',
   'Demon',
   'Dragon',
-  'Shark',
-  'Giant Crab',
   'Fireling',
+  'Giant Crab',
+  'Goblin',
+  'Goblin',
   'Orc',
+  'Pyromancer',
+  'Shark',
+  'Slime',
+  'Slime',
+  'Snow Goblin',
+  'Zombie',
+  'Zombie',
 ] as const
 export type MonsterKind = typeof monsterKinds[number]
 

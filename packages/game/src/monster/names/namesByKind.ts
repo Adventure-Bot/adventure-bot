@@ -5,6 +5,7 @@ import { MonsterKind } from '@adventure-bot/game/monster/names/getRandomMonsterN
 import { giantCrabNames } from '@adventure-bot/game/monster/names/giantCrab'
 import { goblinNames } from '@adventure-bot/game/monster/names/goblin'
 import { orcNames } from '@adventure-bot/game/monster/names/orc'
+import { pyromancerNames } from '@adventure-bot/game/monster/names/pyromancer'
 import { sharkNames } from '@adventure-bot/game/monster/names/shark'
 import { slimeNames } from '@adventure-bot/game/monster/names/slimeNames'
 import { zombieNames } from '@adventure-bot/game/monster/names/zombie'
@@ -17,6 +18,7 @@ export const namesByKind = new Map<MonsterKind, string[]>([
   ['Goblin', goblinNames],
   ['Snow Goblin', goblinNames],
   ['Orc', orcNames],
+  ['Pyromancer', pyromancerNames],
   ['Shark', sharkNames],
   ['Slime', slimeNames],
   ['Zombie', zombieNames],
