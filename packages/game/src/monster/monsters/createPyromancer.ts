@@ -1,4 +1,3 @@
-import { dagger } from '@adventure-bot/game/equipment/items'
 import {
   Monster,
   createMonster,
@@ -13,7 +12,34 @@ export function createPyromancer(): Monster {
     hp: 5,
     maxHP: 5,
     equipment: {
-      weapon: dagger(),
+      weapon: {
+        name: 'Blazing Rod',
+        accuracyDescriptors: {
+          wideMiss: [
+            '<@attacker> launches a fiery orb but <@defender> dodges out of the way',
+          ],
+          nearMiss: [
+            '<@attacker> launches a fiery orb and it nearly struck <@defender>',
+          ],
+          onTheNose: [
+            '<@attacker> launches a fiery orb and it burns <@defender>',
+          ],
+          veryAccurate: [
+            '<@attacker> launches a fiery orb with precision at <@defender>',
+          ],
+        },
+        damageMax: 4,
+        modifiers: {
+          damageBonus: 1,
+        },
+        description: 'a staff infused with the power of a volcano',
+        equippable: true,
+        goldValue: 0,
+        id: 'blazing-rod',
+        type: 'weapon',
+        lootable: false,
+        sellable: false,
+      },
     },
     profile: asset('fantasy', 'monsters', 'pyromancer').s3Url,
     xpValue: 2,
