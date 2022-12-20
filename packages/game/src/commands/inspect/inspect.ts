@@ -14,7 +14,6 @@ import { itemEmbed } from '@adventure-bot/game/equipment'
 import { questEmbed } from '@adventure-bot/game/quest'
 import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
-import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
@@ -31,9 +30,7 @@ export const execute = async ({
   const user =
     (interaction.options.data[0] && interaction.options.data[0].user) ||
     interaction.user
-  findOrCreateCharacter(user) // ensure the character exists
-  const character = selectCharacterById(store.getState(), user.id)
-  if (!character) return
+  const character = findOrCreateCharacter(user)
 
   await interaction.followUp({
     embeds: [
