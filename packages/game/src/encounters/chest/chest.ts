@@ -206,7 +206,7 @@ export async function chest(
       statContest({
         character,
         stat: 'luck',
-        difficulty: d(6) + 14,
+        difficulty: d(6) + 10,
         messageId,
         successText: 'found an item in the chest!',
         failureText: 'found no items in the chest...',
