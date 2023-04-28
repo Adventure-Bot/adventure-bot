@@ -6,6 +6,7 @@ import {
 } from 'discord.js'
 import { filter } from 'remeda'
 
+import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
   decoratedName,
   findOrCreateCharacter,
@@ -87,12 +88,20 @@ export const cairns = async ({
   const option1 = randomOption()
   const option2 = randomOption({ omit: option1 })
 
+  const yourGold = [option1, option2].includes('shop')
+    ? `Your gold: ${EmojiValue('gold', character.gold)}`
+    : ''
+
+  const description = [`Choose your destiny.`, yourGold]
+    .filter(Boolean)
+    .join('\n')
+
   const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} found guidance in the cairns!`,
         color: 'YELLOW',
-        description: `Choose your destiny.`,
+        description,
       }).setImage(
         randomArrayElement([asset('fantasy', 'places', 'cairn')]).s3Url
       ),
