@@ -1,1 +1,1 @@
-export const defaultEffectDuration = 4 * 60 * 60000
+export const defaultEffectDuration = 8 * 60 * 60000

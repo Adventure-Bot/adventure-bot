@@ -1,4 +1,5 @@
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
+import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
 export const aggression: EffectTemplate = {
   name: 'Agression',
@@ -9,5 +10,5 @@ export const aggression: EffectTemplate = {
   },
   announcement: 'became aggressive!',
   announcementColor: 'RED',
-  duration: 60 * 60000,
+  duration: defaultEffectDuration,
 }

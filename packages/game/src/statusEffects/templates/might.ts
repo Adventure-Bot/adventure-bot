@@ -1,4 +1,5 @@
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
+import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
 export const might: EffectTemplate = {
   name: 'Might',
@@ -7,7 +8,7 @@ export const might: EffectTemplate = {
   modifiers: {
     damageMax: 2,
   },
-  duration: 60 * 60000,
+  duration: defaultEffectDuration,
   announcement: 'became mighty!',
   announcementColor: 'RED',
 }

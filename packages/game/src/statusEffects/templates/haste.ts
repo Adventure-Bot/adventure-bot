@@ -1,4 +1,5 @@
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
+import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
 export const haste: EffectTemplate = {
   name: 'Haste',
@@ -7,7 +8,7 @@ export const haste: EffectTemplate = {
   modifiers: {
     haste: 10,
   },
-  duration: 60 * 60000,
+  duration: defaultEffectDuration,
   announcement: 'started moving faster!',
   announcementColor: 'WHITE',
 }
