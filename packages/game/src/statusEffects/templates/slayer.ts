@@ -1,4 +1,5 @@
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
+import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
 export const slayer: EffectTemplate = {
   name: 'Slayer',
@@ -7,7 +8,7 @@ export const slayer: EffectTemplate = {
   modifiers: {
     monsterDamageMax: 3,
   },
-  duration: 60 * 60000,
+  duration: defaultEffectDuration,
   announcement: 'became a slayer!',
   announcementColor: 'DARK_GREEN',
 }

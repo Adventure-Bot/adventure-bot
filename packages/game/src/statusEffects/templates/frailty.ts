@@ -1,10 +1,11 @@
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
+import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
 export const frailty: EffectTemplate = {
   name: 'Frailty',
   buff: false,
   debuff: true,
-  duration: 60 * 60000,
+  duration: defaultEffectDuration,
   modifiers: {
     ac: -3,
     maxHP: -3,
