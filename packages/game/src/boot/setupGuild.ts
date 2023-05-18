@@ -3,6 +3,7 @@ import { Client, Guild } from 'discord.js'
 import {
   announceEffectAdded,
   announceGoldGained,
+  announceGoldStolen,
   announceStatContested,
   announceTrapAttacked,
   announceWinners,
@@ -37,6 +38,7 @@ export async function setupGuild({
   gameChannel({ guild, appId }).then((channel) => {
     announceEffectAdded(channel)
     announceGoldGained(channel)
+    announceGoldStolen(channel)
     announcePeriodicEffects(channel)
     announceStatContested(channel)
     announceTrapAttacked(channel)

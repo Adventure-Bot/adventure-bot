@@ -44,6 +44,7 @@ const defaultEmojis: {
   lockpicking: '🔓',
   luck: '🍀',
   perception: '🔍',
+  pickpocket: '👛',
   revenge: '☠',
 }
 

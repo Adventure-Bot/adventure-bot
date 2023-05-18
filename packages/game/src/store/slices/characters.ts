@@ -115,6 +115,26 @@ const characterSlice = createSlice({
       state.charactersById[characterId].gold += amount
     },
 
+    goldStolen(
+      state,
+      action: PayloadAction<{
+        attackerId: string
+        defenderId: string
+        amount: number
+      }>
+    ) {
+      const { attackerId, defenderId } = action.payload
+
+      const attacker = state.charactersById[attackerId]
+      const defender = state.charactersById[defenderId]
+      if (!attacker || !defender) return
+
+      const amount = Math.min(defender.gold, action.payload.amount)
+
+      attacker.gold += amount
+      defender.gold -= amount
+    },
+
     divineBlessingGranted(state, action: PayloadAction<string>) {
       const character = state.charactersById[action.payload]
       if (!character) return
@@ -341,6 +361,7 @@ export const {
   cooldownStarted,
   damaged,
   goldGained,
+  goldStolen,
   goldSet,
   divineBlessingGranted,
   questGranted,

@@ -14,6 +14,7 @@ const monsterKinds = [
   'Slime',
   'Slime',
   'Snow Goblin',
+  'Tabaxi',
   'Zombie',
   'Zombie',
 ] as const

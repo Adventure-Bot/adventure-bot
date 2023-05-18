@@ -11,6 +11,7 @@ export const stats = [
   'perception',
   'luck',
   'revenge',
+  'pickpocket',
 ] as const
 
 export type Stat = typeof stats[number]
@@ -38,4 +39,5 @@ export const statTitles: { [key in Stat]: string } = {
   monsterDamageMax: 'Monster Slaying',
   perception: 'Perception',
   revenge: 'Revenge',
+  pickpocket: 'Pickpocket',
 }

@@ -8,6 +8,7 @@ import { orcNames } from '@adventure-bot/game/monster/names/orc'
 import { pyromancerNames } from '@adventure-bot/game/monster/names/pyromancer'
 import { sharkNames } from '@adventure-bot/game/monster/names/shark'
 import { slimeNames } from '@adventure-bot/game/monster/names/slimeNames'
+import { tabaxiNames } from '@adventure-bot/game/monster/names/tabaxi'
 import { zombieNames } from '@adventure-bot/game/monster/names/zombie'
 
 export const namesByKind = new Map<MonsterKind, string[]>([
@@ -16,10 +17,11 @@ export const namesByKind = new Map<MonsterKind, string[]>([
   ['Fireling', firelingNames],
   ['Giant Crab', giantCrabNames],
   ['Goblin', goblinNames],
-  ['Snow Goblin', goblinNames],
   ['Orc', orcNames],
   ['Pyromancer', pyromancerNames],
   ['Shark', sharkNames],
   ['Slime', slimeNames],
+  ['Snow Goblin', goblinNames],
+  ['Tabaxi', tabaxiNames],
   ['Zombie', zombieNames],
 ])
