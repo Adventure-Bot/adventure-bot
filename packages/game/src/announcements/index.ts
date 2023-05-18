@@ -8,4 +8,5 @@ export { announceTrapAttacked } from '@adventure-bot/game/announcements/announce
 export { announceWinners } from '@adventure-bot/game/announcements/announceWinners'
 export { announceXpAwarded } from '@adventure-bot/game/announcements/announceXpAwarded'
 export { announceGoldGained } from '@adventure-bot/game/announcements/announceGoldGained'
+export { announceGoldStolen } from '@adventure-bot/game/announcements/announceGoldStolen'
 export { announceStatContested } from '@adventure-bot/game/announcements/announceStatContested'

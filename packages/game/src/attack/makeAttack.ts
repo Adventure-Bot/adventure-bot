@@ -6,7 +6,11 @@ import {
   MonsterWithStats,
   selectEncounterById,
 } from '@adventure-bot/game/store/selectors'
-import { attacked, damaged } from '@adventure-bot/game/store/slices/characters'
+import {
+  attacked,
+  damaged,
+  goldStolen,
+} from '@adventure-bot/game/store/slices/characters'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { d, d20 } from '@adventure-bot/game/utils'
 
@@ -72,6 +76,16 @@ export function makeAttack({
         amount: totalDamage,
       })
     )
+    if (attacker.pickpocket) {
+      const amount = Math.min(defender.gold, d(attacker.pickpocket))
+      store.dispatch(
+        goldStolen({
+          attackerId: attacker.id,
+          defenderId: defender.id,
+          amount,
+        })
+      )
+    }
     if (attacker.equipment.weapon?.onHitEffect)
       store.dispatch(
         effectAdded({

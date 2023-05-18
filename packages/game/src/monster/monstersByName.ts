@@ -9,6 +9,7 @@ import {
   createShark,
   createSlime,
   createSnowGoblin,
+  createTabaxi,
   createZombie,
 } from '@adventure-bot/game/monster'
 import { createPyromancer } from '@adventure-bot/game/monster/monsters/createPyromancer'
@@ -25,5 +26,6 @@ export const monstersByName = [
   ['Shark', createShark],
   ['Slime', createSlime],
   ['Snow Goblin', createSnowGoblin],
+  ['Tabaxi', createTabaxi],
   ['Zombie', createZombie],
 ] as const

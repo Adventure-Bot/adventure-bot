@@ -6,6 +6,7 @@ import { createOrc } from '@adventure-bot/game/monster/monsters/createOrc'
 import { createPyromancer } from '@adventure-bot/game/monster/monsters/createPyromancer'
 import { createSlime } from '@adventure-bot/game/monster/monsters/createSlime'
 import { createSnowGoblin } from '@adventure-bot/game/monster/monsters/createSnowGoblin'
+import { createTabaxi } from '@adventure-bot/game/monster/monsters/createTabaxi'
 import { createZombie } from '@adventure-bot/game/monster/monsters/createZombie'
 
 export {
@@ -18,4 +19,5 @@ export {
   createSlime,
   createZombie,
   createPyromancer,
+  createTabaxi,
 }
