@@ -26,10 +26,9 @@ export function cooldownsEmbed({
     embed.addFields([
       {
         name: 'Stunned',
-        value:
-          Emoji('stunned') +
-          ' recovery ' +
-          moment().add(stunDuration, 'milliseconds').fromNow(),
+        value: `${Emoji('stunned')} recovery <t:${moment()
+          .add(stunDuration, 'milliseconds')
+          .unix()}:R>`,
       },
     ])
   embed.addFields([
