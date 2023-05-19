@@ -8,5 +8,5 @@ export const cooldownRemainingText = (
 ): string => {
   const cooldown = getCooldownRemaining(characterId, type)
   if (cooldown === undefined || cooldown <= 0) return 'Now'
-  return moment().add(cooldown, 'milliseconds').fromNow()
+  return `<t:${moment().add(cooldown, 'milliseconds').unix()}:R>`
 }
