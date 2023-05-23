@@ -3,6 +3,7 @@ import { MessageEmbed } from 'discord.js'
 
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import {
+  cooldownRemainingText,
   decoratedName,
   findOrCreateCharacter,
   hpBarField,
@@ -75,7 +76,10 @@ export const execute = async ({
           asset('fantasy', 'magic', 'a glowing hand applying healing magic')
             .s3Url
         )
-        .setThumbnail(character.profile),
+        .setThumbnail(character.profile)
+        .setDescription(
+          `Can heal again ${cooldownRemainingText(character.id, 'heal')}`
+        ),
     ].concat(),
   })
   if (isUserQuestComplete(interaction.user, 'healer'))
