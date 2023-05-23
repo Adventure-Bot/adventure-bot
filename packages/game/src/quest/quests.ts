@@ -14,7 +14,6 @@ export type QuestId = typeof questIds[number]
 export const isQuestId = (id: string): id is QuestId =>
   questIds.includes(id as QuestId)
 
-// TODO: refactor to map.
 export const quests: {
   [id in QuestId]: Quest
 } = {
@@ -22,8 +21,8 @@ export const quests: {
     id: 'slayer',
     title: 'Slayer',
     progress: 0,
-    totalRequired: 5,
-    objective: 'Defeat 5 monsters',
+    totalRequired: 2,
+    objective: 'Defeat 2 monsters',
     reward: 'Deal more damage to monsters.',
     repeatable: true,
     victoryText: 'Your are a slayer!',
@@ -32,8 +31,8 @@ export const quests: {
     id: 'survivor',
     title: 'Survivor',
     progress: 0,
-    totalRequired: 50,
-    objective: 'Survive 50 damage',
+    totalRequired: 20,
+    objective: 'Survive 20 damage',
     reward: 'Gain temporary health.',
     repeatable: true,
     victoryText: 'You have survived hardship and it only makes you harder.',
@@ -60,8 +59,8 @@ export const quests: {
     id: 'blessed',
     title: 'Blessed',
     progress: 0,
-    totalRequired: 5,
-    objective: 'Find 5 shrines.',
+    totalRequired: 2,
+    objective: 'Find 2 shrines.',
     reward: 'Shrines last twice as long.',
     repeatable: false,
     victoryText: '#blessed is the shrine seeker.',
@@ -70,9 +69,9 @@ export const quests: {
     id: 'healer',
     title: 'Healer',
     progress: 0,
-    totalRequired: 25,
-    objective: 'Heal 25 hp',
-    reward: '`/heal` for +2.',
+    totalRequired: 10,
+    objective: 'Heal 10 hp',
+    reward: 'Heal to full and `/heal` does +2.',
     repeatable: false,
     victoryText: 'Flesh rended and renewed. The cycle of life.',
   },
