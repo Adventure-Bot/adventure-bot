@@ -15,10 +15,10 @@ export const execute = async ({
     {
       hasLock: false,
       hasTrap: false,
-      isLocked: false,
+      locked: false,
       inspected: true,
-      isLooted: false,
-      isTrapped: false,
+      looted: false,
+      trapped: false,
     }
   )
 }

@@ -18,20 +18,21 @@ import {
 import { CommandHandlerOptions, d } from '@adventure-bot/game/utils'
 
 export type Chest = {
-  hasTrap: boolean
-  trap?: TrapWithStats
+  disarmAttempted: boolean
   hasLock: boolean
-  isTrapped: boolean
-  isLocked: boolean
-  lockFound: boolean
-  isLooted: boolean
-  trapFound: boolean
+  hasTrap: boolean
   inspected: boolean
-  unlockAttempt?: number
-  trapDisarmed: boolean
-  disarmAttempt?: number
-  trapTriggered: boolean
+  locked: boolean
+  looted: boolean
+  disarmed: boolean
+  trapped: boolean
+  lockFound: boolean
+  lockpickAttempted: boolean
+  trap?: TrapWithStats
+  trapFound: boolean
   trapResult?: string
+  trapTriggered: boolean
+  unlockAttempted: boolean
 }
 
 export async function chest(
@@ -46,17 +47,20 @@ export async function chest(
   const hasLock = d(3) === 1
 
   const chest: Chest = {
+    disarmAttempted: false,
     hasLock,
     hasTrap,
-    trap: hasTrap ? getRandomTrap() : undefined,
-    isTrapped: hasTrap,
-    isLocked: hasLock,
-    lockFound: false,
-    isLooted: false,
-    trapFound: false,
     inspected: false,
-    trapDisarmed: false,
+    locked: hasLock,
+    looted: false,
+    disarmed: false,
+    trapped: hasTrap,
+    lockFound: false,
+    lockpickAttempted: false,
+    trap: hasTrap ? getRandomTrap() : undefined,
+    trapFound: false,
     trapTriggered: false,
+    unlockAttempted: false,
     ...chestConfig,
   }
 
@@ -94,29 +98,30 @@ export async function chest(
       fled = true
       break
     }
-    if (reaction.emoji.name === Emoji('perception')) {
-      message.reactions.cache.get(Emoji('perception'))?.remove()
+    if (!chest.inspected && reaction.emoji.name === Emoji('perception')) {
       chest.inspected = true
+      message.reactions.cache.get(Emoji('perception'))?.remove()
       const perceptionCheck = statContest({
         character,
         stat: 'perception',
         difficulty: d(6) + 4,
         messageId,
-        successText: chest.isTrapped
+        successText: chest.trapped
           ? 'spotted a trap!'
           : 'cleared the chest of any traps!',
         failureText: 'failed to spot any traps...',
       })
-      if (chest.isTrapped && perceptionCheck.success) {
+      if (chest.trapped && perceptionCheck.success) {
         chest.trapFound = true
         await message.react('⚙')
       }
-      if (chest.isLocked) {
+      if (chest.locked) {
         chest.lockFound = true
         await message.react(Emoji('lockpicking'))
       }
     }
-    if (reaction.emoji.name === '⚙') {
+    if (!chest.disarmAttempted && reaction.emoji.name === '⚙') {
+      chest.disarmAttempted = true
       message.reactions.cache.get('⚙')?.remove()
 
       if (
@@ -129,17 +134,19 @@ export async function chest(
           failureText: "thinks the chest's trap is disabled?",
         }).success
       ) {
-        chest.trapDisarmed = true
-      } else {
-        message.reactions.cache.get('👐')?.remove()
+        chest.disarmed = true
       }
     }
-    if (reaction.emoji.name === Emoji('lockpicking')) {
+    if (
+      !chest.lockpickAttempted &&
+      reaction.emoji.name === Emoji('lockpicking')
+    ) {
+      chest.lockpickAttempted = true
       message.reactions.cache.get(Emoji('lockpicking'))?.remove()
 
       if (
-        chest.isTrapped &&
-        !chest.trapDisarmed &&
+        chest.trapped &&
+        !chest.disarmed &&
         !chest.trapTriggered &&
         !statContest({
           character,
@@ -162,18 +169,18 @@ export async function chest(
           failureText: "failed to pick the chest's lock!",
         }).success
       ) {
-        chest.isLocked = false
+        chest.locked = false
         await message.react('👐')
       } else {
         message.reactions.cache.get('👐')?.remove()
       }
     }
     if (reaction.emoji.name === '👐') {
-      if (chest.isTrapped && !chest.trapDisarmed) {
+      if (chest.trapped && !chest.disarmed) {
         triggerTrap(interaction, chest, message.id)
       }
-      if (!chest.isLocked) chest.isLooted = true
-      if (chest.isLocked) {
+      if (!chest.locked) chest.looted = true
+      if (chest.locked) {
         chest.lockFound = true
         await message.react(Emoji('lockpicking'))
       }
@@ -193,7 +200,7 @@ export async function chest(
       embeds: [chestEmbed(chest, interaction)],
     })
   } while (
-    !chest.isLooted &&
+    !chest.looted &&
     !fled &&
     findOrCreateCharacter(interaction.user).hp > 0
   )
@@ -201,7 +208,7 @@ export async function chest(
   const embed = chestEmbed(chest, interaction)
   if (fled) embed.addField('Result', 'You leave the chest behind.')
 
-  if (chest.isLooted && findOrCreateCharacter(interaction.user).hp > 0) {
+  if (chest.looted && findOrCreateCharacter(interaction.user).hp > 0) {
     if (
       statContest({
         character,
@@ -255,11 +262,11 @@ export async function chest(
 function chestResponses(chest: Chest): string[] {
   const responses = []
   if (!chest.inspected) responses.push(Emoji('perception'))
-  if (!chest.isLooted && !(chest.unlockAttempt && chest.isLocked))
+  if (!chest.looted && !(chest.unlockAttempted && chest.locked))
     responses.push('👐')
-  if (chest.lockFound && !chest.unlockAttempt)
+  if (chest.lockFound && !chest.unlockAttempted)
     responses.push(Emoji('lockpicking'))
-  if (chest.trapFound && !chest.disarmAttempt) responses.push('⚙')
+  if (chest.trapFound && !chest.disarmAttempted) responses.push('⚙')
   responses.push('🏃‍♀️')
   return responses
 }
