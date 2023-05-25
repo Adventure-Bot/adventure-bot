@@ -4,7 +4,7 @@ export const blessed: EffectTemplate = {
   name: 'Blessed',
   buff: true,
   debuff: false,
-  duration: 4 * 60 * 60000,
+  duration: 24 * 60 * 60000,
   announcement: 'was blessed!',
   announcementColor: 'YELLOW',
 }
