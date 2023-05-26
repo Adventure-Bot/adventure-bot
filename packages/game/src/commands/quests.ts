@@ -18,6 +18,7 @@ import {
   slayerBuffQuestReward,
   survivorBuffQuestReward,
 } from '@adventure-bot/game/quest'
+import { travelerBuffQuestReward } from '@adventure-bot/game/quest/rewards'
 import { CommandHandlerOptions, progressBar } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
@@ -96,5 +97,7 @@ const completeQuest = async (
       return await blessedBuffQuestReward(interaction)
     case 'healer':
       return await healerQuestReward(interaction)
+    case 'traveler':
+      return await travelerBuffQuestReward(interaction)
   }
 }

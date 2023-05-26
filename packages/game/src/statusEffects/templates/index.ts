@@ -9,6 +9,7 @@ import { might } from '@adventure-bot/game/statusEffects/templates/might'
 import { poisoned } from '@adventure-bot/game/statusEffects/templates/poisoned'
 import { protectedEffect } from '@adventure-bot/game/statusEffects/templates/protectedEffect'
 import { rogue } from '@adventure-bot/game/statusEffects/templates/rogue'
+import { rugged } from '@adventure-bot/game/statusEffects/templates/rugged'
 import { slayer } from '@adventure-bot/game/statusEffects/templates/slayer'
 import { slowed } from '@adventure-bot/game/statusEffects/templates/slowed'
 import { stunned } from '@adventure-bot/game/statusEffects/templates/stunned'
@@ -26,6 +27,7 @@ export const effects = {
   poisoned,
   protectedEffect,
   rogue,
+  rugged,
   slayer,
   slowed,
   stunned,
