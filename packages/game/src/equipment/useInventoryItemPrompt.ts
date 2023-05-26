@@ -117,6 +117,7 @@ const potionArt: {
   blessed: 'magic potion with glowing yellow liquid',
   survivor: 'magic potion with glowing white liquid',
   healer: 'magic potion with glowing white liquid',
+  rugged: 'magic potion with glowing green liquid',
   rogue: 'magic potion with dark cloudy liquid',
 }
 

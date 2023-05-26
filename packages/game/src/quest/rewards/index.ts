@@ -3,6 +3,7 @@ import { buffQuestReward } from '@adventure-bot/game/quest/rewards/buffQuestRewa
 import { healerQuestReward } from '@adventure-bot/game/quest/rewards/healerQuestReward'
 import { slayerBuffQuestReward } from '@adventure-bot/game/quest/rewards/slayerBuffQuestReward'
 import { survivorBuffQuestReward } from '@adventure-bot/game/quest/rewards/survivorBuffQuest'
+import { travelerBuffQuestReward } from '@adventure-bot/game/quest/rewards/travelerBuffQuestReward'
 
 export {
   blessedBuffQuestReward,
@@ -10,4 +11,5 @@ export {
   healerQuestReward,
   slayerBuffQuestReward,
   survivorBuffQuestReward,
+  travelerBuffQuestReward,
 }

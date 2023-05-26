@@ -139,7 +139,12 @@ export function selectAvailableQuests(
   state: ReduxState,
   character: Character
 ): Quest[] {
-  return [quests.blessed, quests.slayer, quests.survivor].filter(
+  return [
+    quests.blessed,
+    quests.slayer,
+    quests.survivor,
+    quests.traveler,
+  ].filter(
     (quest) =>
       !selectIsCharacterOnQuest({
         state,

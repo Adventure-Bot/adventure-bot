@@ -1,7 +1,7 @@
 import { CommandInteraction } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
-import quests from '@adventure-bot/game/commands/quests'
+import questsCommand from '@adventure-bot/game/commands/quests'
 import { Shrine } from '@adventure-bot/game/encounters/shrine'
 import { isUserQuestComplete } from '@adventure-bot/game/quest'
 import { effects } from '@adventure-bot/game/statusEffects'
@@ -56,5 +56,5 @@ export async function applyShrine({
   )
 
   if (isUserQuestComplete(interaction.user, 'blessed'))
-    await quests.execute({ interaction })
+    await questsCommand.execute({ interaction })
 }
