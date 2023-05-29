@@ -6,7 +6,6 @@ import {
   decoratedName,
   getCharacter,
 } from '@adventure-bot/game/character'
-import { crownArt } from '@adventure-bot/game/crown'
 import { heavyCrownId, itemEmbed } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
@@ -16,6 +15,7 @@ import {
   selectLastChannelUsed,
 } from '@adventure-bot/game/store/selectors'
 import { looted } from '@adventure-bot/game/store/slices/characters'
+import { asset } from '@adventure-bot/game/utils'
 
 export function announceCrownLoots(client: Client): void {
   startAppListening({
@@ -55,9 +55,7 @@ export function announceCrownLoots(client: Client): void {
               ``,
               `If you do not wish to submit to their rule, rise up!`,
             ].join('\n'),
-          })
-            .setImage(crownArt().s3Url)
-            .setThumbnail(crownArt().s3Url),
+          }).setImage(asset('fantasy', 'items', 'crown').s3Url),
         ],
       })
     },
@@ -96,7 +94,7 @@ const announceCrownLooted = async ({
           `If you do not wish to submit to their rule, rise up!`,
         ].join('\n'),
       })
-        .setImage(crownArt().s3Url)
+        .setImage(asset('fantasy', 'items', 'crown').s3Url)
         .setThumbnail(looter.profile),
     ],
   })

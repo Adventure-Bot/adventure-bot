@@ -3,11 +3,11 @@ import moment from 'moment'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import { decoratedName } from '@adventure-bot/game/character'
-import { crownArt } from '@adventure-bot/game/crown'
 import { chanceToFindCrown } from '@adventure-bot/game/crown/chanceToFindCrown'
 import store from '@adventure-bot/game/store'
 import { selectBearer } from '@adventure-bot/game/store/selectors'
 import { timeTillSovereign } from '@adventure-bot/game/store/slices/crown'
+import { asset } from '@adventure-bot/game/utils'
 
 export function leaderboardEmbeds(): MessageEmbed[] {
   const state = store.getState()
@@ -16,12 +16,10 @@ export function leaderboardEmbeds(): MessageEmbed[] {
 
   const gameEndsAt = moment(state.crown.claimedAt).add(timeTillSovereign)
 
-  const crown = crownArt()
-
   let embeds = [
     new MessageEmbed({
       title: 'Crown Leaderboard',
-    }).setImage(crown.s3Url),
+    }).setImage(asset('fantasy', 'items', 'crown').s3Url),
   ]
 
   if (bearer && !state.crown.announced)
