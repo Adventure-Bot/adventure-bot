@@ -8,7 +8,6 @@ import {
 import quests from '@adventure-bot/game/commands/quests'
 import {
   isUserQuestComplete,
-  questProgressField,
   updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -50,11 +49,7 @@ export async function restfulNight(
             character,
             adjustment: amountHealed,
           }),
-        ].concat(
-          character.quests.healer
-            ? questProgressField(character.quests.healer)
-            : []
-        ),
+        ],
       })
         .setImage(asset('fantasy', 'places', 'restful tavern').s3Url)
         .setThumbnail(character.profile),

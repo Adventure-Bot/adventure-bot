@@ -13,7 +13,6 @@ import quests from '@adventure-bot/game/commands/quests'
 import { heal } from '@adventure-bot/game/heal/heal'
 import {
   isUserQuestComplete,
-  questProgressField,
   updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
@@ -66,11 +65,7 @@ export const execute = async ({
             character: target,
             adjustment: result.amount,
           }),
-        ].concat(
-          character.quests.healer
-            ? questProgressField(character.quests.healer)
-            : []
-        ),
+        ],
       })
         .setImage(
           asset('fantasy', 'magic', 'a glowing hand applying healing magic')

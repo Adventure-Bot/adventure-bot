@@ -9,7 +9,6 @@ import {
 import quests from '@adventure-bot/game/commands/quests'
 import {
   isUserQuestComplete,
-  questProgressField,
   updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
@@ -32,11 +31,7 @@ export async function fairyWell({
           'heal'
         )} +${healAmount}!`,
         color: 'DARK_VIVID_PINK',
-        fields: [hpBarField({ character, adjustment: healAmount })].concat(
-          character.quests.healer
-            ? questProgressField(character.quests.healer)
-            : []
-        ),
+        fields: [hpBarField({ character, adjustment: healAmount })],
       }).setImage(asset('fantasy', 'places', "a fairy's well").s3Url),
     ],
   })

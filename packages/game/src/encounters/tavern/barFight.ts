@@ -5,10 +5,7 @@ import {
   findOrCreateCharacter,
   hpBarField,
 } from '@adventure-bot/game/character'
-import {
-  questProgressField,
-  updateQuestProgess,
-} from '@adventure-bot/game/quest'
+import { updateQuestProgess } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { damaged, xpAwarded } from '@adventure-bot/game/store/slices/characters'
 import { asset, d6 } from '@adventure-bot/game/utils'
@@ -35,9 +32,6 @@ export async function barFight(
     .setThumbnail(character.profile)
   if (character.hp > 0 && character.quests.survivor) {
     updateQuestProgess(interaction.user.id, 'survivor', damage)
-    const updated = findOrCreateCharacter(interaction.user)
-    if (updated && updated.quests.survivor)
-      embed.addFields([questProgressField(updated.quests.survivor)])
   }
 
   await interaction[followUp ? 'followUp' : 'reply']({

@@ -14,7 +14,6 @@ import { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items'
 import { randomMonster } from '@adventure-bot/game/monster'
 import {
   isUserQuestComplete,
-  questProgressField,
   updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
@@ -207,8 +206,6 @@ export const monster = async ({
   })
 
   player = findOrCreateCharacter(interaction.user)
-  if (player && player.quests.slayer && encounter.outcome === 'player victory')
-    embed.addFields([questProgressField(player.quests.slayer)])
 
   const embeds = [embed]
 
