@@ -76,6 +76,8 @@ const characterSlice = createSlice({
       const quest = state.charactersById[characterId].quests[questId]
       if (!quest) return
       quest.progress += amount
+      if (quest.progress > quest.totalRequired)
+        quest.progress = quest.totalRequired
     },
 
     questCompleted(
