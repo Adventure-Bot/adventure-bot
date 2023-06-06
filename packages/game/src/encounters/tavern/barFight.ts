@@ -1,13 +1,14 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
 import {
+  awardXP,
   decoratedName,
   findOrCreateCharacter,
   hpBarField,
 } from '@adventure-bot/game/character'
 import { updateQuestProgess } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
-import { damaged, xpAwarded } from '@adventure-bot/game/store/slices/characters'
+import { damaged } from '@adventure-bot/game/store/slices/characters'
 import { asset, d6 } from '@adventure-bot/game/utils'
 
 export async function barFight(
@@ -30,12 +31,11 @@ export async function barFight(
   })
     .setImage(asset('fantasy', 'places', 'drunken bar brawl in a tavern').s3Url)
     .setThumbnail(character.profile)
-  if (character.hp > 0 && character.quests.survivor) {
+  if (damage < character.hp)
     updateQuestProgess(interaction.user.id, 'survivor', damage)
-  }
 
   await interaction[followUp ? 'followUp' : 'reply']({
     embeds: [embed],
   })
-  store.dispatch(xpAwarded({ characterId: interaction.user.id, amount: 1 }))
+  awardXP({ characterId: interaction.user.id, amount: 1 })
 }
