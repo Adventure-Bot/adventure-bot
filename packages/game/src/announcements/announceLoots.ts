@@ -114,10 +114,8 @@ export function announceLoots(client: Client): void {
       channel.send({
         embeds: [
           new MessageEmbed({
-            title: `${decoratedName(looter)} looted ${decoratedName(target)}`,
-          })
-            .setImage(target.profile)
-            .setThumbnail(looter.profile),
+            title: `${looter.name} looted ${target.name}!`,
+          }),
           ...loot.itemsTaken.map((item) =>
             itemEmbed({ item }).setTitle(
               `${decoratedName(looter)} looted ${decoratedName(target)}'s ${
