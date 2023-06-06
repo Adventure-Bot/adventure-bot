@@ -1,4 +1,5 @@
 import { AttackResult } from '@adventure-bot/game/attack'
+import { updateQuestProgess } from '@adventure-bot/game/quest/updateQuestProgess'
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import {
@@ -76,6 +77,8 @@ export function makeAttack({
         amount: totalDamage,
       })
     )
+    if (totalDamage < defender.hp)
+      updateQuestProgess(defender.id, 'survivor', totalDamage)
     if (attacker.pickpocket) {
       const amount = Math.min(defender.gold, d(attacker.pickpocket))
       store.dispatch(
