@@ -15,7 +15,7 @@ import { randomMonster } from '@adventure-bot/game/monster'
 import {
   isUserQuestComplete,
   questProgressField,
-  updateUserQuestProgess,
+  updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
@@ -148,7 +148,7 @@ export const monster = async ({
           })
         )
         if (player.quests.slayer) {
-          updateUserQuestProgess(interaction.user, 'slayer', 1)
+          updateQuestProgess(interaction.user.id, 'slayer', 1)
           player = selectCharacterById(store.getState(), player.id) ?? player
         }
         break

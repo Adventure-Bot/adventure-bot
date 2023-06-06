@@ -14,7 +14,7 @@ import { heal } from '@adventure-bot/game/heal/heal'
 import {
   isUserQuestComplete,
   questProgressField,
-  updateUserQuestProgess,
+  updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
@@ -44,7 +44,7 @@ export const execute = async ({
     await cooldowns.execute({ interaction })
     return
   }
-  updateUserQuestProgess(interaction.user, 'healer', result.amount)
+  updateQuestProgess(interaction.user.id, 'healer', result.amount)
 
   character = findOrCreateCharacter(interaction.user)
 

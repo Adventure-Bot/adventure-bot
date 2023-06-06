@@ -10,13 +10,10 @@ import quests from '@adventure-bot/game/commands/quests'
 import {
   isUserQuestComplete,
   questProgressField,
+  updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
-import {
-  healed,
-  questProgressed,
-  xpAwarded,
-} from '@adventure-bot/game/store/slices/characters'
+import { healed, xpAwarded } from '@adventure-bot/game/store/slices/characters'
 import { CommandHandlerOptions, asset, d } from '@adventure-bot/game/utils'
 
 export async function fairyWell({
@@ -52,13 +49,7 @@ export async function fairyWell({
       messageId: message.id,
     })
   )
-  store.dispatch(
-    questProgressed({
-      characterId: interaction.user.id,
-      questId: 'healer',
-      amount: healAmount,
-    })
-  )
+  updateQuestProgess(interaction.user.id, 'healer', healAmount)
   if (isUserQuestComplete(interaction.user, 'healer'))
     await quests.execute({ interaction })
 }
