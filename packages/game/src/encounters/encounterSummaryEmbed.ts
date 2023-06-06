@@ -1,6 +1,5 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/game/Emoji'
 import { decoratedName } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
 import store from '@adventure-bot/game/store'
