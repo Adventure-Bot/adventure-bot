@@ -1,12 +1,10 @@
-import { awardXP, getCharacter } from '@adventure-bot/game/character'
+import { awardXP } from '@adventure-bot/game/character'
+import { updateQuestProgess } from '@adventure-bot/game/quest'
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { trapAttacked } from '@adventure-bot/game/store/actions'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
-import {
-  damaged,
-  questProgressed,
-} from '@adventure-bot/game/store/slices/characters'
+import { damaged } from '@adventure-bot/game/store/slices/characters'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { TrapAttackResult, TrapWithStats } from '@adventure-bot/game/trap'
 import { d, d20 } from '@adventure-bot/game/utils'
@@ -54,14 +52,8 @@ export function trapAttack({
           amount: damage,
         })
       )
-      if (getCharacter(defender.id)?.hp ?? 0 > 0)
-        store.dispatch(
-          questProgressed({
-            characterId: defender.id,
-            questId: 'survivor',
-            amount: damage,
-          })
-        )
+      if (damage < defender.hp)
+        updateQuestProgess(defender.id, 'survivor', damage)
     }
   }
 
