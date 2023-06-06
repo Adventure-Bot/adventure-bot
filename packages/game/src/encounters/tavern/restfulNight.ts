@@ -9,14 +9,11 @@ import quests from '@adventure-bot/game/commands/quests'
 import {
   isUserQuestComplete,
   questProgressField,
+  updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
-import {
-  healed,
-  questProgressed,
-  xpAwarded,
-} from '@adventure-bot/game/store/slices/characters'
+import { healed, xpAwarded } from '@adventure-bot/game/store/slices/characters'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { asset } from '@adventure-bot/game/utils'
 
@@ -64,13 +61,7 @@ export async function restfulNight(
     ],
   })
 
-  store.dispatch(
-    questProgressed({
-      characterId: interaction.user.id,
-      questId: 'healer',
-      amount: amountHealed,
-    })
-  )
+  updateQuestProgess(interaction.user.id, 'healer', amountHealed)
 
   store.dispatch(
     xpAwarded({

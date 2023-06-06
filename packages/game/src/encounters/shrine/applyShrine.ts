@@ -3,14 +3,14 @@ import { CommandInteraction } from 'discord.js'
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import questsCommand from '@adventure-bot/game/commands/quests'
 import { Shrine } from '@adventure-bot/game/encounters/shrine'
-import { isUserQuestComplete } from '@adventure-bot/game/quest'
+import {
+  isUserQuestComplete,
+  updateQuestProgess,
+} from '@adventure-bot/game/quest'
 import { effects } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
-import {
-  questProgressed,
-  xpAwarded,
-} from '@adventure-bot/game/store/slices/characters'
+import { xpAwarded } from '@adventure-bot/game/store/slices/characters'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 
 export async function applyShrine({
@@ -38,14 +38,7 @@ export async function applyShrine({
       messageId,
     })
   )
-
-  store.dispatch(
-    questProgressed({
-      characterId: interaction.user.id,
-      questId: 'blessed',
-      amount: 1,
-    })
-  )
+  updateQuestProgess(interaction.user.id, 'blessed', 1)
 
   store.dispatch(
     xpAwarded({

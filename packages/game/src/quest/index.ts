@@ -15,7 +15,7 @@ import {
   slayerBuffQuestReward,
   survivorBuffQuestReward,
 } from '@adventure-bot/game/quest/rewards'
-import { updateUserQuestProgess } from '@adventure-bot/game/quest/updateQuestProgess'
+import { updateQuestProgess } from '@adventure-bot/game/quest/updateQuestProgess'
 
 export {
   quests,
@@ -23,7 +23,7 @@ export {
   questProgressBar,
   questProgressField,
   isQuestId,
-  updateUserQuestProgess,
+  updateQuestProgess,
   QuestId,
   blessedBuffQuestReward,
   getCompletedQuests,

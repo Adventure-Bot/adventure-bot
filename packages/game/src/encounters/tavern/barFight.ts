@@ -7,7 +7,7 @@ import {
 } from '@adventure-bot/game/character'
 import {
   questProgressField,
-  updateUserQuestProgess,
+  updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { damaged, xpAwarded } from '@adventure-bot/game/store/slices/characters'
@@ -34,7 +34,8 @@ export async function barFight(
     .setImage(asset('fantasy', 'places', 'drunken bar brawl in a tavern').s3Url)
     .setThumbnail(character.profile)
   if (character.hp > 0 && character.quests.survivor) {
-    const updated = updateUserQuestProgess(interaction.user, 'survivor', damage)
+    updateQuestProgess(interaction.user.id, 'survivor', damage)
+    const updated = findOrCreateCharacter(interaction.user)
     if (updated && updated.quests.survivor)
       embed.addFields([questProgressField(updated.quests.survivor)])
   }

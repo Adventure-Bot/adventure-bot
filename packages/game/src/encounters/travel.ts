@@ -13,14 +13,12 @@ import { isTravelersRing } from '@adventure-bot/game/equipment/items/travelersRi
 import {
   isUserQuestComplete,
   questProgressField,
+  updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import { createEffect, effects } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
-import {
-  healed,
-  questProgressed,
-} from '@adventure-bot/game/store/slices/characters'
+import { healed } from '@adventure-bot/game/store/slices/characters'
 import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { CommandHandlerOptions, asset, d } from '@adventure-bot/game/utils'
 
@@ -28,13 +26,7 @@ export const travel = async ({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
-  store.dispatch(
-    questProgressed({
-      characterId: interaction.user.id,
-      questId: 'traveler',
-      amount: 1,
-    })
-  )
+  updateQuestProgess(interaction.user.id, 'traveler', 1)
   const character = findOrCreateCharacter(interaction.user)
   const { traveler } = character.quests
   const message = await interaction[replyType]({

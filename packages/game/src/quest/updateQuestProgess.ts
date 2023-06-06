@@ -1,22 +1,17 @@
-import { User } from 'discord.js'
-
-import { Character, findOrCreateCharacter } from '@adventure-bot/game/character'
 import { QuestId } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { questProgressed } from '@adventure-bot/game/store/slices/characters'
 
-export const updateUserQuestProgess = (
-  user: User,
+export const updateQuestProgess = (
+  characterId: string,
   questId: QuestId,
-  change: number
-): Character => {
+  amount: number
+): void => {
   store.dispatch(
     questProgressed({
-      characterId: user.id,
+      characterId,
       questId,
-      amount: change,
+      amount,
     })
   )
-
-  return findOrCreateCharacter(user)
 }

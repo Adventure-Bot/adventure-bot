@@ -24,6 +24,5 @@ export async function shrineEncounter({
   const { id: messageId } = await interaction[replyType]({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
-
   applyShrine({ shrine, interaction, messageId })
 }
