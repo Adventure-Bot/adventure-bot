@@ -30,7 +30,6 @@ export function encounterSummaryEmbed({
   embed.setTitle(
     `${decoratedName(character)} encountered ${decoratedName(monster)}!`
   )
-  embed.setTimestamp(new Date(encounter.date))
 
   switch (encounter.outcome) {
     case 'double ko':
@@ -39,7 +38,6 @@ export function encounterSummaryEmbed({
           monster
         )} knocked each other out!`
       )
-      embed.addField('Double KO!', `They knocked eachother out!`)
       break
     case 'in progress':
       embed.addField('In Progress', 'Encounter in progress!')
@@ -47,10 +45,6 @@ export function encounterSummaryEmbed({
     case 'monster fled':
       embed.setTitle(
         `${decoratedName(monster)} fled from ${decoratedName(character)}!`
-      )
-      embed.addField(
-        'Evaded!',
-        Emoji('run') + `${decoratedName(monster)} escaped!`
       )
       break
     case 'player defeated':
@@ -62,23 +56,12 @@ export function encounterSummaryEmbed({
       embed.setTitle(
         `${decoratedName(character)} fled from ${decoratedName(monster)}!`
       )
-      embed.addField(
-        'Fled',
-        `${decoratedName(character)} escaped with their life!`
-      )
       break
     case 'player victory':
       embed.setTitle(
         `${decoratedName(character)} defeated ${decoratedName(monster)}!`
       )
-      embed.addField(
-        'Triumphant!',
-        `${decoratedName(character)} defeated ${decoratedName(monster)}! 🎉`
-      )
       break
   }
-
-  embed.setImage(monster.profile).setThumbnail(character.profile)
-
   return embed
 }
