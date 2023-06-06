@@ -20,7 +20,7 @@ import inspect from '@adventure-bot/game/commands/inspect/inspect'
 import inventory from '@adventure-bot/game/commands/inventory'
 import newgame from '@adventure-bot/game/commands/newgame'
 // import list from '@adventure-bot/game/commands/list/list'
-// import quests from '@adventure-bot/game/commands/quests'
+import quests from '@adventure-bot/game/commands/quests'
 // import renew from '@adventure-bot/game/commands/renew'
 import set from '@adventure-bot/game/commands/set'
 import { CommandHandler } from '@adventure-bot/game/utils'
@@ -42,7 +42,7 @@ commands.set('hp', hp)
 commands.set('inspect', inspect)
 commands.set('inventory', inventory)
 // commands.set('list', list)
-// commands.set('quests', quests)
+commands.set('quests', quests)
 // commands.set('renew', renew)
 commands.set('set', set)
 commands.set('newgame', newgame)

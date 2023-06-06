@@ -12,7 +12,6 @@ import questsCommand from '@adventure-bot/game/commands/quests'
 import { isTravelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
 import {
   isUserQuestComplete,
-  questProgressField,
   updateQuestProgess,
 } from '@adventure-bot/game/quest'
 import { createEffect, effects } from '@adventure-bot/game/statusEffects'
@@ -28,14 +27,11 @@ export const travel = async ({
 }: CommandHandlerOptions): Promise<void> => {
   updateQuestProgess(interaction.user.id, 'traveler', 1)
   const character = findOrCreateCharacter(interaction.user)
-  const { traveler } = character.quests
   const message = await interaction[replyType]({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} traveled.`,
         color: 'GREEN',
-        fields: traveler ? [questProgressField(traveler)] : [],
-
         description: `You travel the lands.`,
       }).setImage(asset('fantasy', 'places', 'travel').s3Url),
     ],
