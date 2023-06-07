@@ -57,55 +57,58 @@ async function inspectThread({
     store.getState(),
     character.id
   ).map(statusEffectEmbed)
-  const equipmentEmbeds = values(character.equipment)
-    .map((item) => itemEmbed({ item, showEquipStatusFor: character }))
-    .slice(0, 9)
+  const equipmentEmbeds = values(character.equipment).map((item) =>
+    itemEmbed({ item, showEquipStatusFor: character })
+  )
+
   const somethingToShow =
     0 <
     (equipmentEmbeds.length ||
       effectEmbeds.length ||
       values(character.quests).length)
   if (!somethingToShow) return
+
   const channel = interaction.channel
   if (!(channel instanceof TextChannel)) return
+
   const thread = await channel.threads.create({
     name: `Inspect ${character.name}`,
   })
-  if (equipmentEmbeds.length)
-    await getHook({
+  if (equipmentEmbeds.length) {
+    const hook = await getHook({
       name: 'Equipment',
       channel,
-    }).then((hook) => {
-      hook?.send({
-        embeds: equipmentEmbeds,
-        threadId: thread.id,
-      })
     })
+    await Promise.all(
+      equipmentEmbeds.map((embed) =>
+        hook?.send({ embeds: [embed], threadId: thread.id })
+      )
+    )
+  }
 
   if (effectEmbeds.length > 0) {
-    await getHook({
+    const hook = await getHook({
       name: 'Status Effects',
       channel,
-    }).then((hook) =>
-      hook?.send({
-        embeds: effectEmbeds,
-        threadId: thread.id,
-      })
+    })
+    await Promise.all(
+      effectEmbeds.map((embed) =>
+        hook?.send({ embeds: [embed], threadId: thread.id })
+      )
     )
   }
   const embed = questEmbed(character)
   if (embed) {
-    await getHook({
+    const hook = await getHook({
       name: 'Quests',
       channel,
-    }).then((hook) =>
-      hook?.send({
-        embeds: [embed],
-        threadId: thread.id,
-      })
-    )
+    })
+    await hook?.send({
+      embeds: [embed],
+      threadId: thread.id,
+    })
   }
-  thread.setArchived(true)
+  await thread.setArchived(true)
 }
 
 export default { command, execute }
