@@ -13,16 +13,13 @@ export function announceTrapAttacked(channel: TextChannel): void {
     effect: ({ payload }) => {
       const { messageId, result } = payload
       const { trap, defender, outcome, damage } = result
-      const hitOrMissed = outcome === 'hit' ? 'hit' : 'missed'
       const embed = new MessageEmbed({
-        title: `${Emoji(outcome)} ${decoratedName(
-          defender
-        )} was ${hitOrMissed} by a ${trap.name}!`,
-        color: 'RED',
+        title: `${Emoji(outcome)} ${decoratedName(defender)} was ${
+          outcome === 'hit' ? 'hit' : 'missed'
+        } by a ${trap.name}!`,
+        color: outcome === 'hit' ? 'RED' : 'GREEN',
         description: outcome === 'hit' ? trap.hitText : trap.missText,
       })
-        .setImage(trap.profile)
-        .setThumbnail(defender.profile)
       embed.addField('Trap Attack', trapRollText(result))
       if ('hit' === outcome) {
         embed.addFields([
