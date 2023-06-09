@@ -42,7 +42,7 @@ export const execute = async ({
     character.name +
       ' can ' +
       Emoji('adventure') +
-      ' again in ' +
+      ' again ' +
       cooldownRemainingText(character.id, 'adventure')
   )
 }
