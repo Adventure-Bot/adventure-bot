@@ -1,7 +1,9 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageEmbed } from 'discord.js'
 
+import { Emoji } from '@adventure-bot/game/Emoji'
 import {
+  cooldownRemainingText,
   findOrCreateCharacter,
   isCharacterOnCooldown,
   startCooldown,
@@ -17,8 +19,8 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  const player = findOrCreateCharacter(interaction.user)
-  if (player.hp === 0) {
+  const character = findOrCreateCharacter(interaction.user)
+  if (character.hp === 0) {
     await interaction.editReply({
       embeds: [
         new MessageEmbed()
@@ -28,14 +30,17 @@ export const execute = async ({
     })
     return
   }
-  if (isCharacterOnCooldown(player.id, 'adventure')) {
+  if (isCharacterOnCooldown(character.id, 'adventure')) {
     await cooldowns.execute({ interaction })
     return
   }
-  startCooldown({ characterId: player.id, cooldown: 'adventure' })
+  startCooldown({ characterId: character.id, cooldown: 'adventure' })
   const encounter = randomEncounter(interaction)
   console.log(encounter)
   await encounter({ interaction })
+  await interaction.followUp(
+    Emoji('adventure') + ' ' + cooldownRemainingText(character.id, 'adventure')
+  )
 }
 
 export default { command, execute }
