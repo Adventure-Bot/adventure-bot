@@ -34,7 +34,6 @@ const commands = new Map<
 
 commands.set('adventure', adventure)
 commands.set('attack', attack)
-// commands.set('dance', dance)
 commands.set('heal', heal)
 // commands.set('d20', d20)
 commands.set('hp', hp)
