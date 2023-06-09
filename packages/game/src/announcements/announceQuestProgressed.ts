@@ -20,9 +20,9 @@ export function announceQuestProgressed(channel: TextChannel): void {
 
       const embeds = [
         new MessageEmbed({
-          title: `${decoratedName(
-            character
-          )} made ${amount} progress on their ${quest.title} quest!`,
+          title: `${decoratedName(character)} made progress on their ${
+            quest.title
+          } quest!`,
           fields: [questProgressField(quest, amount)],
           color: 'YELLOW',
         }),

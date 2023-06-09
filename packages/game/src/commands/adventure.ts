@@ -39,7 +39,11 @@ export const execute = async ({
   console.log(encounter)
   await encounter({ interaction })
   await interaction.followUp(
-    Emoji('adventure') + ' ' + cooldownRemainingText(character.id, 'adventure')
+    character.name +
+      ' can ' +
+      Emoji('adventure') +
+      ' again in ' +
+      cooldownRemainingText(character.id, 'adventure')
   )
 }
 
