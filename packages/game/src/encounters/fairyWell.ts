@@ -1,6 +1,6 @@
 import { Message, MessageEmbed } from 'discord.js'
 
-import { Emoji } from '@adventure-bot/game/Emoji'
+import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
   awardXP,
   decoratedName,
@@ -28,9 +28,10 @@ export async function fairyWell({
       new MessageEmbed({
         title: `${decoratedName(
           character
-        )} drank from a fairy's well and gained ${Emoji(
-          'heal'
-        )} +${healAmount}!`,
+        )} drank from a fairy's well and gained ${EmojiValue(
+          'heal',
+          healAmount
+        )}!`,
         color: 'DARK_VIVID_PINK',
         fields: [hpBarField({ character, adjustment: healAmount })],
       }).setImage(asset('fantasy', 'places', "a fairy's well").s3Url),

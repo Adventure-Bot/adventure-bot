@@ -381,4 +381,8 @@ export const {
   purgeRoamingMonsters,
 } = characterSlice.actions
 
+export const questObjectiveReached = createAction(
+  'character/questObjectiveReached'
+)
+
 export const characters = characterSlice.reducer

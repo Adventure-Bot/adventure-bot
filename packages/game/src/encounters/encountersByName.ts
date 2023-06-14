@@ -18,10 +18,12 @@ import {
 import { tavern } from '@adventure-bot/game/encounters/tavern/tavern'
 import { trap } from '@adventure-bot/game/encounters/trap'
 import { travel } from '@adventure-bot/game/encounters/travel'
+import { warlock } from '@adventure-bot/game/encounters/warlock'
 import { CommandHandler } from '@adventure-bot/game/utils'
 
 export const encountersByName: [string, CommandHandler][] = [
   ['Angels', angels],
+  ['Warlock', warlock],
   ['Cairns', cairns],
   ['Cave', cave],
   ['Chest', chest],

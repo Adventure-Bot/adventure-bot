@@ -4,9 +4,13 @@ import {
   announceCrownLoots,
   announceItemsReceived,
   announceLoots,
+  announceNewgames,
 } from '@adventure-bot/game/announcements'
-import { announceNewgames } from '@adventure-bot/game/announcements/announceNewgames'
 import commands from '@adventure-bot/game/commands'
+import {
+  dispatchQuestObjectiveReached,
+  updateAfflictionQuests,
+} from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { commandUsed } from '@adventure-bot/game/store/actions'
 import { dispatchScheduledActions } from '@adventure-bot/game/store/schedule/dispatchScheduledActions'
@@ -71,6 +75,8 @@ export async function createClient({
     announceLoots(client)
     dispatchScheduledActions()
     announceNewgames(client)
+    updateAfflictionQuests()
+    dispatchQuestObjectiveReached()
     client.guilds.cache.forEach(async (guild) => {
       console.log(`guild ${guild.name}`)
       setupGuild({ guild, client })
