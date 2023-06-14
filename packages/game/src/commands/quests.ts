@@ -11,14 +11,15 @@ import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import {
   Quest,
   QuestId,
+  afflictedQuestReward,
   blessedBuffQuestReward,
   getCompletedQuests,
   healerQuestReward,
   isQuestId,
   slayerBuffQuestReward,
   survivorBuffQuestReward,
+  travelerBuffQuestReward,
 } from '@adventure-bot/game/quest'
-import { travelerBuffQuestReward } from '@adventure-bot/game/quest/rewards'
 import { CommandHandlerOptions, progressBar } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
@@ -89,6 +90,8 @@ const completeQuest = async (
   questId: QuestId
 ): Promise<void> => {
   switch (questId) {
+    case 'afflicted':
+      return await afflictedQuestReward(interaction)
     case 'slayer':
       return await slayerBuffQuestReward(interaction)
     case 'survivor':

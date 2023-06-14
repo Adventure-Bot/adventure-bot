@@ -18,6 +18,7 @@ export const effectAdded = createAction<{
 
 export const characterCleansed = createAction<{
   characterId: string
+  debuffOnly?: boolean
 }>('character/cleansed')
 
 export const statusEffects = createSlice({
@@ -28,8 +29,10 @@ export const statusEffects = createSlice({
     builder
       .addCase(newgame, () => initialState)
       .addCase(characterCleansed, (state, action) => {
-        const { characterId } = action.payload
+        const { characterId, debuffOnly } = action.payload
         for (const effectId in state.effectsByCharacterId[characterId]) {
+          const isDebuff = state.effectsById[effectId].debuff
+          if (debuffOnly && !isDebuff) continue
           delete state.effectsById[effectId]
         }
         state.effectsByCharacterId[characterId] = {}

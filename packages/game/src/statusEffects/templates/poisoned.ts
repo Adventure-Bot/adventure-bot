@@ -9,10 +9,6 @@ export const poisoned: EffectTemplate = {
   modifiers: {
     attackBonus: -2,
   },
-
   announcement: 'was poisoned!',
   announcementColor: 'GREEN',
-  // TODO:
-  // healthAdjustment: -1,
-  // ticksRemaining: 3,
 }
