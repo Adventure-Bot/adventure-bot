@@ -1,14 +1,19 @@
 import { MessageEmbed } from 'discord.js'
 
-import { Character } from '@adventure-bot/game/character'
-import { questProgressField } from '@adventure-bot/game/quest'
+import { Quest } from '@adventure-bot/game/quest'
+import { progressBar } from '@adventure-bot/game/utils'
 
-export const questEmbed = (character: Character): MessageEmbed | void => {
-  if (Object.keys(character.quests).length === 0) return
-  const embed = new MessageEmbed()
-  embed.setTitle('Quests')
-  Object.values(character.quests).forEach((quest) => {
-    embed.addFields([questProgressField(quest)])
+export function questEmbed(quest: Quest): MessageEmbed {
+  const embed = new MessageEmbed({
+    title: quest.title,
+    description: quest.objective,
   })
+  embed.addField('Reward', quest.reward)
+  embed.addField(
+    'Progress',
+    `${progressBar(quest.progress / quest.totalRequired)} ${quest.progress}/${
+      quest.totalRequired
+    }`
+  )
   return embed
 }

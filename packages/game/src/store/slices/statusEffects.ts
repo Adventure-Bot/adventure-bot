@@ -1,4 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
+import { CommandInteraction } from 'discord.js'
 
 import { StatusEffect } from '@adventure-bot/game/statusEffects'
 import { newgame } from '@adventure-bot/game/store/actions'
@@ -10,6 +11,7 @@ const initialState = {
 }
 
 export const effectAdded = createAction<{
+  interaction: CommandInteraction
   character: CharacterWithStats
   effect: StatusEffect
   image?: string
@@ -31,11 +33,14 @@ export const statusEffects = createSlice({
       .addCase(characterCleansed, (state, action) => {
         const { characterId, debuffOnly } = action.payload
         for (const effectId in state.effectsByCharacterId[characterId]) {
-          const isDebuff = state.effectsById[effectId].debuff
-          if (debuffOnly && !isDebuff) continue
+          const effect = state.effectsById[effectId]
+          if (debuffOnly && !effect.debuff) continue
+          console.log(
+            `Removing effect ${effect.name}, debuff: ${effect.debuff} from ${characterId}`
+          )
           delete state.effectsById[effectId]
+          delete state.effectsByCharacterId[characterId][effectId]
         }
-        state.effectsByCharacterId[characterId] = {}
       })
       .addCase(effectAdded, (state, action) => {
         const { effect, character } = action.payload

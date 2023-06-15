@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto'
 import { CommandInteraction } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
@@ -14,11 +15,11 @@ import {
 export const afflictedQuestReward = async (
   interaction: CommandInteraction
 ): Promise<void> => {
+  const character = findOrCreateCharacter(interaction.user)
   const afflictions = selectCharacterEffects(
     store.getState(),
     interaction.user.id
-  )
-  const character = findOrCreateCharacter(interaction.user)
+  ).filter((effect) => effect.debuff)
   store.dispatch(
     characterCleansed({ characterId: character.id, debuffOnly: true })
   )
@@ -27,15 +28,16 @@ export const afflictedQuestReward = async (
   )
   store.dispatch(
     effectAdded({
+      interaction,
       character,
       effect: {
-        id: 'afflicted',
+        id: randomUUID(),
         name: 'Afflicted',
         announcement: 'was afflicted!',
         announcementColor: 'DARK_BUT_NOT_BLACK',
         buff: true,
         debuff: false,
-        started: new Date().toISOString(),
+        started: new Date().toString(),
         duration: defaultEffectDuration,
         modifiers: {
           damageBonus: afflictions.length,

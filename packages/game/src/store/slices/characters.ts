@@ -1,4 +1,5 @@
 import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit'
+import { CommandInteraction } from 'discord.js'
 import { clamp } from 'remeda'
 
 import { AttackResult } from '@adventure-bot/game/attack'
@@ -67,6 +68,7 @@ const characterSlice = createSlice({
     questProgressed(
       state,
       action: PayloadAction<{
+        interaction: CommandInteraction
         characterId: string
         questId: QuestId
         amount: number
@@ -381,8 +383,10 @@ export const {
   purgeRoamingMonsters,
 } = characterSlice.actions
 
-export const questObjectiveReached = createAction(
-  'character/questObjectiveReached'
-)
+export const questObjectiveReached = createAction<{
+  interaction: CommandInteraction
+  characterId: string
+  questId: QuestId
+}>('character/questObjectiveReached')
 
 export const characters = characterSlice.reducer

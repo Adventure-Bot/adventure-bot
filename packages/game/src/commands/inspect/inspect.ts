@@ -11,7 +11,7 @@ import {
 import { cooldownsEmbed } from '@adventure-bot/game/commands/inspect/cooldownsEmbed'
 import { getHook } from '@adventure-bot/game/commands/inspect/getHook'
 import { itemEmbed } from '@adventure-bot/game/equipment'
-import { questEmbed } from '@adventure-bot/game/quest'
+import { characterQuestSummary } from '@adventure-bot/game/quest'
 import { statusEffectEmbed } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
@@ -97,7 +97,7 @@ async function inspectThread({
       )
     )
   }
-  const embed = questEmbed(character)
+  const embed = characterQuestSummary(character)
   if (embed) {
     const hook = await getHook({
       name: 'Quests',

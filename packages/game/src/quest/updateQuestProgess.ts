@@ -1,9 +1,12 @@
+import { CommandInteraction } from 'discord.js'
+
 import { QuestId } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import { questProgressed } from '@adventure-bot/game/store/slices/characters'
 
 export const updateQuestProgess = (
+  interaction: CommandInteraction,
   characterId: string,
   questId: QuestId,
   amount: number
@@ -16,6 +19,7 @@ export const updateQuestProgess = (
 
   store.dispatch(
     questProgressed({
+      interaction,
       characterId,
       questId,
       amount,

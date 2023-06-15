@@ -8,12 +8,8 @@ import {
   findOrCreateCharacter,
   hpBarField,
 } from '@adventure-bot/game/character'
-import questsCommand from '@adventure-bot/game/commands/quests'
 import { isTravelersRing } from '@adventure-bot/game/equipment/items/travelersRing'
-import {
-  isUserQuestComplete,
-  updateQuestProgess,
-} from '@adventure-bot/game/quest'
+import { updateQuestProgess } from '@adventure-bot/game/quest'
 import { createEffect, effects } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterEffects } from '@adventure-bot/game/store/selectors'
@@ -25,7 +21,7 @@ export const travel = async ({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
-  updateQuestProgess(interaction.user.id, 'traveler', 1)
+  updateQuestProgess(interaction, interaction.user.id, 'traveler', 1)
   const character = findOrCreateCharacter(interaction.user)
   const message = await interaction[replyType]({
     embeds: [
@@ -44,6 +40,7 @@ export const travel = async ({
   if (character.inventory.find(isTravelersRing)) {
     store.dispatch(
       effectAdded({
+        interaction,
         character,
         effect: createEffect('invigorated'),
         messageId: message.id,
@@ -56,6 +53,7 @@ export const travel = async ({
   if (isRugged) {
     store.dispatch(
       effectAdded({
+        interaction,
         character,
         effect: createEffect('invigorated'),
         messageId: message.id,
@@ -79,7 +77,4 @@ export const travel = async ({
         ],
       })
   }
-
-  if (isUserQuestComplete(interaction.user, 'traveler'))
-    await questsCommand.execute({ interaction })
 }

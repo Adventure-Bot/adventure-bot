@@ -4,7 +4,7 @@ import {
   decoratedName,
   findOrCreateCharacter,
 } from '@adventure-bot/game/character'
-import { questEmbed } from '@adventure-bot/game/quest'
+import { questEmbed } from '@adventure-bot/game/quest/questEmbed'
 import store from '@adventure-bot/game/store'
 import { questGranted } from '@adventure-bot/game/store/slices/characters'
 import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
@@ -20,17 +20,16 @@ export async function angels({
     })
   )
   const character = findOrCreateCharacter(interaction.user)
-  const angel = asset('fantasy', 'characters', 'angel')
+  const quest = character.quests.healer
 
   interaction[replyType]({
-    files: [angel.attachment],
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} encountered an angel!`,
         color: 'WHITE',
         description:
           'An angel implores you to mend what is broken.\nA taste of their power in return is thier token.',
-      }).setImage(angel.attachmentString),
-    ].concat(questEmbed(character) ?? []),
+      }).setImage(asset('fantasy', 'characters', 'angel').s3Url),
+    ].concat(quest ? questEmbed(quest) : []),
   })
 }

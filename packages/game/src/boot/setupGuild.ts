@@ -5,7 +5,7 @@ import {
   announceGoldGained,
   announceGoldStolen,
   announcePeriodicEffects,
-  announceQuestProgressed,
+  announceQuestProgress,
   announceStatContested,
   announceTrapAttacked,
   announceWinners,
@@ -41,7 +41,7 @@ export async function setupGuild({
     announceGoldGained(channel)
     announceGoldStolen(channel)
     announcePeriodicEffects(channel)
-    announceQuestProgressed(channel)
+    announceQuestProgress(channel)
     announceStatContested(channel)
     announceTrapAttacked(channel)
     announceXpAwarded(channel)

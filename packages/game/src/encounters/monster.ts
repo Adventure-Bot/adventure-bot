@@ -3,7 +3,6 @@ import { Message, MessageEmbed, TextChannel } from 'discord.js'
 import { Emoji, EmojiValue } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
 import { findOrCreateCharacter, loot } from '@adventure-bot/game/character'
-import quests from '@adventure-bot/game/commands/quests'
 import {
   chest,
   createEncounter,
@@ -12,10 +11,7 @@ import {
 } from '@adventure-bot/game/encounters'
 import { swordOfDragonSlaying } from '@adventure-bot/game/equipment/items'
 import { randomMonster } from '@adventure-bot/game/monster'
-import {
-  isUserQuestComplete,
-  updateQuestProgess,
-} from '@adventure-bot/game/quest'
+import { updateQuestProgess } from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import {
@@ -83,10 +79,12 @@ export const monster = async ({
     const playerResult = playerFlee
       ? undefined
       : makeAttack({
+          interaction,
           attacker: player,
           defender: monster,
         })
     const monsterResult = makeAttack({
+      interaction,
       attacker: monster,
       defender: player,
     })
@@ -147,7 +145,7 @@ export const monster = async ({
           })
         )
         if (player.quests.slayer) {
-          updateQuestProgess(interaction.user.id, 'slayer', 1)
+          updateQuestProgess(interaction, interaction.user.id, 'slayer', 1)
           player = selectCharacterById(store.getState(), player.id) ?? player
         }
         break
@@ -231,9 +229,4 @@ export const monster = async ({
 
   if (encounter.outcome === 'player victory' && Math.random() <= 0.3)
     await chest({ interaction })
-  if (
-    isUserQuestComplete(interaction.user, 'slayer') ||
-    isUserQuestComplete(interaction.user, 'survivor')
-  )
-    await quests.execute({ interaction })
 }

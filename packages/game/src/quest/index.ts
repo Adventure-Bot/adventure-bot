@@ -1,11 +1,11 @@
 import { Quest } from '@adventure-bot/game/quest/Quest'
+import { characterQuestSummary } from '@adventure-bot/game/quest/characterQuestSummary'
 import { dispatchQuestObjectiveReached } from '@adventure-bot/game/quest/dispatchQuestObjectiveReached'
 import { getCompletedQuests } from '@adventure-bot/game/quest/getCompletedQuests'
 import {
   isQuestComplete,
   isUserQuestComplete,
 } from '@adventure-bot/game/quest/isQuestComplete'
-import { questEmbed } from '@adventure-bot/game/quest/questEmbed'
 import { questProgressBar } from '@adventure-bot/game/quest/questProgressBar'
 import { questProgressField } from '@adventure-bot/game/quest/questProgressField'
 import { QuestId, isQuestId, quests } from '@adventure-bot/game/quest/quests'
@@ -32,7 +32,7 @@ export {
   isQuestId,
   isUserQuestComplete,
   Quest,
-  questEmbed,
+  characterQuestSummary,
   QuestId,
   questProgressBar,
   questProgressField,

@@ -182,6 +182,7 @@ async function useInventoryItem({
       const effect = createEffect(effectId)
       store.dispatch(
         effectAdded({
+          interaction,
           character,
           effect,
           image: asset('fantasy', 'items', potionArt[effectId]).s3Url,

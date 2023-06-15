@@ -4,7 +4,7 @@ import {
   decoratedName,
   findOrCreateCharacter,
 } from '@adventure-bot/game/character'
-import { questEmbed } from '@adventure-bot/game/quest'
+import { questEmbed } from '@adventure-bot/game/quest/questEmbed'
 import store from '@adventure-bot/game/store'
 import { questGranted } from '@adventure-bot/game/store/slices/characters'
 import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
@@ -21,6 +21,7 @@ export async function warlock({
   )
 
   const character = findOrCreateCharacter(interaction.user)
+  const quest = character.quests.afflicted
 
   await interaction[replyType]({
     embeds: [
@@ -29,6 +30,6 @@ export async function warlock({
         color: 'DARK_BUT_NOT_BLACK',
         description: 'The warlock offers a pact for suffering.',
       }).setImage(asset('fantasy', 'characters', 'tiefling warlock').s3Url),
-    ].concat(questEmbed(character) ?? []),
+    ].concat(quest ? questEmbed(quest) : []),
   })
 }

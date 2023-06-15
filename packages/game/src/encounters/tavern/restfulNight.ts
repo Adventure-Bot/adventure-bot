@@ -5,11 +5,7 @@ import {
   findOrCreateCharacter,
   hpBarField,
 } from '@adventure-bot/game/character'
-import quests from '@adventure-bot/game/commands/quests'
-import {
-  isUserQuestComplete,
-  updateQuestProgess,
-} from '@adventure-bot/game/quest'
+import { updateQuestProgess } from '@adventure-bot/game/quest'
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { healed, xpAwarded } from '@adventure-bot/game/store/slices/characters'
@@ -22,6 +18,7 @@ export async function restfulNight(
   const startingHitpoints = findOrCreateCharacter(interaction.user).hp
   store.dispatch(
     effectAdded({
+      interaction,
       character: findOrCreateCharacter(interaction.user),
       effect: createEffect('invigorated'),
     })
@@ -56,7 +53,7 @@ export async function restfulNight(
     ],
   })
 
-  updateQuestProgess(interaction.user.id, 'healer', amountHealed)
+  updateQuestProgess(interaction, interaction.user.id, 'healer', amountHealed)
 
   store.dispatch(
     xpAwarded({
@@ -65,7 +62,4 @@ export async function restfulNight(
       messageId,
     })
   )
-
-  if (isUserQuestComplete(interaction.user, 'healer'))
-    await quests.execute({ interaction })
 }

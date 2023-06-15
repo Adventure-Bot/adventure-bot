@@ -9,12 +9,8 @@ import {
   hpBarField,
 } from '@adventure-bot/game/character'
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
-import quests from '@adventure-bot/game/commands/quests'
 import { heal } from '@adventure-bot/game/heal/heal'
-import {
-  isUserQuestComplete,
-  updateQuestProgess,
-} from '@adventure-bot/game/quest'
+import { updateQuestProgess } from '@adventure-bot/game/quest'
 import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
@@ -43,7 +39,7 @@ export const execute = async ({
     await cooldowns.execute({ interaction })
     return
   }
-  updateQuestProgess(interaction.user.id, 'healer', result.amount)
+  updateQuestProgess(interaction, interaction.user.id, 'healer', result.amount)
 
   character = findOrCreateCharacter(interaction.user)
 
@@ -77,8 +73,6 @@ export const execute = async ({
         ),
     ].concat(),
   })
-  if (isUserQuestComplete(interaction.user, 'healer'))
-    await quests.execute({ interaction })
 }
 
 export default { command, execute }

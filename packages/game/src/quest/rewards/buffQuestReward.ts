@@ -26,6 +26,7 @@ export async function buffQuestReward(
   })
   store.dispatch(
     effectAdded({
+      interaction,
       character,
       effect,
       messageId: message.id,

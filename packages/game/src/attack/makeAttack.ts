@@ -1,3 +1,5 @@
+import { CommandInteraction } from 'discord.js'
+
 import { AttackResult } from '@adventure-bot/game/attack'
 import { updateQuestProgess } from '@adventure-bot/game/quest/updateQuestProgess'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -16,10 +18,12 @@ import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 import { d, d20 } from '@adventure-bot/game/utils'
 
 export function makeAttack({
+  interaction,
   attacker,
   defender,
   encounterId,
 }: {
+  interaction: CommandInteraction
   attacker: CharacterWithStats
   defender: CharacterWithStats | MonsterWithStats
   encounterId?: string
@@ -78,7 +82,7 @@ export function makeAttack({
       })
     )
     if (totalDamage < defender.hp)
-      updateQuestProgess(defender.id, 'survivor', totalDamage)
+      updateQuestProgess(interaction, defender.id, 'survivor', totalDamage)
     if (attacker.pickpocket) {
       const amount = Math.min(defender.gold, d(attacker.pickpocket))
       store.dispatch(
@@ -92,6 +96,7 @@ export function makeAttack({
     if (attacker.equipment.weapon?.onHitEffect)
       store.dispatch(
         effectAdded({
+          interaction,
           character: defender,
           effect: createEffect(attacker.equipment.weapon.onHitEffect),
         })
