@@ -30,5 +30,5 @@ export const trap = async ({
     embeds: [embed],
   })
   await sleep(2000)
-  trapAttack({ defender: character, trap, messageId })
+  trapAttack({ interaction, defender: character, trap, messageId })
 }

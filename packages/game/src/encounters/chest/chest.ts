@@ -280,6 +280,7 @@ function triggerTrap(
   if (!trap || trapTriggered) return
   chest.trapTriggered = true
   trapAttack({
+    interaction,
     trap,
     defender: findOrCreateCharacter(interaction.user),
     messageId,

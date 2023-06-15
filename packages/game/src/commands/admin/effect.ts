@@ -48,6 +48,7 @@ export const execute = async ({
     }
     store.dispatch(
       effectAdded({
+        interaction,
         character,
         effect: {
           ...effect,

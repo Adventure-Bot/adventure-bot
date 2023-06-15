@@ -9,7 +9,7 @@ export { announceGoldStolen } from '@adventure-bot/game/announcements/announceGo
 export { announceItemsReceived } from '@adventure-bot/game/announcements/announceItemsReceived'
 export { announceNewgames } from '@adventure-bot/game/announcements/announceNewgames'
 export { announcePeriodicEffects } from '@adventure-bot/game/announcements/announcePeriodicEffects'
-export { announceQuestProgressed } from '@adventure-bot/game/announcements/announceQuestProgressed'
+export { announceQuestProgress } from '@adventure-bot/game/announcements/announceQuestProgress'
 export { announceStatContested } from '@adventure-bot/game/announcements/announceStatContested'
 export { announceTrapAttacked } from '@adventure-bot/game/announcements/announceTrapAttacked'
 export { announceWinners } from '@adventure-bot/game/announcements/announceWinners'

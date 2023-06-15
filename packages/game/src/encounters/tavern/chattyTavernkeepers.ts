@@ -12,7 +12,11 @@ import {
   findOrCreateCharacter,
 } from '@adventure-bot/game/character'
 import questsCommand from '@adventure-bot/game/commands/quests'
-import { isQuestId, questEmbed, quests } from '@adventure-bot/game/quest'
+import {
+  characterQuestSummary,
+  isQuestId,
+  quests,
+} from '@adventure-bot/game/quest'
 import store from '@adventure-bot/game/store'
 import { selectAvailableQuests } from '@adventure-bot/game/store/selectors'
 import { questGranted } from '@adventure-bot/game/store/slices/characters'
@@ -34,7 +38,7 @@ export const chattyTavernkeepers = async (
         })
           .setImage(asset('fantasy', 'places', 'chatty tavernkeepers').s3Url)
           .setThumbnail(character.profile),
-      ].concat(questEmbed(character) ?? []),
+      ].concat(characterQuestSummary(character) ?? []),
     })
     return
   }
@@ -48,7 +52,7 @@ export const chattyTavernkeepers = async (
       })
         .setImage(asset('fantasy', 'places', 'chatty tavernkeepers').s3Url)
         .setThumbnail(character.profile),
-    ].concat(questEmbed(character) ?? []),
+    ].concat(characterQuestSummary(character) ?? []),
     components: [
       new MessageActionRow({
         components: [

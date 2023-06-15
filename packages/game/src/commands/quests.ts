@@ -22,6 +22,8 @@ import {
 } from '@adventure-bot/game/quest'
 import { CommandHandlerOptions, progressBar } from '@adventure-bot/game/utils'
 
+import { questEmbed } from '../quest/questEmbed'
+
 export const command = new SlashCommandBuilder()
   .setName('quests')
   .setDescription('Check your quest progress.')
@@ -39,17 +41,30 @@ export const execute = async ({
   }
   const embed = new MessageEmbed({
     title: 'Quests',
+    color: 'YELLOW',
   })
   Object.values(character.quests).forEach((quest) => {
     embed.addField(
       quest.title,
-      `${quest.objective}\n${progressBar(
-        quest.progress / quest.totalRequired
-      )} ${quest.progress}/${quest.totalRequired}`
+      `${quest.objective}\n
+      ${quest.reward}\n
+      ${progressBar(quest.progress / quest.totalRequired)} ${quest.progress}/${
+        quest.totalRequired
+      }`
     )
   })
+
   const message = await interaction.followUp({
-    embeds: [embed],
+    embeds: [
+      new MessageEmbed({
+        title: 'Quests',
+        description: `You have ${
+          Object.values(character.quests).length
+        } active quests.`,
+        color: 'YELLOW',
+      }),
+      ...Object.values(character.quests).map(questEmbed),
+    ],
     components: getComponents(completedQuests),
     fetchReply: true,
   })

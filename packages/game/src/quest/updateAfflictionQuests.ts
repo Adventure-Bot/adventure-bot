@@ -6,8 +6,9 @@ import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 export function updateAfflictionQuests(): void {
   startAppListening({
     actionCreator: effectAdded,
-    effect: ({ payload: { effect, character } }) => {
-      if (effect.debuff) updateQuestProgess(character.id, 'afflicted', 1)
+    effect: ({ payload: { effect, character, interaction } }) => {
+      if (effect.debuff)
+        updateQuestProgess(interaction, character.id, 'afflicted', 1)
     },
   })
 }

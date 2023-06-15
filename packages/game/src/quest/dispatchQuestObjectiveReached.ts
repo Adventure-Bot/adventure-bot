@@ -10,13 +10,15 @@ import {
 export function dispatchQuestObjectiveReached(): void {
   startAppListening({
     actionCreator: questProgressed,
-    effect: ({ payload: { amount, characterId, questId } }) => {
+    effect: ({ payload: { characterId, questId, interaction } }) => {
       const character = selectCharacterById(store.getState(), characterId)
       if (!character) return
       const quest = character.quests[questId]
       if (!quest) return
-      if (quest.progress + amount < quest.totalRequired) return
-      store.dispatch(questObjectiveReached())
+      if (quest.progress < quest.totalRequired) return
+      store.dispatch(
+        questObjectiveReached({ interaction, characterId, questId })
+      )
     },
   })
 }

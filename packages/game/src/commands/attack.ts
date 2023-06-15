@@ -41,7 +41,7 @@ export const execute = async ({
     })
     return
   }
-  const attackResult = playerAttack(initiator, target)
+  const attackResult = playerAttack(interaction, initiator, target)
 
   if (attackResult.outcome === 'cooldown') {
     await cooldowns.execute({ interaction })
@@ -62,6 +62,7 @@ export const execute = async ({
   const retaliationEmbeds: MessageEmbed[] = []
   if (0 < findOrCreateCharacter(targetUser).hp) {
     const retaliationResult = makeAttack({
+      interaction,
       attacker: target,
       defender: initiator,
     })

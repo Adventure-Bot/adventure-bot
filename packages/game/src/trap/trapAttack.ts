@@ -1,3 +1,5 @@
+import { CommandInteraction } from 'discord.js'
+
 import { awardXP } from '@adventure-bot/game/character'
 import { updateQuestProgess } from '@adventure-bot/game/quest'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -10,10 +12,12 @@ import { TrapAttackResult, TrapWithStats } from '@adventure-bot/game/trap'
 import { d, d20 } from '@adventure-bot/game/utils'
 
 export function trapAttack({
+  interaction,
   defender,
   trap,
   messageId,
 }: {
+  interaction: CommandInteraction
   defender: CharacterWithStats
   trap: TrapWithStats
   messageId: string
@@ -38,6 +42,7 @@ export function trapAttack({
   if ('hit' === outcome && trap.onHitEffect)
     store.dispatch(
       effectAdded({
+        interaction,
         character: defender,
         effect: createEffect(trap.onHitEffect),
         messageId,
@@ -53,7 +58,7 @@ export function trapAttack({
         })
       )
       if (damage < defender.hp)
-        updateQuestProgess(defender.id, 'survivor', damage)
+        updateQuestProgess(interaction, defender.id, 'survivor', damage)
     }
   }
 
