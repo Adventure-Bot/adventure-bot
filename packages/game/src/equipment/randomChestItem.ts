@@ -1,5 +1,6 @@
 import { Item } from '@adventure-bot/game/equipment'
 import {
+  alchemistsRing,
   amuletOfAttack,
   amuletOfProtection,
   assassinLeathers,
@@ -49,13 +50,14 @@ export function randomChestItem(): Item {
     [0.5, roguesBrew],
     [0.5, potionOfVigor],
     [0.5, potionOfHaste],
-    [1, potionOfHealing],
+    [1, alchemistsRing],
     [1, chainArmor],
     [1, kiteShield],
     [1, longsword],
+    [1, mace],
+    [1, potionOfHealing],
     [1, travelersRing],
     [1, unidentifiedPotion],
-    [1, mace],
     [1.2, buckler],
     [1.2, leatherArmor],
     [1.3, dagger],

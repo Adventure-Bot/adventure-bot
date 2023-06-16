@@ -7,6 +7,7 @@ import { didFindCrown } from '@adventure-bot/game/crown'
 import { chestEmbed } from '@adventure-bot/game/encounters/chest'
 import { randomChestItem } from '@adventure-bot/game/equipment'
 import { heavyCrown } from '@adventure-bot/game/equipment/items'
+import { randomPotion } from '@adventure-bot/game/equipment/randomPotion'
 import store from '@adventure-bot/game/store'
 import { itemReceived } from '@adventure-bot/game/store/actions'
 import { goldGained } from '@adventure-bot/game/store/slices/characters'
@@ -232,6 +233,15 @@ export async function chest(
         itemReceived({
           characterId: character.id,
           item: heavyCrown(),
+          interaction,
+        })
+      )
+    }
+    if (character.equipment.ring?.name === "Alchemist's Ring") {
+      store.dispatch(
+        itemReceived({
+          characterId: character.id,
+          item: randomPotion(),
           interaction,
         })
       )
