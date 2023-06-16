@@ -1,5 +1,6 @@
 import { Item } from '@adventure-bot/game/equipment'
 import {
+  alchemistsRing,
   amuletOfAttack,
   amuletOfProtection,
   assassinLeathers,
@@ -31,16 +32,17 @@ import { weightedTable } from '@adventure-bot/game/utils'
 
 export function randomShopItem(): Item {
   return weightedTable<() => Item>([
-    [0.3, venomousBlade],
     [0.3, amuletOfAttack],
     [0.3, amuletOfProtection],
     [0.3, ringOfAttack],
-    [0.3, roguesRing],
     [0.3, ringOfHaste],
+    [0.3, roguesRing],
+    [0.3, venomousBlade],
     [0.5, warAxe],
     [0.8, assassinLeathers],
     [0.8, berserkerHides],
     [0.8, plateArmor],
+    [1, alchemistsRing],
     [1, buckler],
     [1, chainArmor],
     [1, dagger],
@@ -53,8 +55,8 @@ export function randomShopItem(): Item {
     [1, potionOfMight],
     [1, potionOfProtection],
     [1, potionOfSlaying],
-    [1, roguesBrew],
     [1, potionOfVigor],
+    [1, roguesBrew],
     [1, towerShield],
     [1, travelersRing],
   ])()
