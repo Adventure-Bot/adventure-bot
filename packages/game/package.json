@@ -60,6 +60,7 @@
     "javascript-stringify": "^2.1.0",
     "mkdirp": "^1.0.4",
     "moment": "^2.29.1",
+    "openai": "^3.3.0",
     "redux-persist": "^6.0.0",
     "remeda": "^0.0.30",
     "ts-debounce": "^4.0.0"

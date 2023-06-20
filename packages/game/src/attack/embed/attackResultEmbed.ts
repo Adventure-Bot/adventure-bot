@@ -13,13 +13,13 @@ import {
   attackResultEmbedCompact,
 } from './attackResultEmbedCompact'
 
-export function attackResultEmbed({
+export async function attackResultEmbed({
   result,
   variant = 'default',
 }: {
   result: AttackResult
   variant?: 'default' | 'compact' | 'retaliation'
-}): MessageEmbed {
+}): Promise<MessageEmbed> {
   if (variant === 'compact')
     return attackResultEmbedCompact({
       result,
@@ -30,7 +30,7 @@ export function attackResultEmbed({
       attackResultHeadline({
         result,
       }) + (variant === 'retaliation' ? ' (retaliation)' : ''),
-    description: `${attackFlavorText(result)}
+    description: `${await attackFlavorText(result)}
     ${attackRollText({
       result,
     })}

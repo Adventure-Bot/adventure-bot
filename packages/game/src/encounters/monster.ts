@@ -177,7 +177,7 @@ export const monster = async ({
         .concat(
           playerResult
             ? [
-                attackResultEmbed({
+                await attackResultEmbed({
                   result: playerResult,
                   variant: 'compact',
                 }),
@@ -186,7 +186,7 @@ export const monster = async ({
         )
         .concat(
           monsterResult
-            ? attackResultEmbed({
+            ? await attackResultEmbed({
                 result: monsterResult,
                 variant: 'compact',
               })

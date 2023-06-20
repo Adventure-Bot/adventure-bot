@@ -47,7 +47,7 @@ export const execute = async ({
     await cooldowns.execute({ interaction })
     return
   }
-  const embeds = [attackResultEmbed({ result: attackResult })]
+  const embeds = [await attackResultEmbed({ result: attackResult })]
   if (0 === selectCharacterById(store.getState(), target.id)?.hp) {
     await loot({
       looterId: initiator.id,
@@ -73,7 +73,10 @@ export const execute = async ({
       return
     }
     retaliationEmbeds.push(
-      attackResultEmbed({ result: retaliationResult, variant: 'retaliation' })
+      await attackResultEmbed({
+        result: retaliationResult,
+        variant: 'retaliation',
+      })
     )
     if (0 === findOrCreateCharacter(initiatorUser).hp) {
       loot({
