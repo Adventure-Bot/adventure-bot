@@ -8,7 +8,7 @@ export const characterQuestSummary = (
 ): MessageEmbed | void => {
   if (Object.keys(character.quests).length === 0) return
   const embed = new MessageEmbed()
-  embed.setTitle('Quests')
+  embed.setTitle(`${character.name}'s Quests`)
   Object.values(character.quests).forEach((quest) => {
     embed.addFields([questProgressField(quest)])
   })
