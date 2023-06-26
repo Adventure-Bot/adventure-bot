@@ -16,9 +16,10 @@ export {
   createTabaxi,
   createPyromancer,
   createBeholder,
+  createEarthElemental,
+  createGiantCrab,
+  createShark,
 } from '@adventure-bot/game/monster/monsters'
-export { createGiantCrab } from '@adventure-bot/game/monster/monsters/createGiantCrab'
-export { createShark } from '@adventure-bot/game/monster/monsters/createShark'
 export {
   MonsterKind,
   getRandomMonsterName,

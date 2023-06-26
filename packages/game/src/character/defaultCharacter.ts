@@ -17,6 +17,7 @@ export const defaultCharacter: Omit<Character, 'id' | 'name'> = {
   luck: 0,
   maxHP: 10,
   monsterDamageMax: 0,
+  momentum: 0,
   perception: 0,
   pickpocket: 0,
   profile: '',

@@ -1,6 +1,7 @@
 import { beholderNames } from '@adventure-bot/game/monster/names/beholderNames'
 import { demonNames } from '@adventure-bot/game/monster/names/demon'
 import { dragonNames } from '@adventure-bot/game/monster/names/dragon'
+import { earthElementalNames } from '@adventure-bot/game/monster/names/earthElemental'
 import { firelingNames } from '@adventure-bot/game/monster/names/fireling'
 import { MonsterKind } from '@adventure-bot/game/monster/names/getRandomMonsterName'
 import { giantCrabNames } from '@adventure-bot/game/monster/names/giantCrab'
@@ -16,6 +17,7 @@ export const namesByKind = new Map<MonsterKind, string[]>([
   ['Beholder', beholderNames],
   ['Demon', demonNames],
   ['Dragon', dragonNames],
+  ['Earth Elemental', earthElementalNames],
   ['Fireling', firelingNames],
   ['Giant Crab', giantCrabNames],
   ['Goblin', goblinNames],

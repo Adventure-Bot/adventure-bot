@@ -1,0 +1,19 @@
+export const earthElementalNames = `
+Bouldus
+Dagmamm
+Dhedrec
+Dromm
+Gekhael
+Geldrahn
+Geod
+Ghod
+Ghoddam
+Halos
+Hamir
+Ignis
+Itadir
+Mechem
+Neviel
+`
+  .split('\n')
+  .filter(Boolean)

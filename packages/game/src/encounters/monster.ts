@@ -115,11 +115,13 @@ export const monster = async ({
           interaction,
           attacker: player,
           defender: monster,
+          encounter,
         })
     const monsterResult = makeAttack({
       interaction,
       attacker: monster,
       defender: player,
+      encounter,
     })
 
     const updatedMonster = selectMonsterById(store.getState(), monster.id)
