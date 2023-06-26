@@ -3,7 +3,6 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import {
   decoratedName,
   findOrCreateCharacter,
-  hpBarField,
 } from '@adventure-bot/game/character'
 import { updateQuestProgess } from '@adventure-bot/game/quest'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -24,42 +23,36 @@ export async function restfulNight(
     })
   )
   const character = findOrCreateCharacter(interaction.user)
-  const amountHealed = character.statsModified.maxHP - startingHitpoints
-  // heal to full
-  if (amountHealed > 0) {
-    store.dispatch(
-      healed({
-        character,
-        amount: amountHealed,
-      })
-    )
-  }
 
-  const { id: messageId } = await interaction.followUp({
+  await interaction.followUp({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} had a restful night.`,
         color: 'DARK_NAVY',
         description: 'You feel well rested. 💤',
-        fields: [
-          hpBarField({
-            character,
-            adjustment: amountHealed,
-          }),
-        ],
       })
         .setImage(asset('fantasy', 'places', 'restful tavern').s3Url)
         .setThumbnail(character.profile),
     ],
   })
 
-  updateQuestProgess(interaction, interaction.user.id, 'healer', amountHealed)
+  const missingHealth = character.statsModified.maxHP - startingHitpoints
+  // heal to full
+  if (missingHealth > 0) {
+    store.dispatch(
+      healed({
+        character,
+        amount: missingHealth,
+      })
+    )
+  }
+
+  updateQuestProgess(interaction, interaction.user.id, 'healer', missingHealth)
 
   store.dispatch(
     xpAwarded({
       characterId: interaction.user.id,
       amount: 1,
-      messageId,
     })
   )
 }

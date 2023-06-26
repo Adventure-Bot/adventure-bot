@@ -251,7 +251,6 @@ export async function chest(
     awardXP({
       characterId: interaction.user.id,
       amount: xp,
-      messageId,
     })
     store.dispatch(
       goldGained({

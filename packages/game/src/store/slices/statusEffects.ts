@@ -15,7 +15,6 @@ export const effectAdded = createAction<{
   character: CharacterWithStats
   effect: StatusEffect
   image?: string
-  messageId?: string
 }>('effect/added')
 
 export const characterCleansed = createAction<{

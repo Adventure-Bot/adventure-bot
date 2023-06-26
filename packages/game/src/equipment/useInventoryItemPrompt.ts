@@ -7,12 +7,8 @@ import {
 } from 'discord.js'
 import { clamp } from 'remeda'
 
-import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import { Manifest } from '@adventure-bot/game/asset-manifest'
-import {
-  findOrCreateCharacter,
-  hpBarField,
-} from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import {
   isPotion,
   itemSelect,
@@ -135,7 +131,16 @@ async function useInventoryItem({
   const item = character.inventory.find((i) => i.id === itemId)
   if (!item) return
   if (isPotion(item)) {
-    const embeds = []
+    await interaction.followUp({
+      embeds: [
+        new MessageEmbed({
+          title: `${character.name} drank a ${item.name}`,
+        })
+          .setImage(asset('fantasy', 'items', item.description, item.id).s3Url)
+          .setThumbnail(character.profile),
+      ],
+    })
+    store.dispatch(itemRemoved({ itemId, characterId }))
     if (item.useEffects.maxHeal) {
       const rawHeal = d(item.useEffects.maxHeal)
       const healAmount = clamp(rawHeal, {
@@ -147,46 +152,15 @@ async function useInventoryItem({
           character,
         })
       )
-      embeds.push(
-        new MessageEmbed({
-          title: `${character.name} healed ${EmojiModifier(
-            'heal',
-            healAmount
-          )}`,
-          fields: [
-            hpBarField({
-              character,
-              adjustment: healAmount,
-            }),
-          ],
-        })
-          .setImage(
-            asset(
-              'fantasy',
-              'items',
-              'magic potion with glowing red liquid',
-              item.id
-            ).s3Url
-          )
-          .setThumbnail(character.profile)
-      )
     }
-    store.dispatch(itemRemoved({ itemId, characterId }))
-    const message = await interaction.followUp({
-      content: `${character.name} drank a ${item.name}`,
-      embeds,
-      fetchReply: true,
-    })
     if (item.useEffects.randomEffect) {
       const effectId = randomArrayElement(item.useEffects.randomEffect)
-      const effect = createEffect(effectId)
       store.dispatch(
         effectAdded({
           interaction,
           character,
-          effect,
+          effect: createEffect(effectId),
           image: asset('fantasy', 'items', potionArt[effectId]).s3Url,
-          messageId: message.id,
         })
       )
     }
