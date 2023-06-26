@@ -6,6 +6,7 @@ const monsterKinds = [
   'Demon',
   'Dragon',
   'Fireling',
+  'Earth Elemental',
   'Giant Crab',
   'Goblin',
   'Orc',

@@ -1,6 +1,7 @@
 import { CommandInteraction } from 'discord.js'
 
 import { AttackResult } from '@adventure-bot/game/attack'
+import { Encounter } from '@adventure-bot/game/encounters'
 import { updateQuestProgess } from '@adventure-bot/game/quest/updateQuestProgess'
 import { createEffect } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
@@ -8,7 +9,6 @@ import {
   CharacterWithStats,
   MonsterWithStats,
   selectCharacterEffects,
-  selectEncounterById,
 } from '@adventure-bot/game/store/selectors'
 import {
   attacked,
@@ -25,23 +25,20 @@ export function makeAttack({
   interaction,
   attacker,
   defender,
-  encounterId,
+  encounter,
 }: {
   interaction: CommandInteraction
   attacker: CharacterWithStats
   defender: CharacterWithStats | MonsterWithStats
-  encounterId?: string
+  encounter?: Encounter
 }): AttackResult {
-  const encounter = encounterId
-    ? selectEncounterById(store.getState(), encounterId)
-    : undefined
-
   const {
     attackBonus,
     damageBonus,
     damageMax,
     monsterDamageMax,
     dragonSlaying,
+    momentum,
   } = attacker.statsModified
 
   const attackRoll = d20()
@@ -49,9 +46,14 @@ export function makeAttack({
   const monsterDamageRoll = defender.isMonster ? d(monsterDamageMax) : 0
 
   const dragonSlayingRoll = d(dragonSlaying)
+  const momentumDamage = momentum * (encounter?.rounds ?? 0)
 
   const totalDamage =
-    (damageRoll + monsterDamageRoll + dragonSlayingRoll + damageBonus) *
+    (damageRoll +
+      monsterDamageRoll +
+      dragonSlayingRoll +
+      damageBonus +
+      momentumDamage) *
     (attackRoll == 20 ? 2 : 1)
   const outcome =
     attackRoll === 20

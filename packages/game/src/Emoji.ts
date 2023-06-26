@@ -39,6 +39,7 @@ const defaultEmojis: {
   luck: '🍀',
   maxHP: '♥',
   miss: '🛡',
+  momentum: '🧱',
   monsterDamageMax: '👹',
   perception: '🔍',
   pickpocket: '👛',
