@@ -1,6 +1,7 @@
 import { Client, Guild } from 'discord.js'
 
 import {
+  announceCooldowns,
   announceEffectAdded,
   announceGoldGained,
   announceGoldStolen,
@@ -38,16 +39,17 @@ export async function setupGuild({
     })
   renderCharacterList({ guild, appId })
   gameChannel({ guild, appId }).then((channel) => {
+    announceCooldowns(channel)
     announceEffectAdded(channel)
     announceGoldGained(channel)
     announceGoldStolen(channel)
+    announceHealed(channel)
     announcePeriodicEffects(channel)
     announceQuestProgress(channel)
     announceStatContested(channel)
     announceTrapAttacked(channel)
-    announceXpAwarded(channel)
-    announceHealed(channel)
     announceWinners(channel)
+    announceXpAwarded(channel)
   })
   renderLeaderboard({ guild, appId })
   renderRoamingMonsters({ guild, appId })

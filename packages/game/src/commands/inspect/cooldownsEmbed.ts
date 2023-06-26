@@ -7,7 +7,6 @@ import {
   decoratedName,
 } from '@adventure-bot/game/character'
 import store from '@adventure-bot/game/store'
-import { selectIsHealer } from '@adventure-bot/game/store/selectors'
 import { selectStunDurationRemaining } from '@adventure-bot/game/store/selectors'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
 
@@ -52,15 +51,5 @@ export function cooldownsEmbed({
       inline: true,
     },
   ])
-  if (selectIsHealer(state, character.id)) {
-    embed.addFields([
-      {
-        name: 'Renew',
-        value:
-          Emoji('renew') + ' ' + cooldownRemainingText(character.id, 'renew'),
-        inline: true,
-      },
-    ])
-  }
   return embed
 }
