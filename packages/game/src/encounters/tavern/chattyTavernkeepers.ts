@@ -101,7 +101,6 @@ export const chattyTavernkeepers = async (
   awardXP({
     characterId: interaction.user.id,
     amount: 1,
-    messageId: message.id,
   })
   await questsCommand.execute({ interaction })
 }

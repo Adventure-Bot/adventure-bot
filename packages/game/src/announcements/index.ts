@@ -14,3 +14,4 @@ export { announceStatContested } from '@adventure-bot/game/announcements/announc
 export { announceTrapAttacked } from '@adventure-bot/game/announcements/announceTrapAttacked'
 export { announceWinners } from '@adventure-bot/game/announcements/announceWinners'
 export { announceXpAwarded } from '@adventure-bot/game/announcements/announceXpAwarded'
+export { announceHealed } from '@adventure-bot/game/announcements/announceHealed'

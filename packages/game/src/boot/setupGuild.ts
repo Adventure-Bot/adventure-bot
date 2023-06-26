@@ -4,6 +4,7 @@ import {
   announceEffectAdded,
   announceGoldGained,
   announceGoldStolen,
+  announceHealed,
   announcePeriodicEffects,
   announceQuestProgress,
   announceStatContested,
@@ -45,6 +46,7 @@ export async function setupGuild({
     announceStatContested(channel)
     announceTrapAttacked(channel)
     announceXpAwarded(channel)
+    announceHealed(channel)
     announceWinners(channel)
   })
   renderLeaderboard({ guild, appId })

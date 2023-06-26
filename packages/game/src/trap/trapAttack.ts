@@ -45,7 +45,6 @@ export function trapAttack({
         interaction,
         character: defender,
         effect: createEffect(trap.onHitEffect),
-        messageId,
       })
     )
 
@@ -65,7 +64,6 @@ export function trapAttack({
   awardXP({
     characterId: defender.id,
     amount: 'hit' === outcome ? 1 : 2,
-    messageId,
   })
 
   return result

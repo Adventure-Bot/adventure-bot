@@ -12,7 +12,6 @@ import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
 export async function applyShrine({
   interaction,
   shrine,
-  messageId,
 }: {
   interaction: CommandInteraction
   shrine: Shrine
@@ -32,7 +31,6 @@ export async function applyShrine({
       interaction,
       character,
       effect,
-      messageId,
     })
   )
   updateQuestProgess(interaction, interaction.user.id, 'blessed', 1)
@@ -41,7 +39,6 @@ export async function applyShrine({
     xpAwarded({
       characterId: interaction.user.id,
       amount: 1,
-      messageId,
     })
   )
 }

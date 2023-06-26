@@ -26,7 +26,7 @@ export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
-  const { id: messageId } = await interaction.editReply({
+  await interaction.editReply({
     embeds: [
       new MessageEmbed({
         title: `${decoratedName(character)} conjures an effect!`,
@@ -55,7 +55,6 @@ export const execute = async ({
           id: randomUUID(),
           started: new Date().toString(),
         },
-        messageId,
       })
     )
   })

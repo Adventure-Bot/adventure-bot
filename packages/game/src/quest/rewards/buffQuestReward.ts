@@ -21,7 +21,7 @@ export async function buffQuestReward(
     }),
   ]
 
-  const message = await interaction.followUp({
+  await interaction.followUp({
     embeds,
   })
   store.dispatch(
@@ -29,7 +29,6 @@ export async function buffQuestReward(
       interaction,
       character,
       effect,
-      messageId: message.id,
     })
   )
   store.dispatch(

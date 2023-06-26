@@ -1,12 +1,10 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageEmbed } from 'discord.js'
 
-import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import {
   cooldownRemainingText,
   decoratedName,
   findOrCreateCharacter,
-  hpBarField,
 } from '@adventure-bot/game/character'
 import cooldowns from '@adventure-bot/game/commands/cooldowns'
 import { heal } from '@adventure-bot/game/heal/heal'
@@ -43,34 +41,24 @@ export const execute = async ({
 
   character = findOrCreateCharacter(interaction.user)
 
-  const maybeTargetName =
-    target.id === character.id ? '' : ' ' + decoratedName(target)
+  const maybeOnTarget =
+    target.id === character.id ? '' : ' on ' + decoratedName(target)
 
   await interaction.editReply({
     embeds: [
       new MessageEmbed({
         color: 'WHITE',
-        title: `${decoratedName(
-          character
-        )} healed${maybeTargetName} for ${EmojiModifier(
-          'heal',
-          result.amount
+        title: `${decoratedName(character)} used Heal${maybeOnTarget}`,
+        description: `Can heal again ${cooldownRemainingText(
+          character.id,
+          'heal'
         )}`,
-        fields: [
-          hpBarField({
-            character: target,
-            adjustment: result.amount,
-          }),
-        ],
       })
         .setImage(
           asset('fantasy', 'magic', 'a glowing hand applying healing magic')
             .s3Url
         )
-        .setThumbnail(character.profile)
-        .setDescription(
-          `Can heal again ${cooldownRemainingText(character.id, 'heal')}`
-        ),
+        .setThumbnail(character.profile),
     ].concat(),
   })
 }
