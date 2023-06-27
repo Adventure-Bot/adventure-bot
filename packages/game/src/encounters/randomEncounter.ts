@@ -27,16 +27,20 @@ export const randomEncounter = (
   const character = findOrCreateCharacter(interaction.user)
   const angelChance = character.quests.healer ? 0 : 0.5
   const warlockChance = character.quests.afflicted ? 0 : 0.5
-  const coralReefChance = character.xp >= 100 ? 1 : 0
+  const coralReefChance = character.xp >= 50 ? 1 : 0
   const caveChance = character.xp >= 10 ? 1 : 0
   const rangerChance = getRoamingMonsters().length > 3 ? 1 : 0
+  const shopChance = Math.min(
+    3,
+    character.gold / 90 + character.inventory.length / 5
+  )
   return weightedTable<() => CommandHandler>([
     [0.2, () => divineBlessing],
     [angelChance, () => angels],
     [warlockChance, () => warlock],
     [1, () => fairyWell],
     [2, () => cairns],
-    [1, () => shop],
+    [shopChance, () => shop],
     [1, () => tavern],
     [caveChance, () => cave],
     [coralReefChance, () => coralReef],
