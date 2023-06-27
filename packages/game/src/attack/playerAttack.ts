@@ -15,7 +15,7 @@ export function playerAttack(
   if (isCharacterOnCooldown(attacker.id, 'attack')) {
     return { outcome: 'cooldown' }
   }
-  startCooldown({ characterId: attacker.id, cooldown: 'attack' })
+  startCooldown({ characterId: attacker.id, cooldown: 'attack', interaction })
   return makeAttack({
     interaction,
     attacker,

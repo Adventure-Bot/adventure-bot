@@ -51,6 +51,7 @@ const characterSlice = createSlice({
       action: PayloadAction<{
         characterId: string
         cooldown: keyof Character['cooldowns']
+        interaction: CommandInteraction
       }>
     ) {
       const { characterId, cooldown } = action.payload

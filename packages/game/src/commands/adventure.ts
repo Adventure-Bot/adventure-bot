@@ -33,7 +33,11 @@ export const execute = async ({
     await cooldowns.execute({ interaction })
     return
   }
-  startCooldown({ characterId: character.id, cooldown: 'adventure' })
+  startCooldown({
+    characterId: character.id,
+    cooldown: 'adventure',
+    interaction,
+  })
   const encounter = randomEncounter(interaction)
   console.log(encounter)
   await encounter({ interaction })
