@@ -13,6 +13,7 @@ import {
   ranger,
   shop,
   tavern,
+  townSquare,
   trap,
   travel,
   warlock,
@@ -34,21 +35,22 @@ export const randomEncounter = (
     3,
     character.gold / 90 + character.inventory.length / 5
   )
-  return weightedTable<() => CommandHandler>([
-    [0.2, () => divineBlessing],
-    [angelChance, () => angels],
-    [warlockChance, () => warlock],
-    [1, () => fairyWell],
-    [2, () => cairns],
-    [shopChance, () => shop],
-    [1, () => tavern],
-    [caveChance, () => cave],
-    [coralReefChance, () => coralReef],
-    [rangerChance, () => ranger],
-    [1, () => trap],
-    [1, () => travel],
-    [2, () => monster],
-    [2, () => chest],
-    [2, randomShrine],
-  ])()
+  return weightedTable<CommandHandler>([
+    [0.2, divineBlessing],
+    [angelChance, angels],
+    [warlockChance, warlock],
+    [1, fairyWell],
+    [2, cairns],
+    [shopChance, shop],
+    [1, tavern],
+    [caveChance, cave],
+    [coralReefChance, coralReef],
+    [rangerChance, ranger],
+    [1, trap],
+    [1, travel],
+    [2, monster],
+    [2, chest],
+    [2, randomShrine()],
+    [2, townSquare],
+  ])
 }

@@ -13,7 +13,6 @@ type StatContest = {
   check: number
   success: boolean
   secret: boolean
-  messageId: string
   successText: string
   failureText: string
 }
@@ -23,7 +22,6 @@ export function statContest({
   stat,
   difficulty,
   secret = false,
-  messageId,
   successText = 'succeeded!',
   failureText = 'failed!',
 }: {
@@ -31,7 +29,6 @@ export function statContest({
   stat: Stat
   difficulty: number
   secret?: boolean
-  messageId: string
   successText?: string
   failureText?: string
 }): StatContest {
@@ -45,7 +42,6 @@ export function statContest({
     modifier,
     success: check + modifier >= difficulty,
     secret,
-    messageId,
     failureText,
     successText,
   }

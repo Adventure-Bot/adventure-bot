@@ -69,7 +69,6 @@ export async function chest(
     embeds: [chestEmbed(chest, interaction)],
     fetchReply: true,
   })
-  const messageId = message.id
   if (!(message instanceof Message)) return
   await message.react(Emoji('perception'))
   await message.react('👐')
@@ -106,7 +105,6 @@ export async function chest(
         character,
         stat: 'perception',
         difficulty: d(6) + 4,
-        messageId,
         successText: chest.trapped
           ? 'spotted a trap!'
           : 'cleared the chest of any traps!',
@@ -130,7 +128,6 @@ export async function chest(
           character,
           stat: 'lockpicking',
           difficulty: d(6) + 4,
-          messageId,
           successText: "disarmed the chest's trap!",
           failureText: "thinks the chest's trap is disabled?",
         }).success
@@ -153,7 +150,6 @@ export async function chest(
           character,
           stat: 'luck',
           difficulty: d(6) + 14,
-          messageId,
           successText: "luckily avoided the chest's trap!",
           failureText: "triggered the chest's trap!",
         }).success
@@ -165,7 +161,6 @@ export async function chest(
           character,
           stat: 'lockpicking',
           difficulty: d(6) + 4,
-          messageId,
           successText: "picked the chest's lock!",
           failureText: "failed to pick the chest's lock!",
         }).success
@@ -215,7 +210,6 @@ export async function chest(
         character,
         stat: 'luck',
         difficulty: d(6) + 10,
-        messageId,
         successText: 'found an item in the chest!',
         failureText: 'found no items in the chest...',
       }).success

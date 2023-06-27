@@ -16,6 +16,7 @@ import {
   vigorShrine,
 } from '@adventure-bot/game/encounters/shrine'
 import { tavern } from '@adventure-bot/game/encounters/tavern/tavern'
+import { townSquare } from '@adventure-bot/game/encounters/townsquare'
 import { trap } from '@adventure-bot/game/encounters/trap'
 import { travel } from '@adventure-bot/game/encounters/travel'
 import { warlock } from '@adventure-bot/game/encounters/warlock'
@@ -39,6 +40,7 @@ export const encountersByName: [string, CommandHandler][] = [
   ['Vigor Shrine', vigorShrine],
   ["Rogue's Guild", roguesGuild],
   ['Tavern', tavern],
+  ['Town Square', townSquare],
   ['Trap', trap],
   ['Travel', travel],
 ]
