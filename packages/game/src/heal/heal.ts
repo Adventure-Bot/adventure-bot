@@ -1,3 +1,5 @@
+import { CommandInteraction } from 'discord.js'
+
 import {
   getCharacter,
   isCharacterOnCooldown,
@@ -12,9 +14,11 @@ import { d6 } from '@adventure-bot/game/utils'
 export function heal({
   healerId,
   targetId,
+  interaction,
 }: {
   healerId: string
   targetId: string
+  interaction: CommandInteraction
 }): HealResult | undefined {
   const state = store.getState()
   if (isCharacterOnCooldown(healerId, 'heal')) return { outcome: 'cooldown' }
@@ -22,7 +26,7 @@ export function heal({
   if (!healer) return
   const targetBeforeHeal = getCharacter(targetId)
   if (!targetBeforeHeal) return
-  startCooldown({ characterId: healer.id, cooldown: 'heal' })
+  startCooldown({ characterId: healer.id, cooldown: 'heal', interaction })
   const rawHeal = d6() + (selectIsHealer(state, healer.id) ? 2 : 0)
   store.dispatch(
     healed({
