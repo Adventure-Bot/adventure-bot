@@ -15,7 +15,6 @@ export function announceStatContested(channel: TextChannel): void {
         modifier,
         stat,
         success,
-        messageId,
         failureText,
         successText,
         secret,
@@ -52,13 +51,7 @@ export function announceStatContested(channel: TextChannel): void {
         embeds,
         content: Emoji(stat) + d20Emoji(check),
       }
-      const message = messageId ? await channel.messages.fetch(messageId) : null
-
-      if (message) {
-        message.reply(messagePayload)
-      } else {
-        channel.send(messagePayload)
-      }
+      channel.send(messagePayload)
     },
   })
 }
