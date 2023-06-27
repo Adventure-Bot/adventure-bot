@@ -2,7 +2,7 @@ import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
 export const aggression: EffectTemplate = {
-  name: 'Agression',
+  name: 'Aggression',
   buff: true,
   debuff: false,
   modifiers: {
