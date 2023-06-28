@@ -7,7 +7,6 @@ import {
 } from 'discord.js'
 import { clamp } from 'remeda'
 
-import { Manifest } from '@adventure-bot/game/asset-manifest'
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import {
   isPotion,
@@ -15,7 +14,6 @@ import {
   usableInventory,
 } from '@adventure-bot/game/equipment'
 import { createEffect } from '@adventure-bot/game/statusEffects'
-import { EffectId } from '@adventure-bot/game/statusEffects'
 import store from '@adventure-bot/game/store'
 import { selectCharacterById } from '@adventure-bot/game/store/selectors'
 import {
@@ -96,27 +94,6 @@ export const useInventoryItemPrompt = async (
   }
 }
 
-const potionArt: {
-  [key in EffectId]: Manifest['fantasy']['items']
-} = {
-  aggression: 'magic potion with glowing orange liquid',
-  frailty: 'magic potion with glowing purple liquid',
-  invigorated: 'magic potion with glowing white liquid',
-  might: 'magic potion with glowing red liquid',
-  protectedEffect: 'magic potion with glowing yellow liquid',
-  slayer: 'magic potion with glowing green liquid',
-  blind: 'magic potion with glowing blue liquid',
-  haste: 'magic potion with vapors',
-  stunned: 'magic potion with glowing white liquid',
-  slowed: 'magic potion with glowing blue liquid',
-  poisoned: 'magic potion with glowing green liquid',
-  blessed: 'magic potion with glowing yellow liquid',
-  survivor: 'magic potion with glowing white liquid',
-  healer: 'magic potion with glowing white liquid',
-  rugged: 'magic potion with glowing green liquid',
-  rogue: 'magic potion with dark cloudy liquid',
-}
-
 async function useInventoryItem({
   itemId,
   characterId,
@@ -154,13 +131,13 @@ async function useInventoryItem({
       )
     }
     if (item.useEffects.randomEffect) {
-      const effectId = randomArrayElement(item.useEffects.randomEffect)
       store.dispatch(
         effectAdded({
           interaction,
           character,
-          effect: createEffect(effectId),
-          image: asset('fantasy', 'items', potionArt[effectId]).s3Url,
+          effect: createEffect(
+            randomArrayElement(item.useEffects.randomEffect)
+          ),
         })
       )
     }
