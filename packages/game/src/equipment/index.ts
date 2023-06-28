@@ -61,7 +61,7 @@ export type Ring = Equippable & {
 }
 export type Potion = Item &
   Usable & {
-    description: Manifest['fantasy']['items']
+    asset: Manifest['fantasy']['items']
     type: 'potion'
     useEffects: {
       maxHeal?: number

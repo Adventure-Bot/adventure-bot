@@ -108,14 +108,13 @@ async function useInventoryItem({
   const item = character.inventory.find((i) => i.id === itemId)
   if (!item) return
   if (isPotion(item)) {
+    const embed = new MessageEmbed({
+      title: `${character.name} drank a ${item.name}`,
+    }).setThumbnail(character.profile)
+    if (item.asset)
+      embed.setImage(asset('fantasy', 'items', item.asset, item.id).s3Url)
     await interaction.followUp({
-      embeds: [
-        new MessageEmbed({
-          title: `${character.name} drank a ${item.name}`,
-        })
-          .setImage(asset('fantasy', 'items', item.description, item.id).s3Url)
-          .setThumbnail(character.profile),
-      ],
+      embeds: [embed],
     })
     store.dispatch(itemRemoved({ itemId, characterId }))
     if (item.useEffects.maxHeal) {

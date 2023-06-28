@@ -3,9 +3,7 @@ import { randomUUID } from 'crypto'
 import { Potion } from '@adventure-bot/game/equipment'
 import { randomArrayElement } from '@adventure-bot/game/utils'
 
-export const unidentifiedPotion = (): Omit<Potion, 'description'> & {
-  description: string
-} => ({
+export const unidentifiedPotion = (): Potion => ({
   id: randomUUID(),
   type: 'potion',
   description: randomArrayElement([
@@ -13,6 +11,7 @@ export const unidentifiedPotion = (): Omit<Potion, 'description'> & {
     'It smells awful. But they usually do.',
     "You're pretty sure the toe is part of it.",
   ]),
+  asset: 'magic potion with dark cloudy liquid',
   goldValue: 10,
   name: randomArrayElement([
     'unidentified potion',

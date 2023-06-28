@@ -1,6 +1,8 @@
 import { createMigrate } from 'redux-persist'
 import { mapValues, values } from 'remeda'
 
+import { isPotion } from '@adventure-bot/game/equipment'
+import { unidentifiedPotion } from '@adventure-bot/game/equipment/items'
 import { defaultLeaderboardState } from '@adventure-bot/game/leaderboard/leaderboardSlice'
 import { isMonster } from '@adventure-bot/game/monster'
 import { RootReducerState } from '@adventure-bot/game/store'
@@ -11,7 +13,7 @@ import { defaultEncounterWeights } from '@adventure-bot/game/store/slices/encoun
 /*
  * This is the current version and should match the latest version
  */
-export const persistVersion = 9
+export const persistVersion = 10
 /**
  * Here we use RootReducerState instead of ReduxState to avoid cyclical type references
  */
@@ -127,6 +129,21 @@ const persistMigrations = {
         ),
     },
   }),
+  10: (state: RootReducerState): RootReducerState => {
+    state.characters.charactersById = mapValues(
+      state.characters.charactersById,
+      (character) => {
+        character.inventory.forEach((item) => {
+          if (isPotion(item) && item.name != unidentifiedPotion.name) {
+            item.asset = item.description as typeof item.asset
+          }
+          return item
+        })
+        return character
+      }
+    )
+    return state
+  },
 }
 
 export const persistMigrate = createMigrate<MigrationState>(persistMigrations)

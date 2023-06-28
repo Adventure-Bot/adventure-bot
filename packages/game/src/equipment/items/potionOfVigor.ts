@@ -6,6 +6,7 @@ export const potionOfVigor = (): Potion => ({
   id: randomUUID(),
   type: 'potion',
   description: 'magic potion with glowing white liquid',
+  asset: 'magic potion with glowing white liquid',
   goldValue: 20,
   name: 'Potion of Vigor',
   useEffects: {
