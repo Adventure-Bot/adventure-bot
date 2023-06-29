@@ -12,6 +12,7 @@ export function announceCooldowns(channel: TextChannel): void {
   startAppListening({
     actionCreator: cooldownStarted,
     effect: async ({ payload: { characterId, cooldown } }) => {
+      if (process.env.COOLDOWNS_DISABLED) return
       let remaining = getCooldownRemaining(characterId, cooldown)
       while (remaining) {
         await sleep(remaining)

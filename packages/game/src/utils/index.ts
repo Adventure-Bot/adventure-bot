@@ -34,3 +34,8 @@ export function isKeyOfObject<T>(
 ): key is keyof T {
   return key in obj
 }
+
+// truncate a string to a maximum of n characters
+export function truncate(str: string, n: number): string {
+  return str.length > n ? str.substring(0, n - 1) + '…' : str
+}
