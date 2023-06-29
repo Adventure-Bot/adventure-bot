@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder } from 'discord.js'
 
 import {
   AttackResult,
@@ -13,8 +13,8 @@ export function attackResultEmbedCompact({
   result,
 }: {
   result: AttackResult
-}): MessageEmbed {
-  return new MessageEmbed({
+}): EmbedBuilder {
+  return new EmbedBuilder({
     title: attackResultHeadline({
       result,
     }),

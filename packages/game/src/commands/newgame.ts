@@ -1,6 +1,5 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
 import * as chrono from 'chrono-node'
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js'
 import moment from 'moment'
 
 import store from '@adventure-bot/game/store'
@@ -9,7 +8,6 @@ import { actionScheduled } from '@adventure-bot/game/store/schedule/schedule'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
-  .setDefaultPermission(false)
   .setName('newgame')
   .setDescription('Start a new game.')
   .addStringOption((input) =>
@@ -19,6 +17,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
+  if (!interaction.isChatInputCommand()) return
   const input = interaction.options.getString('when')
   if (!input) {
     await interaction.editReply('Please specify when you want to start.')
@@ -38,7 +37,7 @@ export const execute = async ({
   )
   await interaction.editReply({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `New game will begin ${moment(date).fromNow()}`,
         description: `The next game will begin ${moment(date).format(
           'h:mm a [on] dddd, [the] Do [day of] MMMM, YYYY'

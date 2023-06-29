@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
 import moment from 'moment'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
@@ -15,9 +15,9 @@ export function cooldownsEmbed({
 }: {
   character: CharacterWithStats
   interaction: CommandInteraction
-}): MessageEmbed {
+}): EmbedBuilder {
   const state = store.getState()
-  const embed = new MessageEmbed({
+  const embed = new EmbedBuilder({
     title: `${decoratedName(character)}'s cooldowns`,
   })
   const stunDuration = selectStunDurationRemaining(state, character.id)

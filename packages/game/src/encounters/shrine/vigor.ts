@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+import { Colors } from 'discord.js'
 
 import { shrineEncounter } from '@adventure-bot/game/encounters/shrine'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -20,7 +21,7 @@ export async function vigorShrine({
         'places',
         'a beautiful glowing statue in a serene forest'
       ).s3Url,
-      color: 'WHITE',
+      color: Colors.White,
       effect: createEffect('invigorated'),
     },
   })

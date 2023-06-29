@@ -1,8 +1,11 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  Colors,
+  ComponentType,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
 } from 'discord.js'
 
 import {
@@ -27,23 +30,23 @@ export async function coralReef({
   const character = findOrCreateCharacter(interaction.user)
   const message = await interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} encountered a coral reef!`,
-        color: 'BLUE',
+        color: Colors.Blue,
       }).setImage(asset('fantasy', 'places', 'coral reef').s3Url),
     ],
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'explore',
             label: 'Explore',
-            style: 'PRIMARY',
+            style: ButtonStyle.Primary,
           }),
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'leave',
             label: 'Leave',
-            style: 'SECONDARY',
+            style: ButtonStyle.Secondary,
           }),
         ],
       }),
@@ -54,7 +57,7 @@ export async function coralReef({
 
   const response = await message
     .awaitMessageComponent({
-      componentType: 'BUTTON',
+      componentType: ComponentType.Button,
       filter: (i) => {
         i.deferUpdate()
         return i.user.id === interaction.user.id

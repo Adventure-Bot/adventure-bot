@@ -1,4 +1,4 @@
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { Colors, EmbedBuilder, TextChannel } from 'discord.js'
 
 import { hpBarField } from '@adventure-bot/game/character'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
@@ -23,10 +23,10 @@ export function announceHealed(channel: TextChannel): void {
       ])
       if (!adjustment) return
       const embeds = [
-        new MessageEmbed({
+        new EmbedBuilder({
           title: `${character.name} ${verbed} ${amount} health!`,
           fields: [hpBarField({ character, adjustment })],
-          color: 'WHITE',
+          color: Colors.White,
         }),
       ]
       await sendEmbeds({ channel, embeds })

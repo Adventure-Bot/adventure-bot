@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import inspect from '@adventure-bot/game/commands/inspect/inspect'
@@ -15,7 +15,7 @@ export async function buffQuestReward(
 ): Promise<void> {
   const character = findOrCreateCharacter(interaction.user)
   const embeds = [
-    new MessageEmbed({
+    new EmbedBuilder({
       title: `${quest.title} Complete!`,
       description: quest.victoryText,
     }),

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
+import { SlashCommandBuilder } from 'discord.js'
 
 import store from '@adventure-bot/game/store'
 import { characterCleansed } from '@adventure-bot/game/store/slices/statusEffects'

@@ -1,4 +1,4 @@
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { Colors, EmbedBuilder, TextChannel } from 'discord.js'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import store from '@adventure-bot/game/store'
@@ -17,12 +17,12 @@ export function announceGoldStolen(channel: TextChannel): void {
       if (!attacker || !defender) return
       if (amount === 0) return
       const embeds = [
-        new MessageEmbed({
+        new EmbedBuilder({
           title: `${attacker.name} robbed ${defender.name} of ${EmojiValue(
             'gold',
             amount
           )} gold!`,
-          color: 'YELLOW',
+          color: Colors.Yellow,
         }),
       ]
       sendEmbeds({ channel, embeds })

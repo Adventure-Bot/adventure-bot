@@ -1,10 +1,11 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   CommandInteraction,
+  ComponentType,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageOptions,
+  SlashCommandBuilder,
   TextChannel,
 } from 'discord.js'
 
@@ -37,8 +38,8 @@ export const execute = async ({
     return
   }
   const message = await interaction.followUp({
-    ...inventoryMain(interaction),
-    fetchReply: true,
+    content: `${decoratedName(character)}'s checks their bags.`,
+    components: [inventoryComponents(interaction)],
   })
   if (!(message instanceof Message)) return
   const channel = interaction.channel
@@ -73,7 +74,7 @@ export const execute = async ({
           i.deferUpdate()
           return i.user.id === interaction.user.id
         },
-        componentType: 'BUTTON',
+        componentType: ComponentType.Button,
       })
       .catch(() => {
         message.edit({
@@ -85,59 +86,56 @@ export const execute = async ({
     if (reply.customId === 'offer') await offerItemPrompt(interaction)
     if (reply.customId === 'use') await useInventoryItemPrompt(interaction)
     if (reply.customId === 'done') done = true
-    await message.edit(inventoryMain(interaction))
+    await message.edit({
+      content: `${decoratedName(character)}'s checks their bags.`,
+      components: [inventoryComponents(interaction)],
+    })
   }
   message.edit({ components: [] })
 }
 
 export default { command, execute }
 
-function inventoryMain(interaction: CommandInteraction): MessageOptions {
+function inventoryComponents(
+  interaction: CommandInteraction
+): ActionRowBuilder<ButtonBuilder> {
+  const components = new ActionRowBuilder<ButtonBuilder>()
   const character = findOrCreateCharacter(interaction.user)
   const hasItemsToOffer = character.inventory.filter(isTradeable).length > 0
   const hasItemsToEquip = equippableInventory(character).length > 0
   const hasItemsToUse = usableInventory(character).length > 0
 
-  const components = []
   if (hasItemsToEquip)
-    components.push(
-      new MessageButton({
+    components.addComponents(
+      new ButtonBuilder({
         customId: 'equip',
-        style: 'SECONDARY',
+        style: ButtonStyle.Secondary,
         label: 'Equip',
       })
     )
   if (hasItemsToUse)
-    components.push(
-      new MessageButton({
+    components.addComponents(
+      new ButtonBuilder({
         customId: 'use',
-        style: 'SECONDARY',
+        style: ButtonStyle.Secondary,
         label: 'Use',
       })
     )
   if (hasItemsToOffer)
-    components.push(
-      new MessageButton({
+    components.addComponents(
+      new ButtonBuilder({
         customId: 'offer',
-        style: 'SECONDARY',
+        style: ButtonStyle.Secondary,
         label: 'Offer',
       })
     )
 
-  components.push(
-    new MessageButton({
+  components.addComponents(
+    new ButtonBuilder({
       customId: 'done',
-      style: 'SECONDARY',
+      style: ButtonStyle.Secondary,
       label: 'Done',
     })
   )
-
-  return {
-    content: `${decoratedName(character)} checks their bags.`,
-    components: [
-      new MessageActionRow({
-        components,
-      }),
-    ],
-  }
+  return components
 }

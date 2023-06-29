@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
+import { SlashCommandBuilder } from 'discord.js'
 
 import { listEncounters } from '@adventure-bot/game/commands/list/listEncounters'
 import { listMonsters } from '@adventure-bot/game/commands/list/listMonsters'

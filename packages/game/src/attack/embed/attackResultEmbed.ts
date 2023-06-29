@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import {
@@ -19,13 +19,13 @@ export function attackResultEmbed({
 }: {
   result: AttackResult
   variant?: 'default' | 'compact' | 'retaliation'
-}): MessageEmbed {
+}): EmbedBuilder {
   if (variant === 'compact')
     return attackResultEmbedCompact({
       result,
     })
 
-  return new MessageEmbed({
+  return new EmbedBuilder({
     title:
       attackResultHeadline({
         result,

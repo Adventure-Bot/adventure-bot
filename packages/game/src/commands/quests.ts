@@ -1,10 +1,13 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
+import { SlashCommandBuilder } from 'discord.js'
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  Colors,
   CommandInteraction,
+  ComponentType,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
 } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
@@ -39,29 +42,31 @@ export const execute = async ({
     )
     return
   }
-  const embed = new MessageEmbed({
+  const embed = new EmbedBuilder({
     title: 'Quests',
-    color: 'YELLOW',
+    color: Colors.Yellow,
   })
   Object.values(character.quests).forEach((quest) => {
-    embed.addField(
-      quest.title,
-      `${quest.objective}\n
+    embed.addFields([
+      {
+        name: quest.title,
+        value: `${quest.objective}\n
       ${quest.reward}\n
       ${progressBar(quest.progress / quest.totalRequired)} ${quest.progress}/${
-        quest.totalRequired
-      }`
-    )
+          quest.totalRequired
+        }`,
+      },
+    ])
   })
 
   const message = await interaction.followUp({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: 'Quests',
         description: `You have ${
           Object.values(character.quests).length
         } active quests.`,
-        color: 'YELLOW',
+        color: Colors.Yellow,
       }),
       ...Object.values(character.quests).map(questEmbed),
     ],
@@ -75,7 +80,7 @@ export const execute = async ({
         i.deferUpdate()
         return i.user.id === interaction.user.id
       },
-      componentType: 'BUTTON',
+      componentType: ComponentType.Button,
     })
     .finally(() => message.edit({ components: [] }))
   if (isQuestId(reply.customId))
@@ -87,13 +92,13 @@ export default { command, execute }
 function getComponents(completedQuests: Map<string, Quest>) {
   if (completedQuests.size === 0) return []
   return [
-    new MessageActionRow({
+    new ActionRowBuilder<ButtonBuilder>({
       components: Array.from(completedQuests.entries()).map(
         ([id, quest]) =>
-          new MessageButton({
+          new ButtonBuilder({
             customId: id,
             label: `Turn in ${quest.title} quest`,
-            style: 'PRIMARY',
+            style: ButtonStyle.Primary,
           })
       ),
     }),

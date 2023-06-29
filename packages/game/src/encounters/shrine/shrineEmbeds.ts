@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
 
 import {
   decoratedName,
@@ -12,10 +12,10 @@ export function shrineEmbeds({
 }: {
   shrine: Shrine
   interaction: CommandInteraction
-}): MessageEmbed[] {
+}): EmbedBuilder[] {
   const character = findOrCreateCharacter(interaction.user)
   return [
-    new MessageEmbed({
+    new EmbedBuilder({
       title: `${decoratedName(character)} encountered a ${shrine.name}!`,
       description: shrine.description,
       color: shrine.color,

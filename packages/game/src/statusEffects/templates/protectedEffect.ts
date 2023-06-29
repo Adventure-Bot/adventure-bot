@@ -1,3 +1,5 @@
+import { Colors } from 'discord.js'
+
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
@@ -10,5 +12,5 @@ export const protectedEffect: EffectTemplate = {
   buff: true,
   debuff: false,
   announcement: 'became protected!',
-  announcementColor: 'NOT_QUITE_BLACK',
+  announcementColor: Colors.NotQuiteBlack,
 }

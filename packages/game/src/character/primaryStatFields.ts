@@ -1,4 +1,4 @@
-import { EmbedFieldData } from 'discord.js'
+import { EmbedField } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { hpBar } from '@adventure-bot/game/character'
@@ -11,7 +11,7 @@ export function primaryStatFields({
 }: {
   characterId: string
   adjustment?: number
-}): EmbedFieldData[] {
+}): EmbedField[] {
   const character = selectCharacterById(store.getState(), characterId)
   if (!character) return []
   return [
@@ -21,6 +21,7 @@ export function primaryStatFields({
         character,
         adjustment
       )}`,
+      inline: false,
     },
     {
       name: 'Experience',

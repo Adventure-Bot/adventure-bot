@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+import { Colors } from 'discord.js'
 
 import { shrineEncounter } from '@adventure-bot/game/encounters/shrine'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -16,7 +17,7 @@ export const slayerShrine = async ({
       name: "Slayer's Shrine",
       description: `This shrine fills you with the instincts of a hunter!`,
       image: asset('fantasy', 'characters', 'hidden hunter').s3Url,
-      color: 'GREY',
+      color: Colors.Grey,
       effect: createEffect('slayer'),
     },
   })

@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { Colors, EmbedBuilder } from 'discord.js'
 
 import {
   decoratedName,
@@ -24,9 +24,9 @@ export async function angels({
 
   interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} encountered an angel!`,
-        color: 'WHITE',
+        color: Colors.White,
         description:
           'An angel implores you to mend what is broken.\nA taste of their power in return is thier token.',
       }).setImage(asset('fantasy', 'characters', 'angel').s3Url),

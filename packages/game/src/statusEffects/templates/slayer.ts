@@ -1,3 +1,5 @@
+import { Colors } from 'discord.js'
+
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
@@ -10,5 +12,5 @@ export const slayer: EffectTemplate = {
   },
   duration: defaultEffectDuration,
   announcement: 'became a slayer!',
-  announcementColor: 'DARK_GREEN',
+  announcementColor: Colors.DarkGreen,
 }

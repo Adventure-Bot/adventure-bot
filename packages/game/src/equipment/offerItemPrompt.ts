@@ -1,8 +1,11 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   CommandInteraction,
+  ComponentType,
   Message,
-  MessageActionRow,
-  MessageButton,
+  StringSelectMenuBuilder,
 } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
@@ -30,7 +33,7 @@ export const offerItemPrompt = async (
     content:
       'Offer an item for grabs. First to click gets it. If time expires, it will become dust in the wind.',
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<StringSelectMenuBuilder>({
         components: [
           itemSelect({
             inventory,
@@ -38,12 +41,12 @@ export const offerItemPrompt = async (
           }),
         ],
       }),
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'cancel',
             label: 'Nevermind',
-            style: 'SECONDARY',
+            style: ButtonStyle.Secondary,
           }),
         ],
       }),
@@ -79,12 +82,12 @@ export const offerItemPrompt = async (
     content: `${sender.name} offers their ${item.name}.`,
     embeds: [itemEmbed({ item })],
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'take',
             label: `Take the ${item.name}.`,
-            style: 'PRIMARY',
+            style: ButtonStyle.Primary,
           }),
         ],
       }),
@@ -94,7 +97,7 @@ export const offerItemPrompt = async (
   if (!(offer instanceof Message)) return
   const reply = await offer
     .awaitMessageComponent({
-      componentType: 'BUTTON',
+      componentType: ComponentType.Button,
       time: 60000,
     })
     .catch(() => {

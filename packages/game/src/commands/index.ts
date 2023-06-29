@@ -1,4 +1,4 @@
-import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types'
+import { RESTPostAPIApplicationCommandsJSONBody } from 'discord.js'
 
 import admin from '@adventure-bot/game/commands/admin/admin'
 import cleanse from '@adventure-bot/game/commands/admin/cleanse'

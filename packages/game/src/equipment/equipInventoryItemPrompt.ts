@@ -1,8 +1,10 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   CommandInteraction,
   Message,
-  MessageActionRow,
-  MessageButton,
+  SelectMenuBuilder,
 } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
@@ -29,7 +31,7 @@ export const equipInventoryItemPrompt = async (
   const message = await interaction.followUp({
     content: 'What would you like to equip?',
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<SelectMenuBuilder>({
         components: [
           itemSelect({
             inventory: inventory,
@@ -37,11 +39,11 @@ export const equipInventoryItemPrompt = async (
           }),
         ],
       }),
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'done',
-            style: 'PRIMARY',
+            style: ButtonStyle.Primary,
             label: 'Done',
           }),
         ],

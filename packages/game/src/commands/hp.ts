@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js'
 
 import {
   findOrCreateCharacter,
@@ -16,7 +15,7 @@ export const execute = async ({
 }: CommandHandlerOptions): Promise<void> => {
   interaction.editReply({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         fields: [
           hpBarField({ character: findOrCreateCharacter(interaction.user) }),
         ],

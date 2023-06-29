@@ -202,7 +202,8 @@ export async function chest(
   )
   message.reactions.removeAll()
   const embed = chestEmbed(chest, interaction)
-  if (fled) embed.addField('Result', 'You leave the chest behind.')
+  if (fled)
+    embed.addFields([{ name: 'Result', value: 'You leave the chest behind.' }])
 
   if (chest.looted && findOrCreateCharacter(interaction.user).hp > 0) {
     if (
@@ -255,7 +256,9 @@ export async function chest(
   }
 
   if (findOrCreateCharacter(interaction.user).hp === 0)
-    embed.addField('Result', `You have been defeated by a chest.`)
+    embed.addFields([
+      { name: 'Result', value: `You have been defeated by a chest.` },
+    ])
 
   message.edit({
     embeds: [embed],

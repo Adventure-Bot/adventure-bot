@@ -1,5 +1,5 @@
 import crypto from 'crypto'
-import { MessageAttachment } from 'discord.js'
+import { AttachmentBuilder } from 'discord.js'
 import path from 'path'
 
 import { Manifest, manifest } from '@adventure-bot/game/asset-manifest'
@@ -15,7 +15,7 @@ function asset<
   seed?: string
 ): {
   path: string
-  attachment: MessageAttachment
+  attachment: AttachmentBuilder
   attachmentString: string
   s3Url: string
   values: [Theme, Kind, Entity]
@@ -49,7 +49,7 @@ function asset<
 
   return {
     path: absolutePath,
-    attachment: new MessageAttachment(absolutePath, file),
+    attachment: new AttachmentBuilder(absolutePath, { name: file }),
     attachmentString: `attachment://${file}`,
     s3Url,
     values: [theme, kind, entity],

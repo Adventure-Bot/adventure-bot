@@ -1,4 +1,4 @@
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { Colors, EmbedBuilder, TextChannel } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { sendEmbeds } from '@adventure-bot/game/announcements/sendEmbeds'
@@ -13,14 +13,14 @@ export function announceTrapAttacked(channel: TextChannel): void {
     effect: ({ payload }) => {
       const { messageId, result } = payload
       const { trap, defender, outcome, damage } = result
-      const embed = new MessageEmbed({
+      const embed = new EmbedBuilder({
         title: `${Emoji(outcome)} ${decoratedName(defender)} was ${
           outcome === 'hit' ? 'hit' : 'missed'
         } by a ${trap.name}!`,
-        color: outcome === 'hit' ? 'RED' : 'GREEN',
+        color: outcome === 'hit' ? Colors.Red : Colors.Green,
         description: outcome === 'hit' ? trap.hitText : trap.missText,
       })
-      embed.addField('Trap Attack', trapRollText(result))
+      embed.addFields([{ name: 'Trap Attack', value: trapRollText(result) }])
       if ('hit' === outcome) {
         embed.addFields([
           hpBarField({ character: defender, adjustment: -damage }),

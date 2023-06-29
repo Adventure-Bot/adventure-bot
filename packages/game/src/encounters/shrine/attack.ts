@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+import { Colors } from 'discord.js'
 
 import { shrineEncounter } from '@adventure-bot/game/encounters/shrine'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -17,7 +18,7 @@ export const attackShrine = async ({
       description: `This shrine fills you with a rage!`,
       image: asset('fantasy', 'places', 'magical obelisk with a fiery aura')
         .s3Url,
-      color: 'RED',
+      color: Colors.Red,
       effect: createEffect('aggression'),
     },
   })

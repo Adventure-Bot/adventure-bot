@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { Colors, EmbedBuilder } from 'discord.js'
 
 import {
   decoratedName,
@@ -25,9 +25,9 @@ export async function warlock({
 
   await interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} encountered a warlock!`,
-        color: 'DARK_BUT_NOT_BLACK',
+        color: Colors.DarkButNotBlack,
         description: 'The warlock offers a pact for suffering.',
       }).setImage(asset('fantasy', 'characters', 'tiefling warlock').s3Url),
     ].concat(quest ? questEmbed(quest) : []),

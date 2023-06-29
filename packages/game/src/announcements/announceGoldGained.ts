@@ -1,4 +1,4 @@
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { Colors, EmbedBuilder, TextChannel } from 'discord.js'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import { sendEmbeds } from '@adventure-bot/game/announcements/sendEmbeds'
@@ -42,13 +42,13 @@ function announce({
   const character = selectCharacterById(store.getState(), characterId)
   if (!character || amount === 0) return
   const embeds = [
-    new MessageEmbed({
+    new EmbedBuilder({
       title: `${decoratedName(character)} gained ${EmojiValue(
         'gold',
         amount
       )} gold!`,
       description: `Total: ${EmojiValue('gold', character.gold)}`,
-      color: 'YELLOW',
+      color: Colors.Yellow,
     }),
   ]
   sendEmbeds({ channel, embeds })

@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { Colors, EmbedBuilder } from 'discord.js'
 
 import {
   decoratedName,
@@ -18,9 +18,9 @@ export const trap = async ({
 }: CommandHandlerOptions & { trap?: TrapWithStats }): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
 
-  const embed = new MessageEmbed({
+  const embed = new EmbedBuilder({
     title: `${decoratedName(character)} encountered a ${trap.name}!`,
-    color: 'RED',
+    color: Colors.Red,
     description: trap.attackText,
   })
     .setImage(trap.profile)

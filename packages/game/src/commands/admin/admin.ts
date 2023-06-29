@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { range } from 'remeda'
@@ -20,7 +19,6 @@ import {
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 export const command = new SlashCommandBuilder()
-  .setDefaultPermission(false)
   .setName('admin')
   .setDescription('Administrative functions.')
   .addSubcommand((option) =>
@@ -80,6 +78,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
+  if (!interaction.isChatInputCommand()) return
   switch (interaction.options.getSubcommand()) {
     case 'add_emoji':
       addEmoji(interaction)
@@ -122,14 +121,14 @@ export const execute = async ({
   }
 }
 
-function declareWinner(interaction: CommandInteraction) {
+function declareWinner(interaction: ChatInputCommandInteraction) {
   const winnerUser = interaction.options.getUser('winner')
   if (!winnerUser) return
   const winner = findOrCreateCharacter(winnerUser)
   store.dispatch(winnerDeclared({ winner, interaction }))
 }
 
-async function addEmoji(interaction: CommandInteraction) {
+async function addEmoji(interaction: ChatInputCommandInteraction) {
   const guild = interaction.guild
   if (!guild) return
   range(1, 21).forEach(async (n) => {
@@ -145,7 +144,10 @@ async function addEmoji(interaction: CommandInteraction) {
         interaction.editReply(`Emoji already exists: ${existing}`)
         return
       }
-      const emoji = await guild.emojis.create(file, emojiName)
+      const emoji = await guild.emojis.create({
+        attachment: file,
+        name: emojiName,
+      })
       interaction.editReply(`Emoji added: ${emoji}`)
     } catch (e) {
       interaction.editReply(`Error: ${e}`)
@@ -153,7 +155,7 @@ async function addEmoji(interaction: CommandInteraction) {
   })
 }
 
-const setGold = async (interaction: CommandInteraction) => {
+const setGold = async (interaction: ChatInputCommandInteraction) => {
   const gold = interaction.options.getInteger('gold')
   if (!gold) return
   store.dispatch(
@@ -163,7 +165,7 @@ const setGold = async (interaction: CommandInteraction) => {
     })
   )
 }
-const setXp = async (interaction: CommandInteraction) => {
+const setXp = async (interaction: ChatInputCommandInteraction) => {
   const xp = interaction.options.getInteger('xp')
   if (!xp) return
   store.dispatch(
@@ -174,7 +176,7 @@ const setXp = async (interaction: CommandInteraction) => {
   )
 }
 
-const setHealth = async (interaction: CommandInteraction) => {
+const setHealth = async (interaction: ChatInputCommandInteraction) => {
   const hp = interaction.options.getInteger('hp')
   if (hp === null) return
   interaction.editReply(`Health set to ${hp}.`)

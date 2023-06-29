@@ -1,4 +1,4 @@
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { Colors, EmbedBuilder, TextChannel } from 'discord.js'
 
 import { decoratedName } from '@adventure-bot/game/character'
 import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard'
@@ -29,10 +29,10 @@ export function announceWinners(channel: TextChannel): void {
     actionCreator: winnerDeclared,
     effect: ({ payload: { winner, interaction } }) => {
       const embeds = [
-        new MessageEmbed({
+        new EmbedBuilder({
           title: `${decoratedName(winner)} won the crown!`,
           description: 'Game over!',
-          color: 'YELLOW',
+          color: Colors.Yellow,
         }).setImage(asset('fantasy', 'magic', 'glitter dust').s3Url),
         ...leaderboardEmbeds(),
       ]

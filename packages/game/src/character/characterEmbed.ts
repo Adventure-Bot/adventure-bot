@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder } from 'discord.js'
 
 import {
   Character,
@@ -10,8 +10,8 @@ export function characterEmbed({
   character,
 }: {
   character: Character
-}): MessageEmbed {
-  return new MessageEmbed()
+}): EmbedBuilder {
+  return new EmbedBuilder()
     .setTitle(decoratedName(character))
     .setImage(character.profile)
     .addFields([...primaryStatFields({ characterId: character.id })])

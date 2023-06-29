@@ -1,4 +1,9 @@
-import { Guild, GuildChannelCreateOptions, TextChannel } from 'discord.js'
+import {
+  ChannelType,
+  Guild,
+  GuildChannelCreateOptions,
+  TextChannel,
+} from 'discord.js'
 
 export async function findOrCreateTextChannelByName({
   guild,
@@ -7,13 +12,14 @@ export async function findOrCreateTextChannelByName({
 }: {
   guild: Guild
   name: string
-  options?: GuildChannelCreateOptions
+  options?: Omit<GuildChannelCreateOptions, 'name'>
 }): Promise<TextChannel> {
   const channel = guild.channels.cache.find((channel) => channel.name === name)
   if (channel instanceof TextChannel) return channel
 
-  return guild.channels.create(name, {
+  return guild.channels.create({
     ...options,
-    type: 'GUILD_TEXT',
+    name,
+    type: ChannelType.GuildText,
   })
 }

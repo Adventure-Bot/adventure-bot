@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { Colors, EmbedBuilder } from 'discord.js'
 
 import { EmojiModifier } from '@adventure-bot/game/Emoji'
 import { findOrCreateCharacter, statField } from '@adventure-bot/game/character'
@@ -17,13 +17,13 @@ export async function divineBlessing({
   await interaction[replyType]({
     files: [art.attachment],
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${interaction.user.username} is blessed by the Divine!`,
         description: `You gain a permanent ${EmojiModifier(
           'maxHP',
           1
         )} Max Health!`,
-        color: 'GOLD',
+        color: Colors.Gold,
         fields: [statField(character, interaction, 'maxHP')],
       }).setImage(art.attachmentString),
     ],

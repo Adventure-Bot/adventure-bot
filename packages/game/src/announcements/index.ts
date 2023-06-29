@@ -3,9 +3,11 @@ export {
   announceCrownLoots,
 } from '@adventure-bot/game/announcements/announceLoots'
 
+export { announceCooldowns } from '@adventure-bot/game/announcements/announceCooldowns'
 export { announceEffectAdded } from '@adventure-bot/game/announcements/announceEffectAdded'
 export { announceGoldGained } from '@adventure-bot/game/announcements/announceGoldGained'
 export { announceGoldStolen } from '@adventure-bot/game/announcements/announceGoldStolen'
+export { announceHealed } from '@adventure-bot/game/announcements/announceHealed'
 export { announceItemsReceived } from '@adventure-bot/game/announcements/announceItemsReceived'
 export { announceNewgames } from '@adventure-bot/game/announcements/announceNewgames'
 export { announcePeriodicEffects } from '@adventure-bot/game/announcements/announcePeriodicEffects'
@@ -14,5 +16,3 @@ export { announceStatContested } from '@adventure-bot/game/announcements/announc
 export { announceTrapAttacked } from '@adventure-bot/game/announcements/announceTrapAttacked'
 export { announceWinners } from '@adventure-bot/game/announcements/announceWinners'
 export { announceXpAwarded } from '@adventure-bot/game/announcements/announceXpAwarded'
-export { announceHealed } from '@adventure-bot/game/announcements/announceHealed'
-export { announceCooldowns } from '@adventure-bot/game/announcements/announceCooldowns'

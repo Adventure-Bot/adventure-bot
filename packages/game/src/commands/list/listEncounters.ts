@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
 
 import {
   encounterSummaryEmbed,
@@ -16,7 +16,7 @@ export function listEncounters(interaction: CommandInteraction): void {
             )
             .slice(0, 10)
         : [
-            new MessageEmbed({
+            new EmbedBuilder({
               description: 'No encounters yet. `/adventure` to find some!',
             }),
           ],

@@ -1,3 +1,5 @@
+import { Colors } from 'discord.js'
+
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
@@ -9,6 +11,6 @@ export const aggression: EffectTemplate = {
     attackBonus: 2,
   },
   announcement: 'became aggressive!',
-  announcementColor: 'RED',
+  announcementColor: Colors.Red,
   duration: defaultEffectDuration,
 }

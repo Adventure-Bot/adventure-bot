@@ -1,3 +1,5 @@
+import { Colors } from 'discord.js'
+
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 
 export const healer: EffectTemplate = {
@@ -6,5 +8,5 @@ export const healer: EffectTemplate = {
   debuff: false,
   duration: 24 * 60 * 60000,
   announcement: 'became a healer!',
-  announcementColor: 'WHITE',
+  announcementColor: Colors.White,
 }

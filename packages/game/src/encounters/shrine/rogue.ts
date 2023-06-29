@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+import { Colors } from 'discord.js'
 
 import { shrineEncounter } from '@adventure-bot/game/encounters/shrine'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -14,7 +15,7 @@ export async function roguesGuild({
       name: "Rogues' Guild",
       description: `They teach you some trade secrets!`,
       image: asset('fantasy', 'places', 'seedy tavern').s3Url,
-      color: 'DARKER_GREY',
+      color: Colors.DarkerGrey,
       effect: createEffect('rogue'),
     },
     interaction,

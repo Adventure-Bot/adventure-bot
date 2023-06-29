@@ -1,4 +1,4 @@
-import { Client, Intents } from 'discord.js'
+import { Client, GatewayIntentBits, Partials } from 'discord.js'
 
 import {
   announceCrownLoots,
@@ -29,11 +29,14 @@ export async function createClient({
   console.time('discord client ready')
   const client = new Client({
     intents: [
-      Intents.FLAGS.GUILDS,
-      Intents.FLAGS.GUILD_MESSAGES,
-      Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-      Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+      GatewayIntentBits.Guilds,
+      GatewayIntentBits.GuildMessages,
+      GatewayIntentBits.GuildEmojisAndStickers,
+      GatewayIntentBits.GuildWebhooks,
+      GatewayIntentBits.MessageContent,
+      GatewayIntentBits.GuildMessageReactions,
     ],
+    partials: [Partials.Channel, Partials.Message, Partials.Reaction],
   })
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ;(BigInt.prototype as any).toJSON = function () {

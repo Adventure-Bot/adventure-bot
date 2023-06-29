@@ -1,5 +1,3 @@
-import { ColorResolvable } from 'discord.js'
-
 import {
   applyShrine,
   shrineEmbeds,
@@ -13,7 +11,7 @@ export type Shrine = {
   effect: StatusEffect
   description: string
   image: string
-  color: ColorResolvable
+  color: number
 }
 
 export async function shrineEncounter({

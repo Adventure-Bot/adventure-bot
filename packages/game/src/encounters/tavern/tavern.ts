@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from 'discord.js'
+import { EmbedBuilder, Message } from 'discord.js'
 
 import {
   decoratedName,
@@ -23,9 +23,9 @@ export const tavern = async ({
   const character = findOrCreateCharacter(interaction.user)
   const message = await interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} found a tavern.`,
-        color: '#964B00',
+        color: 0x964b00,
         description: `You find a tavern and hope for a soft bed, warm meal, and strong drink...`,
       })
         .setImage(asset('fantasy', 'places', 'tavern').s3Url)

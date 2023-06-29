@@ -1,3 +1,5 @@
+import { Colors } from 'discord.js'
+
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
@@ -10,5 +12,5 @@ export const slowed: EffectTemplate = {
     haste: -10,
   },
   announcement: 'started moving more slowly!',
-  announcementColor: 'DARK_BLUE',
+  announcementColor: Colors.DarkBlue,
 }

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
+import { SlashCommandBuilder } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { cooldownsEmbed } from '@adventure-bot/game/commands/inspect/cooldownsEmbed'

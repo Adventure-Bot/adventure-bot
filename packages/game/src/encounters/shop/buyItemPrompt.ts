@@ -1,8 +1,9 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   CommandInteraction,
   Message,
-  MessageActionRow,
-  MessageButton,
 } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
@@ -21,14 +22,14 @@ export async function buyItemPrompt({
 }): Promise<void | Item> {
   await message.edit({
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [buyList({ inventory, interaction })],
       }),
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'cancel',
-            style: 'SECONDARY',
+            style: ButtonStyle.Secondary,
             label: 'Nevermind',
           }),
         ],

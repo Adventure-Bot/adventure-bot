@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { Colors, CommandInteraction, EmbedBuilder } from 'discord.js'
 
 import {
   decoratedName,
@@ -11,11 +11,11 @@ import { Chest } from './chest'
 export function chestEmbed(
   chest: Chest,
   interaction: CommandInteraction
-): MessageEmbed {
+): EmbedBuilder {
   const character = findOrCreateCharacter(interaction.user)
-  const embed = new MessageEmbed({
+  const embed = new EmbedBuilder({
     title: `${decoratedName(character)} encountered a chest!`,
-    color: 'GOLD',
+    color: Colors.Gold,
     description: `You found a treasure chest! What wonders wait within?`,
   })
     .setImage(asset('fantasy', 'items', 'chest', interaction.id).s3Url)

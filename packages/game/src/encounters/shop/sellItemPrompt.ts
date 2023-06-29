@@ -1,9 +1,11 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   CommandInteraction,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
+  StringSelectMenuBuilder,
 } from 'discord.js'
 
 import {
@@ -27,7 +29,7 @@ export async function sellItemPrompt({
   const inventory = character.inventory.filter((i) => i.sellable)
   await message.edit({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} considers what to sell.`,
         description: 'What would you like to sell?',
       }).setImage(
@@ -35,7 +37,7 @@ export async function sellItemPrompt({
       ),
     ],
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<StringSelectMenuBuilder>({
         components: [
           sellList({
             inventory,
@@ -43,11 +45,11 @@ export async function sellItemPrompt({
           }),
         ],
       }),
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'cancel',
-            style: 'SECONDARY',
+            style: ButtonStyle.Secondary,
             label: 'Nevermind',
           }),
         ],
@@ -83,7 +85,7 @@ export async function sellItemPrompt({
 
   interaction.followUp({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${character.name} sold their ${item.name}.`,
       }),
     ],

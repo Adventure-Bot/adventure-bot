@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from 'discord.js'
+import { Colors, EmbedBuilder, Message } from 'discord.js'
 
 import {
   awardXP,
@@ -19,9 +19,9 @@ export async function fairyWell({
   const character = findOrCreateCharacter(interaction.user)
   const message = await interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} drank from a fairy's well!`,
-        color: 'DARK_VIVID_PINK',
+        color: Colors.DarkVividPink,
       }).setImage(asset('fantasy', 'places', "a fairy's well").s3Url),
     ],
   })

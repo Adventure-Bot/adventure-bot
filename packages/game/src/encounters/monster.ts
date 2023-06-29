@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, TextChannel } from 'discord.js'
+import { EmbedBuilder, Message, TextChannel } from 'discord.js'
 
 import { Emoji, EmojiValue } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
@@ -103,7 +103,7 @@ export const monster = async ({
       )
       await interaction.followUp({
         embeds: [
-          new MessageEmbed({
+          new EmbedBuilder({
             title: 'Revenge!',
             description: [
               monster.revengeText,

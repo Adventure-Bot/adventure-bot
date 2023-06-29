@@ -1,8 +1,10 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  Colors,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
 } from 'discord.js'
 import { filter } from 'remeda'
 
@@ -100,24 +102,24 @@ export const cairns = async ({
 
   const message = await interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} found guidance in the cairns!`,
-        color: 'YELLOW',
+        color: Colors.Yellow,
         description,
       }).setImage(
         randomArrayElement([asset('fantasy', 'places', 'cairn')]).s3Url
       ),
     ],
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
-            style: 'SECONDARY',
+          new ButtonBuilder({
+            style: ButtonStyle.Secondary,
             label: labels[option1],
             customId: option1,
           }),
-          new MessageButton({
-            style: 'SECONDARY',
+          new ButtonBuilder({
+            style: ButtonStyle.Secondary,
             label: labels[option2],
             customId: option2,
           }),

@@ -1,3 +1,5 @@
+import { Colors } from 'discord.js'
+
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templates/defaultEffectDuration'
 
@@ -11,5 +13,5 @@ export const frailty: EffectTemplate = {
     maxHP: -3,
   },
   announcement: 'became frail!',
-  announcementColor: 'LIGHT_GREY',
+  announcementColor: Colors.LightGrey,
 }
