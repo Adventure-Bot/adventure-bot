@@ -1,6 +1,7 @@
 import { MessageSelectMenu } from 'discord.js'
 
 import { Item } from '@adventure-bot/game/equipment'
+import { truncate } from '@adventure-bot/game/utils'
 
 export const itemSelect = ({
   inventory,
@@ -15,7 +16,7 @@ export const itemSelect = ({
   }).addOptions(
     inventory.map((item, i) => ({
       label: item.name,
-      description: item.description,
+      description: truncate(item.description, 100),
       value: i.toString(),
     }))
   )
