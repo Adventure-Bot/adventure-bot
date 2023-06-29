@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
 
 import { decoratedName } from '@adventure-bot/game/character'
 import { Encounter } from '@adventure-bot/game/encounters'
@@ -13,8 +13,8 @@ export function encounterSummaryEmbed({
 }: {
   encounter: Encounter
   interaction: CommandInteraction
-}): MessageEmbed {
-  const embed = new MessageEmbed({})
+}): EmbedBuilder {
+  const embed = new EmbedBuilder({})
   const state = store.getState()
   const character = selectCharacterById(state, encounter.characterId)
   if (!character) {
@@ -39,7 +39,9 @@ export function encounterSummaryEmbed({
       )
       break
     case 'in progress':
-      embed.addField('In Progress', 'Encounter in progress!')
+      embed.addFields([
+        { name: 'In Progress', value: 'Encounter in progress!' },
+      ])
       break
     case 'monster fled':
       embed.setTitle(

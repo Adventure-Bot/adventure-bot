@@ -22,15 +22,15 @@ export async function charactersChannel({
       permissionOverwrites: [
         {
           id: guild.id,
-          allow: ['VIEW_CHANNEL'],
+          allow: ['ViewChannel'],
           deny: [
-            'SEND_MESSAGES',
-            'ADD_REACTIONS',
-            'USE_APPLICATION_COMMANDS',
-            'CREATE_PUBLIC_THREADS',
+            'SendMessages',
+            'AddReactions',
+            'UseApplicationCommands',
+            'CreatePublicThreads',
           ],
         },
-        { id: appId, allow: ['SEND_MESSAGES'], deny: [] },
+        { id: appId, allow: ['SendMessages'], deny: [] },
       ],
     },
   })

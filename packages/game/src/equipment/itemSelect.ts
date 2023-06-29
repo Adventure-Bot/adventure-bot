@@ -1,4 +1,4 @@
-import { MessageSelectMenu } from 'discord.js'
+import { StringSelectMenuBuilder } from 'discord.js'
 
 import { Item } from '@adventure-bot/game/equipment'
 
@@ -8,8 +8,8 @@ export const itemSelect = ({
 }: {
   inventory: Item[]
   placeholder?: string
-}): MessageSelectMenu =>
-  new MessageSelectMenu({
+}): StringSelectMenuBuilder =>
+  new StringSelectMenuBuilder({
     customId: 'item',
     placeholder,
   }).addOptions(

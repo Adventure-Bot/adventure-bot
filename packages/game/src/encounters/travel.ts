@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { Colors, EmbedBuilder } from 'discord.js'
 
 import {
   awardXP,
@@ -23,9 +23,9 @@ export const travel = async ({
   const character = findOrCreateCharacter(interaction.user)
   await interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} traveled.`,
-        color: 'GREEN',
+        color: Colors.Green,
         description: `You travel the lands.`,
       }).setImage(asset('fantasy', 'places', 'travel').s3Url),
     ],
@@ -49,7 +49,7 @@ export const travel = async ({
   if (isRugged) {
     await interaction.channel?.send({
       embeds: [
-        new MessageEmbed({
+        new EmbedBuilder({
           title: `${character.name} is rugged.`,
           color: rugged.announcementColor,
         }),

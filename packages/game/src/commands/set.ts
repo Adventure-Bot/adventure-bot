@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
+import { SlashCommandBuilder } from 'discord.js'
 import { URL } from 'url'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'

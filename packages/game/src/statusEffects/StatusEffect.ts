@@ -1,5 +1,3 @@
-import { ColorResolvable } from 'discord.js'
-
 import { Stats } from '@adventure-bot/game/character'
 
 export type EffectTemplate = {
@@ -13,7 +11,7 @@ export type EffectTemplate = {
   buff: boolean
   debuff: boolean
   announcement: string
-  announcementColor: Exclude<ColorResolvable, readonly [number, number, number]>
+  announcementColor: number
   healthAdjustment?: number
   ticksRemaining?: number
 }

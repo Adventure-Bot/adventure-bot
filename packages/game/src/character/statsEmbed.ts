@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
 
 import { statField, stats } from '@adventure-bot/game/character'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
@@ -9,8 +9,8 @@ export function statsEmbed({
 }: {
   character: CharacterWithStats
   interaction: CommandInteraction
-}): MessageEmbed {
-  return new MessageEmbed({
+}): EmbedBuilder {
+  return new EmbedBuilder({
     title: `Stats`,
     fields: stats
       .filter((stat) => character.statsModified[stat])

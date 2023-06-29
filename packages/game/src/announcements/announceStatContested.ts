@@ -1,4 +1,4 @@
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { Colors, EmbedBuilder, TextChannel } from 'discord.js'
 
 import { Emoji, EmojiModifier, d20Emoji } from '@adventure-bot/game/Emoji'
 import { decoratedName, statContested } from '@adventure-bot/game/character'
@@ -38,12 +38,12 @@ export function announceStatContested(channel: TextChannel): void {
         })
       }
 
-      const embed = new MessageEmbed({
+      const embed = new EmbedBuilder({
         title: `${decoratedName(character)} ${
           success ? successText : failureText
         }`,
         fields,
-        color: success ? 'GREEN' : 'RED',
+        color: success ? Colors.Green : Colors.Red,
       }).setThumbnail(character.profile)
       const embeds = [embed]
 

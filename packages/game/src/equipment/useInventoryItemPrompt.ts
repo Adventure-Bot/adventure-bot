@@ -1,9 +1,11 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   CommandInteraction,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
+  StringSelectMenuBuilder,
 } from 'discord.js'
 import { clamp } from 'remeda'
 
@@ -42,7 +44,7 @@ export const useInventoryItemPrompt = async (
   const message = await interaction.followUp({
     content: 'What would you like to use?',
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<StringSelectMenuBuilder>({
         components: [
           itemSelect({
             inventory: inventory,
@@ -50,11 +52,11 @@ export const useInventoryItemPrompt = async (
           }),
         ],
       }),
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'done',
-            style: 'PRIMARY',
+            style: ButtonStyle.Primary,
             label: 'Done',
           }),
         ],
@@ -108,7 +110,7 @@ async function useInventoryItem({
   const item = character.inventory.find((i) => i.id === itemId)
   if (!item) return
   if (isPotion(item)) {
-    const embed = new MessageEmbed({
+    const embed = new EmbedBuilder({
       title: `${character.name} drank a ${item.name}`,
     }).setThumbnail(character.profile)
     if (item.asset)

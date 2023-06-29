@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js'
 
 import { createCharacter, hpBarField } from '@adventure-bot/game/character'
 import { CommandHandlerOptions } from '@adventure-bot/game/utils'
@@ -29,19 +28,19 @@ export const execute = async ({
 
   interaction.editReply({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: 'Heal',
         fields: [hpBarField({ character: half, adjustment: 3 })],
       }),
-      new MessageEmbed({
+      new EmbedBuilder({
         title: 'Overheal',
         fields: [hpBarField({ character: full, adjustment: 300 })],
       }),
-      new MessageEmbed({
+      new EmbedBuilder({
         title: 'Damage',
         fields: [hpBarField({ character: half, adjustment: -3 })],
       }),
-      new MessageEmbed({
+      new EmbedBuilder({
         title: 'Overkill',
         fields: [hpBarField({ character: ko, adjustment: -100 })],
       }),

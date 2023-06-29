@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js'
 
 import {
   decoratedName,
@@ -22,7 +21,7 @@ export const execute = async ({
 }: CommandHandlerOptions): Promise<void> => {
   await interaction.editReply({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(
           findOrCreateCharacter(interaction.user)
         )} searches for trouble!`,

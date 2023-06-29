@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageSelectMenu } from 'discord.js'
+import { CommandInteraction, StringSelectMenuBuilder } from 'discord.js'
 
 import { Item } from '@adventure-bot/game/equipment'
 
@@ -7,8 +7,8 @@ export function buyList({
 }: {
   inventory: Item[]
   interaction: CommandInteraction
-}): MessageSelectMenu {
-  return new MessageSelectMenu({
+}): StringSelectMenuBuilder {
+  return new StringSelectMenuBuilder({
     customId: 'item',
     placeholder: 'Which item would you like to buy?',
     options: inventory.map((item, i) => ({

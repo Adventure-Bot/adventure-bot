@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import { CommandInteraction } from 'discord.js'
+import { Colors, CommandInteraction } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import { quests } from '@adventure-bot/game/quest/quests'
@@ -34,7 +34,7 @@ export const afflictedQuestReward = async (
         id: randomUUID(),
         name: 'Afflicted',
         announcement: 'was afflicted!',
-        announcementColor: 'DARK_BUT_NOT_BLACK',
+        announcementColor: Colors.DarkButNotBlack,
         buff: true,
         debuff: false,
         started: new Date().toString(),

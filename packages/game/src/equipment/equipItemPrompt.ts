@@ -1,8 +1,10 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   CommandInteraction,
+  ComponentType,
   Message,
-  MessageActionRow,
-  MessageButton,
 } from 'discord.js'
 
 import inspect from '@adventure-bot/game/commands/inspect/inspect'
@@ -30,12 +32,12 @@ export async function equipItemPrompt({
     content,
     embeds: showItem ? [itemEmbed({ item })] : [],
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'equip',
             label: `Equip the ${item.name}`,
-            style: 'SECONDARY',
+            style: ButtonStyle.Secondary,
           }),
         ],
       }),
@@ -49,7 +51,7 @@ export async function equipItemPrompt({
         interaction.deferUpdate()
         return interaction.user.id === interaction.user.id
       },
-      componentType: 'BUTTON',
+      componentType: ComponentType.Button,
       time: 60000,
     })
     .catch(() => {

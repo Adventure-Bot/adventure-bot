@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { EmbedBuilder, TextChannel } from 'discord.js'
 
 import { decoratedName, hpBarField } from '@adventure-bot/game/character'
 import { StatusEffect } from '@adventure-bot/game/statusEffects'
@@ -27,7 +27,7 @@ export function announcePeriodicEffects(channel: TextChannel): void {
         : []
 
       const embeds = [
-        new MessageEmbed({
+        new EmbedBuilder({
           title: `${decoratedName(character)} ${effect.announcement}!`,
           fields,
           color: effect.announcementColor,

@@ -1,8 +1,11 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  Colors,
+  ComponentType,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
 } from 'discord.js'
 
 import {
@@ -24,34 +27,34 @@ export const townSquare = async ({
   const character = findOrCreateCharacter(interaction.user)
   const message = await interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} has arrived at the town square!`,
-        color: 'GREY',
+        color: Colors.Grey,
         description: `You've arrived in a bustling town square. Where to?`,
       }).setImage(asset('fantasy', 'places', 'town square').s3Url),
     ],
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'shop',
             label: 'Shop',
-            style: 'PRIMARY',
+            style: ButtonStyle.Primary,
           }),
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'tavern',
             label: 'Tavern',
-            style: 'PRIMARY',
+            style: ButtonStyle.Primary,
           }),
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'dark_alley',
             label: 'Dark Alley',
-            style: 'PRIMARY',
+            style: ButtonStyle.Primary,
           }),
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'leave',
             label: 'Leave',
-            style: 'SECONDARY',
+            style: ButtonStyle.Secondary,
           }),
         ],
       }),
@@ -62,7 +65,7 @@ export const townSquare = async ({
 
   const response = await message
     .awaitMessageComponent({
-      componentType: 'BUTTON',
+      componentType: ComponentType.Button,
       filter: (i) => {
         i.deferUpdate()
         return i.user.id === interaction.user.id

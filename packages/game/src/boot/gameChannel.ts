@@ -22,7 +22,7 @@ export async function gameChannel({
       permissionOverwrites: [
         {
           id: appId,
-          allow: ['USE_APPLICATION_COMMANDS'],
+          allow: ['UseApplicationCommands'],
         },
       ],
     },

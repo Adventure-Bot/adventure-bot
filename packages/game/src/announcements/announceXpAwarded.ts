@@ -1,4 +1,4 @@
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { Colors, EmbedBuilder, TextChannel } from 'discord.js'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
 import store from '@adventure-bot/game/store'
@@ -15,10 +15,10 @@ export function announceXpAwarded(channel: TextChannel): void {
       const character = selectCharacterById(store.getState(), characterId)
       if (!character) return
       const embeds = [
-        new MessageEmbed({
+        new EmbedBuilder({
           title: `${character.name} gained ${amount} experience!`,
           description: EmojiValue('xp', character.xp),
-          color: 'YELLOW',
+          color: Colors.Yellow,
         }),
       ]
       sendEmbeds({ channel, embeds })

@@ -1,3 +1,5 @@
+import { Colors } from 'discord.js'
+
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 
 export const survivor: EffectTemplate = {
@@ -9,5 +11,5 @@ export const survivor: EffectTemplate = {
     maxHP: 5,
   },
   announcement: 'endured!',
-  announcementColor: 'DARK_RED',
+  announcementColor: Colors.DarkRed,
 }

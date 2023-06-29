@@ -1,4 +1,4 @@
-import { EmbedFieldData } from 'discord.js'
+import { EmbedField } from 'discord.js'
 
 import { hpBar } from '@adventure-bot/game/character'
 import { CharacterWithStats } from '@adventure-bot/game/store/selectors'
@@ -18,11 +18,12 @@ export function hpBarField({
   character: CharacterWithStats
   adjustment?: number
   showName?: boolean
-}): EmbedFieldData {
+}): EmbedField {
   return {
     name:
       (showName ? character.name + "'s " : '') +
       ` HP: ${character.hp + adjustment}/${character.statsModified.maxHP}`,
     value: `${hpBar(character, adjustment)} ${numberModifierText(adjustment)}`,
+    inline: false,
   }
 }

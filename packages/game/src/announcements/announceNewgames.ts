@@ -1,4 +1,4 @@
-import { Client, MessageEmbed } from 'discord.js'
+import { Client, Colors, EmbedBuilder } from 'discord.js'
 
 import { newgame } from '@adventure-bot/game/store/actions'
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
@@ -14,9 +14,9 @@ export const announceNewgames: (client: Client) => void = (client) => {
       if (!channel) return
       channel.send({
         embeds: [
-          new MessageEmbed({
+          new EmbedBuilder({
             title: `🎉 Adventures Begin!`,
-            color: 'GREEN',
+            color: Colors.Green,
             description:
               'A new game has started!\n\nUse `/adventure` to begin! Good luck, have fun!',
           }).setImage(asset('fantasy', 'magic', 'sparkle dust').s3Url),

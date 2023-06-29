@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js'
 
 import {
   attackResultEmbed,
@@ -34,7 +33,7 @@ export const execute = async ({
   if (initiator.hp === 0) {
     await interaction.editReply({
       embeds: [
-        new MessageEmbed({
+        new EmbedBuilder({
           description: `You're too weak to press on.`,
         }).setImage('https://imgur.com/uD06Okr.png'),
       ],
@@ -59,7 +58,7 @@ export const execute = async ({
     embeds,
   })
   await sleep(2000)
-  const retaliationEmbeds: MessageEmbed[] = []
+  const retaliationEmbeds: EmbedBuilder[] = []
   if (0 < findOrCreateCharacter(targetUser).hp) {
     const retaliationResult = makeAttack({
       interaction,

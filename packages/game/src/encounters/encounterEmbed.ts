@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { Colors, EmbedBuilder } from 'discord.js'
 
 import { decoratedName, getCharacter } from '@adventure-bot/game/character'
 import { getMonster } from '@adventure-bot/game/monster'
@@ -9,21 +9,21 @@ export const encounterEmbed = ({
   encounterId,
 }: {
   encounterId: string
-}): MessageEmbed => {
+}): EmbedBuilder => {
   const encounter = selectEncounterById(store.getState(), encounterId)
 
   const character = getCharacter(encounter.characterId)
   const monster = getMonster(encounter.monsterId)
 
   if (!character)
-    return new MessageEmbed({
+    return new EmbedBuilder({
       title: `Character ${encounter.characterId} not found`,
     })
   if (!monster)
-    return new MessageEmbed({
+    return new EmbedBuilder({
       title: `Monster ${encounter.monsterId} not found`,
     })
-  const embed = new MessageEmbed({
+  const embed = new EmbedBuilder({
     title: `${decoratedName(character)} vs ${decoratedName(monster)}`,
     fields: [
       {
@@ -39,7 +39,7 @@ export const encounterEmbed = ({
     ],
     timestamp: encounter.date,
   })
-    .setColor('RED')
+    .setColor(Colors.Red)
     .setImage(monster.profile)
     .setThumbnail(character.profile)
   return embed

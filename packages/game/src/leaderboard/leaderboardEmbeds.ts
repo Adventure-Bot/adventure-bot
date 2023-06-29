@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder } from 'discord.js'
 import moment from 'moment'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
@@ -9,7 +9,7 @@ import { selectBearer } from '@adventure-bot/game/store/selectors'
 import { timeTillSovereign } from '@adventure-bot/game/store/slices/crown'
 import { asset } from '@adventure-bot/game/utils'
 
-export function leaderboardEmbeds(): MessageEmbed[] {
+export function leaderboardEmbeds(): EmbedBuilder[] {
   const state = store.getState()
   const bearer = selectBearer(state)
   const { leaderboard, victoriesByCharacter } = state.leaderboard
@@ -17,14 +17,14 @@ export function leaderboardEmbeds(): MessageEmbed[] {
   const gameEndsAt = moment(state.crown.claimedAt).add(timeTillSovereign)
 
   let embeds = [
-    new MessageEmbed({
+    new EmbedBuilder({
       title: 'Crown Leaderboard',
     }).setImage(asset('fantasy', 'items', 'crown').s3Url),
   ]
 
   if (bearer && !state.crown.announced)
     embeds = embeds.concat(
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `Crown Bearer: ${bearer.name}`,
         description: `${decoratedName(
           bearer
@@ -34,7 +34,7 @@ export function leaderboardEmbeds(): MessageEmbed[] {
 
   if (!bearer)
     embeds = embeds.concat(
-      new MessageEmbed({
+      new EmbedBuilder({
         title: 'Crown Chance',
         description: EmojiValue('crown', chanceToFindCrown()),
       })
@@ -44,7 +44,7 @@ export function leaderboardEmbeds(): MessageEmbed[] {
     if (leaderboard.length)
       embeds = embeds.concat(
         leaderboard.map((score) =>
-          new MessageEmbed({
+          new EmbedBuilder({
             title: score.name,
             fields: [
               {

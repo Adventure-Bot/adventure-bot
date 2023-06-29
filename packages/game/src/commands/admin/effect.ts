@@ -1,6 +1,6 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
 import { randomUUID } from 'crypto'
-import { MessageEmbed } from 'discord.js'
+import { SlashCommandBuilder } from 'discord.js'
+import { EmbedBuilder } from 'discord.js'
 import { values } from 'remeda'
 
 import {
@@ -28,7 +28,7 @@ export const execute = async ({
   const character = findOrCreateCharacter(interaction.user)
   await interaction.editReply({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} conjures an effect!`,
         description: `Which shall it be?\n\n${effectList()}\n\nEnter the number of the effect you wish to conjure.`,
       }),

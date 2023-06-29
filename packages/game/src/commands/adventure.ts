@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageEmbed } from 'discord.js'
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import {
@@ -23,7 +22,7 @@ export const execute = async ({
   if (character.hp === 0) {
     await interaction.editReply({
       embeds: [
-        new MessageEmbed()
+        new EmbedBuilder()
           .setDescription(`You're too weak to press on.`)
           .setImage('https://imgur.com/uD06Okr.png'),
       ],

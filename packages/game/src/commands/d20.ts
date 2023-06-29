@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
+import { SlashCommandBuilder } from 'discord.js'
 
 import { d20Emoji } from '@adventure-bot/game/Emoji'
 import { CommandHandlerOptions, d20 } from '@adventure-bot/game/utils'

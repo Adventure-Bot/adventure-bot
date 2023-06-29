@@ -1,4 +1,4 @@
-import { EmbedFieldData, MessageEmbed } from 'discord.js'
+import { EmbedBuilder } from 'discord.js'
 
 import { EmojiModifier, EmojiValue } from '@adventure-bot/game/Emoji'
 import { Character, statTitles, stats } from '@adventure-bot/game/character'
@@ -13,44 +13,60 @@ export function itemEmbed({
   item: Item
   showEquipStatusFor?: Character
   saleRate?: number
-}): MessageEmbed {
-  const fields: EmbedFieldData[] = []
+}): EmbedBuilder {
+  const embed = new EmbedBuilder({
+    title: item.name,
+    description: item.description,
+  })
+
   stats.forEach((stat) => {
     const modifier = item.modifiers?.[stat]
     if (!modifier) return
-    fields.push({
+    embed.addFields({
       name: statTitles[stat],
       value: EmojiModifier(stat, modifier),
       inline: true,
     })
   })
 
-  const embed = new MessageEmbed({
-    title: item.name,
-    description: item.description,
-    fields: [...fields],
-  })
+  if (process.env.SHOW_ITEM_IDS === 'true')
+    embed.addFields([{ name: 'ID', value: item.id, inline: true }])
 
-  if (process.env.SHOW_ITEM_IDS === 'true') embed.addField('ID', item.id, true)
   if (isWeapon(item))
-    embed.addField('Damage', EmojiValue('damage', item.damageMax), true)
-  embed.addField('Type', item.type, true)
-  embed.addField('Lootable?', item.lootable ? 'Yes' : 'No', true)
-  embed.addField('Sellable?', item.sellable ? 'Yes' : 'No', true)
-  embed.addField('Tradeable?', item.tradeable ? 'Yes' : 'No', true)
+    embed.addFields({
+      name: 'Damage',
+      value: EmojiValue('damage', item.damageMax),
+      inline: true,
+    })
+
+  embed.addFields([
+    { name: 'Type', value: item.type, inline: true },
+    { name: 'Lootable?', value: item.lootable ? 'Yes' : 'No', inline: true },
+    { name: 'Sellable?', value: item.sellable ? 'Yes' : 'No', inline: true },
+    { name: 'Tradeable?', value: item.tradeable ? 'Yes' : 'No', inline: true },
+  ])
+
   if (isWeapon(item) && item.onHitEffect)
-    embed.addField('On Hit', item.onHitEffect, true)
+    embed.addFields([{ name: 'On Hit', value: item.onHitEffect, inline: true }])
 
   if (showEquipStatusFor) {
-    embed.addField(
-      'Equipped?',
-      isEquipped({ character: showEquipStatusFor, item }) ? 'Yes' : 'No',
-      true
-    )
+    embed.addFields([
+      {
+        name: 'Equipped?',
+        value: isEquipped({ character: showEquipStatusFor, item })
+          ? 'Yes'
+          : 'No',
+        inline: true,
+      },
+    ])
   }
-  embed.addField('Gold Value', EmojiValue('gold', item.goldValue))
+  embed.addFields([
+    { name: 'Gold Value', value: EmojiValue('gold', item.goldValue) },
+  ])
   if (saleRate !== undefined) {
-    embed.addField('Sell Value', EmojiValue('gold', sellValue(item)))
+    embed.addFields([
+      { name: 'Sell Value', value: EmojiValue('gold', sellValue(item)) },
+    ])
   }
   return embed
 }

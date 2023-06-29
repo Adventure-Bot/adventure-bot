@@ -1,4 +1,4 @@
-import { Client, MessageEmbed } from 'discord.js'
+import { ChannelType, Client, Colors, EmbedBuilder } from 'discord.js'
 import moment from 'moment'
 
 import {
@@ -37,13 +37,13 @@ export function announceCrownLoots(client: Client): void {
       const character = selectCharacterById(state, action.payload.characterId)
       if (!character) return
       const channel = client.channels.cache.get(lastChannelId)
-      if (!channel?.isText()) return
+      if (channel?.type !== ChannelType.GuildText) return
 
       channel.send({
         embeds: [
-          new MessageEmbed({
+          new EmbedBuilder({
             title: `${decoratedName(character)} found the crown!`,
-            color: 'YELLOW',
+            color: Colors.Yellow,
             description: [
               `Attention @here!`,
               ``,
@@ -75,13 +75,13 @@ const announceCrownLooted = async ({
   const state = store.getState()
   const lastChannelId = selectLastChannelUsed(state)
   const channel = client.channels.cache.get(lastChannelId)
-  if (!channel?.isText()) return
+  if (channel?.type !== ChannelType.GuildText) return
 
   channel.send({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(looter)} took the crown!`,
-        color: 'YELLOW',
+        color: Colors.Yellow,
         description: [
           `Attention @here!`,
           ``,
@@ -109,11 +109,11 @@ export function announceLoots(client: Client): void {
       if (!looter || !target) return
       const lastChannelId = selectLastChannelUsed(state)
       const channel = client.channels.cache.get(lastChannelId)
-      if (!channel?.isText()) return
+      if (channel?.type !== ChannelType.GuildText) return
       if (loot.goldTaken === 0 && loot.itemsTaken.length === 0) return
       channel.send({
         embeds: [
-          new MessageEmbed({
+          new EmbedBuilder({
             title: `${looter.name} looted ${target.name}!`,
           }),
           ...loot.itemsTaken.map((item) =>

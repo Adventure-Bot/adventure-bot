@@ -1,8 +1,11 @@
 import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  Colors,
+  ComponentType,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
 } from 'discord.js'
 import { pipe, sort, take } from 'remeda'
 
@@ -31,9 +34,9 @@ export const ranger = async ({
 
   const message = await interaction[replyType]({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} encountered a ranger!`,
-        color: 'GREEN',
+        color: Colors.Green,
         description: `A seasoned traveler greets you. They've seen monster tracks in the area and can guide you to them.\n\nWhich do you seek?`,
       }).setImage(
         randomArrayElement([
@@ -46,20 +49,20 @@ export const ranger = async ({
       ...roamingMonsters.map(monsterEmbed),
     ],
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<ButtonBuilder>({
         components: [
           ...roamingMonsters.map(
             (monster) =>
-              new MessageButton({
+              new ButtonBuilder({
                 customId: monster.id,
                 label: monster.name,
-                style: 'PRIMARY',
+                style: ButtonStyle.Primary,
               })
           ),
-          new MessageButton({
+          new ButtonBuilder({
             customId: 'leave',
             label: 'Leave',
-            style: 'PRIMARY',
+            style: ButtonStyle.Secondary,
           }),
         ],
       }),
@@ -70,7 +73,7 @@ export const ranger = async ({
 
   const response = await message
     .awaitMessageComponent({
-      componentType: 'BUTTON',
+      componentType: ComponentType.Button,
       filter: (i) => {
         i.deferUpdate()
         return i.user.id === interaction.user.id

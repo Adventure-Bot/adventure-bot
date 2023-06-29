@@ -1,8 +1,12 @@
 import {
+  ActionRowBuilder,
+  BaseMessageOptions,
+  ButtonBuilder,
+  ButtonStyle,
+  CommandInteraction,
+  ComponentType,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
 } from 'discord.js'
 
 import { EmojiValue } from '@adventure-bot/game/Emoji'
@@ -23,34 +27,28 @@ import {
 } from '@adventure-bot/game/store/slices/shop'
 import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
+const inventory = () => selectShopInventory(store.getState())
+
 export const shop = async ({
   interaction,
   replyType = 'followUp',
 }: CommandHandlerOptions): Promise<void> => {
-  const character = findOrCreateCharacter(interaction.user)
-
   store.dispatch(shopRestocked())
   if (didFindCrown()) {
     store.dispatch(shopInventoryAdded(heavyCrown()))
   }
-
-  const inventory = () => selectShopInventory(store.getState())
-
-  const hasStuffToSell =
-    character.inventory.filter((i) => i.sellable).length > 0
-
-  const message = await interaction[replyType](shopMain())
+  const message = await interaction[replyType](shopMain(interaction))
   if (!(message instanceof Message)) return
   let hasLeft = false
   while (!hasLeft) {
-    await message.edit(shopMain())
+    await message.edit(shopMain(interaction))
     const response = await message
       .awaitMessageComponent({
         filter: (i) => {
           i.deferUpdate()
           return i.user.id === interaction.user.id
         },
-        componentType: 'BUTTON',
+        componentType: ComponentType.Button,
         time: 60000,
       })
       .catch(() => {
@@ -67,48 +65,52 @@ export const shop = async ({
       await sellItemPrompt({ interaction, message })
   }
   message.edit({ components: [] })
+}
 
-  function shopMain() {
-    const shopEmbed = new MessageEmbed({
-      title: `${character.name} Visits the Shop`,
-      fields: [
-        {
-          name: 'Your Gold',
-          value: EmojiValue('gold', getCharacterUpdate(character).gold),
-        },
-      ],
-    })
-      .setImage(asset('fantasy', 'places', 'shop', interaction.id).s3Url)
-      .setThumbnail(character.profile)
-    return {
-      embeds: [shopEmbed, ...inventory().map((item) => itemEmbed({ item }))],
-      components: [
-        new MessageActionRow({
-          components: [
-            new MessageButton({
-              customId: 'buy',
-              label: 'Buy',
-              style: 'PRIMARY',
-            }),
-          ]
-            .concat(
-              hasStuffToSell
-                ? new MessageButton({
-                    customId: 'sell',
-                    label: 'Sell',
-                    style: 'PRIMARY',
-                  })
-                : []
-            )
-            .concat(
-              new MessageButton({
-                customId: 'leave',
-                label: 'Leave',
-                style: 'SECONDARY',
-              })
-            ),
-        }),
-      ],
-    }
+function shopMain(interaction: CommandInteraction): BaseMessageOptions {
+  const character = findOrCreateCharacter(interaction.user)
+  const hasStuffToSell =
+    character.inventory.filter((i) => i.sellable).length > 0
+
+  const shopEmbed = new EmbedBuilder({
+    title: `${character.name} Visits the Shop`,
+    fields: [
+      {
+        name: 'Your Gold',
+        value: EmojiValue('gold', getCharacterUpdate(character).gold),
+      },
+    ],
+  })
+    .setImage(asset('fantasy', 'places', 'shop', interaction.id).s3Url)
+    .setThumbnail(character.profile)
+  return {
+    embeds: [shopEmbed, ...inventory().map((item) => itemEmbed({ item }))],
+    components: [
+      new ActionRowBuilder<ButtonBuilder>({
+        components: [
+          new ButtonBuilder({
+            customId: 'buy',
+            label: 'Buy',
+            style: ButtonStyle.Primary,
+          }),
+        ]
+          .concat(
+            hasStuffToSell
+              ? new ButtonBuilder({
+                  customId: 'sell',
+                  label: 'Sell',
+                  style: ButtonStyle.Primary,
+                })
+              : []
+          )
+          .concat(
+            new ButtonBuilder({
+              customId: 'leave',
+              label: 'Leave',
+              style: ButtonStyle.Secondary,
+            })
+          ),
+      }),
+    ],
   }
 }

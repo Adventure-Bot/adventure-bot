@@ -1,9 +1,10 @@
 import {
+  ActionRowBuilder,
   CommandInteraction,
+  ComponentType,
+  EmbedBuilder,
   Message,
-  MessageActionRow,
-  MessageEmbed,
-  MessageSelectMenu,
+  StringSelectMenuBuilder,
 } from 'discord.js'
 
 import {
@@ -32,7 +33,7 @@ export const chattyTavernkeepers = async (
   if (availableQuests.length === 0) {
     interaction.followUp({
       embeds: [
-        new MessageEmbed({
+        new EmbedBuilder({
           title: `${decoratedName(character)} met a chatty tavernkeeper!`,
           description: `You're all caught up on the latest, friend!`,
         })
@@ -45,7 +46,7 @@ export const chattyTavernkeepers = async (
   const message = await interaction.followUp({
     fetchReply: true,
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} met a chatty tavernkeeper!`,
         description:
           "Turns out they know someone's got a thing needs doing.\n\nCompensation? Of course!",
@@ -54,9 +55,9 @@ export const chattyTavernkeepers = async (
         .setThumbnail(character.profile),
     ].concat(characterQuestSummary(character) ?? []),
     components: [
-      new MessageActionRow({
+      new ActionRowBuilder<StringSelectMenuBuilder>({
         components: [
-          new MessageSelectMenu({
+          new StringSelectMenuBuilder({
             customId: 'quest',
             placeholder: 'So... you in or what?',
           }).addOptions(
@@ -78,16 +79,15 @@ export const chattyTavernkeepers = async (
         i.deferUpdate()
         return i.user.id === interaction.user.id
       },
-      componentType: 'SELECT_MENU',
+      componentType: ComponentType.StringSelect,
       time: 60000,
     })
     .catch(() => {
       interaction.followUp('Another time, perhaps!')
     })
-  if (!response) {
-    return
-  }
+  if (!response) return
   const questId = response.values[0]
+  response.valueOf()
   if (!isQuestId(questId)) {
     interaction.followUp(`${questId} is not a valid quest id`)
     return

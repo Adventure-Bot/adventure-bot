@@ -1,5 +1,4 @@
-import { APIEmbedField } from 'discord-api-types'
-import { CommandInteraction } from 'discord.js'
+import { CommandInteraction, EmbedField } from 'discord.js'
 
 import { Emoji } from '@adventure-bot/game/Emoji'
 import { Character, Stat, statTitles } from '@adventure-bot/game/character'
@@ -13,7 +12,7 @@ export function statField(
   character: Character,
   interaction: CommandInteraction,
   stat: Stat
-): APIEmbedField {
+): EmbedField {
   return {
     name: statTitles[stat],
     value: statText({ character, stat, interaction }),

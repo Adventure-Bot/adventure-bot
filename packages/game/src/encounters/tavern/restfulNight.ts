@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { Colors, CommandInteraction, EmbedBuilder } from 'discord.js'
 
 import {
   decoratedName,
@@ -26,9 +26,9 @@ export async function restfulNight(
 
   await interaction.followUp({
     embeds: [
-      new MessageEmbed({
+      new EmbedBuilder({
         title: `${decoratedName(character)} had a restful night.`,
-        color: 'DARK_NAVY',
+        color: Colors.DarkNavy,
         description: 'You feel well rested. 💤',
       })
         .setImage(asset('fantasy', 'places', 'restful tavern').s3Url)

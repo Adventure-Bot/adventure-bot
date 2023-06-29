@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+import { Colors } from 'discord.js'
 
 import { shrineEncounter } from '@adventure-bot/game/encounters/shrine'
 import { createEffect } from '@adventure-bot/game/statusEffects'
@@ -13,7 +14,7 @@ export const armorShrine = async ({
     replyType,
     shrine: {
       id: randomUUID(),
-      color: 'YELLOW',
+      color: Colors.Yellow,
       description: `This shrine will protect you in your journeys.`,
       image: asset('fantasy', 'items', 'a shield chiseled out of a stone')
         .s3Url,

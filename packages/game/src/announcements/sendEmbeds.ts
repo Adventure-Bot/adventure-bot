@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, TextChannel } from 'discord.js'
+import { EmbedBuilder, Message, TextChannel } from 'discord.js'
 
 export async function sendEmbeds({
   messageId,
@@ -6,7 +6,7 @@ export async function sendEmbeds({
   embeds,
 }: {
   channel: TextChannel
-  embeds: MessageEmbed[]
+  embeds: EmbedBuilder[]
   messageId?: string
 }): Promise<Message> {
   const message = messageId

@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed, TextChannel } from 'discord.js'
+import { CommandInteraction, EmbedBuilder, TextChannel } from 'discord.js'
 
 import {
   decoratedName,
@@ -20,7 +20,7 @@ export async function listMonsters(
   if (!roamingMonsters.length) {
     interaction.followUp({
       embeds: [
-        new MessageEmbed({
+        new EmbedBuilder({
           description:
             'No monsters encountered yet.\n\n`/adventure` to find some!',
         }),

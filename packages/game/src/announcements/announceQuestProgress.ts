@@ -1,4 +1,4 @@
-import { MessageEmbed, TextChannel } from 'discord.js'
+import { Colors, EmbedBuilder, TextChannel } from 'discord.js'
 
 import { decoratedName } from '@adventure-bot/game/character'
 import quests from '@adventure-bot/game/commands/quests'
@@ -26,12 +26,12 @@ export function announceQuestProgress(channel: TextChannel): void {
       await sendEmbeds({
         channel,
         embeds: [
-          new MessageEmbed({
+          new EmbedBuilder({
             title: `${decoratedName(character)} ${
               isComplete ? 'completed' : 'made progress on'
             } their ${quest.title} quest!`,
             fields: isComplete ? [] : [questProgressField(quest, amount)],
-            color: 'YELLOW',
+            color: Colors.Yellow,
           }),
         ],
       })

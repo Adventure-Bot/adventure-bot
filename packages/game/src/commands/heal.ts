@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageEmbed } from 'discord.js'
+import { Colors, EmbedBuilder, SlashCommandBuilder } from 'discord.js'
 
 import {
   cooldownRemainingText,
@@ -46,8 +45,8 @@ export const execute = async ({
 
   await interaction.editReply({
     embeds: [
-      new MessageEmbed({
-        color: 'WHITE',
+      new EmbedBuilder({
+        color: Colors.White,
         title: `${decoratedName(character)} used Heal${maybeOnTarget}`,
         description: `Can heal again ${cooldownRemainingText(
           character.id,

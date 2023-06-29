@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { Colors, CommandInteraction, EmbedBuilder } from 'discord.js'
 
 import {
   awardXP,
@@ -18,9 +18,9 @@ export async function barFight(
   const damage = d6()
   const character = findOrCreateCharacter(interaction.user)
   store.dispatch(damaged({ character, amount: damage }))
-  const embed = new MessageEmbed({
+  const embed = new EmbedBuilder({
     title: `${decoratedName(character)} got into a bar fight!`,
-    color: 'RED',
+    color: Colors.Red,
     description: 'You get into a drunken brawl and are kicked out.',
     fields: [
       hpBarField({

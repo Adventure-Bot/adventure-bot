@@ -1,3 +1,5 @@
+import { Colors } from 'discord.js'
+
 import { EffectTemplate } from '@adventure-bot/game/statusEffects'
 
 export const blessed: EffectTemplate = {
@@ -6,5 +8,5 @@ export const blessed: EffectTemplate = {
   debuff: false,
   duration: 24 * 60 * 60000,
   announcement: 'was blessed!',
-  announcementColor: 'YELLOW',
+  announcementColor: Colors.Yellow,
 }
