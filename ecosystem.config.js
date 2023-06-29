@@ -13,12 +13,6 @@ module.exports = {
       interpreter: '/bin/bash',
     },
     {
-      name: 'redux-devtools',
-      script: 'yarn',
-      args: 'game redux-devtools',
-      interpreter: '/bin/bash',
-    },
-    {
       name: 'web',
       script: 'yarn',
       args: 'web start',
