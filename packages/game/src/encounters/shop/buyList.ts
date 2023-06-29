@@ -1,6 +1,7 @@
 import { CommandInteraction, StringSelectMenuBuilder } from 'discord.js'
 
 import { Item } from '@adventure-bot/game/equipment'
+import { truncate } from '@adventure-bot/game/utils'
 
 export function buyList({
   inventory,
@@ -13,7 +14,7 @@ export function buyList({
     placeholder: 'Which item would you like to buy?',
     options: inventory.map((item, i) => ({
       label: item.name,
-      description: `${item.goldValue}g ${item.description}`,
+      description: truncate(`${item.goldValue}g ${item.description}`, 100),
       value: i.toString(),
     })),
   })
