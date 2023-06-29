@@ -22,6 +22,9 @@ function asset<
 } {
   // @ts-ignore: TS sucks and is losing context cause the object is deeply nested
   const images = manifest.data[theme][kind][entity]
+  if (!images.length) {
+    throw new Error(`No images found for ${theme}/${kind}/${entity}`)
+  }
 
   let index: number
   if (seed) {
