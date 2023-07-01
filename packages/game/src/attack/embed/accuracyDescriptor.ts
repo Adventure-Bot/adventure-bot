@@ -9,7 +9,8 @@ export const accuracyDescriptor = (
 ): string => {
   if (!result) return `No result`
   if (result.outcome === 'cooldown') return 'On cooldown'
-  const { attackBonus, ac } = result.attacker.statsModified
+  const { attackBonus } = result.attacker.statsModified
+  const ac = result.defender.statsModified.ac
   const accuracy = result.attackRoll + attackBonus - ac
   const attacker = mentionCharacter(result.attacker)
   const defender = mentionCharacter(result.defender)
