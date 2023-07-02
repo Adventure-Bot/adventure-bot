@@ -5,6 +5,7 @@ import {
   MessageEmbed,
 } from 'discord.js'
 
+import { EmojiValue } from '@adventure-bot/game/Emoji'
 import {
   decoratedName,
   findOrCreateCharacter,
@@ -28,6 +29,12 @@ export const townSquare = async ({
         title: `${decoratedName(character)} has arrived at the town square!`,
         color: 'GREY',
         description: `You've arrived in a bustling town square. Where to?`,
+        fields: [
+          {
+            name: 'Your gold',
+            value: EmojiValue('gold', character.gold),
+          },
+        ],
       }).setImage(asset('fantasy', 'places', 'town square').s3Url),
     ],
     components: [

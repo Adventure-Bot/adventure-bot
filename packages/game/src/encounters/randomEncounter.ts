@@ -29,6 +29,7 @@ export const randomEncounter = (
   const angelChance = character.quests.healer ? 0 : 0.5
   const warlockChance = character.quests.afflicted ? 0 : 0.5
   const coralReefChance = character.xp >= 50 ? 1 : 0
+  const townSquareChance = character.xp >= 20 ? 2 : 0
   const caveChance = character.xp >= 10 ? 1 : 0
   const rangerChance = getRoamingMonsters().length > 3 ? 1 : 0
   const shopChance = Math.min(
@@ -51,6 +52,6 @@ export const randomEncounter = (
     [2, monster],
     [2, chest],
     [2, randomShrine()],
-    [2, townSquare],
+    [townSquareChance, townSquare],
   ])
 }
