@@ -22,6 +22,7 @@ import {
   monster,
   shop,
   tavern,
+  townSquare,
   trap,
   travel,
 } from '@adventure-bot/game/encounters'
@@ -35,30 +36,32 @@ import {
 } from '@adventure-bot/game/utils'
 
 type EncounterId =
-  | 'divineBlessing'
-  | 'fairyWell'
-  | 'shop'
-  | 'tavern'
-  | 'trap'
-  | 'travel'
-  | 'monster'
-  | 'chest'
-  | 'randomShrine'
   | 'angels'
   | 'cave'
+  | 'chest'
+  | 'divineBlessing'
+  | 'fairyWell'
+  | 'monster'
+  | 'randomShrine'
+  | 'shop'
+  | 'tavern'
+  | 'townSquare'
+  | 'trap'
+  | 'travel'
 
 const labels: Record<EncounterId, string> = {
-  divineBlessing: 'Divine Blessing',
   angels: 'Angels',
+  cave: 'Cave',
+  chest: 'Chest',
+  divineBlessing: 'Divine Blessing',
   fairyWell: 'Fairy Well',
+  monster: 'Monster',
+  randomShrine: 'Shrine',
   shop: 'Shop',
   tavern: 'Tavern',
+  townSquare: 'Town Square',
   trap: 'Trap',
   travel: 'Travel',
-  monster: 'Monster',
-  chest: 'Chest',
-  randomShrine: 'Shrine',
-  cave: 'Cave',
 }
 
 export const cairns = async ({
@@ -74,14 +77,13 @@ export const cairns = async ({
           [0.2, 'divineBlessing'],
           [character.quests.healer ? 0 : 0.5, 'angels'],
           [1, 'fairyWell'],
-          [1, 'shop'],
-          [1, 'tavern'],
           [1, 'trap'],
           [1, 'travel'],
           [2, 'monster'],
           [2, 'cave'],
           [2, 'chest'],
           [2, 'randomShrine'],
+          [2, 'townSquare'],
         ],
         ([, id]) => id !== omit
       )
@@ -154,6 +156,7 @@ export const cairns = async ({
     tavern,
     trap,
     travel,
+    townSquare,
   }
 
   if (isKeyOfObject(response.customId, handlers)) {

@@ -145,7 +145,12 @@ export const monster = async ({
           })
         )
         if (player.quests.slayer) {
-          updateQuestProgess(interaction, interaction.user.id, 'slayer', 1)
+          updateQuestProgess({
+            interaction,
+            characterId: interaction.user.id,
+            questId: 'slayer',
+            amount: 1,
+          })
           player = selectCharacterById(store.getState(), player.id) ?? player
         }
         break

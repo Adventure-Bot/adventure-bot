@@ -82,7 +82,12 @@ export function makeAttack({
       })
     )
     if (totalDamage < defender.hp)
-      updateQuestProgess(interaction, defender.id, 'survivor', totalDamage)
+      updateQuestProgess({
+        interaction,
+        characterId: defender.id,
+        questId: 'survivor',
+        amount: totalDamage,
+      })
     if (attacker.pickpocket) {
       const amount = Math.min(defender.gold, d(attacker.pickpocket))
       store.dispatch(
