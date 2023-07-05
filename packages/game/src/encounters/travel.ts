@@ -19,7 +19,12 @@ export const travel = async ({
   interaction,
   replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
-  updateQuestProgess(interaction, interaction.user.id, 'traveler', 1)
+  updateQuestProgess({
+    interaction,
+    characterId: interaction.user.id,
+    questId: 'traveler',
+    amount: 1,
+  })
   const character = findOrCreateCharacter(interaction.user)
   await interaction[replyType]({
     embeds: [

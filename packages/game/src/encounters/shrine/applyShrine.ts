@@ -33,7 +33,12 @@ export async function applyShrine({
       effect,
     })
   )
-  updateQuestProgess(interaction, interaction.user.id, 'blessed', 1)
+  updateQuestProgess({
+    interaction,
+    characterId: interaction.user.id,
+    questId: 'blessed',
+    amount: 1,
+  })
 
   store.dispatch(
     xpAwarded({

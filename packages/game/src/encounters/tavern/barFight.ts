@@ -32,7 +32,12 @@ export async function barFight(
     .setImage(asset('fantasy', 'places', 'drunken bar brawl in a tavern').s3Url)
     .setThumbnail(character.profile)
   if (damage < character.hp)
-    updateQuestProgess(interaction, interaction.user.id, 'survivor', damage)
+    updateQuestProgess({
+      interaction,
+      characterId: interaction.user.id,
+      questId: 'survivor',
+      amount: damage,
+    })
 
   await interaction[followUp ? 'followUp' : 'reply']({
     embeds: [embed],

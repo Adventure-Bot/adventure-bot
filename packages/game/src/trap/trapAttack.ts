@@ -57,7 +57,12 @@ export function trapAttack({
         })
       )
       if (damage < defender.hp)
-        updateQuestProgess(interaction, defender.id, 'survivor', damage)
+        updateQuestProgess({
+          interaction,
+          characterId: defender.id,
+          questId: 'survivor',
+          amount: damage,
+        })
     }
   }
 

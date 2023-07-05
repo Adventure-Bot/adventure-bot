@@ -37,7 +37,12 @@ export const execute = async ({
     await cooldowns.execute({ interaction })
     return
   }
-  updateQuestProgess(interaction, interaction.user.id, 'healer', result.amount)
+  updateQuestProgess({
+    interaction,
+    characterId: interaction.user.id,
+    questId: 'healer',
+    amount: result.amount,
+  })
 
   character = findOrCreateCharacter(interaction.user)
 

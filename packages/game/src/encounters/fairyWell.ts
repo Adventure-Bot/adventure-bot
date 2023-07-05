@@ -28,5 +28,10 @@ export async function fairyWell({
   if (!(message instanceof Message)) return
   store.dispatch(healed({ character, amount: healAmount }))
   awardXP({ characterId: interaction.user.id, amount: 1 })
-  updateQuestProgess(interaction, interaction.user.id, 'healer', healAmount)
+  updateQuestProgess({
+    interaction,
+    characterId: interaction.user.id,
+    questId: 'healer',
+    amount: healAmount,
+  })
 }

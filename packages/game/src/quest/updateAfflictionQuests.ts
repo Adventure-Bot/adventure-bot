@@ -8,7 +8,12 @@ export function updateAfflictionQuests(): void {
     actionCreator: effectAdded,
     effect: ({ payload: { effect, character, interaction } }) => {
       if (effect.debuff)
-        updateQuestProgess(interaction, character.id, 'afflicted', 1)
+        updateQuestProgess({
+          interaction,
+          characterId: character.id,
+          questId: 'afflicted',
+          amount: 1,
+        })
     },
   })
 }

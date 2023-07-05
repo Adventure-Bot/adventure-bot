@@ -47,7 +47,12 @@ export async function restfulNight(
     )
   }
 
-  updateQuestProgess(interaction, interaction.user.id, 'healer', missingHealth)
+  updateQuestProgess({
+    interaction,
+    characterId: interaction.user.id,
+    questId: 'healer',
+    amount: missingHealth,
+  })
 
   store.dispatch(
     xpAwarded({
