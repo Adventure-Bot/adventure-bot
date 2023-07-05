@@ -55,15 +55,14 @@ export const execute = async ({
     return
   }
 
-  await Promise.all(
+  Promise.all(
     character.inventory.map((item) =>
       hook.send({
         embeds: [itemEmbed({ item, showEquipStatusFor: character })],
         threadId: thread.id,
       })
     )
-  )
-  thread.setArchived(true)
+  ).finally(() => thread.setArchived(true))
 
   let done = false
   while (!done) {
