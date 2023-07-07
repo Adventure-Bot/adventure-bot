@@ -39,10 +39,11 @@ export const execute = async ({
   })
 
   collector.on('collect', (message) => {
+    if (message.author.id !== interaction.user.id) return
     const input = parseInt(message.content)
     const createItem = values(items)[input - 1]
     if (!createItem) {
-      interaction.channel?.send(`That's not a valid item.`)
+      interaction.channel?.send(`"${message.content}" is not a valid item.`)
       return
     }
     store.dispatch(
