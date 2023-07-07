@@ -15,12 +15,10 @@ export function trapAttack({
   interaction,
   defender,
   trap,
-  messageId,
 }: {
   interaction: CommandInteraction
   defender: CharacterWithStats
   trap: TrapWithStats
-  messageId: string
 }): TrapAttackResult {
   const attackRoll = d20()
   const { attackBonus, damageMax } = trap
@@ -37,7 +35,7 @@ export function trapAttack({
     defender,
     trap,
   }
-  store.dispatch(trapAttacked({ result, messageId }))
+  store.dispatch(trapAttacked({ result }))
 
   if ('hit' === outcome && trap.onHitEffect)
     store.dispatch(

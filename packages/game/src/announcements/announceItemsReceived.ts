@@ -16,7 +16,7 @@ export function announceItemsReceived(): void {
     effect: ({ payload: { item, interaction, characterId } }) => {
       const character = selectCharacterById(store.getState(), characterId)
       if (!character) return
-      interaction.followUp({
+      interaction.channel?.send({
         content: `${decoratedName(character)} received: ${item.name}!`,
         embeds: [itemEmbed({ item })],
       })
@@ -30,7 +30,7 @@ export function announceItemsReceived(): void {
     effect: ({ payload: { item, interaction, characterId } }) => {
       const character = selectCharacterById(store.getState(), characterId)
       if (!character) return
-      interaction.followUp({
+      interaction.channel?.send({
         content: `${decoratedName(character)} purchased: ${item.name}!`,
         embeds: [itemEmbed({ item })],
       })

@@ -25,10 +25,9 @@ import {
 
 export async function coralReef({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> {
   const character = findOrCreateCharacter(interaction.user)
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} encountered a coral reef!`,
@@ -67,17 +66,16 @@ export async function coralReef({
 
   if (!response.isButton()) return
   if (response.customId === 'leave') {
-    await interaction.followUp('You leave the reef.')
+    await interaction.channel?.send('You leave the reef.')
     return
   }
   weightedTable<() => void>([
-    [1, () => chest({ interaction, replyType: 'followUp' })],
+    [1, () => chest({ interaction })],
     [
       2,
       () =>
         monster({
           interaction,
-          replyType: 'followUp',
           monster: createMonster(
             weightedTable([
               [1, createShark],

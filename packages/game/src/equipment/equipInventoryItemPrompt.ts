@@ -23,12 +23,12 @@ export const equipInventoryItemPrompt = async (
   const character = findOrCreateCharacter(interaction.user)
   const inventory = equippableInventory(character)
   if (inventory.length === 0) {
-    interaction.editReply({
+    interaction.channel?.send({
       content: 'No inventory items available to equip',
     })
     return
   }
-  const message = await interaction.followUp({
+  const message = await interaction.channel?.send({
     content: 'What would you like to equip?',
     components: [
       new ActionRowBuilder<SelectMenuBuilder>({
@@ -77,7 +77,9 @@ export const equipInventoryItemPrompt = async (
       store.dispatch(
         itemEquipped({ itemId: item.id, characterId: character.id })
       )
-      interaction.followUp(`${character.name} equipped their ${item.name}.`)
+      interaction.channel?.send(
+        `${character.name} equipped their ${item.name}.`
+      )
     }
   }
 }

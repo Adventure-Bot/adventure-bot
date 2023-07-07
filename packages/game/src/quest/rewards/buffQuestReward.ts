@@ -21,7 +21,7 @@ export async function buffQuestReward(
     }),
   ]
 
-  await interaction.followUp({
+  await interaction.channel?.send({
     embeds,
   })
   store.dispatch(

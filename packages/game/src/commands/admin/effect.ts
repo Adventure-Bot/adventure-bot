@@ -26,7 +26,7 @@ export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
-  await interaction.editReply({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} conjures an effect!`,
@@ -43,7 +43,7 @@ export const execute = async ({
     const input = parseInt(message.content)
     const effect = values(effects)[input - 1]
     if (!effect) {
-      interaction.editReply(`That's not a valid effect.`)
+      interaction.channel?.send(`That's not a valid effect.`)
       return
     }
     store.dispatch(

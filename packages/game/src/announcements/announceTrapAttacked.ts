@@ -11,7 +11,7 @@ export function announceTrapAttacked(channel: TextChannel): void {
   startAppListening({
     actionCreator: trapAttacked,
     effect: ({ payload }) => {
-      const { messageId, result } = payload
+      const { result } = payload
       const { trap, defender, outcome, damage } = result
       const embed = new EmbedBuilder({
         title: `${Emoji(outcome)} ${decoratedName(defender)} was ${
@@ -28,7 +28,7 @@ export function announceTrapAttacked(channel: TextChannel): void {
       }
       sendEmbeds({
         channel,
-        messageId,
+
         embeds: [embed],
       })
     },

@@ -7,7 +7,6 @@ import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export async function roguesGuild({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> {
   return shrineEncounter({
     shrine: {
@@ -19,6 +18,5 @@ export async function roguesGuild({
       effect: createEffect('rogue'),
     },
     interaction,
-    replyType,
   })
 }

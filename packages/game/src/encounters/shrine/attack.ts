@@ -7,11 +7,10 @@ import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export const attackShrine = async ({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
   return shrineEncounter({
     interaction,
-    replyType,
+
     shrine: {
       id: randomUUID(),
       name: 'Shrine of Agression',

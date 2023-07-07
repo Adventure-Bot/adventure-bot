@@ -83,7 +83,7 @@ export async function sellItemPrompt({
     })
   )
 
-  interaction.followUp({
+  interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${character.name} sold their ${item.name}.`,

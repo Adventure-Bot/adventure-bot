@@ -26,10 +26,10 @@ export const offerItemPrompt = async (
   const sender = findOrCreateCharacter(interaction.user)
   const inventory = sender.inventory.filter(isTradeable)
   if (inventory.length === 0) {
-    interaction.followUp(`No items to offer.`)
+    interaction.channel?.send(`No items to offer.`)
     return
   }
-  const message = await interaction.followUp({
+  const message = await interaction.channel?.send({
     content:
       'Offer an item for grabs. First to click gets it. If time expires, it will become dust in the wind.',
     components: [
@@ -77,8 +77,7 @@ export const offerItemPrompt = async (
   const item = inventory[parseInt(response.values[0])]
   if (timeout || !item) return
   if (!item) return
-  const offer = await interaction.followUp({
-    fetchReply: true,
+  const offer = await interaction.channel?.send({
     content: `${sender.name} offers their ${item.name}.`,
     embeds: [itemEmbed({ item })],
     components: [
@@ -122,6 +121,8 @@ export const offerItemPrompt = async (
       })
     )
     offer.edit({ components: [] })
-    interaction.followUp(`${recipient.name} took ${sender.name}'s ${item.name}`)
+    interaction.channel?.send(
+      `${recipient.name} took ${sender.name}'s ${item.name}`
+    )
   }
 }

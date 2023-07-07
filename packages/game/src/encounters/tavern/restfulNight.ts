@@ -24,7 +24,7 @@ export async function restfulNight(
   )
   const character = findOrCreateCharacter(interaction.user)
 
-  await interaction.followUp({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} had a restful night.`,

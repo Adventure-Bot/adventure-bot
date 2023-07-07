@@ -15,7 +15,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  await interaction.editReply({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(
@@ -33,7 +33,7 @@ export const execute = async ({
   collector.on('collect', async (message) => {
     const input = parseInt(message.content)
     if (!monstersByName[input - 1]) {
-      interaction.editReply(`That's not a valid monster.`)
+      interaction.channel?.send(`That's not a valid monster.`)
       return
     }
     const monster = monstersByName[input - 1][1]()

@@ -18,10 +18,9 @@ import { asset } from '@adventure-bot/game/utils'
 
 export const tavern = async ({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} found a tavern.`,

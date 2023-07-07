@@ -10,7 +10,7 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  interaction.editReply({
+  interaction.channel?.send({
     content: d20Emoji(d20()),
   })
 }

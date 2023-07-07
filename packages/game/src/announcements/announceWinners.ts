@@ -37,7 +37,7 @@ export function announceWinners(channel: TextChannel): void {
         ...leaderboardEmbeds(),
       ]
       if (interaction) {
-        interaction.editReply({ embeds })
+        interaction.channel?.send({ embeds })
         return
       }
       channel.send({

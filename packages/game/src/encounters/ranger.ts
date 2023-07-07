@@ -23,7 +23,6 @@ import {
 
 export const ranger = async ({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
   const roamingMonsters = pipe(
@@ -32,7 +31,7 @@ export const ranger = async ({
     take(3)
   )
 
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} encountered a ranger!`,
@@ -90,13 +89,12 @@ export const ranger = async ({
     (monster) => monster.id === response.customId
   )
   if (!selectedMonster) {
-    await interaction.followUp('Monster not found.')
+    await interaction.channel?.send('Monster not found.')
     return
   }
 
   await monsterEncounter({
     interaction,
     monster: selectedMonster,
-    replyType: 'followUp',
   })
 }

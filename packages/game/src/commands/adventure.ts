@@ -20,7 +20,7 @@ export const execute = async ({
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
   if (character.hp === 0) {
-    await interaction.editReply({
+    await interaction.channel?.send({
       embeds: [
         new EmbedBuilder()
           .setDescription(`You're too weak to press on.`)
@@ -41,7 +41,7 @@ export const execute = async ({
   const encounter = randomEncounter(interaction)
   console.log(encounter)
   await encounter({ interaction })
-  await interaction.followUp(
+  await interaction.channel?.send(
     character.name +
       ' can ' +
       Emoji('adventure') +

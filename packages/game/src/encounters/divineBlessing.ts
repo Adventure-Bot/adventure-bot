@@ -8,13 +8,12 @@ import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export async function divineBlessing({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> {
   store.dispatch(divineBlessingGranted(interaction.user.id))
   const art = asset('fantasy', 'magic', 'a divine blessing')
   const character = findOrCreateCharacter(interaction.user)
 
-  await interaction[replyType]({
+  await interaction.channel?.send({
     files: [art.attachment],
     embeds: [
       new EmbedBuilder({

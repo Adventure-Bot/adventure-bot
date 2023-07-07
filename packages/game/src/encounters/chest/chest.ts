@@ -37,7 +37,7 @@ export type Chest = {
 }
 
 export async function chest(
-  { interaction, replyType = 'followUp' }: CommandHandlerOptions,
+  { interaction }: CommandHandlerOptions,
   chestConfig?: Partial<Chest>
 ): Promise<void> {
   const character = findOrCreateCharacter(interaction.user)
@@ -65,9 +65,8 @@ export async function chest(
     ...chestConfig,
   }
 
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [chestEmbed(chest, interaction)],
-    fetchReply: true,
   })
   if (!(message instanceof Message)) return
   await message.react(Emoji('perception'))
@@ -154,7 +153,7 @@ export async function chest(
           failureText: "triggered the chest's trap!",
         }).success
       ) {
-        triggerTrap(interaction, chest, message.id)
+        triggerTrap(interaction, chest)
       }
       if (
         statContest({
@@ -173,7 +172,7 @@ export async function chest(
     }
     if (reaction.emoji.name === '👐') {
       if (chest.trapped && !chest.disarmed) {
-        triggerTrap(interaction, chest, message.id)
+        triggerTrap(interaction, chest)
       }
       if (!chest.locked) chest.looted = true
       if (chest.locked) {
@@ -277,11 +276,7 @@ function chestResponses(chest: Chest): string[] {
   return responses
 }
 
-function triggerTrap(
-  interaction: CommandInteraction,
-  chest: Chest,
-  messageId: string
-) {
+function triggerTrap(interaction: CommandInteraction, chest: Chest) {
   const { trap, trapTriggered } = chest
   if (!trap || trapTriggered) return
   chest.trapTriggered = true
@@ -289,6 +284,5 @@ function triggerTrap(
     interaction,
     trap,
     defender: findOrCreateCharacter(interaction.user),
-    messageId,
   })
 }

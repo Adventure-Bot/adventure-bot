@@ -17,10 +17,9 @@ export type Shrine = {
 export async function shrineEncounter({
   shrine,
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions & { shrine: Shrine }): Promise<void> {
-  const { id: messageId } = await interaction[replyType]({
+  await interaction.channel?.send({
     embeds: shrineEmbeds({ shrine, interaction }),
   })
-  applyShrine({ shrine, interaction, messageId })
+  applyShrine({ shrine, interaction })
 }

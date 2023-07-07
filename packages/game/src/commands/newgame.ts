@@ -20,12 +20,12 @@ export const execute = async ({
   if (!interaction.isChatInputCommand()) return
   const input = interaction.options.getString('when')
   if (!input) {
-    await interaction.editReply('Please specify when you want to start.')
+    await interaction.channel?.send('Please specify when you want to start.')
     return
   }
   const date = chrono.parseDate(input)
   if (!date) {
-    await interaction.editReply('Invalid date.')
+    await interaction.channel?.send('Invalid date.')
     return
   }
   store.dispatch(
@@ -35,7 +35,7 @@ export const execute = async ({
       action: newgame(),
     })
   )
-  await interaction.editReply({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `New game will begin ${moment(date).fromNow()}`,

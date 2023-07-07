@@ -21,7 +21,7 @@ export async function listCharacters(
     .sort((a, b) => b.xp - a.xp)
     .slice(0, 10)
     .map((character) => limitedCharacterEmbed({ character }))
-  interaction.editReply(`${character.name} sized up the competition.`)
+  interaction.channel?.send(`${character.name} sized up the competition.`)
   const hook = await getHook({
     name: 'Characters',
     channel,

@@ -16,7 +16,7 @@ export const execute = async ({
   findOrCreateCharacter(interaction.user)
   const character = selectCharacterById(store.getState(), interaction.user.id)
   if (!character) return
-  await interaction.editReply({
+  await interaction.channel?.send({
     embeds: [cooldownsEmbed({ character, interaction })],
   })
 }

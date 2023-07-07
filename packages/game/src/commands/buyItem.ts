@@ -11,7 +11,7 @@ export const buyItem = async (
   item: Item
 ): Promise<void> => {
   if (player.gold < item.goldValue) {
-    await interaction.followUp(
+    await interaction.channel?.send(
       `You cannot afford the ${item.name}. You have only ${player.gold} gold and it costs ${item.goldValue}.`
     )
     return
