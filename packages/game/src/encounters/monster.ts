@@ -2,7 +2,12 @@ import { EmbedBuilder, Message, TextChannel } from 'discord.js'
 
 import { Emoji, EmojiValue } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
-import { findOrCreateCharacter, loot } from '@adventure-bot/game/character'
+import {
+  findOrCreateCharacter,
+  isCharacterOnCooldown,
+  loot,
+} from '@adventure-bot/game/character'
+import heal from '@adventure-bot/game/commands/heal'
 import {
   chest,
   createEncounter,
@@ -53,12 +58,20 @@ export const monster = async ({
     encounter = selectEncounterById(store.getState(), encounterId)
     await message.react(Emoji('attack'))
     await message.react(Emoji('run'))
+    if (!isCharacterOnCooldown(player.id, 'heal'))
+      await message.react(Emoji('heal'))
     const collected = await message
       .awaitReactions({
         filter: (reaction, user) =>
-          [Emoji('attack'), 'attack', Emoji('run'), 'run'].includes(
-            reaction.emoji.name ?? ''
-          ) && user.id === interaction.user.id,
+          [
+            'attack',
+            'heal',
+            'run',
+            Emoji('attack'),
+            Emoji('heal'),
+            Emoji('run'),
+          ].includes(reaction.emoji.name ?? '') &&
+          user.id === interaction.user.id,
         max: 1,
         time: 60000,
         errors: ['time'],
@@ -75,6 +88,16 @@ export const monster = async ({
       [Emoji('run'), 'run'].includes(reaction.emoji.name ?? '')
 
     if (playerFlee) store.dispatch(playerFled({ encounterId }))
+
+    if (['heal', Emoji('heal')].includes(reaction?.emoji.name ?? '')) {
+      await heal.execute({ interaction })
+      await message.reactions.cache
+        .find((r) => {
+          return ['heal', Emoji('heal')].includes(r.emoji.name ?? '')
+        })
+        ?.remove()
+      continue
+    }
 
     const playerResult = playerFlee
       ? undefined
