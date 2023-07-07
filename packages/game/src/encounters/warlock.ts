@@ -11,7 +11,6 @@ import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export async function warlock({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> {
   store.dispatch(
     questGranted({
@@ -23,7 +22,7 @@ export async function warlock({
   const character = findOrCreateCharacter(interaction.user)
   const quest = character.quests.afflicted
 
-  await interaction[replyType]({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} encountered a warlock!`,

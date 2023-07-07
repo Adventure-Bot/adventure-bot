@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Partials } from 'discord.js'
+import { ChannelType, Client, GatewayIntentBits, Partials } from 'discord.js'
 
 import {
   announceCrownLoots,
@@ -45,21 +45,27 @@ export async function createClient({
 
   client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return
+
+    interaction.reply(`${interaction.user} used /${interaction.commandName}`)
+
+    const channel = interaction.channel
+    if (!channel || channel.type !== ChannelType.GuildText) return
     store.dispatch(commandUsed(interaction))
+    channel.sendTyping()
     console.log(`command ${interaction.commandName}`)
     console.time(interaction.commandName + ' ' + interaction.id)
+
     try {
-      await interaction.deferReply()
       const command = commands.get(interaction.commandName)
       if (!command) {
-        interaction.editReply(`Command not found ${interaction.commandName}`)
+        channel.send(`Command not found ${interaction.commandName}`)
         return
       }
       await command.execute({ interaction })
     } catch (e) {
       console.error(e)
       try {
-        await interaction.followUp(
+        await channel.send(
           `Command \`${interaction.commandName}\` failed with error: \`${e}\``
         )
       } catch {

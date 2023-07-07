@@ -18,7 +18,7 @@ export async function listMonsters(
   const channel = interaction.channel
   if (!(channel instanceof TextChannel)) return
   if (!roamingMonsters.length) {
-    interaction.followUp({
+    interaction.channel?.send({
       embeds: [
         new EmbedBuilder({
           description:
@@ -28,7 +28,9 @@ export async function listMonsters(
     })
     return
   }
-  interaction.followUp(`${decoratedName(character)} checks the wanted board.`)
+  interaction.channel?.send(
+    `${decoratedName(character)} checks the wanted board.`
+  )
   const thread = await channel.threads.create({
     name: 'Roaming Monsters',
   })

@@ -34,11 +34,11 @@ export const execute = async ({
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
   if (!character.inventory.length) {
-    await interaction.followUp('Your inventory is empty.')
+    await interaction.channel?.send('Your inventory is empty.')
     return
   }
-  const message = await interaction.followUp({
-    content: `${decoratedName(character)}'s checks their bags.`,
+  const message = await interaction.channel?.send({
+    content: `${decoratedName(character)} checks their bags.`,
     components: [inventoryComponents(interaction)],
   })
   if (!(message instanceof Message)) return
@@ -52,7 +52,7 @@ export const execute = async ({
     channel,
   })
   if (!hook) {
-    await interaction.followUp(`Inventory hook not found.`)
+    await interaction.channel?.send(`Inventory hook not found.`)
     return
   }
 

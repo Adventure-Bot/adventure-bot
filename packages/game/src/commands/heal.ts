@@ -49,7 +49,7 @@ export const execute = async ({
   const maybeOnTarget =
     target.id === character.id ? '' : ' on ' + decoratedName(target)
 
-  await interaction.editReply({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         color: Colors.White,

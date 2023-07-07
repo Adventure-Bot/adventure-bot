@@ -31,13 +31,12 @@ const inventory = () => selectShopInventory(store.getState())
 
 export const shop = async ({
   interaction,
-  replyType = 'followUp',
 }: CommandHandlerOptions): Promise<void> => {
   store.dispatch(shopRestocked())
   if (didFindCrown()) {
     store.dispatch(shopInventoryAdded(heavyCrown()))
   }
-  const message = await interaction[replyType](shopMain(interaction))
+  const message = await interaction.channel?.send(shopMain(interaction))
   if (!(message instanceof Message)) return
   let hasLeft = false
   while (!hasLeft) {

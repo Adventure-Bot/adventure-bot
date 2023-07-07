@@ -23,10 +23,9 @@ import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export const townSquare = async ({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} has arrived at the town square!`,
@@ -81,18 +80,15 @@ export const townSquare = async ({
     .finally(() => message.edit({ components: [] }))
 
   if (!response.isButton()) return
-  if (response.customId === 'shop')
-    await shop.execute({ interaction, replyType: 'followUp' })
-  if (response.customId === 'tavern')
-    await tavern({ interaction, replyType: 'followUp' })
+  if (response.customId === 'shop') await shop.execute({ interaction })
+  if (response.customId === 'tavern') await tavern({ interaction })
   if (response.customId === 'dark_alley') {
     if (statContest({ character, stat: 'luck', difficulty: 14 }).success) {
-      await roguesGuild({ interaction, replyType: 'followUp' })
+      await roguesGuild({ interaction })
     } else {
       await monster({
         monster: createMonster(createTabaxi()),
         interaction,
-        replyType: 'followUp',
       })
     }
   }

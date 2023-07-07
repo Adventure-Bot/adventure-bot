@@ -15,7 +15,6 @@ export async function applyShrine({
 }: {
   interaction: CommandInteraction
   shrine: Shrine
-  messageId: string
 }): Promise<void> {
   const character = findOrCreateCharacter(interaction.user)
   const effect = shrine.effect

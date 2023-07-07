@@ -85,17 +85,17 @@ export const execute = async ({
       break
     case 'purge_roaming':
       store.dispatch(purgeRoamingMonsters())
-      interaction.editReply('Roaming monsters purged')
+      interaction.channel?.send('Roaming monsters purged')
       break
     case 'set_xp':
       setXp(interaction)
-      interaction.editReply(
+      interaction.channel?.send(
         `XP set to ${interaction.options.getInteger('xp')}.`
       )
       break
     case 'set_gold':
       setGold(interaction)
-      interaction.editReply('Gold set.')
+      interaction.channel?.send('Gold set.')
       return
     case 'set_health':
       setHealth(interaction)
@@ -105,17 +105,17 @@ export const execute = async ({
       break
     case 'declare_winner_revoked':
       store.dispatch(winnerRevoked())
-      interaction.editReply({
+      interaction.channel?.send({
         embeds: leaderboardEmbeds(),
       })
       break
     case 'leaderboard':
-      interaction.editReply({
+      interaction.channel?.send({
         embeds: leaderboardEmbeds(),
       })
       break
     default:
-      interaction.editReply(
+      interaction.channel?.send(
         `Invalid subcommand ${interaction.options.getSubcommand()}`
       )
   }
@@ -141,16 +141,16 @@ async function addEmoji(interaction: ChatInputCommandInteraction) {
         (emoji) => emoji.name === emojiName
       )
       if (existing) {
-        interaction.editReply(`Emoji already exists: ${existing}`)
+        interaction.channel?.send(`Emoji already exists: ${existing}`)
         return
       }
       const emoji = await guild.emojis.create({
         attachment: file,
         name: emojiName,
       })
-      interaction.editReply(`Emoji added: ${emoji}`)
+      interaction.channel?.send(`Emoji added: ${emoji}`)
     } catch (e) {
-      interaction.editReply(`Error: ${e}`)
+      interaction.channel?.send(`Error: ${e}`)
     }
   })
 }
@@ -179,7 +179,7 @@ const setXp = async (interaction: ChatInputCommandInteraction) => {
 const setHealth = async (interaction: ChatInputCommandInteraction) => {
   const hp = interaction.options.getInteger('hp')
   if (hp === null) return
-  interaction.editReply(`Health set to ${hp}.`)
+  interaction.channel?.send(`Health set to ${hp}.`)
   store.dispatch(
     healthSet({
       characterId: interaction.user.id,

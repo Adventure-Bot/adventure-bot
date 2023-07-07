@@ -11,7 +11,6 @@ import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
 
 export async function angels({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> {
   store.dispatch(
     questGranted({
@@ -22,7 +21,7 @@ export async function angels({
   const character = findOrCreateCharacter(interaction.user)
   const quest = character.quests.healer
 
-  interaction[replyType]({
+  interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} encountered an angel!`,

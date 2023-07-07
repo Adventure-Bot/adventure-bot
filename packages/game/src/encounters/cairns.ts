@@ -66,7 +66,6 @@ const labels: Record<EncounterId, string> = {
 
 export const cairns = async ({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
 
@@ -100,7 +99,7 @@ export const cairns = async ({
     .filter(Boolean)
     .join('\n')
 
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} found guidance in the cairns!`,
@@ -140,7 +139,7 @@ export const cairns = async ({
     .catch(() => null)
   message.edit({ components: [] })
   if (!response?.isButton()) {
-    interaction.followUp(`Destiny does not wait forever.`)
+    interaction.channel?.send(`Destiny does not wait forever.`)
     return
   }
 
@@ -160,8 +159,8 @@ export const cairns = async ({
   }
 
   if (isKeyOfObject(response.customId, handlers)) {
-    handlers[response.customId]({ interaction, replyType: 'followUp' })
+    handlers[response.customId]({ interaction })
   } else {
-    interaction.followUp(`${response.customId} is not a valid option.`)
+    interaction.channel?.send(`${response.customId} is not a valid option.`)
   }
 }

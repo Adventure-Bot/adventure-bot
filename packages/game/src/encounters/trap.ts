@@ -13,7 +13,7 @@ import { CommandHandlerOptions, sleep } from '@adventure-bot/game/utils'
 
 export const trap = async ({
   interaction,
-  replyType = 'editReply',
+
   trap = getRandomTrap(),
 }: CommandHandlerOptions & { trap?: TrapWithStats }): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
@@ -26,9 +26,9 @@ export const trap = async ({
     .setImage(trap.profile)
     .setThumbnail(character.profile)
 
-  const { id: messageId } = await interaction[replyType]({
+  await interaction.channel?.send({
     embeds: [embed],
   })
   await sleep(2000)
-  trapAttack({ interaction, defender: character, trap, messageId })
+  trapAttack({ interaction, defender: character, trap })
 }

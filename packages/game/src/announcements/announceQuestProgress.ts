@@ -35,8 +35,7 @@ export function announceQuestProgress(channel: TextChannel): void {
           }),
         ],
       })
-      if (isComplete)
-        await quests.execute({ interaction, replyType: 'followUp' })
+      if (isComplete) await quests.execute({ interaction })
     },
   })
 }

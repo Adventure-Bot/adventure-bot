@@ -26,7 +26,7 @@ export const execute = async ({
     maxHP: 10,
   })
 
-  interaction.editReply({
+  interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: 'Heal',

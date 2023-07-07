@@ -12,12 +12,11 @@ import { CommandHandlerOptions, asset, d } from '@adventure-bot/game/utils'
 
 export async function fairyWell({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> {
   const healAmount = d(6)
 
   const character = findOrCreateCharacter(interaction.user)
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} drank from a fairy's well!`,

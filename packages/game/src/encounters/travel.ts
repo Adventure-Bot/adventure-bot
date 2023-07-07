@@ -17,7 +17,6 @@ import { CommandHandlerOptions, asset, d } from '@adventure-bot/game/utils'
 
 export const travel = async ({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
   updateQuestProgess({
     interaction,
@@ -26,7 +25,7 @@ export const travel = async ({
     amount: 1,
   })
   const character = findOrCreateCharacter(interaction.user)
-  await interaction[replyType]({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} traveled.`,

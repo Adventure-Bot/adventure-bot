@@ -12,7 +12,7 @@ export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
   store.dispatch(characterCleansed({ characterId: interaction.user.id }))
-  interaction.followUp(`${interaction.user.username} cleansed themself`)
+  interaction.channel?.send(`${interaction.user.username} cleansed themself`)
 }
 
 export default { command, execute }

@@ -20,7 +20,7 @@ function encounterList(): string {
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  await interaction.editReply({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(
@@ -42,10 +42,10 @@ export const execute = async ({
     const encounter = encountersByName[input - 1]
     if (!encounter) return
     if (!encounter[1]) {
-      interaction.editReply(`That's not a valid encounter.`)
+      interaction.channel?.send(`That's not a valid encounter.`)
       return
     }
-    encounter[1]({ interaction, replyType: 'followUp' })
+    encounter[1]({ interaction })
   })
 }
 

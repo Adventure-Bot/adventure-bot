@@ -7,7 +7,7 @@ import {
 
 export function listEncounters(interaction: CommandInteraction): void {
   const encounters = getEncounters()
-  interaction.editReply({
+  interaction.channel?.send({
     embeds:
       encounters.length > 0
         ? encounters

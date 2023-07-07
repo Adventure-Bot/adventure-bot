@@ -36,12 +36,12 @@ export const useInventoryItemPrompt = async (
   const character = findOrCreateCharacter(interaction.user)
   const inventory = usableInventory(character)
   if (inventory.length === 0) {
-    interaction.editReply({
+    interaction.channel?.send({
       content: 'No inventory items available to use',
     })
     return
   }
-  const message = await interaction.followUp({
+  const message = await interaction.channel?.send({
     content: 'What would you like to use?',
     components: [
       new ActionRowBuilder<StringSelectMenuBuilder>({
@@ -115,7 +115,7 @@ async function useInventoryItem({
     }).setThumbnail(character.profile)
     if (item.asset)
       embed.setImage(asset('fantasy', 'items', item.asset, item.id).s3Url)
-    await interaction.followUp({
+    await interaction.channel?.send({
       embeds: [embed],
     })
     store.dispatch(itemRemoved({ itemId, characterId }))

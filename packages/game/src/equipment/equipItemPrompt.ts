@@ -28,7 +28,7 @@ export async function equipItemPrompt({
   showItem?: boolean
 }): Promise<void> {
   const content = `Would you like to equip the ${item.name}?`
-  const message = await interaction.followUp({
+  const message = await interaction.channel?.send({
     content,
     embeds: showItem ? [itemEmbed({ item })] : [],
     components: [

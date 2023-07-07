@@ -24,10 +24,9 @@ import {
 
 export const cave = async ({
   interaction,
-  replyType = 'editReply',
 }: CommandHandlerOptions): Promise<void> => {
   const character = findOrCreateCharacter(interaction.user)
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} encountered a wonderous cave!`,
@@ -67,7 +66,7 @@ export const cave = async ({
 
   if (!response.isButton()) return
   if (response.customId === 'leave') {
-    await interaction.followUp('You leave the cave.')
+    await interaction.channel?.send('You leave the cave.')
     return
   }
 
@@ -75,5 +74,5 @@ export const cave = async ({
     [1, chest],
     [1, monster],
     [1, trap],
-  ])({ interaction, replyType: 'followUp' })
+  ])({ interaction })
 }

@@ -24,14 +24,14 @@ export const execute = async ({
   const targetUser = interaction.options.data[0].user
   const initiatorUser = interaction.user
   if (!targetUser) {
-    await interaction.editReply(`You must specify a target @player`)
+    await interaction.channel?.send(`You must specify a target @player`)
     return
   }
 
   const initiator = findOrCreateCharacter(initiatorUser)
   const target = findOrCreateCharacter(targetUser)
   if (initiator.hp === 0) {
-    await interaction.editReply({
+    await interaction.channel?.send({
       embeds: [
         new EmbedBuilder({
           description: `You're too weak to press on.`,
@@ -54,7 +54,7 @@ export const execute = async ({
       interaction,
     })
   }
-  await interaction.editReply({
+  await interaction.channel?.send({
     embeds,
   })
   await sleep(2000)
@@ -66,7 +66,7 @@ export const execute = async ({
       defender: initiator,
     })
     if (!retaliationResult) {
-      await interaction.editReply({
+      await interaction.channel?.send({
         content: `No attack result or retaliation outcome is cooldown. This should not happen.`,
       })
       return
@@ -82,7 +82,7 @@ export const execute = async ({
       })
     }
 
-    await interaction.followUp({
+    await interaction.channel?.send({
       embeds: retaliationEmbeds,
     })
   }

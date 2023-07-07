@@ -19,7 +19,7 @@ export const itemReceived = createAction<{
 }>('itemReceived')
 export const backdateCrown = createAction('backdateCrown') // for testing
 export const trapAttacked =
-  createAction<{ result: TrapAttackResult; messageId: string }>('trapAttacked')
+  createAction<{ result: TrapAttackResult }>('trapAttacked')
 
 export const characterMessageCreated = createAction<{
   character: Character

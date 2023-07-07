@@ -10,7 +10,10 @@ import {
   Message,
 } from 'discord.js'
 
-import { findOrCreateCharacter } from '@adventure-bot/game/character'
+import {
+  decoratedName,
+  findOrCreateCharacter,
+} from '@adventure-bot/game/character'
 import {
   Quest,
   QuestId,
@@ -43,7 +46,7 @@ export const execute = async ({
     return
   }
   const embed = new EmbedBuilder({
-    title: 'Quests',
+    title: `${decoratedName(character)}'s Quests`,
     color: Colors.Yellow,
   })
   Object.values(character.quests).forEach((quest) => {
@@ -71,7 +74,6 @@ export const execute = async ({
       ...Object.values(character.quests).map(questEmbed),
     ],
     components: getComponents(completedQuests),
-    fetchReply: true,
   })
   if (!(message instanceof Message)) return
   const reply = await message

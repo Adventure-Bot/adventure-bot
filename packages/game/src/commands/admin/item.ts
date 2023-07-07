@@ -23,7 +23,7 @@ function itemList(): string {
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
-  await interaction.editReply({
+  await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(
@@ -42,7 +42,7 @@ export const execute = async ({
     const input = parseInt(message.content)
     const createItem = values(items)[input - 1]
     if (!createItem) {
-      interaction.editReply(`That's not a valid item.`)
+      interaction.channel?.send(`That's not a valid item.`)
       return
     }
     store.dispatch(

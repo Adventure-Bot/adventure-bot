@@ -32,14 +32,14 @@ import { CommandHandlerOptions, d } from '@adventure-bot/game/utils'
 
 export const monster = async ({
   interaction,
-  replyType = 'editReply',
+
   monster = randomMonster(),
 }: CommandHandlerOptions & { monster?: MonsterWithStats }): Promise<void> => {
   let player = findOrCreateCharacter(interaction.user)
   let encounter = createEncounter({ monster, player })
   const encounterId = encounter.id
   let timeout = false
-  const message = await interaction[replyType]({
+  const message = await interaction.channel?.send({
     embeds: [encounterEmbed({ encounterId })],
   })
   if (!(message instanceof Message)) return
@@ -101,7 +101,7 @@ export const monster = async ({
           amount: revengeDamage,
         })
       )
-      await interaction.followUp({
+      await interaction.channel?.send({
         embeds: [
           new EmbedBuilder({
             title: 'Revenge!',

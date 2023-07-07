@@ -31,7 +31,7 @@ export const chattyTavernkeepers = async (
   const availableQuests = selectAvailableQuests(state, character)
 
   if (availableQuests.length === 0) {
-    interaction.followUp({
+    interaction.channel?.send({
       embeds: [
         new EmbedBuilder({
           title: `${decoratedName(character)} met a chatty tavernkeeper!`,
@@ -43,8 +43,7 @@ export const chattyTavernkeepers = async (
     })
     return
   }
-  const message = await interaction.followUp({
-    fetchReply: true,
+  const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} met a chatty tavernkeeper!`,
@@ -83,17 +82,17 @@ export const chattyTavernkeepers = async (
       time: 60000,
     })
     .catch(() => {
-      interaction.followUp('Another time, perhaps!')
+      interaction.channel?.send('Another time, perhaps!')
     })
   if (!response) return
   const questId = response.values[0]
   response.valueOf()
   if (!isQuestId(questId)) {
-    interaction.followUp(`${questId} is not a valid quest id`)
+    interaction.channel?.send(`${questId} is not a valid quest id`)
     return
   }
   store.dispatch(questGranted({ characterId: character.id, questId }))
-  await interaction.followUp(
+  await interaction.channel?.send(
     `${decoratedName(character)} was charged with the ${
       quests[questId].title
     } quest.`

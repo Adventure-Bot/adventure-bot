@@ -30,7 +30,7 @@ export const execute = async ({
     const isValidExtension = (path: string) =>
       new RegExp(`${validExtensions.join('|')}$`).test(path)
     if (!isValidExtension(url.pathname)) {
-      interaction.editReply(
+      interaction.channel?.send(
         [
           `\`${profile}\` must be a one of these valid extensions: ${validExtensions.join(
             ', '
@@ -43,7 +43,7 @@ export const execute = async ({
       return
     }
   } catch (e) {
-    interaction.editReply(
+    interaction.channel?.send(
       [
         `\`${profile}\` must be a valid URL.`,
         'Example:',

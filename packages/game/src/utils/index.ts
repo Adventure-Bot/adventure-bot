@@ -23,7 +23,6 @@ export const sleep = (milliseconds: number): Promise<void> =>
 
 export type CommandHandlerOptions = {
   interaction: CommandInteraction
-  replyType?: 'editReply' | 'followUp'
 }
 
 export type CommandHandler = (options: CommandHandlerOptions) => Promise<void>

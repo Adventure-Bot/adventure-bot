@@ -38,7 +38,7 @@ export const execute = async ({
   const character = selectCharacterById(store.getState(), user.id)
   if (!character) return
 
-  await interaction.followUp({
+  await interaction.channel?.send({
     embeds: [
       characterEmbed({ character }),
       statsEmbed({ character, interaction }),
