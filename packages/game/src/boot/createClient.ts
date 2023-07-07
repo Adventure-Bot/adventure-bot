@@ -51,7 +51,7 @@ export async function createClient({
     const channel = interaction.channel
     if (!channel || channel.type !== ChannelType.GuildText) return
     store.dispatch(commandUsed(interaction))
-    channel.sendTyping()
+    await channel.sendTyping()
     console.log(`command ${interaction.commandName}`)
     console.time(interaction.commandName + ' ' + interaction.id)
 
