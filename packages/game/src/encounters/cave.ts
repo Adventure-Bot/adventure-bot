@@ -70,6 +70,8 @@ export const cave = async ({
     return
   }
 
+  await interaction.channel?.sendTyping()
+
   weightedTable<CommandHandler>([
     [1, chest],
     [1, monster],
