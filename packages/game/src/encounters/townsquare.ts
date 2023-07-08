@@ -13,13 +13,17 @@ import {
   decoratedName,
   findOrCreateCharacter,
 } from '@adventure-bot/game/character'
-import { statContest } from '@adventure-bot/game/character/statContest'
 import shop from '@adventure-bot/game/commands/shop'
 import { monster } from '@adventure-bot/game/encounters/monster'
 import { roguesGuild } from '@adventure-bot/game/encounters/shrine'
 import { tavern } from '@adventure-bot/game/encounters/tavern/tavern'
+import { thugs } from '@adventure-bot/game/encounters/thugs'
 import { createMonster, createTabaxi } from '@adventure-bot/game/monster'
-import { CommandHandlerOptions, asset } from '@adventure-bot/game/utils'
+import {
+  CommandHandlerOptions,
+  asset,
+  weightedTable,
+} from '@adventure-bot/game/utils'
 
 export const townSquare = async ({
   interaction,
@@ -83,13 +87,13 @@ export const townSquare = async ({
   if (response.customId === 'shop') await shop.execute({ interaction })
   if (response.customId === 'tavern') await tavern({ interaction })
   if (response.customId === 'dark_alley') {
-    if (statContest({ character, stat: 'luck', difficulty: 14 }).success) {
-      await roguesGuild({ interaction })
-    } else {
-      await monster({
-        monster: createMonster(createTabaxi()),
-        interaction,
-      })
-    }
+    await weightedTable([
+      [
+        1,
+        () => monster({ monster: createMonster(createTabaxi()), interaction }),
+      ],
+      [1, () => roguesGuild({ interaction })],
+      [1, () => thugs({ interaction })],
+    ])()
   }
 }
