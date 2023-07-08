@@ -12,7 +12,7 @@
       "runtimeVersion": "16",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["dev"],
-      "console": "integratedTerminal"
+      "console": "externalTerminal"
     },
     {
       "type": "chrome",
