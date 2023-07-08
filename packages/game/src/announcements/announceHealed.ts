@@ -24,7 +24,7 @@ export function announceHealed(channel: TextChannel): void {
       if (!adjustment) return
       const embeds = [
         new EmbedBuilder({
-          title: `${character.name} ${verbed} ${amount} health!`,
+          title: `${character.name} ${verbed} ${adjustment} health!`,
           fields: [hpBarField({ character, adjustment })],
           color: Colors.White,
         }),
