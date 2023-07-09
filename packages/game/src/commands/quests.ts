@@ -9,10 +9,7 @@ import {
   EmbedBuilder,
 } from 'discord.js'
 
-import {
-  decoratedName,
-  findOrCreateCharacter,
-} from '@adventure-bot/game/character'
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import {
   Quest,
   QuestId,
@@ -25,7 +22,7 @@ import {
   survivorBuffQuestReward,
   travelerBuffQuestReward,
 } from '@adventure-bot/game/quest'
-import { CommandHandlerOptions, progressBar } from '@adventure-bot/game/utils'
+import { CommandHandlerOptions } from '@adventure-bot/game/utils'
 
 import { questEmbed } from '../quest/questEmbed'
 
@@ -46,27 +43,10 @@ export const execute = async ({
     )
     return
   }
-  const embed = new EmbedBuilder({
-    title: `${decoratedName(character)}'s Quests`,
-    color: Colors.Yellow,
-  })
-  Object.values(character.quests).forEach((quest) => {
-    embed.addFields([
-      {
-        name: quest.title,
-        value: `${quest.objective}\n
-      ${quest.reward}\n
-      ${progressBar(quest.progress / quest.totalRequired)} ${quest.progress}/${
-          quest.totalRequired
-        }`,
-      },
-    ])
-  })
-
   const message = await send({
     embeds: [
       new EmbedBuilder({
-        title: 'Quests',
+        title: `${character.name}'s Quests`,
         description: `You have ${
           Object.values(character.quests).length
         } active quests.`,
