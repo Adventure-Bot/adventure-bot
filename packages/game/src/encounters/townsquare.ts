@@ -14,11 +14,9 @@ import {
   findOrCreateCharacter,
 } from '@adventure-bot/game/character'
 import shop from '@adventure-bot/game/commands/shop'
-import { monster } from '@adventure-bot/game/encounters/monster'
 import { roguesGuild } from '@adventure-bot/game/encounters/shrine'
 import { tavern } from '@adventure-bot/game/encounters/tavern/tavern'
 import { thugs } from '@adventure-bot/game/encounters/thugs'
-import { createMonster, createTabaxi } from '@adventure-bot/game/monster'
 import {
   CommandHandlerOptions,
   asset,
@@ -88,12 +86,8 @@ export const townSquare = async ({
   if (response.customId === 'tavern') await tavern({ interaction })
   if (response.customId === 'dark_alley') {
     await weightedTable([
-      [
-        1,
-        () => monster({ monster: createMonster(createTabaxi()), interaction }),
-      ],
       [1, () => roguesGuild({ interaction })],
-      [1, () => thugs({ interaction })],
+      [4, () => thugs({ interaction })],
     ])()
   }
 }
