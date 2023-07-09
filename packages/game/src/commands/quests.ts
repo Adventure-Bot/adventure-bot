@@ -7,7 +7,6 @@ import {
   CommandInteraction,
   ComponentType,
   EmbedBuilder,
-  Message,
 } from 'discord.js'
 
 import {
@@ -37,10 +36,12 @@ export const command = new SlashCommandBuilder()
 export const execute = async ({
   interaction,
 }: CommandHandlerOptions): Promise<void> => {
+  const send = interaction.channel?.send.bind(interaction.channel)
+  if (!send) return
   const character = findOrCreateCharacter(interaction.user)
   const completedQuests = getCompletedQuests(character)
   if (Object.values(character.quests).length === 0) {
-    await interaction.followUp(
+    await send(
       `You do not have any active quests. \`/adventure\` to find some!`
     )
     return
@@ -62,7 +63,7 @@ export const execute = async ({
     ])
   })
 
-  const message = await interaction.followUp({
+  const message = await send({
     embeds: [
       new EmbedBuilder({
         title: 'Quests',
@@ -75,7 +76,6 @@ export const execute = async ({
     ],
     components: getComponents(completedQuests),
   })
-  if (!(message instanceof Message)) return
   const reply = await message
     .awaitMessageComponent({
       filter: (i) => {
