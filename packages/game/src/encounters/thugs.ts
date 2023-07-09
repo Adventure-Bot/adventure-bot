@@ -221,7 +221,7 @@ export const thugs = async ({
         new EmbedBuilder({
           title: `${character.name} lost ${EmojiModifier(
             'gold',
-            dropped.gold
+            -dropped.gold
           )}!`,
           fields: [
             {
