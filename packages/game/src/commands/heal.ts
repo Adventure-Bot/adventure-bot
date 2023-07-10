@@ -26,6 +26,25 @@ export const execute = async ({
   )
 
   let character = findOrCreateCharacter(interaction.user)
+  const maybeOnTarget =
+    target.id === character.id ? '' : ' on ' + decoratedName(target)
+  await interaction.channel?.send({
+    embeds: [
+      new EmbedBuilder({
+        color: Colors.White,
+        title: `${decoratedName(character)} used Heal${maybeOnTarget}`,
+        description: `Can heal again ${cooldownRemainingText(
+          character.id,
+          'heal'
+        )}`,
+      })
+        .setImage(
+          asset('fantasy', 'magic', 'a glowing hand applying healing magic')
+            .s3Url
+        )
+        .setThumbnail(character.profile),
+    ].concat(),
+  })
 
   const result = heal({
     healerId: character.id,
@@ -45,27 +64,6 @@ export const execute = async ({
   })
 
   character = findOrCreateCharacter(interaction.user)
-
-  const maybeOnTarget =
-    target.id === character.id ? '' : ' on ' + decoratedName(target)
-
-  await interaction.channel?.send({
-    embeds: [
-      new EmbedBuilder({
-        color: Colors.White,
-        title: `${decoratedName(character)} used Heal${maybeOnTarget}`,
-        description: `Can heal again ${cooldownRemainingText(
-          character.id,
-          'heal'
-        )}`,
-      })
-        .setImage(
-          asset('fantasy', 'magic', 'a glowing hand applying healing magic')
-            .s3Url
-        )
-        .setThumbnail(character.profile),
-    ].concat(),
-  })
 }
 
 export default { command, execute }
