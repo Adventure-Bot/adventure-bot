@@ -3,6 +3,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   CommandInteraction,
+  ComponentType,
   Message,
 } from 'discord.js'
 
@@ -51,9 +52,10 @@ export async function buyItemPrompt({
       })
     })
   if (!response) return
-  if (!response.isSelectMenu()) return
-
-  const item = inventory[parseInt(response.values[0])]
+  if (response.componentType !== ComponentType.StringSelect) return
+  const item = findOrCreateCharacter(interaction.user).inventory.find(
+    ({ id }) => id === response.values[0]
+  )
   if (!item) return
   await buyItem(interaction, findOrCreateCharacter(interaction.user), item)
   return item

@@ -73,10 +73,11 @@ export const offerItemPrompt = async (
       components: [],
     })
   }
-  if (!response.isSelectMenu()) return
-  const item = inventory[parseInt(response.values[0])]
+  if (response.componentType !== ComponentType.StringSelect) return
+  const item = findOrCreateCharacter(interaction.user).inventory.find(
+    ({ id }) => id === response.values[0]
+  )
   if (timeout || !item) return
-  if (!item) return
   const offer = await interaction.channel?.send({
     content: `${sender.name} offers their ${item.name}.`,
     embeds: [itemEmbed({ item })],

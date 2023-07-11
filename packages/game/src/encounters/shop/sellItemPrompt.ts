@@ -3,6 +3,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   CommandInteraction,
+  ComponentType,
   EmbedBuilder,
   Message,
   StringSelectMenuBuilder,
@@ -71,8 +72,10 @@ export async function sellItemPrompt({
       })
     })
   if (!response) return
-  if (!response.isSelectMenu()) return
-  const item = inventory[parseInt(response.values[0])]
+  if (response.componentType !== ComponentType.StringSelect) return
+  const item = findOrCreateCharacter(interaction.user).inventory.find(
+    ({ id }) => id === response.values[0]
+  )
   if (!item) return
 
   store.dispatch(
