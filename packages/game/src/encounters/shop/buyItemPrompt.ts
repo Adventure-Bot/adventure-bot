@@ -53,9 +53,7 @@ export async function buyItemPrompt({
     })
   if (!response) return
   if (response.componentType !== ComponentType.StringSelect) return
-  const item = findOrCreateCharacter(interaction.user).inventory.find(
-    ({ id }) => id === response.values[0]
-  )
+  const item = inventory.find(({ id }) => id === response.values[0])
   if (!item) return
   await buyItem(interaction, findOrCreateCharacter(interaction.user), item)
   return item
