@@ -3,6 +3,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   CommandInteraction,
+  ComponentType,
   Message,
   SelectMenuBuilder,
 } from 'discord.js'
@@ -71,9 +72,12 @@ export const equipInventoryItemPrompt = async (
       message.delete()
       done = true
     }
-    if (response.isSelectMenu()) {
-      const item = inventory[parseInt(response.values[0])]
+    if (response.componentType === ComponentType.StringSelect) {
       const character = findOrCreateCharacter(interaction.user)
+      const item = character.inventory.find(
+        ({ id }) => id === response.values[0]
+      )
+      if (!item) return
       store.dispatch(
         itemEquipped({ itemId: item.id, characterId: character.id })
       )

@@ -14,9 +14,9 @@ export const itemSelect = ({
     customId: 'item',
     placeholder,
   }).addOptions(
-    inventory.map((item, i) => ({
+    inventory.slice(0, 24).map((item) => ({
       label: item.name,
       description: truncate(item.description, 100),
-      value: i.toString(),
+      value: item.id,
     }))
   )

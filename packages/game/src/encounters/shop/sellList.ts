@@ -13,10 +13,10 @@ export function sellList({
   return new StringSelectMenuBuilder({
     customId: 'item',
     placeholder: `Which item would you like to sell?`,
-    options: inventory.map((item, i) => ({
+    options: inventory.slice(0, 24).map((item) => ({
       label: item.name,
       description: truncate(`${sellValue(item)}g ${item.description}`, 100),
-      value: i.toString(),
+      value: item.id,
     })),
   })
 }

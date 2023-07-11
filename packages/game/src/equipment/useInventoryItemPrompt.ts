@@ -3,6 +3,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   CommandInteraction,
+  ComponentType,
   EmbedBuilder,
   Message,
   StringSelectMenuBuilder,
@@ -84,9 +85,11 @@ export const useInventoryItemPrompt = async (
       message.delete()
       done = true
     }
-    if (response.isSelectMenu()) {
-      const item = inventory[parseInt(response.values[0])]
-      const character = findOrCreateCharacter(interaction.user)
+    if (response.componentType === ComponentType.StringSelect) {
+      const item = findOrCreateCharacter(interaction.user).inventory.find(
+        ({ id }) => id === response.values[0]
+      )
+      if (!item) return
       await useInventoryItem({
         itemId: item.id,
         characterId: character.id,
