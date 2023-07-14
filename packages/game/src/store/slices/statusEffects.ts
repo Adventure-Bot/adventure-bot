@@ -34,9 +34,6 @@ export const statusEffects = createSlice({
         for (const effectId in state.effectsByCharacterId[characterId]) {
           const effect = state.effectsById[effectId]
           if (debuffOnly && !effect.debuff) continue
-          console.log(
-            `Removing effect ${effect.name}, debuff: ${effect.debuff} from ${characterId}`
-          )
           delete state.effectsById[effectId]
           delete state.effectsByCharacterId[characterId][effectId]
         }
@@ -44,10 +41,15 @@ export const statusEffects = createSlice({
       .addCase(effectAdded, (state, action) => {
         const { effect, character } = action.payload
         state.effectsById[effect.id] = effect
-        state.effectsByCharacterId[character.id] = {
-          ...state.effectsByCharacterId[character.id],
-          [effect.id]: true,
+        // remove prior effects with the same name
+        for (const effectId in state.effectsByCharacterId[character.id]) {
+          const oldEffect = state.effectsById[effectId]
+          if (effect.name === oldEffect.name) {
+            delete state.effectsById[oldEffect.id]
+            delete state.effectsByCharacterId[character.id][oldEffect.id]
+          }
         }
+        state.effectsByCharacterId[character.id][effect.id] = true
       })
   },
 }).reducer

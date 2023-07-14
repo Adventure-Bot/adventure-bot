@@ -37,13 +37,14 @@ export const execute = async ({
   if (!interaction.channel) return
   const collector = interaction.channel.createMessageCollector({
     time: 15000,
+    filter: (message) => message.author.id === interaction.user.id,
   })
 
   collector.on('collect', (message) => {
     const input = parseInt(message.content)
     const effect = values(effects)[input - 1]
     if (!effect) {
-      interaction.channel?.send(`That's not a valid effect.`)
+      interaction.channel?.send(`${message.content} is not a valid effect.`)
       return
     }
     store.dispatch(
