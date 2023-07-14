@@ -49,7 +49,10 @@ export const statusEffects = createSlice({
             delete state.effectsByCharacterId[character.id][oldEffect.id]
           }
         }
-        state.effectsByCharacterId[character.id][effect.id] = true
+        state.effectsByCharacterId[character.id] = {
+          ...state.effectsByCharacterId[character.id],
+          [effect.id]: true,
+        }
       })
   },
 }).reducer
