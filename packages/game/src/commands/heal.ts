@@ -26,6 +26,18 @@ export const execute = async ({
   )
 
   let character = findOrCreateCharacter(interaction.user)
+
+  const result = heal({
+    healerId: character.id,
+    targetId: target.id,
+    interaction,
+  })
+  if (!result) return
+  if (result.outcome === 'cooldown') {
+    await cooldowns.execute({ interaction })
+    return
+  }
+
   const maybeOnTarget =
     target.id === character.id ? '' : ' on ' + decoratedName(target)
   await interaction.channel?.send({
@@ -46,16 +58,6 @@ export const execute = async ({
     ].concat(),
   })
 
-  const result = heal({
-    healerId: character.id,
-    targetId: target.id,
-    interaction,
-  })
-  if (!result) return
-  if (result.outcome === 'cooldown') {
-    await cooldowns.execute({ interaction })
-    return
-  }
   updateQuestProgess({
     interaction,
     characterId: interaction.user.id,
