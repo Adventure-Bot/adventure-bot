@@ -22,9 +22,7 @@ export async function listCharacters({
   const { characterMessages } = store.getState()
   const guildMessages = characterMessages[guild.id] || []
 
-  console.time('deleteMissingMessages')
   await deleteMissingMessages({ messages, guildMessages })
-  console.timeEnd('deleteMissingMessages')
   return Promise.all(
     getUserCharacters()
       .sort((a, b) => b.xp - a.xp)
