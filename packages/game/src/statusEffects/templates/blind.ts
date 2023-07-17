@@ -9,7 +9,7 @@ export const blind: EffectTemplate = {
   debuff: true,
   duration: defaultEffectDuration,
   modifiers: {
-    attackBonus: -3,
+    attackBonus: -4,
   },
   announcement: 'was blinded!',
   announcementColor: Colors.NotQuiteBlack,

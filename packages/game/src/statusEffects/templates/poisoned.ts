@@ -9,7 +9,7 @@ export const poisoned: EffectTemplate = {
   debuff: true,
   duration: defaultEffectDuration,
   modifiers: {
-    attackBonus: -2,
+    attackBonus: -4,
   },
   announcement: 'was poisoned!',
   announcementColor: Colors.Green,

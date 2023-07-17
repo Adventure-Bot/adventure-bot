@@ -9,7 +9,7 @@ export const slowed: EffectTemplate = {
   debuff: true,
   duration: defaultEffectDuration,
   modifiers: {
-    haste: -10,
+    haste: -30,
   },
   announcement: 'started moving more slowly!',
   announcementColor: Colors.DarkBlue,

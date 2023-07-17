@@ -8,7 +8,7 @@ export const might: EffectTemplate = {
   buff: true,
   debuff: false,
   modifiers: {
-    damageMax: 2,
+    damageMax: 3,
   },
   duration: defaultEffectDuration,
   announcement: 'became mighty!',

@@ -8,7 +8,7 @@ export const aggression: EffectTemplate = {
   buff: true,
   debuff: false,
   modifiers: {
-    attackBonus: 2,
+    attackBonus: 4,
   },
   announcement: 'became aggressive!',
   announcementColor: Colors.Red,

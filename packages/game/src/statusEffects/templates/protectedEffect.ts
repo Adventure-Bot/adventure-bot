@@ -6,7 +6,7 @@ import { defaultEffectDuration } from '@adventure-bot/game/statusEffects/templat
 export const protectedEffect: EffectTemplate = {
   name: 'Protected',
   modifiers: {
-    ac: 2,
+    ac: 4,
   },
   duration: defaultEffectDuration,
   buff: true,

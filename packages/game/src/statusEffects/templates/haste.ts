@@ -8,7 +8,7 @@ export const haste: EffectTemplate = {
   buff: true,
   debuff: false,
   modifiers: {
-    haste: 10,
+    haste: 30,
   },
   duration: defaultEffectDuration,
   announcement: 'started moving faster!',

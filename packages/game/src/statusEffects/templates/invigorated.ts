@@ -9,7 +9,7 @@ export const invigorated: EffectTemplate = {
   debuff: false,
   duration: defaultEffectDuration,
   modifiers: {
-    maxHP: 2,
+    maxHP: 5,
   },
   announcement: 'became invigorated!',
   announcementColor: Colors.White,

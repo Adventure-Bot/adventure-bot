@@ -9,8 +9,8 @@ export const frailty: EffectTemplate = {
   debuff: true,
   duration: defaultEffectDuration,
   modifiers: {
-    ac: -3,
-    maxHP: -3,
+    ac: -4,
+    maxHP: -4,
   },
   announcement: 'became frail!',
   announcementColor: Colors.LightGrey,
