@@ -19,6 +19,7 @@ import {
   warlock,
 } from '@adventure-bot/game/encounters'
 import { randomShrine } from '@adventure-bot/game/encounters/shrine'
+import { thugs } from '@adventure-bot/game/encounters/thugs'
 import { getRoamingMonsters } from '@adventure-bot/game/monster'
 import { CommandHandler, weightedTable } from '@adventure-bot/game/utils'
 
@@ -26,13 +27,11 @@ export const randomEncounter = (
   interaction: CommandInteraction
 ): CommandHandler => {
   const character = findOrCreateCharacter(interaction.user)
+  const xpRequired = (xp: number) => (character.xp >= xp ? 1 : 0)
   const angelChance = character.quests.healer ? 0 : 0.5
   const warlockChance = character.quests.afflicted ? 0 : 0.5
-  const coralReefChance = character.xp >= 50 ? 1 : 0
-  const townSquareChance = character.xp >= 20 ? 1 : 0
-  const caveChance = character.xp >= 10 ? 1 : 0
   const rangerChance = getRoamingMonsters().length > 3 ? 1 : 0
-  const shopChance = Math.min(
+  const wealthy = Math.min(
     3,
     character.gold / 90 + character.inventory.length / 5
   )
@@ -41,17 +40,18 @@ export const randomEncounter = (
     [angelChance, angels],
     [warlockChance, warlock],
     [1, fairyWell],
-    [2, cairns],
-    [shopChance, shop],
+    [xpRequired(20) * 2, cairns],
+    [wealthy, shop],
+    [wealthy, thugs],
     [1, tavern],
-    [caveChance, cave],
-    [coralReefChance, coralReef],
+    [xpRequired(10), cave],
+    [xpRequired(50), coralReef],
     [rangerChance, ranger],
     [1, trap],
     [1, travel],
     [2, monster],
     [2, chest],
     [2, randomShrine()],
-    [townSquareChance, townSquare],
+    [xpRequired(20), townSquare],
   ])
 }
