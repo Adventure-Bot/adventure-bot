@@ -41,12 +41,13 @@ export function announceCooldowns(channel: TextChannel): void {
         .finally(() => message.reactions.removeAll())
       if (!collected) return
       switch (collected.first()?.emoji.name) {
+        case Emoji('adventure'):
         case 'adventure':
-          adventure.execute({ interaction })
+          await adventure.execute({ interaction })
           break
-        case 'heal':
         case Emoji('heal'):
-          heal.execute({ interaction })
+        case 'heal':
+          await heal.execute({ interaction })
           break
       }
     },
