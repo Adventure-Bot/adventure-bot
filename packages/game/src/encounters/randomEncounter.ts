@@ -42,7 +42,7 @@ export const randomEncounter = (
     [1, fairyWell],
     [xpRequired(20) * 2, cairns],
     [wealthy, shop],
-    [wealthy, thugs],
+    [wealthy / 2, thugs],
     [1, tavern],
     [xpRequired(10), cave],
     [xpRequired(50), coralReef],
