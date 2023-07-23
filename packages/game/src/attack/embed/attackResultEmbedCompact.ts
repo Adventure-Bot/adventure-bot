@@ -33,7 +33,7 @@ export function attackResultEmbedCompact({
         showName: true,
       }),
     ],
-  }).setThumbnail(result.attacker.profile)
+  })
 }
 export const attackFlavorText = (result: AttackResult): string =>
   result

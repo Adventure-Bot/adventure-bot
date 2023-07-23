@@ -1,4 +1,10 @@
-import { EmbedBuilder, Message, TextChannel } from 'discord.js'
+import {
+  AttachmentBuilder,
+  EmbedBuilder,
+  Message,
+  TextChannel,
+} from 'discord.js'
+import path from 'path'
 
 import { Emoji, EmojiValue } from '@adventure-bot/game/Emoji'
 import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
@@ -197,6 +203,26 @@ export const monster = async ({
 
     store.dispatch(roundFinished(encounterId))
     message.edit({
+      files: [
+        new AttachmentBuilder(
+          path.join(
+            __dirname,
+            `../../images/dice/00${playerResult?.attackRoll
+              .toString()
+              .padStart(2, '0')}.png`
+          ),
+          { name: 'player_attack.png' }
+        ),
+        new AttachmentBuilder(
+          path.join(
+            __dirname,
+            `../../images/dice/00${monsterResult?.attackRoll
+              .toString()
+              .padStart(2, '0')}.png`
+          ),
+          { name: 'monster_attack.png' }
+        ),
+      ],
       embeds: [
         encounterEmbed({
           encounterId,
@@ -208,7 +234,7 @@ export const monster = async ({
                 attackResultEmbed({
                   result: playerResult,
                   variant: 'compact',
-                }),
+                }).setThumbnail('attachment://player_attack.png'),
               ]
             : []
         )
@@ -217,7 +243,7 @@ export const monster = async ({
             ? attackResultEmbed({
                 result: monsterResult,
                 variant: 'compact',
-              })
+              }).setThumbnail('attachment://monster_attack.png')
             : []
         ),
     })
