@@ -19,8 +19,10 @@ import {
   potionOfProtection,
   potionOfSlaying,
   potionOfVigor,
+  righteousHammer,
   ringOfAttack,
   ringOfHaste,
+  ringOfPurity,
   roguesBrew,
   roguesRing,
   towerShield,
@@ -33,6 +35,8 @@ import { weightedTable } from '@adventure-bot/game/utils'
 export function randomShopItem(): Item {
   return weightedTable<() => Item>([
     [0.3, amuletOfAttack],
+    [0.3, righteousHammer],
+    [0.3, ringOfPurity],
     [0.3, amuletOfProtection],
     [0.3, ringOfAttack],
     [0.3, ringOfHaste],
