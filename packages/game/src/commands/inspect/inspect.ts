@@ -56,10 +56,9 @@ async function inspectThread({
   interaction: CommandInteraction
   character: Character
 }): Promise<void> {
-  const effectEmbeds = selectCharacterEffects(
-    store.getState(),
-    character.id
-  ).map(statusEffectEmbed)
+  const effectEmbeds = selectCharacterEffects(store.getState(), character.id)
+    .sort((a) => (a.buff ? -1 : 1))
+    .map(statusEffectEmbed)
   const equipmentEmbeds = values(character.equipment).map((item) =>
     itemEmbed({ item, showEquipStatusFor: character })
   )

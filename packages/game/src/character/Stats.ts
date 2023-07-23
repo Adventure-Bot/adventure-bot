@@ -1,6 +1,7 @@
 export const stats = [
   'ac',
   'attackBonus',
+  'cleansing',
   'damageBonus',
   'damageMax',
   'dragonSlaying',
@@ -29,6 +30,7 @@ export type Stats = {
 export const statTitles: { [key in Stat]: string } = {
   ac: 'Armor',
   attackBonus: 'Attack Bonus',
+  cleansing: 'Cleansing',
   damageBonus: 'Damage Bonus',
   damageMax: 'Damage',
   dragonSlaying: 'Dragon Slaying',
@@ -38,6 +40,6 @@ export const statTitles: { [key in Stat]: string } = {
   maxHP: 'Max Health',
   monsterDamageMax: 'Monster Slaying',
   perception: 'Perception',
-  revenge: 'Revenge',
   pickpocket: 'Pickpocket',
+  revenge: 'Revenge',
 }
