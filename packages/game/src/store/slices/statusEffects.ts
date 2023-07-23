@@ -17,6 +17,12 @@ export const effectAdded = createAction<{
   image?: string
 }>('effect/added')
 
+export const effectRemoved = createAction<{
+  character: CharacterWithStats
+  effect: StatusEffect
+  image?: string
+}>('effect/removed')
+
 export const characterCleansed = createAction<{
   characterId: string
   debuffOnly?: boolean
@@ -53,6 +59,11 @@ export const statusEffects = createSlice({
           ...state.effectsByCharacterId[character.id],
           [effect.id]: true,
         }
+      })
+      .addCase(effectRemoved, (state, action) => {
+        const { effect, character } = action.payload
+        delete state.effectsById[effect.id]
+        delete state.effectsByCharacterId[character.id][effect.id]
       })
   },
 }).reducer
