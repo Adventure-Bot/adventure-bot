@@ -1,4 +1,4 @@
-import { EmbedBuilder } from 'discord.js'
+import { Colors, EmbedBuilder } from 'discord.js'
 import moment from 'moment'
 
 import { EmojiModifier, EmojiValue } from '@adventure-bot/game/Emoji'
@@ -8,6 +8,7 @@ import { StatusEffect } from '@adventure-bot/game/statusEffects'
 export function statusEffectEmbed(effect: StatusEffect): EmbedBuilder {
   const embed = new EmbedBuilder({
     title: effect.name,
+    color: effect.buff ? Colors.Green : Colors.Red,
   })
 
   stats.forEach((stat) => {

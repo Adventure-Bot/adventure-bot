@@ -7,6 +7,7 @@ import store from '@adventure-bot/game/store'
 import {
   CharacterWithStats,
   MonsterWithStats,
+  selectCharacterEffects,
   selectEncounterById,
 } from '@adventure-bot/game/store/selectors'
 import {
@@ -14,8 +15,11 @@ import {
   damaged,
   goldStolen,
 } from '@adventure-bot/game/store/slices/characters'
-import { effectAdded } from '@adventure-bot/game/store/slices/statusEffects'
-import { d, d20 } from '@adventure-bot/game/utils'
+import {
+  effectAdded,
+  effectRemoved,
+} from '@adventure-bot/game/store/slices/statusEffects'
+import { d, d20, randomArrayElement } from '@adventure-bot/game/utils'
 
 export function makeAttack({
   interaction,
@@ -97,6 +101,16 @@ export function makeAttack({
           amount,
         })
       )
+    }
+    if (attacker.statsModified.cleansing > d(100)) {
+      const debuff = randomArrayElement(
+        selectCharacterEffects(store.getState(), attacker.id).filter(
+          (effect) => effect.debuff
+        )
+      )
+      if (debuff) {
+        store.dispatch(effectRemoved({ character: attacker, effect: debuff }))
+      }
     }
     if (attacker.equipment.weapon?.onHitEffect)
       store.dispatch(

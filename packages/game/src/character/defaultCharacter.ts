@@ -3,6 +3,7 @@ import { Character } from '@adventure-bot/game/character'
 export const defaultCharacter: Omit<Character, 'id' | 'name'> = {
   ac: 10,
   attackBonus: 1,
+  cleansing: 0,
   cooldowns: {},
   damageBonus: 0,
   damageMax: 4,
@@ -17,10 +18,10 @@ export const defaultCharacter: Omit<Character, 'id' | 'name'> = {
   maxHP: 10,
   monsterDamageMax: 0,
   perception: 0,
+  pickpocket: 0,
   profile: '',
   quests: {},
   revenge: 0,
   xp: 0,
   xpValue: 10,
-  pickpocket: 0,
 }
