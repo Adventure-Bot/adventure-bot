@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js'
-import { readFileSync } from 'fs'
+import { readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 import { range } from 'remeda'
 
@@ -153,6 +153,27 @@ async function addEmoji(interaction: ChatInputCommandInteraction) {
       interaction.channel?.send(`Error: ${e}`)
     }
   })
+  for (const file of readdirSync(join(__dirname, '../../../images/emoji/'))) {
+    const emojiName = file.replace('.png', '')
+    const existing = guild.emojis.cache.find(
+      (emoji) => emoji.name === emojiName
+    )
+    if (existing) {
+      interaction.channel?.send(`Emoji already exists: ${existing}`)
+      continue
+    }
+    guild.emojis
+      .create({
+        attachment: join(__dirname, `../../../images/emoji/${file}`),
+        name: emojiName,
+      })
+      .then((emoji) => {
+        interaction.channel?.send(`Emoji added: ${emoji}`)
+      })
+      .catch((e) => {
+        interaction.channel?.send(`Error: ${e}`)
+      })
+  }
 }
 
 const setGold = async (interaction: ChatInputCommandInteraction) => {
