@@ -5,6 +5,7 @@ export {
 
 export { announceCooldowns } from '@adventure-bot/game/announcements/announceCooldowns'
 export { announceEffectAdded } from '@adventure-bot/game/announcements/announceEffectAdded'
+export { announceEffectRemoved } from '@adventure-bot/game/announcements/announceEffectRemoved'
 export { announceGoldGained } from '@adventure-bot/game/announcements/announceGoldGained'
 export { announceGoldStolen } from '@adventure-bot/game/announcements/announceGoldStolen'
 export { announceHealed } from '@adventure-bot/game/announcements/announceHealed'
