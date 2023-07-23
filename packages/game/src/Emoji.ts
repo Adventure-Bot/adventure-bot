@@ -70,3 +70,11 @@ export function d20Emoji(n: number): string {
   )
   return `${emoji ?? `${n}`}`
 }
+
+export function d6Emoji(n: number): string {
+  const emojiName = `d6_${n}`
+  const emoji = getClient()?.emojis.cache.find(
+    (emoji) => emoji.name === emojiName
+  )
+  return `${emoji ?? `${n}`}`
+}
