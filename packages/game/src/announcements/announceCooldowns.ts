@@ -24,8 +24,14 @@ export function announceCooldowns(channel: TextChannel): void {
       if (!character) return
       const user = channel.guild.members.cache.get(character.id)
       if (!user) return
+      const missingHealth =
+        cooldown === 'heal'
+          ? `\n(${character.statsModified.maxHP - character.hp} health missing)`
+          : ''
       const message = await channel.send(
-        `${user}, it's your turn to ${Emoji(cooldown)} \`/${cooldown}\`!`
+        `${user}, it's your turn to ${Emoji(
+          cooldown
+        )} \`/${cooldown}\`!${missingHealth}`
       )
       await message.react(Emoji(cooldown))
       const collected = await message
