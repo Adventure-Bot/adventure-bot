@@ -1,4 +1,5 @@
 import {
+  createBeholder,
   createDemon,
   createDragon,
   createFireling,
@@ -20,7 +21,8 @@ export function createRandomMonster(): MonsterWithStats {
   return createMonster(
     weightedTable([
       [7, createDemon],
-      [5, createDragon],
+      [3, createBeholder],
+      [3, createDragon],
       [7, createFireling],
       [10, createGoblin],
       [10, createOrc],

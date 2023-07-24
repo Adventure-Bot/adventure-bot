@@ -1,0 +1,25 @@
+export const beholderNames = `
+Dhitriqesco
+Gardorelsh
+Getacea
+Ilks
+Jidhux
+Kaxalorth
+Kholbalsh
+Korukesk
+Lorttrung
+Medrekal
+Nezdyll
+Orlulks
+Quervaxelthan
+Quzarq
+Shotivar
+Thonthryxall
+Torbulox
+Vaar
+Xebokaal
+Xiltraqs
+Xorl
+`
+  .split('\n')
+  .filter(Boolean)

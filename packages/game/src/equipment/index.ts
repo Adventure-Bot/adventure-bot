@@ -28,6 +28,7 @@ export type Weapon = Equippable & {
   type: 'weapon'
   damageMax: number
   onHitEffect?: EffectId
+  onHitRandomEffect?: EffectId[]
   accuracyDescriptors: {
     wideMiss: string[]
     nearMiss: string[]

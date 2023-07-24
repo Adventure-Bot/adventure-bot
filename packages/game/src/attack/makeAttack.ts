@@ -85,13 +85,14 @@ export function makeAttack({
         amount: totalDamage,
       })
     )
-    if (totalDamage < defender.hp)
+    if (totalDamage < defender.hp) {
       updateQuestProgess({
         interaction,
         characterId: defender.id,
         questId: 'survivor',
         amount: totalDamage,
       })
+    }
     if (attacker.pickpocket) {
       const amount = Math.min(defender.gold, d(attacker.pickpocket))
       store.dispatch(
@@ -112,7 +113,19 @@ export function makeAttack({
         store.dispatch(effectRemoved({ character: attacker, effect: debuff }))
       }
     }
-    if (attacker.equipment.weapon?.onHitEffect)
+
+    if (attacker.equipment.weapon?.onHitRandomEffect) {
+      store.dispatch(
+        effectAdded({
+          interaction,
+          character: defender,
+          effect: createEffect(
+            randomArrayElement(attacker.equipment.weapon.onHitRandomEffect)
+          ),
+        })
+      )
+    }
+    if (attacker.equipment.weapon?.onHitEffect) {
       store.dispatch(
         effectAdded({
           interaction,
@@ -120,6 +133,7 @@ export function makeAttack({
           effect: createEffect(attacker.equipment.weapon.onHitEffect),
         })
       )
+    }
   }
 
   return attackResult

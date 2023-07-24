@@ -15,6 +15,7 @@ export {
   createOrc,
   createTabaxi,
   createPyromancer,
+  createBeholder,
 } from '@adventure-bot/game/monster/monsters'
 export { createGiantCrab } from '@adventure-bot/game/monster/monsters/createGiantCrab'
 export { createShark } from '@adventure-bot/game/monster/monsters/createShark'
