@@ -1,4 +1,5 @@
 import {
+  createBeholder,
   createDemon,
   createDragon,
   createFireling,
@@ -15,6 +16,7 @@ import {
 import { createPyromancer } from '@adventure-bot/game/monster/monsters/createPyromancer'
 
 export const monstersByName = [
+  ['Beholder', createBeholder],
   ['Demon', createDemon],
   ['Dragon', createDragon],
   ['Fireling', createFireling],
