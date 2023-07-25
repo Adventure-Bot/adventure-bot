@@ -7,7 +7,11 @@ import {
 import path from 'path'
 
 import { Emoji, EmojiValue } from '@adventure-bot/game/Emoji'
-import { attackResultEmbed, makeAttack } from '@adventure-bot/game/attack'
+import {
+  AttackResult,
+  attackResultEmbed,
+  makeAttack,
+} from '@adventure-bot/game/attack'
 import {
   findOrCreateCharacter,
   isCharacterOnCooldown,
@@ -201,28 +205,11 @@ export const monster = async ({
         break
     }
 
+    const files = getFiles(playerResult, monsterResult)
+
     store.dispatch(roundFinished(encounterId))
     message.edit({
-      files: [
-        new AttachmentBuilder(
-          path.join(
-            __dirname,
-            `../../images/dice/00${(playerResult?.attackRoll || 1)
-              .toString()
-              .padStart(2, '0')}.png`
-          ),
-          { name: 'player_attack.png' }
-        ),
-        new AttachmentBuilder(
-          path.join(
-            __dirname,
-            `../../images/dice/00${(monsterResult?.attackRoll || 1)
-              .toString()
-              .padStart(2, '0')}.png`
-          ),
-          { name: 'monster_attack.png' }
-        ),
-      ],
+      files,
       embeds: [
         encounterEmbed({
           encounterId,
@@ -283,4 +270,36 @@ export const monster = async ({
 
   if (encounter.outcome === 'player victory' && Math.random() <= 0.3)
     await chest({ interaction })
+}
+
+function getFiles(
+  playerResult: AttackResult | undefined,
+  monsterResult: AttackResult
+) {
+  const files = []
+  if (playerResult) {
+    files.push(
+      new AttachmentBuilder(
+        path.join(
+          __dirname,
+          `../../images/dice/00${playerResult.attackRoll
+            .toString()
+            .padStart(2, '0')}.png`
+        ),
+        { name: 'player_attack.png' }
+      )
+    )
+  }
+  files.push(
+    new AttachmentBuilder(
+      path.join(
+        __dirname,
+        `../../images/dice/00${(monsterResult?.attackRoll || 1)
+          .toString()
+          .padStart(2, '0')}.png`
+      ),
+      { name: 'monster_attack.png' }
+    )
+  )
+  return files
 }
