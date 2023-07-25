@@ -207,7 +207,7 @@ export const monster = async ({
         new AttachmentBuilder(
           path.join(
             __dirname,
-            `../../images/dice/00${playerResult?.attackRoll
+            `../../images/dice/00${(playerResult?.attackRoll || 1)
               .toString()
               .padStart(2, '0')}.png`
           ),
@@ -216,7 +216,7 @@ export const monster = async ({
         new AttachmentBuilder(
           path.join(
             __dirname,
-            `../../images/dice/00${monsterResult?.attackRoll
+            `../../images/dice/00${(monsterResult?.attackRoll || 1)
               .toString()
               .padStart(2, '0')}.png`
           ),
