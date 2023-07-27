@@ -38,12 +38,7 @@ export const ranger = async ({
         color: Colors.Green,
         description: `A seasoned traveler greets you. They've seen monster tracks in the area and can guide you to them.\n\nWhich do you seek?`,
       }).setImage(
-        randomArrayElement([
-          asset('fantasy', 'places', 'a lone traveler in the desert'),
-          asset('fantasy', 'places', 'a lone traveler in the forest'),
-          asset('fantasy', 'places', 'a lone traveler in the mountains'),
-          asset('fantasy', 'places', 'a lone traveler in the plains'),
-        ]).s3Url
+        randomArrayElement([asset('fantasy', 'characters', 'ranger')]).s3Url
       ),
       ...roamingMonsters.map(monsterEmbed),
     ],
