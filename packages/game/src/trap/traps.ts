@@ -45,14 +45,7 @@ export const traps = {
       attackText: 'A huge stone ball comes bowling down on you!',
       hitText: 'You are crushed!',
       missText: 'You deftly evade!',
-      profile: randomArrayElement([
-        asset('fantasy', 'items', 'a large tumbling boulder with motion blur'),
-        asset(
-          'fantasy',
-          'items',
-          'a massive stone sphere tumbling towards you'
-        ),
-      ]).s3Url,
+      profile: asset('fantasy', 'items', 'boulder trap').s3Url,
     }),
   poisonNeedle: (): TrapWithStats =>
     createTrap({
