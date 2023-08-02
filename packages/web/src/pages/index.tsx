@@ -18,7 +18,7 @@ const IndexPage: NextPage<{
         <title>Adventure Bot</title>
         <meta
           name="description"
-          content="Adventure Bot is the DM in your friend's Discord roleplaying game!"
+          content="Adventure Bot is the Dungeon Master in your friend's Discord roleplaying game!"
         />
       </Head>
 
