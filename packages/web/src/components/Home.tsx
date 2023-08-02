@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FunctionComponent } from 'react'
-import { animated, config, easings, useSpring } from 'react-spring'
+import { animated, config, useSpring } from 'react-spring'
 
 import { usePrefersReducedMotion } from '@adventure-bot/web/utils/motions'
 
