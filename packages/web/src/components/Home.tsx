@@ -16,7 +16,6 @@ export const Home: FunctionComponent<{
     config: {
       ...config.slow,
       duration: 80000,
-      // easing: easings.easeInOutQuad,
     },
     loop: {
       reverse: true,
