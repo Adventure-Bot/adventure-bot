@@ -28,7 +28,9 @@ export async function warlock({
         title: `${decoratedName(character)} encountered a warlock!`,
         color: Colors.DarkButNotBlack,
         description: 'The warlock offers a pact for suffering.',
-      }).setImage(asset('fantasy', 'characters', 'tiefling warlock').s3Url),
+      })
+        .setImage(asset('fantasy', 'characters', 'tiefling warlock').s3Url)
+        .setThumbnail(character.profile),
     ].concat(quest ? questEmbed(quest) : []),
   })
 }
