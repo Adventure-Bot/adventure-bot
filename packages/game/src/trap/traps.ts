@@ -4,7 +4,7 @@ import { defaultCharacter } from '@adventure-bot/game/character'
 import store from '@adventure-bot/game/store'
 import { selectCharacterStats } from '@adventure-bot/game/store/selectors'
 import { Trap, TrapWithStats } from '@adventure-bot/game/trap'
-import { asset, randomArrayElement } from '@adventure-bot/game/utils'
+import { asset } from '@adventure-bot/game/utils'
 
 function createTrap(trapConfig: Omit<Trap, 'id'>): TrapWithStats {
   const state = store.getState()
