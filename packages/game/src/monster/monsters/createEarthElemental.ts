@@ -41,7 +41,7 @@ export function createEarthElemental(): Monster {
       },
     },
     profile: asset('fantasy', 'monsters', 'earth elemental').s3Url,
-    xpValue: 100,
+    xpValue: 75,
     gold: 150 + d(100),
   })
 }
