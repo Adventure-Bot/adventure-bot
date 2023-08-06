@@ -49,8 +49,10 @@ export const Home: FunctionComponent<{
               server!
             </p>
             <p className="text-sm mb-6 text-gray-700">
-              Slay powerful monsters,  disarm and evade dangerous traps, earn riches, complete
-              quests, and stab and loot your friends! Explore the world of Adventure Bot and become the most powerful adventurer!
+              Slay powerful monsters, disarm and evade dangerous traps, earn
+              riches, complete quests, and stab and loot your friends! Explore
+              the world of Adventure Bot and become the most powerful
+              adventurer!
             </p>
           </div>
 
@@ -84,6 +86,5 @@ export const Home: FunctionComponent<{
         </div>
       </div>
     </animated.div>
-
   )
 }
