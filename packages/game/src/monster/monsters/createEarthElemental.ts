@@ -15,6 +15,7 @@ export function createEarthElemental(): Monster {
     maxHP: 50,
     ac: 18,
     attackBonus: 2,
+    damageMax: 0,
     equipment: {
       weapon: {
         name: 'Earthen Fist',
