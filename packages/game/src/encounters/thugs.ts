@@ -8,12 +8,7 @@ import {
   InteractionType,
 } from 'discord.js'
 
-import {
-  Emoji,
-  EmojiModifier,
-  EmojiValue,
-  d20Emoji,
-} from '@adventure-bot/game/Emoji'
+import { Emoji, EmojiValue, d20Emoji } from '@adventure-bot/game/Emoji'
 import {
   decoratedName,
   findOrCreateCharacter,
@@ -22,7 +17,7 @@ import {
 import store from '@adventure-bot/game/store'
 import {
   damaged,
-  goldSet,
+  goldStolen,
   itemRemoved,
 } from '@adventure-bot/game/store/slices/characters'
 import {
@@ -37,9 +32,16 @@ export const thugs = async ({
   const send = interaction.channel?.send.bind(interaction.channel)
   if (!send) return
   const character = findOrCreateCharacter(interaction.user)
+  const equipment = character.equipment
+  const unequipped = character.inventory.filter(
+    (item) =>
+      !Object.values(equipment)
+        .map((i) => i?.id)
+        .includes(item.id)
+  )
   const dropped = {
-    item: randomArrayElement(character.inventory),
-    gold: Math.floor(character.gold / 5 + d(6)),
+    item: randomArrayElement(unequipped),
+    gold: Math.floor(character.gold / (5 + d(4))),
   }
 
   if (!dropped.item && !dropped.gold) {
@@ -89,7 +91,7 @@ export const thugs = async ({
     embeds: [
       new EmbedBuilder({
         title: `${decoratedName(character)} encountered a gang of thugs!`,
-        color: Colors.Green,
+        color: Colors.DarkButNotBlack,
         description: `A foot comes out of nowhere, you trip and fall. Your ${lootDropped} spill${
           plural ? '' : 's'
         } to the floor and figures dash in from the shadows!`,
@@ -211,27 +213,11 @@ export const thugs = async ({
   // gold lost
   if (dropped.gold && (response.customId !== 'gold' || !conscious)) {
     store.dispatch(
-      goldSet({
-        characterId: character.id,
-        gold: character.gold - dropped.gold,
+      goldStolen({
+        attackerId: 'Thugs',
+        defenderId: character.id,
+        amount: dropped.gold,
       })
     )
-    await send({
-      embeds: [
-        new EmbedBuilder({
-          title: `${character.name} lost ${EmojiModifier(
-            'gold',
-            -dropped.gold
-          )}!`,
-          fields: [
-            {
-              name: 'Your gold',
-              value: EmojiValue('gold', character.gold - dropped.gold),
-            },
-          ],
-          color: Colors.Red,
-        }),
-      ],
-    })
   }
 }
