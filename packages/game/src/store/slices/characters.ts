@@ -129,15 +129,14 @@ const characterSlice = createSlice({
       }>
     ) {
       const { attackerId, defenderId } = action.payload
-
       const attacker = state.charactersById[attackerId]
       const defender = state.charactersById[defenderId]
-      if (!attacker || !defender) return
+      const amount = defender
+        ? Math.min(defender.gold, action.payload.amount)
+        : action.payload.amount
 
-      const amount = Math.min(defender.gold, action.payload.amount)
-
-      attacker.gold += amount
-      defender.gold -= amount
+      if (attacker) attacker.gold += amount
+      if (defender) defender.gold -= amount
     },
 
     divineBlessingGranted(state, action: PayloadAction<string>) {

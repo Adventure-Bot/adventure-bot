@@ -14,11 +14,12 @@ export function announceGoldStolen(channel: TextChannel): void {
     effect: async ({ payload: { attackerId, defenderId, amount } }) => {
       const attacker = selectCharacterById(store.getState(), attackerId)
       const defender = selectCharacterById(store.getState(), defenderId)
-      if (!attacker || !defender) return
+      const attackerName = attacker?.name ?? attackerId
+      const defenderName = defender?.name ?? defenderId
       if (amount === 0) return
       const embeds = [
         new EmbedBuilder({
-          title: `${attacker.name} robbed ${defender.name} of ${EmojiValue(
+          title: `${attackerName} robbed ${defenderName} of ${EmojiValue(
             'gold',
             amount
           )} gold!`,
