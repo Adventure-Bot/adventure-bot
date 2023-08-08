@@ -16,7 +16,6 @@ import {
 } from '@adventure-bot/game/announcements'
 import { installCommands } from '@adventure-bot/game/boot/installCommands'
 import { renderCharacterList } from '@adventure-bot/game/character'
-import { renderLeaderboard } from '@adventure-bot/game/leaderboard'
 import { renderRoamingMonsters } from '@adventure-bot/game/roamingMonsters/renderRoamingMonsters'
 
 import { gameChannel } from './gameChannel'
@@ -53,6 +52,5 @@ export async function setupGuild({
     announceWinners(channel)
     announceXpAwarded(channel)
   })
-  renderLeaderboard({ guild, appId })
   renderRoamingMonsters({ guild, appId })
 }
