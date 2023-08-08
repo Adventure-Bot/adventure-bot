@@ -3,11 +3,8 @@ import { mapValues, values } from 'remeda'
 
 import { isPotion } from '@adventure-bot/game/equipment'
 import { unidentifiedPotion } from '@adventure-bot/game/equipment/items'
-import { defaultLeaderboardState } from '@adventure-bot/game/leaderboard/leaderboardSlice'
 import { isMonster } from '@adventure-bot/game/monster'
 import { RootReducerState } from '@adventure-bot/game/store'
-import { defaultCommandsState } from '@adventure-bot/game/store/slices/commands'
-import { crownDefaultState } from '@adventure-bot/game/store/slices/crown'
 import { defaultEncounterWeights } from '@adventure-bot/game/store/slices/encounters'
 
 /*
@@ -21,14 +18,8 @@ type PersistedReduxStateV9 = RootReducerState
 type PersistedReduxStateV8 = PersistedReduxStateV9
 type PersistedReduxStateV7 = PersistedReduxStateV8
 
-type PersistedReduxStateV6 = Omit<PersistedReduxStateV7, 'leaderboard'> & {
-  leaderboard: Omit<
-    PersistedReduxStateV7['leaderboard'],
-    'victoriesByCharacterId'
-  >
-}
-type PersistedReduxStateV5 = Omit<PersistedReduxStateV6, 'commands'> & {
-  commands: Omit<PersistedReduxStateV6['commands'], 'userCommands'> & {
+type PersistedReduxStateV5 = Omit<PersistedReduxStateV7, 'commands'> & {
+  commands: Omit<PersistedReduxStateV7['commands'], 'userCommands'> & {
     userCommands: {
       [key: string]: number
     }
@@ -61,7 +52,6 @@ type MigrationState =
   | PersistedReduxStateV3
   | PersistedReduxStateV4
   | PersistedReduxStateV5
-  | PersistedReduxStateV6
 
 /** Migrations **/
 
@@ -79,12 +69,6 @@ const persistMigrations = {
       encounterWeights: defaultEncounterWeights,
     },
   }),
-  4: (state: PersistedReduxStateV3): PersistedReduxStateV4 => ({
-    ...state,
-    leaderboard: defaultLeaderboardState,
-    crown: crownDefaultState(),
-    commands: defaultCommandsState,
-  }),
   5: (state: PersistedReduxStateV4): PersistedReduxStateV5 => ({
     ...state,
     commands: {
@@ -92,16 +76,12 @@ const persistMigrations = {
       commandsUsed: {},
     },
   }),
-  6: (state: PersistedReduxStateV5): PersistedReduxStateV6 => ({
+  6: (state: PersistedReduxStateV5): PersistedReduxStateV7 => ({
     ...state,
     commands: {
       ...state.commands,
       userCommands: {},
     },
-  }),
-  7: (state: PersistedReduxStateV6): PersistedReduxStateV7 => ({
-    ...state,
-    leaderboard: defaultLeaderboardState,
   }),
   8: (state: PersistedReduxStateV7): RootReducerState => {
     state.characters.charactersById = mapValues(

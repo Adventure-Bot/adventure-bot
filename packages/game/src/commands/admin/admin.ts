@@ -4,7 +4,6 @@ import { join } from 'path'
 import { range } from 'remeda'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
-import { leaderboardEmbeds } from '@adventure-bot/game/leaderboard'
 import store from '@adventure-bot/game/store'
 import {
   winnerDeclared,
@@ -105,14 +104,6 @@ export const execute = async ({
       break
     case 'declare_winner_revoked':
       store.dispatch(winnerRevoked())
-      interaction.channel?.send({
-        embeds: leaderboardEmbeds(),
-      })
-      break
-    case 'leaderboard':
-      interaction.channel?.send({
-        embeds: leaderboardEmbeds(),
-      })
       break
     default:
       interaction.channel?.send(
