@@ -8,7 +8,7 @@ import {
 } from 'discord.js'
 
 import { findOrCreateCharacter } from '@adventure-bot/game/character'
-import { buyItem } from '@adventure-bot/game/commands/buyItem'
+import { buyItem } from '@adventure-bot/game/encounters/shop/buyItem'
 import { buyList } from '@adventure-bot/game/encounters/shop/buyList'
 import { Item } from '@adventure-bot/game/equipment'
 
