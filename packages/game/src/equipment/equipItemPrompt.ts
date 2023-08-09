@@ -7,8 +7,9 @@ import {
   Message,
 } from 'discord.js'
 
+import { findOrCreateCharacter } from '@adventure-bot/game/character'
 import inspect from '@adventure-bot/game/commands/inspect/inspect'
-import { Item, itemEmbed } from '@adventure-bot/game/equipment'
+import { Item, isEquippable, itemEmbed } from '@adventure-bot/game/equipment'
 import store from '@adventure-bot/game/store'
 import { itemEquipped } from '@adventure-bot/game/store/slices/characters'
 
@@ -27,7 +28,13 @@ export async function equipItemPrompt({
   item: Item
   showItem?: boolean
 }): Promise<void> {
-  const content = `Would you like to equip the ${item.name}?`
+  const character = findOrCreateCharacter(interaction.user)
+  const equippedItem = isEquippable(item)
+    ? character.equipment[item.type]
+    : null
+  const content =
+    `Would you like to equip the ${item.name}?` +
+    (equippedItem ? `\n(Current ${item.type}: ${equippedItem.name})` : '')
   const message = await interaction.channel?.send({
     content,
     embeds: showItem ? [itemEmbed({ item })] : [],
@@ -36,7 +43,7 @@ export async function equipItemPrompt({
         components: [
           new ButtonBuilder({
             customId: 'equip',
-            label: `Equip the ${item.name}`,
+            label: `Equip ${item.name}`,
             style: ButtonStyle.Secondary,
           }),
         ],
