@@ -87,7 +87,7 @@ export const townSquare = async ({
   if (response.customId === 'dark_alley') {
     await weightedTable([
       [1, () => roguesGuild({ interaction })],
-      [4, () => thugs({ interaction })],
+      [2, () => thugs({ interaction })],
     ])()
   }
 }
