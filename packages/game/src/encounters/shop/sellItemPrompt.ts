@@ -41,8 +41,8 @@ export async function sellItemPrompt({
       new ActionRowBuilder<StringSelectMenuBuilder>({
         components: [
           sellList({
+            character,
             inventory,
-            interaction,
           }),
         ],
       }),
