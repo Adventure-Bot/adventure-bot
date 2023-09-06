@@ -32,7 +32,7 @@ export function announceWinners(channel: TextChannel): void {
           title: `${decoratedName(winner)} won the crown!`,
           description: 'Game over!',
           color: Colors.Yellow,
-        }).setImage(asset('fantasy', 'magic', 'glitter dust').s3Url),
+        }).setImage(asset('fantasy', 'items', 'crown').s3Url),
       ]
       if (interaction) {
         interaction.channel?.send({ embeds })
