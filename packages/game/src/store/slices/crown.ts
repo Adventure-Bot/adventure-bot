@@ -12,7 +12,7 @@ import {
 import { startAppListening } from '@adventure-bot/game/store/listenerMiddleware'
 import { looted } from '@adventure-bot/game/store/slices/characters'
 
-export function crownDefaultState(): {
+function crownDefaultState(): {
   bearerId: string
   claimedAt: number
   gameStartedAt: number
@@ -27,8 +27,7 @@ export function crownDefaultState(): {
 }
 export const timeTillSovereign = 1000 * 60 * 60 * 24
 
-export const crownReceived =
-  createAction<{ characterId: string }>('crown/received')
+const crownReceived = createAction<{ characterId: string }>('crown/received')
 
 startAppListening({
   actionCreator: looted,

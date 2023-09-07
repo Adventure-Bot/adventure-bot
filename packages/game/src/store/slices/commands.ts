@@ -5,7 +5,7 @@ import { commandUsed } from '@adventure-bot/game/store/actions'
 const commandsUsed: { [key: string]: number } = {}
 const userCommands: { [key: string]: number } = {}
 
-export const defaultCommandsState = {
+const defaultCommandsState = {
   lastChannelId: '',
   commandsUsed,
   userCommands,
