@@ -11,7 +11,7 @@ import { selectIsHealer } from '@adventure-bot/game/store/selectors'
 import { healed } from '@adventure-bot/game/store/slices/characters'
 import { d6 } from '@adventure-bot/game/utils'
 
-export function heal({
+export function healAbility({
   healerId,
   targetId,
   interaction,
@@ -22,10 +22,16 @@ export function heal({
 }): HealResult | undefined {
   const state = store.getState()
   if (isCharacterOnCooldown(healerId, 'heal')) return { outcome: 'cooldown' }
+
   const healer = getCharacter(healerId)
   if (!healer) return
+
   const targetBeforeHeal = getCharacter(targetId)
   if (!targetBeforeHeal) return
+
+  if (targetBeforeHeal.hp >= targetBeforeHeal.statsModified.maxHP)
+    return { outcome: 'full' }
+
   startCooldown({ characterId: healer.id, cooldown: 'heal', interaction })
   const rawHeal = d6() + (selectIsHealer(state, healer.id) ? 2 : 0)
   store.dispatch(
@@ -34,6 +40,7 @@ export function heal({
       amount: rawHeal,
     })
   )
+
   const target = getCharacter(targetId)
   if (!target) return
   return {

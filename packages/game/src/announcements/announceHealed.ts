@@ -13,6 +13,7 @@ export function announceHealed(channel: TextChannel): void {
     effect: async ({ payload: { amount, character } }) => {
       const missingHealth = character.statsModified.maxHP - character.hp
       const adjustment = Math.min(amount, missingHealth)
+      if (adjustment <= 0) return
       const verbed = randomArrayElement([
         'recovered',
         'healed',

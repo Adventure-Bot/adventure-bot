@@ -20,9 +20,9 @@ import {
 export async function fairyWell({
   interaction,
 }: CommandHandlerOptions): Promise<void> {
+  const character = findOrCreateCharacter(interaction.user)
   const healAmount = d(6)
 
-  const character = findOrCreateCharacter(interaction.user)
   const message = await interaction.channel?.send({
     embeds: [
       new EmbedBuilder({
@@ -32,6 +32,7 @@ export async function fairyWell({
     ],
   })
   if (!(message instanceof Message)) return
+
   store.dispatch(healed({ character, amount: healAmount }))
   awardXP({ characterId: interaction.user.id, amount: 1 })
 
