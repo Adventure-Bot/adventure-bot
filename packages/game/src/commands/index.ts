@@ -41,9 +41,9 @@ commands.set('inventory', inventory)
 commands.set('quests', quests)
 commands.set('set_profile', setProfile)
 commands.set('newgame', newgame)
-commands.set('admin', admin)
 
 if (process.env.DEV_COMMANDS === 'true') {
+  commands.set('admin', admin)
   console.warn('⚠ DEV COMMANDS LOADED ⚠')
   commands.set('encounter', encounter)
   commands.set('monster', monster)
@@ -53,7 +53,6 @@ if (process.env.DEV_COMMANDS === 'true') {
   commands.set('hpbartest', hpbartest)
   commands.set('lootchest', lootchest)
   commands.set('lootme', lootme)
-  commands.set('lootmonster', lootmonster)
   commands.set('lootmonster', lootmonster)
 } else {
   console.warn('🔒 Dev commands disabled')
