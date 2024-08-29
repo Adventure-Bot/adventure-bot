@@ -57,7 +57,6 @@ Use it on another player with `/inspect <@user>` to see what they're carrying.
 
 ![character](./example-gameplay/inspect.png)
 
-
 ## Developers
 
 Adventure Bot is developer friendly. Fork, hack, contribute!
